@@ -1,0 +1,16 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 125px;
+}
+
+.container {
+  padding: 0 15px;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}

@@ -1,0 +1,179 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 125px;
+  background-color: #f5f5f5;
+}
+
+.footer-nav {
+  height: 100%;
+}
+
+.footer-nav-row {
+  margin-top: 15px;
+}
+
+
+.main-footer {
+  height: 125px;
+  padding-top: 25px;
+  padding-bottom: 0;
+  background-color: #fff;
+}
+
+.main-footer-page-nav {
+  background-color: #f5f5f5;
+  height: 100%;
+}
+
+.main-footer-tab-container {
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 40px;
+  height: 100%;
+  margin-bottom: 100px;
+}
+
+.main-footer-tab {
+
+}
+.main-footer-tab-content {
+  background-color: #fff;
+  height: 100%;
+  border-bottom-color: #ddd;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: #ddd;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: #ddd;
+  border-right-style: solid;
+  border-right-width: 1px;
+  padding-top: 25px;
+}
+
+.main-footer-accordian {
+  margin-bottom: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+
+
+.main-footer-accordian-table>tbody>tr>td {
+  vertical-align: middle;
+  border-top: none;
+  white-space: nowrap;
+}
+
+.dots {
+  border-bottom-style: dotted;
+  border-bottom-width: 2px;
+  line-height: .75;
+}
+
+.expanded{
+
+  height: 100%;
+  padding-top: 0;
+
+}
+
+.content-well {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+}
+
+.btn-icon {
+  font-size: 26px;
+}
+
+.btn-text-icon {
+  display: inline-flex;
+}
+
+.btn-text-icon .btn-icon {
+  display: inline-flex;
+  padding-right: 10px;
+}
+
+.main-footer-table-icon-col {
+  min-width: 25px;
+}
+
+.main-footer-panel-body {
+  padding-left: 100px;
+}
+
+.main-footer-tab-pane {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.main-footer-tab-container-expanded {
+  margin-top: 0;
+  padding-top: 0px;
+  padding-bottom: 200px;
+  height: 100%;
+}
+.main-footer-page-nav-buttons-expanded {
+  padding-top: 110px;
+}
+
+.main-footer-index-progress-stage-1 {
+  width: 35%;
+}
+
+.main-footer-index-progress-stage-2 {
+  width: 20%;
+}
+
+.main-footer-index-progress-stage-3 {
+  width: 10%;
+}
+
+.main-footer-pages-progress-stage-1 {
+  width: 35%;
+}
+
+.main-footer-pages-progress-stage-2 {
+  width: 20%;
+}
+
+.main-footer-pages-progress-stage-3 {
+  width: 10%;
+}
+
+.main-footer-accordian {
+  .panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: #fff;
+  }
+  .panel-group .panel-heading+.panel-collapse>.list-group .panel-group {
+    border-top: 1px solid #fff;
+  }
+  .panel-group.panel-heading+.panel-collapse>.panel-body {
+    border-top: 1px solid #fff;
+  }
+
+  .panel-heading,
+  .panel-default,
+  .panel-body,
+  .list-group,
+  .panel-body,
+  .panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body,
+  .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border-color: #fff;
+    background-color: #fff;
+  }
+}
+
+.main-footer-accordian-table-pages {
+  margin-left: 25px;
+}
+
+.main-footer-accordian-table-row {
+  cursor: pointer;
+}

@@ -1,0 +1,109 @@
+/* DDAudioQuizView.scss */
+
+.dd-word-bank-text {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  border-width: 1px;
+  border-style: solid;
+  text-align: center;
+  padding: 10px;
+}
+
+.dd-drop-answer-area {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  border-width: 1px;
+  border-style: solid;
+  text-align: center;
+  padding: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.dd-drop-answer-area-correct {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.dd-drop-answer-area-incorrect {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.dd-answer-list {
+  list-style: none;
+  width: auto;
+}
+
+.dd-answer-list-item {
+
+}
+
+.dd-container {
+  max-width: 100%;
+  width: 100%;
+}
+
+.dd-answer-area {
+  display: inline-flex;
+  line-height: 1px;
+}
+
+.dd-answer-area-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.dd-player-label {
+  font-weight: bold;
+}
+
+.dd-answer-image {
+  width: 64px;
+  height: 64px;
+}
+
+.dd-draggable-area {
+  display: inline-block;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.dd-drop-answer-image {
+  padding: 0px;
+}
+
+.dd-flag {
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+
+.dd-flag:before {
+  border-radius: 50%;
+  background-color: white;
+  padding: 1px;
+}
+
+.dd-quiz-title {
+  text-align: center;
+}
+
+.dd-quiz-feedback {
+  text-align: center;
+}
+
+.dd-quiz-submit {
+  position: absolute;
+  top: 5;
+  left: 5;
+}
+
+.dd-quiz-container {
+  padding-top: 25px;
+}
