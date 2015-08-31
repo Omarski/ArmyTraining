@@ -1,7 +1,8 @@
-# react-boilerplate
+# Enskill
 
-Quickstart project template for building `npm` modules with React and JSX.
+Build tools:
 
-Just `npm install` and `npm run build` when you're done. Use `npm start` to continuously build.
+`npm install` and `npm run build` when you're done. Use `npm start` to continuously build.
 
+For css compiler
 sass --watch sass:dist/css/
