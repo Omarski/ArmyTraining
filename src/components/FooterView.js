@@ -3,34 +3,76 @@ var CheckIcon = require('../components/widgets/CheckIcon');
 var UnitStore = require('../stores/UnitStore');
 var LoaderStore = require('../stores/LoaderStore');
 var PageActions = require('../actions/PageActions');
+var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
 
 
-function getUnitState() {
+function getUnitState(expanded) {
     var units = UnitStore.getAll();
     var data = [];
+    var totalUnits = 0;
+    var totalUnitsComplete = 0;
+    var currentUnitIndex = 0;
 
-    var title = "";
     for (var key in units) {
+        totalUnits++;
         var unit = units[key];
         var chapters = [];
+        var completed = true;
+        var completedCount = 0;
+        var totalPages = 0;
         for (var i = 0; i < unit.data.chapter.length; i++) {
             var c = unit.data.chapter[i];
+
+
+
+            // check pages to see if everything has been
+            // viewed in the chapter to determine unit
+            // complete state
+
+            var pages = c.pages;
+            var pagesLen = pages.length;
+            var tcpCompleted = 0;
+            var tcpTotal = pages.length;
+            while(pagesLen--) {
+                totalPages++;
+                var page = pages[pagesLen];
+                if (!page.state || !page.state.visited) {
+                    completed = false;
+                } else {
+                    completedCount++;
+                    tcpCompleted++;
+                }
+            }
 
             chapters.push({
                 completed:false,
                 title:c.title,
-                percent:10,
+                percent:Math.round((tcpCompleted / tcpTotal) * 100),
                 data: c
             });
+
+
         }
 
+        var unitCls = '';
+        var unitExpandedCls = 'panel-collapse collapse';
+        if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
+            currentUnitIndex = totalUnits;
+            unitCls = 'main-footer-accordian-table-row-active';
+            unitExpandedCls += ' in';
+        }
+        if (completed) {
+            totalUnitsComplete++;
+        }
         data.push(
             {
+                unitExpandedCls: unitExpandedCls,
+                unitCls: unitCls,
                 unit: unit,
-                completed:true,
+                completed:completed,
                 title:unit.data.title,
-                percent:100,
+                percent:Math.round((completedCount / totalPages) * 100),
                 rows:chapters
             }
         );
@@ -38,43 +80,53 @@ function getUnitState() {
 
     return {
         data: data,
-        expanded: false
+        currentUnitIndex: currentUnitIndex,
+        totalUnits: totalUnits,
+        currentPageIndex: currentPageIndex,
+        totalPages: totalPages,
+        unitsPercent: Math.round((totalUnitsComplete / totalUnits) * 100),
+        expanded: expanded
     };
 }
 
 var FooterView = React.createClass({
     next: function() {
-        //NotificationActions.show({title:'Please wait', body:'Loading...', percent: ''});
         PageActions.loadNext({});
     },
     previous: function() {
-        //NotificationActions.show({title:'Please wait', body:'Loading...', percent: ''});
         PageActions.loadPrevious({});
     },
     _onLoadChange: function() {
-        this.setState(getUnitState());
+        this.setState(getUnitState(false));
+    },
+
+    _onPageChange: function() {
+        if (this.state.expanded) {
+         //   this.setState(getUnitState());
+        }
     },
 
     getInitialState: function() {
-        //var unitState = getUnitState();
-        //return unitState;
         return {data: [], expanded:false};
     },
 
     componentWillMount: function() {
         LoaderStore.addChangeListener(this._onLoadChange);
+        PageStore.addChangeListener(this._onPageChange);
     },
 
     componentDidMount: function() {
         LoaderStore.addChangeListener(this._onLoadChange);
+        PageStore.addChangeListener(this._onPageChange);
     },
 
     componentWillUnmount: function() {
         LoaderStore.removeChangeListener(this._onLoadChange);
+        PageStore.removeChangeListener(this._onPageChange);
     },
 
     toggleTOC: function(event) {
-        this.setState( { expanded : !this.state.expanded } );
+        this.setState(getUnitState(!this.state.expanded));
     },
     render: function() {
         var items = this.state.data.map(function(item, index) {
@@ -83,7 +135,7 @@ var FooterView = React.createClass({
                     <div className="panel panel-default">
                         <div className="panel-heading" role="tab" id={'heading' + index}>
                             <table className="panel-title table table-condensed main-footer-accordian-table">
-                                <tr>
+                                <tr className={item.unitCls}>
                                     <td>
                                         <div className="main-footer-table-icon-col">
                                             <CheckIcon checked={item.completed} />
@@ -113,7 +165,7 @@ var FooterView = React.createClass({
                                 </tr>
                             </table>
                         </div>
-                        <div id={'collapse' + index} className="panel-collapse collapse" role="tabpanel" aria-labelledby={'heading' + index}>
+                        <div id={'collapse' + index} className={item.unitExpandedCls} role="tabpanel" aria-labelledby={'heading' + index}>
                             <div className="panel-body main-footer-panel-body">
                                 <TOCDetails data={item.rows} unit={item.unit}/>
                             </div>
@@ -133,18 +185,12 @@ var FooterView = React.createClass({
                                     <div className="col-md-2">Lessons</div>
                                     <div className="col-md-9">
                                         <div className="progress">
-                                            <div className="progress-bar progress-bar-success main-footer-index-progress-stage-1">
+                                            <div className="progress-bar progress-bar-success" style={{width: this.state.unitsPercent + '%'}}>
                                                 <span className="sr-only">35% Complete (success)</span>
-                                            </div>
-                                            <div className="progress-bar progress-bar-warning progress-bar-striped main-footer-index-progress-stage-2">
-                                                <span className="sr-only main-footer-index-progress-stage-2">20% Complete (warning)</span>
-                                            </div>
-                                            <div className="progress-bar progress-bar-danger main-footer-index-progress-stage-3">
-                                                <span className="sr-only main-footer-index-progress-stage-3">10% Complete (danger)</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-1">2/5</div>
+                                    <div className="col-md-1">{this.state.currentUnitIndex}/{this.state.totalUnits}</div>
                                 </div>
                             </div>
                         </div>
@@ -234,9 +280,13 @@ var TOCDetails = React.createClass({
 
 var TOCChapterRow = React.createClass({
     render: function() {
+        var cls = '';
+        if (PageStore.chapter() && this.props.item.data.xid === PageStore.chapter().xid) {
+            cls += ' main-footer-accordian-table-row-active';
+        }
         return (
             <table className="panel-title table table-condensed main-footer-accordian-table">
-                <tr>
+                <tr className={cls}>
                     <td>
                         <div className="main-footer-table-icon-col">
                             <CheckIcon completed={this.props.item.completed} />
@@ -291,10 +341,21 @@ var TOCPageRow = React.createClass({
 
     },
     render: function() {
+        var cls = 'main-footer-accordian-table-row';
+        if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
+            cls += ' main-footer-accordian-table-row-active';
+        } else {
+            if (this.props.item.state && this.props.item.state.visited) {
+                cls += ' main-footer-accordian-table-row-visited';
+            }
+        }
+
         return (
             <div>
-                <table onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)} className="panel-title table table-condensed table-hover main-footer-accordian-table main-footer-accordian-table-pages">
-                    <tr className="main-footer-accordian-table-row">
+                <table
+                    onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}
+                    className="panel-title table table-condensed table-hover main-footer-accordian-table main-footer-accordian-table-pages">
+                    <tr className={cls}>
                         <td>
                             <div className="main-footer-table-icon-col">
                                 <CheckIcon completed={true} />

@@ -123,30 +123,6 @@
   padding-top: 110px;
 }
 
-.main-footer-index-progress-stage-1 {
-  width: 35%;
-}
-
-.main-footer-index-progress-stage-2 {
-  width: 20%;
-}
-
-.main-footer-index-progress-stage-3 {
-  width: 10%;
-}
-
-.main-footer-pages-progress-stage-1 {
-  width: 35%;
-}
-
-.main-footer-pages-progress-stage-2 {
-  width: 20%;
-}
-
-.main-footer-pages-progress-stage-3 {
-  width: 10%;
-}
-
 .main-footer-accordian {
   .panel-default>.panel-heading+.panel-collapse>.panel-body {
     border-top-color: #fff;
@@ -176,4 +152,12 @@
 
 .main-footer-accordian-table-row {
   cursor: pointer;
+}
+
+.main-footer-accordian-table-row-visited {
+  color: #8a6d3b;
+}
+
+.main-footer-accordian-table-row-active {
+  color: #3c763d;
 }

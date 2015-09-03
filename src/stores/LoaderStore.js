@@ -74,6 +74,7 @@ function loadChapterPages(units, unit, index) {
 
             $.getJSON("data/content/" + chapter.xid + "/toc.json", function (result) {
 
+                var storedPages = store.get('pages');
 
                 var sections = result.chapter.section;
                 for (var i = 0; i < sections.length; i++) {
@@ -82,6 +83,14 @@ function loadChapterPages(units, unit, index) {
                     var pages = sections[i].pageRef;
                     for (var j = 0; j < pages.length; j++) {
                         var page = pages[j];
+                        if(storedPages) {
+                            var storeId = unit.data.xid + '_' + chapter.xid + '_' +  page.xid
+                            if (storedPages[storeId]) {
+                                page.state = storedPages[storeId];
+                                console.log('page state');
+                                console.dir(page);
+                            }
+                        }
                         chapter.pages.push(page);
                     }
 

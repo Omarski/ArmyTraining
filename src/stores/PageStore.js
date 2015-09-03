@@ -197,6 +197,19 @@ function load(data) {
         _currentPage = data.page;
 
         _data = result.page;
+
+
+        var storedPages = store.get('pages');
+        if (!storedPages) {
+            storedPages = {};
+        }
+
+        var state = {visited: true};
+        _currentPage.state = state;
+        storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = state;
+
+        store.set('pages', storedPages);
+
         PageActions.complete(result);
     });
 }
