@@ -13,6 +13,7 @@ function getUnitState(expanded) {
     var totalUnits = 0;
     var totalUnitsComplete = 0;
     var currentUnitIndex = 0;
+    var currentPageIndex = 0;
 
     for (var key in units) {
         totalUnits++;
