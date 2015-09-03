@@ -39,11 +39,15 @@ var ContentView = React.createClass({
 
     render: function() {
         var page = <div></div>;
+
         if (this.state.page) {
-            page = <DefaultPageView page={this.state.page} />;
+            if (this.state.page.type === "MatchItem") {
+                page = <DDAudioQuizView page={this.state.page} />;
+            } else {
+                page = <DefaultPageView page={this.state.page} />;
+            }
         }
 
-        //var activity = <DDAudioQuizView />;
         return (
             <div className="container main-content">
                 {page}

@@ -87,8 +87,6 @@ function loadChapterPages(units, unit, index) {
                             var storeId = unit.data.xid + '_' + chapter.xid + '_' +  page.xid
                             if (storedPages[storeId]) {
                                 page.state = storedPages[storeId];
-                                console.log('page state');
-                                console.dir(page);
                             }
                         }
                         chapter.pages.push(page);
