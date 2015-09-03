@@ -29,6 +29,22 @@ function findCurrentUnitKey() {
     return result;
 }
 
+
+function findCurrentUnitById(xid) {
+    var result = null;
+    var units = UnitStore.getAll();
+
+    for (key in units) {
+        var unit = units[key];
+        if (unit.data.xid === xid) {
+            result = unit;
+            break;
+        }
+    }
+
+    return result;
+}
+
 function findUnitByKey(key) {
     return UnitStore.getAll()[key];
 }
@@ -182,9 +198,6 @@ function load(data) {
 
         _data = result.page;
         PageActions.complete(result);
-        console.log("page complete " + data.page.xid)
-        console.log(result)
-
     });
 }
 
@@ -193,13 +206,15 @@ function jump(data) {
     var chapterId = data.chapter;
     var unitId = data.unit;
     var unit = findUnitByKey(unitId);
+
+    if (!unit) {
+        unit = findCurrentUnitById(unitId);
+    }
+
     var chapter = findChapterById(unit, chapterId);
     var page = findPageById(chapter, pageId);
 
     load({unit: unit, chapter: chapter, page:page});
-
-
-
 }
 
 var PageStore = assign({}, EventEmitter.prototype, {

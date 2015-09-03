@@ -4,6 +4,7 @@ var LoaderConstants = require('../constants/LoaderConstants');
 var LoaderActions = require('../actions/LoaderActions');
 var BookStore = require('../stores/BookStore');
 var BookActions = require('../actions/BookActions');
+var BookmarkStore = require('../stores/BookmarkStore');
 var PageActions = require('../actions/PageActions');
 var UnitStore = require('../stores/UnitStore');
 var UnitActions = require('../actions/UnitActions');
@@ -105,7 +106,12 @@ function loadChapterPages(units, unit, index) {
                 NotificationActions.updateBody("Loading Page : " + page.title);
 
                 setTimeout(function() {
-                    PageActions.load({unit:unit, chapter:chapter, page:page});
+                    var bookmark = BookmarkStore.bookmark();
+                    if (bookmark) {
+                        PageActions.jump(bookmark);
+                    } else {
+                        PageActions.load({unit:unit, chapter:chapter, page:page});
+                    }
 
                     LoaderActions.complete({});
                     _loaded = true;
