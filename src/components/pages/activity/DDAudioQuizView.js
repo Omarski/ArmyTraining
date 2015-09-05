@@ -268,14 +268,14 @@ var DDAudioQuizView = React.createClass({
       //  console.log("handleDrag target: ");
         //console.log($(e.target)[0]);
         this.state.dragSrc = e.target;
-        if($(this.state.dragSrc).children().length > 1){
+        if($(this.state.dragSrc).children().length > 3){
             this.setState({
-                childHTML: $($(this.state.dragSrc).children()[2])
+                childHTML: $($(this.state.dragSrc).children()[4])
             });
 
         }else{
             this.setState({
-                childHTML: $(this.state.dragSrc).children()
+                childHTML: $($(this.state.dragSrc).children()[2])
             });
         }
     },
@@ -305,7 +305,8 @@ var DDAudioQuizView = React.createClass({
                                          src={$this.state.childHTML.attr("src")}></img>;
                             break;
                         default:
-                            inner = <div className={$this.state.childHTML.attr("class")}>{$this.state.childHTML[0].innerHTML}</div>;
+                            inner = <div className={$this.state.childHTML.attr("class")}>{
+                                $this.state.childHTML[0].innerHTML}</div>;
                             break;
                     }
                     return (
@@ -319,6 +320,8 @@ var DDAudioQuizView = React.createClass({
                              onDragStart={$this.onDragging}>
                             <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>
                             <span className="glyphicon glyphicon-ok-circle answer-feedback-correct"></span>
+                            <span className="glyphicon glyphicon-play-circle mouseover-play"></span>
+                            <span className="glyphicon glyphicon-ban-circle mouseover-stop"></span>
                             {inner}
                         </div>
                     );
@@ -330,18 +333,32 @@ var DDAudioQuizView = React.createClass({
                     e.target
                 );
             }
-            console.log($($this.state.dragSrc).parent().attr("class"));
 
             if ($($this.state.dragSrc).parent().attr("class") == "answer-handle") {
                 //console.log($(dragSrc).parent()[0]);
+                console.log(e.target);
                 React.unmountComponentAtNode($($this.state.dragSrc).parent()[0]);
-                $this.state.dragSrc.style.opacity = '1.0';
-                $this.state.dragSrc.setAttribute("draggable", "true");
-                $($this.state.dragSrc).removeClass("audio-disabled");
+                var movedItem = $this.state.childHTML[0].innerHTML;
+                var listItems = document.getElementsByClassName("dd-answer-list-item");
+                //console.log(movedItem);
+                if($(e.target).attr("class") == "dd-word-bank-text") {
+                    for (var i = 0; i < listItems.length; i++) {
+                        //console.log(listItems[i].childNodes[0].childNodes[2].innerHTML);
+                        // match movedItem to it's corresponding item in the answer list
+                        if (movedItem == listItems[i].childNodes[0].childNodes[2].innerHTML) {
+                            listItems[i].childNodes[0].style.opacity = '1.0';
+                            listItems[i].childNodes[0].setAttribute("draggable", "true");
+                            $(listItems[i].childNodes[0]).removeClass("audio-disabled");
+                        }
+                    }
+                }
+
             } else {
-                $this.state.dragSrc.style.opacity = '0.4';
-                $this.state.dragSrc.setAttribute("draggable", "false");
-                $($this.state.dragSrc).addClass("audio-disabled");
+                if($(e.target).attr("class") != "dd-word-bank-text") {
+                    $this.state.dragSrc.style.opacity = '0.4';
+                    $this.state.dragSrc.setAttribute("draggable", "false");
+                    $($this.state.dragSrc).addClass("audio-disabled");
+                }
             }
             this.setState({
                 dragSrc: null
@@ -391,6 +408,7 @@ var DDAudioQuizView = React.createClass({
             //}
             return (
                 <li className="dd-answer-list-item" key={index}>
+
                     <div
                         className="dd-draggable-area"
                         draggable="true"
@@ -402,7 +420,11 @@ var DDAudioQuizView = React.createClass({
                         onMouseOver={self.itemMouseOver}
                         onMouseOut={self.itemMouseOff}
                         onClick={self.handleClick}
-                        >{component}</div>
+                        ><span className="glyphicon glyphicon-play-circle mouseover-play"></span>
+                        <span className="glyphicon glyphicon-ban-circle mouseover-stop"></span>
+                        {component}
+
+                    </div>
                 </li>
             )
         });
@@ -441,14 +463,27 @@ var DDAudioQuizView = React.createClass({
                     result = <div className={answerCls} onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
                         &nbsp;
                         {flag}
-                        <div className="answer-handle"></div></div>
+                        <div className="answer-handle"></div>
+                    </div>
                 } else {
-                    result = <div className="dd-answer-area-text"
-                                  data-question-id={index+1}
-                                  data-question-letter={""}
-                                  onMouseOver={self.itemMouseOver}
-                                  onMouseOut={self.itemMouseOff}
-                                  onClick={self.handleClick}>{ms.nut.uttering.utterance.native.text}</div>
+                    var needRender = true;
+                    ms.nut.uttering.info.property.forEach(function(prop){
+                        if(prop.name == "full") {
+                            needRender = false;
+                        }
+                    });
+                    if(needRender) {
+                        result = <div className="dd-answer-area-text"
+                                      data-question-id={index+1}
+                                      data-question-letter={""}
+                                      onMouseOver={self.itemMouseOver}
+                                      onMouseOut={self.itemMouseOff}
+                                      onClick={self.handleClick}>
+                            <span className="glyphicon glyphicon-play-circle mouseover-play"></span>
+                            <span className="glyphicon glyphicon-ban-circle mouseover-stop"></span>
+                            {ms.nut.uttering.utterance.native.text}
+                        </div>
+                    }
                 }
 
                 return (

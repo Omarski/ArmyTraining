@@ -1,5 +1,53 @@
 /* DDAudioQuizView.scss */
 
+li {
+  list-style-type: none;
+}
+
+html {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.mouseover-play{
+  z-index: 255;
+  height: 0;
+  width: 0;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mouseover-stop{
+  z-index: 255;
+  height: 0;
+  width: 0;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.answer-feedback-incorrect{
+  float: right;
+  color: #a94442;
+  display: none;
+}
+
+.answer-feedback-correct{
+  float: right;
+  color: #3c763d;
+  display: none;
+}
+
+.answer-handle{
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
 .dd-word-bank-text {
   background-color: #f8f8f8;
   border-color: #e7e7e7;
@@ -7,6 +55,8 @@
   border-style: solid;
   text-align: center;
   padding: 10px;
+  height: 100%;
+  line-height: normal;
 }
 
 .dd-drop-answer-area {
@@ -15,6 +65,7 @@
   border-width: 1px;
   border-style: solid;
   text-align: center;
+  vertical-align: middle;
   padding: 0px;
   margin-left: 10px;
   margin-right: 10px;
@@ -57,6 +108,7 @@
   margin-bottom: 10px;
   padding-top: 15px;
   padding-bottom: 15px;
+  min-height: 15px;
 }
 
 .dd-player-label {
@@ -80,7 +132,6 @@
 
 .dd-flag {
   top: 0;
-  right: 0;
   position: absolute;
 }
 
