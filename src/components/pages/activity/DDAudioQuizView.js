@@ -2,6 +2,37 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 
 
+function playAudio(xid){
+    console.log(xid);
+    var audio = document.getElementById('audio');
+    var source = document.getElementById('mp3Source');
+    source.src="data/media/" + xid + ".mp3";
+    if(audio.paused){
+        audio.load();
+        audio.play();
+    }else{
+        audio.pause();
+    }
+
+}
+
+function isPlaying(xid){
+    var amPlay = false;
+
+    var audio = document.getElementById('audio');
+    var source = document.getElementById('mp3Source');
+
+    var test = "data/media/" + xid + ".mp3";
+
+    var short = source.src.substr(source.src.length - test.length);
+
+    if(short == test){
+        return(!audio.paused);
+    }
+    //console.log(amPlay);
+    return amPlay;
+}
+
 function getPageState(props) {
     var data = props;
     data.answers = [];
@@ -190,13 +221,68 @@ var DDAudioQuizView = React.createClass({
         // in the answer area, amd dd-word-bank-text ( the draggable answers)
         //console.log("over");
         //console.log($(event.target).attr("class"));
-
+        var data = this.state;
+        var xid;
         switch ($(event.target).attr("class")) {
-            case "dd-answer-area-text":
-                $(event.target).css("background-color", "yellow");
+            case "dd-word-bank-text":
+                if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
+                    //console.log("draggable and is not disabled");
+                    data.page.matchSource.forEach(function(item){
+                        // if this item is what we clicked on
+                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
+                            // play audio
+                            xid = (item.nut.uttering.media[0].zid);
+                        }
+                    });
+                    if($($(event.target).parent()[0]).children().length > 3){
+                        if( isPlaying(xid) ){
+                            $($($(event.target).parent()[0]).children()[3]).css('display', 'inline');
+                        } else {
+                            $($($(event.target).parent()[0]).children()[2]).css('display', 'inline');
+                        }
+                    }else {
+                        if (isPlaying(xid)) {
+                            $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
+                        } else {
+                            $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
+                        }
+                    }
+                }
                 break;
+
+            case "dd-answer-area-text":
+                data.page.matchSource.forEach(function(item){
+                    // if this item is what we clicked on
+                    if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
+                        // play audio
+                        xid = item.nut.uttering.media[0].zid;
+                    }
+                });
+                    if (isPlaying(xid)) {
+                        $($(event.target).children()[1]).css('display', 'inline');
+                    } else {
+                        $($(event.target).children()[0]).css('display', 'inline');
+                    }
+
+                break;
+
             default:
-                //do nothing
+                if($(event.target).parent()[0].className == "dd-answer-area-text") {
+                    data.page.matchSource.forEach(function(item){
+                        // if this item is what we clicked on
+                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
+                            // play audio
+                            xid = (item.nut.uttering.media[0].zid);
+                        }
+                    });
+                    if( isPlaying(xid) ){
+                        $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
+                    } else {
+                        $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
+                    }
+                }
+
+                // else do nothing
 
                 break;
         }
@@ -205,41 +291,85 @@ var DDAudioQuizView = React.createClass({
     itemMouseOff: function(event){
         //console.log("off");
         switch ($(event.target).attr("class")) {
-            case "dd-answer-area-text":
-                $(event.target).css({"background-color": "white"});
+            case "dd-word-bank-text":
+                //console.dir($(event.target).children());
+                if($($(event.target).parent()[0]).children().length > 3){
+                        $($($(event.target).parent()[0]).children()[2]).css('display', 'none');
+                        $($($(event.target).parent()[0]).children()[3]).css('display', 'none');
+                }else {
+                        $($($(event.target).parent()[0]).children()[1]).css('display', 'none');
+                        $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
+                }
                 break;
+
+            case "dd-answer-area-text":
+                //$(event.target).css("background-color", "white");
+                $($(event.target).children()[0]).css('display', 'none');
+                $($(event.target).children()[1]).css('display', 'none');
+                break;
+
             default:
-                //do nothing
+                if($(event.target).parent()[0].className == "dd-answer-area-text"){
+                    //console.log("text of plain text in question");
+                    $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
+                    $($($(event.target).parent()[0]).children()[1]).css('display', 'none');
+                }
+
+                // else do nothing
 
                 break;
         }
     },
 
     handleClick: function(event) {
-      //  console.log($(event.target).attr("class"));
+        var data = this.state;
         switch($(event.target).attr("class")){
             case "dd-word-bank-text":
                 if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
-                    alert("lineNumber " + $($(event.target)[0].parentElement).attr("data-question-id") + " : orderIndex "
-                        + $($(event.target)[0].parentElement).attr("data-order-index"));
+                    //console.log("draggable and is not disabled");
+                    data.page.matchSource.forEach(function(item){
+                        // if this item is what we clicked on
+                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
+                            // play audio
+                            playAudio(item.nut.uttering.media[0].zid);
+                        }
+                    });
+
                 }
                 break;
             case "dd-answer-area-text":
-                alert("lineNumber " + $(event.target).attr("data-question-id") + " : orderIndex "
-                    + $(event.target).attr("data-order-index"));
+                //console.log("area around text of questions");
+                data.page.matchSource.forEach(function(item){
+                    // if this item is what we clicked on
+                    if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
+                        // play audio
+                        playAudio(item.nut.uttering.media[0].zid);
+                    }
+                });
+
                 break;
             case "dd-draggable-area":
-                alert("lineNumber " + $($(event.target)[0]).attr("data-question-id") + " : orderIndex "
+                console.log("lineNumber " + $($(event.target)[0]).attr("data-question-id") + " : orderIndex "
                     + $($(event.target)[0]).attr("data-order-index"));
                 break;
             case "img-thumbnail dd-answer-image":
                 if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
-                    alert("lineNumber " + $($(event.target)[0].parentElement).attr("data-question-id") + " : orderIndex "
+                    console.log("lineNumber " + $($(event.target)[0].parentElement).attr("data-question-id") + " : orderIndex "
                         + $($(event.target)[0].parentElement).attr("data-order-index"));
                 }
                 break;
             default:
-                alert("lineNumber " + $($(event.target)[0].parentElement).attr("data-question-id") + " : Question Prompt");
+
+                if($(event.target).parent()[0].className == "dd-answer-area-text"){
+                    //console.log("text of plain text in question");
+                    data.page.matchSource.forEach(function(item){
+                        // if this item is what we clicked on
+                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
+                            // play audio
+                            playAudio(item.nut.uttering.media[0].zid);
+                        }
+                    });
+                }
                 break;
         }
     },
@@ -264,6 +394,9 @@ var DDAudioQuizView = React.createClass({
 
     // TODO: Cancel and remove answer
     onDragging: function(e){
+        // TODO: fix d&d in firefox
+        //e.dataTransfer.setData('Text', this.id);
+        e.dataTransfer.setData('text/plain', 'anything');
         //event.target is the source node
       //  console.log("handleDrag target: ");
         //console.log($(e.target)[0]);
@@ -280,6 +413,8 @@ var DDAudioQuizView = React.createClass({
         }
     },
     onDropping: function(e){
+        e.preventDefault();
+        e.stopPropagation();
 
         if(this.state.dragSrc != null) {
           //  console.log("handleDrop target: ");
@@ -367,6 +502,7 @@ var DDAudioQuizView = React.createClass({
                 childHTML: null
             });
         }
+        return false;
     },
     onDraggingOver: function(e){
         this.setState({
@@ -529,6 +665,11 @@ var DDAudioQuizView = React.createClass({
                 </div>
                 <div className="row dd-quiz-feedback">
                     <button className="btn btn-default" onClick={this.submit}>{this.state.submitLabel}</button>
+                    <audio id="audio">
+                       /* <source id="oggSource" src="" type="audio/ogg"></source> */
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
                 </div>
             </div>
         );
