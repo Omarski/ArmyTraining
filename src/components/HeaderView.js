@@ -1,5 +1,6 @@
 var React = require('react');
 var BreadcrumbsView = require('../components/BreadcrumbsView');
+var SettingsView = require('../components/widgets/SettingsView');
 var BookStore = require('../stores/BookStore');
 
 function getBookState() {
@@ -48,9 +49,7 @@ var HeaderView = React.createClass({
                             <button type="button" className="btn btn-default btn-lg btn-link" aria-label="Left Align">
                                 <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>
                             </button>
-                            <button type="button" className="btn btn-default btn-link btn-lg" aria-label="Left Align">
-                                <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
-                            </button>
+                            <SettingsView />
                         </div>
                     </div>
                     <BreadcrumbsView />

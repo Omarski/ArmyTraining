@@ -230,6 +230,20 @@ function jump(data) {
     load({unit: unit, chapter: chapter, page:page});
 }
 
+function reset() {
+    store.remove('pages');
+
+    var units = UnitStore.getAll();
+    for (var key in units) {
+        _currentUnit = units[key];
+        _currentChapter = _currentUnit.data.chapter[0];
+        _currentPage = _currentChapter.pages[0];
+        load({unit:_currentUnit, chapter:_currentChapter, page:_currentPage});
+        break;
+    }
+
+}
+
 var PageStore = assign({}, EventEmitter.prototype, {
 
     page: function() {
@@ -290,6 +304,10 @@ AppDispatcher.register(function(action) {
             break;
         case PageConstants.PAGE_JUMP:
             jump(action.data);
+            PageStore.emitChange();
+            break;
+        case PageConstants.PAGE_RESET:
+            reset();
             PageStore.emitChange();
             break;
 

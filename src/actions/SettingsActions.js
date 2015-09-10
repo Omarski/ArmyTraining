@@ -1,14 +1,14 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var BookmarkConstants = require('../constants/BookmarkConstants');
+var SettingsConstants = require('../constants/SettingsConstants');
 
-var BookmarkActions = {
+var SettingsActions = {
 
     /**
      * @param  {string} text
      */
     create: function(data) {
         AppDispatcher.dispatch({
-            actionType: BookmarkConstants.BOOKMARK_CREATE,
+            actionType: SettingsConstants.SETTINGS_CREATE,
             data: data
         });
     },
@@ -18,12 +18,13 @@ var BookmarkActions = {
     /**
      * @param  {string} id
      */
-    destroy: function() {
+    destroy: function(id) {
         AppDispatcher.dispatch({
-            actionType: BookmarkConstants.BOOKMARK_DESTROY
+            actionType: SettingsConstants.SETTINGS_DESTROY,
+            id: id
         });
     }
 
 };
 
-module.exports = BookmarkActions;
+module.exports = SettingsActions;

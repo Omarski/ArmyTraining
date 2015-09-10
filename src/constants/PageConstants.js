@@ -6,4 +6,5 @@ module.exports = keyMirror({
     PAGE_LOAD_PREVIOUS: null,
     PAGE_COMPLETE: null,
     PAGE_JUMP: null,
+    PAGE_RESET: null
 });

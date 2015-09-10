@@ -7,7 +7,9 @@
     "flux": "^2.0.1",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "jquery": "^2.1.1",
+    "bootstrap-slider": "^4.3.0"
   },
   "devDependencies": {
     "browserify": "^6.2.0",
