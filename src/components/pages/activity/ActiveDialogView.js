@@ -4,13 +4,16 @@ var PageStore = require('../../../stores/PageStore');
 
 function getPageState(props) {
     var title = "";
+    var pageType = "";
 
     if (props && props.page) {
         title = props.page.title;
+        pageType = props.page.type;
     }
 
     return {
-        title: title
+        title: title,
+        pageType: pageType
     };
 }
 
@@ -35,7 +38,7 @@ var ActiveDialogView = React.createClass({
 
         return (
             <div className="container">
-                <h3>{this.state.title}</h3>
+                <h3>{this.state.title} : {this.state.pageType}</h3>
             </div>
         );
     },

@@ -19,6 +19,7 @@ var OrderingView = require('../components/pages/activity/OrderingView');
 var PronunciationView = require('../components/pages/activity/PronunciationView');
 var ResponseFormationView = require('../components/pages/activity/ResponseFormationView');
 var SortingView = require('../components/pages/activity/SortingView');
+var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
 
 var NotificationActions = require('../actions/NotificationActions');
 
@@ -104,6 +105,9 @@ var ContentView = React.createClass({
                     break;
                 case "Video":
                     page = <VideoView page={this.state.page} />;
+                    break;
+                case "UtteranceFormation":
+                    page = <UtteranceFormationView page={this.state.page} />;
                     break;
                 default:
                     page = <DefaultPageView page={this.state.page} />;

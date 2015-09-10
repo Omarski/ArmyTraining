@@ -4,12 +4,13 @@ var PageStore = require('../../../stores/PageStore');
 
 function getPageState(props) {
     var title = "";
-
+    var pageType = "";
     var noteItems = "";
     var mediaItems = "";
 
     if (props && props.page) {
         title = props.page.title;
+        pageType = props.page.type;
 
         if (props.page.note) {
             var notes = props.page.note;
@@ -49,7 +50,8 @@ function getPageState(props) {
     return {
         title: title,
         note: noteItems,
-        media: mediaItems
+        media: mediaItems,
+        pageType: pageType
     };
 }
 
@@ -74,6 +76,7 @@ var DefaultPageView = React.createClass({
 
         return (
             <div className="container">
+                <h1>Unknown Page Type {this.state.pageType}</h1>
                 <h3>{this.state.title}</h3>
                 <div>
                     {this.state.note}

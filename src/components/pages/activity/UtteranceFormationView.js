@@ -17,7 +17,7 @@ function getPageState(props) {
     };
 }
 
-var SortingView = React.createClass({
+var UtteranceFormationView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
         return pageState;
@@ -50,4 +50,4 @@ var SortingView = React.createClass({
     }
 });
 
-module.exports = SortingView;
+module.exports = UtteranceFormationView;
