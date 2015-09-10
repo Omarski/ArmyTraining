@@ -25,8 +25,9 @@ function getBookState() {
 
 var HeaderView = React.createClass({
     mute: function() {
+        var st = this.state;
         $('audio,video').each(function(){
-            if (!this.state.mute ) {
+            if (!st.mute ) {
                 if( !$(this).paused ) {
                     $(this).data('muted',true); //Store elements muted by the button.
                     $(this).pause(); // or .muted=true to keep playing muted
