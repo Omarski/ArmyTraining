@@ -11,7 +11,6 @@ function getPageState(props) {
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
-
         if (props.page.note) {
             var notes = props.page.note;
 
@@ -30,10 +29,10 @@ function getPageState(props) {
 
                 if (item.type === "video") {
                     result = <div key={index}>
-                                <video width="320" height="240" controls>
-                                    <source src={filePath} type="video/mp4"></source>
-                                </video>
-                            </div>
+                        <video width="320" height="240" controls>
+                            <source src={filePath} type="video/mp4"></source>
+                        </video>
+                    </div>
                 }
 
                 if (item.type === "image") {
@@ -55,7 +54,7 @@ function getPageState(props) {
     };
 }
 
-var DefaultPageView = React.createClass({
+var VideoView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
         return pageState;
@@ -76,8 +75,7 @@ var DefaultPageView = React.createClass({
 
         return (
             <div className="container">
-                <h1>Unknown Page Type {this.state.pageType}</h1>
-                <h3>{this.state.title}</h3>
+                <h3>{this.state.title} : {this.state.pageType}</h3>
                 <div>
                     {this.state.note}
                     {this.state.media}
@@ -93,4 +91,4 @@ var DefaultPageView = React.createClass({
     }
 });
 
-module.exports = DefaultPageView;
+module.exports = VideoView;

@@ -1,7 +1,26 @@
 var React = require('react');
 var PageStore = require('../stores/PageStore');
-var DefaultPageView = require('../components/pages/content/DefaultPageView')
-var DDAudioQuizView = require('../components/pages/activity/DDAudioQuizView')
+var DefaultPageView = require('../components/pages/content/DefaultPageView');
+var DDAudioQuizView = require('../components/pages/activity/DDAudioQuizView');
+
+var InfoView = require('../components/pages/content/InfoView');
+var InteractiveTimelineView = require('../components/pages/content/InteractiveTimelineView');
+var IntroductionPageView = require('../components/pages/content/IntroductionPageView');
+var MapView = require('../components/pages/content/MapView');
+var MultiNoteView = require('../components/pages/content/MultiNoteView');
+var VideoView = require('../components/pages/content/VideoView');
+
+var ActiveDialogView = require('../components/pages/activity/ActiveDialogView');
+var ListeningComprehensionView = require('../components/pages/activity/ListeningComprehensionView');
+var MatchItemView = require('../components/pages/activity/MatchItemView');
+var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
+var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceView');
+var OrderingView = require('../components/pages/activity/OrderingView');
+var PronunciationView = require('../components/pages/activity/PronunciationView');
+var ResponseFormationView = require('../components/pages/activity/ResponseFormationView');
+var SortingView = require('../components/pages/activity/SortingView');
+var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
+
 var NotificationActions = require('../actions/NotificationActions');
 
 function getPageState() {
@@ -41,10 +60,57 @@ var ContentView = React.createClass({
         var page = <div></div>;
 
         if (this.state.page) {
-            if (this.state.page.type === "MatchItem") {
-                page = <DDAudioQuizView page={this.state.page} />;
-            } else {
-                page = <DefaultPageView page={this.state.page} />;
+            switch (this.state.page.type) {
+                case "ActiveDialog":
+                    page = <ActiveDialogView page={this.state.page} />;
+                    break;
+                case "ListeningComprehension":
+                    page = <ListeningComprehensionView page={this.state.page} />;
+                    break;
+                case "MatchItem":
+                    page = <MatchItemView page={this.state.page} />;
+                    break;
+                case "MultiColumnPronunciation":
+                    page = <MultiColumnPronunciationView page={this.state.page} />;
+                    break;
+                case "MultipleChoice":
+                    page = <MultipleChoiceView page={this.state.page} />;
+                    break;
+                case "Ordering":
+                    page = <OrderingView page={this.state.page} />;
+                    break;
+                case "Pronunciation":
+                    page = <PronunciationView page={this.state.page} />;
+                    break;
+                case "ResponseFormation":
+                    page = <ResponseFormationView page={this.state.page} />;
+                    break;
+                case "Sorting":
+                    page = <SortingView page={this.state.page} />;
+                    break;
+                case "Info":
+                    page = <InfoView page={this.state.page} />;
+                    break;
+                case "InteractiveTimeline":
+                    page = <InteractiveTimelineView page={this.state.page} />;
+                    break;
+                case "IntroductionPage":
+                    page = <IntroductionPageView page={this.state.page} />;
+                    break;
+                case "Map":
+                    page = <MapView page={this.state.page} />;
+                    break;
+                case "MultiNote":
+                    page = <MultiNoteView page={this.state.page} />;
+                    break;
+                case "Video":
+                    page = <VideoView page={this.state.page} />;
+                    break;
+                case "UtteranceFormation":
+                    page = <UtteranceFormationView page={this.state.page} />;
+                    break;
+                default:
+                    page = <DefaultPageView page={this.state.page} />;
             }
         }
 
