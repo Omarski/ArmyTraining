@@ -46,37 +46,40 @@ function getPageState(props) {
 
     var line = {};
     data.page.matchSource.forEach(function(item){
-        var ln = "";
-        var hasLine = false;
+        var _ln = "";
+        var _hasLine = false;
+        var _utteringInfo = item.nut.uttering.info || {property: []};
+        var _infoProps = _utteringInfo.property;
+        console.dir(item);
+
         //if a matchSource has a line, then it will be displayed in the conversation
-        item.nut.uttering.info.property.forEach(function(prop){
+        _infoProps.forEach(function(prop){
             if(prop.name == "line"){
-                ln = prop.value;
-                hasLine = true;
+                _ln = prop.value;
+                _hasLine = true;
             }
         });
         // if matchSource has a line and a letter, it's letter is associated with
         // a correct answer
-        if(hasLine){
+        if(_hasLine){
             if(item.letter != ""){
                 data.matchTarget.push(item.letter);
                // console.log("this should only be here 4 times");
             }
-            // TODO: remove duplicates from matchTarget[] to allow for multiple correct answers
         }
-        // if ln != to "" the matchSource has a line spot.
-        if(ln != ""){
-            if(!line[parseInt(ln)]) {
-                line[parseInt(ln)] = [];
+        // if _ln != to "" the matchSource has a line spot.
+        if(_ln != ""){
+            if(!line[parseInt(_ln)]) {
+                line[parseInt(_ln)] = [];
             }
-            line[parseInt(ln)].push(item);
+            line[parseInt(_ln)].push(item);
         }
     });
     data.lines = line;
    // console.log(data.matchTarget);
     // shuffle and add to answers[]
     // grab all answers from quiz for word bank
-    var questions = data.page.matchSource;
+    var questions = data.page.matchSource || [];
     var len = questions.length;
     while (len--) {
         // for each matchSource
@@ -86,7 +89,8 @@ function getPageState(props) {
 
             // get it's line number
             var ln = -1;
-            a.nut.uttering.info.property.forEach(function(prop){
+            var _aInfo = a.nut.uttering.info || {property: []};
+            _aInfo.property.forEach(function(prop){
                 if(prop.name == "line"){
                     ln = prop.value;
                 }
@@ -130,7 +134,11 @@ function shuffle(array) {
 function setDraggableSize() {
 
     var dd_drop_answer_area = $('.dd-drop-answer-area');
+    var dd_answer_area_text = $('dd-answer-area-text');
     var dd_draggable_area = $('.dd-draggable-area');
+    var glyphicon_wl = $(".glyphicon.wl");
+    var _na = $(".na");
+    var _ad = $(".ad");
     var maxWidth = 0;
     var maxHeight = 0;
     dd_draggable_area.each(function(index) {
@@ -145,10 +153,16 @@ function setDraggableSize() {
     });
     dd_drop_answer_area.width(maxWidth).height(maxHeight);
     dd_draggable_area.width(maxWidth).height(maxHeight);
+    glyphicon_wl.css( 'font-size', (maxHeight + 'px') );
+    glyphicon_wl.css( 'left', ( maxWidth + 'px' ) );
+    dd_answer_area_text.css('line-height', (maxHeight + 'px'));
+    _na.css( 'font-size', ('inherit') );
+    _na.css( 'left', ( 'inherit' ) );
+    _ad.css( 'font-size', (maxHeight + 'px') );
+    _ad.css( 'left', ( maxHeight/2 + 'px' ) );
 }
 
 // gets all the answers and questions. Checks to see if answers are in their desired locations
-// TODO:  multiple valid answers
 function checkAnswers(state){
     var dd_answers = document.getElementsByClassName('answer-handle');
     var numCorrect = 0;
@@ -200,12 +214,6 @@ var DDAudioQuizView = React.createClass({
     submit: function(event) {
       //  console.log("Submit pressed!");
 
-        // if the page is timed return the duration the page was displayed for until the submit button was pressed.
-        //if(true){
-        // Date.now() returns the number of milliseconds since 1970/01/01
-        //alert(Date.now()-timer);
-        //}
-
         // if we need the Answers to be checked when the submit button is pressed
         //if(true){
         //console.log(this.state);
@@ -217,17 +225,14 @@ var DDAudioQuizView = React.createClass({
     },
 
     itemMouseOver: function(event){
-        // as of 8/31/15, undefined == the <p> with the npc text, dd-answer-area-text (the words between answers in
-        // in the answer area, amd dd-word-bank-text ( the draggable answers)
-        //console.log("over");
-        //console.log($(event.target).attr("class"));
-        var data = this.state;
-        var xid;
+        var xid = 0;
+        // perform functions based on what class is moused over
         switch ($(event.target).attr("class")) {
             case "dd-word-bank-text":
                 if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
+                    $(event.target).css("opacity", "0.4");
                     //console.log("draggable and is not disabled");
-                    data.page.matchSource.forEach(function(item){
+                    this.state.page.matchSource.forEach(function(item){
                         // if this item is what we clicked on
                         if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
                             // play audio
@@ -251,8 +256,9 @@ var DDAudioQuizView = React.createClass({
                 break;
 
             case "dd-answer-area-text":
-                data.page.matchSource.forEach(function(item){
+                this.state.page.matchSource.forEach(function(item){
                     // if this item is what we clicked on
+                    $($(event.target).children()[2]).css('opacity', '0.4');
                     if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
                         // play audio
                         xid = item.nut.uttering.media[0].zid;
@@ -268,7 +274,8 @@ var DDAudioQuizView = React.createClass({
 
             default:
                 if($(event.target).parent()[0].className == "dd-answer-area-text") {
-                    data.page.matchSource.forEach(function(item){
+                    $(event.target).css("opacity", "0.4");
+                    this.state.page.matchSource.forEach(function(item){
                         // if this item is what we clicked on
                         if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
                             // play audio
@@ -290,6 +297,7 @@ var DDAudioQuizView = React.createClass({
     },
     itemMouseOff: function(event){
         //console.log("off");
+        $(event.target).css("opacity", "1.0");
         switch ($(event.target).attr("class")) {
             case "dd-word-bank-text":
                 //console.dir($(event.target).children());
@@ -303,6 +311,7 @@ var DDAudioQuizView = React.createClass({
                 break;
 
             case "dd-answer-area-text":
+                $($(event.target).children()[2]).css('opacity', '1.0');
                 //$(event.target).css("background-color", "white");
                 $($(event.target).children()[0]).css('display', 'none');
                 $($(event.target).children()[1]).css('display', 'none');
@@ -311,6 +320,7 @@ var DDAudioQuizView = React.createClass({
             default:
                 if($(event.target).parent()[0].className == "dd-answer-area-text"){
                     //console.log("text of plain text in question");
+                    $(event.target).css("opacity", "1.0");
                     $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
                     $($($(event.target).parent()[0]).children()[1]).css('display', 'none');
                 }
@@ -323,29 +333,55 @@ var DDAudioQuizView = React.createClass({
 
     handleClick: function(event) {
         var data = this.state;
+        var zid = 0;
         switch($(event.target).attr("class")){
+            // word bank is what get's the click event inside draggable areas
             case "dd-word-bank-text":
                 if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
+
+                    // parent == dd-draggable-area, > child[0] is play, child[1] is stop
                     //console.log("draggable and is not disabled");
                     data.page.matchSource.forEach(function(item){
                         // if this item is what we clicked on
                         if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
                             // play audio
-                            playAudio(item.nut.uttering.media[0].zid);
+                            zid = item.nut.uttering.media[0].zid;
+                            playAudio(zid);
                         }
                     });
 
+                    if($($(event.target).parent()[0]).children().length > 3){
+                        if(isPlaying(zid)) {
+                            $($($(event.target).parent()[0]).children()[2]).css('display', 'none');
+                            $($($(event.target).parent()[0]).children()[3]).css('display', 'inline');
+                        }
+                    }else {
+                        if(isPlaying(zid)) {
+                            $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
+                            $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
+                        }
+                    }
+
                 }
                 break;
+
+            // the div containing the span
             case "dd-answer-area-text":
+                // child [0] is play, child[1] is stop
+
                 //console.log("area around text of questions");
                 data.page.matchSource.forEach(function(item){
                     // if this item is what we clicked on
                     if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
                         // play audio
-                        playAudio(item.nut.uttering.media[0].zid);
+                        zid = item.nut.uttering.media[0].zid;
+                        playAudio(zid);
                     }
                 });
+                if(isPlaying(zid)) {
+                    $($(event.target).children()[0]).css('display', 'none');
+                    $($(event.target).children()[1]).css('display', 'inline');
+                }
 
                 break;
             case "dd-draggable-area":
@@ -360,15 +396,23 @@ var DDAudioQuizView = React.createClass({
                 break;
             default:
 
+                // the span containing the text
                 if($(event.target).parent()[0].className == "dd-answer-area-text"){
+
                     //console.log("text of plain text in question");
                     data.page.matchSource.forEach(function(item){
                         // if this item is what we clicked on
                         if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
                             // play audio
-                            playAudio(item.nut.uttering.media[0].zid);
+                            zid = item.nut.uttering.media[0].zid;
+                            playAudio(zid);
                         }
                     });
+                    if(isPlaying(zid)){
+                        $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
+                        $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
+                    }
+
                 }
                 break;
         }
@@ -392,9 +436,7 @@ var DDAudioQuizView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
 
-    // TODO: Cancel and remove answer
     onDragging: function(e){
-        // TODO: fix d&d in firefox
         //e.dataTransfer.setData('Text', this.id);
         e.dataTransfer.setData('text/plain', 'anything');
         //event.target is the source node
@@ -455,8 +497,8 @@ var DDAudioQuizView = React.createClass({
                              onDragStart={$this.onDragging}>
                             <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>
                             <span className="glyphicon glyphicon-ok-circle answer-feedback-correct"></span>
-                            <span className="glyphicon glyphicon-play-circle mouseover-play"></span>
-                            <span className="glyphicon glyphicon-ban-circle mouseover-stop"></span>
+                            <span className="glyphicon glyphicon-play-circle mouseover-play ad"></span>
+                            <span className="glyphicon glyphicon-ban-circle mouseover-stop ad"></span>
                             {inner}
                         </div>
                     );
@@ -556,8 +598,8 @@ var DDAudioQuizView = React.createClass({
                         onMouseOver={self.itemMouseOver}
                         onMouseOut={self.itemMouseOff}
                         onClick={self.handleClick}
-                        ><span className="glyphicon glyphicon-play-circle mouseover-play"></span>
-                        <span className="glyphicon glyphicon-ban-circle mouseover-stop"></span>
+                        ><span className="glyphicon glyphicon-play-circle mouseover-play wl"></span>
+                        <span className="glyphicon glyphicon-ban-circle mouseover-stop wl"></span>
                         {component}
 
                     </div>
@@ -615,8 +657,8 @@ var DDAudioQuizView = React.createClass({
                                       onMouseOver={self.itemMouseOver}
                                       onMouseOut={self.itemMouseOff}
                                       onClick={self.handleClick}>
-                            <span className="glyphicon glyphicon-play-circle mouseover-play"></span>
-                            <span className="glyphicon glyphicon-ban-circle mouseover-stop"></span>
+                            <span className="glyphicon glyphicon-play-circle mouseover-play na"></span>
+                            <span className="glyphicon glyphicon-ban-circle mouseover-stop na"></span>
                             {ms.nut.uttering.utterance.native.text}
                         </div>
                     }
