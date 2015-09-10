@@ -18,29 +18,21 @@ function getBookState() {
     }
     return {
         title: title,
-        mute: false
+        muted: false
 
     };
 }
 
 var HeaderView = React.createClass({
-    mute: function() {
-        var st = this.state;
-        $('audio,video').each(function(){
-            if (!st.mute ) {
-                if( !$(this).paused ) {
-                    $(this).data('muted',true); //Store elements muted by the button.
-                    $(this).pause(); // or .muted=true to keep playing muted
-                }
-            } else {
-                if( $(this).data('muted') ) {
-                    $(this).data('muted',false);
-                    $(this).play(); // or .muted=false
-                }
-            }
-        });
+    toggleMute: function() {
+        if(this.state.muted) {
+            $('audio,video').prop("volume", 1.0);
+        } else {
+            $('audio,video').prop("volume", 0.0);
+        }
 
-        this.state.mute = !this.state.mute;
+        this.state.muted = !this.state.muted;
+        this.setState();
     },
     getInitialState: function() {
         var bookState = getBookState();
@@ -59,6 +51,10 @@ var HeaderView = React.createClass({
         BookStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
+        if (this.state.muted) {
+            muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
+        }
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container main-nav-container">
@@ -67,8 +63,8 @@ var HeaderView = React.createClass({
                     </div>
                     <div id="navbar" className="navbar main-nav-bar">
                         <div className="nav navbar-nav main-nav-bar-nav">
-                            <button onClick={this.mute} type="button" className="btn btn-default btn-lg btn-link" aria-label="sound">
-                                <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>
+                            <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link" aria-label="sound">
+                                {muteIcon}
                             </button>
                             <SettingsView />
                         </div>
