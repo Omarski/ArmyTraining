@@ -68,7 +68,8 @@ var ContentView = React.createClass({
                     page = <ListeningComprehensionView page={this.state.page} />;
                     break;
                 case "MatchItem":
-                    page = <MatchItemView page={this.state.page} />;
+                    //page = <MatchItemView page={this.state.page} />;
+                    page = <DDAudioQuizView page={this.state.page} />;
                     break;
                 case "MultiColumnPronunciation":
                     page = <MultiColumnPronunciationView page={this.state.page} />;
