@@ -17,6 +17,10 @@ html {
   -webkit-user-select: none;
 }
 
+.glyphicon{
+  pointer-events: none;
+}
+
 .mouseover-play{
   position: absolute;
   top: inherit;
@@ -128,6 +132,7 @@ html {
   padding-top: 15px;
   padding-bottom: 15px;
   min-height: 15px;
+  cursor: pointer;
 }
 
 .dd-player-label {
