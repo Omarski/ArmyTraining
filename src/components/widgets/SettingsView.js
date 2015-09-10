@@ -90,7 +90,7 @@ var SettingsView = React.createClass({
                                         onSlide={this.didChange} />
                                 </ListGroupItem>
                                 <ListGroupItem>
-                                    FOR DEVELOPERS NOT FINAL PRODUCT
+                                    <p><i>BUTTONS BELOW ARE FOR DEVELOPERS NOT FOR FINAL PRODUCT</i></p>
                                 </ListGroupItem>
                                 <ListGroupItem>
                                     <Button bsStyle='warning' onClick={this.clearBookmark}>Clear Bookmark</Button>
