@@ -1,25 +1,23 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var BookmarkConstants = require('../constants/BookmarkConstants');
+var SettingsConstants = require('../constants/SettingsConstants');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 
 function create(data) {
-    store.set('bookmark', data);
+    store.set('settings', data);
 }
 
 function destroy() {
-    store.remove('bookmark');
-    console.log('Removing bookmark');
-    console.dir(store.getAll());
+    store.remove('settings');
 }
 
-var BookmarkStore = assign({}, EventEmitter.prototype, {
+var SettingsStore = assign({}, EventEmitter.prototype, {
 
-    bookmark: function() {
-        return store.get('bookmark');
+    settings: function() {
+        return store.get('settings');
     },
 
     emitChange: function() {
@@ -38,17 +36,17 @@ var BookmarkStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     switch(action.actionType) {
-        case BookmarkConstants.BOOKMARK_CREATE:
+        case SettingsConstants.SETTINGS_CREATE:
             create(action.data);
-            BookmarkStore.emitChange();
+            SettingsStore.emitChange();
             break;
-        case BookmarkConstants.BOOKMARK_DESTROY:
+        case SettingsConstants.SETTINGS_DESTROY:
             destroy();
-            BookmarkStore.emitChange();
+            SettingsStore.emitChange();
             break;
         default:
         // no op
     }
 });
 
-module.exports = BookmarkStore;
+module.exports = SettingsStore;

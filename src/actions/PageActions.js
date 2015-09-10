@@ -36,6 +36,11 @@ var PageActions = {
             actionType: PageConstants.PAGE_JUMP,
             data: data
         });
+    },
+    reset: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.PAGE_RESET
+        });
     }
 
 
