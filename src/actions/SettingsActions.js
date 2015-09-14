@@ -13,8 +13,6 @@ var SettingsActions = {
         });
     },
 
-
-
     /**
      * @param  {string} id
      */
@@ -23,8 +21,35 @@ var SettingsActions = {
             actionType: SettingsConstants.SETTINGS_DESTROY,
             id: id
         });
-    }
+    },
 
+    updateAutoPlaySound: function(data) {
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_UPDATE_AUTO_PLAY_SOUND,
+            data: data
+        });
+    },
+
+    updateBackgroundVolume: function(data) {
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_UPDATE_BACKGROUND_VOLUME,
+            data: data
+        });
+    },
+
+    updateMuted: function(data) {
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_UPDATE_MUTED,
+            data: data
+        });
+    },
+
+    updateVoiceVolume: function(data) {
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_UPDATE_VOICE_VOLUME,
+            data: data
+        });
+    }
 };
 
 module.exports = SettingsActions;

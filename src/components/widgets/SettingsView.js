@@ -11,11 +11,16 @@ var Slider = require('../../components/widgets/Slider');
 
 var BookmarkActions = require('../../actions/BookmarkActions');
 var PageActions = require('../../actions/PageActions');
+var SettingsActions = require('../../actions/SettingsActions');
 
 function getSettingsState() {
+    var settings = store.get('settings') || {};
     return {
-        value: 5,
-        max : 10
+        autoPlaySound: settings.autoPlaySound,
+        backgroundVolume: settings.backgroundVolume || 1.0,
+        muted: settings.muted || false,
+        voiceVolume: settings.voiceVolume || 1.0,
+        max : 1.0
     };
 }
 
@@ -35,11 +40,18 @@ var SettingsView = React.createClass({
         });
     },
 
-    didChange: function(event) {
+    voiceVolumeChange: function(event) {
         var value = event.value || event;
-        this.setState({
-            value: value
-        });
+        SettingsActions.updateVoiceVolume(value);
+    },
+
+    backgroundVolumeChange: function(event) {
+        var value = event.value || event;
+        SettingsActions.updateBackgroundVolume(value);
+    },
+
+    autoPlaySoundChange: function(event) {
+        SettingsActions.updateAutoPlaySound();
     },
 
     clearBookmark: function() {
@@ -48,6 +60,10 @@ var SettingsView = React.createClass({
 
     resetProgress: function() {
         PageActions.reset();
+    },
+
+    resetSettings: function() {
+        SettingsActions.destroy();
     },
 
     componentWillMount: function() {
@@ -66,7 +82,7 @@ var SettingsView = React.createClass({
                             <ListGroup>
                                 <ListGroupItem>
                                     <form>
-                                        <Input type='checkbox' label='Auto Play Sound' checked readOnly />
+                                        <Input type='checkbox' label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange} />
                                     </form>
                                 </ListGroupItem>
                                 <ListGroupItem>
@@ -74,20 +90,20 @@ var SettingsView = React.createClass({
                                     <Slider
                                         min={0}
                                         max={this.state.max}
-                                        step={1}
-                                        value={this.state.value}
+                                        step={.1}
+                                        value={this.state.voiceVolume}
                                         toolTip={false}
-                                        onSlide={this.didChange} />
+                                        onSlide={this.voiceVolumeChange} />
                                 </ListGroupItem>
                                 <ListGroupItem>
                                     <h5>Background Sound Volume</h5>
                                     <Slider
                                         min={0}
                                         max={this.state.max}
-                                        step={1}
-                                        value={this.state.value}
+                                        step={.1}
+                                        value={this.state.backgroundVolume}
                                         toolTip={false}
-                                        onSlide={this.didChange} />
+                                        onSlide={this.backgroundVolumeChange} />
                                 </ListGroupItem>
                                 <ListGroupItem>
                                     <p><i>BUTTONS BELOW ARE FOR DEVELOPERS NOT FOR FINAL PRODUCT</i></p>
@@ -97,6 +113,9 @@ var SettingsView = React.createClass({
                                 </ListGroupItem>
                                 <ListGroupItem>
                                     <Button bsStyle='danger' onClick={this.resetProgress}>Reset Progress</Button>
+                                </ListGroupItem>
+                                <ListGroupItem>
+                                    <Button bsStyle='info' onClick={this.resetSettings}>Reset Settings</Button>
                                 </ListGroupItem>
                             </ListGroup>
                         </Popover>;
