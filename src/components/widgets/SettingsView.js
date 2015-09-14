@@ -30,19 +30,10 @@ var SettingsView = React.createClass({
         return settingsState;
     },
 
-    increment: function(event) {
-        var value = this.state.value;
-        if(value >= this.state.max) {
-            value = this.state.max - 1;
-        }
-        this.setState({
-            value: value + 1
-        });
-    },
-
     voiceVolumeChange: function(event) {
         var value = event.value || event;
         SettingsActions.updateVoiceVolume(value);
+        $('audio,video').prop("volume", SettingsStore.voiceVolume());
     },
 
     backgroundVolumeChange: function(event) {
