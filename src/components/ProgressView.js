@@ -85,7 +85,7 @@ function getUnitState() {
         pagesPercent: Math.round((currentPageIndex / currentUnitTotalPages) * 100)
     };
 
-    console.dir(st);
+
 
     return st;
 }

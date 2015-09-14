@@ -68,8 +68,25 @@ var ContentView = React.createClass({
                     page = <ListeningComprehensionView page={this.state.page} />;
                     break;
                 case "MatchItem":
-                   //  page = <MatchItemView page={this.state.page} />;
-                    page = <DDAudioQuizView page={this.state.page} />;
+                    console.dir(this.state.page);
+
+                    var foundType = false;
+                    if (this.state.page.info) {
+                        var properties = this.state.page.info.property || [];
+                        var propLen = properties.length;
+
+                        while (propLen--) {
+                            if (properties[propLen].name === "dnd") {
+                                page = <DDAudioQuizView page={this.state.page} />;
+                                foundType = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!foundType) {
+                        page = <MatchItemView page={this.state.page} />;
+                    }
                     break;
                 case "MultiColumnPronunciation":
                     page = <MultiColumnPronunciationView page={this.state.page} />;
