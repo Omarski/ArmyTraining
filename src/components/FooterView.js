@@ -5,6 +5,7 @@ var LoaderStore = require('../stores/LoaderStore');
 var PageActions = require('../actions/PageActions');
 var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
+var ProgressView = require('../components/ProgressView');
 
 
 function getUnitState(expanded) {
@@ -178,46 +179,7 @@ var FooterView = React.createClass({
         return (
             <footer className={this.state.expanded ? "footer main-footer expanded" : "footer main-footer"}>
                 <div className="container-fluid footer-nav">
-                    <div className={this.state.expanded ? "row hide" : "row"}>
-                        <div className="col-md-2"></div>
-                        <div className="col-md-4">
-                            <div className="container-fluid">
-                                <div className="row">
-                                    <div className="col-md-2">Lessons</div>
-                                    <div className="col-md-9">
-                                        <div className="progress">
-                                            <div className="progress-bar progress-bar-success" style={{width: this.state.unitsPercent + '%'}}>
-                                                <span className="sr-only">35% Complete (success)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1">{this.state.currentUnitIndex}/{this.state.totalUnits}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="container-fluid">
-                                <div className="row">
-                                    <div className="col-md-2">Pages</div>
-                                    <div className="col-md-9">
-                                        <div className="progress">
-                                            <div className="progress-bar progress-bar-success main-footer-pages-progress-stage-1">
-                                                <span className="sr-only">35% Complete (success)</span>
-                                            </div>
-                                            <div className="progress-bar progress-bar-warning progress-bar-striped main-footer-pages-progress-stage-2">
-                                                <span className="sr-only main-footer-index-progress-stage-2">20% Complete (warning)</span>
-                                            </div>
-                                            <div className="progress-bar progress-bar-danger main-footer-pages-progress-stage-3">
-                                                <span className="sr-only main-footer-index-progress-stage-3">10% Complete (danger)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1">2/5</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-2"></div>
-                    </div>
+                    <ProgressView />
                     <div id="mainFooterPageNav" className="row main-footer-page-nav">
                         <div className={this.state.expanded ? "container-fluid main-footer-page-nav-buttons-expanded" : "container-fluid"}>
                             <div className="row">

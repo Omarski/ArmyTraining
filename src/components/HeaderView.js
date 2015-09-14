@@ -3,6 +3,7 @@ var BreadcrumbsView = require('../components/BreadcrumbsView');
 var SettingsView = require('../components/widgets/SettingsView');
 var BookStore = require('../stores/BookStore');
 var SettingsStore = require('../stores/SettingsStore');
+var SettingsActions = require('../actions/SettingsActions');
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -32,7 +33,8 @@ var HeaderView = React.createClass({
         }
 
         this.state.muted = !this.state.muted;
-        this.setState();
+        this.setState({});
+        SettingsActions.updateMuted(this.state.muted);
     },
     getInitialState: function() {
         var bookState = getBookState();
