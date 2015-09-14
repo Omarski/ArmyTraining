@@ -1,9 +1,9 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
-
+var SettingsStore = require('../../../stores/SettingsStore');
 
 function playAudio(xid){
-    console.log(xid);
+    //console.log(xid);
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     source.src="data/media/" + xid + ".mp3";
@@ -34,7 +34,8 @@ function isPlaying(xid){
 }
 
 function getPageState(props) {
-    var data = props;
+    var data = {};
+    data.page = props.page;
     data.answers = [];
     data.lines = [];
     data.submitLabel = "Submit";
@@ -43,6 +44,7 @@ function getPageState(props) {
     data.dragSrc = null;
     data.childHTML = null;
     data.needsRender = null;
+    data.volume = SettingsStore.voiceVolume();
 
     var line = {};
     data.page.matchSource.forEach(function(item){
@@ -50,7 +52,6 @@ function getPageState(props) {
         var _hasLine = false;
         var _utteringInfo = item.nut.uttering.info || {property: []};
         var _infoProps = _utteringInfo.property;
-        console.dir(item);
 
         //if a matchSource has a line, then it will be displayed in the conversation
         _infoProps.forEach(function(prop){
@@ -134,9 +135,11 @@ function shuffle(array) {
 function setDraggableSize() {
 
     var dd_drop_answer_area = $('.dd-drop-answer-area');
+    var _dd_word_bank_text = $('.dd-word-bank-text');
     var dd_answer_area_text = $('dd-answer-area-text');
     var dd_draggable_area = $('.dd-draggable-area');
     var glyphicon_wl = $(".glyphicon.wl");
+    var _glyphicon = $(".glyphicon");
     var _na = $(".na");
     var _ad = $(".ad");
     var maxWidth = 0;
@@ -153,13 +156,29 @@ function setDraggableSize() {
     });
     dd_drop_answer_area.width(maxWidth).height(maxHeight);
     dd_draggable_area.width(maxWidth).height(maxHeight);
-    glyphicon_wl.css( 'font-size', (maxHeight + 'px') );
-    glyphicon_wl.css( 'left', ( maxWidth + 'px' ) );
+    _glyphicon.css('font-size', '26px');
+    _dd_word_bank_text.css('position', 'relative');
+    glyphicon_wl.css('position', 'absolute');
+    glyphicon_wl.css( 'font-size', (26 + 'px') );
+    var texts = document.getElementsByClassName("wl");
+    Array.prototype.forEach.call(texts, function (item, index) {
+        $(item).css('left', ( ($(item).parent().width() ) + 'px' ) );
+        $(item).css('top', ( ( (maxHeight*Math.floor(index/2)+(10*Math.floor(index/2))) + maxHeight/2 - 13 )+'px'));
+    });
+    /*
+     var texts = document.getElementsByClassName("wl");
+     Array.prototype.forEach.call(texts, function (item, index) {
+     $(item).css('left', ( ($(item).parent().width() ) + 'px' ) );
+     $(item).css('top', ( ( $(item).parent().height()*index - 13*index) + 'px' ) );
+     });
+
     dd_answer_area_text.css('line-height', (maxHeight + 'px'));
-    _na.css( 'font-size', ('inherit') );
-    _na.css( 'left', ( 'inherit' ) );
-    _ad.css( 'font-size', (maxHeight + 'px') );
+    _na.css( 'font-size', (26 + 'px') );
+    //_na.css('top', ('0px') );
+    _ad.css( 'font-size', (26 + 'px') );
     _ad.css( 'left', ( maxHeight/2 + 'px' ) );
+    //_ad.css( 'top', (maxHeight/2 + 'px') );
+    */
 }
 
 // gets all the answers and questions. Checks to see if answers are in their desired locations
@@ -175,7 +194,7 @@ function checkAnswers(state){
             var dataContainer = $(dd_answers[index].childNodes[0]);
             var qL = dataContainer.attr("data-question-letter");
           //  console.log(qL);
-            console.dir(state.matchTarget);
+            //console.dir(state.matchTarget);
             if ( qL == state.matchTarget[index] ) {
                 // if the answer matches expected
               //  console.log("correct!");
@@ -227,31 +246,32 @@ var DDAudioQuizView = React.createClass({
     itemMouseOver: function(event){
         var xid = 0;
         // perform functions based on what class is moused over
+
         switch ($(event.target).attr("class")) {
             case "dd-word-bank-text":
                 if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
                     $(event.target).css("opacity", "0.4");
                     //console.log("draggable and is not disabled");
                     this.state.page.matchSource.forEach(function(item){
-                        // if this item is what we clicked on
+                        // if this item we are over
                         if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            // play audio
                             xid = (item.nut.uttering.media[0].zid);
                         }
                     });
-                    if($($(event.target).parent()[0]).children().length > 3){
-                        if( isPlaying(xid) ){
-                            $($($(event.target).parent()[0]).children()[3]).css('display', 'inline');
+                        if ($($(event.target).parent()[0]).children().length > 3) {
+                            if (isPlaying(xid)) {
+                                $($($(event.target).parent()[0]).children()[3]).css('display', 'inline');
+                            } else {
+                                $($($(event.target).parent()[0]).children()[2]).css('display', 'inline');
+                            }
                         } else {
-                            $($($(event.target).parent()[0]).children()[2]).css('display', 'inline');
+                            if (isPlaying(xid)) {
+                                $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
+                            } else {
+                                $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
+                            }
                         }
-                    }else {
-                        if (isPlaying(xid)) {
-                            $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
-                        } else {
-                            $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
-                        }
-                    }
+
                 }
                 break;
 
@@ -269,7 +289,6 @@ var DDAudioQuizView = React.createClass({
                     } else {
                         $($(event.target).children()[0]).css('display', 'inline');
                     }
-
                 break;
 
             default:
@@ -282,11 +301,11 @@ var DDAudioQuizView = React.createClass({
                             xid = (item.nut.uttering.media[0].zid);
                         }
                     });
-                    if( isPlaying(xid) ){
-                        $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
-                    } else {
-                        $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
-                    }
+                        if (isPlaying(xid)) {
+                            $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
+                        } else {
+                            $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
+                        }
                 }
 
                 // else do nothing
@@ -296,6 +315,7 @@ var DDAudioQuizView = React.createClass({
 
     },
     itemMouseOff: function(event){
+        this.iid && clearInterval(this.iid);
         //console.log("off");
         $(event.target).css("opacity", "1.0");
         switch ($(event.target).attr("class")) {
@@ -385,13 +405,13 @@ var DDAudioQuizView = React.createClass({
 
                 break;
             case "dd-draggable-area":
-                console.log("lineNumber " + $($(event.target)[0]).attr("data-question-id") + " : orderIndex "
-                    + $($(event.target)[0]).attr("data-order-index"));
+                //console.log("lineNumber " + $($(event.target)[0]).attr("data-question-id") + " : orderIndex "
+                  //  + $($(event.target)[0]).attr("data-order-index"));
                 break;
             case "img-thumbnail dd-answer-image":
                 if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
-                    console.log("lineNumber " + $($(event.target)[0].parentElement).attr("data-question-id") + " : orderIndex "
-                        + $($(event.target)[0].parentElement).attr("data-order-index"));
+                    //console.log("lineNumber " + $($(event.target)[0].parentElement).attr("data-question-id") + " : orderIndex "
+                     //   + $($(event.target)[0].parentElement).attr("data-order-index"));
                 }
                 break;
             default:
@@ -430,6 +450,26 @@ var DDAudioQuizView = React.createClass({
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
         setDraggableSize();
+        var _audioTarget = $('audio,video');
+        _audioTarget.prop("volume", SettingsStore.voiceVolume());
+        // if muted, then reduce volume to 0
+        if(_audioTarget.prop("muted")){
+            _audioTarget.prop("volume", 0);
+        }
+/*
+        var texts = document.getElementsByClassName("wl");
+        Array.prototype.forEach.call(texts, function (item, index) {
+            $(item).css('left', ( ($(item).parent().width() ) + 'px' ) );
+            $(item).css('top', ( ( $(item).parent().height()*index - 13*index) + 'px' ) );
+        });
+*/
+        var texts = document.getElementsByClassName("na");
+        Array.prototype.forEach.call(texts, function (item) {
+            $(item).css('left', ( ($(item).parent().width()/2 - 13) + 'px') );
+            $(item).css('top', ( ($(item).parent().height()/2 ) + 'px') );
+        });
+
+
     },
 
     componentWillUnmount: function() {
@@ -498,7 +538,7 @@ var DDAudioQuizView = React.createClass({
                             <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>
                             <span className="glyphicon glyphicon-ok-circle answer-feedback-correct"></span>
                             <span className="glyphicon glyphicon-play-circle mouseover-play ad"></span>
-                            <span className="glyphicon glyphicon-ban-circle mouseover-stop ad"></span>
+                            <span className="glyphicon glyphicon-stop mouseover-stop ad"></span>
                             {inner}
                         </div>
                     );
@@ -513,7 +553,7 @@ var DDAudioQuizView = React.createClass({
 
             if ($($this.state.dragSrc).parent().attr("class") == "answer-handle") {
                 //console.log($(dragSrc).parent()[0]);
-                console.log(e.target);
+                //(e.target);
                 React.unmountComponentAtNode($($this.state.dragSrc).parent()[0]);
                 var movedItem = $this.state.childHTML[0].innerHTML;
                 var listItems = document.getElementsByClassName("dd-answer-list-item");
@@ -543,8 +583,13 @@ var DDAudioQuizView = React.createClass({
             this.setState({
                 childHTML: null
             });
+
+            var texts = document.getElementsByClassName("ad");
+            Array.prototype.forEach.call(texts, function (item) {
+                $(item).css('left', ( ($(item).parent().width()/2 - 13) + 'px') );
+                $(item).css('top', ( ($(item).parent().height()/2 - 13) + 'px') );
+            });
         }
-        return false;
     },
     onDraggingOver: function(e){
         this.setState({
@@ -599,7 +644,7 @@ var DDAudioQuizView = React.createClass({
                         onMouseOut={self.itemMouseOff}
                         onClick={self.handleClick}
                         ><span className="glyphicon glyphicon-play-circle mouseover-play wl"></span>
-                        <span className="glyphicon glyphicon-ban-circle mouseover-stop wl"></span>
+                        <span className="glyphicon glyphicon-stop mouseover-stop wl"></span>
                         {component}
 
                     </div>
@@ -658,7 +703,7 @@ var DDAudioQuizView = React.createClass({
                                       onMouseOut={self.itemMouseOff}
                                       onClick={self.handleClick}>
                             <span className="glyphicon glyphicon-play-circle mouseover-play na"></span>
-                            <span className="glyphicon glyphicon-ban-circle mouseover-stop na"></span>
+                            <span className="glyphicon glyphicon-stop mouseover-stop na"></span>
                             {ms.nut.uttering.utterance.native.text}
                         </div>
                     }
@@ -707,8 +752,7 @@ var DDAudioQuizView = React.createClass({
                 </div>
                 <div className="row dd-quiz-feedback">
                     <button className="btn btn-default" onClick={this.submit}>{this.state.submitLabel}</button>
-                    <audio id="audio">
-                       /* <source id="oggSource" src="" type="audio/ogg"></source> */
+                    <audio id="audio" volume={this.state.volume}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
