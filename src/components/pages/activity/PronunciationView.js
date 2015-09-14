@@ -17,6 +17,11 @@ function getPageState(props) {
     };
 }
 
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
 var PronunciationView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
@@ -29,6 +34,11 @@ var PronunciationView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+        if(hasGetUserMedia()){
+            alert("we are good.");
+        }else{
+            alert('getUserMedia is not supported in this browser.');
+        }
     },
 
     componentWillUnmount: function() {
