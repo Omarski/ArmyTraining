@@ -35,9 +35,9 @@ var PronunciationView = React.createClass({
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
         if(hasGetUserMedia()){
-            //alert("we are good.");
+            // UserMedia allowed
         }else{
-            //alert('getUserMedia is not supported in this browser.');
+            // UserMedia not allowed
         }
     },
 
