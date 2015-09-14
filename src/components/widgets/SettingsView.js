@@ -18,7 +18,7 @@ function getSettingsState() {
     return {
         autoPlaySound: settings.autoPlaySound,
         backgroundVolume: settings.backgroundVolume || 1.0,
-        muted: settings.muted || false,
+        muted: settings.muted,
         voiceVolume: settings.voiceVolume || 1.0,
         max : 1.0
     };
