@@ -4,6 +4,39 @@ li {
   list-style-type: none;
 }
 
+span {
+  pointer-events: none;
+}
+
+.paragraph{
+  border: 1px solid #000000;
+  width: 735px;
+  min-height: 400px;
+  height: auto;
+  background: #cccccc;
+  margin-top: 27px;
+  margin-left: 65px;
+  margin-right: 70px;
+}
+
+.paragraph > div {
+  height: 50px;
+  width: auto;
+
+}
+
+.word-list{
+  border: 1px solid #000000;
+  background: #cccccc;
+  margin-top: 27px;
+  width: 300px;
+  height: auto;
+  min-height: 400px;
+}
+
+.dd-answer-list > li {
+}
+
 html {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -110,6 +143,7 @@ html {
 .dd-answer-list {
   list-style: none;
   width: auto;
+  margin: 10px;
 }
 
 .dd-answer-list-item {
@@ -119,6 +153,7 @@ html {
 .dd-container {
   max-width: 100%;
   width: 100%;
+  display: inline;
 }
 
 .dd-answer-area {
@@ -181,5 +216,5 @@ html {
 }
 
 .dd-quiz-container {
-  padding-top: 25px;
+  padding-top: 0px;
 }

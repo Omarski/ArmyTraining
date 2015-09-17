@@ -2,11 +2,19 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 
+var DROP_ANSWER_AREA_CLS = "dd-drop-answer-area";
+var WORD_BANK_TEXT_CLS = "dd-word-bank-text";
+var DRAGGABLE_AREA_CLS = "dd-draggable-area";
+var ANSWER_HANDLE_CLS = "answer-handle";
+var ANSWER_AREA_TEXT_CLS = "dd-answer-area-text";
+var ANSWER_AREA_CORRECT_CLS = "dd-drop-answer-area-correct";
+var ANSWER_AREA_WRONG_CLS = "dd-drop-answer-area-incorrect";
 // TODO: Make submit button change page to read-only
 // TODO: on drop, hide element from word list
 // TODO: boxes around paragraph and word list
-// TODO: reward audio on 100% correct ( play the "full" tags audio media )
-
+/*
+    TODO: switch from jquery to updating the state for react to use.
+ */
 
 // Plays Audio filed named with the xid(zid?) given
 function playAudio(xid){
@@ -26,7 +34,7 @@ function playAudio(xid){
 
 // Returns True if the audio component is currently playing something, false otherwise.
 function isPlaying(xid){
-    var amPlay = false;
+    var isBeingPlayed = false;
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     var test = "data/media/" + xid + ".mp3";
@@ -35,7 +43,7 @@ function isPlaying(xid){
     if(short == test){
         return(!audio.paused);
     }
-    return amPlay;
+    return isBeingPlayed;
 }
 
 // Initializes the state of the page with the JSON given in props
@@ -53,41 +61,41 @@ function getPageState(props) {
     data.needsRender = null;
     data.volume = SettingsStore.voiceVolume();
 
+    var msArray = data.page.matchSource;
     var line = {};
     // collect all matchSource items to be printed in the paragraph, and create the list to be used to check
     // correct answers
-    data.page.matchSource.forEach(function(item){
-        var _ln = "";
-        var _hasLine = false;
-        var _utteringInfo = item.nut.uttering.info || {property: []};
-        var _infoProps = _utteringInfo.property;
+    msArray.forEach(function(item){
+        var ln = "";
+        var utteringInfo = item.nut.uttering.info || {property: []};
+        var infoProps = utteringInfo.property;
 
         //if a matchSource has a line, then it will be displayed in the conversation
-        _infoProps.forEach(function(prop){
+        // scan properties for line, and save the value
+        infoProps.forEach(function(prop){
             if(prop.name == "line"){
-                _ln = prop.value;
-                _hasLine = true;
+                ln = prop.value;
             }
         });
-        // if matchSource has a line and a letter, it's letter is associated with a correct answer
-        if(_hasLine){
+
+        // if ln != to "" the matchSource has a line spot.
+        if(ln != ""){
+            // if it also has a letter, it is associated with a correct answer
             if(item.letter != ""){
                 data.matchTarget.push(item.letter);
             }
-        }
-        // if _ln != to "" the matchSource has a line spot.
-        if(_ln != ""){
-            if(!line[parseInt(_ln)]) {
-                line[parseInt(_ln)] = [];
+
+            if(!line[parseInt(ln)]) {
+                line[parseInt(ln)] = [];
             }
-            line[parseInt(_ln)].push(item);
+            line[parseInt(ln)].push(item);
         }
     });
     data.lines = line;
 
     // shuffle and add to answers[]
     // grab all answers from quiz for word bank
-    var questions = data.page.matchSource || [];
+    var questions = msArray || [];
     var len = questions.length;
     while (len--) {
         // for each matchSource
@@ -97,8 +105,8 @@ function getPageState(props) {
 
             // get it's line number
             var ln = -1;
-            var _aInfo = a.nut.uttering.info || {property: []};
-            _aInfo.property.forEach(function(prop){
+            var aInfo = a.nut.uttering.info || {property: []};
+            aInfo.property.forEach(function(prop){
                 if(prop.name == "line"){
                     ln = prop.value;
                 }
@@ -137,16 +145,16 @@ function shuffle(array) {
 // Set the size of the answer areas and all the draggable items to be the same as the largest
 // Also centers play/stop icons on clickables
 function setDraggableSize() {
-    var dd_drop_answer_area = $('.dd-drop-answer-area');
-    var _dd_word_bank_text = $('.dd-word-bank-text');
-    var dd_draggable_area = $('.dd-draggable-area');
-    var glyphicon_wl = $(".glyphicon.wl");
-    var _glyphicon = $(".glyphicon");
-    var _na = $(".na");
-    var _ad = $(".ad");
+    var dropAnswerArea = $('.' + DROP_ANSWER_AREA_CLS);
+    var wordBankText = $('.' + WORD_BANK_TEXT_CLS);
+    var draggableArea = $('.' + DRAGGABLE_AREA_CLS);
+    var wordListGlyphCls = $(".wl");
+    var glyphicon = $(".glyphicon");
+    var plainTextGlyphCls = $(".na");
+    var droppedAnswerGlyphCls = $(".ad");
     var maxWidth = 0;
     var maxHeight = 0;
-    dd_draggable_area.each(function() {
+    draggableArea.each(function() {
         var w = $(this).width();
         var h = $(this).height();
         if (w > maxWidth) {
@@ -156,15 +164,15 @@ function setDraggableSize() {
             maxHeight = h;
         }
     });
-    dd_drop_answer_area.width(maxWidth).height(maxHeight);
-    dd_draggable_area.width(maxWidth).height(maxHeight);
-    _glyphicon.css('z-index', '255');
-    _dd_word_bank_text.css('position', 'relative');
-    glyphicon_wl.css('position', 'absolute');
-    glyphicon_wl.css( 'font-size', (26 + 'px') );
-    _na.css('font-size', '26px');
-    _ad.css('font-size', '26px');
-    glyphicon_wl.css('font-size', '26px');
+    dropAnswerArea.width(maxWidth).height(maxHeight);
+    draggableArea.width(maxWidth).height(maxHeight);
+    glyphicon.css('z-index', '255');
+    wordBankText.css('position', 'relative');
+    wordListGlyphCls.css('position', 'absolute');
+    wordListGlyphCls.css( 'font-size', (26 + 'px') );
+    plainTextGlyphCls.css('font-size', '26px');
+    droppedAnswerGlyphCls.css('font-size', '26px');
+    wordListGlyphCls.css('font-size', '26px');
 
     var texts = document.getElementsByClassName("wl");
     Array.prototype.forEach.call(texts, function (item, index) {
@@ -175,47 +183,60 @@ function setDraggableSize() {
 
 // gets all the answers and questions. Checks to see if answers are in their desired locations
 function checkAnswers(state){
-    var dd_answers = document.getElementsByClassName('answer-handle');
+    var ddAnswers = document.getElementsByClassName('answer-handle');
     var numCorrect = 0;
     var numWrong = 0;
+    var isMissingAnswer = false;
 
-    // for each answer-handle
-    for(var index=0; index < dd_answers.length; index++){
-        var _container = $(dd_answers[index]).parent();
-        if (dd_answers[index].childElementCount > 0) {
-            var dataContainer = $(dd_answers[index].childNodes[0]);
-            var qL = dataContainer.attr("data-question-letter");
-            if ( qL == state.matchTarget[index] ) {
-                // if the answer matches expected
-                _container.addClass("dd-drop-answer-area-correct");
-                var _glyphicon_correct = $($(dd_answers[index]).children()[0]).children();
-                $(_glyphicon_correct[1]).css('display', 'block');
+    Array.forEach(ddAnswers, function(ans){
+        if($(ans).children().length == 0){
+            isMissingAnswer = true;
+        }
+    });
+    if(isMissingAnswer){
+        alert("Please fill in every answer.");
+        return ("");
+    }else {
+        // for each answer-handle
+        for (var index = 0; index < ddAnswers.length; index++) {
+            var _parent = $(ddAnswers[index]).parent();
+            var _child = $(ddAnswers[index].childNodes[0]);
+            var questionLetter = _child.attr("data-question-letter");
 
+            // if the letter of the answer is what is expected, then it is correct
+            if (questionLetter == state.matchTarget[index]) {
+                _parent.addClass("dd-drop-answer-area-correct");
+                var glyphCorrect = $($($(ddAnswers[index]).children()[0]).children()[1]);
+                glyphCorrect.css('display', 'block');
                 numCorrect++;
             } else {
                 // else it's wrong
-                _container.addClass("dd-drop-answer-area-incorrect");
-                var _glyphicon_incorrect = $($(dd_answers[index]).children()[0]).children();
-                $(_glyphicon_incorrect[0]).css('display', 'block');
-
+                _parent.addClass("dd-drop-answer-area-incorrect");
+                var glyphWrong = $($($(ddAnswers[index]).children()[0]).children()[0]);
+                glyphWrong.css('display', 'block');
                 numWrong++;
             }
-        } else {
-            // else no answer was given for this one
-            _container.addClass("dd-drop-answer-area-incorrect");
-            numWrong++;
-
-            // Render the missing glyphicon
-            React.render(
-                <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>,
-                $(dd_answers[index])[0]
-            );
-            // and display it
-            var _glyphicon_missing = $($(dd_answers[index]).children()[0]);
-            _glyphicon_missing.css('display', 'block');
         }
+        var total = numCorrect + numWrong;
+        if (numCorrect > 0 && numCorrect == total) {
+            // if you got all questions correct, play reward audio
+            var rewardZid = 0;
+            Array.forEach(state.page.matchSource, function (ms) {
+                var uttering = ms.nut.uttering;
+                var utteringInfo = uttering.info || {property: []};
+                //ms.nut.uttering.info.property[0].name == "full"
+                Array.forEach(utteringInfo.property, function (prop) {
+                    if (prop.name == "full") {
+                        rewardZid = uttering.media[0].zid;
+                    }
+                });
+            });
+            if (rewardZid != 0) {
+                playAudio(rewardZid);
+            }
+        }
+        return ("You got " + numCorrect + " of " + total + " correct.");
     }
-    return ("You got "+ numCorrect + " of " + (numCorrect + numWrong) + " correct.");
 }
 
 
@@ -242,21 +263,21 @@ var DDAudioQuizView = React.createClass({
             feedback: ""
         });
 
-        // Clear All Answer-Handles of draggables and correct/incorrect classes
-        var _answer_handles = document.getElementsByClassName("answer-handle");
-        Array.prototype.forEach.call(_answer_handles, function (item) {
+        //dismount all the react components on the answer handles
+        var answerHandles = document.getElementsByClassName(ANSWER_HANDLE_CLS);
+        Array.prototype.forEach.call(answerHandles, function(item){
             React.unmountComponentAtNode(item);
-            $(item).removeClass("dd-drop-answer-area-incorrect");
         });
 
-        var _dd_answer_areas = document.getElementsByClassName("dd-drop-answer-area");
-        Array.prototype.forEach.call(_dd_answer_areas, function (item) {
-            $(item).removeClass("dd-drop-answer-area-correct");
-            $(item).removeClass("dd-drop-answer-area-incorrect");
+        // Clear All Answer-Handles of draggables and correct/incorrect classes
+        var answerArea = document.getElementsByClassName(DROP_ANSWER_AREA_CLS);
+        Array.prototype.forEach.call(answerArea, function (item) {
+            $(item).removeClass(ANSWER_AREA_CORRECT_CLS);
+            $(item).removeClass(ANSWER_AREA_WRONG_CLS);
         });
 
-        var _draggable_areas = document.getElementsByClassName("dd-draggable-area");
-        Array.prototype.forEach.call(_draggable_areas, function (item) {
+        var draggableArea = document.getElementsByClassName(DRAGGABLE_AREA_CLS);
+        Array.prototype.forEach.call(draggableArea, function (item) {
             $(item).css('opacity', '1.0');
             $(item).removeClass("audio-disabled");
             $(item).attr('draggable', 'true');
@@ -270,129 +291,112 @@ var DDAudioQuizView = React.createClass({
 
     // called when the mouse is brought over various objects
     itemMouseOver: function(event){
-        var xid = 0;
+        var zid = 0;
         var _parent = $($(event.target)[0].parentElement);
         var _target = $(event.target);
 
         // switch functions based on what class is moused over (this is due to inheritence issues)
-        switch ($(event.target).attr("class")) {
+        switch (_target.attr("class")) {
             // dd-word-bank-text is the child element of a draggable
-            case "dd-word-bank-text":
+            case WORD_BANK_TEXT_CLS:
                 if(!_parent.hasClass("audio-disabled")){
                     _target.css("opacity", "0.4");
                     this.state.page.matchSource.forEach(function(item){
+                        var uttering = item.nut.uttering;
                         // if this item we are over
-                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            xid = (item.nut.uttering.media[0].zid);
+                        if(uttering.utterance.native.text == event.target.innerHTML){
+                            zid = (uttering.media[0].zid);
                         }
                     });
-                        var _draggable_glyphicons = $($(event.target).parent()[0]).children();
-                    /*
-                        [0] = word list "play" glyphicon
-                        [1] = word list "stop" glyphicon
-                        [2] = answer-handle "play" glyphicon
-                        [3] = answer-handle "stop" glyphicon
-                     */
-                        if (_draggable_glyphicons.length > 3) {
-                            if (isPlaying(xid)) {
-                                $(_draggable_glyphicons[3]).css('display', 'inline');
+                        var targetGlyphs = _parent.children();
+                        if (targetGlyphs.length > 3) {
+                            var glyphPlayAH = $(targetGlyphs[2]);
+                            var glyphStopAH = $(targetGlyphs[3]);
+                            if (isPlaying(zid)) {
+                                glyphStopAH.css('display', 'inline');
                             } else {
-                                $(_draggable_glyphicons[2]).css('display', 'inline');
+                                glyphPlayAH.css('display', 'inline');
                             }
                         } else {
-                            if (isPlaying(xid)) {
-                                $(_draggable_glyphicons[1]).css('display', 'inline');
+                            var glyphPlayWL = $(targetGlyphs[0]);
+                            var glyphStopWL = $(targetGlyphs[1]);
+                            if (isPlaying(zid)) {
+                                glyphStopWL.css('display', 'inline');
                             } else {
-                                $(_draggable_glyphicons[0]).css('display', 'inline');
+                                glyphPlayWL.css('display', 'inline');
                             }
                         }
-
                 }
                 break;
 
             // dd-answer-area-text is the area around the clickable text in the paragraph
-            case "dd-answer-area-text":
+            case ANSWER_AREA_TEXT_CLS:
+                var textAreaGlyphs = $(event.target).children();
+                var glyphPlay = $(textAreaGlyphs[0]);
+                var glyphStop = $(textAreaGlyphs[1]);
+
                 this.state.page.matchSource.forEach(function(item){
+                    var uttering = item.nut.uttering;
+                    var fadeTarget = $($(event.target).children()[2]);
+                    fadeTarget.css('opacity', '0.4');
+
                     // if this item is what we clicked on
-                    $($(event.target).children()[2]).css('opacity', '0.4');
-                    if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
+                    if(uttering.utterance.native.text == event.target.children[2].innerHTML){
                         // play audio
-                        xid = item.nut.uttering.media[0].zid;
+                        zid = uttering.media[0].zid;
                     }
                 });
-                var _area_text_glyphicons = $(event.target).children();
-                /*
-                    [0] = "play" glyphicon
-                    [1] = "stop" glyphicon
-                 */
-                if (isPlaying(xid)) {
-                    $(_area_text_glyphicons[1]).css('display', 'inline');
+
+                if (isPlaying(zid)) {
+                    glyphStop.css('display', 'inline');
                 } else {
-                    $(_area_text_glyphicons[0]).css('display', 'inline');
+                    glyphPlay.css('display', 'inline');
                 }
                 break;
 
             default:
-                if($(event.target).parent()[0].className == "dd-answer-area-text") {
-                    $(event.target).css("opacity", "0.4");
-                    this.state.page.matchSource.forEach(function(item){
-                        // if this item is what we clicked on
-                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            // play audio
-                            xid = (item.nut.uttering.media[0].zid);
-                        }
-                    });
-                    var _text_glyphicons = $($(event.target).parent()[0]).children();
-                    /*
-                        [0] = "play" glyphicon
-                        [1] = "stop" glyphicon
-                     */
-                    if (isPlaying(xid)) {
-                        $(_text_glyphicons[1]).css('display', 'inline');
-                    } else {
-                        $(_text_glyphicons[0]).css('display', 'inline');
-                    }
-                }
+
                 // else do nothing
                 break;
         }
 
     },
 
-    // set opacity of mouseover target back to 100% and hide all glyphicons
+    // set opacity of mouse-over target back to 100% and hide all glyphicons
     itemMouseOff: function(event){
-        $(event.target).css("opacity", "1.0");
-        switch ($(event.target).attr("class")) {
-            case "dd-word-bank-text":
-                var _word_bank_children = $($(event.target).parent()[0]).children();
-                if(_word_bank_children.length > 3){
+        var _target = $(event.target);
+        _target.css("opacity", "1.0");
+        switch (_target.attr("class")) {
+            case WORD_BANK_TEXT_CLS:
+                var draggableChildren = $(_target.parent()[0]).children();
+
+                if(draggableChildren.length > 3){
+                    var glyphPlayAH = $(draggableChildren[2]);
+                    var glyphStopAH = $(draggableChildren[3]);
                         // answer-handle glyphicons
-                        $(_word_bank_children[2]).css('display', 'none');
-                        $(_word_bank_children[3]).css('display', 'none');
+                    glyphPlayAH.css('display', 'none');
+                    glyphStopAH.css('display', 'none');
                 }else {
+                    var glyphPlayWL = $(draggableChildren[0]);
+                    var glyphStopWL = $(draggableChildren[1]);
                         // word-list glyphicons
-                        $(_word_bank_children[1]).css('display', 'none');
-                        $(_word_bank_children[0]).css('display', 'none');
+                    glyphPlayWL.css('display', 'none');
+                    glyphStopWL.css('display', 'none');
                 }
                 break;
 
-            case "dd-answer-area-text":
-                var _answer_area_text_children = $(event.target).children();
-                // mouseover target is not what was faded, [2] is the text that was faded, [0] and [1] are glyphicons
-                $(_answer_area_text_children[2]).css('opacity', '1.0');
-                $(_answer_area_text_children[0]).css('display', 'none');
-                $(_answer_area_text_children[1]).css('display', 'none');
+            case ANSWER_AREA_TEXT_CLS:
+                var targetChildren = _target.children();
+                var fadeTarget =  $(targetChildren[2]);
+                var glyphPlayTXT = $(targetChildren[0]);
+                var glyphStopTXT = $(targetChildren[1]);
+                // mouse-over target is not what was faded, [2] is the text that was faded, [0] and [1] are glyphicons
+                fadeTarget.css('opacity', '1.0');
+                glyphPlayTXT.css('display', 'none');
+                glyphStopTXT.css('display', 'none');
                 break;
 
             default:
-                // save as dd-answer-area-text, but need to reference parent object
-                var _target_parent = $(event.target).parent()[0];
-                if(_target_parent.className == "dd-answer-area-text"){
-                    $(event.target).css("opacity", "1.0");
-                    var _glyphicons = $(_target_parent).children();
-                    $(_glyphicons[0]).css('display', 'none');
-                    $(_glyphicons[1]).css('display', 'none');
-                }
 
                 // else do nothing
 
@@ -405,7 +409,7 @@ var DDAudioQuizView = React.createClass({
         var zid = 0;
         switch($(event.target).attr("class")){
             // word bank is what get's the click event inside draggable areas
-            case "dd-word-bank-text":
+            case WORD_BANK_TEXT_CLS:
                 var _parent_element = $($(event.target)[0].parentElement);
                 if(!_parent_element.hasClass("audio-disabled")){
                     data.page.matchSource.forEach(function(item){
@@ -439,7 +443,7 @@ var DDAudioQuizView = React.createClass({
                 break;
 
             // the div containing the span
-            case "dd-answer-area-text":
+            case ANSWER_AREA_TEXT_CLS:
                 // child [0] is play, child[1] is stop
                 data.page.matchSource.forEach(function(item){
                     // if this item is what we clicked on
@@ -460,38 +464,11 @@ var DDAudioQuizView = React.createClass({
                 }
 
                 break;
-            case "dd-draggable-area":
-
-                break;
             case "img-thumbnail dd-answer-image":
-                if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
-
-                }
+                // placeholder for image answers
                 break;
             default:
-
-                // the span containing the text
-                if($(event.target).parent()[0].className == "dd-answer-area-text"){
-
-                    data.page.matchSource.forEach(function(item){
-                        // if this item is what we clicked on
-                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            // play audio
-                            zid = item.nut.uttering.media[0].zid;
-                            playAudio(zid);
-                        }
-                    });
-                    var _text_glyphicons = $($(event.target).parent()[0]).children();
-                    /*
-                     [0] = "play" glyphicon
-                     [1] = "stop" glyphicon
-                     */
-                    if(isPlaying(zid)){
-                        $(_text_glyphicons[0]).css('display', 'none');
-                        $(_text_glyphicons[1]).css('display', 'inline');
-                    }
-
-                }
+                // do nothing
                 break;
         }
     },
@@ -508,11 +485,11 @@ var DDAudioQuizView = React.createClass({
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
         setDraggableSize();
-        var _audioTarget = $('audio,video');
-        _audioTarget.prop("volume", SettingsStore.voiceVolume());
+        var audioTarget = $('audio,video');
+        audioTarget.prop("volume", SettingsStore.voiceVolume());
         // if muted, then reduce volume to 0
-        if(_audioTarget.prop("muted")){
-            _audioTarget.prop("volume", 0);
+        if(audioTarget.prop("muted")){
+            audioTarget.prop("volume", 0);
         }
 
         var texts = document.getElementsByClassName("na");
@@ -520,8 +497,6 @@ var DDAudioQuizView = React.createClass({
             $(item).css('left', ( ($(item).parent().width()/2 - 13) + 'px') );
             $(item).css('top', ( ($(item).parent().height()/2 ) + 'px') );
         });
-
-
     },
 
     componentWillUnmount: function() {

@@ -3,18 +3,13 @@ var PageStore = require('../../../stores/PageStore');
 
 
 function getPageState(props) {
-    var title = "";
-    var pageType = "";
+    var data = {};
 
     if (props && props.page) {
-        title = props.page.title;
-        pageType = props.page.type;
+        data.page = props.page;
     }
 
-    return {
-        title: title,
-        pageType: pageType
-    };
+    return {data};
 }
 
 function hasGetUserMedia(){
@@ -24,8 +19,7 @@ function hasGetUserMedia(){
 
 var PronunciationView = React.createClass({
     getInitialState: function() {
-        var pageState = getPageState(this.props);
-        return pageState;
+        return getPageState(this.props);
     },
 
     componentWillMount: function() {
@@ -45,10 +39,26 @@ var PronunciationView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        var page = this.state.data.page;
+        var list = null;
 
         return (
             <div className="container">
-                <h3>{this.state.title} : {this.state.pageType}</h3>
+                <div className="row li-title">
+                    <h3>{page.title}</h3>
+                </div>
+                <div className="row li-note">
+                    <h4>{page.nut[0].note.text}</h4>
+                </div>
+                <div className="row">
+                    <div className="li-container">
+                        <div className="li-column">
+                            <ul className="dd-answer-list">
+                                {list}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     },
