@@ -103,9 +103,7 @@ var FooterView = React.createClass({
     },
 
     _onPageChange: function() {
-        if (this.state.expanded) {
-         //   this.setState(getUnitState());
-        }
+        this.setState(getUnitState(false));
     },
 
     getInitialState: function() {
