@@ -29,6 +29,14 @@ var ActiveDialogView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+        AdobeEdge.loadComposition('dist/js/ScenarioTemplate3', 'EDGE-20743566', {
+            scaleToFit: "none",
+            centerStage: "none",
+            minW: "0px",
+            maxW: "undefined",
+            width: "1240px",
+            height: "814px"
+        }, {dom: [ ]}, {dom: [ ]});
     },
 
     componentWillUnmount: function() {
@@ -39,6 +47,8 @@ var ActiveDialogView = React.createClass({
         return (
             <div className="container">
                 <h3>{this.state.title} : {this.state.pageType}</h3>
+                <div id="Stage" className="EDGE-20743566">
+                </div>
             </div>
         );
     },
