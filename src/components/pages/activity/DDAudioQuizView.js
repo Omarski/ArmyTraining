@@ -2,6 +2,8 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 
+var ANSWER_AREA_CLS = 'dd-drop-answer-area-incorrect';
+
 function playAudio(xid){
     //console.log(xid);
     var audio = document.getElementById('audio');
