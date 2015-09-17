@@ -4,13 +4,23 @@
 }
 
 .main-nav-bar-nav {
-  margin-top: 7px;
-  margin-bottom: 7px;
+  
+}
+
+.main-nav-bar-button {
+  padding-top: 0px;
 }
 
 .main-nav-bar-header {
-  margin-top: 7px;
-  margin-bottom: 7px;
+  position: absolute;
+  top: 7px;
+  //bottom: 7px;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+  & a {
+    width: 100%;
+  }
 }
 
 .main-nav-bar-header .navbar-brand {
@@ -22,6 +32,7 @@
   margin-right: 10px;
   max-width: none;
   width: 100%;
+  position: relative;
 }
 
 .navbar {
