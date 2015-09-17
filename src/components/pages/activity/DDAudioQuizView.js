@@ -111,7 +111,7 @@ function getPageState(props) {
     data.answers = shuffle(data.answers); // randomize answers bank
 
 
-    return {data};
+    return data;
 }
 
 function shuffle(array) {
