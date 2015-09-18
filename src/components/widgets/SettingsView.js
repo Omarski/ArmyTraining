@@ -112,7 +112,7 @@ var SettingsView = React.createClass({
                         </Popover>;
 
         return  <OverlayTrigger trigger='click' placement='left' overlay={popover}>
-                    <Button className="btn btn-default btn-link btn-lg">
+                    <Button className="btn btn-default btn-link btn-lg main-nav-bar-button">
                         <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                     </Button>
                 </OverlayTrigger>

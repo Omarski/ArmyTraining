@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="dist/css/bootstrap-slider.min.css">
     <link rel="stylesheet" href="dist/css/app.css">
+    <style>
+        .edgeLoad-EDGE-20743566 { visibility:hidden; }
+    </style>
 </head>
 <body>
 
@@ -14,12 +17,14 @@
 <script src="dist/js/jquery.min.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
 <script src="dist/js/store+json2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="dist/js/edge_includes/edge.6.0.0.min.js"></script>
+
 <script>
     init()
     function init() {
         if (!store.enabled) {
-            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
-            return
+            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
+            return;
         }
     }
 </script>

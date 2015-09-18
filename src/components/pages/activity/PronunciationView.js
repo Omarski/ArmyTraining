@@ -3,13 +3,15 @@ var PageStore = require('../../../stores/PageStore');
 
 
 function getPageState(props) {
-    var data = {};
+    var data = {
+        page: null
+    };
 
     if (props && props.page) {
         data.page = props.page;
     }
 
-    return {data};
+    return data;
 }
 
 function hasGetUserMedia(){
@@ -39,7 +41,7 @@ var PronunciationView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
-        var page = this.state.data.page;
+        var page = this.state.page;
         var list = null;
 
         return (

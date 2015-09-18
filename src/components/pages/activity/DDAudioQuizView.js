@@ -6,9 +6,12 @@ var DROP_ANSWER_AREA_CLS = "dd-drop-answer-area";
 var WORD_BANK_TEXT_CLS = "dd-word-bank-text";
 var DRAGGABLE_AREA_CLS = "dd-draggable-area";
 var ANSWER_HANDLE_CLS = "answer-handle";
+var ANSWER_AREA_CLS = "dd-answer-area";
 var ANSWER_AREA_TEXT_CLS = "dd-answer-area-text";
 var ANSWER_AREA_CORRECT_CLS = "dd-drop-answer-area-correct";
 var ANSWER_AREA_WRONG_CLS = "dd-drop-answer-area-incorrect";
+var ANSWER_LIST_ITEM_CLS = "dd-answer-list-item";
+
 // TODO: Make submit button change page to read-only
 // TODO: on drop, hide element from word list
 // TODO: boxes around paragraph and word list
@@ -48,19 +51,19 @@ function isPlaying(xid){
 
 // Initializes the state of the page with the JSON given in props
 function getPageState(props) {
-    var data = {};
-    data.page = props.page;
-    data.answers = [];
-    data.lines = [];
-    data.submitLabel = "Submit";
-    data.resetLabel = "Reset";
-    data.feedback = "";
-    data.matchTarget = [];
-    data.dragSrc = null;
-    data.childHTML = null;
-    data.needsRender = null;
-    data.volume = SettingsStore.voiceVolume();
-
+    var data = {
+        page: props.page,
+        answers: [],
+        lines: [],
+        submitLabel: "Submit",
+        resetLabel: "Reset",
+        feedback: "",
+        matchTarget: [],
+        dragSrc: null,
+        childHTML: null,
+        needsRender: null,
+        volume: SettingsStore.voiceVolume()
+    };
     var msArray = data.page.matchSource;
     var line = {};
     // collect all matchSource items to be printed in the paragraph, and create the list to be used to check
@@ -122,7 +125,7 @@ function getPageState(props) {
     }
 
     data.answers = shuffle(data.answers); // randomize answers bank
-    return {data};
+    return data;
 }
 
 function shuffle(array) {
@@ -154,6 +157,10 @@ function setDraggableSize() {
     var droppedAnswerGlyphCls = $(".ad");
     var maxWidth = 0;
     var maxHeight = 0;
+    var buffer = 35;
+    var marginTop = 90;
+    var ansHeight = 50;
+
     draggableArea.each(function() {
         var w = $(this).width();
         var h = $(this).height();
@@ -164,20 +171,40 @@ function setDraggableSize() {
             maxHeight = h;
         }
     });
+
     dropAnswerArea.width(maxWidth).height(maxHeight);
     draggableArea.width(maxWidth).height(maxHeight);
     glyphicon.css('z-index', '255');
     wordBankText.css('position', 'relative');
-    wordListGlyphCls.css('position', 'absolute');
+    wordListGlyphCls.css('position', 'relative');
     wordListGlyphCls.css( 'font-size', (26 + 'px') );
     plainTextGlyphCls.css('font-size', '26px');
     droppedAnswerGlyphCls.css('font-size', '26px');
     wordListGlyphCls.css('font-size', '26px');
 
-    var texts = document.getElementsByClassName("wl");
-    Array.prototype.forEach.call(texts, function (item, index) {
-        $(item).css('left', ( ($(item).parent().width() ) + 'px' ) );
-        $(item).css('top', ( ( (maxHeight*Math.floor(index/2)+(10*Math.floor(index/2))) + maxHeight/2 - 13 )+'px'));
+    var icons = document.getElementsByClassName("wl");
+    Array.prototype.forEach.call(icons, function (item, index) {
+        var _item = $(item);
+        _item.css('left', ( (maxWidth/2 - 13 ) + 'px' ) );
+        _item.css('top', (  ( 'calc(50% - 13px)' ) ));
+        _item.css('float', 'left');
+    });
+
+    var answerItems = document.getElementsByClassName(ANSWER_LIST_ITEM_CLS);
+    Array.prototype.forEach.call(answerItems, function(item, index){
+        var _item = $(item);
+        _item.css('top', ( ( buffer + (buffer*index) + (maxHeight*index) )+'px'));
+    });
+
+    var answerArea = document.getElementsByClassName(ANSWER_AREA_CLS);
+    Array.prototype.forEach.call(answerArea, function(item, index){
+        var _item = $(item);
+        _item.css('top', ( ( (ansHeight*index) +marginTop)+'px'));
+        if(index%2 == 0){
+            _item.css('background', '#d7d7d7');
+        }else{
+            _item.css('background', '#c4c4c4');
+        }
     });
 }
 
@@ -280,6 +307,7 @@ var DDAudioQuizView = React.createClass({
         Array.prototype.forEach.call(draggableArea, function (item) {
             $(item).css('opacity', '1.0');
             $(item).removeClass("audio-disabled");
+            $(item).css('display', 'inherit' );
             $(item).attr('draggable', 'true');
         });
 
@@ -474,8 +502,7 @@ var DDAudioQuizView = React.createClass({
     },
 
     getInitialState: function() {
-        var pageState = getPageState(this.props);
-        return pageState.data;
+        return getPageState(this.props);
     },
 
     componentWillMount: function() {
@@ -581,13 +608,15 @@ var DDAudioQuizView = React.createClass({
                 React.unmountComponentAtNode($($this.state.dragSrc).parent()[0]);
                 var movedItem = $this.state.childHTML[0].innerHTML;
                 var listItems = document.getElementsByClassName("dd-answer-list-item");
-                if($(e.target).attr("class") == "dd-word-bank-text") {
+                console.log($(e.target).attr("class"));
+                if($(e.target).attr("class") == "dd-word-bank-text" ||$(e.target).attr("class") == "word-list" ) {
                     for (var i = 0; i < listItems.length; i++) {
                         // match movedItem to it's corresponding item in the answer list
                         if (movedItem == listItems[i].childNodes[0].childNodes[2].innerHTML) {
                             listItems[i].childNodes[0].style.opacity = '1.0';
                             listItems[i].childNodes[0].setAttribute("draggable", "true");
                             $(listItems[i].childNodes[0]).removeClass("audio-disabled");
+                            $(listItems[i].childNodes[0]).css('display', 'inherit');
                         }
                     }
                 }
@@ -597,6 +626,7 @@ var DDAudioQuizView = React.createClass({
                     $this.state.dragSrc.style.opacity = '0.4';
                     $this.state.dragSrc.setAttribute("draggable", "false");
                     $($this.state.dragSrc).addClass("audio-disabled");
+                    $($this.state.dragSrc).css('display', 'none');
                 }
             }
             this.setState({
@@ -635,6 +665,15 @@ var DDAudioQuizView = React.createClass({
             });
         }
 
+        if( $(e.target).attr("class") == "word-list" ){
+            // if answer-handle, in P
+            // if dd-answer-list-item then word bank
+            e.preventDefault();
+            this.setState({
+                needsRender: false
+            });
+        }
+
         if( $(e.target).parent().parent().attr("class") == "answer-handle" ){
 
         }
@@ -648,7 +687,7 @@ var DDAudioQuizView = React.createClass({
         var answers = st.answers.map(function(item, index) {
             var component = <div className="dd-word-bank-text">{item.answer.nut.uttering.utterance.native.text}</div>;
             return (
-                <li className="dd-answer-list-item" key={index}>
+                <div className="dd-answer-list-item" key={index}>
                     <div
                         className="dd-draggable-area"
                         draggable="true"
@@ -664,7 +703,7 @@ var DDAudioQuizView = React.createClass({
                         <span className="glyphicon glyphicon-stop mouseover-stop wl"></span>
                         {component}
                     </div>
-                </li>
+                </div>
             )
         });
 
@@ -764,14 +803,18 @@ var DDAudioQuizView = React.createClass({
                 </div>
                 <div className="row">
                     <div className="dd-quiz-container">
-                        <div className="col-md-11">
-                            {lines}
-                        </div>
-                        <div className="col-md-1">
-                            <ul className="dd-answer-list">
-                                {answers}
-                            </ul>
-                        </div>
+
+                            <div className="paragraph">
+                                {lines}
+                            </div>
+
+
+                            <div className="dd-answer-list" >
+                                <div className="word-list" onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
+                                    {answers}
+                                </div>
+                            </div>
+
                     </div>
                 </div>
                 <div className="row dd-quiz-feedback">

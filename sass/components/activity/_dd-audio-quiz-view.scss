@@ -17,12 +17,13 @@ span {
   margin-top: 27px;
   margin-left: 65px;
   margin-right: 70px;
+  float: left;
 }
 
 .paragraph > div {
   height: 50px;
   width: auto;
-
+  position: absolute;
 }
 
 .word-list{
@@ -32,9 +33,14 @@ span {
   width: 300px;
   height: auto;
   min-height: 400px;
+  display: block;
+  margin-right: 70px;
+  position: absolute;
+  right: 0px;
 }
 
-.dd-answer-list > li {
+.dd-answer-list-item{
+  position: absolute;
 }
 
 html {
@@ -140,16 +146,6 @@ html {
   border-color: #ebccd1;
 }
 
-.dd-answer-list {
-  list-style: none;
-  width: auto;
-  margin: 10px;
-}
-
-.dd-answer-list-item {
-
-}
-
 .dd-container {
   max-width: 100%;
   width: 100%;
@@ -159,6 +155,9 @@ html {
 .dd-answer-area {
   display: inline-flex;
   line-height: 1px;
+  position: absolute;
+  width: 590px;
+  height: 50px;
 }
 
 .dd-answer-area-text {
@@ -217,4 +216,5 @@ html {
 
 .dd-quiz-container {
   padding-top: 0px;
+
 }

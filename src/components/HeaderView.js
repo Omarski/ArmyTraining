@@ -60,12 +60,14 @@ var HeaderView = React.createClass({
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container main-nav-container">
+                    <img src="images/ART_Logo.png" />
                     <div className="navbar-header main-nav-bar-header">
+
                         <a className="navbar-brand" href="#">{this.state.title}</a>
                     </div>
                     <div id="navbar" className="navbar main-nav-bar">
                         <div className="nav navbar-nav main-nav-bar-nav">
-                            <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link" aria-label="sound">
+                            <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
                                 {muteIcon}
                             </button>
                             <SettingsView />

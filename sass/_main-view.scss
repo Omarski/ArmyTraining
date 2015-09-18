@@ -3,14 +3,9 @@ html {
   min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
+  background-color: #eaeaea;
   margin-bottom: 125px;
-}
-
-.container {
-  padding: 0 15px;
-}
-
-.container .text-muted {
-  margin: 20px 0;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
 }

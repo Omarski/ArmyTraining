@@ -103,9 +103,7 @@ var FooterView = React.createClass({
     },
 
     _onPageChange: function() {
-        if (this.state.expanded) {
-         //   this.setState(getUnitState());
-        }
+        this.setState(getUnitState(false));
     },
 
     getInitialState: function() {
@@ -182,7 +180,7 @@ var FooterView = React.createClass({
                     <ProgressView />
                     <div id="mainFooterPageNav" className="row main-footer-page-nav">
                         <div className={this.state.expanded ? "container-fluid main-footer-page-nav-buttons-expanded" : "container-fluid"}>
-                            <div className="row">
+                            <div className="row main-footer-page-nav-row">
                                 <div className="col-md-3">
                                     <button id="lessonsIndexBtn" type="button" className="btn btn-default btn-lg btn-link btn-text-icon" aria-label="Left Align" onClick={this.toggleTOC}>
                                         <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-download btn-icon" : "glyphicon glyphicon-upload btn-icon"} aria-hidden="true"></span>
