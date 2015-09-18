@@ -1,0 +1,10 @@
+.active-dialog-view {
+  position: relative;
+}
+.active-dialog-toolbar {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  right: 20px;
+  z-index: 1999;
+}
