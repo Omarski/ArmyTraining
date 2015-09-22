@@ -6,6 +6,7 @@ li {
 
 span {
   pointer-events: none;
+  visibility: visible;
 }
 
 .paragraph{
@@ -88,18 +89,14 @@ html {
   position: absolute;
   top: inherit;
   left: inherit;
-  float: right;
   color: #a94442;
-  display: none;
 }
 
 .answer-feedback-correct{
   position: absolute;
   top: inherit;
   left: inherit;
-  float: right;
   color: #3c763d;
-  display: none;
 }
 
 .answer-handle{
@@ -168,6 +165,7 @@ html {
   min-height: 15px;
   cursor: pointer;
   position: relative;
+  visibility: visible;
 }
 
 .dd-player-label {
