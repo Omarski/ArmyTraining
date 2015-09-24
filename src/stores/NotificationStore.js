@@ -23,7 +23,9 @@ function show(data) {
 
 function hide() {
     _visible = false;
-    $('#notificationView').modal('hide');
+    if ($('#notificationView').modal) {
+        $('#notificationView').modal('hide');
+    }
 }
 
 var NotificationStore = assign({}, EventEmitter.prototype, {
