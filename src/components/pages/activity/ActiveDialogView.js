@@ -6,6 +6,8 @@ var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var PageStore = require('../../../stores/PageStore');
+var ActiveDialogStore = require('../../../stores/ActiveDialogStore');
+var ActiveDialogActions = require('../../../actions/ActiveDialogActions');
 
 function getPageState(props) {
     var title = "";
@@ -25,17 +27,9 @@ function getPageState(props) {
     };
 }
 
-
-var charArray1 = {
-    "Soraya_No":["Soraya1","Soraya2"],
-    "Soraya_Idle":["Soraya2","Soraya3"],
-    "Soraya_Nod":["Soraya3","Soraya4"],
-    "Soraya_Yes":["Soraya4","Soraya5"]
-};
-
-
 var _data = {
         composition: "EDGE-20743566",
+        objectives: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         symbols: [
             {
                 symbolName: "SorayaSymbol",
@@ -123,8 +117,8 @@ var ActiveDialogView = React.createClass({
     },
 
     hintAction:function(symbol, hint) {
-        console.log(_data.composition + ", " + symbol.symbolName + ", " + symbol.videoName + ", " + hint.animationName + ", " + hint.start + ", " + hint.stop);
         this.play(_data.composition, symbol.symbolName, symbol.videoName, hint.animationName, hint.start, hint.stop);
+        ActiveDialogActions.create({label:hint.label});
     },
 
     getInitialState: function() {
@@ -172,6 +166,12 @@ var ActiveDialogView = React.createClass({
                                 {symbols}
                             </Popover>;
 
+        var objectivesPopover =  <Popover id="settingsPopover" title='Background and Objectives'>
+                                    <p>
+                                        {this.state.data.objectives}
+                                    </p>
+                                </Popover>;
+
         return (
             <div className="container active-dialog-view">
                 <h3>{this.state.title} : {this.state.pageType}</h3>
@@ -186,10 +186,14 @@ var ActiveDialogView = React.createClass({
                                 </OverlayTrigger>
                             </div>
                             <div className="col-md-1">
-                                <button className="btn btn-default">Dialog</button>
+                                <ActiveDialogListView />
                             </div>
                             <div className="col-md-1">
-                                <button className="btn btn-default">Objectives</button>
+                                <OverlayTrigger trigger='click' placement='left' overlay={objectivesPopover}>
+                                    <Button className="btn btn-default">
+                                        Objectives
+                                    </Button>
+                                </OverlayTrigger>
                             </div>
                         </div>
                     </div>
@@ -204,6 +208,63 @@ var ActiveDialogView = React.createClass({
      */
     _onChange: function() {
         this.setState(getPageState());
+    }
+});
+
+function getDialogState() {
+    return {data:ActiveDialogStore.activeDialog()};
+}
+
+var ActiveDialogListView = React.createClass({
+    getInitialState: function() {
+        return getDialogState();
+    },
+
+    componentWillMount: function() {
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
+    },
+
+    componentDidMount: function() {
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
+    },
+
+    componentWillUnmount: function() {
+        ActiveDialogStore.removeChangeListener(this._onDialogChange);
+    },
+
+    render: function() {
+
+        var items = this.state.data.map(function(item, index) {
+            return  <ListGroupItem key={index}>
+                            {item.label}
+                    </ListGroupItem>
+        });
+
+        var content = items;
+
+        if (items.length === 0) {
+            content =   <p>
+                            Your dialog will appear here as you interact with the scenario.
+                        </p>
+        }
+        var hintsPopover =  <Popover id="settingsPopover" title='Dialog'>
+                                <ListGroup>
+                                    {content}
+                                </ListGroup>
+                            </Popover>;
+
+        return (
+            <OverlayTrigger trigger='click' placement='left' overlay={hintsPopover}>
+                <Button className="btn btn-default">
+                    Dialog
+                </Button>
+            </OverlayTrigger>
+
+        );
+    },
+
+    _onDialogChange: function() {
+        this.setState(getDialogState());
     }
 });
 
