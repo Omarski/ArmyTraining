@@ -4,6 +4,46 @@ li {
   list-style-type: none;
 }
 
+span {
+  pointer-events: none;
+  visibility: visible;
+}
+
+.paragraph{
+  border: 1px solid #000000;
+  width: 735px;
+  min-height: 400px;
+  height: auto;
+  background: #cccccc;
+  margin-top: 27px;
+  margin-left: 65px;
+  margin-right: 70px;
+  float: left;
+}
+
+.paragraph > div {
+  height: 50px;
+  width: auto;
+  position: absolute;
+}
+
+.word-list{
+  border: 1px solid #000000;
+  background: #cccccc;
+  margin-top: 27px;
+  width: 300px;
+  height: auto;
+  min-height: 400px;
+  display: block;
+  margin-right: 70px;
+  position: absolute;
+  right: 0px;
+}
+
+.dd-answer-list-item{
+  position: absolute;
+}
+
 html {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -49,18 +89,14 @@ html {
   position: absolute;
   top: inherit;
   left: inherit;
-  float: right;
   color: #a94442;
-  display: none;
 }
 
 .answer-feedback-correct{
   position: absolute;
   top: inherit;
   left: inherit;
-  float: right;
   color: #3c763d;
-  display: none;
 }
 
 .answer-handle{
@@ -107,23 +143,18 @@ html {
   border-color: #ebccd1;
 }
 
-.dd-answer-list {
-  list-style: none;
-  width: auto;
-}
-
-.dd-answer-list-item {
-
-}
-
 .dd-container {
   max-width: 100%;
   width: 100%;
+  display: inline;
 }
 
 .dd-answer-area {
   display: inline-flex;
   line-height: 1px;
+  position: absolute;
+  width: 590px;
+  height: 50px;
 }
 
 .dd-answer-area-text {
@@ -134,6 +165,7 @@ html {
   min-height: 15px;
   cursor: pointer;
   position: relative;
+  visibility: visible;
 }
 
 .dd-player-label {
@@ -181,5 +213,6 @@ html {
 }
 
 .dd-quiz-container {
-  padding-top: 25px;
+  padding-top: 0px;
+
 }

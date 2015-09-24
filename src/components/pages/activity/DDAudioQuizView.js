@@ -2,13 +2,23 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 
-var ANSWER_AREA_CLS = 'dd-drop-answer-area-incorrect';
+var DROP_ANSWER_AREA_CLS = "dd-drop-answer-area";
+var WORD_BANK_TEXT_CLS = "dd-word-bank-text";
+var DRAGGABLE_AREA_CLS = "dd-draggable-area";
+var ANSWER_HANDLE_CLS = "answer-handle";
+var ANSWER_AREA_CLS = "dd-answer-area";
+var ANSWER_AREA_TEXT_CLS = "dd-answer-area-text";
+var ANSWER_AREA_CORRECT_CLS = "dd-drop-answer-area-correct";
+var ANSWER_AREA_WRONG_CLS = "dd-drop-answer-area-incorrect";
+var ANSWER_LIST_ITEM_CLS = "dd-answer-list-item";
 
+// Plays Audio filed named with the xid(zid?) given
 function playAudio(xid){
-    //console.log(xid);
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
-    source.src="data/media/" + xid + ".mp3";
+    // construct file-path to audio file
+    source.src = "data/media/" + xid + ".mp3";
+    // play audio, or stop the audio if currently playing
     if(audio.paused){
         audio.load();
         audio.play();
@@ -18,71 +28,75 @@ function playAudio(xid){
 
 }
 
+// Returns True if the audio component is currently playing something, false otherwise.
 function isPlaying(xid){
-    var amPlay = false;
-
+    var isBeingPlayed = false;
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
-
     var test = "data/media/" + xid + ".mp3";
-
     var short = source.src.substr(source.src.length - test.length);
 
     if(short == test){
         return(!audio.paused);
     }
-    //console.log(amPlay);
-    return amPlay;
+    return isBeingPlayed;
 }
 
+// Initializes the state of the page with the JSON given in props
 function getPageState(props) {
-    var data = {};
-    data.page = props.page;
-    data.answers = [];
-    data.lines = [];
-    data.submitLabel = "Submit";
-    data.feedback = "";
-    data.matchTarget = [];
-    data.dragSrc = null;
-    data.childHTML = null;
-    data.needsRender = null;
-    data.volume = SettingsStore.voiceVolume();
-
+    var data = {
+        page: props.page,
+        answers: [],
+        lines: [],
+        submitLabel: "Submit",
+        resetLabel: "Try Again",
+        clearLabel: "Clear All",
+        feedback: "",
+        matchTarget: [],
+        dragSrc: null,
+        childHTML: null,
+        needsRender: null,
+        volume: SettingsStore.voiceVolume(),
+        readOnly: false,
+        selection: [],
+        isCorrect: [],
+        perfect: false
+    };
+    var msArray = data.page.matchSource;
     var line = {};
-    data.page.matchSource.forEach(function(item){
-        var _ln = "";
-        var _hasLine = false;
-        var _utteringInfo = item.nut.uttering.info || {property: []};
-        var _infoProps = _utteringInfo.property;
+    // collect all matchSource items to be printed in the paragraph, and create the list to be used to check
+    // correct answers
+    msArray.forEach(function(item){
+        var ln = "";
+        var utteringInfo = item.nut.uttering.info || {property: []};
+        var infoProps = utteringInfo.property;
 
         //if a matchSource has a line, then it will be displayed in the conversation
-        _infoProps.forEach(function(prop){
+        // scan properties for line, and save the value
+        infoProps.forEach(function(prop){
             if(prop.name == "line"){
-                _ln = prop.value;
-                _hasLine = true;
+                ln = prop.value;
             }
         });
-        // if matchSource has a line and a letter, it's letter is associated with
-        // a correct answer
-        if(_hasLine){
+
+        // if ln != to "" the matchSource has a line spot.
+        if(ln != ""){
+            // if it also has a letter, it is associated with a correct answer
             if(item.letter != ""){
                 data.matchTarget.push(item.letter);
-               // console.log("this should only be here 4 times");
             }
-        }
-        // if _ln != to "" the matchSource has a line spot.
-        if(_ln != ""){
-            if(!line[parseInt(_ln)]) {
-                line[parseInt(_ln)] = [];
+
+            if(!line[parseInt(ln)]) {
+                line[parseInt(ln)] = [];
             }
-            line[parseInt(_ln)].push(item);
+            line[parseInt(ln)].push(item);
         }
     });
     data.lines = line;
-   // console.log(data.matchTarget);
+
     // shuffle and add to answers[]
     // grab all answers from quiz for word bank
-    var questions = data.page.matchSource || [];
+    var questions = msArray || [];
     var len = questions.length;
     while (len--) {
         // for each matchSource
@@ -92,8 +106,8 @@ function getPageState(props) {
 
             // get it's line number
             var ln = -1;
-            var _aInfo = a.nut.uttering.info || {property: []};
-            _aInfo.property.forEach(function(prop){
+            var aInfo = a.nut.uttering.info || {property: []};
+            aInfo.property.forEach(function(prop){
                 if(prop.name == "line"){
                     ln = prop.value;
                 }
@@ -109,14 +123,11 @@ function getPageState(props) {
     }
 
     data.answers = shuffle(data.answers); // randomize answers bank
-
-
     return data;
 }
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
-
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
 
@@ -129,24 +140,20 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
 // Set the size of the answer areas and all the draggable items to be the same as the largest
+// Also centers play/stop icons on clickables
 function setDraggableSize() {
+    var dropAnswerArea = $('.' + DROP_ANSWER_AREA_CLS);
+    var draggableArea = $('.' + DRAGGABLE_AREA_CLS);
 
-    var dd_drop_answer_area = $('.dd-drop-answer-area');
-    var _dd_word_bank_text = $('.dd-word-bank-text');
-    var dd_answer_area_text = $('dd-answer-area-text');
-    var dd_draggable_area = $('.dd-draggable-area');
-    var glyphicon_wl = $(".glyphicon.wl");
-    var _glyphicon = $(".glyphicon");
-    var _na = $(".na");
-    var _ad = $(".ad");
     var maxWidth = 0;
     var maxHeight = 0;
-    dd_draggable_area.each(function(index) {
+
+    // find the max width/height of answers so we can keep them consistent
+    draggableArea.each(function() {
         var w = $(this).width();
         var h = $(this).height();
         if (w > maxWidth) {
@@ -156,199 +163,350 @@ function setDraggableSize() {
             maxHeight = h;
         }
     });
-    dd_drop_answer_area.width(maxWidth).height(maxHeight);
-    dd_draggable_area.width(maxWidth).height(maxHeight);
-    _glyphicon.css('font-size', '26px');
-    _dd_word_bank_text.css('position', 'relative');
-    glyphicon_wl.css('position', 'absolute');
-    glyphicon_wl.css( 'font-size', (26 + 'px') );
-    var texts = document.getElementsByClassName("wl");
-    Array.prototype.forEach.call(texts, function (item, index) {
-        $(item).css('left', ( ($(item).parent().width() ) + 'px' ) );
-        $(item).css('top', ( ( (maxHeight*Math.floor(index/2)+(10*Math.floor(index/2))) + maxHeight/2 - 13 )+'px'));
-    });
-    /*
-     var texts = document.getElementsByClassName("wl");
-     Array.prototype.forEach.call(texts, function (item, index) {
-     $(item).css('left', ( ($(item).parent().width() ) + 'px' ) );
-     $(item).css('top', ( ( $(item).parent().height()*index - 13*index) + 'px' ) );
-     });
+    dropAnswerArea.width(maxWidth).height(maxHeight);
+    draggableArea.width(maxWidth).height(maxHeight);
 
-    dd_answer_area_text.css('line-height', (maxHeight + 'px'));
-    _na.css( 'font-size', (26 + 'px') );
-    //_na.css('top', ('0px') );
-    _ad.css( 'font-size', (26 + 'px') );
-    _ad.css( 'left', ( maxHeight/2 + 'px' ) );
-    //_ad.css( 'top', (maxHeight/2 + 'px') );
-    */
+    // position Icons correcty within their containers
+    setGlyphIconPos(maxHeight, maxWidth);
+}
+
+function setGlyphIconPos(maxHeight, maxWidth){
+    var glyphCorrect = $(".answer-feedback-correct");
+    var glyphIncorrect = $(".answer-feedback-incorrect");
+    var wordListGlyphCls = $(".wl");
+    var wordBankText = $('.' + WORD_BANK_TEXT_CLS);
+    var glyphicon = $(".glyphicon");
+    var plainTextGlyphCls = $(".na");
+    var droppedAnswerGlyphCls = $(".ad");
+    var buffer = 35;
+    var marginTop = 90;
+    var ansHeight = 50;
+
+    glyphicon.css('z-index', '255');
+    wordBankText.css('position', 'relative');
+    wordListGlyphCls.css('position', 'relative');
+    wordListGlyphCls.css( 'font-size', (26 + 'px') );
+    plainTextGlyphCls.css('font-size', '26px');
+    droppedAnswerGlyphCls.css('font-size', '26px');
+    wordListGlyphCls.css('font-size', '26px');
+
+    var icons = document.getElementsByClassName("wl");
+    Array.prototype.forEach.call(icons, function (item, index) {
+        var _item = $(item);
+        _item.css('left', ( (maxWidth/2 - 13 ) + 'px' ) );
+        _item.css('top', (  ( 'calc(50% - 13px)' ) ));
+        _item.css('float', 'left');
+    });
+
+    var answerItems = document.getElementsByClassName(ANSWER_LIST_ITEM_CLS);
+    Array.prototype.forEach.call(answerItems, function(item, index){
+        var _item = $(item);
+        _item.css('top', ( ( buffer + (buffer*index) + (maxHeight*index) )+'px'));
+    });
+
+    var answerArea = document.getElementsByClassName(ANSWER_AREA_CLS);
+    Array.prototype.forEach.call(answerArea, function(item, index){
+        var _item = $(item);
+        _item.css('top', ( ( (ansHeight*index) +marginTop)+'px'));
+        if(index%2 == 0){
+            _item.css('background', '#d7d7d7');
+        }else{
+            _item.css('background', '#c4c4c4');
+        }
+    });
+
+    var texts = document.getElementsByClassName("na");
+    Array.prototype.forEach.call(texts, function (item) {
+        $(item).css('left', ( ($(item).parent().width()/2 - 13) + 'px') );
+        $(item).css('top', ( ($(item).parent().height()/2 ) + 'px') );
+    });
+
+    glyphCorrect.css('top', '-6px');
+    glyphIncorrect.css('top', '-6px');
+
 }
 
 // gets all the answers and questions. Checks to see if answers are in their desired locations
-function checkAnswers(state){
-    var dd_answers = document.getElementsByClassName('answer-handle');
+function checkAnswers(self){
+    var state = self.state;
+    var ddAnswers = document.getElementsByClassName('answer-handle');
     var numCorrect = 0;
     var numWrong = 0;
+    var isMissingAnswer = false;
 
-    // for each answer-handle
-    for(var index=0; index < dd_answers.length; index++){
-      // console.log(index);
-        if (dd_answers[index].childElementCount > 0) {
-            var dataContainer = $(dd_answers[index].childNodes[0]);
-            var qL = dataContainer.attr("data-question-letter");
-          //  console.log(qL);
-            //console.dir(state.matchTarget);
-            if ( qL == state.matchTarget[index] ) {
-                // if the answer matches expected
-              //  console.log("correct!");
-                //console.log($($(dd_answers[dd_counter]).children()[0]).children()[1]);
-                $(dd_answers[index]).parent().addClass("dd-drop-answer-area-correct");
-                $($($(dd_answers[index]).children()[0]).children()[1]).css('display', 'block');
+    Array.forEach(ddAnswers, function(ans){
+        if($(ans).children().length == 0){
+            isMissingAnswer = true;
+        }
+    });
+    // if all answers are filled in
+    if(isMissingAnswer){
+        alert("Please fill in every answer.");
+        return ("");
+    }else {
+        // then for each answer-handle
+        for (var index = 0; index < ddAnswers.length; index++) {
+            var _parent = $(ddAnswers[index]).parent();
+            var _child = $(ddAnswers[index].childNodes[0]);
+            var questionLetter = _child.attr("data-question-letter");
+
+            // if the letter of the answer is what is expected, then it is correct
+            if (questionLetter == state.matchTarget[index]) {
+                _parent.addClass("dd-drop-answer-area-correct");
+                var glyphCorrect = ddAnswers[index].children[0].children[1];
+                $(glyphCorrect).css('display', 'block');
+                self.state.isCorrect.push(true);
                 numCorrect++;
             } else {
                 // else it's wrong
-              //  console.log("false");
-                //console.log($($(dd_answers[dd_counter]).children()[0]).children()[0]);
-                $(dd_answers[index]).parent().addClass("dd-drop-answer-area-incorrect");
-                $($($(dd_answers[index]).children()[0]).children()[0]).css('display', 'block');
+                _parent.addClass("dd-drop-answer-area-incorrect");
+                var glyphWrong = ddAnswers[index].children[0].children[0];
+                $(glyphWrong).css('display', 'block');
+                self.state.isCorrect.push(false);
                 numWrong++;
             }
-        } else {
-            // else no answer was given for this one
-          //  console.log("empty answer, auto false");
-            $(dd_answers[index]).addClass("dd-drop-answer-area-incorrect");
-            numWrong++;
-            React.render(
-                <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>,
-                $(dd_answers[index])[0]
-            );
-            $($(dd_answers[index]).children()[0]).css('display', 'block');
         }
-      //  console.log("-------");
-    }
+        var total = numCorrect + numWrong;
+        if (numCorrect > 0 && numCorrect == total) {
+            self.setState({
+               perfect: true
+            });
+            // if you got all questions correct, play reward audio
+            var rewardZid = 0;
+            Array.forEach(state.page.matchSource, function (ms) {
+                var uttering = ms.nut.uttering;
+                var utteringInfo = uttering.info || {property: []};
+                //ms.nut.uttering.info.property[0].name == "full"
+                Array.forEach(utteringInfo.property, function (prop) {
+                    if (prop.name == "full") {
+                        rewardZid = uttering.media[0].zid;
+                    }
+                });
+            });
+            if (rewardZid != 0) {
+                playAudio(rewardZid);
+            }
+        }
+        // set state to read only mode, update feedback string
+        self.setState({
+            selection: getAnswerStrings(),
+            readOnly: true
+        });
+        readOnly();
 
-    return ("You got "+ numCorrect + " of " + (numCorrect + numWrong) + " correct.");
+        return ("You got " + numCorrect + " of " + total + " correct.");
+    }
 }
 
+function readOnly(){
+    // fade remaining answers and make them non-interactable
+    var draggableArea = document.getElementsByClassName(DRAGGABLE_AREA_CLS);
+    Array.prototype.forEach.call(draggableArea, function (item) {
+        $(item).css('opacity', '0.4');
+        $(item).removeClass("audio-disabled");
+    });
+
+    //hide the boxes the answers are contained in
+    $(".dd-drop-answer-area-incorrect").css('visibility', 'hidden');
+    $(".dd-drop-answer-area-correct").css('visibility', 'hidden');
+}
+
+// returns an array consisting of the strings for all the answers
+// this may or may not work with images, may need to changes the stored value from native text to something else
+function getAnswerStrings(){
+    var tempArr = [];
+    var answerHandles = document.getElementsByClassName(ANSWER_HANDLE_CLS);
+    Array.prototype.forEach.call(answerHandles, function(item){
+        var text = $($(item).children()[0]).children()[2].innerHTML;
+        tempArr.push(text);
+
+    });
+    return tempArr;
+}
 
 var DDAudioQuizView = React.createClass({
-
-    submit: function(event) {
-      //  console.log("Submit pressed!");
-
-        // if we need the Answers to be checked when the submit button is pressed
-        //if(true){
-        //console.log(this.state);
-        // }
-
+    // when the submit button is pressed
+    submit: function() {
         this.setState({
-            feedback: checkAnswers(this.state)
+            feedback: checkAnswers(this)
         });
     },
 
-    itemMouseOver: function(event){
-        var xid = 0;
-        // perform functions based on what class is moused over
+    // when the reset button is pressed
+    reset: function(){
+        // clear the feedback text
+        this.setState({
+            feedback: "",
+            readOnly: false,
+            isCorrect: [],
+            selection: []
+        });
+        $(".dd-answer-area-text").css('visibility', 'visible');
+        //dismount all the react components on the answer handles
+        var answerHandles = document.getElementsByClassName(ANSWER_HANDLE_CLS);
+        Array.prototype.forEach.call(answerHandles, function(item){
+            React.unmountComponentAtNode(item);
+        });
 
-        switch ($(event.target).attr("class")) {
-            case "dd-word-bank-text":
-                if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
-                    $(event.target).css("opacity", "0.4");
-                    //console.log("draggable and is not disabled");
-                    this.state.page.matchSource.forEach(function(item){
-                        // if this item we are over
-                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            xid = (item.nut.uttering.media[0].zid);
-                        }
-                    });
-                        if ($($(event.target).parent()[0]).children().length > 3) {
-                            if (isPlaying(xid)) {
-                                $($($(event.target).parent()[0]).children()[3]).css('display', 'inline');
-                            } else {
-                                $($($(event.target).parent()[0]).children()[2]).css('display', 'inline');
-                            }
-                        } else {
-                            if (isPlaying(xid)) {
-                                $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
-                            } else {
-                                $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
-                            }
-                        }
+        // Clear All Answer-Handles of draggables and correct/incorrect classes
+        var answerArea = document.getElementsByClassName(DROP_ANSWER_AREA_CLS);
+        Array.prototype.forEach.call(answerArea, function (item) {
+            $(item).removeClass(ANSWER_AREA_CORRECT_CLS);
+            $(item).removeClass(ANSWER_AREA_WRONG_CLS);
+        });
 
-                }
-                break;
+        var draggableArea = document.getElementsByClassName(DRAGGABLE_AREA_CLS);
+        Array.prototype.forEach.call(draggableArea, function (item) {
+            $(item).css('opacity', '1.0');
+            $(item).removeClass("audio-disabled");
+            $(item).css('display', 'inherit' );
+            $(item).attr('draggable', 'true');
+        });
 
-            case "dd-answer-area-text":
-                this.state.page.matchSource.forEach(function(item){
-                    // if this item is what we clicked on
-                    $($(event.target).children()[2]).css('opacity', '0.4');
-                    if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
-                        // play audio
-                        xid = item.nut.uttering.media[0].zid;
-                    }
-                });
-                    if (isPlaying(xid)) {
-                        $($(event.target).children()[1]).css('display', 'inline');
-                    } else {
-                        $($(event.target).children()[0]).css('display', 'inline');
-                    }
-                break;
-
-            default:
-                if($(event.target).parent()[0].className == "dd-answer-area-text") {
-                    $(event.target).css("opacity", "0.4");
-                    this.state.page.matchSource.forEach(function(item){
-                        // if this item is what we clicked on
-                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            // play audio
-                            xid = (item.nut.uttering.media[0].zid);
-                        }
-                    });
-                        if (isPlaying(xid)) {
-                            $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
-                        } else {
-                            $($($(event.target).parent()[0]).children()[0]).css('display', 'inline');
-                        }
-                }
-
-                // else do nothing
-
-                break;
-        }
-
+        this.setState({
+            answers: shuffle(this.state.answers) // randomize answers bank
+        });
     },
+
+    // when the Clear All button is pressed
+    clearAll: function(){
+        // clear the feedback text
+        this.setState({
+            feedback: "",
+            readOnly: false,
+            isCorrect: [],
+            selection: []
+        });
+        $(".dd-answer-area-text").css('visibility', 'visible');
+        //dismount all the react components on the answer handles
+        var answerHandles = document.getElementsByClassName(ANSWER_HANDLE_CLS);
+        Array.prototype.forEach.call(answerHandles, function(item){
+            React.unmountComponentAtNode(item);
+        });
+
+        // Clear All Answer-Handles of draggables and correct/incorrect classes
+        var answerArea = document.getElementsByClassName(DROP_ANSWER_AREA_CLS);
+        Array.prototype.forEach.call(answerArea, function (item) {
+            $(item).removeClass(ANSWER_AREA_CORRECT_CLS);
+            $(item).removeClass(ANSWER_AREA_WRONG_CLS);
+        });
+
+        var draggableArea = document.getElementsByClassName(DRAGGABLE_AREA_CLS);
+        Array.prototype.forEach.call(draggableArea, function (item) {
+            $(item).css('opacity', '1.0');
+            $(item).removeClass("audio-disabled");
+            $(item).css('display', 'inherit' );
+            $(item).attr('draggable', 'true');
+        });
+    },
+
+    // called when the mouse is brought over various objects
+    itemMouseOver: function(event){
+        var zid = 0;
+        var _parent = $($(event.target)[0].parentElement);
+        var _target = $(event.target);
+        if(!this.state.readOnly) {
+            // switch functions based on what class is moused over (this is due to inheritence issues)
+            switch (_target.attr("class")) {
+                // dd-word-bank-text is the child element of a draggable
+                case WORD_BANK_TEXT_CLS:
+                    if (!_parent.hasClass("audio-disabled")) {
+                        _target.css("opacity", "0.4");
+                        this.state.page.matchSource.forEach(function (item) {
+                            var uttering = item.nut.uttering;
+                            // if this item we are over
+                            if (uttering.utterance.native.text == event.target.innerHTML) {
+                                zid = (uttering.media[0].zid);
+                            }
+                        });
+                        var targetGlyphs = _parent.children();
+                        if (targetGlyphs.length > 3) {
+                            var glyphPlayAH = $(targetGlyphs[2]);
+                            var glyphStopAH = $(targetGlyphs[3]);
+                            if (isPlaying(zid)) {
+                                glyphStopAH.css('display', 'inline');
+                            } else {
+                                glyphPlayAH.css('display', 'inline');
+                            }
+                        } else {
+                            var glyphPlayWL = $(targetGlyphs[0]);
+                            var glyphStopWL = $(targetGlyphs[1]);
+                            if (isPlaying(zid)) {
+                                glyphStopWL.css('display', 'inline');
+                            } else {
+                                glyphPlayWL.css('display', 'inline');
+                            }
+                        }
+                    }
+                    break;
+
+                // dd-answer-area-text is the area around the clickable text in the paragraph
+                case ANSWER_AREA_TEXT_CLS:
+                    var textAreaGlyphs = $(event.target).children();
+                    var glyphPlay = $(textAreaGlyphs[0]);
+                    var glyphStop = $(textAreaGlyphs[1]);
+
+                    this.state.page.matchSource.forEach(function (item) {
+                        var uttering = item.nut.uttering;
+                        var fadeTarget = $($(event.target).children()[2]);
+                        fadeTarget.css('opacity', '0.4');
+
+                        // if this item is what we clicked on
+                        if (uttering.utterance.native.text == event.target.children[2].innerHTML) {
+                            // play audio
+                            zid = uttering.media[0].zid;
+                        }
+                    });
+                    if (isPlaying(zid)) {
+                        glyphStop.css('display', 'inline');
+                    } else {
+                        glyphPlay.css('display', 'inline');
+                    }
+                    break;
+
+                default:
+                    // else do nothing
+                    break;
+            }
+        }
+    },
+
+    // set opacity of mouse-over target back to 100% and hide all glyphicons
     itemMouseOff: function(event){
-        this.iid && clearInterval(this.iid);
-        //console.log("off");
-        $(event.target).css("opacity", "1.0");
-        switch ($(event.target).attr("class")) {
-            case "dd-word-bank-text":
-                //console.dir($(event.target).children());
-                if($($(event.target).parent()[0]).children().length > 3){
-                        $($($(event.target).parent()[0]).children()[2]).css('display', 'none');
-                        $($($(event.target).parent()[0]).children()[3]).css('display', 'none');
+        var _target = $(event.target);
+        _target.css("opacity", "1.0");
+        switch (_target.attr("class")) {
+            case WORD_BANK_TEXT_CLS:
+                var draggableChildren = $(_target.parent()[0]).children();
+
+                if(draggableChildren.length > 3){
+                    var glyphPlayAH = $(draggableChildren[2]);
+                    var glyphStopAH = $(draggableChildren[3]);
+                        // answer-handle glyphicons
+                    glyphPlayAH.css('display', 'none');
+                    glyphStopAH.css('display', 'none');
                 }else {
-                        $($($(event.target).parent()[0]).children()[1]).css('display', 'none');
-                        $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
+                    var glyphPlayWL = $(draggableChildren[0]);
+                    var glyphStopWL = $(draggableChildren[1]);
+                        // word-list glyphicons
+                    glyphPlayWL.css('display', 'none');
+                    glyphStopWL.css('display', 'none');
                 }
                 break;
 
-            case "dd-answer-area-text":
-                $($(event.target).children()[2]).css('opacity', '1.0');
-                //$(event.target).css("background-color", "white");
-                $($(event.target).children()[0]).css('display', 'none');
-                $($(event.target).children()[1]).css('display', 'none');
+            case ANSWER_AREA_TEXT_CLS:
+                var targetChildren = _target.children();
+                var fadeTarget =  $(targetChildren[2]);
+                var glyphPlayTXT = $(targetChildren[0]);
+                var glyphStopTXT = $(targetChildren[1]);
+                // mouse-over target is not what was faded, [2] is the text that was faded, [0] and [1] are glyphicons
+                fadeTarget.css('opacity', '1.0');
+                glyphPlayTXT.css('display', 'none');
+                glyphStopTXT.css('display', 'none');
                 break;
 
             default:
-                if($(event.target).parent()[0].className == "dd-answer-area-text"){
-                    //console.log("text of plain text in question");
-                    $(event.target).css("opacity", "1.0");
-                    $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
-                    $($($(event.target).parent()[0]).children()[1]).css('display', 'none');
-                }
-
                 // else do nothing
-
                 break;
         }
     },
@@ -358,11 +516,9 @@ var DDAudioQuizView = React.createClass({
         var zid = 0;
         switch($(event.target).attr("class")){
             // word bank is what get's the click event inside draggable areas
-            case "dd-word-bank-text":
-                if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
-
-                    // parent == dd-draggable-area, > child[0] is play, child[1] is stop
-                    //console.log("draggable and is not disabled");
+            case WORD_BANK_TEXT_CLS:
+                var parentElement = $($(event.target)[0].parentElement);
+                if(!parentElement.hasClass("audio-disabled")){
                     data.page.matchSource.forEach(function(item){
                         // if this item is what we clicked on
                         if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
@@ -371,27 +527,27 @@ var DDAudioQuizView = React.createClass({
                             playAudio(zid);
                         }
                     });
-
-                    if($($(event.target).parent()[0]).children().length > 3){
+                    var glyphiconArray = $($(event.target).parent()[0]).children();
+                    if(glyphiconArray.length > 3){
+                        var playAH = $(glyphiconArray[2]);
+                        var stopAH = $(glyphiconArray[3]);
                         if(isPlaying(zid)) {
-                            $($($(event.target).parent()[0]).children()[2]).css('display', 'none');
-                            $($($(event.target).parent()[0]).children()[3]).css('display', 'inline');
+                            playAH.css('display', 'none');
+                            stopAH.css('display', 'inline');
                         }
                     }else {
+                        var playWL = $(glyphiconArray[0]);
+                        var stopWL = $(glyphiconArray[1]);
                         if(isPlaying(zid)) {
-                            $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
-                            $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
+                            playWL.css('display', 'none');
+                            stopWL.css('display', 'inline');
                         }
                     }
-
                 }
                 break;
 
             // the div containing the span
-            case "dd-answer-area-text":
-                // child [0] is play, child[1] is stop
-
-                //console.log("area around text of questions");
+            case ANSWER_AREA_TEXT_CLS:
                 data.page.matchSource.forEach(function(item){
                     // if this item is what we clicked on
                     if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
@@ -400,77 +556,45 @@ var DDAudioQuizView = React.createClass({
                         playAudio(zid);
                     }
                 });
+                var answerAreaTextGlyphicons = $(event.target).children();
+                var play = $(answerAreaTextGlyphicons[0]);
+                var stop = $(answerAreaTextGlyphicons[1]);
                 if(isPlaying(zid)) {
-                    $($(event.target).children()[0]).css('display', 'none');
-                    $($(event.target).children()[1]).css('display', 'inline');
-                }
-
-                break;
-            case "dd-draggable-area":
-                //console.log("lineNumber " + $($(event.target)[0]).attr("data-question-id") + " : orderIndex "
-                  //  + $($(event.target)[0]).attr("data-order-index"));
-                break;
-            case "img-thumbnail dd-answer-image":
-                if(!$($(event.target)[0].parentElement).hasClass("audio-disabled")){
-                    //console.log("lineNumber " + $($(event.target)[0].parentElement).attr("data-question-id") + " : orderIndex "
-                     //   + $($(event.target)[0].parentElement).attr("data-order-index"));
+                    play.css('display', 'none');
+                    stop.css('display', 'inline');
                 }
                 break;
             default:
-
-                // the span containing the text
-                if($(event.target).parent()[0].className == "dd-answer-area-text"){
-
-                    //console.log("text of plain text in question");
-                    data.page.matchSource.forEach(function(item){
-                        // if this item is what we clicked on
-                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            // play audio
-                            zid = item.nut.uttering.media[0].zid;
-                            playAudio(zid);
-                        }
-                    });
-                    if(isPlaying(zid)){
-                        $($($(event.target).parent()[0]).children()[0]).css('display', 'none');
-                        $($($(event.target).parent()[0]).children()[1]).css('display', 'inline');
-                    }
-
-                }
+                // do nothing
                 break;
         }
     },
 
     getInitialState: function() {
-        var pageState = getPageState(this.props);
-        return pageState.data;
+        return getPageState(this.props);
     },
 
     componentWillMount: function() {
         //PageStore.addChangeListener(this._onChange);
     },
 
+    componentDidUpdate: function(){
+        if(this.state.readOnly){
+            $(".dd-answer-area-text").css('width', 'auto');
+        }
+
+        setDraggableSize();
+    },
+
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
         setDraggableSize();
-        var _audioTarget = $('audio,video');
-        _audioTarget.prop("volume", SettingsStore.voiceVolume());
+        var audioTarget = $('audio,video');
+        audioTarget.prop("volume", SettingsStore.voiceVolume());
         // if muted, then reduce volume to 0
-        if(_audioTarget.prop("muted")){
-            _audioTarget.prop("volume", 0);
+        if(audioTarget.prop("muted")){
+            audioTarget.prop("volume", 0);
         }
-/*
-        var texts = document.getElementsByClassName("wl");
-        Array.prototype.forEach.call(texts, function (item, index) {
-            $(item).css('left', ( ($(item).parent().width() ) + 'px' ) );
-            $(item).css('top', ( ( $(item).parent().height()*index - 13*index) + 'px' ) );
-        });
-*/
-        var texts = document.getElementsByClassName("na");
-        Array.prototype.forEach.call(texts, function (item) {
-            $(item).css('left', ( ($(item).parent().width()/2 - 13) + 'px') );
-            $(item).css('top', ( ($(item).parent().height()/2 ) + 'px') );
-        });
-
 
     },
 
@@ -479,66 +603,54 @@ var DDAudioQuizView = React.createClass({
     },
 
     onDragging: function(e){
-        //e.dataTransfer.setData('Text', this.id);
         e.dataTransfer.setData('text/plain', 'anything');
-        //event.target is the source node
-      //  console.log("handleDrag target: ");
-        //console.log($(e.target)[0]);
         this.state.dragSrc = e.target;
-        if($(this.state.dragSrc).children().length > 3){
-            this.setState({
-                childHTML: $($(this.state.dragSrc).children()[4])
-            });
-
-        }else{
-            this.setState({
-                childHTML: $($(this.state.dragSrc).children()[2])
-            });
-        }
+        // collect the innerHTML of the item being dragged
+        this.setState({
+            childHTML: $(this.state.dragSrc.children[2])
+        });
     },
+
     onDropping: function(e){
+        // preventDefault stops the default drop code from running so we can write our own function using React
         e.preventDefault();
+        // stopPropagation stops some browsers from attempting to forward to the dropped item as a URL
         e.stopPropagation();
 
         if(this.state.dragSrc != null) {
-          //  console.log("handleDrop target: ");
-          //  console.log(e.target);
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            }
-            var $this = this;
+            var self = this;
+            var tgtClass = $(e.target).attr("class");
+            // Construct the component to be dropped in the answer-handle
             var DropComponent = React.createClass({
                 componentDidMount: function () {
                     setDraggableSize();
-                    //-----------------------------------------------------------------------------------------------------
                 },
                 render: function () {
-                    var cls = $($this.state.dragSrc).attr("class");
-                    var data_question_id = $($this.state.dragSrc).attr("data-question-id");
-                    var data_question_letter = $($this.state.dragSrc).attr("data-question-letter");
-                    var inner;
-                    switch ($this.state.childHTML.attr("class")) {
+                    var cls = $(self.state.dragSrc).attr("class");
+                    var data_question_id = $(self.state.dragSrc).attr("data-question-id");
+                    var data_question_letter = $(self.state.dragSrc).attr("data-question-letter");
+                    var inner = <div></div>;
+                    switch (self.state.childHTML.attr("class")) {
                         case "img-thumbnail dd-answer-image":
-                            inner = <img className={$this.state.childHTML.attr("class")}
+                            inner = <img className={self.state.childHTML.attr("class")}
                                          draggable={false}
-                                         src={$this.state.childHTML.attr("src")}></img>;
+                                         src={self.state.childHTML.attr("src")}></img>;
                             break;
                         default:
-                            inner = <div className={$this.state.childHTML.attr("class")}>{
-                                $this.state.childHTML[0].innerHTML}</div>;
+                            inner = <div className={self.state.childHTML.attr("class")}>{
+                                self.state.childHTML[0].innerHTML}</div>;
                             break;
                     }
+
                     return (
                         <div className={cls}
                              data-question-id={data_question_id}
                              data-question-letter={data_question_letter}
-                             onClick={$this.handleClick}
-                             onMouseOver={$this.itemMouseOver}
-                             onMouseOut={$this.itemMouseOff}
+                             onClick={self.handleClick}
+                             onMouseOver={self.itemMouseOver}
+                             onMouseOut={self.itemMouseOff}
                              draggable={true}
-                             onDragStart={$this.onDragging}>
-                            <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>
-                            <span className="glyphicon glyphicon-ok-circle answer-feedback-correct"></span>
+                             onDragStart={self.onDragging}>
                             <span className="glyphicon glyphicon-play-circle mouseover-play ad"></span>
                             <span className="glyphicon glyphicon-stop mouseover-stop ad"></span>
                             {inner}
@@ -546,37 +658,40 @@ var DDAudioQuizView = React.createClass({
                     );
                 }
             });
-            if($this.state.needsRender){
+
+            // if we are moving the item to an answer-handle
+            if(self.state.needsRender){
                 React.render(
                     <DropComponent />,
                     e.target
                 );
             }
-
-            if ($($this.state.dragSrc).parent().attr("class") == "answer-handle") {
-                //console.log($(dragSrc).parent()[0]);
-                //(e.target);
-                React.unmountComponentAtNode($($this.state.dragSrc).parent()[0]);
-                var movedItem = $this.state.childHTML[0].innerHTML;
-                var listItems = document.getElementsByClassName("dd-answer-list-item");
-                //console.log(movedItem);
-                if($(e.target).attr("class") == "dd-word-bank-text") {
+            // if we are moving an item from an answer-handle
+            if ($(self.state.dragSrc).parent().attr("class") == "answer-handle") {
+                // un-mount the answer from that answer-handle
+                React.unmountComponentAtNode($(self.state.dragSrc).parent()[0]);
+                // movedItem == the stored childHTML of the dragged item
+                var movedItem = self.state.childHTML[0].innerHTML;
+                if(tgtClass == "dd-word-bank-text" || tgtClass == "word-list" ) {
+                    var listItems = document.getElementsByClassName("dd-answer-list-item");
                     for (var i = 0; i < listItems.length; i++) {
-                        //console.log(listItems[i].childNodes[0].childNodes[2].innerHTML);
+                        var childRef = listItems[i].childNodes[0];
                         // match movedItem to it's corresponding item in the answer list
-                        if (movedItem == listItems[i].childNodes[0].childNodes[2].innerHTML) {
-                            listItems[i].childNodes[0].style.opacity = '1.0';
-                            listItems[i].childNodes[0].setAttribute("draggable", "true");
-                            $(listItems[i].childNodes[0]).removeClass("audio-disabled");
+                        if (movedItem == childRef.childNodes[2].innerHTML) {
+                            childRef.style.opacity = '1.0';
+                            childRef.setAttribute("draggable", "true");
+                            $(childRef).removeClass("audio-disabled");
+                            $(childRef).css('display', 'inherit');
                         }
                     }
                 }
-
             } else {
-                if($(e.target).attr("class") != "dd-word-bank-text") {
-                    $this.state.dragSrc.style.opacity = '0.4';
-                    $this.state.dragSrc.setAttribute("draggable", "false");
-                    $($this.state.dragSrc).addClass("audio-disabled");
+                if(tgtClass != "dd-word-bank-text" && tgtClass != "word-list") {
+                    var dragSource = self.state.dragSrc;
+                    dragSource.style.opacity = '0.4';
+                    dragSource.setAttribute("draggable", "false");
+                    $(dragSource).addClass("audio-disabled");
+                    $(dragSource).css('display', 'none');
                 }
             }
             this.setState({
@@ -585,7 +700,6 @@ var DDAudioQuizView = React.createClass({
             this.setState({
                 childHTML: null
             });
-
             var texts = document.getElementsByClassName("ad");
             Array.prototype.forEach.call(texts, function (item) {
                 $(item).css('left', ( ($(item).parent().width()/2 - 13) + 'px') );
@@ -593,47 +707,56 @@ var DDAudioQuizView = React.createClass({
             });
         }
     },
+
     onDraggingOver: function(e){
+        var target = $(e.target).attr("class");
         this.setState({
             needsRender: null
         });
-
-        if($(e.target).attr("class") == "answer-handle"){
+        if(target == "answer-handle"){
             //if answer-handle empty drop spot
             e.preventDefault();
             this.setState({
                 needsRender: true
             });
         }
-
+        // This one is when you are over a word in the word-list. This is needed to prevent you from dropping it on
+        // an answer that is in an answer handle, due to them sharing a class.
         if( $(e.target).parent().parent().attr("class") == "dd-answer-list-item" ){
-            // if answer-handle, in P
-            // if dd-answer-list-item then word bank
+            // if dd-answer-list-item then word bank item
             e.preventDefault();
             this.setState({
                 needsRender: false
             });
         }
-
-        if( $(e.target).parent().parent().attr("class") == "answer-handle" ){
-
+        if( target == "word-list" ){
+            // if over the word list box
+            e.preventDefault();
+            this.setState({
+                needsRender: false
+            });
         }
     },
 
     render: function() {
+        var needReset = true;
         var st = this.state;
         var self = this;
         // word bank, answers are MatchSources
         var answers = st.answers.map(function(item, index) {
-            //item = {answer: "", lineNumber: -1, letter: ""}
             var component = <div className="dd-word-bank-text">{item.answer.nut.uttering.utterance.native.text}</div>;
-            //console.log(item);
-            //if (item.answer.type === "image") {
-            //component = <img className="img-thumbnail dd-answer-image" draggable="false" src={item.answer.image}/>
-            //}
-            return (
-                <li className="dd-answer-list-item" key={index}>
-
+            if(self.state.readOnly){
+                var answerItem = <div className="dd-answer-list-item" key={index}>
+                    <div
+                        className="dd-draggable-area"
+                        data-question-id={item.lineNumber}
+                        data-question-letter={item.letter}
+                        >
+                        {component}
+                    </div>
+                </div>
+            }else{
+                var answerItem = <div className="dd-answer-list-item" key={index}>
                     <div
                         className="dd-draggable-area"
                         draggable="true"
@@ -648,13 +771,15 @@ var DDAudioQuizView = React.createClass({
                         ><span className="glyphicon glyphicon-play-circle mouseover-play wl"></span>
                         <span className="glyphicon glyphicon-stop mouseover-stop wl"></span>
                         {component}
-
                     </div>
-                </li>
+                </div>
+            }
+            return (
+                answerItem
             )
         });
 
-
+        var counter = -1;
         // drop area
         var lines = Object.keys(st.lines).map(function(linesKey, index) {
             var line = st.lines[linesKey];
@@ -664,19 +789,6 @@ var DDAudioQuizView = React.createClass({
                 var result = "";
                 var answerCls = "dd-drop-answer-area";
                 var flag = "";
-                //  if (answer.type === "image") {
-                //     answerCls += " dd-drop-answer-image";
-                // }
-
-                //    if (answer.correct === true) {
-                //        answerCls += " dd-drop-answer-area-correct";
-                //        flag = <span className="glyphicon glyphicon-ok-circle dd-flag dd-correct-flag" aria-hidden="true"></span>
-                //    }
-
-                //   if (answer.correct === false) {
-                //        answerCls += " dd-drop-answer-area-incorrect";
-                //        flag = <span className="glyphicon glyphicon-remove-circle dd-flag dd-incorrect-flag" aria-hidden="true"></span>
-                //    }
 
                 ms.nut.uttering.info.property.forEach(function(prop){
                     if(prop.name == "speaker"){
@@ -684,41 +796,87 @@ var DDAudioQuizView = React.createClass({
                     }
                 });
 
-                if (ms.letter != "") {
-                    result = <div className={answerCls} onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
-                        &nbsp;
-                        {flag}
-                        <div className="answer-handle"></div>
-                    </div>
-                } else {
-                    var needRender = true;
-                    ms.nut.uttering.info.property.forEach(function(prop){
-                        if(prop.name == "full") {
-                            needRender = false;
+                if(self.state.readOnly){
+                    var need2Render = true;
+                    var clsName = "dd-answer-area-text";
+                    ms.nut.uttering.info.property.forEach(function (prop) {
+                        if (prop.name == "full") {
+                            need2Render = false;
                         }
                     });
-                    if(needRender) {
-                        result = <div className="dd-answer-area-text"
-                                      data-question-id={index+1}
-                                      data-question-letter={""}
-                                      onMouseOver={self.itemMouseOver}
-                                      onMouseOut={self.itemMouseOff}
-                                      onClick={self.handleClick}>
-                            <span className="glyphicon glyphicon-play-circle mouseover-play na"></span>
-                            <span className="glyphicon glyphicon-stop mouseover-stop na"></span>
-                            {ms.nut.uttering.utterance.native.text}
-                        </div>
+                    if (need2Render) {
+                        if (ms.letter != "") {
+                            counter++;
+                            if(self.state.isCorrect[counter]){
+                                clsName += " dd-drop-answer-area-correct";
+                                result = <div className={clsName}
+                                              data-question-id={index+1}
+                                              data-question-letter={""}>
+                                    <span className="glyphicon glyphicon-ok-circle answer-feedback-correct"></span>
+                                    {" " + self.state.selection[counter] + " "}&nbsp;
+                                </div>
+                            }else{
+                                clsName += " dd-drop-answer-area-incorrect";
+                                result = <div className={clsName}
+                                              data-question-id={index+1}
+                                              data-question-letter={""}>
+                                    <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>
+                                    {" " + self.state.selection[counter] + " "}&nbsp;
+                                </div>
+                            }
+                        }else{
+                            result = <div className={clsName}
+                                          data-question-id={index+1}
+                                          data-question-letter={""}>
+                                {" " + ms.nut.uttering.utterance.native.text + " "}&nbsp;
+                            </div>
+                        }
+                    }
+                }else {
+                    if (ms.letter != "") {
+                        counter++;
+                            result =
+                                <div className={answerCls} onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
+                                    &nbsp;
+                                    {flag}
+                                    <div className="answer-handle"></div>
+                                </div>
+                    } else {
+                        var needRender = true;
+                        ms.nut.uttering.info.property.forEach(function (prop) {
+                            if (prop.name == "full") {
+                                needRender = false;
+                            }
+                        });
+                        if (needRender) {
+                            if (!self.state.readOnly) {
+                                result = <div className="dd-answer-area-text"
+                                              data-question-id={index+1}
+                                              data-question-letter={""}
+                                              onMouseOver={self.itemMouseOver}
+                                              onMouseOut={self.itemMouseOff}
+                                              onClick={self.handleClick}>
+                                    <span className="glyphicon glyphicon-play-circle mouseover-play na"></span>
+                                    <span className="glyphicon glyphicon-stop mouseover-stop na"></span>
+                                    {ms.nut.uttering.utterance.native.text}
+                                </div>
+                            } else {
+                                result = <div className="dd-answer-area-text"
+                                              data-question-id={index+1}
+                                              data-question-letter={""}>
+                                    {ms.nut.uttering.utterance.native.text}
+                                </div>
+                            }
+                        }
                     }
                 }
-
                 return (
                     <div key={aIndex}>
                         {result}
                     </div>
                 )
             });
-            // userLabel is the speaker, answers will be the list of objects on that line
-            // index is incremental, might be able to test against lineNumber
+            // currently only 1 speaker allowed per line
             return (
                 <div key={index}>
                     <div className="dd-answer-area">
@@ -731,6 +889,18 @@ var DDAudioQuizView = React.createClass({
             )
         });
 
+        var _buttons;
+        if(!self.state.readOnly){
+            _buttons = [<button className="btn btn-default submite-btn" onClick={this.submit}>{this.state.submitLabel}</button>,
+                        <button className="btn btn-default clearAll-btn" onClick={this.clearAll}>{this.state.clearLabel}</button>];
+        }else{
+            if(self.state.perfect){
+                _buttons = <span></span>;
+            }else {
+                _buttons = <button className="btn btn-default reset-btn" onClick={this.reset}>{this.state.resetLabel}</button>;
+            }
+        }
+
         // questions is a list of lines that contain a list of objects
         return (
             <div className="container dd-container">
@@ -742,18 +912,22 @@ var DDAudioQuizView = React.createClass({
                 </div>
                 <div className="row">
                     <div className="dd-quiz-container">
-                        <div className="col-md-11">
-                            {lines}
-                        </div>
-                        <div className="col-md-1">
-                            <ul className="dd-answer-list">
-                                {answers}
-                            </ul>
-                        </div>
+
+                            <div className="paragraph">
+                                {lines}
+                            </div>
+
+
+                            <div className="dd-answer-list" >
+                                <div className="word-list" onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
+                                    {answers}
+                                </div>
+                            </div>
+
                     </div>
                 </div>
                 <div className="row dd-quiz-feedback">
-                    <button className="btn btn-default" onClick={this.submit}>{this.state.submitLabel}</button>
+                    {_buttons}
                     <audio id="audio" volume={this.state.volume}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
@@ -762,7 +936,6 @@ var DDAudioQuizView = React.createClass({
             </div>
         );
     },
-
 
     /**
      * Event handler for 'change' events coming from the BookStore
