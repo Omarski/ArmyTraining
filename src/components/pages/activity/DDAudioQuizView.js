@@ -94,9 +94,6 @@ function getPageState(props) {
         }
     });
     data.lines = line;
-    console.log("---");
-    console.log(data.page.prompt.text);
-    console.log("---");
     //get the instructions prompt from the JSON
     data.prompt = data.page.prompt.text || data.prompt;
 
