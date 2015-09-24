@@ -60,7 +60,8 @@ function getPageState(props) {
         readOnly: false,
         selection: [],
         isCorrect: [],
-        perfect: false
+        perfect: false,
+        prompt: "Complete the objective."
     };
     var msArray = data.page.matchSource;
     var line = {};
@@ -93,6 +94,11 @@ function getPageState(props) {
         }
     });
     data.lines = line;
+    console.log("---");
+    console.log(data.page.prompt.text);
+    console.log("---");
+    //get the instructions prompt from the JSON
+    data.prompt = data.page.prompt.text || data.prompt;
 
     // shuffle and add to answers[]
     // grab all answers from quiz for word bank
@@ -234,7 +240,7 @@ function checkAnswers(self){
     var numWrong = 0;
     var isMissingAnswer = false;
 
-    Array.forEach(ddAnswers, function(ans){
+    Array.prototype.forEach.call(ddAnswers, function(ans){
         if($(ans).children().length == 0){
             isMissingAnswer = true;
         }
@@ -273,11 +279,11 @@ function checkAnswers(self){
             });
             // if you got all questions correct, play reward audio
             var rewardZid = 0;
-            Array.forEach(state.page.matchSource, function (ms) {
+            Array.prototype.forEach.call(state.page.matchSource, function (ms) {
                 var uttering = ms.nut.uttering;
                 var utteringInfo = uttering.info || {property: []};
                 //ms.nut.uttering.info.property[0].name == "full"
-                Array.forEach(utteringInfo.property, function (prop) {
+                Array.prototype.forEach.call(utteringInfo.property, function (prop) {
                     if (prop.name == "full") {
                         rewardZid = uttering.media[0].zid;
                     }
@@ -905,7 +911,7 @@ var DDAudioQuizView = React.createClass({
         return (
             <div className="container dd-container">
                 <div className="row dd-quiz-title">
-                    <h3>{this.state.page.title}</h3>
+                    <h4>{this.state.page.prompt}</h4>
                 </div>
                 <div className="row dd-quiz-feedback">
                     <h4>{this.state.feedback}</h4>
