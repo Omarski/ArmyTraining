@@ -102,13 +102,15 @@ var PronunciationView = React.createClass({
         var self = this.state;
         var page = self.page;
         var questions = page.nut || [];
+        var text = "";
         var vaList = questions.map(function(item, index){
             text = item.uttering.utterance.native.text || "Error: JSON structure changed";
-
+            var id = "audio";
             return(
                 <div className="li-vocal-answer">
-                    <span classNane="glyphicon glyphicon-record"></span>
-                    <span classNane="glyphicon glyphicon-record"></span>
+                    <audio id={id+index}></audio>
+                    <button classNane="glyphicon glyphicon-record" onClick="record()"></button>
+                    <span classNane="glyphicon glyphicon-play-circle" onClick=""></span>
                     {text}
                     <span classNane="glyphicon glyphicon-ok-circle"></span>
                     <span classNane="glyphicon glyphicon-remove-circle"></span>
