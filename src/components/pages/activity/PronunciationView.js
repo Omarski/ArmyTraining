@@ -46,8 +46,13 @@ var PronunciationView = React.createClass({
         var self = this.state;
         var page = self.page;
         var questions = page.nut || [];
+        var text = "";
         var vaList = questions.map(function(item, index){
-            text = item.uttering.utterance.native.text || "Error: JSON structure changed";
+
+            if (item && item.uttering && item.uttering.utterance) {
+                text = item.uttering.utterance.native.text || "Error: JSON structure changed";
+            }
+
 
             return(
                 <div className="li-vocal-answer">

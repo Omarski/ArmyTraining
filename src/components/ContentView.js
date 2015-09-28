@@ -27,6 +27,7 @@ function getPageState() {
     var page = null;
     if (PageStore.loadingComplete()) {
         page = PageStore.page();
+        console.dir(page);
         setTimeout(function() {
             NotificationActions.hide();
         });
