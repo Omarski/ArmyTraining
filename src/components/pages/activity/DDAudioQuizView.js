@@ -2,6 +2,7 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 
+// CONSTANTS
 var DROP_ANSWER_AREA_CLS = "dd-drop-answer-area";
 var WORD_BANK_TEXT_CLS = "dd-word-bank-text";
 var DRAGGABLE_AREA_CLS = "dd-draggable-area";

@@ -1,10 +1,12 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
+var SettingsStore = require('../../../stores/SettingsStore');
 
 
 function getPageState(props) {
     var data = {
-        page: null
+        page: null,
+        note: "Listen and Repeat"
     };
 
     if (props && props.page) {
@@ -41,8 +43,22 @@ var PronunciationView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
-        var page = this.state.page;
-        var list = null;
+        var self = this.state;
+        var page = self.page;
+        var questions = page.nut || [];
+        var vaList = questions.map(function(item, index){
+            text = item.uttering.utterance.native.text || "Error: JSON structure changed";
+
+            return(
+                <div className="li-vocal-answer">
+                    <span classNane="glyphicon glyphicon-record"></span>
+                    <span classNane="glyphicon glyphicon-record"></span>
+                    {text}
+                    <span classNane="glyphicon glyphicon-ok-circle"></span>
+                    <span classNane="glyphicon glyphicon-remove-circle"></span>
+                </div>
+            );
+        });
 
         return (
             <div className="container">
@@ -50,14 +66,14 @@ var PronunciationView = React.createClass({
                     <h3>{page.title}</h3>
                 </div>
                 <div className="row li-note">
-                    <h4>{page.nut[0].note.text}</h4>
+                    <h4>{self.note}</h4>
                 </div>
                 <div className="row">
                     <div className="li-container">
                         <div className="li-column">
-                            <ul className="dd-answer-list">
-                                {list}
-                            </ul>
+                            <div className="li-voice-answers">
+                                {vaList}
+                            </div>
                         </div>
                     </div>
                 </div>
