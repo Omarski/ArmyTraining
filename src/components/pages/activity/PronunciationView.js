@@ -3,6 +3,62 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 
 
+var recorder;
+
+window.onload = function init(){
+    // webkit shim
+    console.log("init called!");
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia ||
+                             navigator.webkitGetUserMedia ||
+                             navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+};
+
+var onFail = function(e){
+    console.log('An Error has occured.', e);
+};
+
+var onSuccess = function(s){
+    var context = new AudioContext();
+    var mediaStreamSource = context.createMediaStreamSource(s);
+    recorder = new Recorder(mediaStreamSource);
+    recorder.record();
+    console.log("--- onSuccess ---");
+    console.dir(recorder);
+};
+
+function record(){
+    if(navigator.getUserMedia){
+        navigator.getUserMedia({audio: true}, onSuccess, onFail);
+    }else{
+        console.log('navigator.getUserMedia not present');
+    }
+}
+
+// pass the audio handle to stopRecording
+function stopRecording(label){
+    console.log('audio'+ label);
+    var audio = document.getElementById('audio' + label);
+    recorder.stop();
+    recorder.exportWAV(function(s){
+        audio.src = window.URL.createObjectURL(s);
+    });
+    console.log("--- stopRecording ---");
+    console.log(recorder);
+}
+
+function play1(){
+    var a = document.getElementById("audio1");
+    a.play();
+}
+
+function play2(){
+    var a = document.getElementById("audio2");
+    a.play();
+}
+
 function getPageState(props) {
     var data = {
         page: null,
