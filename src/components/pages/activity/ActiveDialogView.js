@@ -131,6 +131,7 @@ var ActiveDialogView = React.createClass({
     },
 
     componentDidMount: function() {
+        console.dir(PageStore.page().dialog.lgid);
         //PageStore.addChangeListener(this._onChange);
         AdobeEdge.loadComposition('dist/js/ScenarioTemplate3', 'EDGE-20743566', {
             scaleToFit: "none",

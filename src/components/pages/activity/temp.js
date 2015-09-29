@@ -1,7 +1,7 @@
 
 Ext.define('scene.Fsm', (function ()
 {
-    var DATA, memory, state, blockImg, blockId, objectives;
+    var DATA, memory, activityState, blockImg, blockId, objectives;
 
     function makeCOAs( acts, transInd, retId, retInputId ) {
 
@@ -123,7 +123,7 @@ Ext.define('scene.Fsm', (function ()
 
         DATA.transitions.forEach(function (o, i) {
 
-            if (o.startState === state && checkVRQ(o)) {
+            if (o.startState === activityState && checkVRQ(o)) {
 
                 coas = coas.concat( makeCOAs( o.inputSymbols, i ) );
             }
@@ -168,7 +168,7 @@ Ext.define('scene.Fsm', (function ()
 
     function handleTransitionInput( trans ) {
 
-        state = trans.endState;
+        activityState = trans.endState;
 
         // only set if defined
         if (trans.blockImg)
@@ -221,7 +221,7 @@ Ext.define('scene.Fsm', (function ()
              *  FSM.handleInput requires a coa from this array as the argument
              */
             'coas': getCOAs(),
-            'state' : state,
+            'state' : activityState,
             'memory' : memory,
             'objectives': objectives,
             'image': blockImg,
@@ -243,7 +243,7 @@ Ext.define('scene.Fsm', (function ()
             return {
                 'outputs': [ {'act':'GARBAGE', 'action':'GARBAGE'} ],
                 'coas': getCOAs(),
-                'state' : state,
+                'state' : activityState,
                 'memory' : memory,
                 'objectives': objectives,
                 'image': blockImg,
@@ -286,7 +286,7 @@ Ext.define('scene.Fsm', (function ()
 
         objectives.forEach( function( o ) { o.pass = false; } );
 
-        state = 's0';
+        activityState = 's0';
 
         // set initial blocking image
         if (fsm.nodesPy) {

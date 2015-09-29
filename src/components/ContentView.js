@@ -20,6 +20,7 @@ var PronunciationView = require('../components/pages/activity/PronunciationView'
 var ResponseFormationView = require('../components/pages/activity/ResponseFormationView');
 var SortingView = require('../components/pages/activity/SortingView');
 var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
+var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
 
 var NotificationActions = require('../actions/NotificationActions');
 
@@ -87,6 +88,25 @@ var ContentView = React.createClass({
 
                     if (!foundType) {
                         page = <MatchItemView page={this.state.page} />;
+                    }
+                    break;
+                case "Generic":
+                    var foundType = false;
+                    if (this.state.page.info) {
+                        var properties = this.state.page.info.property || [];
+                        var propLen = properties.length;
+
+                        while (propLen--) {
+                            if (properties[propLen].name === "network") {
+                                page = <NetworkActivityView page={this.state.page} />
+                                foundType = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!foundType) {
+                        page = <InfoView page={this.state.page} />;
                     }
                     break;
                 case "MultiColumnPronunciation":

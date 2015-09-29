@@ -5,60 +5,7 @@ var ActiveDialogConstants = require('../constants/ActiveDialogConstants');
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 var _data = [];
-
-function create(data) {
-    _data.push(data);
-}
-
-function destroy() {
-    _data = [];
-}
-
-var ActiveDialogStore = assign({}, EventEmitter.prototype, {
-
-    activeDialog: function() {
-        return _data;
-    },
-
-    emitChange: function() {
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener: function(callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
-
-    removeChangeListener: function(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
-    }
-});
-
-// Register callback to handle all updates
-AppDispatcher.register(function(action) {
-    switch(action.actionType) {
-        case ActiveDialogConstants.ACTIVE_DIALOG_CREATE:
-            create(action.data);
-            ActiveDialogStore.emitChange();
-            break;
-        case ActiveDialogConstants.ACTIVE_DIALOG_DESTROY:
-            destroy();
-            ActiveDialogStore.emitChange();
-            break;
-        default:
-        // no op
-    }
-});
-
-
-
-
-
-/*
-
-
-
-
-var DATA, memory, state, blockImg, blockId, objectives;
+var DATA, memory, activityState, blockImg, blockId, objectives;
 
 function makeCOAs( acts, transInd, retId, retInputId ) {
 
@@ -180,7 +127,7 @@ function getCOAs() {
 
     DATA.transitions.forEach(function (o, i) {
 
-        if (o.startState === state && checkVRQ(o)) {
+        if (o.startState === activityState && checkVRQ(o)) {
 
             coas = coas.concat( makeCOAs( o.inputSymbols, i ) );
         }
@@ -225,7 +172,7 @@ function nextRandom() {
 
 function handleTransitionInput( trans ) {
 
-    state = trans.endState;
+    activityState = trans.endState;
 
     // only set if defined
     if (trans.blockImg)
@@ -274,9 +221,11 @@ function makeResult( transInd, inputq, outputq, retVid ) {
                 'action': DATA.outputMappings[output]
             };
         }),
-
+        /**
+         *  FSM.handleInput requires a coa from this array as the argument
+         */
         'coas': getCOAs(),
-        'state' : state,
+        'state' : activityState,
         'memory' : memory,
         'objectives': objectives,
         'image': blockImg,
@@ -298,7 +247,7 @@ function handleInput( coa ) {
         return {
             'outputs': [ {'act':'GARBAGE', 'action':'GARBAGE'} ],
             'coas': getCOAs(),
-            'state' : state,
+            'state' : activityState,
             'memory' : memory,
             'objectives': objectives,
             'image': blockImg,
@@ -331,7 +280,7 @@ function handleInput( coa ) {
     return makeResult( coa.transitionIndex, inputq, outputq, retVid );
 }
 
-function init(fsm) {
+function create(fsm) {
 
     DATA = fsm;
 
@@ -341,7 +290,7 @@ function init(fsm) {
 
     objectives.forEach( function( o ) { o.pass = false; } );
 
-    state = 's0';
+    activityState = 's0';
 
     // set initial blocking image
     if (fsm.nodesPy) {
@@ -368,14 +317,53 @@ function init(fsm) {
     }
 }
 
+function destroy() {
+    DATA = null;
+}
+
+/*
 return {
     init: init,
     changeBlockingImage: changeBlockingImage,
     handleInput: handleInput,
     singleton: true
-};
+};*/
 
-*/
+
+var ActiveDialogStore = assign({}, EventEmitter.prototype, {
+
+    activeDialog: function() {
+        return _data;
+    },
+
+    emitChange: function() {
+        this.emit(CHANGE_EVENT);
+    },
+
+    addChangeListener: function(callback) {
+        this.on(CHANGE_EVENT, callback);
+    },
+
+    removeChangeListener: function(callback) {
+        this.removeListener(CHANGE_EVENT, callback);
+    }
+});
+
+// Register callback to handle all updates
+AppDispatcher.register(function(action) {
+    switch(action.actionType) {
+        case ActiveDialogConstants.ACTIVE_DIALOG_CREATE:
+            create(action.data);
+            ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_DESTROY:
+            destroy();
+            ActiveDialogStore.emitChange();
+            break;
+        default:
+        // no op
+    }
+});
 
 
 module.exports = ActiveDialogStore;
