@@ -2,6 +2,16 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 
+// CONSTANTS
+var LI_ANSWERS_CONTAINER_CLS = "li-answers-container";
+var LI_COLUMN_CLS = "li-column";
+var LI_VOICE_ANSWERS_CLS = "li-voice-answers";
+var LI_VOCAL_ANSWER_CLS = "li-vocal-answer";
+var LI_GLYPHICON_RECORD_CLS = "li-record";
+var LI_GLYPHICON_STOP_CLS = "li-stop";
+var LI_GLYPHICON_PLAY_CLS = "li-playback";
+var LI_GLYPHICON_CORRECT_CLS = "li-correct";
+var LI_GLYPHICON_INCORRECT_CLS = "li-incorrect";
 
 var recorder;
 
@@ -71,6 +81,24 @@ function hasGetUserMedia(){
             navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
 
+function setup(){
+    $(".glyphicon").css('pointerEvents', 'auto');
+
+    var vocalAnswers = document.getElementsByClassName(LI_VOCAL_ANSWER_CLS);
+    Array.prototype.forEach.call(vocalAnswers, function(item, index){
+        var _item = $(item);
+        if(index == 0){
+            _item.css('border-top', '5px solid #cccccc');
+        }
+        _item.css('border-bottom', '5px solid #cccccc');
+        if(index%2 == 0){
+            _item.css('background', '#ebebeb');
+        }else{
+            _item.css('background', '#ffffff');
+        }
+    });
+}
+
 var PronunciationView = React.createClass({
     getInitialState: function() {
         return getPageState(this.props);
@@ -87,8 +115,11 @@ var PronunciationView = React.createClass({
         }else{
             // UserMedia not allowed
         }
+        setup();
     },
+    componentDidUpdate: function(){
 
+    },
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
     },
@@ -108,12 +139,12 @@ var PronunciationView = React.createClass({
             return(
                 <div className="li-vocal-answer">
                     <audio id={id}></audio>
-                    <button classNane="glyphicon glyphicon-record" onClick={record}>Record</button>
-                    <button className="glyph-icon glyph-icon-stop" onClick={function(){stopRecording(id)}}>Stop</button>
-                    <button classNane="glyphicon glyphicon-play-circle" onClick={function(){play(id)}}>PlayBack</button>
+                    <button className="glyphicon glyphicon-record li-record" onClick={record}>Record</button>
+                    <button className="glyphicon glyphicon-stop li-stop" onClick={function(){stopRecording(id)}}>Stop</button>
+                    <button className="glyphicon glyphicon-play-circle li-playback" onClick={function(){play(id)}}>PlayBack</button>
                     <div id={"text-"+id} onClick={self.handleClick}>{text}</div>
-                    <span classNane="glyphicon glyphicon-ok-circle"></span>
-                    <span classNane="glyphicon glyphicon-remove-circle"></span>
+                    <span className="glyphicon glyphicon-ok-circle"></span>
+                    <span className="glyphicon glyphicon-remove-circle"></span>
                 </div>
             );
         });

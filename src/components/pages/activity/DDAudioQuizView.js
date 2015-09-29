@@ -535,14 +535,8 @@ var DDAudioQuizView = React.createClass({
             case WORD_BANK_TEXT_CLS:
                 var parentElement = $($(event.target)[0].parentElement);
                 if(!parentElement.hasClass("audio-disabled")){
-                    data.page.matchSource.forEach(function(item){
-                        // if this item is what we clicked on
-                        if(item.nut.uttering.utterance.native.text == event.target.innerHTML){
-                            // play audio
-                            zid = item.nut.uttering.media[0].zid;
-                            playAudio(zid);
-                        }
-                    });
+                    zid = $(event.target.parentElement).attr("data-question-zid");
+                    playAudio(zid);
                     var glyphiconArray = $($(event.target).parent()[0]).children();
                     if(glyphiconArray.length > 3){
                         var playAH = $(glyphiconArray[2]);
@@ -564,14 +558,12 @@ var DDAudioQuizView = React.createClass({
 
             // the div containing the span
             case ANSWER_AREA_TEXT_CLS:
-                data.page.matchSource.forEach(function(item){
-                    // if this item is what we clicked on
-                    if(item.nut.uttering.utterance.native.text == event.target.children[2].innerHTML){
-                        // play audio
-                        zid = item.nut.uttering.media[0].zid;
-                        playAudio(zid);
-                    }
-                });
+                // if the answer area text is not the speaker name
+                if(event.target.children.length > 1){
+                    // play audio
+                    zid = $(event.target).attr("data-question-zid");
+                    playAudio(zid);
+                }
                 var answerAreaTextGlyphicons = $(event.target).children();
                 var play = $(answerAreaTextGlyphicons[0]);
                 var stop = $(answerAreaTextGlyphicons[1]);
@@ -643,8 +635,9 @@ var DDAudioQuizView = React.createClass({
                 },
                 render: function () {
                     var cls = $(self.state.dragSrc).attr("class");
-                    var data_question_id = $(self.state.dragSrc).attr("data-question-id");
-                    var data_question_letter = $(self.state.dragSrc).attr("data-question-letter");
+                    var dataQuestionId = $(self.state.dragSrc).attr("data-question-id");
+                    var dataQuestionLetter = $(self.state.dragSrc).attr("data-question-letter");
+                    var zid = $(self.state.dragSrc).attr("data-question-zid");
                     var inner = <div></div>;
                     switch (self.state.childHTML.attr("class")) {
                         case "img-thumbnail dd-answer-image":
@@ -660,8 +653,9 @@ var DDAudioQuizView = React.createClass({
 
                     return (
                         <div className={cls}
-                             data-question-id={data_question_id}
-                             data-question-letter={data_question_letter}
+                             data-question-id={dataQuestionId}
+                             data-question-letter={dataQuestionLetter}
+                             data-question-zid={zid}
                              onClick={self.handleClick}
                              onMouseOver={self.itemMouseOver}
                              onMouseOut={self.itemMouseOff}
@@ -781,6 +775,7 @@ var DDAudioQuizView = React.createClass({
                         onDrop={self.onDropping}
                         data-question-id={item.lineNumber}
                         data-question-letter={item.letter}
+                        data-question-zid={item.answer.nut.uttering.media[0].zid}
                         onMouseOver={self.itemMouseOver}
                         onMouseOut={self.itemMouseOff}
                         onClick={self.handleClick}
@@ -866,9 +861,11 @@ var DDAudioQuizView = React.createClass({
                         });
                         if (needRender) {
                             if (!self.state.readOnly) {
+                                var zid = ms.nut.uttering.media[0].zid || 0;
                                 result = <div className="dd-answer-area-text"
                                               data-question-id={index+1}
                                               data-question-letter={""}
+                                              data-question-zid={zid}
                                               onMouseOver={self.itemMouseOver}
                                               onMouseOut={self.itemMouseOff}
                                               onClick={self.handleClick}>

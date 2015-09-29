@@ -16,5 +16,31 @@
   height: auto;
   width: 800px;
   left: calc(50% - 400px);
-  border: 1px dashed black;
+  position: absolute;
+}
+
+.li-vocal-answer{
+  height: 120px;
+}
+
+.li-record{
+  position: absolute;
+  left: 0;
+}
+
+.li-stop{
+
+}
+
+.li-playback{
+
+}
+
+.li-correct{
+  position: absolute;
+  right: 0;
+}
+
+.li-incorrect{
+
 }
