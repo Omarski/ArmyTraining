@@ -268,4 +268,12 @@ var ActiveDialogListView = React.createClass({
     }
 });
 
+
+/**
+ *
+ *
+ *
+ * getCOA gets the hints
+ */
+
 module.exports = ActiveDialogView;
