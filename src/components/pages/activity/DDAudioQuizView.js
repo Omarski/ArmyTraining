@@ -277,18 +277,20 @@ function checkAnswers(self){
             });
             // if you got all questions correct, play reward audio
             var rewardZid = 0;
+            var rewardArray = [];
             Array.prototype.forEach.call(state.page.matchSource, function (ms) {
                 var uttering = ms.nut.uttering;
                 var utteringInfo = uttering.info || {property: []};
                 //ms.nut.uttering.info.property[0].name == "full"
                 Array.prototype.forEach.call(utteringInfo.property, function (prop) {
                     if (prop.name == "full") {
-                        rewardZid = uttering.media[0].zid;
+                        rewardArray.push(uttering.media[0].zid);
                     }
                 });
+
             });
-            if (rewardZid != 0) {
-                playAudio(rewardZid);
+            if (rewardArray.length > 0) {
+                rewardAudio(rewardArray);
             }
         }
         // set state to read only mode, update feedback string
@@ -299,6 +301,16 @@ function checkAnswers(self){
         readOnly();
 
         return ("You got " + numCorrect + " of " + total + " correct.");
+    }
+}
+
+function rewardAudio(idArray){
+    if(idArray.length > 0){
+        $("#audio").bind('ended', function(){
+            idArray.shift();
+            rewardAudio(idArray);
+        });
+        playAudio(idArray[0]);
     }
 }
 

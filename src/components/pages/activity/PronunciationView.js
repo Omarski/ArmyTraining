@@ -7,7 +7,6 @@ var recorder;
 
 window.onload = function init(){
     // webkit shim
-    console.log("init called!");
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     navigator.getUserMedia = navigator.getUserMedia ||
                              navigator.webkitGetUserMedia ||
@@ -38,9 +37,9 @@ function record(){
 }
 
 // pass the audio handle to stopRecording
-function stopRecording(label){
-    console.log('audio'+ label);
-    var audio = document.getElementById('audio' + label);
+function stopRecording(id){
+    console.log(id);
+    var audio = document.getElementById(id);
     recorder.stop();
     recorder.exportWAV(function(s){
         audio.src = window.URL.createObjectURL(s);
@@ -49,13 +48,8 @@ function stopRecording(label){
     console.log(recorder);
 }
 
-function play1(){
-    var a = document.getElementById("audio1");
-    a.play();
-}
-
-function play2(){
-    var a = document.getElementById("audio2");
+function play(id){
+    var a = document.getElementById(id);
     a.play();
 }
 
@@ -98,20 +92,26 @@ var PronunciationView = React.createClass({
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
     },
+    handleClick: function(event){
+
+    },
     render: function() {
-        var self = this.state;
-        var page = self.page;
+        var self = this;
+        var page = self.state.page;
         var questions = page.nut || [];
         var text = "";
         var vaList = questions.map(function(item, index){
-            text = item.uttering.utterance.native.text || "Error: JSON structure changed";
-            var id = "audio";
+            if(item && item.uttering && item.uttering.utterance){
+                text = item.uttering.utterance.native.text || "Error: JSON structure changed";
+            }
+            var id = "audio" + index;
             return(
                 <div className="li-vocal-answer">
-                    <audio id={id+index}></audio>
-                    <button classNane="glyphicon glyphicon-record" onClick="record()"></button>
-                    <span classNane="glyphicon glyphicon-play-circle" onClick=""></span>
-                    {text}
+                    <audio id={id}></audio>
+                    <button classNane="glyphicon glyphicon-record" onClick={record}>Record</button>
+                    <button className="glyph-icon glyph-icon-stop" onClick={function(){stopRecording(id)}}>Stop</button>
+                    <button classNane="glyphicon glyphicon-play-circle" onClick={function(){play(id)}}>PlayBack</button>
+                    <div id={"text-"+id} onClick={self.handleClick}>{text}</div>
                     <span classNane="glyphicon glyphicon-ok-circle"></span>
                     <span classNane="glyphicon glyphicon-remove-circle"></span>
                 </div>
@@ -119,7 +119,7 @@ var PronunciationView = React.createClass({
         });
 
         return (
-            <div className="container">
+            <div className="li-container">
                 <div className="row li-title">
                     <h3>{page.title}</h3>
                 </div>
@@ -127,7 +127,7 @@ var PronunciationView = React.createClass({
                     <h4>{self.note}</h4>
                 </div>
                 <div className="row">
-                    <div className="li-container">
+                    <div className="li-answers-container">
                         <div className="li-column">
                             <div className="li-voice-answers">
                                 {vaList}
