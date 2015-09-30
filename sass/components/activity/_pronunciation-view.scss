@@ -23,24 +23,31 @@
   height: 120px;
 }
 
-.li-record{
+.li-glyphicon{
   position: absolute;
-  left: 0;
+  font-size: 36px;
+  top: inherit;
+}
+
+.li-record{
+  left: 40px;
 }
 
 .li-stop{
-
+  left: 40px;
 }
 
 .li-playback{
-
+  left: 120px;
 }
 
 .li-correct{
-  position: absolute;
-  right: 0;
 }
 
 .li-incorrect{
 
+}
+
+.li-feedback{
+  left: calc(100% - 76px);
 }

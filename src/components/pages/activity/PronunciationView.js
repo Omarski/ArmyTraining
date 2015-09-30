@@ -7,11 +7,12 @@ var LI_ANSWERS_CONTAINER_CLS = "li-answers-container";
 var LI_COLUMN_CLS = "li-column";
 var LI_VOICE_ANSWERS_CLS = "li-voice-answers";
 var LI_VOCAL_ANSWER_CLS = "li-vocal-answer";
-var LI_GLYPHICON_RECORD_CLS = "li-record";
-var LI_GLYPHICON_STOP_CLS = "li-stop";
-var LI_GLYPHICON_PLAY_CLS = "li-playback";
-var LI_GLYPHICON_CORRECT_CLS = "li-correct";
-var LI_GLYPHICON_INCORRECT_CLS = "li-incorrect";
+var LI_GLYPHICON_RECORD_CLS = "glyphicon-record";
+var LI_GLYPHICON_STOP_CLS = "glyphicon-stop";
+var LI_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
+var LI_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
+var LI_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+var LI_GLYPHICON_CLS = "li-glyphicon";
 
 var recorder;
 
@@ -58,20 +59,80 @@ function stopRecording(id){
     console.log(recorder);
 }
 
+function handlePlaying(id, index, self){
+    var newPlayingState = self.state.isPlaying;
+    if(newPlayingState[index]){
+        newPlayingState[index] = false;
+        self.setState({
+            isPlaying: newPlayingState
+        });
+        stop(id);
+    }else{
+        newPlayingState[index] = true;
+        self.setState({
+            isPlaying: newPlayingState
+        });
+        play(id);
+    }
+}
+
 function play(id){
     var a = document.getElementById(id);
+    // might need to be $(a)
+    a.bind('ended', function(){
+        stop(id);
+    });
     a.play();
+}
+
+function stop(id){
+    var a = document.getElementById(id);
+    a.pause();
+    a.currentTime = 0;
+}
+
+function handleRecord(id, index, self){
+    var newRecordingState = self.state.recordingState;
+    if(newRecordingState[index]){
+        stopRecording(id);
+        var newPlayableState = self.state.playableState;
+        newPlayableState[index] = true;
+        newRecordingState[index] = false;
+        // TODO: Implement the ASR to check if recorded answer is correct
+        self.setState({
+            recordingState: newRecordingState,
+            playableState: newPlayableState
+        })
+    }else{
+        record();
+        newRecordingState[index] = true;
+        self.setState({
+            recordingState: newRecordingState
+        })
+    }
 }
 
 function getPageState(props) {
     var data = {
         page: null,
-        note: "Listen and Repeat"
+        note: "Listen and Repeat",
+        recordingState: [],
+        playableState: [],
+        isPlaying: [],
+        isCorrect: []
     };
 
     if (props && props.page) {
         data.page = props.page;
     }
+
+    //for page.nut.length
+    data.page.nut.map(function(){
+        data.recordingState.push(false);
+        data.playableState.push(false);
+        data.isPlaying.push(false);
+        data.isCorrect.push(null);
+    });
 
     return data;
 }
@@ -96,6 +157,15 @@ function setup(){
         }else{
             _item.css('background', '#ffffff');
         }
+    });
+
+    // 39.5 because math
+    var buffer = 39.5;
+    var icons = document.getElementsByClassName(LI_GLYPHICON_CLS);
+    Array.prototype.forEach.call(icons, function(item, index){
+        var $item = $(item);
+        var answerLine = Math.floor(index/3);
+        $item.css('top', ( ( buffer + (120*answerLine) )+'px'));
     });
 }
 
@@ -130,21 +200,55 @@ var PronunciationView = React.createClass({
         var self = this;
         var page = self.state.page;
         var questions = page.nut || [];
-        var text = "";
+        var nativeText = "";
+        var feedbackClass = "glyphicon li-glyphicon li-feedback";
+        var recordedClass = "glyphicon li-glyphicon li-playback";
+        var recordingClass = "glyphicon li-glyphicon li-record";
+
         var vaList = questions.map(function(item, index){
             if(item && item.uttering && item.uttering.utterance){
-                text = item.uttering.utterance.native.text || "Error: JSON structure changed";
+                nativeText = item.uttering.utterance.native.text || "Error: JSON structure changed";
             }
             var id = "audio" + index;
+            var itemFeedbackClass = "";
+            var itemRecordedClass = "";
+            var itemRecordingClass = "";
+
+            var hasRecorded = self.state.playableState[index];
+            if(hasRecorded){
+                var isCorrect = self.state.isCorrect[index];
+                if(isCorrect){
+                    itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_CORRECT_CLS;
+                }else{
+                    itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_INCORRECT_CLS;
+                }
+                if(self.state.isPlaying[index]){
+                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
+                }else{
+                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
+                }
+            }else{
+                itemRecordedClass = recordedClass;
+                itemFeedbackClass = feedbackClass;
+            }
+
+            var isRecording = self.state.recordingState[index];
+            if(isRecording){
+                itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
+            }else{
+                itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
+            }
+
             return(
                 <div className="li-vocal-answer">
                     <audio id={id}></audio>
-                    <button className="glyphicon glyphicon-record li-record" onClick={record}>Record</button>
-                    <button className="glyphicon glyphicon-stop li-stop" onClick={function(){stopRecording(id)}}>Stop</button>
-                    <button className="glyphicon glyphicon-play-circle li-playback" onClick={function(){play(id)}}>PlayBack</button>
-                    <div id={"text-"+id} onClick={self.handleClick}>{text}</div>
-                    <span className="glyphicon glyphicon-ok-circle"></span>
-                    <span className="glyphicon glyphicon-remove-circle"></span>
+                    <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
+                    <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
+                    <div className="li-text-area" id={"text-"+id} onClick={self.handleClick}>
+                        <div className="li-native-text">{nativeText}</div>
+                        <div className="li-translated-text">{"Translated Text Placeholder"}</div>
+                    </div>
+                    <span className={itemFeedbackClass}></span>
                 </div>
             );
         });
