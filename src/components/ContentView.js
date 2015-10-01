@@ -28,7 +28,6 @@ function getPageState() {
     var page = null;
     if (PageStore.loadingComplete()) {
         page = PageStore.page();
-        console.dir(page);
         setTimeout(function() {
             NotificationActions.hide();
         });
@@ -70,8 +69,6 @@ var ContentView = React.createClass({
                     page = <ListeningComprehensionView page={this.state.page} />;
                     break;
                 case "MatchItem":
-                    console.dir(this.state.page);
-
                     var foundType = false;
                     if (this.state.page.info) {
                         var properties = this.state.page.info.property || [];

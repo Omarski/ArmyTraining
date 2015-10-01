@@ -12,8 +12,6 @@ function create(data) {
 
 function destroy() {
     store.remove('bookmark');
-    console.log('Removing bookmark');
-    console.dir(store.getAll());
 }
 
 var BookmarkStore = assign({}, EventEmitter.prototype, {

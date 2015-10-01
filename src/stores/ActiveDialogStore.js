@@ -4,9 +4,11 @@ var ActiveDialogConstants = require('../constants/ActiveDialogConstants');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
-var _data = [];
+var _data = {};
+var _info = {};
 var DATA, memory, activityState, blockImg, blockId, objectives;
-
+var asrMode = false;
+var _result = {};
 function makeCOAs( acts, transInd, retId, retInputId ) {
 
     if( retId == 'GARBAGE' ) return [];
@@ -29,7 +31,7 @@ function makeCOAs( acts, transInd, retId, retInputId ) {
             })};
 
         res.isChoice = res.realizations[0].gesture !== null || res.realizations[0].terp === "L1"
-        res.isChoice = !Alelo.config.Global.asrMode || res.isChoice // always use choice if no asr
+        res.isChoice = !asrMode || res.isChoice // always use choice if no asr
 
         return res
     });
@@ -277,12 +279,12 @@ function handleInput( coa ) {
         retVideo[ blockId ] ? retVideo[ blockId ] :
             retVideo[ 'b0000' ];
 
-    return makeResult( coa.transitionIndex, inputq, outputq, retVid );
+    _data = makeResult( coa.transitionIndex, inputq, outputq, retVid );
 }
 
 function create(fsm) {
 
-    DATA = fsm;
+    DATA = fsm.data;
 
     memory = JSON.parse( JSON.stringify( DATA.initialMemory ) ); // deep copy so DATA contents never mutated
 
@@ -309,12 +311,15 @@ function create(fsm) {
 
     if( DATA.transitions.length > 0 && DATA.transitions[0].inputSymbols[0] === 'automatic' )
     {
-        return makeResult( 0, [], handleTransitionInput(DATA.transitions[0], 0) );
+        _data =  makeResult( 0, [], handleTransitionInput(DATA.transitions[0], 0) );
     }
     else
     {
-        return makeResult( -1, [], [], null );
+        _data = makeResult( -1, [], [], null );
     }
+
+    _info = fsm.info;
+
 }
 
 function destroy() {
@@ -334,6 +339,49 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 
     activeDialog: function() {
         return _data;
+    },
+
+    info: function() {
+        return _info;
+    },
+
+    findInfoSymbolByAnimationName: function(name) {
+        var len = _info.symbols.length;
+        var symbol = null;
+        var found = false;
+        while(len--) {
+            var sym = _info.symbols[len];
+            var aniLen = sym.animations.length;
+            while(aniLen--) {
+                var ani = sym.animations[aniLen];
+                if (ani.animationName === name) {
+                    symbol = sym;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                break;
+            }
+        }
+
+        return symbol;
+    },
+
+    findInfoAnimationByName: function(symbol, name) {
+        var len = symbol.animations.length;
+        var animation = null;
+
+        while(len--) {
+            var ani = symbol.animations[len];
+            if (ani.animationName === name) {
+                animation = ani;
+                break;
+            }
+        }
+
+        return animation;
     },
 
     emitChange: function() {
@@ -358,6 +406,10 @@ AppDispatcher.register(function(action) {
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_DESTROY:
             destroy();
+            ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT:
+            handleInput(action.data);
             ActiveDialogStore.emitChange();
             break;
         default:
