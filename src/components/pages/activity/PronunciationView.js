@@ -1,6 +1,7 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var ColorText = require('../../../components/widgets/ColorText');
 
 // CONSTANTS
 var LI_ANSWERS_CONTAINER_CLS = "li-answers-container";
@@ -60,35 +61,36 @@ function stopRecording(id){
 }
 
 function handlePlaying(id, index, self){
-    var newPlayingState = self.state.isPlaying;
-    if(newPlayingState[index]){
-        newPlayingState[index] = false;
-        self.setState({
-            isPlaying: newPlayingState
-        });
-        stop(id);
+    if(self.state.isPlaying[index]){
+        stop(id, index, self);
     }else{
-        newPlayingState[index] = true;
-        self.setState({
-            isPlaying: newPlayingState
-        });
-        play(id);
+        play(id, index, self);
     }
 }
 
-function play(id){
+function play(id, index, self){
     var a = document.getElementById(id);
     // might need to be $(a)
-    a.bind('ended', function(){
-        stop(id);
+    $(a).bind('ended', function(){
+        stop(id, index, self);
     });
     a.play();
+    var newPlayingState = self.state.isPlaying;
+    newPlayingState[index] = true;
+    self.setState({
+        isPlaying: newPlayingState
+    });
 }
 
-function stop(id){
+function stop(id, index, self){
     var a = document.getElementById(id);
     a.pause();
     a.currentTime = 0;
+    var newPlayingState = self.state.isPlaying;
+    newPlayingState[index] = false;
+    self.setState({
+        isPlaying: newPlayingState
+    });
 }
 
 function handleRecord(id, index, self){
@@ -201,13 +203,15 @@ var PronunciationView = React.createClass({
         var page = self.state.page;
         var questions = page.nut || [];
         var nativeText = "";
+        var translatedText = "";
         var feedbackClass = "glyphicon li-glyphicon li-feedback";
         var recordedClass = "glyphicon li-glyphicon li-playback";
         var recordingClass = "glyphicon li-glyphicon li-record";
 
         var vaList = questions.map(function(item, index){
             if(item && item.uttering && item.uttering.utterance){
-                nativeText = item.uttering.utterance.native.text || "Error: JSON structure changed";
+                nativeText = item.uttering.utterance.native.text || "Error: Native Text Not Found";
+                translatedText = item.uttering.utterance.translation.text || "Error: Translated Text Not Found";
             }
             var id = "audio" + index;
             var itemFeedbackClass = "";
@@ -245,8 +249,12 @@ var PronunciationView = React.createClass({
                     <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
                     <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
                     <div className="li-text-area" id={"text-"+id} onClick={self.handleClick}>
-                        <div className="li-native-text">{nativeText}</div>
-                        <div className="li-translated-text">{"Translated Text Placeholder"}</div>
+                        <div className="li-native-text">
+                            <ColorText props={nativeText}/>
+                        </div>
+                        <div className="li-translated-text">
+                            <ColorText props={translatedText}/>
+                        </div>
                     </div>
                     <span className={itemFeedbackClass}></span>
                 </div>
