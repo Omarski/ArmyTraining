@@ -13,7 +13,15 @@ var ActiveDialogActions = {
         });
     },
 
-
+    /**
+     * @param  {string} text
+     */
+    handleInput: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT,
+            data: data
+        });
+    },
 
     /**
      * @param  {string} id

@@ -80,7 +80,6 @@ var NetworkActivityView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
-        console.log('render');
         return (
             <div className="container">
                 <h3>{this.state.title} : {this.state.pageType}</h3>
