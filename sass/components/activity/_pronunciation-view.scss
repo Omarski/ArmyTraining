@@ -1,0 +1,53 @@
+.li-container{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.li-title{
+  text-align: left;
+}
+
+.li-note{
+  text-align: left;
+}
+
+.li-answers-container{
+  height: auto;
+  width: 800px;
+  left: calc(50% - 400px);
+  position: absolute;
+}
+
+.li-vocal-answer{
+  height: 120px;
+}
+
+.li-glyphicon{
+  position: absolute;
+  font-size: 36px;
+  top: inherit;
+}
+
+.li-record{
+  left: 40px;
+}
+
+.li-stop{
+  left: 40px;
+}
+
+.li-playback{
+  left: 120px;
+}
+
+.li-correct{
+}
+
+.li-incorrect{
+
+}
+
+.li-feedback{
+  left: calc(100% - 76px);
+}
