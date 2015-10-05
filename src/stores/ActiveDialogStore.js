@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ActiveDialogConstants = require('../constants/ActiveDialogConstants');
+var ActiveDialogActions = require('../actions/ActiveDialogActions');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -8,7 +9,8 @@ var _data = {};
 var _info = {};
 var DATA, memory, activityState, blockImg, blockId, objectives;
 var asrMode = false;
-var _result = {};
+
+
 function makeCOAs( acts, transInd, retId, retInputId ) {
 
     if( retId == 'GARBAGE' ) return [];
@@ -212,7 +214,41 @@ function makeResult( transInd, inputq, outputq, retVid ) {
             output.substr(0, output.indexOf('-') ) == DATA.roles['coach']) {
             coached.push( DATA.outputMappings[output]['L1'] );
         }
-    })
+    });
+
+
+
+
+
+    var uniqueCOAs = [];
+    var coas = getCOAs();
+    var len = coas.length;
+    while(len--) {
+        var coa = coas[len];
+        var found = false;
+        var uLen = uniqueCOAs.length;
+        while (uLen--) {
+            var uCoa = uniqueCOAs[uLen];
+            if (uCoa.act === coa.act) {
+                found = true;
+                uCoa.coas.push(coa);
+                break;
+            }
+        }
+        if (!found) {
+            uniqueCOAs.push({
+                act: coa.act,
+                coas: [coa]
+            });
+        }
+    }
+
+    console.log("uniqueCOAs");
+    console.dir(uniqueCOAs)
+    console.log("/uniqueCOAs");
+
+
+
 
     return {
         'inputs': inputq,
@@ -227,6 +263,7 @@ function makeResult( transInd, inputq, outputq, retVid ) {
          *  FSM.handleInput requires a coa from this array as the argument
          */
         'coas': getCOAs(),
+        'uniqueCOAs': uniqueCOAs,
         'state' : activityState,
         'memory' : memory,
         'objectives': objectives,
@@ -317,9 +354,7 @@ function create(fsm) {
     {
         _data = makeResult( -1, [], [], null );
     }
-
     _info = fsm.info;
-
 }
 
 function destroy() {
@@ -334,6 +369,15 @@ return {
     singleton: true
 };*/
 
+function load(args) {
+    var self = this;
+
+    $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + "_info.json", function(info) {
+        $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + ".json", function (result) {
+            ActiveDialogActions.create({data: result, info: info});
+        });
+    });
+}
 
 var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 
@@ -406,6 +450,10 @@ AppDispatcher.register(function(action) {
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_DESTROY:
             destroy();
+            ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_LOAD:
+            load(action.data);
             ActiveDialogStore.emitChange();
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT:

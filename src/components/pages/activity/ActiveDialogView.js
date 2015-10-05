@@ -10,6 +10,7 @@ var ActiveDialogStore = require('../../../stores/ActiveDialogStore');
 var ActiveDialogActions = require('../../../actions/ActiveDialogActions');
 
 var _dataLoaded = false;
+var _compositionLoaded = false;
 
 function getPageState(props) {
     var title = "";
@@ -20,10 +21,20 @@ function getPageState(props) {
         pageType = props.page.type;
     }
 
+    if (PageStore.page() && PageStore.page().dialog && PageStore.page().dialog.lgid) {
+        if (!_dataLoaded) {
+            setTimeout(function() {
+                ActiveDialogActions.load({chapterId: PageStore.chapter().xid, dialogId: PageStore.page().dialog.lgid});
+            }, 2000);
+            _dataLoaded = true;
+        }
+    }
+
     return {
         title: title,
         pageType: pageType,
-        data: ActiveDialogStore.activeDialog()
+        data: ActiveDialogStore.activeDialog(),
+        activeCOA: null
     };
 }
 
@@ -32,74 +43,40 @@ function updatePageState(st) {
         title: st.title || "",
         pageType: st.pageType || "",
         data: ActiveDialogStore.activeDialog(),
-        info: ActiveDialogStore.info()
+        info: ActiveDialogStore.info(),
+        activeCOA: st.activeCOA
     };
 }
 
-/*
-var _data = {
-        composition: "EDGE-20743566",
-        objectives: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        symbols: [
-            {
-                symbolName: "SorayaSymbol",
-                videoName: "Soraya_Crop4",
-                animations: [
-                    {
-                        animationName: "Soraya_No",
-                        start: "Soraya1",
-                        stop: "Soraya2"
-                    },
-                    {
-                        animationName: "Soraya_Idle",
-                        start: "Soraya2",
-                        stop: "Soraya3"
-                    },
-                    {
-                        animationName: "Soraya_Nod",
-                        start: "Soraya3",
-                        stop: "Soraya4"
-                    },
-                    {
-                        animationName: "Soraya_Yes",
-                        start: "Soraya4",
-                        stop: "Soraya5"
-                    }
-                ]
-            },
-            {
-                symbolName: "ZhangSymbol",
-                videoName: "Zhang_Crop",
-                animations: [
-                    {
-                        label: "Zhang Yes",
-                        animationName: "Zhang_Yes",
-                        start: "Zhang1",
-                        stop: "Zhang2"
-                    },
-                    {
-                        label: "Zhang No",
-                        animationName: "Zhang_No",
-                        start: "Zhang2",
-                        stop: "Zhang3"
-                    },
-                    {
-                        label: "Zhang Idle",
-                        animationName: "Zhang_Idle",
-                        start: "Zhang3",
-                        stop: "Zhang4"
-                    },
-                    {
-                        label: "Zhang Beat",
-                        animationName: "Zhang_Beat",
-                        start: "Zhang4",
-                        stop: "Zhang5"
-                    }
-                ]
-            }
-        ]
-};
-*/
+function updateCOAState(st, coa) {
+    return {
+        title: st.title || "",
+        pageType: st.pageType || "",
+        data: ActiveDialogStore.activeDialog(),
+        info: ActiveDialogStore.info(),
+        activeCOA: coa
+    };
+}
+
+function loadComposition() {
+    if (!_compositionLoaded &&
+        ActiveDialogStore.info().script &&
+        ActiveDialogStore.info().composition &&
+        $("#Stage").length > 0) {
+
+        _compositionLoaded = true;
+
+
+        AdobeEdge.loadComposition('dist/js/' + ActiveDialogStore.info().script, ActiveDialogStore.info().composition, {
+            scaleToFit: "none",
+            centerStage: "none",
+            minW: "0px",
+            maxW: "undefined",
+            width: "1240px",
+            height: "814px"
+        }, {dom: []}, {dom: []});
+    }
+}
 
 var ActiveDialogView = React.createClass({
 
@@ -124,13 +101,26 @@ var ActiveDialogView = React.createClass({
     },
 
     hintAction:function(hint) {
-        console.dir(hint);
+        /*
         var animationName = hint.realizations[0].anima;
         var symbol = ActiveDialogStore.findInfoSymbolByAnimationName(animationName);
         var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
         this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
+         ActiveDialogActions.handleInput(hint);
+        */
 
-        ActiveDialogActions.handleInput(hint);
+        this.setState(updateCOAState(this.state, hint));
+
+
+    },
+
+    coaAction: function (coa, realization) {
+        console.log(coa)
+        var animationName = realization.anima;
+        var symbol = ActiveDialogStore.findInfoSymbolByAnimationName(animationName);
+        var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
+        this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
+        ActiveDialogActions.handleInput(coa);
     },
 
     getInitialState: function() {
@@ -140,66 +130,37 @@ var ActiveDialogView = React.createClass({
 
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
-        ActiveDialogStore.addChangeListener(this._onChange);
+        //ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentDidMount: function() {
         PageStore.addChangeListener(this._onChange);
-        ActiveDialogStore.addChangeListener(this._onChange);
-
-        if (!_dataLoaded) {
-            $.getJSON("data/content/" + PageStore.chapter().xid + "/" + PageStore.page().dialog.lgid + "_info.json", function(info) {
-                $.getJSON("data/content/" + PageStore.chapter().xid + "/" + PageStore.page().dialog.lgid + ".json", function (result) {
-                    ActiveDialogActions.create({data: result, info: info});
-                    AdobeEdge.loadComposition('dist/js/ScenarioTemplate3', 'EDGE-20743566', {
-                        scaleToFit: "none",
-                        centerStage: "none",
-                        minW: "0px",
-                        maxW: "undefined",
-                        width: "1240px",
-                        height: "814px"
-                    }, {dom: []}, {dom: []});
-                });
-            });
-
-
-            _dataLoaded = true;
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
+        if (this.state && this.state.title != "") {
+            this.setState(updatePageState(this.state));
+        } else {
+            this.setState(getPageState());
         }
     },
 
     componentWillUnmount: function() {
-        ActiveDialogStore.removeChangeListener(this._onChange);
+        ActiveDialogStore.removeChangeListener(this._onDialogChange);
         PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
         var content = <div></div>;
         if (this.state.data && this.state.info) {
             var _self = this;
-            /*
-             var symbols = this.state.data.symbols.map(function(item, index) {
-             var animations = item.animations.map(function(aItem, aIndex) {
-             return  <ListGroupItem key={aIndex}>
-             <button className="btn btn-default" onClick={_self.hintAction.bind(this, item, aItem)}>
-             {aItem.label}
-             </button>
-             </ListGroupItem>
-             });
-
-             return  <ListGroup key={index}>
-             {animations}
-             </ListGroup>
-             });*/
-
-
             var hintsList = <ListGroupItem />;
+            var realizationsList = <ListGroupItem />;
 
-            if (this.state.data && this.state.data.coas) {
-                hintsList = this.state.data.coas.map(function(item, index) {
-                    var name = item.realizations[0].anima;
+            if (this.state.data && this.state.data.uniqueCOAs) {
+                hintsList = this.state.data.uniqueCOAs.map(function(item, index) {
+                    var name = item.coas[0].realizations[0].anima;
                     return  <ListGroupItem key={index}>
-                        <button className="btn btn-default" data-animation-name={name} onClick={_self.hintAction.bind(_self, item)}>
+                        <a className="" href="#" data-animation-name={name} onClick={_self.hintAction.bind(_self, item)}>
                             {item.act}
-                        </button>
+                        </a>
                     </ListGroupItem>
                 });
             }
@@ -211,11 +172,46 @@ var ActiveDialogView = React.createClass({
                 </ListGroup>
             </Popover>;
 
+
+            var realizations = [];
+
+            if (this.state.data && this.state.activeCOA) {
+                var activCOA = this.state.activeCOA;
+                var coas = activCOA.coas;
+                var coasLen = coas.length;
+                for (var i = 0; i < coasLen; i++) {
+                    var coa = coas[i];
+                    var rlzns = coa.realizations;
+                    var rlznsLen = rlzns.length;
+                    for (var j = 0; j < rlznsLen; j++) {
+                        var r = rlzns[j];
+                        realizations.push(<ListGroupItem key={j}>
+                            <a className="coa-item" href="#" data-animation-name={r.anima} onClick={this.coaAction.bind(this, coa, r)}>
+                                {r.uttText}
+                            </a>
+                        </ListGroupItem>);
+                    }
+                }
+            }
+
+            console.log("realizations");
+            console.dir(realizations);
+            console.log("/realizations");
+            var realizationsPopover =  <Popover id="realizationsPopover" title='Realizations'>
+                <ListGroup>
+                    {realizations}
+                </ListGroup>
+            </Popover>;
+
             var objectivesPopover =  <Popover id="settingsPopover" title='Background and Objectives'>
                 <p>
                     {this.state.data.objectives}
                 </p>
             </Popover>;
+
+
+
+
 
 
             content = <div className="container active-dialog-view">
@@ -229,6 +225,13 @@ var ActiveDialogView = React.createClass({
                                             Hints
                                         </Button>
                                     </OverlayTrigger>
+
+                                    <OverlayTrigger trigger='focus' placement='right' overlay={realizationsPopover}>
+                                        <Button className="btn btn-default">
+                                            Realizations
+                                        </Button>
+                                    </OverlayTrigger>
+
                                 </div>
                                 <div className="col-md-1">
                                     <ActiveDialogListView />
@@ -262,7 +265,13 @@ var ActiveDialogView = React.createClass({
         } else {
             this.setState(getPageState());
         }
+    },
+
+    _onDialogChange: function() {
+        this.setState(updatePageState(this.state));
+        loadComposition();
     }
+
 });
 
 function getDialogState() {

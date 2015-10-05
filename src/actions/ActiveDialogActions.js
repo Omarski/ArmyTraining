@@ -24,6 +24,16 @@ var ActiveDialogActions = {
     },
 
     /**
+     * @param  {string} text
+     */
+    load: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_LOAD,
+            data: data
+        });
+    },
+
+    /**
      * @param  {string} id
      */
     destroy: function() {
