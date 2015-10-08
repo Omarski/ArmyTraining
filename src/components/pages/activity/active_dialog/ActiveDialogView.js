@@ -5,9 +5,14 @@ var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
-var PageStore = require('../../../stores/PageStore');
-var ActiveDialogStore = require('../../../stores/ActiveDialogStore');
-var ActiveDialogActions = require('../../../actions/ActiveDialogActions');
+var PageStore = require('../../../../stores/PageStore');
+var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
+var ActiveDialogActions = require('../../../../actions/ActiveDialogActions');
+
+var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dialog/ActiveDialogCOAs')
+var ActiveDialogHints = require('../../../../components/pages/activity/active_dialog/ActiveDialogHints')
+var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory')
+var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives')
 
 var _dataLoaded = false;
 var _compositionLoaded = false;
@@ -25,7 +30,7 @@ function getPageState(props) {
         if (!_dataLoaded) {
             setTimeout(function() {
                 ActiveDialogActions.load({chapterId: PageStore.chapter().xid, dialogId: PageStore.page().dialog.lgid});
-            }, 2000);
+            }, .25);
             _dataLoaded = true;
         }
     }
@@ -101,17 +106,7 @@ var ActiveDialogView = React.createClass({
     },
 
     hintAction:function(hint) {
-        /*
-        var animationName = hint.realizations[0].anima;
-        var symbol = ActiveDialogStore.findInfoSymbolByAnimationName(animationName);
-        var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
-        this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
-         ActiveDialogActions.handleInput(hint);
-        */
-
         this.setState(updateCOAState(this.state, hint));
-
-
     },
 
     coaAction: function (coa, realization) {
@@ -150,7 +145,9 @@ var ActiveDialogView = React.createClass({
     render: function() {
         var content = <div></div>;
         if (this.state.data && this.state.info) {
+            /*
             var _self = this;
+
             var hintsList = <ListGroupItem />;
             var realizationsList = <ListGroupItem />;
 
@@ -211,7 +208,7 @@ var ActiveDialogView = React.createClass({
 
 
 
-
+            */
 
 
             content = <div className="container active-dialog-view">
@@ -220,28 +217,14 @@ var ActiveDialogView = React.createClass({
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-10">
-                                    <OverlayTrigger trigger='focus' placement='right' overlay={hintsPopover}>
-                                        <Button className="btn btn-default">
-                                            Hints
-                                        </Button>
-                                    </OverlayTrigger>
-
-                                    <OverlayTrigger trigger='focus' placement='right' overlay={realizationsPopover}>
-                                        <Button className="btn btn-default">
-                                            Realizations
-                                        </Button>
-                                    </OverlayTrigger>
-
+                                    <ActiveDialogHints />
+                                    <ActiveDialogCOAs />
                                 </div>
                                 <div className="col-md-1">
-                                    <ActiveDialogListView />
+                                    <ActiveDialogHistory />
                                 </div>
                                 <div className="col-md-1">
-                                    <OverlayTrigger trigger='focus' placement='left' overlay={objectivesPopover}>
-                                        <Button className="btn btn-default">
-                                            Objectives
-                                        </Button>
-                                    </OverlayTrigger>
+                                    <ActiveDialogObjectives />
                                 </div>
                             </div>
                         </div>
@@ -270,76 +253,10 @@ var ActiveDialogView = React.createClass({
     _onDialogChange: function() {
         this.setState(updatePageState(this.state));
         loadComposition();
+
+
     }
 
 });
-
-function getDialogState() {
-    return {data:ActiveDialogStore.activeDialog()};
-}
-
-var ActiveDialogListView = React.createClass({
-    getInitialState: function() {
-        return getDialogState();
-    },
-
-    componentWillMount: function() {
-        ActiveDialogStore.addChangeListener(this._onDialogChange);
-    },
-
-    componentDidMount: function() {
-        ActiveDialogStore.addChangeListener(this._onDialogChange);
-    },
-
-    componentWillUnmount: function() {
-        ActiveDialogStore.removeChangeListener(this._onDialogChange);
-    },
-
-    render: function() {
-
-        /*
-        var items = this.state.data.map(function(item, index) {
-            return  <ListGroupItem key={index}>
-                            {item.label}
-                    </ListGroupItem>
-        });*/
-
-        var items = [];
-
-        var content = items;
-
-        if (items.length === 0) {
-            content =   <p>
-                            Your dialog will appear here as you interact with the scenario.
-                        </p>
-        }
-        var hintsPopover =  <Popover id="settingsPopover" title='Dialog'>
-                                <ListGroup>
-                                    {content}
-                                </ListGroup>
-                            </Popover>;
-
-        return (
-            <OverlayTrigger trigger='click' placement='left' overlay={hintsPopover}>
-                <Button className="btn btn-default">
-                    Dialog
-                </Button>
-            </OverlayTrigger>
-
-        );
-    },
-
-    _onDialogChange: function() {
-        this.setState(getDialogState());
-    }
-});
-
-
-/**
- *
- *
- *
- * getCOA gets the hints
- */
 
 module.exports = ActiveDialogView;

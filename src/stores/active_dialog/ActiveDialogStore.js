@@ -1,7 +1,7 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var ActiveDialogConstants = require('../constants/ActiveDialogConstants');
-var ActiveDialogActions = require('../actions/ActiveDialogActions');
+var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
+var ActiveDialogActions = require('../../actions/ActiveDialogActions');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -32,8 +32,8 @@ function makeCOAs( acts, transInd, retId, retInputId ) {
                 };
             })};
 
-        res.isChoice = res.realizations[0].gesture !== null || res.realizations[0].terp === "L1"
-        res.isChoice = !asrMode || res.isChoice // always use choice if no asr
+        res.isChoice = res.realizations[0].gesture !== null || res.realizations[0].terp === "L1";
+        res.isChoice = !asrMode || res.isChoice; // always use choice if no asr
 
         return res
     });
@@ -242,13 +242,6 @@ function makeResult( transInd, inputq, outputq, retVid ) {
             });
         }
     }
-
-    console.log("uniqueCOAs");
-    console.dir(uniqueCOAs)
-    console.log("/uniqueCOAs");
-
-
-
 
     return {
         'inputs': inputq,

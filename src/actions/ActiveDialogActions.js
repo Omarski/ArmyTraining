@@ -1,5 +1,5 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var ActiveDialogConstants = require('../constants/ActiveDialogConstants');
+var ActiveDialogConstants = require('../constants/active_dialog/ActiveDialogConstants');
 
 var ActiveDialogActions = {
 

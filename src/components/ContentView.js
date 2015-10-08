@@ -10,7 +10,7 @@ var MapView = require('../components/pages/content/MapView');
 var MultiNoteView = require('../components/pages/content/MultiNoteView');
 var VideoView = require('../components/pages/content/VideoView');
 
-var ActiveDialogView = require('../components/pages/activity/ActiveDialogView');
+var ActiveDialogView = require('../components/pages/activity/active_dialog/ActiveDialogView');
 var ListeningComprehensionView = require('../components/pages/activity/ListeningComprehensionView');
 var MatchItemView = require('../components/pages/activity/MatchItemView');
 var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
