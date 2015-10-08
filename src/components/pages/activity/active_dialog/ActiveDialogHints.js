@@ -5,60 +5,86 @@ var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogHintStore = require('../../../../stores/active_dialog/ActiveDialogHintStore');
-var ActiveDialogActions = require('../../../../actions/ActiveDialogActions');
+var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
+var ActiveDialogHintActions = require('../../../../actions/active_dialog/ActiveDialogHintActions');
 
-var _dataLoaded = false;
-
-function getDialogState() {
-    return {};
+function getCompState(coas) {
+    if (!coas) {
+        coas = ActiveDialogHintStore.data();
+    }
+    return {
+        coas: coas
+    };
 }
 
 var ActiveDialogHints = React.createClass({
     getInitialState: function() {
-        return getDialogState();
+        return getCompState();
+    },
+
+    hintAction:function(hint) {
+        ActiveDialogActions.setActiveCOA(hint);
     },
 
     componentWillMount: function() {
-        ActiveDialogHintStore.addChangeListener(this._onDialogChange);
+        ActiveDialogHintStore.addChangeListener(this._onChange);
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentDidMount: function() {
-        ActiveDialogHintStore.addChangeListener(this._onDialogChange);
+        ActiveDialogHintStore.addChangeListener(this._onChange);
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
-        ActiveDialogHintStore.removeChangeListener(this._onDialogChange);
+        ActiveDialogHintStore.removeChangeListener(this._onChange);
+        ActiveDialogStore.removeChangeListener(this._onDialogChange);
     },
 
     render: function() {
-        var items = [];
 
-        var content = items;
+        var _self = this;
 
-        if (items.length === 0) {
-            content =   <p>
-                Your dialog will appear here as you interact with the scenario.
-            </p>
+        var hintsList = <ListGroupItem />;
+
+        if (this.state.coas) {
+            hintsList = this.state.coas.map(function(item, index) {
+                var name = item.coas[0].realizations[0].anima;
+                return  <ListGroupItem key={index}>
+                    <a className="" href="#" data-animation-name={name} onClick={_self.hintAction.bind(_self, item)}>
+                        {item.act}
+                    </a>
+                </ListGroupItem>
+            });
         }
-        var hintsPopover =  <Popover id="settingsPopover" title='Dialog'>
+
+
+        var hintsPopover =  <Popover id="hintsPopover" title='Hints'>
             <ListGroup>
-                {content}
+                {hintsList}
             </ListGroup>
         </Popover>;
 
         return (
             <OverlayTrigger trigger='click' placement='left' overlay={hintsPopover}>
                 <Button className="btn btn-default">
-                    Dialog
+                    Hints
                 </Button>
             </OverlayTrigger>
 
         );
     },
 
+    _onChange: function() {
+        this.setState(getCompState());
+    },
+
     _onDialogChange: function() {
-        this.setState(getDialogState());
+        setTimeout(function() {
+            ActiveDialogHintActions.create(ActiveDialogStore.activeDialog().coas);
+        }, .25);
     }
 });
 

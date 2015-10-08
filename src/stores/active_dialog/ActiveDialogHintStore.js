@@ -1,6 +1,7 @@
 var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var ActiveDialogHintConstants = require('../../constants/active_dialog/ActiveDialogHintContstants');
+var ActiveDialogHintConstants = require('../../constants/active_dialog/ActiveDialogHintConstants');
+
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -8,7 +9,32 @@ var CHANGE_EVENT = 'change';
 var _data = [];
 
 function create(data) {
-
+    _data = [];
+    if (data) {
+        var uniqueCOAs = [];
+        var coas = data;
+        var len = coas.length;
+        while(len--) {
+            var coa = coas[len];
+            var found = false;
+            var uLen = uniqueCOAs.length;
+            while (uLen--) {
+                var uCoa = uniqueCOAs[uLen];
+                if (uCoa.act === coa.act) {
+                    found = true;
+                    uCoa.coas.push(coa);
+                    break;
+                }
+            }
+            if (!found) {
+                uniqueCOAs.push({
+                    act: coa.act,
+                    coas: [coa]
+                });
+            }
+        }
+        _data = uniqueCOAs;
+    }
 }
 
 function destroy() {

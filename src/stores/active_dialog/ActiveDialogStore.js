@@ -1,7 +1,7 @@
 var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
-var ActiveDialogActions = require('../../actions/ActiveDialogActions');
+var ActiveDialogActions = require('../../actions/active_dialog/ActiveDialogActions');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -216,33 +216,6 @@ function makeResult( transInd, inputq, outputq, retVid ) {
         }
     });
 
-
-
-
-
-    var uniqueCOAs = [];
-    var coas = getCOAs();
-    var len = coas.length;
-    while(len--) {
-        var coa = coas[len];
-        var found = false;
-        var uLen = uniqueCOAs.length;
-        while (uLen--) {
-            var uCoa = uniqueCOAs[uLen];
-            if (uCoa.act === coa.act) {
-                found = true;
-                uCoa.coas.push(coa);
-                break;
-            }
-        }
-        if (!found) {
-            uniqueCOAs.push({
-                act: coa.act,
-                coas: [coa]
-            });
-        }
-    }
-
     return {
         'inputs': inputq,
         'outputs': outputq.map( function(output) {
@@ -256,7 +229,6 @@ function makeResult( transInd, inputq, outputq, retVid ) {
          *  FSM.handleInput requires a coa from this array as the argument
          */
         'coas': getCOAs(),
-        'uniqueCOAs': uniqueCOAs,
         'state' : activityState,
         'memory' : memory,
         'objectives': objectives,
@@ -372,6 +344,14 @@ function load(args) {
     });
 }
 
+
+function setActiveCOA(coa) {
+    if (coa) {
+        _data['activeCOA'] = coa;
+    }
+
+}
+
 var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 
     activeDialog: function() {
@@ -451,6 +431,10 @@ AppDispatcher.register(function(action) {
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT:
             handleInput(action.data);
+            ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_SET_ACTIVE_COA:
+            setActiveCOA(action.data);
             ActiveDialogStore.emitChange();
             break;
         default:

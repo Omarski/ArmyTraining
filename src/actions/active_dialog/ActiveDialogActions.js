@@ -1,5 +1,5 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var ActiveDialogConstants = require('../constants/active_dialog/ActiveDialogConstants');
+var AppDispatcher = require('../../dispatcher/AppDispatcher');
+var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
 
 var ActiveDialogActions = {
 
@@ -29,6 +29,16 @@ var ActiveDialogActions = {
     load: function(data) {
         AppDispatcher.dispatch({
             actionType: ActiveDialogConstants.ACTIVE_DIALOG_LOAD,
+            data: data
+        });
+    },
+
+    /**
+     * @param  {string} text
+     */
+    setActiveCOA: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_SET_ACTIVE_COA,
             data: data
         });
     },

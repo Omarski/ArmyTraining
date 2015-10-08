@@ -1,13 +1,27 @@
 var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var ActiveDialogCOAConstants = require('../../constants/active_dialog/ActiveDialogCOAContants');
+var ActiveDialogCOAConstants = require('../../constants/active_dialog/ActiveDialogCOAConstants');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var _data = [];
 
-function create(data) {
+function create(activeCOA) {
+    _data = [];
+    if (activeCOA) {
+        var coas = activeCOA.coas;
+        var coasLen = coas.length;
+        for (var i = 0; i < coasLen; i++) {
+            var coa = coas[i];
+            var rlzns = coa.realizations;
+            var rlznsLen = rlzns.length;
+            for (var j = 0; j < rlznsLen; j++) {
+                var r = rlzns[j];
+                _data.push({coa: coa, realization: r});
+            }
+        }
+    }
 
 }
 

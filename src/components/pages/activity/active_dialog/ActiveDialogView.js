@@ -7,7 +7,7 @@ var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var PageStore = require('../../../../stores/PageStore');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
-var ActiveDialogActions = require('../../../../actions/ActiveDialogActions');
+var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 
 var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dialog/ActiveDialogCOAs')
 var ActiveDialogHints = require('../../../../components/pages/activity/active_dialog/ActiveDialogHints')
@@ -53,15 +53,6 @@ function updatePageState(st) {
     };
 }
 
-function updateCOAState(st, coa) {
-    return {
-        title: st.title || "",
-        pageType: st.pageType || "",
-        data: ActiveDialogStore.activeDialog(),
-        info: ActiveDialogStore.info(),
-        activeCOA: coa
-    };
-}
 
 function loadComposition() {
     if (!_compositionLoaded &&
@@ -84,39 +75,6 @@ function loadComposition() {
 }
 
 var ActiveDialogView = React.createClass({
-
-    play: function(compName, symbolName, childName, animKey, start, end) {
-
-
-        var sym = AdobeEdge.getComposition(compName).getStage().getSymbol(symbolName);
-        var symChild = sym.$(childName)[0];
-        var pos = sym.getLabelPosition(start)/1000;
-        var pause = sym.getLabelPosition(end)/1000;
-
-        symChild.currentTime = pos;
-
-        symChild.addEventListener("timeupdate", function() {
-            if(symChild.currentTime >= pause) {
-                symChild.pause();
-                symChild.removeEventListener("timeupdate");
-            }
-        });
-
-        symChild.play();
-    },
-
-    hintAction:function(hint) {
-        this.setState(updateCOAState(this.state, hint));
-    },
-
-    coaAction: function (coa, realization) {
-        console.log(coa)
-        var animationName = realization.anima;
-        var symbol = ActiveDialogStore.findInfoSymbolByAnimationName(animationName);
-        var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
-        this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
-        ActiveDialogActions.handleInput(coa);
-    },
 
     getInitialState: function() {
         var pageState = getPageState(this.props);
