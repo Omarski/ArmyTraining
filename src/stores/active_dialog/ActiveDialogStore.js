@@ -292,6 +292,7 @@ function create(fsm) {
 
     objectives = JSON.parse( JSON.stringify( DATA.objectives ) ); // deep copy so DATA contents never mutated
 
+
     objectives.forEach( function( o ) { o.pass = false; } );
 
     activityState = 's0';

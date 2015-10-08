@@ -88,7 +88,7 @@ var ActiveDialogCOAs = React.createClass({
         </Popover>;
 
         return (
-            <OverlayTrigger trigger='click' placement='left' overlay={coasPopover}>
+            <OverlayTrigger trigger='click' placement='right' overlay={coasPopover}>
                 <Button className="btn btn-default">
                     COAs
                 </Button>

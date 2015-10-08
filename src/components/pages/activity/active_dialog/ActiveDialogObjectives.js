@@ -5,60 +5,62 @@ var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogObjectiveStore = require('../../../../stores/active_dialog/ActiveDialogObjectiveStore');
-var ActiveDialogActions = require('../../../../actions/ActiveDialogActions');
+var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
+var ActiveDialogObjectiveActions = require('../../../../actions/active_dialog/ActiveDialogObjectiveActions');
 
-var _dataLoaded = false;
-
-function getDialogState() {
-    return {};
+function getCompState() {
+    return {
+        objectives: ActiveDialogObjectiveStore.data().objectives || ''
+    };
 }
 
 var ActiveDialogObjectives = React.createClass({
     getInitialState: function() {
-        return getDialogState();
+        return getCompState();
     },
 
     componentWillMount: function() {
-        ActiveDialogObjectiveStore.addChangeListener(this._onDialogChange);
+        ActiveDialogObjectiveStore.addChangeListener(this._onChange);
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentDidMount: function() {
-        ActiveDialogObjectiveStore.addChangeListener(this._onDialogChange);
+        ActiveDialogObjectiveStore.addChangeListener(this._onChange);
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
-        ActiveDialogObjectiveStore.removeChangeListener(this._onDialogChange);
+        ActiveDialogObjectiveStore.removeChangeListener(this._onChange);
+        ActiveDialogStore.removeChangeListener(this._onDialogChange);
     },
 
     render: function() {
-        var items = [];
-
-        var content = items;
-
-        if (items.length === 0) {
-            content =   <p>
-                Your dialog will appear here as you interact with the scenario.
-            </p>
-        }
-        var hintsPopover =  <Popover id="settingsPopover" title='Dialog'>
-            <ListGroup>
-                {content}
-            </ListGroup>
-        </Popover>;
+        var objectivesPopover =     <Popover id="objectivesPopover" title='Objectives'>
+                                        <p>
+                                            {this.state.objectives}
+                                        </p>
+                                    </Popover>;
 
         return (
-            <OverlayTrigger trigger='click' placement='left' overlay={hintsPopover}>
+            <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover}>
                 <Button className="btn btn-default">
-                    Dialog
+                    Objectives
                 </Button>
             </OverlayTrigger>
 
         );
     },
 
+    _onChange: function() {
+        this.setState(getCompState());
+    },
+
     _onDialogChange: function() {
-        this.setState(getDialogState());
+        setTimeout(function() {
+            ActiveDialogObjectiveActions.create(ActiveDialogStore.activeDialog().objectives);
+        }, .25);
     }
 });
 

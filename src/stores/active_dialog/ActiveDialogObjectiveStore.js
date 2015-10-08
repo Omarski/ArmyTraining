@@ -5,10 +5,12 @@ var ActiveDialogObjectiveConstants = require('../../constants/active_dialog/Acti
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
-var _data = [];
+var _data = {};
 
 function create(data) {
-
+    _data = {
+        objectives: data
+    }
 }
 
 function destroy() {

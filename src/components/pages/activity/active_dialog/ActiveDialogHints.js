@@ -68,7 +68,7 @@ var ActiveDialogHints = React.createClass({
         </Popover>;
 
         return (
-            <OverlayTrigger trigger='click' placement='left' overlay={hintsPopover}>
+            <OverlayTrigger trigger='click' placement='bottom' overlay={hintsPopover}>
                 <Button className="btn btn-default">
                     Hints
                 </Button>

@@ -9,6 +9,9 @@ var _data = [];
 
 function create(activeCOA) {
     _data = [];
+
+    var temp = [];
+
     if (activeCOA) {
         var coas = activeCOA.coas;
         var coasLen = coas.length;
@@ -18,11 +21,25 @@ function create(activeCOA) {
             var rlznsLen = rlzns.length;
             for (var j = 0; j < rlznsLen; j++) {
                 var r = rlzns[j];
-                _data.push({coa: coa, realization: r});
+                if (!isDuplicate(temp, r)) {
+                    _data.push({coa: coa, realization: r});
+                    temp.push(r);
+                }
+
             }
         }
     }
+}
 
+function isDuplicate(temp, realization) {
+    var len = temp.length;
+    while (len--) {
+        var r = temp[len];
+        if (realization.uttText === r.uttText) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function destroy() {
