@@ -292,19 +292,19 @@ AppDispatcher.register(function(action) {
             break;
         case PageConstants.PAGE_LOAD:
             load(action.data);
-            PageStore.emitChange();
+            //PageStore.emitChange();
             break;
         case PageConstants.PAGE_LOAD_NEXT:
             loadNext();
-            PageStore.emitChange();
+            //PageStore.emitChange();
             break;
         case PageConstants.PAGE_LOAD_PREVIOUS:
-            loadPrevious();
+            //loadPrevious();
             PageStore.emitChange();
             break;
         case PageConstants.PAGE_JUMP:
             jump(action.data);
-            PageStore.emitChange();
+            //PageStore.emitChange();
             break;
         case PageConstants.PAGE_RESET:
             reset();

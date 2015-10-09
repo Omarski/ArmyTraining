@@ -1,6 +1,7 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var ActiveDialogConstants = require('../constants/ActiveDialogConstants');
+var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
+var ActiveDialogActions = require('../../actions/active_dialog/ActiveDialogActions');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -8,7 +9,8 @@ var _data = {};
 var _info = {};
 var DATA, memory, activityState, blockImg, blockId, objectives;
 var asrMode = false;
-var _result = {};
+
+
 function makeCOAs( acts, transInd, retId, retInputId ) {
 
     if( retId == 'GARBAGE' ) return [];
@@ -30,8 +32,8 @@ function makeCOAs( acts, transInd, retId, retInputId ) {
                 };
             })};
 
-        res.isChoice = res.realizations[0].gesture !== null || res.realizations[0].terp === "L1"
-        res.isChoice = !asrMode || res.isChoice // always use choice if no asr
+        res.isChoice = res.realizations[0].gesture !== null || res.realizations[0].terp === "L1";
+        res.isChoice = !asrMode || res.isChoice; // always use choice if no asr
 
         return res
     });
@@ -212,7 +214,7 @@ function makeResult( transInd, inputq, outputq, retVid ) {
             output.substr(0, output.indexOf('-') ) == DATA.roles['coach']) {
             coached.push( DATA.outputMappings[output]['L1'] );
         }
-    })
+    });
 
     return {
         'inputs': inputq,
@@ -290,6 +292,7 @@ function create(fsm) {
 
     objectives = JSON.parse( JSON.stringify( DATA.objectives ) ); // deep copy so DATA contents never mutated
 
+
     objectives.forEach( function( o ) { o.pass = false; } );
 
     activityState = 's0';
@@ -317,9 +320,7 @@ function create(fsm) {
     {
         _data = makeResult( -1, [], [], null );
     }
-
     _info = fsm.info;
-
 }
 
 function destroy() {
@@ -334,6 +335,23 @@ return {
     singleton: true
 };*/
 
+function load(args) {
+    var self = this;
+
+    $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + "_info.json", function(info) {
+        $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + ".json", function (result) {
+            ActiveDialogActions.create({data: result, info: info});
+        });
+    });
+}
+
+
+function setActiveCOA(coa) {
+    if (coa) {
+        _data['activeCOA'] = coa;
+    }
+
+}
 
 var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 
@@ -408,8 +426,16 @@ AppDispatcher.register(function(action) {
             destroy();
             ActiveDialogStore.emitChange();
             break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_LOAD:
+            load(action.data);
+            ActiveDialogStore.emitChange();
+            break;
         case ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT:
             handleInput(action.data);
+            ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_SET_ACTIVE_COA:
+            setActiveCOA(action.data);
             ActiveDialogStore.emitChange();
             break;
         default:
