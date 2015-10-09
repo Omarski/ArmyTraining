@@ -25,6 +25,10 @@ window.onload = function init(){
                              navigator.mozGetUserMedia ||
                              navigator.msGetUserMedia;
     window.URL = window.URL || window.webkitURL;
+
+    if(!ASR.isInitialized()){
+        ASR.InitializeASR();
+    }
 };
 
 var onFail = function(e){
@@ -41,30 +45,43 @@ var onSuccess = function(s){
 };
 
 function record(){
-    if(navigator.getUserMedia){
-        navigator.getUserMedia({audio: true}, onSuccess, onFail);
-    }else{
-        console.log('navigator.getUserMedia not present');
+    if(ASR.isInitialized){
+        ASR.StartRecording();
+    }else {
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({audio: true}, onSuccess, onFail);
+        } else {
+            console.log('navigator.getUserMedia not present');
+        }
     }
 }
 
 // pass the audio handle to stopRecording
 function stopRecording(id){
-    console.log(id);
-    var audio = document.getElementById(id);
-    recorder.stop();
-    recorder.exportWAV(function(s){
-        audio.src = window.URL.createObjectURL(s);
-    });
-    console.log("--- stopRecording ---");
-    console.log(recorder);
+    if(ASR.isInitialized){
+        ASR.StopRecording();
+        ASR.RecognizeRecording();
+    }else {
+        console.log(id);
+        var audio = document.getElementById(id);
+        recorder.stop();
+        recorder.exportWAV(function (s) {
+            audio.src = window.URL.createObjectURL(s);
+        });
+        console.log("--- stopRecording ---");
+        console.log(recorder);
+    }
 }
 
 function handlePlaying(id, index, self){
-    if(self.state.isPlaying[index]){
-        stop(id, index, self);
-    }else{
-        play(id, index, self);
+    if(ASR.isInitialized){
+        ASR.PlayRecording();
+    }else {
+        if (self.state.isPlaying[index]) {
+            stop(id, index, self);
+        } else {
+            play(id, index, self);
+        }
     }
 }
 
@@ -95,17 +112,16 @@ function stop(id, index, self){
 
 function handleRecord(id, index, self){
     var newRecordingState = self.state.recordingState;
-    if(newRecordingState[index]){
+    if (newRecordingState[index]) {
         stopRecording(id);
         var newPlayableState = self.state.playableState;
         newPlayableState[index] = true;
         newRecordingState[index] = false;
-        // TODO: Implement the ASR to check if recorded answer is correct
         self.setState({
             recordingState: newRecordingState,
             playableState: newPlayableState
         })
-    }else{
+    } else {
         record();
         newRecordingState[index] = true;
         self.setState({
@@ -117,11 +133,12 @@ function handleRecord(id, index, self){
 function getPageState(props) {
     var data = {
         page: null,
-        note: "Listen and Repeat",
+        notes: [],
         recordingState: [],
         playableState: [],
         isPlaying: [],
-        isCorrect: []
+        isCorrect: [],
+        utterings: []
     };
 
     if (props && props.page) {
@@ -129,13 +146,23 @@ function getPageState(props) {
     }
 
     //for page.nut.length
-    data.page.nut.map(function(){
-        data.recordingState.push(false);
-        data.playableState.push(false);
-        data.isPlaying.push(false);
-        data.isCorrect.push(null);
-    });
+    var counter = 0;
+    data.page.nut.map(function(item){
+        if(item.uttering){
+            data.recordingState.push(false);
+            data.playableState.push(false);
+            data.isPlaying.push(false);
+            data.isCorrect.push(null);
+            data.utterings.push(item);
+            counter++;
+        }
+        if(item.note){
+            //data.notes.push(item.note.text);
+            data.notes[counter] = item.note.text;
+            //possible error if 2 notes in a row
+        }
 
+    });
     return data;
 }
 
@@ -171,6 +198,28 @@ function setup(){
     });
 }
 
+// Plays Audio filed named with the xid(zid?) given
+function playAudio(xid){
+    var audio = document.getElementById('li-demo-audio');
+    //var source = document.getElementById('mp3Source');
+    // construct file-path to audio file
+    audio.src = "data/media/" + xid + ".mp3";
+    // play audio, or stop the audio if currently playing
+    if(audio.paused){
+        audio.load();
+        audio.play();
+    }else{
+        audio.pause();
+    }
+
+}
+
+function textClick(id, index, self){
+    var zid = self.state.utterings[index].uttering.media[0].zid;
+    // get audio.
+    playAudio(zid);
+}
+
 var PronunciationView = React.createClass({
     getInitialState: function() {
         return getPageState(this.props);
@@ -195,70 +244,77 @@ var PronunciationView = React.createClass({
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
     },
-    handleClick: function(event){
-
-    },
     render: function() {
         var self = this;
         var page = self.state.page;
-        var questions = page.nut || [];
+        var questions = self.state.utterings || [];
         var nativeText = "";
         var translatedText = "";
+        var ezreadText = "";
+        var note = "";
         var feedbackClass = "glyphicon li-glyphicon li-feedback";
         var recordedClass = "glyphicon li-glyphicon li-playback";
         var recordingClass = "glyphicon li-glyphicon li-record";
 
+        // need to check for notes and send those  to top of page
         var vaList = questions.map(function(item, index){
-            if(item && item.uttering && item.uttering.utterance){
-                nativeText = item.uttering.utterance.native.text || "Error: Native Text Not Found";
-                translatedText = item.uttering.utterance.translation.text || "Error: Translated Text Not Found";
-            }
-            var id = "audio" + index;
-            var itemFeedbackClass = "";
-            var itemRecordedClass = "";
-            var itemRecordingClass = "";
+            if(item && item.uttering && item.uttering.utterance) {
+                note = self.state.notes[index] || "";
+                nativeText = item.uttering.utterance.native.text || "";
+                translatedText = item.uttering.utterance.translation.text || "";
+                ezreadText = item.uttering.utterance.ezread.text || "";
+                var id = "audio" + index;
+                var itemFeedbackClass = "";
+                var itemRecordedClass = "";
+                var itemRecordingClass = "";
 
-            var hasRecorded = self.state.playableState[index];
-            if(hasRecorded){
-                var isCorrect = self.state.isCorrect[index];
-                if(isCorrect){
-                    itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_CORRECT_CLS;
-                }else{
-                    itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_INCORRECT_CLS;
+                var hasRecorded = self.state.playableState[index];
+                if (hasRecorded) {
+                    var isCorrect = self.state.isCorrect[index];
+                    if (isCorrect) {
+                        itemFeedbackClass = feedbackClass + " li-correct " + LI_GLYPHICON_CORRECT_CLS;
+                    } else {
+                        itemFeedbackClass = feedbackClass + " li-incorrect " + LI_GLYPHICON_INCORRECT_CLS;
+                    }
+                    if (self.state.isPlaying[index]) {
+                        itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
+                    } else {
+                        itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
+                    }
+                } else {
+                    itemRecordedClass = recordedClass;
+                    itemFeedbackClass = feedbackClass;
                 }
-                if(self.state.isPlaying[index]){
-                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
-                }else{
-                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
+
+                var isRecording = self.state.recordingState[index];
+                if (isRecording) {
+                    itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
+                } else {
+                    itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
                 }
-            }else{
-                itemRecordedClass = recordedClass;
-                itemFeedbackClass = feedbackClass;
-            }
 
-            var isRecording = self.state.recordingState[index];
-            if(isRecording){
-                itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
-            }else{
-                itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
-            }
+                return (
+                    <div className="li-vocal-answer">
+                        <audio id={id}></audio>
+                        <div className="li-note-text">{note}</div>
+                        <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
+                        <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
 
-            return(
-                <div className="li-vocal-answer">
-                    <audio id={id}></audio>
-                    <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
-                    <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
-                    <div className="li-text-area" id={"text-"+id} onClick={self.handleClick}>
-                        <div className="li-native-text">
-                            <ColorText props={nativeText}/>
+                        <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
+                            <div className="li-native-text">
+                                <ColorText props={nativeText}/>
+                            </div>
+                            <div className="li-ezread-text">
+                                <ColorText props={ezreadText}/>
+                            </div>
+                            <div className="li-translated-text">
+                                <ColorText props={translatedText}/>
+                            </div>
                         </div>
-                        <div className="li-translated-text">
-                            <ColorText props={translatedText}/>
-                        </div>
+                        <span className={itemFeedbackClass}></span>
                     </div>
-                    <span className={itemFeedbackClass}></span>
-                </div>
-            );
+                );
+            }
         });
 
         return (
@@ -266,11 +322,9 @@ var PronunciationView = React.createClass({
                 <div className="row li-title">
                     <h3>{page.title}</h3>
                 </div>
-                <div className="row li-note">
-                    <h4>{self.note}</h4>
-                </div>
                 <div className="row">
                     <div className="li-answers-container">
+                        <audio id="li-demo-audio"></audio>
                         <div className="li-column">
                             <div className="li-voice-answers">
                                 {vaList}

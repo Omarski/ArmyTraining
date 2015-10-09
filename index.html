@@ -9,10 +9,46 @@
     <style>
         .edgeLoad-EDGE-20743566 { visibility:hidden; }
     </style>
+    <!-- ASR Included scripts -->
+    <script type="text/javascript" src="dist/js/ASR/prototype-1.6.0.3.js"></script>
+    <script type="text/javascript" src="dist/js/ASR/AsrAdapter.js"></script>
+    <script type="text/javascript" src="dist/js/ASR/js/messa_config.js"></script>
+    <script type="text/javascript" src="dist/js/ASR/js/messa.js"></script>
+    <script type="text/javascript" src="dist/js/ASR/js/messajs_tester.js"></script>
+    <script type="text/javascript" src="dist/js/ASR/ASRMessajsTester.js"></script>
+    <script type="text/javascript" src="dist/js/ASR.js"></script>
 </head>
 <body>
 
 <div id="mainView"></div>
+
+<div id="asr">
+    <applet code="org.jdesktop.applet.util.JNLPAppletLauncher"
+            archive="applet-launcher.jar,SpeechInterfaceApplet.jar"
+            height="1"
+            mayscript="yes"
+            scriptable="true"
+            id="ASRApplet"
+            name="ASRApplet">
+        <param name="codebase_lookup"
+               value="false"/>
+        <param name="prgressbar"
+               value="true"/>
+        <param name="subapplet.classname"
+               value="com.alelo.speechinterfaceapplet.SpeechInterfaceApplet"/>
+        <param name="subapplet.displayname"
+               value="SpeechInterface"/>
+        <param name="jnlpNumExtensions"
+               value="1"/>
+        <param name="jnlpExtension1"
+               value="speechinterface15.jnlp"/>
+        <param name="installationType"
+               value="wan"/>
+        <param name="jnlp_href"
+               value="speechinterface16.jnlp"/>
+    </applet>
+</div>
+<div id="messajs_test"></div>
 
 <script src="dist/js/jquery.min.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
@@ -20,8 +56,9 @@
 <script src="dist/js/recorderjs/recorder.js"></script>
 <script type="text/javascript" charset="utf-8" src="dist/js/edge_includes/edge.6.0.0.min.js"></script>
 
+
 <script>
-    init()
+    init();
     function init() {
         if (!store.enabled) {
             alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');

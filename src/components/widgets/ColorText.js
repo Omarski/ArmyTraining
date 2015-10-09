@@ -57,7 +57,7 @@ function processColoredText(text, colorArray){
 
 var ColorText = React.createClass({
     getInitialState: function() {
-        var colorArray = ['00cc00', 'cc0000', '0000cc'];
+        var colorArray = ['', '00cc00', 'cc0000', '0000cc'];
         return processColoredText(this.props.props, colorArray);
     },
 
