@@ -25,10 +25,6 @@ window.onload = function init(){
                              navigator.mozGetUserMedia ||
                              navigator.msGetUserMedia;
     window.URL = window.URL || window.webkitURL;
-
-    if(!ASR.isInitialized()){
-        ASR.InitializeASR();
-    }
 };
 
 var onFail = function(e){
@@ -237,6 +233,9 @@ var PronunciationView = React.createClass({
             // UserMedia not allowed
         }
         setup();
+        if(!ASR.isInitialized()){
+            ASR.InitializeASR();
+        }
     },
     componentDidUpdate: function(){
 
