@@ -3,11 +3,12 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var ColorText = require('../../../components/widgets/ColorText');
 
-var L2_GLYPHICON_CORRECT_CLS;
-var L2_GLYPHICON_INCORRECT_CLS;
-var L2_GLYPHICON_STOP_CLS;
-var L2_GLYPHICON_PLAY_CLS;
-var L2_GLYPHICON_RECORD_CLS;
+var L2_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
+var L2_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+var L2_GLYPHICON_STOP_CLS = "glyphicon-stop";
+var L2_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
+var L2_GLYPHICON_RECORD_CLS = "glyphicon-record";
+var L2_GLYPHICON_CLS = "l2-glyphicon";
 
 function getPageState(props) {
     var data = {
@@ -32,12 +33,11 @@ function getPageState(props) {
     var isColElementPlaying = [];
     var colElementRecordingState = [];
     for(var i=0; i<data.page.colTitle.length; i++){
-        var newCol = [];
-        data.cols.push(newCol);
-        isColElementCorrect.push(newCol);
-        colElementPlayableState.push(newCol);
-        isColElementPlaying.push(newCol);
-        colElementRecordingState.push(newCol);
+        data.cols.push([]);
+        isColElementCorrect.push([]);
+        colElementPlayableState.push([]);
+        isColElementPlaying.push([]);
+        colElementRecordingState.push([]);
     }
 
     data.page.row.map(function(item, index){
@@ -62,19 +62,17 @@ function getPageState(props) {
     data.playableState = colElementPlayableState;
     data.isPlaying = isColElementPlaying;
     data.recordingState = colElementRecordingState;
-    console.log("Data: ");
     console.dir(data);
     return data;
 }
 
-function positionDivs(){
+function positionDivs(self){
+    $(L2_GLYPHICON_CLS).css("pointer-events", "auto");
     var columns = document.getElementsByClassName("l2-column");
     var columnWidth = 575; // potentially dynamic value (more columns, the skinnier they are)
     Array.prototype.forEach.call(columns, function(item, index) {
         $(item).css('left', ((columnWidth*index) + (30*index) + 30 + 'px'));
-
         var vocalAnswers = item.childNodes;
-        console.dir(vocalAnswers);
         Array.prototype.forEach.call(vocalAnswers, function(columnItem, index){
             var _item = $(columnItem);
             if(index == 0){
@@ -87,11 +85,44 @@ function positionDivs(){
                 _item.css('background', '#ffffff');
             }
         });
-
+    });
+    // 39.5 because math
+    var buffer = 39.5;
+    var icons = document.getElementsByClassName(L2_GLYPHICON_CLS);
+    Array.prototype.forEach.call(icons, function(item, index){
+        var $item = $(item);
+        var answerLine = Math.floor(index/3); //3 because 3 icons per answer item.
+        if(answerLine >= self.state.cols[0].length){answerLine -= self.state.cols[0].length;}
+        $item.css('top', ( ( buffer + (120*answerLine) )+'px'));
     });
 }
 
+function handleRecord(id, index, self){
+
+}
+
+function handlePlaying(id, index, self){
+
+}
+
 function textClick(id, index, self){
+    var zid = 0; //self.state.utterings[index].uttering.media[0].zid; this needs to change to access the correct zid
+    // get audio.
+    //playAudio(zid);
+}
+
+function playAudio(xid){
+    var audio = document.getElementById('l2-demo-audio');
+    //var source = document.getElementById('mp3Source');
+    // construct file-path to audio file
+    audio.src = "data/media/" + xid + ".mp3";
+    // play audio, or stop the audio if currently playing
+    if(audio.paused){
+        audio.load();
+        audio.play();
+    }else{
+        audio.pause();
+    }
 
 }
 
@@ -105,8 +136,9 @@ var MultiColumnPronunciationView = React.createClass({
     },
 
     componentDidMount: function() {
+        var self = this;
         //PageStore.addChangeListener(this._onChange);
-        positionDivs();
+        positionDivs(self);
     },
 
     componentWillUnmount: function() {
@@ -162,7 +194,6 @@ var MultiColumnPronunciationView = React.createClass({
 
                     return (
                         <div className="l2-vocal-answer">
-                            <audio id={id}></audio>
                             <div className="l2-note-text">{note}</div>
                             <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
                             <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>

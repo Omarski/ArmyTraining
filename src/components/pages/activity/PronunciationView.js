@@ -27,6 +27,11 @@ window.onload = function init(){
     window.URL = window.URL || window.webkitURL;
 };
 
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
 var onFail = function(e){
     console.log('An Error has occured.', e);
 };
@@ -162,11 +167,6 @@ function getPageState(props) {
     return data;
 }
 
-function hasGetUserMedia(){
-    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia || navigator.msGetUserMedia);
-}
-
 function setup(){
     $(".glyphicon").css('pointerEvents', 'auto');
 
@@ -189,7 +189,7 @@ function setup(){
     var icons = document.getElementsByClassName(LI_GLYPHICON_CLS);
     Array.prototype.forEach.call(icons, function(item, index){
         var $item = $(item);
-        var answerLine = Math.floor(index/3);
+        var answerLine = Math.floor(index/3); //3 because 3 icons per answer item.
         $item.css('top', ( ( buffer + (120*answerLine) )+'px'));
     });
 }
@@ -294,7 +294,6 @@ var PronunciationView = React.createClass({
 
                 return (
                     <div className="li-vocal-answer">
-                        <audio id={id}></audio>
                         <div className="li-note-text">{note}</div>
                         <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
                         <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>

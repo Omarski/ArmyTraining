@@ -14,6 +14,12 @@
   height: 120px;
 }
 
+.l2-glyphicon{
+  position: absolute;
+  font-size: 36px;
+  top: inherit;
+}
+
 .l2-note-text{
 
 }
@@ -34,4 +40,28 @@
 
 .l2-translated-text{
 
+}
+
+.l2-record{
+  left: 40px;
+}
+
+.l2-stop{
+  left: 40px;
+}
+
+.l2-playback{
+  left: 120px;
+}
+
+.l2-correct{
+  color: green;
+}
+
+.l2-incorrect{
+  color: red;
+}
+
+.l2-feedback{
+  left: calc(100% - 76px);
 }
