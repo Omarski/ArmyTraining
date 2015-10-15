@@ -12,7 +12,7 @@ var ActiveDialogObjectiveActions = require('../../../../actions/active_dialog/Ac
 function getCompState() {
 
     return {
-        objectives: ActiveDialogObjectiveStore.data()
+        objectives: ActiveDialogObjectiveStore.data() || []
     };
 }
 
@@ -43,7 +43,7 @@ var ActiveDialogObjectives = React.createClass({
 
         var objectivesList = <ListGroupItem />;
 
-        if (this.state.objectives) {
+        if (this.state.objectives && this.state.objectives.length > 0) {
             objectivesList = this.state.objectives.map(function(item, index) {
                 var name = item.objectives[0].realizations[0].anima;
                 return  <ListGroupItem key={index}>
