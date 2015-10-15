@@ -21,7 +21,6 @@ var ActiveDialogObjectives = React.createClass({
         return getCompState();
     },
 
-
     componentWillMount: function() {
         ActiveDialogObjectiveStore.addChangeListener(this._onChange);
         ActiveDialogStore.addChangeListener(this._onDialogChange);

@@ -6,9 +6,76 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var _data = [];
+var _items = [];
 
 function create(data) {
-    _data.push(data);
+    var inputs = data.inputs;
+    var outputs = data.outputs;
+
+    /*
+     if scene_data.inputs.length > 0
+     input = scene_data.inputs.shift()
+
+     # get sound
+     sound = input.sound if input.sound
+
+     # get image
+     image = input.anima if input.anima
+
+     # get caption text
+     captionText = input.uttText if input.uttText
+
+     # get the next output
+     else if  scene_data.outputs.length > 0
+     output = scene_data.outputs.shift()
+
+     # move this better <------------------------------------------
+     if (output.act.substring(0,14) == "BlockingChange")
+     scene_data.image = scene.Fsm.changeBlockingImage(output.act)
+
+     # get sound
+     sound = output.action?.sound
+
+     # get image
+     image = output.action?.anima
+
+     # get caption text
+     if output.action?.terp
+     captionText = output.action[output.action.terp]
+     */
+
+    var exists = false;
+    var obj = {};
+    obj.label = "";
+
+
+
+
+    if (inputs && inputs.length > 0) {
+        var input = inputs.shift();
+        _items.push(input);
+        if (input.uttText) {
+            obj.label = input.uttText;
+        }
+        exists = true;
+    } else if (outputs && outputs.length > 0) {
+
+        var output = outputs.shift();
+        _items.push(output);
+        if (output.action && output.action.terp) {
+            obj.label = output.action[output.action.terp];
+        }
+        exists = true;
+    }
+
+    if (exists) {
+        _data.push(obj);
+    }
+
+    console.log("..............................");
+    console.dir(_items);
+    console.log("..............................");
+
 }
 
 function destroy() {
