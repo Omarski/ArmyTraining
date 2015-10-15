@@ -6,7 +6,7 @@ var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ActiveDialogHistoryStore = require('../../../../stores/active_dialog/ActiveDialogHistoryStore');
-var ActiveDialogActions = require('../../../../actions/ActiveDialogActions');
+var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 
 var _dataLoaded = false;
 

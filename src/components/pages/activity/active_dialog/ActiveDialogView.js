@@ -9,10 +9,10 @@ var PageStore = require('../../../../stores/PageStore');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 
-var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dialog/ActiveDialogCOAs')
-var ActiveDialogHints = require('../../../../components/pages/activity/active_dialog/ActiveDialogHints')
-var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory')
-var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives')
+var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dialog/ActiveDialogCOAs');
+var ActiveDialogHints = require('../../../../components/pages/activity/active_dialog/ActiveDialogHints');
+var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory');
+var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives');
 
 var _dataLoaded = false;
 var _compositionLoaded = false;
@@ -63,7 +63,7 @@ function loadComposition() {
         _compositionLoaded = true;
 
 
-        AdobeEdge.loadComposition('dist/js/' + ActiveDialogStore.info().script, ActiveDialogStore.info().composition, {
+        AdobeEdge.loadComposition(ActiveDialogStore.info().script, ActiveDialogStore.info().composition, {
             scaleToFit: "none",
             centerStage: "none",
             minW: "0px",
@@ -211,8 +211,6 @@ var ActiveDialogView = React.createClass({
     _onDialogChange: function() {
         this.setState(updatePageState(this.state));
         loadComposition();
-
-
     }
 
 });

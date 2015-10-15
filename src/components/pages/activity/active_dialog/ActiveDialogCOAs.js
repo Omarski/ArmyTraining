@@ -2,7 +2,7 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
-var Popover = ReactBootstrap.Popover;
+var Modal = ReactBootstrap.Modal;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
@@ -81,18 +81,25 @@ var ActiveDialogCOAs = React.createClass({
         }
 
 
-        var coasPopover =  <Popover id="coasPopover" title='COAs'>
-            <ListGroup>
-                {coasList}
-            </ListGroup>
-        </Popover>;
+
 
         return (
-            <OverlayTrigger trigger='click' placement='right' overlay={coasPopover}>
-                <Button className="btn btn-default">
-                    COAs
-                </Button>
-            </OverlayTrigger>
+            <Modal.Dialog id="coasModal" title='COAs'>
+                <Modal.Header>
+                    <Modal.Title>Modal title</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <ListGroup>
+                        {coasList}
+                    </ListGroup>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button>Close</Button>
+                    <Button bsStyle="primary">Save changes</Button>
+                </Modal.Footer>
+            </Modal.Dialog>
 
         );
     },
