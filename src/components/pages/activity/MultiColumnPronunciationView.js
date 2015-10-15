@@ -97,18 +97,72 @@ function positionDivs(self){
     });
 }
 
-function handleRecord(id, index, self){
-
+//var id = "" + colNumber + "audio" + index;
+function handleRecord(id, colNumber, index, self){
+    var newRecordingState = self.state.recordingState;
+    if (newRecordingState[colNumber][index]) {
+        stopRecording(id);
+        var newPlayableState = self.state.playableState;
+        newPlayableState[colNumber][index] = true;
+        newRecordingState[colNumber][index] = false;
+        self.setState({
+            recordingState: newRecordingState,
+            playableState: newPlayableState
+        })
+    } else {
+        record();
+        newRecordingState[colNumber][index] = true;
+        self.setState({
+            recordingState: newRecordingState
+        })
+    }
 }
 
-function handlePlaying(id, index, self){
-
+function record(){
+    if(ASR.isInitialized){
+        ASR.StartRecording();
+    }else {
+        //if (navigator.getUserMedia) {
+        //    navigator.getUserMedia({audio: true}, onSuccess, onFail);
+        //} else {
+        //    console.log('navigator.getUserMedia not present');
+        //}
+    }
 }
 
-function textClick(id, index, self){
-    var zid = 0; //self.state.utterings[index].uttering.media[0].zid; this needs to change to access the correct zid
+// pass the audio handle to stopRecording
+function stopRecording(id){
+    if(ASR.isInitialized){
+        ASR.StopRecording();
+        ASR.RecognizeRecording();
+    }else {
+        //console.log(id);
+        //var audio = document.getElementById(id);
+        //recorder.stop();
+        //recorder.exportWAV(function (s) {
+        //    audio.src = window.URL.createObjectURL(s);
+        //});
+        //console.log("--- stopRecording ---");
+        //console.log(recorder);
+    }
+}
+
+function handlePlaying(id, colNumber, index, self){
+    if(ASR.isInitialized){
+        ASR.PlayRecording();
+    }else {
+        //if (self.state.isPlaying[index]) {
+        //    stop(id, index, self);
+        //} else {
+        //    play(id, index, self);
+        //}
+    }
+}
+
+function textClick(id, colNumber, index, self){
+    var zid = self.state.cols[colNumber][index].uttering.media[0].zid;
     // get audio.
-    //playAudio(zid);
+    playAudio(zid);
 }
 
 function playAudio(xid){
@@ -139,6 +193,9 @@ var MultiColumnPronunciationView = React.createClass({
         var self = this;
         //PageStore.addChangeListener(this._onChange);
         positionDivs(self);
+        if(!ASR.isInitialized()){
+            ASR.InitializeASR();
+        }
     },
 
     componentWillUnmount: function() {
@@ -195,10 +252,10 @@ var MultiColumnPronunciationView = React.createClass({
                     return (
                         <div className="l2-vocal-answer">
                             <div className="l2-note-text">{note}</div>
-                            <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
-                            <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
+                            <span className={itemRecordingClass} onClick={function(){handleRecord(id, colNumber, index, self)}}></span>
+                            <span className={itemRecordedClass} onClick={function(){handlePlaying(id, colNumber, index, self)}}></span>
 
-                            <div className="l2-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
+                            <div className="l2-text-area" id={"text-"+id} onClick={function(){textClick(id, colNumber, index, self)}}>
                                 <div className="l2-native-text">
                                     <ColorText props={nativeText}/>
                                 </div>
