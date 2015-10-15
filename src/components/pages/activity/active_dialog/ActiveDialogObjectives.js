@@ -7,12 +7,12 @@ var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogObjectiveStore = require('../../../../stores/active_dialog/ActiveDialogObjectiveStore');
-var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 var ActiveDialogObjectiveActions = require('../../../../actions/active_dialog/ActiveDialogObjectiveActions');
 
 function getCompState() {
+
     return {
-        objectives: ActiveDialogObjectiveStore.data().objectives || ''
+        objectives: ActiveDialogObjectiveStore.data()
     };
 }
 
@@ -20,6 +20,7 @@ var ActiveDialogObjectives = React.createClass({
     getInitialState: function() {
         return getCompState();
     },
+
 
     componentWillMount: function() {
         ActiveDialogObjectiveStore.addChangeListener(this._onChange);
@@ -37,11 +38,27 @@ var ActiveDialogObjectives = React.createClass({
     },
 
     render: function() {
-        var objectivesPopover =     <Popover id="objectivesPopover" title='Objectives'>
-                                        <p>
-                                            {this.state.objectives}
-                                        </p>
-                                    </Popover>;
+
+        var _self = this;
+
+        var objectivesList = <ListGroupItem />;
+
+        if (this.state.objectives) {
+            objectivesList = this.state.objectives.map(function(item, index) {
+                var name = item.objectives[0].realizations[0].anima;
+                return  <ListGroupItem key={index}>
+                    <a className="" href="#" data-animation-name={name} onClick={_self.hintAction.bind(_self, item)}>
+                        {item.act}
+                    </a>
+                </ListGroupItem>
+            });
+        }
+
+        var objectivesPopover =  <Popover id="objectivesPopover" title='Objectives'>
+            <ListGroup>
+                {objectivesList}
+            </ListGroup>
+        </Popover>;
 
         return (
             <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover}>

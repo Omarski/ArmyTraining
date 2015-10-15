@@ -8,11 +8,11 @@ var CHANGE_EVENT = 'change';
 var _data = [];
 
 function create(data) {
-
+    _data.push(data);
 }
 
 function destroy() {
-
+    _data = [];
 }
 
 var ActiveDialogHistoryStore = assign({}, EventEmitter.prototype, {
