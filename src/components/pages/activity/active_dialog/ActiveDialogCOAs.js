@@ -2,16 +2,18 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
-var Popover = ReactBootstrap.Popover;
+var Modal = ReactBootstrap.Modal;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 var ActiveDialogCOAActions = require('../../../../actions/active_dialog/ActiveDialogCOAActions');
 var ActiveDialogCOAStore = require('../../../../stores/active_dialog/ActiveDialogCOAStore');
+var ActiveDialogHistoryActions = require('../../../../actions/active_dialog/ActiveDialogHistoryActions');
 
-function getCompState() {
+function getCompState(show) {
     return {
+        show: show,
         coas: ActiveDialogCOAStore.data() || []
     };
 }
@@ -37,15 +39,21 @@ var ActiveDialogCOAs = React.createClass({
     },
 
     coaAction: function (coa, realization) {
+        this.hideModal();
         var animationName = realization.anima;
         var symbol = ActiveDialogStore.findInfoSymbolByAnimationName(animationName);
         var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
         this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
         ActiveDialogActions.handleInput(coa);
+        ActiveDialogHistoryActions.create({coa: coa, realization:realization});
+    },
+
+    hideModal: function() {
+        this.setState(getCompState(false));
     },
 
     getInitialState: function() {
-        return getCompState();
+        return getCompState(false);
     },
 
     componentWillMount: function() {
@@ -69,7 +77,8 @@ var ActiveDialogCOAs = React.createClass({
 
         var coasList = <ListGroupItem />;
 
-        if (this.state.coas) {
+        if (this.state.coas && this.state.coas.length > 0) {
+
             coasList = this.state.coas.map(function(item, index) {
                 var name = item.realization.anima;
                 return  <ListGroupItem key={index}>
@@ -80,25 +89,32 @@ var ActiveDialogCOAs = React.createClass({
             });
         }
 
-
-        var coasPopover =  <Popover id="coasPopover" title='COAs'>
-            <ListGroup>
-                {coasList}
-            </ListGroup>
-        </Popover>;
-
         return (
-            <OverlayTrigger trigger='click' placement='right' overlay={coasPopover}>
-                <Button className="btn btn-default">
-                    COAs
-                </Button>
-            </OverlayTrigger>
+            <Modal
+                id="coasModal"
+                show={this.state.show}
+                onHide={this.hideModal}
+                >
+                <Modal.Header>
+                    <Modal.Title>Choose</Modal.Title>
+                </Modal.Header>
 
+                <Modal.Body>
+                    <ListGroup>
+                        {coasList}
+                    </ListGroup>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button onClick={this.hideModal}>Close</Button>
+                </Modal.Footer>
+            </Modal>
         );
     },
 
     _onChange: function() {
-        this.setState(getCompState());
+        var show = (this.state.coas && this.state.coas.length > 0);
+        this.setState(getCompState(show));
     },
 
     _onDialogChange: function() {

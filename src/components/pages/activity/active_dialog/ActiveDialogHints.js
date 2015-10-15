@@ -60,7 +60,6 @@ var ActiveDialogHints = React.createClass({
             });
         }
 
-
         var hintsPopover =  <Popover id="hintsPopover" title='Hints'>
             <ListGroup>
                 {hintsList}

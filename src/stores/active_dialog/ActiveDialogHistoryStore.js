@@ -1,6 +1,6 @@
 var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var ActiveDialogHistoryConstants = require('../../constants/active_dialog/ActiveDialogHistoryContants');
+var ActiveDialogHistoryConstants = require('../../constants/active_dialog/ActiveDialogHistoryConstants');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -8,11 +8,11 @@ var CHANGE_EVENT = 'change';
 var _data = [];
 
 function create(data) {
-
+    _data.push(data);
 }
 
 function destroy() {
-
+    _data = [];
 }
 
 var ActiveDialogHistoryStore = assign({}, EventEmitter.prototype, {

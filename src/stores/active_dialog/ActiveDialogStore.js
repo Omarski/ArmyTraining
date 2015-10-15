@@ -285,7 +285,6 @@ function handleInput( coa ) {
 }
 
 function create(fsm) {
-
     DATA = fsm.data;
 
     memory = JSON.parse( JSON.stringify( DATA.initialMemory ) ); // deep copy so DATA contents never mutated
@@ -336,12 +335,17 @@ return {
 };*/
 
 function load(args) {
-    var self = this;
-
+    console.log("data/content/" + args.chapterId + "/" + args.dialogId + "_info.json")
     $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + "_info.json", function(info) {
+        console.log(info)
         $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + ".json", function (result) {
+            console.log(result)
             ActiveDialogActions.create({data: result, info: info});
         });
+    })
+    .error(function(jqXHR, textStatus, errorThrown) {
+        console.log("error " + textStatus);
+        console.log("incoming Text " + jqXHR.responseText);
     });
 }
 
