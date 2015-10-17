@@ -2,6 +2,7 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var ColorText = require('../../../components/widgets/ColorText');
+var ASRStore = require('../../../stores/ASRStore');
 
 // CONSTANTS
 var LI_ANSWERS_CONTAINER_CLS = "li-answers-container";
@@ -139,8 +140,11 @@ function getPageState(props) {
         playableState: [],
         isPlaying: [],
         isCorrect: [],
-        utterings: []
+        utterings: [],
+        message: ""
     };
+
+    data.message = ASRStore.GetMessage();
 
     if (props && props.page) {
         data.page = props.page;
@@ -226,6 +230,7 @@ var PronunciationView = React.createClass({
     },
 
     componentDidMount: function() {
+        ASRStore.addChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
         if(hasGetUserMedia()){
             // UserMedia allowed
@@ -285,11 +290,13 @@ var PronunciationView = React.createClass({
                     itemFeedbackClass = feedbackClass;
                 }
 
-                var isRecording = self.state.recordingState[index];
-                if (isRecording) {
-                    itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
-                } else {
-                    itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
+                if(self.state.message != "No data found.") {
+                    var isRecording = self.state.recordingState[index];
+                    if (isRecording) {
+                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
+                    } else {
+                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
+                    }
                 }
 
                 return (
@@ -337,7 +344,11 @@ var PronunciationView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        var newMessage = ASRStore.GetMessage();
+        this.setState({
+            message: newMessage
+        });
+        setup();
     }
 });
 

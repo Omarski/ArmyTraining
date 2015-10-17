@@ -2,6 +2,7 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var ColorText = require('../../../components/widgets/ColorText');
+var ASRStore = require('../../../stores/ASRStore');
 
 var L2_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var L2_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
@@ -11,7 +12,8 @@ var L2_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var L2_GLYPHICON_CLS = "l2-glyphicon";
 
 function getPageState(props) {
-    var data = {
+    var data;
+    data = {
         page: null,
         title: "",
         pageType: "",
@@ -20,8 +22,13 @@ function getPageState(props) {
         playableState: [],
         isCorrect: [],
         isPlaying: [],
-        recordingState: []
+        recordingState: [],
+        message: "",
+        recordedSpeech: "",
+        clickedAnswer: 0
     };
+
+    data.message = ASRStore.GetMessage();
 
     if (props && props.page) {
         data.page = props.page;
@@ -62,7 +69,7 @@ function getPageState(props) {
     data.playableState = colElementPlayableState;
     data.isPlaying = isColElementPlaying;
     data.recordingState = colElementRecordingState;
-    console.dir(data);
+
     return data;
 }
 
@@ -101,7 +108,7 @@ function positionDivs(self){
 function handleRecord(id, colNumber, index, self){
     var newRecordingState = self.state.recordingState;
     if (newRecordingState[colNumber][index]) {
-        stopRecording(id);
+        stopRecording(id, colNumber, index, self);
         var newPlayableState = self.state.playableState;
         newPlayableState[colNumber][index] = true;
         newRecordingState[colNumber][index] = false;
@@ -110,17 +117,33 @@ function handleRecord(id, colNumber, index, self){
             playableState: newPlayableState
         })
     } else {
-        record();
-        newRecordingState[colNumber][index] = true;
-        self.setState({
-            recordingState: newRecordingState
-        })
+        if(self.state.message != "recordingStarted") {
+            record(id, colNumber, index, self);
+            newRecordingState[colNumber][index] = true;
+            self.setState({
+                recordingState: newRecordingState
+            })
+        }
     }
 }
 
-function record(){
+function record(id, colNumber, index, self){
     if(ASR.isInitialized){
+        var pState = self.state.playableState;
+        var oldCA = self.state.clickedAnswer;
+        if(oldCA != 0){
+            pState[oldCA.colNumber][oldCA.index] = false;
+        }
         ASR.StartRecording();
+        var clickedAnswer = {
+            colNumber: colNumber,
+            index: index
+        };
+        console.dir(pState);
+        self.setState({
+            clickedAnswer: clickedAnswer,
+            playableState: pState
+        })
     }else {
         //if (navigator.getUserMedia) {
         //    navigator.getUserMedia({audio: true}, onSuccess, onFail);
@@ -131,7 +154,7 @@ function record(){
 }
 
 // pass the audio handle to stopRecording
-function stopRecording(id){
+function stopRecording(id, colNumber, index, self){
     if(ASR.isInitialized){
         ASR.StopRecording();
         ASR.RecognizeRecording();
@@ -145,6 +168,17 @@ function stopRecording(id){
         //console.log("--- stopRecording ---");
         //console.log(recorder);
     }
+}
+
+function checkAnswer(colNumber, index, self){
+    var item = self.state.cols[colNumber][index];
+    console.log("Item: ");
+    console.dir(item);
+    var resultString = ASR.GetMessage();
+    var result = eval(resultString);
+    console.log("Result: ");
+    console.dir(result);
+    console.log(item.uttering.utternace.native.text == result);
 }
 
 function handlePlaying(id, colNumber, index, self){
@@ -190,12 +224,16 @@ var MultiColumnPronunciationView = React.createClass({
     },
 
     componentDidMount: function() {
-        var self = this;
+        ASRStore.addChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
-        positionDivs(self);
+        positionDivs(this);
         if(!ASR.isInitialized()){
             ASR.InitializeASR();
         }
+    },
+
+    componentDidUpdate: function(){
+        positionDivs(this);
     },
 
     componentWillUnmount: function() {
@@ -219,19 +257,27 @@ var MultiColumnPronunciationView = React.createClass({
                     nativeText = item.uttering.utterance.native.text || "";
                     translatedText = item.uttering.utterance.translation.text || "";
                     ezreadText = item.uttering.utterance.ezread.text || "";
+
                     var id = "" + colNumber + "audio" + index;
                     var itemFeedbackClass = "";
                     var itemRecordedClass = "";
                     var itemRecordingClass = "";
 
-                    var hasRecorded = self.state.playableState[colNumber][index];
-                    if (hasRecorded) {
-                        var isCorrect = self.state.isCorrect[colNumber][index];
-                        if (isCorrect) {
+
+                    var isCorrect = self.state.isCorrect[colNumber][index];
+                    if (isCorrect != null) {
+                        if(isCorrect){
                             itemFeedbackClass = feedbackClass + " l2-correct " + L2_GLYPHICON_CORRECT_CLS;
-                        } else {
+                        }else{
                             itemFeedbackClass = feedbackClass + " l2-incorrect " + L2_GLYPHICON_INCORRECT_CLS;
                         }
+                    } else {
+                        itemFeedbackClass = feedbackClass;
+                    }
+
+                    var hasRecorded = self.state.playableState[colNumber][index];
+                    if (hasRecorded) {
+
                         if (self.state.isPlaying[colNumber][index]) {
                             itemRecordedClass = recordedClass + " " + L2_GLYPHICON_STOP_CLS;
                         } else {
@@ -239,14 +285,15 @@ var MultiColumnPronunciationView = React.createClass({
                         }
                     } else {
                         itemRecordedClass = recordedClass;
-                        itemFeedbackClass = feedbackClass;
                     }
 
-                    var isRecording = self.state.recordingState[colNumber][index];
-                    if (isRecording) {
-                        itemRecordingClass = recordingClass + " " + L2_GLYPHICON_STOP_CLS;
-                    } else {
-                        itemRecordingClass = recordingClass + " " + L2_GLYPHICON_RECORD_CLS;
+                    if(self.state.message != "No data found.") {
+                        var isRecording = self.state.recordingState[colNumber][index];
+                        if (isRecording) {
+                            itemRecordingClass = recordingClass + " " + L2_GLYPHICON_STOP_CLS;
+                        } else {
+                            itemRecordingClass = recordingClass + " " + L2_GLYPHICON_RECORD_CLS;
+                        }
                     }
 
                     return (
@@ -299,7 +346,41 @@ var MultiColumnPronunciationView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        var self = this.state;
+        var isCorrectLists = self.isCorrect;
+        var newMessage = ASRStore.GetMessage();
+        var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        switch(newMessage){
+            case "initialized":
+                console.log(newMessage);
+                break;
+            case "recordingStarted":
+                console.log(newMessage);
+                break;
+            case "recordingStopped":
+                console.log(newMessage);
+                break;
+            default:
+                recordedSpeech = eval("(" + newMessage + ")").result;
+                var col = self.clickedAnswer.colNumber;
+                var ind = self.clickedAnswer.index;
+
+                if(self.cols[col][ind].uttering.utterance.native.text == recordedSpeech){
+                    //mark as correct
+                    isCorrectLists[col][ind] = true;
+                }else{
+                    //mark as incorrect
+                    isCorrectLists[col][ind] = false;
+                }
+        }
+
+        // depending on message, do things
+
+        this.setState({
+            message: newMessage,
+            recordedSpeech: recordedSpeech,
+            isCorrect: isCorrectLists
+        });
     }
 });
 
