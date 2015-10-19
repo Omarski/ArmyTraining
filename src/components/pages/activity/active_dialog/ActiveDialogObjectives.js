@@ -11,8 +11,19 @@ var ActiveDialogObjectiveActions = require('../../../../actions/active_dialog/Ac
 
 function getCompState() {
 
+    var objectives = [];
+    if (ActiveDialogObjectiveStore.data() && ActiveDialogObjectiveStore.data().objectives) {
+        var arr = ActiveDialogObjectiveStore.data().objectives;
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            var obj = arr[i];
+            if (obj.label && obj.label !== "") {
+                objectives.push(obj);
+            }
+        }
+    }
     return {
-        objectives: ActiveDialogObjectiveStore.data() || []
+        objectives: objectives
     };
 }
 
@@ -38,18 +49,13 @@ var ActiveDialogObjectives = React.createClass({
 
     render: function() {
 
-        var _self = this;
-
         var objectivesList = <ListGroupItem />;
 
         if (this.state.objectives && this.state.objectives.length > 0) {
             objectivesList = this.state.objectives.map(function(item, index) {
-                var name = item.objectives[0].realizations[0].anima;
                 return  <ListGroupItem key={index}>
-                    <a className="" href="#" data-animation-name={name} onClick={_self.hintAction.bind(_self, item)}>
-                        {item.act}
-                    </a>
-                </ListGroupItem>
+                            {item.label}
+                        </ListGroupItem>
             });
         }
 
