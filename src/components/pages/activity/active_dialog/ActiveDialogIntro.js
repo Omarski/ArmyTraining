@@ -42,6 +42,31 @@ var ActiveDialogIntro = React.createClass({
     },
 
     render: function() {
+
+
+
+        var content= "";
+        var steps = "";
+        var end = "";
+
+        if (this.state.intro && (typeof this.state.intro === "string") && this.state.intro !== "") {
+            var intro = this.state.intro;
+
+            if (intro.indexOf("\n")) {
+                var parts = intro.split("\n");
+                content = parts.shift();
+                end = parts.pop();
+
+                steps = parts.map(function(item, index) {
+                   return (
+                       <p key={index}>
+                           {item}
+                       </p>
+                   );
+                });
+            }
+        }
+
         return (
             <Modal
                 id="introModal"
@@ -49,12 +74,15 @@ var ActiveDialogIntro = React.createClass({
                 onHide={this.hideModal}
                 >
                 <Modal.Header>
-                    <Modal.Title>Choose</Modal.Title>
+                    <Modal.Title>Intro</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
                     <p>
-                        {this.state.intro}
+                        {content}
+                        {steps}
+                        <br/>
+                        {end}
                     </p>
                 </Modal.Body>
 
