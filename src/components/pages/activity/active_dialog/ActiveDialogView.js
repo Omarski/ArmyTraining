@@ -13,6 +13,7 @@ var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dia
 var ActiveDialogHints = require('../../../../components/pages/activity/active_dialog/ActiveDialogHints');
 var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory');
 var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives');
+var ActiveDialogIntro = require('../../../../components/pages/activity/active_dialog/ActiveDialogIntro');
 
 var _dataLoaded = false;
 var _compositionLoaded = false;
@@ -189,6 +190,7 @@ var ActiveDialogView = React.createClass({
                     </div>
                     <div id="Stage" className={this.state.info.composition}>
                     </div>
+                    <ActiveDialogIntro />
                 </div>
 
         }

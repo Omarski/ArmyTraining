@@ -7,6 +7,7 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 var _data = {};
 var _info = {};
+var _briefings = "";
 var DATA, memory, activityState, blockImg, blockId, objectives;
 var asrMode = false;
 
@@ -325,6 +326,7 @@ function create(fsm) {
         _data = makeResult( -1, [], [], null );
     }
     _info = fsm.info;
+    _briefings = DATA.briefings.s0.description;
 }
 
 function destroy() {
@@ -367,6 +369,10 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 
     info: function() {
         return _info;
+    },
+
+    briefings: function () {
+        return _briefings;
     },
 
     findInfoSymbolByAnimationName: function(name) {
@@ -449,5 +455,6 @@ AppDispatcher.register(function(action) {
     }
 });
 
+ActiveDialogStore.setMaxListeners(20);
 
 module.exports = ActiveDialogStore;

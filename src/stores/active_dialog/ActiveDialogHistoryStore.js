@@ -72,10 +72,6 @@ function create(data) {
         _data.push(obj);
     }
 
-    console.log("..............................");
-    console.dir(_items);
-    console.log("..............................");
-
 }
 
 function destroy() {
