@@ -2,8 +2,7 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var Button = ReactBootstrap.Button;
 var Modal = ReactBootstrap.Modal;
-var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
-var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
+var ActiveDialogHintStore = require('../../../../stores/active_dialog/ActiveDialogHintStore');
 var ActiveDialogEvaluationActions = require('../../../../actions/active_dialog/ActiveDialogEvaluationActions');
 var ActiveDialogEvaluationStore = require('../../../../stores/active_dialog/ActiveDialogEvaluationStore');
 
@@ -28,45 +27,20 @@ var ActiveDialogEvaluation = React.createClass({
 
     componentWillMount: function() {
         ActiveDialogEvaluationStore.addChangeListener(this._onChange);
-        ActiveDialogStore.addChangeListener(this._onDialogChange);
+        ActiveDialogHintStore.addChangeListener(this._onDialogChange);
     },
 
     componentDidMount: function() {
         ActiveDialogEvaluationStore.addChangeListener(this._onChange);
-        ActiveDialogStore.addChangeListener(this._onDialogChange);
+        ActiveDialogHintStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
         ActiveDialogEvaluationStore.removeChangeListener(this._onChange);
-        ActiveDialogStore.removeChangeListener(this._onDialogChange);
+        ActiveDialogHintStore.removeChangeListener(this._onDialogChange);
     },
 
     render: function() {
-
-
-
-        var content= "";
-        var steps = "";
-        var end = "";
-
-        if (this.state.evaluation && (typeof this.state.evaluation === "string") && this.state.evaluation !== "") {
-            var evaluation = this.state.evaluation;
-
-            if (evaluation.indexOf("\n")) {
-                var parts = evaluation.split("\n");
-                content = parts.shift();
-                end = parts.pop();
-
-                steps = parts.map(function(item, index) {
-                    return (
-                        <p key={index}>
-                            {item}
-                        </p>
-                    );
-                });
-            }
-        }
-
         return (
             <Modal
                 id="evaluationModal"
@@ -79,10 +53,7 @@ var ActiveDialogEvaluation = React.createClass({
 
                 <Modal.Body>
                     <p>
-                        {content}
-                        {steps}
-                        <br/>
-                        {end}
+                        Evaluation
                     </p>
                 </Modal.Body>
 
@@ -103,9 +74,9 @@ var ActiveDialogEvaluation = React.createClass({
     },
 
     _onDialogChange: function() {
-        if (ActiveDialogStore.briefings() !== "") {
+        if (ActiveDialogHintStore.initialized() && ActiveDialogHintStore.data().length === 0) {
             setTimeout(function() {
-                ActiveDialogEvaluationActions.create(ActiveDialogStore.briefings());
+                ActiveDialogEvaluationActions.create({});
             }, .25);
         }
     }

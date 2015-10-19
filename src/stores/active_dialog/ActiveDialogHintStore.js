@@ -7,7 +7,7 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var _data = [];
-
+var _initialized = false;
 function create(data) {
     _data = [];
     if (data) {
@@ -34,6 +34,9 @@ function create(data) {
             }
         }
         _data = uniqueCOAs;
+        if (_data.length > 0) {
+            _initialized = true;
+        }
     }
 }
 
@@ -45,6 +48,10 @@ var ActiveDialogHintStore = assign({}, EventEmitter.prototype, {
 
     data: function() {
         return _data;
+    },
+
+    initialized: function() {
+        return _initialized;
     },
 
     emitChange: function() {
