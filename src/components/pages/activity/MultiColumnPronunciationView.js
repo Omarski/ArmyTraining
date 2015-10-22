@@ -139,7 +139,6 @@ function record(id, colNumber, index, self){
             colNumber: colNumber,
             index: index
         };
-        console.dir(pState);
         self.setState({
             clickedAnswer: clickedAnswer,
             playableState: pState
@@ -170,16 +169,16 @@ function stopRecording(id, colNumber, index, self){
     }
 }
 
-function checkAnswer(colNumber, index, self){
-    var item = self.state.cols[colNumber][index];
-    console.log("Item: ");
-    console.dir(item);
-    var resultString = ASR.GetMessage();
-    var result = eval(resultString);
-    console.log("Result: ");
-    console.dir(result);
-    console.log(item.uttering.utternace.native.text == result);
-}
+//function checkAnswer(colNumber, index, self){
+//    var item = self.state.cols[colNumber][index];
+//    console.log("Item: ");
+//    console.dir(item);
+//    var resultString = ASR.GetMessage();
+//    var result = eval(resultString);
+//    console.log("Result: ");
+//    console.dir(result);
+//    console.log(item.uttering.utternace.native.text == result);
+//}
 
 function handlePlaying(id, colNumber, index, self){
     if(ASR.isInitialized){
@@ -238,7 +237,9 @@ var MultiColumnPronunciationView = React.createClass({
 
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
+        ASRStore.removeChangeListener(this._onChange);
     },
+
     render: function() {
 
         var self = this;
@@ -346,8 +347,8 @@ var MultiColumnPronunciationView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        var self = this.state;
-        var isCorrectLists = self.isCorrect;
+        var state = this.state;
+        var isCorrectLists = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
         var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
         switch(newMessage){
@@ -362,10 +363,10 @@ var MultiColumnPronunciationView = React.createClass({
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;
-                var col = self.clickedAnswer.colNumber;
-                var ind = self.clickedAnswer.index;
-
-                if(self.cols[col][ind].uttering.utterance.native.text == recordedSpeech){
+                var col = state.clickedAnswer.colNumber;
+                var ind = state.clickedAnswer.index;
+                var text = state.cols[col][ind].uttering.utterance.native.text;
+                if(AGeneric().purgeString(text) == AGeneric().purgeString(recordedSpeech)){
                     //mark as correct
                     isCorrectLists[col][ind] = true;
                 }else{

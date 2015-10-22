@@ -1,0 +1,45 @@
+.UF-container{
+  text-align: center;
+}
+
+.UF-Image{
+
+}
+
+.UF-InteractionContainer{
+  width: 440px;
+  position: absolute;
+  left: calc(50% - 220px);
+
+}
+
+.UF-RecorderContainer{
+  left: calc(50% - 175px);
+  text-align: center;
+  width: 350px;
+  height: 64px;
+  border: 1px solid #666666;
+  background: #bdbdbd;
+  position: relative;
+}
+
+.UF-ResponseContainer{
+
+}
+
+.UF-PromptContainer{
+
+}
+
+.UF-glyphicon{
+  font-size: 20px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.glyphicon-ok-circle{
+  cursor: default;
+}
+.glyphicon-remove-circle{
+  cursor: default;
+}

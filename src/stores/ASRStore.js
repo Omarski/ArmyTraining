@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ASRConstants = require('../constants/ASRConstants');
+var PageStore = require('../stores/PageStore');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -22,6 +23,23 @@ var _message = "No data found.";
 var _lesson = "msb_lesson115_mini_10002";
 var _page = "page4004";
 var _recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+
+function getGrammarID(){
+    var grammarID = "";
+    var pageType = PageStore.page().type;
+    var lessonXID = PageStore.chapter().xid;
+    var lesson = lessonXID.split("_")[0];
+    switch(pageType){
+
+        case "Pronunciation":
+            case "MultiColumnPronunciation":
+            default:
+                grammarID = lesson;
+                console.log(grammarID);
+                return ("msb_" + grammarID);
+    }
+}
+
 
 var ASRStore = assign({}, EventEmitter.prototype, {
 
@@ -50,7 +68,7 @@ var ASRStore = assign({}, EventEmitter.prototype, {
 
     RecognizeRecording: function() {
         // recognize will need to swtich the lesson/page being checked
-        ASRMessajsTester.sendMessage("recognize msb_lesson115", "urn:ASRApplet:test", "text/plain; charset=utf-8");
+        ASRMessajsTester.sendMessage("recognize " + getGrammarID(), "urn:ASRApplet:test", "text/plain; charset=utf-8");
         console.log("recognize recording")
     },
 

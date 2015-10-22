@@ -46,9 +46,21 @@ var onSuccess = function(s){
     console.dir(recorder);
 };
 
-function record(){
+function record(id, index, self){
     if(ASR.isInitialized){
+        var pState = self.state.playableState;
+        var oldCA = self.state.clickedAnswer;
+        if(oldCA != 0){
+            pState[oldCA.index] = false;
+        }
         ASR.StartRecording();
+        var clickedAnswer = {
+            index: index
+        };
+        self.setState({
+            clickedAnswer: clickedAnswer,
+            playableState: pState
+        });
     }else {
         if (navigator.getUserMedia) {
             navigator.getUserMedia({audio: true}, onSuccess, onFail);
@@ -59,7 +71,7 @@ function record(){
 }
 
 // pass the audio handle to stopRecording
-function stopRecording(id){
+function stopRecording(id, index, self){
     if(ASR.isInitialized){
         ASR.StopRecording();
         ASR.RecognizeRecording();
@@ -115,7 +127,7 @@ function stop(id, index, self){
 function handleRecord(id, index, self){
     var newRecordingState = self.state.recordingState;
     if (newRecordingState[index]) {
-        stopRecording(id);
+        stopRecording(id, index, self);
         var newPlayableState = self.state.playableState;
         newPlayableState[index] = true;
         newRecordingState[index] = false;
@@ -124,11 +136,13 @@ function handleRecord(id, index, self){
             playableState: newPlayableState
         })
     } else {
-        record();
-        newRecordingState[index] = true;
-        self.setState({
-            recordingState: newRecordingState
-        })
+        if(self.state.message != "recordingStarted") {
+            record(id, index, self);
+            newRecordingState[index] = true;
+            self.setState({
+                recordingState: newRecordingState
+            })
+        }
     }
 }
 
@@ -141,7 +155,9 @@ function getPageState(props) {
         isPlaying: [],
         isCorrect: [],
         utterings: [],
-        message: ""
+        message: "",
+        recordedSpeech: "",
+        clickedAnswer: 0
     };
 
     data.message = ASRStore.GetMessage();
@@ -242,12 +258,16 @@ var PronunciationView = React.createClass({
             ASR.InitializeASR();
         }
     },
-    componentDidUpdate: function(){
 
+    componentDidUpdate: function(){
+        setup();
     },
+
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
+        ASRStore.removeChangeListener(this._onChange);
     },
+
     render: function() {
         var self = this;
         var page = self.state.page;
@@ -272,14 +292,23 @@ var PronunciationView = React.createClass({
                 var itemRecordedClass = "";
                 var itemRecordingClass = "";
 
-                var hasRecorded = self.state.playableState[index];
-                if (hasRecorded) {
-                    var isCorrect = self.state.isCorrect[index];
+
+                var isCorrect = self.state.isCorrect[index];
+                if(isCorrect != null){
                     if (isCorrect) {
                         itemFeedbackClass = feedbackClass + " li-correct " + LI_GLYPHICON_CORRECT_CLS;
                     } else {
                         itemFeedbackClass = feedbackClass + " li-incorrect " + LI_GLYPHICON_INCORRECT_CLS;
                     }
+                }else{
+                    itemFeedbackClass = feedbackClass;
+                }
+
+
+
+
+                var hasRecorded = self.state.playableState[index];
+                if (hasRecorded) {
                     if (self.state.isPlaying[index]) {
                         itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
                     } else {
@@ -287,7 +316,6 @@ var PronunciationView = React.createClass({
                     }
                 } else {
                     itemRecordedClass = recordedClass;
-                    itemFeedbackClass = feedbackClass;
                 }
 
                 if(self.state.message != "No data found.") {
@@ -344,11 +372,39 @@ var PronunciationView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
+        var state = this.state;
+        var newIsCorrect = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
+        var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+
+        switch(newMessage){
+            case "initialized":
+                console.log(newMessage);
+                break;
+            case "recordingStarted":
+                console.log(newMessage);
+                break;
+            case "recordingStopped":
+                console.log(newMessage);
+                break;
+            default:
+                recordedSpeech = eval("(" + newMessage + ")").result;
+                var ind = state.clickedAnswer.index;
+                var text = state.utterings[ind].uttering.utterance.native.text;
+                if(AGeneric().purgeString(text) == AGeneric().purgeString(recordedSpeech)){
+                    //mark as correct
+                    newIsCorrect[ind] = true;
+                }else{
+                    //mark as incorrect
+                    newIsCorrect[ind] = false;
+                }
+        }
+
         this.setState({
-            message: newMessage
+            message: newMessage,
+            recordedSpeech: recordedSpeech,
+            isCorrect: newIsCorrect
         });
-        setup();
     }
 });
 
