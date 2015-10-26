@@ -129,19 +129,23 @@ var UtteranceFormationView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
-        var response;
+        var response = state.feedbackResponse;
+        var imageSource = "data/media/Emperor_of_Mankind_by_genzoman.jpg";
+        var coach = "";
+        var answerHint = "";
+        var answerString = "";
         var recordingClass = "glyphicon UF-glyphicon UF-record";
         var recordedClass = "glyphicon UF-glyphicon UF-play";
         var feedbackClass = "glyphicon UF-glyphicon UF-feedback";
 
         if(state.haveAnswered){
+            coach = <img className="UF-coachImage" src={imageSource}></img>;
+            $(".UF-ResponseContainer").css("border", "1px solid black");
             if(state.isCorrect){
-                response = <div className="UF-response">Correct Response</div>;
-                feedbackClass += " " + UF_GLYPHICON_CORRECT_CLS;
+                feedbackClass += " UF-correct " + UF_GLYPHICON_CORRECT_CLS;
             }else{
-                response = <div className="UF-response">Incorrect Response</div>;
                 recordedClass += " " + UF_GLYPHICON_PLAY_CLS;
-                feedbackClass += " " + UF_GLYPHICON_INCORRECT_CLS;
+                feedbackClass += " UF-incorrect " + UF_GLYPHICON_INCORRECT_CLS;
             }
         }else{
             response = <div className="UF-response"></div>;
@@ -164,14 +168,16 @@ var UtteranceFormationView = React.createClass({
                 <div className="UF-InteractionContainer">
                     <img className="row UF-Image" src={state.image}></img>
                     <div className="UF-RecorderContainer">
-                        <span className={recordingClass} onClick={function(){handleRecord(self)}}></span>
-                        <span className={recordedClass} onClick={function(){handlePlaying(self)}}></span>
-                        Record your Response Here.
+                        <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
+                        <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
+                        {state.page.prompt.text}
                     </div>
                 </div>
                 <div className="UF-ResponseContainer">
-                    {response}
-                    <span className={feedbackClass}></span>
+                    <div className="UF-coach">{coach}</div>
+                    <div className="UF-answerString">{answerString}</div>
+                    <div className="UF-response">{response}</div>
+                    <div className={feedbackClass}></div>
                 </div>
 
             </div>
@@ -204,18 +210,19 @@ var UtteranceFormationView = React.createClass({
                 state.page.answer.map(function(item){
                     if(test != "Response Found") {
                         var text = item.nut.uttering.utterance.native.text;
+                        // if we find what was spoken as an expected answer
                         if (AGeneric().purgeString(text) == AGeneric().purgeString(recordedSpeech)) {
-                            console.log(AGeneric().purgeString(text));
-                            console.log(AGeneric().purgeString(recordedSpeech));
                             test = "Response Found";
                             if(item.correct == true){
                                 //mark as correct
                                 isCorrect = true;
-                                // add generic positive response
+                                feedbackResponse = AGeneric().correctResponse();
+                                feedbackResponse += "\n";
                             }else{
                                 //mark as incorrect
                                 isCorrect = false;
-                                // add generic negative response
+                                feedbackResponse = AGeneric().incorrectResponse();
+                                feedbackResponse += "\n";
                             }
                         }
                     }
@@ -223,7 +230,7 @@ var UtteranceFormationView = React.createClass({
 
                 if(test == "Unidentified Sentence"){
                     isCorrect = false;
-                    // add generic unidentified response
+                    feedbackResponse = AGeneric().incorrectResponse();
                 }
         }
 

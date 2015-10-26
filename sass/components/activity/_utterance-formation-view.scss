@@ -24,7 +24,17 @@
 }
 
 .UF-ResponseContainer{
+  height: 225px;
+  width: 300px;
+  position: absolute;
+  left: calc(50% + 175px);
+}
 
+.UF-coachImage{
+  position: absolute;
+  left: 0;
+  height: 143px;
+  width: 125px;
 }
 
 .UF-PromptContainer{
@@ -32,14 +42,42 @@
 }
 
 .UF-glyphicon{
-  font-size: 20px;
+  font-size: 36px;
   pointer-events: auto;
   cursor: pointer;
 }
 
-.glyphicon-ok-circle{
-  cursor: default;
+.UF-response{
+  top: 100px;
+  position: absolute;
+  margin: 25px;
+  left: calc(50% - 25px);
 }
-.glyphicon-remove-circle{
+
+.UF-record{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.UF-play{
+  position: absolute;
+  left: 50px;
+  top: 10px;
+}
+
+.UF-feedback{
   cursor: default;
+  position: absolute;
+  top: 20px;
+  font-size: 50px;
+  left: calc(50% - 5px);
+}
+
+.UF-correct{
+  color: green;
+}
+
+.UF-incorrect{
+  color: red;
 }

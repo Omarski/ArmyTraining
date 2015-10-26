@@ -31,12 +31,19 @@ function getGrammarID(){
     var lesson = lessonXID.split("_")[0];
     switch(pageType){
 
+        case "ResponseFormation":
+        case "UtteranceFormation":
+            grammarID = lesson;
+            console.log(grammarID);
+            return ("utt_" + grammarID);
+            break; //break just in case
+
         case "Pronunciation":
-            case "MultiColumnPronunciation":
-            default:
-                grammarID = lesson;
-                console.log(grammarID);
-                return ("msb_" + grammarID);
+        case "MultiColumnPronunciation":
+        default:
+            grammarID = lesson;
+            console.log(grammarID);
+            return ("msb_" + grammarID);
     }
 }
 

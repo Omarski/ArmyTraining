@@ -4,6 +4,7 @@ var SettingsStore = require('../../../stores/SettingsStore');
 var ColorText = require('../../../components/widgets/ColorText');
 var ASRStore = require('../../../stores/ASRStore');
 
+// CONSTANTS
 var L2_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var L2_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 var L2_GLYPHICON_STOP_CLS = "glyphicon-stop";
@@ -168,17 +169,6 @@ function stopRecording(id, colNumber, index, self){
         //console.log(recorder);
     }
 }
-
-//function checkAnswer(colNumber, index, self){
-//    var item = self.state.cols[colNumber][index];
-//    console.log("Item: ");
-//    console.dir(item);
-//    var resultString = ASR.GetMessage();
-//    var result = eval(resultString);
-//    console.log("Result: ");
-//    console.dir(result);
-//    console.log(item.uttering.utternace.native.text == result);
-//}
 
 function handlePlaying(id, colNumber, index, self){
     if(ASR.isInitialized){
