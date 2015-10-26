@@ -53,8 +53,19 @@ var ActiveDialogObjectives = React.createClass({
 
         if (this.state.objectives && this.state.objectives.length > 0) {
             objectivesList = this.state.objectives.map(function(item, index) {
+                var check = "";
+                if (item.pass) {
+                    check = <span className="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                }
+
                 return  <ListGroupItem key={index}>
-                            {item.label}
+                        <table>
+                            <tr>
+                                <td width="25">{check}</td>
+                                <td>{item.label}</td>
+                            </tr>
+                        </table>
+
                         </ListGroupItem>
             });
         }
