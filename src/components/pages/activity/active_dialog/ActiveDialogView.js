@@ -13,6 +13,8 @@ var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dia
 var ActiveDialogHints = require('../../../../components/pages/activity/active_dialog/ActiveDialogHints');
 var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory');
 var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives');
+var ActiveDialogIntro = require('../../../../components/pages/activity/active_dialog/ActiveDialogIntro');
+var ActiveDialogEvaluation = require('../../../../components/pages/activity/active_dialog/ActiveDialogEvaluation');
 
 var _dataLoaded = false;
 var _compositionLoaded = false;
@@ -103,71 +105,6 @@ var ActiveDialogView = React.createClass({
     render: function() {
         var content = <div></div>;
         if (this.state.data && this.state.info) {
-            /*
-            var _self = this;
-
-            var hintsList = <ListGroupItem />;
-            var realizationsList = <ListGroupItem />;
-
-            if (this.state.data && this.state.data.uniqueCOAs) {
-                hintsList = this.state.data.uniqueCOAs.map(function(item, index) {
-                    var name = item.coas[0].realizations[0].anima;
-                    return  <ListGroupItem key={index}>
-                        <a className="" href="#" data-animation-name={name} onClick={_self.hintAction.bind(_self, item)}>
-                            {item.act}
-                        </a>
-                    </ListGroupItem>
-                });
-            }
-
-
-            var hintsPopover =  <Popover id="hintsPopover" title='Hints'>
-                <ListGroup>
-                    {hintsList}
-                </ListGroup>
-            </Popover>;
-
-
-            var realizations = [];
-
-            if (this.state.data && this.state.activeCOA) {
-                var activCOA = this.state.activeCOA;
-                var coas = activCOA.coas;
-                var coasLen = coas.length;
-                for (var i = 0; i < coasLen; i++) {
-                    var coa = coas[i];
-                    var rlzns = coa.realizations;
-                    var rlznsLen = rlzns.length;
-                    for (var j = 0; j < rlznsLen; j++) {
-                        var r = rlzns[j];
-                        realizations.push(<ListGroupItem key={j}>
-                            <a className="coa-item" href="#" data-animation-name={r.anima} onClick={this.coaAction.bind(this, coa, r)}>
-                                {r.uttText}
-                            </a>
-                        </ListGroupItem>);
-                    }
-                }
-            }
-
-            console.log("realizations");
-            console.dir(realizations);
-            console.log("/realizations");
-            var realizationsPopover =  <Popover id="realizationsPopover" title='Realizations'>
-                <ListGroup>
-                    {realizations}
-                </ListGroup>
-            </Popover>;
-
-            var objectivesPopover =  <Popover id="settingsPopover" title='Background and Objectives'>
-                <p>
-                    {this.state.data.objectives}
-                </p>
-            </Popover>;
-
-
-
-            */
-
 
             content = <div className="container active-dialog-view">
                     <h3>{this.state.title} : {this.state.pageType}</h3>
@@ -189,6 +126,8 @@ var ActiveDialogView = React.createClass({
                     </div>
                     <div id="Stage" className={this.state.info.composition}>
                     </div>
+                    <ActiveDialogIntro />
+                    <ActiveDialogEvaluation />
                 </div>
 
         }

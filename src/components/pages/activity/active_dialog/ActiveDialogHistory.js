@@ -2,86 +2,80 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
-var Modal = ReactBootstrap.Modal;
+var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogHistoryStore = require('../../../../stores/active_dialog/ActiveDialogHistoryStore');
+var ActiveDialogHistoryActions = require('../../../../actions/active_dialog/ActiveDialogHistoryActions');
 
-function getCompState(show) {
+function getCompState() {
     return {
-        show: show,
         history: ActiveDialogHistoryStore.data() || []
     };
 }
 
 var ActiveDialogHistory = React.createClass({
-
-    showModal: function() {
-        this.setState(getCompState(true));
-    },
-
-    hideModal: function() {
-        this.setState(getCompState(false));
-    },
-
     getInitialState: function() {
-        return getCompState(false);
+        return getCompState();
     },
 
     componentWillMount: function() {
         ActiveDialogHistoryStore.addChangeListener(this._onChange);
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentDidMount: function() {
         ActiveDialogHistoryStore.addChangeListener(this._onChange);
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
         ActiveDialogHistoryStore.removeChangeListener(this._onChange);
+        ActiveDialogStore.removeChangeListener(this._onDialogChange);
     },
 
     render: function() {
 
+        var _self = this;
+
         var historyList = <ListGroupItem />;
 
-        if (this.state.history && this.state.history.length > 0) {
+        if (this.state.history) {
             historyList = this.state.history.map(function(item, index) {
                 return  <ListGroupItem key={index}>
-                            {item.realization.uttText}
+                            {item.label}
                         </ListGroupItem>
             });
         }
 
+        var historyPopover =  <Popover id="historyPopover" title='History'>
+            <ListGroup>
+                {historyList}
+            </ListGroup>
+        </Popover>;
+
         return (
-            <div>
-                <Button className="btn btn-default" onClick={this.showModal}>
+            <OverlayTrigger trigger='click' placement='bottom' overlay={historyPopover}>
+                <Button className="btn btn-default">
                     Dialog
                 </Button>
-                <Modal
-                    id="historyModal"
-                    show={this.state.show}
-                    onHide={this.hideModal}
-                    >
-                    <Modal.Header>
-                        <Modal.Title>Dialog</Modal.Title>
-                    </Modal.Header>
+            </OverlayTrigger>
 
-                    <Modal.Body>
-                        <ListGroup>
-                            {historyList}
-                        </ListGroup>
-                    </Modal.Body>
-
-                    <Modal.Footer>
-                        <Button onClick={this.hideModal}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
         );
     },
 
     _onChange: function() {
-        this.setState(getCompState(this.state.show));
+        this.setState(getCompState());
+    },
+
+    _onDialogChange: function() {
+        setTimeout(function() {
+            ActiveDialogHistoryActions.create({
+                inputs: ActiveDialogStore.activeDialog().inputs,
+                outputs: ActiveDialogStore.activeDialog().outputs
+            });
+        }, .25);
     }
 });
 
