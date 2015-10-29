@@ -23,7 +23,8 @@ function getPageState(props) {
         incorrectResponses: [],
         message: "No data found.",
         recordedSpeech: "",
-        feedbackResponse: ""
+        feedbackResponse: "",
+        spoken: ""
     };
 
     data.message = ASRStore.GetMessage();
@@ -48,8 +49,6 @@ function getPageState(props) {
         var imgFile = data.page.media[0].xid;
     }
     data.image = "./data/media/" + imgFile;
-    console.log(imgFile);
-    console.log(data.image);
     return data;
 }
 
@@ -130,13 +129,13 @@ var UtteranceFormationView = React.createClass({
         var self = this;
         var state = self.state;
         var response = state.feedbackResponse;
-        var imageSource = "data/media/Emperor_of_Mankind_by_genzoman.jpg";
+        var imageSource = "data/media/MainlandFemale_Render01_exercisecrop.jpg";
         var coach = "";
-        var answerHint = "";
         var answerString = "";
         var recordingClass = "glyphicon UF-glyphicon UF-record";
         var recordedClass = "glyphicon UF-glyphicon UF-play";
         var feedbackClass = "glyphicon UF-glyphicon UF-feedback";
+        var spoken = state.spoken;
 
         if(state.haveAnswered){
             coach = <img className="UF-coachImage" src={imageSource}></img>;
@@ -170,7 +169,7 @@ var UtteranceFormationView = React.createClass({
                     <div className="UF-RecorderContainer">
                         <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
                         <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
-                        {state.page.prompt.text}
+                        <div className="UF-recorderTextContainer">{state.page.prompt.text}</div>
                     </div>
                 </div>
                 <div className="UF-ResponseContainer">
@@ -178,6 +177,7 @@ var UtteranceFormationView = React.createClass({
                     <div className="UF-answerString">{answerString}</div>
                     <div className="UF-response">{response}</div>
                     <div className={feedbackClass}></div>
+                    <div className="UF-spokenContainer">{spoken}</div>
                 </div>
 
             </div>
@@ -192,19 +192,20 @@ var UtteranceFormationView = React.createClass({
         var newMessage = ASRStore.GetMessage();
         var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
         var feedbackResponse = state.feedbackResponse;
+        var spoken = state.spoken;
         switch(newMessage){
             case "initialized":
-                console.log(newMessage);
+                //console.log(newMessage);
                 break;
             case "recordingStarted":
-                console.log(newMessage);
+                //console.log(newMessage);
                 break;
             case "recordingStopped":
-                console.log(newMessage);
+                //console.log(newMessage);
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;
-                console.log(recordedSpeech);
+                //console.log(recordedSpeech);
                 isCorrect = false;
                 var test = "Unidentified Sentence";
                 state.page.answer.map(function(item){
@@ -216,13 +217,14 @@ var UtteranceFormationView = React.createClass({
                             if(item.correct == true){
                                 //mark as correct
                                 isCorrect = true;
-                                feedbackResponse = AGeneric().correctResponse();
-                                feedbackResponse += "\n";
+                                spoken = text;
+                                feedbackResponse = <div className="UF-textContainer">{AGeneric().correctResponse() + "\n" + item.feedback.text}</div>;
+
                             }else{
                                 //mark as incorrect
                                 isCorrect = false;
-                                feedbackResponse = AGeneric().incorrectResponse();
-                                feedbackResponse += "\n";
+                                spoken = text;
+                                feedbackResponse = <div className="UF-textContainer">{AGeneric().incorrectResponse() + "\n" + item.feedback.text}</div>;
                             }
                         }
                     }
@@ -230,9 +232,11 @@ var UtteranceFormationView = React.createClass({
 
                 if(test == "Unidentified Sentence"){
                     isCorrect = false;
-                    feedbackResponse = AGeneric().incorrectResponse();
+                    spoken = "";
+                    feedbackResponse = <div className="UF-textContainer">{AGeneric().incorrectResponse()}</div>;
                 }
         }
+
 
         // depending on message, do things
 
@@ -240,7 +244,8 @@ var UtteranceFormationView = React.createClass({
             message: newMessage,
             recordedSpeech: recordedSpeech,
             isCorrect: isCorrect,
-            feedbackResponse: feedbackResponse
+            feedbackResponse: feedbackResponse,
+            spoken: spoken
         });
     }
 });

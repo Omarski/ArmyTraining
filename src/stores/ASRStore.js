@@ -65,18 +65,18 @@ var ASRStore = assign({}, EventEmitter.prototype, {
 
     StartRecording: function() {
         ASRMessajsTester.sendMessage("startrecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        console.log("Start recording...");
+        //console.log("Start recording...");
     },
 
     StopRecording: function() {
         ASRMessajsTester.sendMessage("stoprecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        console.log("stop recording...");
+        //console.log("stop recording...");
     },
 
     RecognizeRecording: function() {
         // recognize will need to swtich the lesson/page being checked
         ASRMessajsTester.sendMessage("recognize " + getGrammarID(), "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        console.log("recognize recording")
+        //console.log("recognize recording")
     },
 
     PlayRecording: function(){
