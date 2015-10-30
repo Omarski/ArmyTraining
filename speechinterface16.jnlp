@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="" href="speechinterface16.jnlp">
+    <information>
+        <title>Java Binding to the Julius Speech Recognition API</title>
+        <vendor>Alelo, Inc.</vendor>
+        <homepage href="http://www.alelo.com/"/>
+        <description>Java Binding to the Julius Speech RecognitionAPI</description>
+        <description kind="short">Java Binding to the Julius Speech RecognitionAPI</description>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se href="http://java.sun.com/products/autodl/j2se" version="1.5+"/>
+        <jar href="SpeechInterfaceApplet.jar"/>
+    </resources>
+    <resources os="Windows" arch="x86">
+        <nativelib href="asr-native-win32-x86.jar"/>
+    </resources>
+    <resources os="Mac OS X" arch="i386">
+        <nativelib href="asr-native-macosx-i386.jar"/>
+    </resources>
+    <resources os="Mac OS X" arch="x86_64">
+        <nativelib href="asr-native-macosx-x86_64.jar"/>
+    </resources>
+    <resources os="Linux" arch="i386">
+        <nativelib href="asr-native-linux-i386.jar"/>
+    </resources>
+    <resources os="Linux" arch="amd64">
+        <nativelib href="asr-native-linux-amd64.jar"/>
+    </resources>
+    <applet-desc name="SpeechInterface"
+                 main-class="com.alelo.speechinterfaceapplet.SpeechInterfaceApplet"
+                 width="600"
+                 height="100">
+        <param name="installationType" value="wan"/>
+        <param name="installationPathWin" value="--"/>
+        <param name="installationPathUnix" value="--"/>
+        <param name="java.util.logging.config.file" value="logging.properties"/>
+    </applet-desc>
+</jnlp>

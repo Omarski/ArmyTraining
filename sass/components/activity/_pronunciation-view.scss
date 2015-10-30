@@ -19,6 +19,11 @@
   position: absolute;
 }
 
+.li-text-area{
+  font-family: "Myriad Pro", Times, serif;
+  font-size: 18px;
+}
+
 .li-vocal-answer{
   height: 120px;
 }
@@ -31,21 +36,25 @@
 
 .li-record{
   left: 40px;
+  cursor: pointer;
 }
 
 .li-stop{
   left: 40px;
+  cursor: pointer;
 }
 
 .li-playback{
   left: 120px;
+  cursor: pointer;
 }
 
 .li-correct{
+  color: green;
 }
 
 .li-incorrect{
-
+  color: red;
 }
 
 .li-feedback{

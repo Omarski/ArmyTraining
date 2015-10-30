@@ -1,0 +1,100 @@
+.UF-container{
+  text-align: center;
+}
+
+.UF-Image{
+
+}
+
+.UF-InteractionContainer{
+  width: 440px;
+  position: absolute;
+  left: calc(50% - 220px);
+
+}
+
+.UF-RecorderContainer{
+  left: calc(50% - 175px);
+  text-align: center;
+  width: 350px;
+  height: 64px;
+  border: 1px solid #666666;
+  background: #bdbdbd;
+  position: relative;
+}
+
+.UF-recorderTextContainer{
+  float: right;
+  width: 264px;
+  vertical-align: middle;
+}
+
+.UF-ResponseContainer{
+  height: 225px;
+  width: 300px;
+  position: absolute;
+  left: calc(50% + 200px);
+}
+
+.UF-textContainer{
+  top: 150px;
+  position: absolute;
+  width: 100%;
+  height: 75px;
+}
+
+.UF-coachImage{
+  position: absolute;
+  left: 0;
+  height: 143px;
+  width: 125px;
+}
+
+.UF-spokenContainer{
+  font-weight: bold;
+  position: relative;
+  left: 10%;
+  top: 100px;
+}
+
+.UF-PromptContainer{
+
+}
+
+.UF-glyphicon{
+  font-size: 36px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.UF-response{
+
+}
+
+.UF-record{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.UF-play{
+  position: absolute;
+  left: 50px;
+  top: 10px;
+}
+
+.UF-feedback{
+  cursor: default;
+  position: absolute;
+  top: 20px;
+  font-size: 50px;
+  left: calc(50% - 5px);
+}
+
+.UF-correct{
+  color: green;
+}
+
+.UF-incorrect{
+  color: red;
+}

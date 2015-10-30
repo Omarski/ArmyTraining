@@ -1,0 +1,71 @@
+.l2-answers-container{
+  height: auto;
+  width: 1180px;
+  margin: 30px;
+  position: absolute;
+}
+
+.l2-column{
+  width: 575px;
+  position: absolute;
+}
+
+.l2-vocal-answer{
+  height: 120px;
+}
+
+.l2-glyphicon{
+  position: absolute;
+  font-size: 36px;
+  top: inherit;
+  pointer-events: auto;
+}
+
+.l2-note-text{
+
+}
+
+.l2-text-area{
+  font-family: "Myriad Pro", Times, serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+.l2-native-text{
+
+}
+
+.l2-ezread-text{
+
+}
+
+.l2-translated-text{
+
+}
+
+.l2-record{
+  left: 40px;
+  cursor: pointer;
+}
+
+.l2-stop{
+  left: 40px;
+  cursor: pointer;
+}
+
+.l2-playback{
+  left: 120px;
+  cursor: pointer;
+}
+
+.l2-correct{
+  color: green;
+}
+
+.l2-incorrect{
+  color: red;
+}
+
+.l2-feedback{
+  left: calc(100% - 76px);
+}

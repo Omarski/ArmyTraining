@@ -1,6 +1,8 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var ColorText = require('../../../components/widgets/ColorText');
+var ASRStore = require('../../../stores/ASRStore');
 
 // CONSTANTS
 var LI_ANSWERS_CONTAINER_CLS = "li-answers-container";
@@ -26,6 +28,11 @@ window.onload = function init(){
     window.URL = window.URL || window.webkitURL;
 };
 
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
 var onFail = function(e){
     console.log('An Error has occured.', e);
 };
@@ -39,107 +46,145 @@ var onSuccess = function(s){
     console.dir(recorder);
 };
 
-function record(){
-    if(navigator.getUserMedia){
-        navigator.getUserMedia({audio: true}, onSuccess, onFail);
-    }else{
-        console.log('navigator.getUserMedia not present');
+function record(id, index, self){
+    if(ASR.isInitialized){
+        var pState = self.state.playableState;
+        var oldCA = self.state.clickedAnswer;
+        if(oldCA != 0){
+            pState[oldCA.index] = false;
+        }
+        ASR.StartRecording();
+        var clickedAnswer = {
+            index: index
+        };
+        self.setState({
+            clickedAnswer: clickedAnswer,
+            playableState: pState
+        });
+    }else {
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({audio: true}, onSuccess, onFail);
+        } else {
+            console.log('navigator.getUserMedia not present');
+        }
     }
 }
 
 // pass the audio handle to stopRecording
-function stopRecording(id){
-    console.log(id);
-    var audio = document.getElementById(id);
-    recorder.stop();
-    recorder.exportWAV(function(s){
-        audio.src = window.URL.createObjectURL(s);
-    });
-    console.log("--- stopRecording ---");
-    console.log(recorder);
-}
-
-function handlePlaying(id, index, self){
-    var newPlayingState = self.state.isPlaying;
-    if(newPlayingState[index]){
-        newPlayingState[index] = false;
-        self.setState({
-            isPlaying: newPlayingState
+function stopRecording(id, index, self){
+    if(ASR.isInitialized){
+        ASR.StopRecording();
+        ASR.RecognizeRecording();
+    }else {
+        console.log(id);
+        var audio = document.getElementById(id);
+        recorder.stop();
+        recorder.exportWAV(function (s) {
+            audio.src = window.URL.createObjectURL(s);
         });
-        stop(id);
-    }else{
-        newPlayingState[index] = true;
-        self.setState({
-            isPlaying: newPlayingState
-        });
-        play(id);
+        console.log("--- stopRecording ---");
+        console.log(recorder);
     }
 }
 
-function play(id){
-    var a = document.getElementById(id);
-    // might need to be $(a)
-    a.bind('ended', function(){
-        stop(id);
-    });
-    a.play();
+function handlePlaying(id, index, self){
+    if(ASR.isInitialized){
+        ASR.PlayRecording();
+    }else {
+        if (self.state.isPlaying[index]) {
+            stop(id, index, self);
+        } else {
+            play(id, index, self);
+        }
+    }
 }
 
-function stop(id){
+function play(id, index, self){
+    var a = document.getElementById(id);
+    // might need to be $(a)
+    $(a).bind('ended', function(){
+        stop(id, index, self);
+    });
+    a.play();
+    var newPlayingState = self.state.isPlaying;
+    newPlayingState[index] = true;
+    self.setState({
+        isPlaying: newPlayingState
+    });
+}
+
+function stop(id, index, self){
     var a = document.getElementById(id);
     a.pause();
     a.currentTime = 0;
+    var newPlayingState = self.state.isPlaying;
+    newPlayingState[index] = false;
+    self.setState({
+        isPlaying: newPlayingState
+    });
 }
 
 function handleRecord(id, index, self){
     var newRecordingState = self.state.recordingState;
-    if(newRecordingState[index]){
-        stopRecording(id);
+    if (newRecordingState[index]) {
+        stopRecording(id, index, self);
         var newPlayableState = self.state.playableState;
         newPlayableState[index] = true;
         newRecordingState[index] = false;
-        // TODO: Implement the ASR to check if recorded answer is correct
         self.setState({
             recordingState: newRecordingState,
             playableState: newPlayableState
         })
-    }else{
-        record();
-        newRecordingState[index] = true;
-        self.setState({
-            recordingState: newRecordingState
-        })
+    } else {
+        if(self.state.message != "recordingStarted") {
+            record(id, index, self);
+            newRecordingState[index] = true;
+            self.setState({
+                recordingState: newRecordingState
+            })
+        }
     }
 }
 
 function getPageState(props) {
     var data = {
         page: null,
-        note: "Listen and Repeat",
+        notes: [],
         recordingState: [],
         playableState: [],
         isPlaying: [],
-        isCorrect: []
+        isCorrect: [],
+        utterings: [],
+        message: "",
+        recordedSpeech: "",
+        clickedAnswer: 0
     };
+
+    data.message = ASRStore.GetMessage();
 
     if (props && props.page) {
         data.page = props.page;
     }
 
     //for page.nut.length
-    data.page.nut.map(function(){
-        data.recordingState.push(false);
-        data.playableState.push(false);
-        data.isPlaying.push(false);
-        data.isCorrect.push(null);
+    var counter = 0;
+    data.page.nut.map(function(item){
+        if(item.uttering){
+            data.recordingState.push(false);
+            data.playableState.push(false);
+            data.isPlaying.push(false);
+            data.isCorrect.push(null);
+            data.utterings.push(item);
+            counter++;
+        }
+        if(item.note){
+            //data.notes.push(item.note.text);
+            data.notes[counter] = item.note.text;
+            //possible error if 2 notes in a row
+        }
+
     });
-
     return data;
-}
-
-function hasGetUserMedia(){
-    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
 
 function setup(){
@@ -164,9 +209,31 @@ function setup(){
     var icons = document.getElementsByClassName(LI_GLYPHICON_CLS);
     Array.prototype.forEach.call(icons, function(item, index){
         var $item = $(item);
-        var answerLine = Math.floor(index/3);
+        var answerLine = Math.floor(index/3); //3 because 3 icons per answer item.
         $item.css('top', ( ( buffer + (120*answerLine) )+'px'));
     });
+}
+
+// Plays Audio filed named with the xid(zid?) given
+function playAudio(xid){
+    var audio = document.getElementById('li-demo-audio');
+    //var source = document.getElementById('mp3Source');
+    // construct file-path to audio file
+    audio.src = "data/media/" + xid + ".mp3";
+    // play audio, or stop the audio if currently playing
+    if(audio.paused){
+        audio.load();
+        audio.play();
+    }else{
+        audio.pause();
+    }
+
+}
+
+function textClick(id, index, self){
+    var zid = self.state.utterings[index].uttering.media[0].zid;
+    // get audio.
+    playAudio(zid);
 }
 
 var PronunciationView = React.createClass({
@@ -179,6 +246,7 @@ var PronunciationView = React.createClass({
     },
 
     componentDidMount: function() {
+        ASRStore.addChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
         if(hasGetUserMedia()){
             // UserMedia allowed
@@ -186,71 +254,100 @@ var PronunciationView = React.createClass({
             // UserMedia not allowed
         }
         setup();
+        if(!ASR.isInitialized()){
+            ASR.InitializeASR();
+        }
     },
-    componentDidUpdate: function(){
 
+    componentDidUpdate: function(){
+        setup();
     },
+
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
+        ASRStore.removeChangeListener(this._onChange);
     },
-    handleClick: function(event){
 
-    },
     render: function() {
         var self = this;
         var page = self.state.page;
-        var questions = page.nut || [];
+        var questions = self.state.utterings || [];
         var nativeText = "";
+        var translatedText = "";
+        var ezreadText = "";
+        var note = "";
         var feedbackClass = "glyphicon li-glyphicon li-feedback";
         var recordedClass = "glyphicon li-glyphicon li-playback";
         var recordingClass = "glyphicon li-glyphicon li-record";
 
+        // need to check for notes and send those  to top of page
         var vaList = questions.map(function(item, index){
-            if(item && item.uttering && item.uttering.utterance){
-                nativeText = item.uttering.utterance.native.text || "Error: JSON structure changed";
-            }
-            var id = "audio" + index;
-            var itemFeedbackClass = "";
-            var itemRecordedClass = "";
-            var itemRecordingClass = "";
+            if(item && item.uttering && item.uttering.utterance) {
+                note = self.state.notes[index] || "";
+                nativeText = item.uttering.utterance.native.text || "";
+                translatedText = item.uttering.utterance.translation.text || "";
+                ezreadText = item.uttering.utterance.ezread.text || "";
+                var id = "audio" + index;
+                var itemFeedbackClass = "";
+                var itemRecordedClass = "";
+                var itemRecordingClass = "";
 
-            var hasRecorded = self.state.playableState[index];
-            if(hasRecorded){
+
                 var isCorrect = self.state.isCorrect[index];
-                if(isCorrect){
-                    itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_CORRECT_CLS;
+                if(isCorrect != null){
+                    if (isCorrect) {
+                        itemFeedbackClass = feedbackClass + " li-correct " + LI_GLYPHICON_CORRECT_CLS;
+                    } else {
+                        itemFeedbackClass = feedbackClass + " li-incorrect " + LI_GLYPHICON_INCORRECT_CLS;
+                    }
                 }else{
-                    itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_INCORRECT_CLS;
+                    itemFeedbackClass = feedbackClass;
                 }
-                if(self.state.isPlaying[index]){
-                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
-                }else{
-                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
+
+
+
+
+                var hasRecorded = self.state.playableState[index];
+                if (hasRecorded) {
+                    if (self.state.isPlaying[index]) {
+                        itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
+                    } else {
+                        itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
+                    }
+                } else {
+                    itemRecordedClass = recordedClass;
                 }
-            }else{
-                itemRecordedClass = recordedClass;
-                itemFeedbackClass = feedbackClass;
-            }
 
-            var isRecording = self.state.recordingState[index];
-            if(isRecording){
-                itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
-            }else{
-                itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
-            }
+                if(self.state.message != "No data found.") {
+                    var isRecording = self.state.recordingState[index];
+                    if (isRecording) {
+                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
+                    } else {
+                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
+                    }
+                }
 
-            return(
-                <div className="li-vocal-answer">
-                    <audio id={id}></audio>
-                    <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
-                    <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
-                    <div className="li-text-area" id={"text-"+id} onClick={self.handleClick}>
-                        <div className="li-native-text">{nativeText}</div>
-                        <div className="li-translated-text">{"Translated Text Placeholder"}</div>
+                return (
+                    <div className="li-vocal-answer">
+                        <div className="li-note-text">{note}</div>
+                        <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
+                        <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
+
+                        <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
+                            <div className="li-native-text">
+                                <ColorText props={nativeText}/>
+                            </div>
+                            <div className="li-ezread-text">
+                                <ColorText props={ezreadText}/>
+                            </div>
+                            <div className="li-translated-text">
+                                <ColorText props={translatedText}/>
+                            </div>
+                        </div>
+                        <span className={itemFeedbackClass}></span>
                     </div>
-                    <span className={itemFeedbackClass}></span>
-                </div>
-            );
+                );
+            }
         });
 
         return (
@@ -258,11 +355,9 @@ var PronunciationView = React.createClass({
                 <div className="row li-title">
                     <h3>{page.title}</h3>
                 </div>
-                <div className="row li-note">
-                    <h4>{self.note}</h4>
-                </div>
                 <div className="row">
                     <div className="li-answers-container">
+                        <audio id="li-demo-audio"></audio>
                         <div className="li-column">
                             <div className="li-voice-answers">
                                 {vaList}
@@ -277,7 +372,39 @@ var PronunciationView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        var state = this.state;
+        var newIsCorrect = state.isCorrect;
+        var newMessage = ASRStore.GetMessage();
+        var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+
+        switch(newMessage){
+            case "initialized":
+                console.log(newMessage);
+                break;
+            case "recordingStarted":
+                console.log(newMessage);
+                break;
+            case "recordingStopped":
+                console.log(newMessage);
+                break;
+            default:
+                recordedSpeech = eval("(" + newMessage + ")").result;
+                var ind = state.clickedAnswer.index;
+                var text = state.utterings[ind].uttering.utterance.native.text;
+                if(AGeneric().purgeString(text) == AGeneric().purgeString(recordedSpeech)){
+                    //mark as correct
+                    newIsCorrect[ind] = true;
+                }else{
+                    //mark as incorrect
+                    newIsCorrect[ind] = false;
+                }
+        }
+
+        this.setState({
+            message: newMessage,
+            recordedSpeech: recordedSpeech,
+            isCorrect: newIsCorrect
+        });
     }
 });
 
