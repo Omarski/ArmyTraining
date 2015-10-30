@@ -2,12 +2,14 @@ var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
 var ActiveDialogActions = require('../../actions/active_dialog/ActiveDialogActions');
+var PageStore = require('../../stores/PageStore');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 var _data = {};
 var _info = {};
 var _briefings = "";
+var _metrics = {};
 var DATA, memory, activityState, blockImg, blockId, objectives;
 var asrMode = false;
 
@@ -361,6 +363,18 @@ function setActiveCOA(coa) {
 
 }
 
+function hintsShown() {
+    // Greg here is where you would store the hints shown count
+    var metrics = {
+        duration: PageStore.duration(),
+        hintsShown: 25,
+        objectives: ActiveDialogStore.activeDialog().objectives,
+        inputs: ActiveDialogStore.activeDialog().inputs,
+        outputs: ActiveDialogStore.activeDialog().outputs
+    }
+
+}
+
 var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 
     activeDialog: function() {
@@ -448,6 +462,10 @@ AppDispatcher.register(function(action) {
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_SET_ACTIVE_COA:
             setActiveCOA(action.data);
+            ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN:
+            hintsShown(action.data);
             ActiveDialogStore.emitChange();
             break;
         default:

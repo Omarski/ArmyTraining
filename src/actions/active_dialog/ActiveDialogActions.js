@@ -43,6 +43,15 @@ var ActiveDialogActions = {
         });
     },
 
+    hintsShown: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN,
+            data: data
+        });
+    },
+
+
+
     /**
      * @param  {string} id
      */

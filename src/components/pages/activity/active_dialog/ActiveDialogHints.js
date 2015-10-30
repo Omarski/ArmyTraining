@@ -28,6 +28,10 @@ var ActiveDialogHints = React.createClass({
         ActiveDialogActions.setActiveCOA(hint);
     },
 
+    showAction:function() {
+        ActiveDialogActions.hintsShown();
+    },
+
     componentWillMount: function() {
         ActiveDialogHintStore.addChangeListener(this._onChange);
         ActiveDialogStore.addChangeListener(this._onDialogChange);
@@ -68,7 +72,7 @@ var ActiveDialogHints = React.createClass({
 
         return (
             <OverlayTrigger trigger='click' placement='bottom' overlay={hintsPopover}>
-                <Button className="btn btn-default">
+                <Button className="btn btn-default" onClick={this.showAction}>
                     Hints
                 </Button>
             </OverlayTrigger>
