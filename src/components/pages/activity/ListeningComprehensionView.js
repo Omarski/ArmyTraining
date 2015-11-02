@@ -82,10 +82,19 @@ var ListeningComprehensionView = React.createClass({
     componentDidUpdate: function(){
         var selectedAns = null;
         $(".LC-answers").click(function(e){
-            selectedAns = e.value;
-            $(".LC-answers").each(function(item){
-                item.checked = (item.value == selectedAns);
-            })
+            selectedAns = e.target.value;
+            if(e.target.className != "LC-answers disabled") {
+                $(".LC-answers").each(function () {
+                    this.checked = (this.value == selectedAns);
+                    this.className = ("LC-answers disabled");
+                });
+            }else{
+                $(".LC-answers").each(function () {
+                    if(this.value == selectedAns){
+                        this.checked = !this.checked;
+                    }
+                });
+            }
         });
     },
 
@@ -111,10 +120,10 @@ var ListeningComprehensionView = React.createClass({
             </div>;
         }
 
-        var choices = state.answers.map(function(item){
+        var choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
 
-            return (<input type="checkbox" className="LC-answers" value={ans}></input>);
+            return (<input type="checkbox" className="LC-answers" value={ans}>{ans}</input>);
         });
 
         var question = "";
