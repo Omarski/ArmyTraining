@@ -6,6 +6,7 @@ var ActiveDialogHintStore = require('../../../../stores/active_dialog/ActiveDial
 var ActiveDialogObjectiveStore = require('../../../../stores/active_dialog/ActiveDialogObjectiveStore');
 var ActiveDialogEvaluationActions = require('../../../../actions/active_dialog/ActiveDialogEvaluationActions');
 var ActiveDialogEvaluationStore = require('../../../../stores/active_dialog/ActiveDialogEvaluationStore');
+var PageActions = require('../../../../actions/PageActions');
 
 var _shownOnce = false;
 var _current = null;
@@ -24,6 +25,7 @@ function getCompState(show) {
 var ActiveDialogEvaluation = React.createClass({
     next: function() {
         var objectives = ActiveDialogObjectiveStore.data().objectives;
+
         if (_current) {
             if (_currentIndex < objectives.length - 1) {
                 _currentIndex++;
@@ -32,6 +34,13 @@ var ActiveDialogEvaluation = React.createClass({
             }
         }
         _current = objectives[_currentIndex];
+
+
+        if (_current.passDescription === "" && _current.failDescription === ""  && !_startCourse) {
+            this.next();
+            return;
+        }
+
         this.setState(getCompState(this.state.show));
     },
 
@@ -43,11 +52,17 @@ var ActiveDialogEvaluation = React.createClass({
             }
         }
         _current = objectives[_currentIndex];
+
+        if (_current.passDescription === "" && _current.failDescription === "" && _current != 0) {
+            this.previous();
+            return;
+        }
+
         this.setState(getCompState(this.state.show));
     },
 
     start: function() {
-        alert('start');
+        PageActions.loadNext({});
     },
 
     hideModal: function() {
@@ -96,6 +111,20 @@ var ActiveDialogEvaluation = React.createClass({
                         </button>
                         </div>);
         }
+
+        var nextButton = "";
+        var previousButton = "";
+
+        if (!_startCourse) {
+            previousButton = <button type="button" className="btn btn-default" aria-label="Previous" onClick={this.previous}>
+                                <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            </button>;
+
+            nextButton =  <button type="button" className="btn btn-default" aria-label="Next" onClick={this.next}>
+                            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        </button>;
+        }
+
         return (
             <Modal
                 id="evaluationModal"
@@ -124,9 +153,7 @@ var ActiveDialogEvaluation = React.createClass({
                             <table className="table">
                                 <tr>
                                     <td width="25" valign="middle">
-                                        <button type="button" className="btn btn-default" aria-label="Previous" onClick={this.previous}>
-                                            <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                        </button>
+                                        {previousButton}
                                     </td>
                                     <td>
                                         <p>
@@ -134,9 +161,7 @@ var ActiveDialogEvaluation = React.createClass({
                                         </p>
                                     </td>
                                     <td width="25" valign="middle">
-                                        <button type="button" className="btn btn-default" aria-label="Next" onClick={this.next}>
-                                            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                        </button>
+                                        {nextButton}
                                     </td>
                                 </tr>
                             </table>
@@ -144,10 +169,6 @@ var ActiveDialogEvaluation = React.createClass({
                         </div>
                     </div>
                 </Modal.Body>
-
-                <Modal.Footer>
-                    <Button onClick={this.hideModal}>Close</Button>
-                </Modal.Footer>
             </Modal>
         );
     },

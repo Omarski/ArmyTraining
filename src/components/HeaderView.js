@@ -82,7 +82,9 @@ var HeaderView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getBookState());
+        if (this.isMounted()) {
+            this.setState(getBookState());
+        }
     }
 });
 

@@ -328,7 +328,7 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <div className="li-vocal-answer">
+                    <div className="li-vocal-answer" key={index}>
                         <div className="li-note-text">{note}</div>
                         <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
                         <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>

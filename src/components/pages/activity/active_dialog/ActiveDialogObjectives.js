@@ -77,7 +77,7 @@ var ActiveDialogObjectives = React.createClass({
         </Popover>;
 
         return (
-            <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover}>
+            <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover} ref="objectivesPopover">
                 <Button className="btn btn-default">
                     Objectives
                 </Button>

@@ -45,6 +45,20 @@ var ActiveDialogCOAs = React.createClass({
         var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
         this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
         ActiveDialogActions.handleInput(coa);
+
+        var outputs = ActiveDialogStore.activeDialog().outputs;
+
+        if (outputs) {
+            var len = outputs.length;
+            for (var i = 0; i < len; i++) {
+                var o = outputs[i];
+                var action = o.action;
+                var animation = action.anima;
+                var oSymbol = ActiveDialogStore.findInfoSymbolByAnimationName(animation);
+                var oAni = ActiveDialogStore.findInfoAnimationByName(oSymbol, animation);
+                this.play(ActiveDialogStore.info().composition, oSymbol.symbolName, oSymbol.videoName, oAni.animationName, oAni.start, oAni.stop);
+            }
+        }
         ActiveDialogHistoryActions.create({coa: coa, realization:realization});
     },
 

@@ -240,7 +240,7 @@ function makeResult( transInd, inputq, outputq, retVid ) {
         'video': transInd === -1 ? retVid : DATA.transitions[transInd].video
     };
 
-    console.dir(result);
+    //console.dir(result);
     return result;
 }
 
@@ -365,13 +365,14 @@ function setActiveCOA(coa) {
 
 function hintsShown() {
     // Greg here is where you would store the hints shown count
+    /*
     var metrics = {
         duration: PageStore.duration(),
         hintsShown: 25,
         objectives: ActiveDialogStore.activeDialog().objectives,
         inputs: ActiveDialogStore.activeDialog().inputs,
         outputs: ActiveDialogStore.activeDialog().outputs
-    }
+    }*/
 
 }
 
