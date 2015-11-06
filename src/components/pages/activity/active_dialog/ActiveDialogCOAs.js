@@ -18,6 +18,8 @@ function getCompState(show) {
     };
 }
 
+var _actionSound = "";
+
 var ActiveDialogCOAs = React.createClass({
 
     play: function(compName, symbolName, childName, animKey, start, end) {
@@ -48,11 +50,15 @@ var ActiveDialogCOAs = React.createClass({
 
         var outputs = ActiveDialogStore.activeDialog().outputs;
 
+        var sounds = [];
         if (outputs) {
             var len = outputs.length;
             for (var i = 0; i < len; i++) {
                 var o = outputs[i];
+                console.log('output');
+                console.dir(o);
                 var action = o.action;
+                sounds.push(action.sound);
                 var animation = action.anima;
                 var oSymbol = ActiveDialogStore.findInfoSymbolByAnimationName(animation);
                 var oAni = ActiveDialogStore.findInfoAnimationByName(oSymbol, animation);
@@ -60,6 +66,35 @@ var ActiveDialogCOAs = React.createClass({
             }
         }
         ActiveDialogHistoryActions.create({coa: coa, realization:realization});
+        this.playSounds(sounds, 0);
+    },
+
+    playSounds: function(sounds, index) {
+        if (index < sounds.length) {
+            var self = this;
+            var sound = sounds[index];
+            if (_actionSound !== sound) {
+                index++;
+                console.log('data/media/' + sound + '.mp3');
+                $('#activeDialogAudioPlayer').attr('src', 'data/media/' + sound + '.mp3');
+
+                $('#activeDialogAudioPlayer').on('ended', function() {
+                    setTimeout(function() {
+                        self.playSounds(sounds, index);
+                    }, 1000);
+                });
+
+                $('#activeDialogAudioPlayer').on('load', function() {
+                    console.log('loaded')
+                    $('#activeDialogAudioPlayer').trigger('play');
+                });
+
+
+                $('#activeDialogAudioPlayer').load();
+
+
+            }
+        }
     },
 
     hideModal: function() {
@@ -122,6 +157,8 @@ var ActiveDialogCOAs = React.createClass({
                 <Modal.Footer>
                     <Button onClick={this.hideModal}>Close</Button>
                 </Modal.Footer>
+                <audio id="activeDialogAudioPlayer" src="">
+                </audio>
             </Modal>
         );
     },

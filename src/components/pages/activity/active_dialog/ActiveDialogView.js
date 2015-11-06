@@ -46,6 +46,7 @@ function getPageState(props) {
 }
 
 function updatePageState(st) {
+    console.log(ActiveDialogStore.activeDialog());
     return {
         title: st.title || "",
         pageType: st.pageType || "",
@@ -125,6 +126,7 @@ var ActiveDialogView = React.createClass({
                         </div>
                     </div>
                     <div id="Stage" className={this.state.info.composition}>
+                        Loading....
                     </div>
                     <ActiveDialogIntro />
                     <ActiveDialogEvaluation />
