@@ -3,18 +3,24 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 
 
+var LC_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
+var LC_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+
 function getPageState(props) {
     var data = {
         title: "",
         pageType: "",
-        feedbackResponse: "",
         image: "",
         prompt: "",
         volume: SettingsStore.voiceVolume(),
         haveListened: false,
         haveAnswered: false,
         isCorrect: false,
-        answers: []
+        answers: [],
+        correctAnswer: "",
+        answerFeedback: "No Answer Selected.",
+        questionString: "",
+        addClickComplete: false
     };
 
     var imageZid = "";
@@ -26,7 +32,14 @@ function getPageState(props) {
         imageZid = props.page.media[0].zid;
         data.prompt = props.page.prompt.text;
         data.answers = props.page.answer;
+        data.questionString = props.page.question.utterance.native.text;
     }
+
+    props.page.answer.map(function(item){
+        if(item.correct == true){
+            data.correctAnswer = item.nut.uttering.utterance.translation.text;
+        }
+    });
 
     data.answers = AGeneric().shuffle(data.answers);
 
@@ -64,6 +77,17 @@ function playAudio(xid){
 
 }
 
+function getFeedback(answers, selectedAnswer){
+    var getter = "getFeedback could not find selected Answer.";
+    answers.map(function(item){
+        var translation = item.nut.uttering.utterance.translation;
+        if(selectedAnswer == translation.text){
+            getter = item.feedback.text;
+        }
+    });
+    return(getter);
+}
+
 var ListeningComprehensionView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
@@ -80,22 +104,34 @@ var ListeningComprehensionView = React.createClass({
     },
 
     componentDidUpdate: function(){
+        var self = this;
+        var state = this.state;
         var selectedAns = null;
-        $(".LC-answers").click(function(e){
-            selectedAns = e.target.value;
-            if(e.target.className != "LC-answers disabled") {
-                $(".LC-answers").each(function () {
-                    this.checked = (this.value == selectedAns);
-                    this.className = ("LC-answers disabled");
-                });
-            }else{
-                $(".LC-answers").each(function () {
-                    if(this.value == selectedAns){
-                        this.checked = !this.checked;
+        var haveAnswered = false;
+        var isCorrect = false;
+        var feedback = state.answerFeedback;
+        var target = state.correctAnswer;
+        if(!state.addClickComplete) {
+            $(".LC-answerCheckbox").click(function (e) {
+                selectedAns = e.target.value;
+                haveAnswered = true;
+                $(".LC-answerCheckbox").each(function () {
+                    if (this.value == selectedAns) {
+                        this.checked = true;
+                        isCorrect = (selectedAns == target);
+                        feedback = getFeedback(state.answers, selectedAns);
+                    } else {
+                        this.checked = false;
                     }
                 });
-            }
-        });
+                self.setState({
+                    haveAnswered: haveAnswered,
+                    isCorrect: isCorrect,
+                    answerFeedback: feedback,
+                    addClickComplete: true
+                });
+            });
+        }
     },
 
     componentWillUnmount: function() {
@@ -104,15 +140,24 @@ var ListeningComprehensionView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
-        var response = state.feedbackResponse;
+        var response = state.answerFeedback;
+        var imageSource = "data/media/MainlandFemale_Render01_exercisecrop.jpg";
         var coach = "";
-        var answerString = "";
+        var answerString = state.questionString;
         var feedbackClass = "glyphicon LC-glyphicon LC-feedback";
         var promptString = state.prompt;
 
         var responder = "";
         if(state.haveAnswered) {
-            responder = <div>
+            coach = <img className="LC-coachImage" src={imageSource}></img>;
+
+            if(state.isCorrect){
+                feedbackClass += " LC-correct " + LC_GLYPHICON_CORRECT_CLS;
+            }else{
+                feedbackClass += " LC-incorrect " + LC_GLYPHICON_INCORRECT_CLS;
+            }
+
+            responder = <div className="LC-coachContainer">
                 <div className="LC-coach">{coach}</div>
                 <div className="LC-answerString">{answerString}</div>
                 <div className="LC-response">{response}</div>
@@ -122,8 +167,7 @@ var ListeningComprehensionView = React.createClass({
 
         var choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
-
-            return (<input type="checkbox" className="LC-answers" value={ans}>{ans}</input>);
+            return (<div className="LC-answers"><input type="checkbox" className="LC-answerCheckbox" value={ans}>{ans + "\n"}<br /></input></div>);
         });
 
         var question = "";

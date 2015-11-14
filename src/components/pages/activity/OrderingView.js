@@ -3,18 +3,17 @@ var PageStore = require('../../../stores/PageStore');
 
 
 function getPageState(props) {
-    var title = "";
-    var pageType = "";
+    var data = {
+        title: "",
+        pageType: ""
+    };
 
     if (props && props.page) {
-        title = props.page.title;
-        pageType = props.page.type;
+        data.title = props.page.title;
+        data.pageType = props.page.type;
     }
 
-    return {
-        title: title,
-        pageType: pageType
-    };
+    return data;
 }
 
 var OrderingView = React.createClass({
