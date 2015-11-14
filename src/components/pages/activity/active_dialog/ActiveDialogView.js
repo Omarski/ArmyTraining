@@ -46,6 +46,7 @@ function getPageState(props) {
 }
 
 function updatePageState(st) {
+    console.log(ActiveDialogStore.activeDialog());
     return {
         title: st.title || "",
         pageType: st.pageType || "",
@@ -125,6 +126,7 @@ var ActiveDialogView = React.createClass({
                         </div>
                     </div>
                     <div id="Stage" className={this.state.info.composition}>
+                        Loading....
                     </div>
                     <ActiveDialogIntro />
                     <ActiveDialogEvaluation />
@@ -140,16 +142,20 @@ var ActiveDialogView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        if (this.state && this.state.title != "") {
-            this.setState(updatePageState(this.state));
-        } else {
-            this.setState(getPageState());
+        if (this.isMounted()) {
+            if (this.state && this.state.title != "") {
+                this.setState(updatePageState(this.state));
+            } else {
+                this.setState(getPageState());
+            }
         }
     },
 
     _onDialogChange: function() {
-        this.setState(updatePageState(this.state));
-        loadComposition();
+        if (this.isMounted()) {
+            this.setState(updatePageState(this.state));
+            loadComposition();
+        }
     }
 
 });

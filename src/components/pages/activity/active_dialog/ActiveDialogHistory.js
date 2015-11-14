@@ -56,7 +56,7 @@ var ActiveDialogHistory = React.createClass({
         </Popover>;
 
         return (
-            <OverlayTrigger trigger='click' placement='bottom' overlay={historyPopover}>
+            <OverlayTrigger trigger='click' placement='bottom' overlay={historyPopover} ref="dialogHistoryPopover">
                 <Button className="btn btn-default">
                     Dialog
                 </Button>

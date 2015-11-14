@@ -8,6 +8,8 @@ function getPageState(props) {
     var noteItems = "";
     var mediaItems = "";
 
+
+
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
@@ -62,15 +64,15 @@ var InfoView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
         return (
@@ -88,7 +90,10 @@ var InfoView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        if (this.isMounted()) {
+            this.setState(getPageState(this.props));
+        }
+
     }
 });
 

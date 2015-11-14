@@ -316,4 +316,6 @@ AppDispatcher.register(function(action) {
     }
 });
 
+PageStore.setMaxListeners(20);
+
 module.exports = PageStore;

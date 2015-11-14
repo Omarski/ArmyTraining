@@ -10,11 +10,12 @@ var ActiveDialogHintStore = require('../../../../stores/active_dialog/ActiveDial
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 var ActiveDialogHintActions = require('../../../../actions/active_dialog/ActiveDialogHintActions');
 
-function getCompState(coas) {
+function getCompState(coas, show) {
     if (!coas) {
         coas = ActiveDialogHintStore.data();
     }
     return {
+        show: show,
         coas: coas
     };
 }
@@ -26,6 +27,7 @@ var ActiveDialogHints = React.createClass({
 
     hintAction:function(hint) {
         ActiveDialogActions.setActiveCOA(hint);
+        this.refs.hintsPopover.hide();
     },
 
     showAction:function() {
@@ -71,7 +73,7 @@ var ActiveDialogHints = React.createClass({
         </Popover>;
 
         return (
-            <OverlayTrigger trigger='click' placement='bottom' overlay={hintsPopover}>
+            <OverlayTrigger trigger='click' placement='bottom' overlay={hintsPopover} ref="hintsPopover">
                 <Button className="btn btn-default" onClick={this.showAction}>
                     Hints
                 </Button>

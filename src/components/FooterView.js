@@ -99,11 +99,15 @@ var FooterView = React.createClass({
         PageActions.loadPrevious({});
     },
     _onLoadChange: function() {
-        this.setState(getUnitState(false));
+        if (this.isMounted()) {
+            this.setState(getUnitState(false));
+        }
     },
 
     _onPageChange: function() {
-        this.setState(getUnitState(false));
+        if (this.isMounted()) {
+            this.setState(getUnitState(false));
+        }
     },
 
     getInitialState: function() {
