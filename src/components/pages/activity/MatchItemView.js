@@ -71,9 +71,6 @@ var MatchItemView = React.createClass({
             draggedItemTarget = "";
         }
 
-        //console.log("dragging: ");
-        //console.log($(e.target).attr("data"));
-
         self.setState({
             draggedItemData: draggedItemData,
             draggedItemTarget: draggedItemTarget
@@ -99,12 +96,6 @@ var MatchItemView = React.createClass({
         var draggedItemData = state.draggedItemData;
 
         var dropLocation = "";
-
-        //console.log("dropping on class: ");
-        //console.log($(e.target).attr("class"));
-        //console.log($(e.target).attr("data-letter"));
-        //console.dir(draggedItemTarget);
-        //console.log($(e.target).parent().attr("class"));
 
         //TODO: don't allow more than 1 answer
         switch($(e.target).attr("class")){
@@ -146,7 +137,6 @@ var MatchItemView = React.createClass({
         var playable = true;
         var answerState = state.answerState;
 
-        // console.dir($($(e.target).parent()).attr("class"));
         if($($(e.target).parent()).attr("class") == "MI-choices-container"){
             answerState.map(function(item){
                 if($(e.target).attr("data") == item.label){
@@ -165,10 +155,6 @@ var MatchItemView = React.createClass({
                 }
             });
         }
-
-        //zid = $(e.target.parentElement).attr("data-question-zid");
-        //playAudio(zid);
-        //console.dir($(e.target).attr("data"));
     },
 
     reset: function() {

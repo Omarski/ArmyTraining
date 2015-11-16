@@ -72,8 +72,6 @@ var SortingView = React.createClass({
             draggedItemData = "";
             draggedItemTarget = "";
         }
-        //console.log("dragging: ");
-        //console.log($(e.target).attr("data"));
 
         self.setState({
             draggedItemData: draggedItemData,
@@ -101,10 +99,6 @@ var SortingView = React.createClass({
 
         var dropLocation = "";
 
-        //console.log("dropping on class: ");
-        //console.log($(e.target).attr("class"));
-        //console.dir(draggedItemTarget);
-        //console.log($(e.target).parent().attr("class"));
         switch($(e.target).attr("class")){
             case "sorting-columnA-dropArea":
                 dropLocation = "A";
@@ -150,7 +144,6 @@ var SortingView = React.createClass({
         var playable = true;
         var answerState = state.answerState;
 
-       // console.dir($($(e.target).parent()).attr("class"));
         if($($(e.target).parent()).attr("class") == "sorting-choices-container"){
             answerState.map(function(item){
                 if($(e.target).attr("data") == item.label){
@@ -170,9 +163,6 @@ var SortingView = React.createClass({
             });
         }
 
-        //zid = $(e.target.parentElement).attr("data-question-zid");
-        //playAudio(zid);
-        //console.dir($(e.target).attr("data"));
     },
 
     reset: function() {
@@ -270,10 +260,6 @@ var SortingView = React.createClass({
             }
         });
 
-        //console.dir(answerState);
-        //console.log("colContent before answerState map...");
-
-
         answerState.map(function(item, index){
             var isCorrect = "";
             if(state.numMoved == answerState.length) {
@@ -286,11 +272,6 @@ var SortingView = React.createClass({
                 colBContent.push({label: item.label, isCorrect: isCorrect});
             }
         });
-
-        //console.log("colContent before creating img's...");
-        //console.dir(colAContent);
-        //console.dir(colBContent);
-
 
         colARender = colAContent.map(function(itemA, index){
             var feedbackA = "";
@@ -312,9 +293,6 @@ var SortingView = React.createClass({
             </div>);
         });
 
-        //console.log("colBContent: ");
-        //console.dir(colBContent);
-        //console.log("colBContent.map: ");
         colBRender = colBContent.map(function(itemB, index){
             var feedbackB = "";
             if(state.numMoved == answerState.length){
@@ -334,11 +312,6 @@ var SortingView = React.createClass({
                 <div className={feedbackB}></div>
             </div>);
         });
-
-        //console.log("colBRender: ");
-        //console.dir(colBRender);
-        //console.log(colBRender);
-        //console.dir($(colBRender[0]));
 
         return (
             <div className="sorting-container">
