@@ -15,7 +15,7 @@ function getPageState(props) {
         draggedItemTarget: "",
         isGraded: false,
         numMoved: 0
-    } ;
+    };
 
     if (props && props.page) {
         data.title = props.page.title;
@@ -61,15 +61,15 @@ var MatchItemView = React.createClass({
         var draggedItemData = "";
         var draggedItemTarget = "";
 
-        //if(state.numMoved != state.answerState.length && $(e.target).css("opacity") != 0.3) {
-        //    if (e.target) {
-        //        draggedItemData = $(e.target).attr("data");
-        //        draggedItemTarget = e.target;
-        //    }
-        //}else{
-        //    draggedItemData = "";
-        //    draggedItemTarget = "";
-        //}
+        if(state.numMoved != state.answerState.length && $(e.target).css("opacity") != 0.3) {
+            if (e.target) {
+                draggedItemData = $(e.target).attr("data");
+                draggedItemTarget = e.target;
+            }
+        }else{
+            draggedItemData = "";
+            draggedItemTarget = "";
+        }
 
         //console.log("dragging: ");
         //console.log($(e.target).attr("data"));
@@ -102,41 +102,37 @@ var MatchItemView = React.createClass({
 
         //console.log("dropping on class: ");
         //console.log($(e.target).attr("class"));
+        //console.log($(e.target).attr("data-letter"));
         //console.dir(draggedItemTarget);
         //console.log($(e.target).parent().attr("class"));
 
-        //switch($(e.target).attr("class")){
-        //    case "MI-columnA-dropArea":
-        //        dropLocation = "A";
-        //        break;
-        //    case "MI-columnB-dropArea":
-        //        dropLocation = "B";
-        //        break;
-        //    default:
-        //        if($(e.target).parent().attr("class") == "MI-columnA-dropArea"){
-        //            dropLocation = "A";
-        //        }
-        //        if($(e.target).parent().attr("class") == "MI-columnB-dropArea"){
-        //            dropLocation = "B";
-        //        }
-        //}
+        //TODO: don't allow more than 1 answer
+        switch($(e.target).attr("class")){
+            case "MI-answer-dropArea":
+                dropLocation = $(e.target).attr("data-letter");
+                break;
+            default:
+                //if($(e.target).parent().attr("class") == "MI-answer-dropArea"){
+                //    dropLocation = $(e.target).parent().attr("data-letter");
+                //}
+        }
 
-        //var itemFound = false;
-        //if(state.numMoved != state.answerState && $(draggedItemTarget).css("opacity") != 0.3) {
-        //    if (draggedItemData != "" && dropLocation != "") {
-        //        answerState.map(function (item) {
-        //            if (draggedItemData == item.label) {
-        //                item.currentBox = dropLocation;
-        //                item.isMoved = true;
-        //                if ($($(draggedItemTarget).parent()).attr("class") == "MI-choices-container") {
-        //                    $(draggedItemTarget).css("opacity", "0.3");
-        //                    numMoved++;
-        //                }
-        //                itemFound = true;
-        //            }
-        //        });
-        //    }
-        //}
+        var itemFound = false;
+        if(state.numMoved != state.answerState && $(draggedItemTarget).css("opacity") != 0.3) {
+            if (draggedItemData != "" && dropLocation != "") {
+                answerState.map(function (item) {
+                    if (draggedItemData == item.label) {
+                        item.currentBox = dropLocation;
+                        item.isMoved = true;
+                        if ($($(draggedItemTarget).parent()).attr("class") == "MI-choices-container") {
+                            $(draggedItemTarget).css("opacity", "0.3");
+                            numMoved++;
+                        }
+                        itemFound = true;
+                    }
+                });
+            }
+        }
 
         self.setState({
             answerState: answerState,
@@ -185,9 +181,9 @@ var MatchItemView = React.createClass({
             item.currentBox = "";
         });
 
-        //$(".MI-playicon").each(function(i, item){
-        //    $(item).css("opacity", "1.0");
-        //});
+        $(".MI-playicon").each(function(i, item){
+            $(item).css("opacity", "1.0");
+        });
 
         self.setState({
             numMoved: 0,
@@ -213,14 +209,9 @@ var MatchItemView = React.createClass({
         var choices;
         var answerState = state.answerState;
         var numQuestions = answerState.length;
-        var colATitle = "a little column A";
-        var colAContent = [];
-        var colARender;
-        var colBTitle = "a little column B";
-        var colBContent = [];
-        var colBRender;
         var correct = "glyphicon MI-feedback MI-correct glyphicon-ok-circle";
         var incorrect = "glyphicon MI-feedback MI-incorrect glyphicon-remove-circle";
+        var answerContainers;
 
         var isGraded = state.isGraded;
         var numMoved = state.numMoved;
@@ -257,11 +248,48 @@ var MatchItemView = React.createClass({
             </img>);
         });
 
-        // get the prompt for each answer, it will act as a different box like the sort page
+        answerContainers = state.page.matchTarget.map(function(item, index){
+            var answerPrompt = item.nut.uttering.utterance.translation.text;
+            var letter = item.letter;
+            var answerRender = "";
+            var feedback = "";
+            var needCheck = state.numMoved == answerState.length;
 
-        // render all the answer boxes if they have something in them. "simpler" because only 1 item in each box.
-        // maybe turn each column into an answer container. Make a dynamic list of them. only added code is to prevent
-        // more than one item being dropped.
+            for(var i=0;i<state.answerState.length;i++){
+                if(letter == state.answerState[i].currentBox){
+
+                    if(needCheck){
+                        if(state.answerState[i].currentBox == state.answerState[i].correctBox){
+                            feedback = correct;
+                        }else{
+                            feedback = incorrect;
+                        }
+                    }
+
+                    answerRender = <div src={"./data/media/myPlay.jpg"}
+                                        data={state.answerState[i].label}
+                                        className="MI-playicon"
+                                        draggable="true"
+                                        onDragStart={self.onDragging}
+                                        onClick={self.onClick}>
+                        <img className="MI-image" src={"./data/media/myPlay.jpg"}></img>
+                        <div className={feedback}></div>
+                    </div>;
+                }
+            }
+
+           return(<div className = "MI-answer" key={"answer-"+index}>
+               <div className="MI-answer-prompt">{answerPrompt}</div>
+               <div className="MI-answer-dropArea"
+                    data-letter={letter}
+                    onDragOver={self.onDraggingOver}
+                    onDrop={self.onDropping}>
+                   {answerRender}
+               </div>
+           </div>);
+        });
+
+
         return (
             <div className="MI-container">
                 <audio id="audio" volume={this.state.volume}>
@@ -272,23 +300,7 @@ var MatchItemView = React.createClass({
                 <div className="MI-buttons-container">{button}</div>
                 <div className="MI-choices-container">{choices}</div>
                 <div className="MI-answers-container">
-                    <div className="MI-columnA">
-                        <div className="MI-columnA-title">{colATitle}</div>
-                        <div className="MI-columnA-dropArea"
-                             onDragOver={self.onDraggingOver}
-                             onDrop={self.onDropping}>
-                            {colARender}
-                        </div>
-                    </div>
-
-                    <div className="MI-columnB">
-                        <div className="MI-columnB-title">{colBTitle}</div>
-                        <div className="MI-columnB-dropArea"
-                             onDragOver={self.onDraggingOver}
-                             onDrop={self.onDropping}>
-                            {colBRender}
-                        </div>
-                    </div>
+                    {answerContainers}
                 </div>
             </div>
         );

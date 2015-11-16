@@ -30,7 +30,7 @@ function getPageState(props) {
         });
     }
 
-
+    data.answerState = AGeneric().shuffle(data.answerState);
 
     return data;
 }
@@ -189,6 +189,8 @@ var SortingView = React.createClass({
             $(item).css("opacity", "1.0");
         });
 
+        answerState = AGeneric().shuffle(answerState);
+
         self.setState({
             numMoved: 0,
             answerState: answerState
@@ -221,10 +223,8 @@ var SortingView = React.createClass({
         var colBRender;
         var correct = "glyphicon sorting-feedback sorting-correct glyphicon-ok-circle";
         var incorrect = "glyphicon sorting-feedback sorting-incorrect glyphicon-remove-circle";
-
         var isGraded = state.isGraded;
         var numMoved = state.numMoved;
-
 
         if(numMoved == numQuestions){
             var isCorrect = true;
