@@ -126,26 +126,11 @@ function getPageState(props) {
         }
     }
 
-    data.answers = shuffle(data.answers); // randomize answers bank
+    data.answers = AGeneric().shuffle(data.answers); // randomize answers bank
     return data;
 }
 
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex ;
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
 
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-    return array;
-}
 
 // Set the size of the answer areas and all the draggable items to be the same as the largest
 // Also centers play/stop icons on clickables
@@ -380,7 +365,7 @@ var DDAudioQuizView = React.createClass({
         });
 
         this.setState({
-            answers: shuffle(this.state.answers) // randomize answers bank
+            answers: AGeneric().shuffle(this.state.answers) // randomize answers bank
         });
     },
 
