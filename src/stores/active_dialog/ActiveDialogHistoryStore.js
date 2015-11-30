@@ -44,26 +44,29 @@ function create(data) {
      captionText = output.action[output.action.terp]
      */
 
+
     var exists = false;
     var obj = {};
     obj.label = "";
-
-
-
 
     if (inputs && inputs.length > 0) {
         var input = inputs.shift();
         _items.push(input);
         if (input.uttText) {
             obj.label = input.uttText;
+            obj.speaker = input.anima.split('_')[0];
         }
+
         exists = true;
-    } else if (outputs && outputs.length > 0) {
+    } else  if (outputs && outputs.length > 0) {
 
         var output = outputs.shift();
+
         _items.push(output);
         if (output.action && output.action.terp) {
+            obj.speaker = output.action.anima.split('_')[0];
             obj.label = output.action[output.action.terp];
+
         }
         exists = true;
     }

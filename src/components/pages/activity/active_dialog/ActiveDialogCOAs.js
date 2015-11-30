@@ -47,17 +47,18 @@ var ActiveDialogCOAs = React.createClass({
         var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
         this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
         ActiveDialogActions.handleInput(coa);
+        console.log('realization')
+        console.log(realization)
 
         var outputs = ActiveDialogStore.activeDialog().outputs;
-
+        var speaker = "";
         var sounds = [];
         if (outputs) {
             var len = outputs.length;
             for (var i = 0; i < len; i++) {
                 var o = outputs[i];
-                console.log('output');
-                console.dir(o);
                 var action = o.action;
+                speaker = o.speaker;
                 sounds.push(action.sound);
                 var animation = action.anima;
                 var oSymbol = ActiveDialogStore.findInfoSymbolByAnimationName(animation);
@@ -65,34 +66,33 @@ var ActiveDialogCOAs = React.createClass({
                 this.play(ActiveDialogStore.info().composition, oSymbol.symbolName, oSymbol.videoName, oAni.animationName, oAni.start, oAni.stop);
             }
         }
-        ActiveDialogHistoryActions.create({coa: coa, realization:realization});
-        this.playSounds(sounds, 0);
+        console.log('in coaAction')
+        ActiveDialogHistoryActions.create({coa: coa, realization:realization, speaker: speaker});
+        this.playSounds(sounds);
     },
 
-    playSounds: function(sounds, index) {
-        if (index < sounds.length) {
+    playSounds: function(sounds) {
+        if (sounds.length) {
             var self = this;
-            var sound = sounds[index];
+            var sound = sounds.shift();
+
             if (_actionSound !== sound) {
-                index++;
-                console.log('data/media/' + sound + '.mp3');
-                $('#activeDialogAudioPlayer').attr('src', 'data/media/' + sound + '.mp3');
+                _actionSound = sound;
 
-                $('#activeDialogAudioPlayer').on('ended', function() {
-                    setTimeout(function() {
-                        self.playSounds(sounds, index);
-                    }, 1000);
+                var player = document.getElementById('activeDialogAudioPlayer');
+                player.setAttribute('src', 'data/media/' + sound + '.mp3');
+
+                player.addEventListener('loadeddata', function(ev) {
+                    this.removeEventListener('loadeddata');
+                    this.play();
                 });
 
-                $('#activeDialogAudioPlayer').on('load', function() {
-                    console.log('loaded')
-                    $('#activeDialogAudioPlayer').trigger('play');
+                player.addEventListener('ended', function(ev) {
+                    this.removeEventListener('ended');
+                    self.playSounds(sounds);
                 });
 
-
-                $('#activeDialogAudioPlayer').load();
-
-
+                player.load();
             }
         }
     },
@@ -127,7 +127,6 @@ var ActiveDialogCOAs = React.createClass({
         var coasList = <ListGroupItem />;
 
         if (this.state.coas && this.state.coas.length > 0) {
-
             coasList = this.state.coas.map(function(item, index) {
                 var name = item.realization.anima;
                 return  <ListGroupItem key={index}>
@@ -157,8 +156,7 @@ var ActiveDialogCOAs = React.createClass({
                 <Modal.Footer>
                     <Button onClick={this.hideModal}>Close</Button>
                 </Modal.Footer>
-                <audio id="activeDialogAudioPlayer" src="">
-                </audio>
+
             </Modal>
         );
     },
@@ -176,5 +174,7 @@ var ActiveDialogCOAs = React.createClass({
         }
     }
 });
+
+
 
 module.exports = ActiveDialogCOAs;
