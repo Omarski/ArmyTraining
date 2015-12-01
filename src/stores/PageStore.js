@@ -299,8 +299,8 @@ AppDispatcher.register(function(action) {
             //PageStore.emitChange();
             break;
         case PageConstants.PAGE_LOAD_PREVIOUS:
-            //loadPrevious();
-            PageStore.emitChange();
+            loadPrevious();
+            //PageStore.emitChange();
             break;
         case PageConstants.PAGE_JUMP:
             jump(action.data);

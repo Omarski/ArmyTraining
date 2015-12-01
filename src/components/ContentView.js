@@ -32,7 +32,6 @@ function getPageState() {
             NotificationActions.hide();
         });
     }
-
     return {
         page: page
     };
