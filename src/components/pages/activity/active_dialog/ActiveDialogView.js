@@ -46,7 +46,6 @@ function getPageState(props) {
 }
 
 function updatePageState(st) {
-    console.log(ActiveDialogStore.activeDialog());
     return {
         title: st.title || "",
         pageType: st.pageType || "",
@@ -64,7 +63,6 @@ function loadComposition() {
         $("#Stage").length > 0) {
 
         _compositionLoaded = true;
-
 
         AdobeEdge.loadComposition(ActiveDialogStore.info().script, ActiveDialogStore.info().composition, {
             scaleToFit: "none",
@@ -125,18 +123,15 @@ var ActiveDialogView = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <div id="Stage" className={this.state.info.composition}>
-                        Loading....
-                    </div>
+                    <ActiveDialogScenarioView composition={this.state.info.composition} />
                     <ActiveDialogIntro />
                     <ActiveDialogEvaluation />
+                    <ActiveDialogAudio />
                 </div>
 
         }
 
         return (content);
-
-
     },
     /**
      * Event handler for 'change' events coming from the BookStore
@@ -156,6 +151,39 @@ var ActiveDialogView = React.createClass({
             this.setState(updatePageState(this.state));
             loadComposition();
         }
+    }
+
+});
+
+
+var ActiveDialogScenarioView = React.createClass({
+    shouldRender: true,
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return this.shouldRender;
+    },
+
+    render: function() {
+        if (this.props.composition) {
+            this.shouldRender = false;
+        }
+
+        return (<div id="Stage" className={this.props.composition}>
+                    Loading....
+                </div>
+        );
+    }
+
+});
+
+var ActiveDialogAudio = React.createClass({
+    shouldRender: true,
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return this.shouldRender;
+    },
+
+    render: function() {
+        this.shouldRender = false;
+        return (<audio id="activeDialogAudioPlayer" src="" ></audio>);
     }
 
 });

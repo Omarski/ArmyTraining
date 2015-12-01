@@ -23,9 +23,6 @@ function create(data) {
         text: data.config.text,
         data: data
     };
-
-    console.dir(_books)
-
 }
 
 /**

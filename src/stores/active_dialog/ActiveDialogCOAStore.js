@@ -15,6 +15,7 @@ function create(activeCOA) {
     if (activeCOA) {
         var coas = activeCOA.coas;
         var coasLen = coas.length;
+
         for (var i = 0; i < coasLen; i++) {
             var coa = coas[i];
             var rlzns = coa.realizations;

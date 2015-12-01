@@ -44,7 +44,7 @@ var ActiveDialogHistory = React.createClass({
         if (this.state.history) {
             historyList = this.state.history.map(function(item, index) {
                 return  <ListGroupItem key={index}>
-                            {item.label}
+                    {item.speaker} : {item.label}
                         </ListGroupItem>
             });
         }
