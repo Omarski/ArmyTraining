@@ -49,27 +49,6 @@ function getPageState(props) {
                     }
                 }
 
-                /*  saving old json data so I don't lose it.
-
-                 {
-                 "zid" : 1419374508184,
-                 "xid" : "1419374508184.jpg",
-                 "type" : "image",
-                 "file" : "1419374508184.jpg",
-                 "mime" : "image/jpeg",
-                 "info" : {
-                     "property" : [ {
-                         "name" : "mediacaption",
-                         "value" : "NASA's Earth Observatory"
-                         }, {
-                         "name" : "mediadisplayblurb",
-                         "value" : "Map of Afghanistan"
-                         } ]
-                     }
-                 }
-
-                 */
-
                 if (item.type === "image") {
                     result = <div key={index}>
                         <img src={filePath}></img>
