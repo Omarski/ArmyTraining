@@ -166,7 +166,6 @@ function getPageState(props) {
         data.page = props.page;
     }
 
-    //for page.nut.length
     var counter = 0;
     data.page.nut.map(function(item){
         if(item.uttering){
@@ -182,7 +181,6 @@ function getPageState(props) {
             data.notes[counter] = item.note.text;
             //possible error if 2 notes in a row
         }
-
     });
     return data;
 }
@@ -264,7 +262,7 @@ var PronunciationView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        console.log("unmounted...");
+        //console.log("unmounted...");
         PageStore.removeChangeListener(this._onChange);
         ASRStore.removeChangeListener(this._onChange);
     },
@@ -405,6 +403,7 @@ var PronunciationView = React.createClass({
         }
 
         if(this.isMounted()) {
+            this.setState(getPageState(this.props));
             this.setState({
                 message: newMessage,
                 recordedSpeech: recordedSpeech,

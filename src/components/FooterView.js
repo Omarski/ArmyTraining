@@ -130,7 +130,7 @@ var FooterView = React.createClass({
     },
 
     toggleTOC: function(event) {
-        window.location.hash = "#" + PageStore.page().title;
+        window.location.hash = "#" + PageStore.chapter().title + PageStore.page().title;
         this.setState(getUnitState(!this.state.expanded));
     },
     render: function() {
@@ -328,7 +328,7 @@ var TOCPageRow = React.createClass({
                             </div>
                         </td>
                         <td>
-                            <div id={this.props.item.title}></div>
+                            <div id={this.props.chapter.title + this.props.item.title}></div>
                             <h4>{this.props.item.title}</h4>
                         </td>
                         <td width="100%">
