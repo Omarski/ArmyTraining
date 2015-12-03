@@ -568,7 +568,7 @@ var DDAudioQuizView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentDidUpdate: function(){
@@ -592,7 +592,7 @@ var DDAudioQuizView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
     },
 
     onDragging: function(e){
