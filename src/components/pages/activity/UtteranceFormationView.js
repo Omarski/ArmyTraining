@@ -1,6 +1,7 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var ASRStore = require('../../../stores/ASRStore');
+var ConfigStore= require('../../../stores/ConfigStore');
 
 
 var UF_GLYPHICON_STOP_CLS = "glyphicon-stop";
@@ -8,6 +9,8 @@ var UF_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var UF_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
 var UF_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var UF_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+
+var recorder;
 
 function getPageState(props) {
     var data;
@@ -19,6 +22,7 @@ function getPageState(props) {
         haveAnswered: false,
         isCorrect: false,
         isRecording: false,
+        isPlaying: false,
         correctResponses: [],
         incorrectResponses: [],
         message: "No data found.",
@@ -57,19 +61,24 @@ function Setup(){
 }
 
 function record(self){
-    if(ASR.isInitialized){
+    if(ASR.isInitialized()){
         ASR.StartRecording();
     }else{
-        console.log("record called when ASR not initialized");
+        var audio = document.getElementById("audio");
+        navigator.getUserMedia({video: false, audio: true}, onSuccess, onFail);
     }
 }
 
 function stopRecording(self){
-    if(ASR.isInitialized){
+    if(ASR.isInitialized()){
         ASR.StopRecording();
         ASR.RecognizeRecording();
     }else{
-        console.log("stopRecording called when ASR not initialized")
+        var audio = document.getElementById("audio");
+        recorder.stop();
+        recorder.exportWAV(function (s) {
+            audio.src = window.URL.createObjectURL(s);
+        });
     }
 }
 
@@ -82,20 +91,79 @@ function handleRecord(self){
             haveAnswered: true
         })
     } else {
-        if(self.state.message != "recordingStarted") {
-            record(self);
-            self.setState({
-                isRecording: true
-            })
-        }
+        record(self);
+        self.setState({
+            isRecording: true
+        })
     }
 }
 
 function handlePlaying(self){
-    if(ASR.isInitialized){
+    if(ASR.isInitialized()){
         ASR.PlayRecording();
+    }else{
+        if (self.state.isPlaying) {
+            stop("audio", self);
+        } else {
+            play("audio", self);
+        }
     }
 }
+
+function play(id, self){
+    var a = document.getElementById(id);
+    // might need to be $(a)
+    $(a).bind('ended', function(){
+        stop(id, self);
+    });
+    a.play();
+    var newPlayingState = self.state.isPlaying;
+    newPlayingState = true;
+    self.setState({
+        isPlaying: newPlayingState
+    });
+}
+
+function stop(id, self){
+    var a = document.getElementById(id);
+    a.pause();
+    a.currentTime = 0;
+    var newPlayingState = self.state.isPlaying;
+    newPlayingState = false;
+    self.setState({
+        isPlaying: newPlayingState
+    });
+}
+
+window.onload = function init(){
+    // webkit shim
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+};
+
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
+var onFail = function(e){
+    console.log('An Error has occured.', e);
+    console.log('navigator.getUserMedia not present');
+};
+
+var onSuccess = function(s){
+    console.log("on success.");
+    var context = new AudioContext();
+    var mediaStreamSource = context.createMediaStreamSource(s);
+    recorder = new Recorder(mediaStreamSource);
+    recorder.record();
+    console.log("--- onSuccess ---");
+    console.dir(recorder);
+};
 
 var UtteranceFormationView = React.createClass({
     getInitialState: function() {
@@ -110,8 +178,10 @@ var UtteranceFormationView = React.createClass({
     componentDidMount: function() {
         ASRStore.addChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
-        if(!ASR.isInitialized()){
-            ASR.InitializeASR();
+        if(ConfigStore.isASREnabled()){
+            if(!ASR.isInitialized()){
+                ASR.InitializeASR();
+            }
         }
         Setup();
     },
@@ -138,19 +208,24 @@ var UtteranceFormationView = React.createClass({
         var spoken = state.spoken;
 
         if(state.haveAnswered){
-            coach = <img className="UF-coachImage" src={imageSource}></img>;
-            $(".UF-ResponseContainer").css("border", "1px solid black");
-            if(state.isCorrect){
-                feedbackClass += " UF-correct " + UF_GLYPHICON_CORRECT_CLS;
+            recordedClass += " " + UF_GLYPHICON_PLAY_CLS;
+            if(ConfigStore.isASREnabled()){
+                coach = <img className="UF-coachImage" src={imageSource}></img>;
+                $(".UF-ResponseContainer").css("border", "1px solid black");
+                if(state.isCorrect){
+                    feedbackClass += " UF-correct " + UF_GLYPHICON_CORRECT_CLS;
+                }else{
+
+                    feedbackClass += " UF-incorrect " + UF_GLYPHICON_INCORRECT_CLS;
+                }
             }else{
-                recordedClass += " " + UF_GLYPHICON_PLAY_CLS;
-                feedbackClass += " UF-incorrect " + UF_GLYPHICON_INCORRECT_CLS;
+                response = <div className="UF-response"></div>;
             }
         }else{
             response = <div className="UF-response"></div>;
         }
 
-        if(self.state.message != "No data found.") {
+        if(self.state.message != "No data found." || !ConfigStore.isASREnabled()) {
             var isRecording = state.isRecording;
             if (isRecording) {
                 recordingClass += " " + UF_GLYPHICON_STOP_CLS;
@@ -164,6 +239,7 @@ var UtteranceFormationView = React.createClass({
         return (
 
             <div className="UF-container">
+                <audio id="audio"></audio>
                 <div className="UF-InteractionContainer">
                     <img className="row UF-Image" src={state.image}></img>
                     <div className="UF-RecorderContainer">
@@ -193,7 +269,14 @@ var UtteranceFormationView = React.createClass({
         var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
         var feedbackResponse = state.feedbackResponse;
         var spoken = state.spoken;
+
+        if(!ConfigStore.isASREnabled()){
+            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        }
+
         switch(newMessage){
+            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+                break;
             case "initialized":
                 //console.log(newMessage);
                 break;
@@ -208,7 +291,7 @@ var UtteranceFormationView = React.createClass({
                 //console.log(recordedSpeech);
                 isCorrect = false;
                 var test = "Unidentified Sentence";
-                state.page.answer.map(function(item){
+                state.page.answer.map(function(item, index){
                     if(test != "Response Found") {
                         var text = item.nut.uttering.utterance.native.text;
                         // if we find what was spoken as an expected answer
@@ -218,13 +301,13 @@ var UtteranceFormationView = React.createClass({
                                 //mark as correct
                                 isCorrect = true;
                                 spoken = text;
-                                feedbackResponse = <div className="UF-textContainer">{AGeneric().correctResponse() + "\n" + item.feedback.text}</div>;
+                                feedbackResponse = <div key={state.page.xid + String(index)} className="UF-textContainer">{AGeneric().correctResponse() + "\n" + item.feedback.text}</div>;
 
                             }else{
                                 //mark as incorrect
                                 isCorrect = false;
                                 spoken = text;
-                                feedbackResponse = <div className="UF-textContainer">{AGeneric().incorrectResponse() + "\n" + item.feedback.text}</div>;
+                                feedbackResponse = <div key={state.page.xid + String(index)} className="UF-textContainer">{AGeneric().incorrectResponse() + "\n" + item.feedback.text}</div>;
                             }
                         }
                     }
@@ -233,7 +316,7 @@ var UtteranceFormationView = React.createClass({
                 if(test == "Unidentified Sentence"){
                     isCorrect = false;
                     spoken = "";
-                    feedbackResponse = <div className="UF-textContainer">{AGeneric().incorrectResponse()}</div>;
+                    feedbackResponse = <div key={page.xid + "unidentified sentence"} className="UF-textContainer">{AGeneric().incorrectResponse()}</div>;
                 }
         }
 

@@ -1,0 +1,29 @@
+.mapContainer{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(calc(-50% + 70px), -50%);
+  -moz-transform: translate(calc(-50% + 70px), -50%);
+  -ms-transform: translate(calc(-50% + 70px), -50%);
+  -o-transform: translate(calc(-50% + 70px), -50%);
+  transform: translate(calc(-50% + 70px), -50%);
+}
+
+
+.mapInstructions{
+  text-align: center;
+  -webkit-transform: translateX(-35px);
+  -moz-transform: translateX(-35px);
+  -ms-transform: translateX(-35px);
+  -o-transform: translateX(-35px);
+  transform: translateX(-35px);
+}
+
+.interactiveMapPin{
+  top: 0;
+  -webkit-transition: top 1.5s;
+  -moz-transition: top 1.5s;
+  -ms-transition: top 1.5s;
+  -o-transition: top 1.5s;
+  transition: top 1.5s;
+}

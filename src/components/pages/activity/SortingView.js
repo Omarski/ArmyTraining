@@ -40,6 +40,7 @@ function playAudio(xid){
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     source.src = "data/media/" + xid + ".mp3";
+    //audio.src = "data/media/" + xid + ".mp3";
     // play audio, or stop the audio if currently playing
     if(audio.paused){
         audio.load();
@@ -201,6 +202,7 @@ var SortingView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
+        var page = state.page;
         var button = "";
         var choices;
         var answerState = state.answerState;
@@ -240,7 +242,7 @@ var SortingView = React.createClass({
 
 
         choices = state.page.matchSource.map(function(item, index){
-            return (<img key={"choice-"+index}
+            return (<img key={page.xid + "choice-"+index}
                          src={"./data/media/myPlay.jpg"}
                          data={item.nut.uttering.utterance.native.text}
                          className="sorting-playicon"
@@ -282,7 +284,7 @@ var SortingView = React.createClass({
                     feedbackA = incorrect;
                 }
             }
-            return( <div key={"colA-"+itemA.label}
+            return( <div key={page.xid + "colA-"+itemA.label}
                          className="sorting-playicon"
                          data={itemA.label}
                          draggable="true"
@@ -302,7 +304,7 @@ var SortingView = React.createClass({
                     feedbackB = incorrect;
                 }
             }
-            return( <div key={"colB-"+itemB.label}
+            return( <div key={page.xid + "colB-"+itemB.label}
                          className="sorting-playicon"
                          data={itemB.label}
                          draggable="true"

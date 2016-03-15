@@ -140,6 +140,7 @@ var ListeningComprehensionView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
+        var page = state.page;
         var response = state.answerFeedback;
         var imageSource = "data/media/MainlandFemale_Render01_exercisecrop.jpg";
         var coach = "";
@@ -167,7 +168,7 @@ var ListeningComprehensionView = React.createClass({
 
         var choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
-            return (<div className="LC-answers"><input type="checkbox" className="LC-answerCheckbox" value={ans}>{ans + "\n"}<br /></input></div>);
+            return (<div key={page.xid + String(index)} className="LC-answers"><input type="checkbox" className="LC-answerCheckbox" value={ans}>{ans + "\n"}<br /></input></div>);
         });
 
         var question = "";

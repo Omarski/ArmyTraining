@@ -9,6 +9,7 @@ var IntroductionPageView = require('../components/pages/content/IntroductionPage
 var MapView = require('../components/pages/content/MapView');
 var MultiNoteView = require('../components/pages/content/MultiNoteView');
 var VideoView = require('../components/pages/content/VideoView');
+var EthnoMapView = require('../components/pages/content/EthnoMapView');
 
 var ActiveDialogView = require('../components/pages/activity/active_dialog/ActiveDialogView');
 var ListeningComprehensionView = require('../components/pages/activity/ListeningComprehensionView');
@@ -21,7 +22,6 @@ var ResponseFormationView = require('../components/pages/activity/ResponseFormat
 var SortingView = require('../components/pages/activity/SortingView');
 var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
 var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
-
 var NotificationActions = require('../actions/NotificationActions');
 
 function getPageState() {
@@ -148,6 +148,9 @@ var ContentView = React.createClass({
                     break;
                 case "UtteranceFormation":
                     page = <UtteranceFormationView page={this.state.page} />;
+                    break;
+                case "EthnoMap":
+                    page = <EthnoMapView page={this.state.page} />;
                     break;
                 default:
                     page = <DefaultPageView page={this.state.page} />;

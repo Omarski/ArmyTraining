@@ -3,6 +3,7 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var ColorText = require('../../../components/widgets/ColorText');
 var ASRStore = require('../../../stores/ASRStore');
+var ConfigStore = require('../../../stores/ConfigStore');
 
 // CONSTANTS
 var L2_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
@@ -11,6 +12,23 @@ var L2_GLYPHICON_STOP_CLS = "glyphicon-stop";
 var L2_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
 var L2_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var L2_GLYPHICON_CLS = "l2-glyphicon";
+
+var recorder;
+
+window.onload = function init(){
+    // webkit shim
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+};
+
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
 
 function getPageState(props) {
     var data;
@@ -105,6 +123,21 @@ function positionDivs(self){
     });
 }
 
+var onFail = function(e){
+    console.log('An Error has occured.', e);
+    console.log('navigator.getUserMedia not present');
+};
+
+var onSuccess = function(s){
+    console.log("on success.");
+    var context = new AudioContext();
+    var mediaStreamSource = context.createMediaStreamSource(s);
+    recorder = new Recorder(mediaStreamSource);
+    recorder.record();
+    console.log("--- onSuccess ---");
+    console.dir(recorder);
+};
+
 //var id = "" + colNumber + "audio" + index;
 function handleRecord(id, colNumber, index, self){
     var newRecordingState = self.state.recordingState;
@@ -118,14 +151,41 @@ function handleRecord(id, colNumber, index, self){
             playableState: newPlayableState
         })
     } else {
-        if(self.state.message != "recordingStarted") {
+       // if(self.state.message != "recordingStarted") {
             record(id, colNumber, index, self);
             newRecordingState[colNumber][index] = true;
             self.setState({
                 recordingState: newRecordingState
-            })
-        }
+            });
+       // }
     }
+}
+
+function play(id, colNumber, index, self){
+    var a = document.getElementById(id);
+    // might need to be $(a)
+    $(a).bind('ended', function(){
+        stop(id, index, self);
+    });
+    a.play();
+    var newPlayingState = self.state.isPlaying;
+    //TODO: test if isplaying is a double array
+    newPlayingState[colNumber][index] = true;
+    self.setState({
+        isPlaying: newPlayingState
+    });
+}
+
+function stop(id, colNumber, index, self){
+    var a = document.getElementById(id);
+    a.pause();
+    a.currentTime = 0;
+    var newPlayingState = self.state.isPlaying;
+    //TODO: test if isplaying is a double array
+    newPlayingState[colNumber][index] = false;
+    self.setState({
+        isPlaying: newPlayingState
+    });
 }
 
 function record(id, colNumber, index, self){
@@ -145,11 +205,8 @@ function record(id, colNumber, index, self){
             playableState: pState
         })
     }else {
-        //if (navigator.getUserMedia) {
-        //    navigator.getUserMedia({audio: true}, onSuccess, onFail);
-        //} else {
-        //    console.log('navigator.getUserMedia not present');
-        //}
+        var audio = document.getElementById("li-demo-audio");
+        navigator.getUserMedia({video: false, audio: true}, onSuccess, onFail);
     }
 }
 
@@ -159,14 +216,11 @@ function stopRecording(id, colNumber, index, self){
         ASR.StopRecording();
         ASR.RecognizeRecording();
     }else {
-        //console.log(id);
-        //var audio = document.getElementById(id);
-        //recorder.stop();
-        //recorder.exportWAV(function (s) {
-        //    audio.src = window.URL.createObjectURL(s);
-        //});
-        //console.log("--- stopRecording ---");
-        //console.log(recorder);
+        var audio = document.getElementById(id);
+        recorder.stop();
+        recorder.exportWAV(function (s) {
+            audio.src = window.URL.createObjectURL(s);
+        });
     }
 }
 
@@ -174,11 +228,12 @@ function handlePlaying(id, colNumber, index, self){
     if(ASR.isInitialized){
         ASR.PlayRecording();
     }else {
-        //if (self.state.isPlaying[index]) {
-        //    stop(id, index, self);
-        //} else {
-        //    play(id, index, self);
-        //}
+        //TODO: test if isplaying is a double array
+        if (self.state.isPlaying[colNumber][index]) {
+            stop(id, colNumber, index, self);
+        } else {
+            play(id, colNumber, index, self);
+        }
     }
 }
 
@@ -209,15 +264,17 @@ var MultiColumnPronunciationView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
         ASRStore.addChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
         positionDivs(this);
-        if(!ASR.isInitialized()){
-            ASR.InitializeASR();
+        if(ConfigStore.isASREnabled()){
+            if(!ASR.isInitialized()){
+                ASR.InitializeASR();
+            }
         }
     },
 
@@ -226,7 +283,7 @@ var MultiColumnPronunciationView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
         ASRStore.removeChangeListener(this._onChange);
     },
 
@@ -288,7 +345,7 @@ var MultiColumnPronunciationView = React.createClass({
                     }
 
                     return (
-                        <div className="l2-vocal-answer">
+                        <div key={page.xid + String(index)} className="l2-vocal-answer">
                             <div className="l2-note-text">{note}</div>
                             <span className={itemRecordingClass} onClick={function(){handleRecord(id, colNumber, index, self)}}></span>
                             <span className={itemRecordedClass} onClick={function(){handlePlaying(id, colNumber, index, self)}}></span>
@@ -310,7 +367,7 @@ var MultiColumnPronunciationView = React.createClass({
                 }
             });
             return(
-                <div className="l2-column">
+                <div key={page.xid + String(colNumber)} className="l2-column">
                     {vaList}
                 </div>
             );
@@ -341,7 +398,14 @@ var MultiColumnPronunciationView = React.createClass({
         var isCorrectLists = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
         var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+
+        if(!ConfigStore.isASREnabled()){
+            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        }
+
         switch(newMessage){
+            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+                break;
             case "initialized":
                 console.log(newMessage);
                 break;
@@ -367,11 +431,16 @@ var MultiColumnPronunciationView = React.createClass({
 
         // depending on message, do things
 
-        this.setState({
-            message: newMessage,
-            recordedSpeech: recordedSpeech,
-            isCorrect: isCorrectLists
-        });
+        if(this.isMounted()) {
+            this.setState(getPageState(this.props));
+            if(ConfigStore.isASREnabled()){
+                this.setState({
+                    message: newMessage,
+                    recordedSpeech: recordedSpeech,
+                    isCorrect: isCorrectLists
+                });
+            }
+        }
     }
 });
 

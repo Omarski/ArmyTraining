@@ -1,0 +1,58 @@
+.timelineImageContainer{
+  border: 3px solid black;
+  position: relative;
+  display: table;
+  margin: 0 auto;
+  height: 600px;
+  width: 800px;
+  background: #000000;
+}
+
+.timelineImageContainer > img {
+  display: table;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.timelineImageDescription{
+  background-color: rgba(83, 83, 83, 0.8);
+  bottom: 0;
+  position: absolute;
+  color: white;
+  font-size: larger;
+}
+
+.timelineContainer{
+  border: 1px solid grey;
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+  background: #969696;
+}
+
+.timelineDate{
+  border: 1px solid black;
+  width: 50px;
+  height: 25px;
+  display: inline-block;
+  -webkit-box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #ffffff;
+  cursor: pointer;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(-45deg);
+  -moz-transform: translateY(-50%) rotate(-45deg);
+  -ms-transform: translateY(-50%) rotate(-45deg);
+  -o-transform: translateY(-50%) rotate(-45deg);
+  transform: translateY(-50%) rotate(-45deg);
+  text-align: center;
+}

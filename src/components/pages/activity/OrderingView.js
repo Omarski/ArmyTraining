@@ -175,6 +175,7 @@ var OrderingView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
+        var page = state.page;
         var button = "";
         var choices;
         var answerState = state.answerState;
@@ -208,7 +209,7 @@ var OrderingView = React.createClass({
         }
 
         choices = state.page.matchSource.map(function(item, index){
-            return (<img key={"choice-"+index}
+            return (<img key={page.xid +"choice-"+index}
                          src={"./data/media/myPlay.jpg"}
                          data={item.nut.uttering.utterance.native.text}
                          className="OR-playicon"
@@ -247,8 +248,7 @@ var OrderingView = React.createClass({
                     </div>;
                 }
             }
-
-            return(<div className = "OR-answer" key={"answer-"+index}>
+            return(<div className = "OR-answer" key={page.xid + "answer-"+index}>
                 <div className="OR-answer-prompt">{answerPrompt}</div>
                 <div className="OR-answer-dropArea"
                      data-letter={letter}
