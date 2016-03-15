@@ -210,7 +210,7 @@ var ResponseFormationView = React.createClass({
 
     componentDidMount: function() {
         ASRStore.addChangeListener(this._onChange);
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
         if(ConfigStore.isASREnabled()){
             if(!ASR.isInitialized()){
                 ASR.InitializeASR();
@@ -226,7 +226,7 @@ var ResponseFormationView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
         ASRStore.removeChangeListener(this._onChange);
     },
 
@@ -343,7 +343,7 @@ var ResponseFormationView = React.createClass({
                 //console.log(recordedSpeech);
                 isCorrect = false;
                 var test = "Unidentified Sentence";
-                state.page.answer.map(function(item){
+                state.page.answer.map(function(item, index){
                     if(test != "Response Found") {
                         var text = item.nut.uttering.utterance.native.text;
                         // if we find what was spoken as an expected answer
@@ -353,13 +353,13 @@ var ResponseFormationView = React.createClass({
                                 //mark as correct
                                 isCorrect = true;
                                 spoken = text;
-                                feedbackResponse = <div className="RF-feedbackTextContainer">{AGeneric().correctResponse() + "\n" + item.feedback.text}</div>;
+                                feedbackResponse = <div key={state.page.xid + String(index)} className="RF-feedbackTextContainer">{AGeneric().correctResponse() + "\n" + item.feedback.text}</div>;
 
                             }else{
                                 //mark as incorrect
                                 isCorrect = false;
                                 spoken = text;
-                                feedbackResponse = <div className="RF-feedbackTextContainer">{AGeneric().incorrectResponse() + "\n" + item.feedback.text}</div>;
+                                feedbackResponse = <div key={state.page.xid + String(index)} className="RF-feedbackTextContainer">{AGeneric().incorrectResponse() + "\n" + item.feedback.text}</div>;
                             }
                         }
                     }
@@ -368,7 +368,7 @@ var ResponseFormationView = React.createClass({
                 if(test == "Unidentified Sentence"){
                     isCorrect = false;
                     spoken = "";
-                    feedbackResponse = <div className="RF-feedbackTextContainer">{AGeneric().incorrectResponse()}</div>;
+                    feedbackResponse = <div key={page.xid + "unidentified sentence"} className="RF-feedbackTextContainer">{AGeneric().incorrectResponse()}</div>;
                 }
         }
 

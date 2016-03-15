@@ -38,7 +38,7 @@ var EthnoMapView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     handleClick: function(e){
@@ -70,7 +70,7 @@ var EthnoMapView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
         var self = this;
@@ -94,7 +94,7 @@ var EthnoMapView = React.createClass({
         //        </div>
         //    </div>
         //);
-        return(<div></div>);
+        return(<div>{"EthnoMap View"}</div>);
     },
     /**
      * Event handler for 'change' events coming from the BookStore

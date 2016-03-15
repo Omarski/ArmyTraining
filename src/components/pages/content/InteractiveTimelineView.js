@@ -29,7 +29,6 @@ function getPageState(props) {
         note: noteItems,
         media: mediaItems,
         pageType: pageType,
-        // temporary storage method for timeline json
         timelineJSON: json,
         selectedDate: dateList[0],
         dateList: dateList
@@ -43,7 +42,7 @@ var InteractiveTimelineView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -51,7 +50,7 @@ var InteractiveTimelineView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
     },
     handleClick: function(e){
         console.dir(e.target.id);
@@ -59,16 +58,16 @@ var InteractiveTimelineView = React.createClass({
     },
     render: function() {
         var self = this;
+        var page = self.state.page;
         var image = "";
         var description = "";
-        console.dir(self.state);
 
         //image in center
         image = getImage(self.state.selectedDate, self.state.timelineJSON.nodes);
         description = getDescription(self.state.selectedDate, self.state.timelineJSON.nodes);
         // dates along the bottom are selectable
         var dates = this.state.timelineJSON.nodes.map(function(item, index){
-            return (<div id={item.title} className="timelineDate" key={index} onClick={self.handleClick}>
+            return (<div id={item.title} className="timelineDate" key={page.xid + String(index)} onClick={self.handleClick}>
                 {item.year}</div>);
         });
 

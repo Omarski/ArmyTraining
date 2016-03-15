@@ -255,7 +255,6 @@ var PronunciationView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //console.log("unmounted...");
         PageStore.removeChangeListener(this._onChange);
         ASRStore.removeChangeListener(this._onChange);
     },
@@ -371,7 +370,13 @@ var PronunciationView = React.createClass({
         var newMessage = ASRStore.GetMessage();
         var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
 
+        if(!ConfigStore.isASREnabled()){
+            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        }
+
         switch(newMessage){
+            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+                break;
             case "initialized":
                 console.log(newMessage);
                 break;
@@ -396,11 +401,13 @@ var PronunciationView = React.createClass({
 
         if(this.isMounted()) {
             this.setState(getPageState(this.props));
-            this.setState({
-                message: newMessage,
-                recordedSpeech: recordedSpeech,
-                isCorrect: newIsCorrect
-            });
+            if(ConfigStore.isASREnabled()){
+                this.setState({
+                    message: newMessage,
+                    recordedSpeech: recordedSpeech,
+                    isCorrect: newIsCorrect
+                });
+            }
         }
     }
 });

@@ -13,6 +13,8 @@ var ANSWER_AREA_CORRECT_CLS = "dd-drop-answer-area-correct";
 var ANSWER_AREA_WRONG_CLS = "dd-drop-answer-area-incorrect";
 var ANSWER_LIST_ITEM_CLS = "dd-answer-list-item";
 
+// TODO: if given the time, rewrite so less content is hard coded css
+
 // Plays Audio filed named with the xid(zid?) given
 function playAudio(xid){
     var audio = document.getElementById('audio');
@@ -45,8 +47,16 @@ function isPlaying(xid){
 
 // Initializes the state of the page with the JSON given in props
 function getPageState(props) {
+    var page = {};
+    var msArray = [];
+    if(props){
+        if(props && props.page){
+            page = props.page;
+            msArray = props.page.matchSource;
+        }
+    }
     var data = {
-        page: props.page || {},
+        page: page,
         answers: [],
         lines: [],
         submitLabel: "Submit",
@@ -64,7 +74,6 @@ function getPageState(props) {
         perfect: false,
         prompt: "Complete the objective."
     };
-    var msArray = data.page.matchSource;
     var line = {};
     // collect all matchSource items to be printed in the paragraph, and create the list to be used to check
     // correct answers
@@ -96,7 +105,17 @@ function getPageState(props) {
     });
     data.lines = line;
     //get the instructions prompt from the JSON
-    data.prompt = data.page.prompt.text || data.prompt;
+    if(data){
+        if(data && data.page){
+            if(data.page.prompt){
+                if(data.page.prompt.text){
+                    data.prompt = data.page.prompt.text;
+                }
+            }
+
+        }
+    }
+
 
     // shuffle and add to answers[]
     // grab all answers from quiz for word bank
@@ -623,21 +642,23 @@ var DDAudioQuizView = React.createClass({
                     var dataQuestionId = $(self.state.dragSrc).attr("data-question-id");
                     var dataQuestionLetter = $(self.state.dragSrc).attr("data-question-letter");
                     var zid = $(self.state.dragSrc).attr("data-question-zid");
-                    var inner = <div></div>;
+                    var inner = <div key={self.state.page.xid + "blank inner"}></div>;
                     switch (self.state.childHTML.attr("class")) {
                         case "img-thumbnail dd-answer-image":
                             inner = <img className={self.state.childHTML.attr("class")}
+                                         key={self.state.page.xid + "inner img"}
                                          draggable={false}
                                          src={self.state.childHTML.attr("src")}></img>;
                             break;
                         default:
-                            inner = <div className={self.state.childHTML.attr("class")}>{
+                            inner = <div key={self.state.page.xid + "inner div"} className={self.state.childHTML.attr("class")}>{
                                 self.state.childHTML[0].innerHTML}</div>;
                             break;
                     }
 
                     return (
                         <div className={cls}
+                             key={self.state.page.xid + "dropComponent div"}
                              data-question-id={dataQuestionId}
                              data-question-letter={dataQuestionLetter}
                              data-question-zid={zid}
@@ -735,13 +756,14 @@ var DDAudioQuizView = React.createClass({
 
     render: function() {
         var needReset = true;
-        var st = this.state;
         var self = this;
+        var st = self.state;
+        var page = st.page;
         // word bank, answers are MatchSources
         var answers = st.answers.map(function(item, index) {
-            var component = <div className="dd-word-bank-text">{item.answer.nut.uttering.utterance.native.text}</div>;
+            var component = <div key={page.xid + "component" + String(index)} className="dd-word-bank-text">{item.answer.nut.uttering.utterance.native.text}</div>;
             if(self.state.readOnly){
-                var answerItem = <div className="dd-answer-list-item" key={index}>
+                var answerItem = <div className="dd-answer-list-item" key={page.xid + "readOnly" + String(index)}>
                     <div
                         className="dd-draggable-area"
                         data-question-id={item.lineNumber}
@@ -751,7 +773,7 @@ var DDAudioQuizView = React.createClass({
                     </div>
                 </div>
             }else{
-                var answerItem = <div className="dd-answer-list-item" key={index}>
+                var answerItem = <div className="dd-answer-list-item" key={page.xid + "!readOnly" + String(index)}>
                     <div
                         className="dd-draggable-area"
                         draggable="true"
@@ -806,6 +828,7 @@ var DDAudioQuizView = React.createClass({
                             if(self.state.isCorrect[counter]){
                                 clsName += " dd-drop-answer-area-correct";
                                 result = <div className={clsName}
+                                              key={page.xid + String(aIndex) + "isCorrect"}
                                               data-question-id={index+1}
                                               data-question-letter={""}>
                                     <span className="glyphicon glyphicon-ok-circle answer-feedback-correct"></span>
@@ -814,6 +837,7 @@ var DDAudioQuizView = React.createClass({
                             }else{
                                 clsName += " dd-drop-answer-area-incorrect";
                                 result = <div className={clsName}
+                                              key={page.xid + String(aIndex) + "!isCorrect"}
                                               data-question-id={index+1}
                                               data-question-letter={""}>
                                     <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>
@@ -822,6 +846,7 @@ var DDAudioQuizView = React.createClass({
                             }
                         }else{
                             result = <div className={clsName}
+                                          key={page.xid + String(aIndex) + "letterIsBlank"}
                                           data-question-id={index+1}
                                           data-question-letter={""}>
                                 {" " + ms.nut.uttering.utterance.native.text + " "}&nbsp;
@@ -832,7 +857,7 @@ var DDAudioQuizView = React.createClass({
                     if (ms.letter != "") {
                         counter++;
                             result =
-                                <div className={answerCls} onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
+                                <div key={page.xid + String(aIndex)+"!letterIsBlank"} className={answerCls} onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
                                     &nbsp;
                                     {flag}
                                     <div className="answer-handle"></div>
@@ -846,8 +871,9 @@ var DDAudioQuizView = React.createClass({
                         });
                         if (needRender) {
                             if (!self.state.readOnly) {
-                                var zid = ms.nut.uttering.media[0].zid || 0;
+                                var zid = ms.nut.uttering.media ? ms.nut.uttering.media[0].zid : 0;
                                 result = <div className="dd-answer-area-text"
+                                              key={page.xid + String(aIndex) + "needRender!readOnly"}
                                               data-question-id={index+1}
                                               data-question-letter={""}
                                               data-question-zid={zid}
@@ -860,6 +886,7 @@ var DDAudioQuizView = React.createClass({
                                 </div>
                             } else {
                                 result = <div className="dd-answer-area-text"
+                                              key={page.xid + String(aIndex) + "needRenderreadOnly"}
                                               data-question-id={index+1}
                                               data-question-letter={""}>
                                     {ms.nut.uttering.utterance.native.text}
@@ -869,14 +896,14 @@ var DDAudioQuizView = React.createClass({
                     }
                 }
                 return (
-                    <div key={aIndex}>
+                    <div key={page.xid + String(aIndex)}>
                         {result}
                     </div>
                 )
             });
             // currently only 1 speaker allowed per line
             return (
-                <div key={index}>
+                <div key={page.xid + String(index)}>
                     <div className="dd-answer-area">
                         <div className="dd-answer-area-text">
                             <span className="dd-player-label">{speaker}&nbsp;</span>
@@ -889,13 +916,13 @@ var DDAudioQuizView = React.createClass({
 
         var _buttons;
         if(!self.state.readOnly){
-            _buttons = [<button className="btn btn-default submite-btn" onClick={this.submit}>{this.state.submitLabel}</button>,
-                        <button className="btn btn-default clearAll-btn" onClick={this.clearAll}>{this.state.clearLabel}</button>];
+            _buttons = [<button key={page.xid + "submitbtn"} className="btn btn-default submite-btn" onClick={this.submit}>{this.state.submitLabel}</button>,
+                        <button key={page.xid + "clearAllbtn"} className="btn btn-default clearAll-btn" onClick={this.clearAll}>{this.state.clearLabel}</button>];
         }else{
             if(self.state.perfect){
-                _buttons = <span></span>;
+                _buttons = <span key={page.xid + "blankSpan"}></span>;
             }else {
-                _buttons = <button className="btn btn-default reset-btn" onClick={this.reset}>{this.state.resetLabel}</button>;
+                _buttons = <button key={page.xid + "resetbtn"} className="btn btn-default reset-btn" onClick={this.reset}>{this.state.resetLabel}</button>;
             }
         }
 

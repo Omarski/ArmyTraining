@@ -6,6 +6,7 @@ var MC_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
 function getPageState(props) {
     var data = {
+        page: null,
         title: "",
         pageType: "",
         answers: [],
@@ -20,6 +21,7 @@ function getPageState(props) {
     };
 
     if (props && props.page) {
+        data.page = props.page;
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.answers = props.page.answer;
@@ -59,7 +61,7 @@ var MultipleChoiceView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -98,11 +100,12 @@ var MultipleChoiceView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
         var self = this;
         var state = this.state;
+        var page = self.state.page;
         var mediaType;
         var mediaContainer;
         var questionContainer;
@@ -137,9 +140,9 @@ var MultipleChoiceView = React.createClass({
         }
 
         var choices;
-        choices = state.answers.map(function(item){
+        choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
-            return (<div className="MC-answers"><input type="checkbox" className="MC-answerCheckbox" value={ans}>{ans + "\n"}<br /></input></div>);
+            return (<div key={page.xid + String(index)} className="MC-answers"><input type="checkbox" className="MC-answerCheckbox" value={ans}>{ans + "\n"}<br /></input></div>);
         });
 
         choicesContainer = <div className="MC-choicesContainer">{choices}</div>;

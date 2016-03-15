@@ -291,7 +291,7 @@ var UtteranceFormationView = React.createClass({
                 //console.log(recordedSpeech);
                 isCorrect = false;
                 var test = "Unidentified Sentence";
-                state.page.answer.map(function(item){
+                state.page.answer.map(function(item, index){
                     if(test != "Response Found") {
                         var text = item.nut.uttering.utterance.native.text;
                         // if we find what was spoken as an expected answer
@@ -301,13 +301,13 @@ var UtteranceFormationView = React.createClass({
                                 //mark as correct
                                 isCorrect = true;
                                 spoken = text;
-                                feedbackResponse = <div className="UF-textContainer">{AGeneric().correctResponse() + "\n" + item.feedback.text}</div>;
+                                feedbackResponse = <div key={state.page.xid + String(index)} className="UF-textContainer">{AGeneric().correctResponse() + "\n" + item.feedback.text}</div>;
 
                             }else{
                                 //mark as incorrect
                                 isCorrect = false;
                                 spoken = text;
-                                feedbackResponse = <div className="UF-textContainer">{AGeneric().incorrectResponse() + "\n" + item.feedback.text}</div>;
+                                feedbackResponse = <div key={state.page.xid + String(index)} className="UF-textContainer">{AGeneric().incorrectResponse() + "\n" + item.feedback.text}</div>;
                             }
                         }
                     }
@@ -316,7 +316,7 @@ var UtteranceFormationView = React.createClass({
                 if(test == "Unidentified Sentence"){
                     isCorrect = false;
                     spoken = "";
-                    feedbackResponse = <div className="UF-textContainer">{AGeneric().incorrectResponse()}</div>;
+                    feedbackResponse = <div key={page.xid + "unidentified sentence"} className="UF-textContainer">{AGeneric().incorrectResponse()}</div>;
                 }
         }
 

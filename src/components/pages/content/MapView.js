@@ -38,7 +38,7 @@ var MapView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -67,7 +67,7 @@ var MapView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
     },
 
     render: function() {
@@ -154,8 +154,8 @@ function getPins(nodeList, hasMoved, self){
             };
         }
         return (
-            <ReactBootstrap.OverlayTrigger key={"BBOT"+i} id="RBOT" trigger="click" placement="top" overlay={<ReactBootstrap.Popover key={"Popover"+i} id="Popover" title="">{nodeList[i].mouseover}</ReactBootstrap.Popover>}>
-                <img key={i}
+            <ReactBootstrap.OverlayTrigger key={page.xid + "BBOT"+i} id="RBOT" trigger="click" placement="top" overlay={<ReactBootstrap.Popover key={page.xid + "Popover"+i} id="Popover" title="">{nodeList[i].mouseover}</ReactBootstrap.Popover>}>
+                <img key={page.xid + i}
                      style={pinstyle}
                      className="interactiveMapPin"
                      id={"mapPin-" + i}

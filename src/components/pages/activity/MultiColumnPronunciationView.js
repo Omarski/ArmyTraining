@@ -264,7 +264,7 @@ var MultiColumnPronunciationView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -283,7 +283,7 @@ var MultiColumnPronunciationView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
         ASRStore.removeChangeListener(this._onChange);
     },
 
@@ -345,7 +345,7 @@ var MultiColumnPronunciationView = React.createClass({
                     }
 
                     return (
-                        <div className="l2-vocal-answer">
+                        <div key={page.xid + String(index)} className="l2-vocal-answer">
                             <div className="l2-note-text">{note}</div>
                             <span className={itemRecordingClass} onClick={function(){handleRecord(id, colNumber, index, self)}}></span>
                             <span className={itemRecordedClass} onClick={function(){handlePlaying(id, colNumber, index, self)}}></span>
@@ -367,7 +367,7 @@ var MultiColumnPronunciationView = React.createClass({
                 }
             });
             return(
-                <div className="l2-column">
+                <div key={page.xid + String(colNumber)} className="l2-column">
                     {vaList}
                 </div>
             );
@@ -398,7 +398,14 @@ var MultiColumnPronunciationView = React.createClass({
         var isCorrectLists = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
         var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+
+        if(!ConfigStore.isASREnabled()){
+            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        }
+
         switch(newMessage){
+            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+                break;
             case "initialized":
                 console.log(newMessage);
                 break;
@@ -424,11 +431,16 @@ var MultiColumnPronunciationView = React.createClass({
 
         // depending on message, do things
 
-        this.setState({
-            message: newMessage,
-            recordedSpeech: recordedSpeech,
-            isCorrect: isCorrectLists
-        });
+        if(this.isMounted()) {
+            this.setState(getPageState(this.props));
+            if(ConfigStore.isASREnabled()){
+                this.setState({
+                    message: newMessage,
+                    recordedSpeech: recordedSpeech,
+                    isCorrect: isCorrectLists
+                });
+            }
+        }
     }
 });
 
