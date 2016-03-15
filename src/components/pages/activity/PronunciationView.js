@@ -236,6 +236,7 @@ function textClick(id, index, self){
 
 var PronunciationView = React.createClass({
     getInitialState: function() {
+
         return getPageState(this.props);
     },
 
@@ -257,10 +258,6 @@ var PronunciationView = React.createClass({
         }
     },
 
-    componentDidUpdate: function(){
-        //setup();
-    },
-
     componentWillUnmount: function() {
         //console.log("unmounted...");
         PageStore.removeChangeListener(this._onChange);
@@ -268,6 +265,8 @@ var PronunciationView = React.createClass({
     },
 
     render: function() {
+
+
         var self = this;
         var page = self.state.page;
         var questions = self.state.utterings || [];
@@ -278,6 +277,8 @@ var PronunciationView = React.createClass({
         var feedbackClass = "glyphicon li-glyphicon li-feedback";
         var recordedClass = "glyphicon li-glyphicon li-playback";
         var recordingClass = "glyphicon li-glyphicon li-record";
+
+        console.log(self.state);
 
         // need to check for notes and send those  to top of page
         var vaList = questions.map(function(item, index){
@@ -291,7 +292,6 @@ var PronunciationView = React.createClass({
                 var itemRecordedClass = "";
                 var itemRecordingClass = "";
 
-
                 var isCorrect = self.state.isCorrect[index];
                 if(isCorrect != null){
                     if (isCorrect) {
@@ -302,9 +302,6 @@ var PronunciationView = React.createClass({
                 }else{
                     itemFeedbackClass = feedbackClass;
                 }
-
-
-
 
                 var hasRecorded = self.state.playableState[index];
                 if (hasRecorded) {
@@ -327,7 +324,7 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <div className="li-vocal-answer" key={index}>
+                    <div className="li-vocal-answer" key={page.xid + String(index)}>
                         <div className="li-audio-buttons">
                             <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
                             <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
@@ -353,7 +350,7 @@ var PronunciationView = React.createClass({
         });
 
         return (
-            <div className="li-container">
+            <div  className="li-container">
                 <div className="row li-title">
                     <h3>{page.title}</h3>
                 </div>
@@ -391,7 +388,7 @@ var PronunciationView = React.createClass({
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;
-                var ind = state.clickedAnswer.index;
+                var ind = state.clickedAnswer.index || 0 ;
                 var text = state.utterings[ind].uttering.utterance.native.text;
                 if(AGeneric().purgeString(text) == AGeneric().purgeString(recordedSpeech)){
                     //mark as correct

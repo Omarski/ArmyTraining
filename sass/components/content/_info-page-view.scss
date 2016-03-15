@@ -8,12 +8,16 @@
 
 .infoMediaContainer{
   margin: 0 auto;
-  width: 800px;
-  height: 400px;
+  margin-top: 40px;
 }
 
 .infoNoteContainer{
   margin: 0 auto;
+  margin-top: 40px;
+  p {
+    font-size: 24px;
+    font-weight: 300;
+  }
 }
 
 .infoDataContainer{
