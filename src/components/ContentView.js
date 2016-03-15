@@ -57,6 +57,9 @@ var ContentView = React.createClass({
     },
 
     render: function() {
+
+
+
         var page = <div></div>;
 
 

@@ -1,9 +1,7 @@
 var React = require('react');
-var ReactBootstrap = require('react-bootstrap');
-var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-var Tooltip = ReactBootstrap.Tooltip;
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 function getPageState(props) {
@@ -106,22 +104,21 @@ var InfoView = React.createClass({
         var pageType = state.pageType;
         var note = state.note;
         var media = state.media;
-        var attributions = <Tooltip>{state.sources}</Tooltip>;
+
+        var mediaContainer = "";
+        if (media) {
+            mediaContainer = <div className="infoMediaContainer">{media}</div>;
+        }
 
         return (
+
             <div className="infoContainer">
                 <div className="infoTitle">
-                    <h3>
-                        {title}
-                        <OverlayTrigger placement="right" overlay={attributions}>
-                            <span className="infoAttributions glyphicon glyphicon-info-sign"></span>
-                        </OverlayTrigger>
-                    </h3>
-
+                    <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
                 </div>
-                <div className="infoDataContainer">
-                    <div className="infoMediaContainer">{media}</div>
-                    <div className="infoNoteContainer">{note}</div>
+                <div className="infoDataContainer col-md-6 col-md-offset-3">
+                    {mediaContainer}
+                    <div className="infoNoteContainer"><p class="lead">{note}</p></div>
                 </div>
             </div>
         );

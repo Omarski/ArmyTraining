@@ -46,7 +46,7 @@ function isPlaying(xid){
 // Initializes the state of the page with the JSON given in props
 function getPageState(props) {
     var data = {
-        page: props.page,
+        page: props.page || {},
         answers: [],
         lines: [],
         submitLabel: "Submit",

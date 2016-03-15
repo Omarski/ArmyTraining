@@ -36,11 +36,9 @@ function hasGetUserMedia(){
 
 var onFail = function(e){
     console.log('An Error has occured.', e);
-    console.log('navigator.getUserMedia not present');
 };
 
 var onSuccess = function(s){
-    console.log("on success.");
     var context = new AudioContext();
     var mediaStreamSource = context.createMediaStreamSource(s);
     recorder = new Recorder(mediaStreamSource);
@@ -122,7 +120,6 @@ function stop(id, index, self){
 }
 
 function handleRecord(id, index, self){
-
     var newRecordingState = self.state.recordingState;
     if (newRecordingState[index]) {
         stopRecording(id, index, self);
@@ -255,11 +252,6 @@ var PronunciationView = React.createClass({
                 ASR.InitializeASR();
             }
         }
-
-    },
-
-    componentDidUpdate: function(){
-        //setup();
     },
 
     componentWillUnmount: function() {
@@ -304,9 +296,6 @@ var PronunciationView = React.createClass({
                     itemFeedbackClass = feedbackClass;
                 }
 
-
-
-
                 var hasRecorded = self.state.playableState[index];
                 if (hasRecorded) {
                     if (self.state.isPlaying[index]) {
@@ -329,7 +318,7 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <div className="li-vocal-answer" key={index}>
+                    <div className="li-vocal-answer" key={page.xid + String(index)}>
                         <audio id={id}></audio>
                         <div className="li-audio-buttons">
                             <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
@@ -394,7 +383,7 @@ var PronunciationView = React.createClass({
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;
-                var ind = state.clickedAnswer.index;
+                var ind = state.clickedAnswer.index || 0 ;
                 var text = state.utterings[ind].uttering.utterance.native.text;
                 if(AGeneric().purgeString(text) == AGeneric().purgeString(recordedSpeech)){
                     //mark as correct
