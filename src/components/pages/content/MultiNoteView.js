@@ -7,43 +7,17 @@ function getPageState(props) {
     var pageType = "";
     var noteItems = "";
     var mediaItems = "";
+    var related = [];
+    var xid = "page not found";
+    var activePage = 0;
 
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
-
-        if (props.page.note) {
-            var notes = props.page.note;
-
-            noteItems = notes.map(function(item, index) {
-                return (
-                    <p key={index}>{item.text}</p>
-                );
-            });
-        }
-
-        if (props.page.media) {
-            var media = props.page.media;
-            mediaItems = media.map(function(item, index) {
-                var filePath = "data/media/" + item.file;
-                var result = <div key={index}>Unknown File Type</div>
-
-                if (item.type === "video") {
-                    result = <div key={index}>
-                        <video width="320" height="240" controls>
-                            <source src={filePath} type="video/mp4"></source>
-                        </video>
-                    </div>
-                }
-
-                if (item.type === "image") {
-                    result = <div key={index}>
-                        <img src={filePath}></img>
-                    </div>
-                }
-                return result;
-
-            });
+        xid = props.page.xid;
+        console.dir(props.page);
+        if(props.page.related){
+            related = props.page.related;
         }
     }
 
@@ -51,7 +25,10 @@ function getPageState(props) {
         title: title,
         note: noteItems,
         media: mediaItems,
-        pageType: pageType
+        pageType: pageType,
+        related: related,
+        xid: xid,
+        activePage: activePage
     };
 }
 
@@ -65,6 +42,12 @@ var MultiNoteView = React.createClass({
         //PageStore.addChangeListener(this._onChange);
     },
 
+    handleClick: function(e){
+        this.setState({
+            activePage: $(e.target).attr("data")
+        })
+    },
+
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
     },
@@ -73,14 +56,40 @@ var MultiNoteView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        var self = this;
+        var infoPages = self.state.related;
+        var pagesHTML = infoPages.map(function(item, index){
+            var imageURL = item.media[0].xid;
+            var text = item.note[0].text;
+            var title = item.title;
+            var image = <img className="MN-activeImage" alt={title} key={self.state.xid + index} src={"media/images/"+imageURL} alt={item.title}></img>;
+
+            return({
+                imageURL: imageURL,
+                image: image,
+                title: title,
+                text: text
+            })
+        });
+
+        var pageChoices = pagesHTML.map(function(item, index){
+            var imageURL = item.imageURL;
+            var title = item.title;
+            var thumbnail = <img className="MN-thumbnail" data={index} onClick={self.handleClick} alt={title} key={self.state.xid + index} src={"media/images/"+imageURL}></img>;
+            return (thumbnail);
+        });
+
+        // get active page
+        //set image based on active page
+        //set text based on active page{pagesHTML}
+
+        //mouse work for mouseover'ed selections
 
         return (
             <div className="container">
-                <h3>{this.state.title} : {this.state.pageType}</h3>
-                <div>
-                    {this.state.note}
-                    {this.state.media}
-                </div>
+                <div className="MN-imageContainer">{pagesHTML[self.state.activePage].image} </div>
+                <div className="MN-imageText">{pagesHTML[self.state.activePage].text}</div>
+                <div className="MN-pageChoices">{pageChoices}</div>
             </div>
         );
     },

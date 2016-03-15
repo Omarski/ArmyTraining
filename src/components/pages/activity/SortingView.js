@@ -40,6 +40,7 @@ function playAudio(xid){
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     source.src = "data/media/" + xid + ".mp3";
+    //audio.src = "data/media/" + xid + ".mp3";
     // play audio, or stop the audio if currently playing
     if(audio.paused){
         audio.load();

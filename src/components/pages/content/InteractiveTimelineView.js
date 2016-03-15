@@ -1,5 +1,6 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
+var ReactBootstrap = require('react-bootstrap');
 
 
 function getPageState(props) {
@@ -7,42 +8,18 @@ function getPageState(props) {
     var pageType = "";
     var noteItems = "";
     var mediaItems = "";
+    var json = "";
+    var dateList = [];
 
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
+        // TODO: Change 'TimelineData' to whatever the real name will be
+        if(props.page.timelineData){
+            json = props.page.timelineData;
 
-        if (props.page.note) {
-            var notes = props.page.note;
-
-            noteItems = notes.map(function(item, index) {
-                return (
-                    <p key={index}>{item.text}</p>
-                );
-            });
-        }
-
-        if (props.page.media) {
-            var media = props.page.media;
-            mediaItems = media.map(function(item, index) {
-                var filePath = "data/media/" + item.file;
-                var result = <div key={index}>Unknown File Type</div>
-
-                if (item.type === "video") {
-                    result = <div key={index}>
-                        <video width="320" height="240" controls>
-                            <source src={filePath} type="video/mp4"></source>
-                        </video>
-                    </div>
-                }
-
-                if (item.type === "image") {
-                    result = <div key={index}>
-                        <img src={filePath}></img>
-                    </div>
-                }
-                return result;
-
+            json.nodes.map(function(item, index){
+                dateList.push(item.title);
             });
         }
     }
@@ -51,7 +28,11 @@ function getPageState(props) {
         title: title,
         note: noteItems,
         media: mediaItems,
-        pageType: pageType
+        pageType: pageType,
+        // temporary storage method for timeline json
+        timelineJSON: json,
+        selectedDate: dateList[0],
+        dateList: dateList
     };
 }
 
@@ -72,14 +53,34 @@ var InteractiveTimelineView = React.createClass({
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
     },
+    handleClick: function(e){
+        console.dir(e.target.id);
+        this.setState({selectedDate: e.target.id});
+    },
     render: function() {
+        var self = this;
+        var image = "";
+        var description = "";
+        console.dir(self.state);
+
+        //image in center
+        image = getImage(self.state.selectedDate, self.state.timelineJSON.nodes);
+        description = getDescription(self.state.selectedDate, self.state.timelineJSON.nodes);
+        // dates along the bottom are selectable
+        var dates = this.state.timelineJSON.nodes.map(function(item, index){
+            return (<div id={item.title} className="timelineDate" key={index} onClick={self.handleClick}>
+                {item.year}</div>);
+        });
+
 
         return (
             <div className="container">
-                <h3>{this.state.title} : {this.state.pageType}</h3>
-                <div>
-                    {this.state.note}
-                    {this.state.media}
+                <div className="timelineImageContainer">
+                    {image}
+                    {description}
+                </div>
+                <div className="timelineContainer">
+                    {dates}
                 </div>
             </div>
         );
@@ -91,5 +92,21 @@ var InteractiveTimelineView = React.createClass({
         this.setState(getPageState());
     }
 });
+
+function getImage(selectedDateString, nodeList){
+    for(var i=0;i<nodeList.length;i++){
+        if(selectedDateString == nodeList[i].title){
+            return(<img src={'data/media/'+ nodeList[i].file + '.jpg'} alt={nodeList[i].attribution}></img>);
+        }
+    }
+}
+
+function getDescription(selectedDateString, nodeList){
+    for(var i=0;i<nodeList.length;i++){
+        if(selectedDateString == nodeList[i].title){
+            return(<div className="timelineImageDescription"><b>{nodeList[i].year + ": "}</b>{nodeList[i].desc}</div>);
+        }
+    }
+}
 
 module.exports = InteractiveTimelineView;
