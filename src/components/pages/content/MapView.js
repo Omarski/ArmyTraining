@@ -10,10 +10,12 @@ function getPageState(props) {
     var mediaItems = "";
     var json = "";
     var hasMoved = [];
+    var page = null;
 
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
+        page = props.page;
 
         if(props.page.MapData){
             json = props.page.MapData;
@@ -27,7 +29,8 @@ function getPageState(props) {
         media: mediaItems,
         pageType: pageType,
         mapJSON: json,
-        hasMoved: hasMoved
+        hasMoved: hasMoved,
+        page: page
     };
 }
 
@@ -137,6 +140,9 @@ function animatePins(self){
 }
 
 function getPins(nodeList, hasMoved, self){
+    console.log("getPins");
+    console.log(self.state);
+
     var pins = nodeList.map(function(item, i){
 
         if(hasMoved[i]) {
@@ -154,8 +160,8 @@ function getPins(nodeList, hasMoved, self){
             };
         }
         return (
-            <ReactBootstrap.OverlayTrigger key={page.xid + "BBOT"+i} id="RBOT" trigger="click" placement="top" overlay={<ReactBootstrap.Popover key={page.xid + "Popover"+i} id="Popover" title="">{nodeList[i].mouseover}</ReactBootstrap.Popover>}>
-                <img key={page.xid + i}
+            <ReactBootstrap.OverlayTrigger key={self.state.page.xid + "BBOT"+i} id="RBOT" trigger="click" placement="top" overlay={<ReactBootstrap.Popover key={self.state.page.xid + "Popover"+i} id="Popover" title="">{nodeList[i].mouseover}</ReactBootstrap.Popover>}>
+                <img key={self.state.page.xid + i}
                      style={pinstyle}
                      className="interactiveMapPin"
                      id={"mapPin-" + i}

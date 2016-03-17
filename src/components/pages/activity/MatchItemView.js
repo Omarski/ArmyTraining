@@ -224,6 +224,9 @@ var MatchItemView = React.createClass({
             button = <button className="btn-default MI-clear" onClick={self.reset}>Clear All</button>; // clear all button
         }
 
+        // TODO: change <img> tag to be a generic media object (i.e. image or text)
+        // check the matchsource media type, if audio then do the generic play image, else load specific image
+
         choices = state.page.matchSource.map(function(item, index){
             return (<img key={page.xid + "choice-"+index}
                          src={"./data/media/myPlay.jpg"}
@@ -252,6 +255,9 @@ var MatchItemView = React.createClass({
                             feedback = incorrect;
                         }
                     }
+
+                    // TODO: change <img> tag to be a generic media object (i.e. image or text)
+                    // check the matchsource media type, if audio then do the generic play image, else load specific image
 
                     answerRender = <div src={"./data/media/myPlay.jpg"}
                                         data={state.answerState[i].label}

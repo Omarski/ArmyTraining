@@ -10,10 +10,12 @@ function getPageState(props) {
     var mediaItems = "";
     var json = "";
     var dateList = [];
+    var page = null;
 
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
+        page = props.page;
         // TODO: Change 'TimelineData' to whatever the real name will be
         if(props.page.timelineData){
             json = props.page.timelineData;
@@ -31,7 +33,8 @@ function getPageState(props) {
         pageType: pageType,
         timelineJSON: json,
         selectedDate: dateList[0],
-        dateList: dateList
+        dateList: dateList,
+        page: page
     };
 }
 
