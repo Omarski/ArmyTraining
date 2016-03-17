@@ -26,7 +26,7 @@ function getPageState(props) {
 
             noteItems = notes.map(function(item, index) {
                 return (
-                    <p key={index}>{item.text}</p>
+                    <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
                 );
             });
         }
@@ -102,7 +102,7 @@ var InfoView = React.createClass({
         var state = self.state;
         var title = state.title;
         var pageType = state.pageType;
-        var note = state.note;
+        var pageNotes = state.note;
         var media = state.media;
 
         var mediaContainer = "";
@@ -110,6 +110,18 @@ var InfoView = React.createClass({
             mediaContainer = <div className="infoMediaContainer">{media}</div>;
         }
 
+        function createMarkup(n) {
+            var str = "";
+            if (n.length) {
+                for (var i = 0; i < n.length; i++) {
+                    str += n[i];
+                }
+            } else {
+                n = str;
+            }
+
+            return {__html: str};
+        }
         return (
 
             <div className="infoContainer">
@@ -118,7 +130,7 @@ var InfoView = React.createClass({
                 </div>
                 <div className="infoDataContainer col-md-6 col-md-offset-3">
                     {mediaContainer}
-                    <div className="infoNoteContainer"><p class="lead">{note}</p></div>
+                    <div className="infoNoteContainer">{pageNotes}</div>
                 </div>
             </div>
         );
@@ -127,7 +139,9 @@ var InfoView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
+        console.log("is mounted?")
         if (this.isMounted()) {
+            console.log("mounted setstate")
             this.setState(getPageState(this.props));
         }
 
