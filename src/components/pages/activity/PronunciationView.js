@@ -186,32 +186,7 @@ function getPageState(props) {
     return data;
 }
 
-function setup(){
-    //$(".glyphicon").css('pointerEvents', 'auto');
 
-    var vocalAnswers = document.getElementsByClassName(LI_VOCAL_ANSWER_CLS);
-    Array.prototype.forEach.call(vocalAnswers, function(item, index){
-        var _item = $(item);
-        if(index == 0){
-            _item.css('border-top', '5px solid #cccccc');
-        }
-        _item.css('border-bottom', '5px solid #cccccc');
-        if(index%2 == 0){
-            _item.css('background', '#ebebeb');
-        }else{
-            _item.css('background', '#ffffff');
-        }
-    });
-
-    // 39.5 because math
-    //var buffer = 39.5;
-    //var icons = document.getElementsByClassName(LI_GLYPHICON_CLS);
-    //Array.prototype.forEach.call(icons, function(item, index){
-    //    var $item = $(item);
-    //    var answerLine = Math.floor(index/3); //3 because 3 icons per answer item.
-    //    $item.css('top', ( ( buffer + (120*answerLine) )+'px'));
-    //});
-}
 
 // Plays Audio filed named with the xid(zid?) given
 function playAudio(xid){
@@ -252,7 +227,7 @@ var PronunciationView = React.createClass({
         }else{
             // UserMedia not allowed
         }
-        setup();
+
         if(ConfigStore.isASREnabled()){
             if(!ASR.isInitialized()){
                 ASR.InitializeASR();
@@ -325,28 +300,30 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <div className="li-vocal-answer" key={page.xid + String(index)}>
-                        <audio id={id}></audio>
-                        <div className="li-audio-buttons">
-                            <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
-                            <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
-                        </div>
-                        <div className="li-text-container">
-                            <h4 className="li-note-text">{note}</h4>
-                            <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
-                                <div className="li-native-text">
-                                    <ColorText props={nativeText}/>
-                                </div>
-                                <div className="li-ezread-text">
-                                    <ColorText props={ezreadText}/>
-                                </div>
-                                <div className="li-translated-text">
-                                    <ColorText props={translatedText}/>
+                    <li>
+                        <div className="li-vocal-answer" key={page.xid + String(index)}>
+                            <audio id={id}></audio>
+                            <div className="li-audio-buttons">
+                                <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
+                                <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
+                            </div>
+                            <div className="li-text-container">
+                                <h4 className="li-note-text">{note}</h4>
+                                <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
+                                    <div className="li-native-text">
+                                        <ColorText props={nativeText}/>
+                                    </div>
+                                    <div className="li-ezread-text">
+                                        <ColorText props={ezreadText}/>
+                                    </div>
+                                    <div className="li-translated-text">
+                                        <ColorText props={translatedText}/>
+                                    </div>
                                 </div>
                             </div>
+                            <span className={itemFeedbackClass}></span>
                         </div>
-                        <span className={itemFeedbackClass}></span>
-                    </div>
+                    </li>
                 );
             }
         });
@@ -361,7 +338,9 @@ var PronunciationView = React.createClass({
                             <audio id="li-demo-audio"></audio>
                             <div className="li-column">
                                 <div className="li-voice-answers">
+                                    <ul className="li-items-list">
                                     {vaList}
+                                    </ul>
                                 </div>
                             </div>
                         </div>

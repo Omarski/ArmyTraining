@@ -1,3 +1,14 @@
+.li-items-list {
+  li {
+    background: #f9f9f9;
+    border-top: 1px solid #ddd
+  }
+  li:nth-child(odd) { background: #fff; }
+  li:last-child {
+    border-bottom: 1px solid #ddd
+  }
+}
+
 .li-container{
   height: 100%;
   width: 100%;

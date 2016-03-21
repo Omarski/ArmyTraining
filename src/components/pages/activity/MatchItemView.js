@@ -280,7 +280,6 @@ var MatchItemView = React.createClass({
            </div>);
         });
 
-
         return (
             <div>
                 <PageHeader sources={sources} title={title} key={page.xid}/>

@@ -3,6 +3,7 @@ var PageStore = require('../../../stores/PageStore');
 var ASRStore = require('../../../stores/ASRStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var ConfigStore = require('../../../stores/ConfigStore');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 var RF_GLYPHICON_STOP_CLS = "glyphicon-stop";
@@ -17,6 +18,7 @@ function getPageState(props) {
     var data;
     data = {
         page: null,
+        sources: [],
         title: "",
         pageType: "",
         image: "",
@@ -237,6 +239,9 @@ var ResponseFormationView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
+        var page = self.state.page;
+        var title = self.state.title;
+        var sources = self.state.sources;
         var response = state.feedbackResponse;
         var imageSource = "data/media/MainlandFemale_Render01_exercisecrop.jpg";
         var coach = "";
@@ -282,31 +287,39 @@ var ResponseFormationView = React.createClass({
 
 
         return (
-
-            <div className="RF-container">
-                <audio id="audio" volume={this.state.volume}>
-                    <source id="mp3Source" src="" type="audio/mp3"></source>
-                    Your browser does not support the audio format.
-                </audio>
-                <div className="RF-InteractionContainer">
-                    <img className="row RF-Image" src={state.image}></img>
-                    <div className="RF-promptContainer" onClick={function(){promptClick(self)}}>
-                        Click to Listen
+            <div>
+                <PageHeader sources={sources} title={title} key={page.xid}/>
+                <div className="RF-container">
+                    <audio id="audio" volume={this.state.volume}>
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
+                    <div className="RF-InteractionContainer">
+                        <img className="row RF-Image" src={state.image}></img>
+                        <ul>
+                            <li>
+                                <div className="RF-promptContainer" onClick={function(){promptClick(self)}}>
+                                    Click to Listen
+                                </div>
+                            </li>
+                            <li>
+                                <div className="RF-RecorderContainer">
+                                    <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
+                                    <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
+                                    <div className="RF-recorderTextContainer">{state.page.prompt.text}</div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="RF-RecorderContainer">
-                        <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
-                        <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
-                        <div className="RF-recorderTextContainer">{state.page.prompt.text}</div>
+                    <div className="RF-ResponseContainer">
+                        <div className="RF-coach">{coach}</div>
+                        <div className="RF-answerString">{answerString}</div>
+                        <div className="RF-response">{response}</div>
+                        <div className={feedbackClass}></div>
+                        <div className="RF-spokenContainer">{spoken}</div>
+                        {requestAnswer}
+                        {showAnswer}
                     </div>
-                </div>
-                <div className="RF-ResponseContainer">
-                    <div className="RF-coach">{coach}</div>
-                    <div className="RF-answerString">{answerString}</div>
-                    <div className="RF-response">{response}</div>
-                    <div className={feedbackClass}></div>
-                    <div className="RF-spokenContainer">{spoken}</div>
-                    {requestAnswer}
-                    {showAnswer}
                 </div>
             </div>
         );
