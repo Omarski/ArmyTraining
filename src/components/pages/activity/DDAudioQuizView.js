@@ -1,6 +1,7 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var PageHeader = require('../../widgets/PageHeader');
 
 // CONSTANTS
 var DROP_ANSWER_AREA_CLS = "dd-drop-answer-area";
@@ -49,20 +50,15 @@ function isPlaying(xid){
 function getPageState(props) {
     var page = {};
     var msArray = [];
-    if(props){
-        if(props && props.page){
-            page = props.page;
-            msArray = props.page.matchSource;
-        }
-    }
     var data = {
         page: page,
+        sources: [],
         answers: [],
         lines: [],
         submitLabel: "Submit",
         resetLabel: "Try Again",
         clearLabel: "Clear All",
-        feedback: "",
+        feedback: {label: "", passed:false},
         matchTarget: [],
         dragSrc: null,
         childHTML: null,
@@ -74,6 +70,15 @@ function getPageState(props) {
         perfect: false,
         prompt: "Complete the objective."
     };
+
+
+    if (props && props.page) {
+        data.title = props.page.title;
+        data.pageType = props.page.type;
+        data.page = props.page;
+        msArray = props.page.matchSource;
+    }
+
     var line = {};
     // collect all matchSource items to be printed in the paragraph, and create the list to be used to check
     // correct answers
@@ -209,18 +214,7 @@ function setGlyphIconPos(maxHeight, maxWidth){
     var answerItems = document.getElementsByClassName(ANSWER_LIST_ITEM_CLS);
     Array.prototype.forEach.call(answerItems, function(item, index){
         var _item = $(item);
-        _item.css('top', ( ( buffer + (buffer*index) + (maxHeight*index) )+'px'));
-    });
-
-    var answerArea = document.getElementsByClassName(ANSWER_AREA_CLS);
-    Array.prototype.forEach.call(answerArea, function(item, index){
-        var _item = $(item);
-        _item.css('top', ( ( (ansHeight*index) +marginTop)+'px'));
-        if(index%2 == 0){
-            _item.css('background', '#d7d7d7');
-        }else{
-            _item.css('background', '#c4c4c4');
-        }
+        //_item.css('top', ( ( buffer + (buffer*index) + (maxHeight*index) )+'px'));
     });
 
     var texts = document.getElementsByClassName("na");
@@ -304,7 +298,10 @@ function checkAnswers(self){
         });
         readOnly();
 
-        return ("You got " + numCorrect + " of " + total + " correct.");
+        return ({
+                label:"You got " + numCorrect + " of " + total + " correct.",
+                passed: (numCorrect === total)
+            });
     }
 }
 
@@ -356,7 +353,7 @@ var DDAudioQuizView = React.createClass({
     reset: function(){
         // clear the feedback text
         this.setState({
-            feedback: "",
+            feedback: {label: "", passed:false},
             readOnly: false,
             isCorrect: [],
             selection: []
@@ -392,7 +389,7 @@ var DDAudioQuizView = React.createClass({
     clearAll: function(){
         // clear the feedback text
         this.setState({
-            feedback: "",
+            feedback: {label:"", passed:false},
             readOnly: false,
             isCorrect: [],
             selection: []
@@ -758,39 +755,46 @@ var DDAudioQuizView = React.createClass({
         var needReset = true;
         var self = this;
         var st = self.state;
-        var page = st.page;
+        var page = self.state.page;
+        var title = self.state.title;
+        var sources = self.state.sources;
+        console.log(title + " asdf");
         // word bank, answers are MatchSources
         var answers = st.answers.map(function(item, index) {
             var component = <div key={page.xid + "component" + String(index)} className="dd-word-bank-text">{item.answer.nut.uttering.utterance.native.text}</div>;
             if(self.state.readOnly){
-                var answerItem = <div className="dd-answer-list-item" key={page.xid + "readOnly" + String(index)}>
-                    <div
-                        className="dd-draggable-area"
-                        data-question-id={item.lineNumber}
-                        data-question-letter={item.letter}
-                        >
-                        {component}
-                    </div>
-                </div>
+                var answerItem = <li>
+                        <div className="dd-answer-list-item" key={page.xid + "readOnly" + String(index)}>
+                            <div
+                                className="dd-draggable-area"
+                                data-question-id={item.lineNumber}
+                                data-question-letter={item.letter}
+                                >
+                                {component}
+                            </div>
+                        </div>
+                    </li>
             }else{
-                var answerItem = <div className="dd-answer-list-item" key={page.xid + "!readOnly" + String(index)}>
-                    <div
-                        className="dd-draggable-area"
-                        draggable="true"
-                        onDragStart={self.onDragging}
-                        onDragOver={self.onDraggingOver}
-                        onDrop={self.onDropping}
-                        data-question-id={item.lineNumber}
-                        data-question-letter={item.letter}
-                        data-question-zid={item.answer.nut.uttering.media[0].zid}
-                        onMouseOver={self.itemMouseOver}
-                        onMouseOut={self.itemMouseOff}
-                        onClick={self.handleClick}
-                        ><span className="glyphicon glyphicon-play-circle mouseover-play wl"></span>
-                        <span className="glyphicon glyphicon-stop mouseover-stop wl"></span>
-                        {component}
-                    </div>
-                </div>
+                var answerItem = <li>
+                                <div className="dd-answer-list-item" key={page.xid + "!readOnly" + String(index)}>
+                                    <div
+                                        className="dd-draggable-area"
+                                        draggable="true"
+                                        onDragStart={self.onDragging}
+                                        onDragOver={self.onDraggingOver}
+                                        onDrop={self.onDropping}
+                                        data-question-id={item.lineNumber}
+                                        data-question-letter={item.letter}
+                                        data-question-zid={item.answer.nut.uttering.media[0].zid}
+                                        onMouseOver={self.itemMouseOver}
+                                        onMouseOut={self.itemMouseOff}
+                                        onClick={self.handleClick}
+                                        ><span className="glyphicon glyphicon-play-circle mouseover-play wl"></span>
+                                        <span className="glyphicon glyphicon-stop mouseover-stop wl"></span>
+                                        {component}
+                                    </div>
+                                </div>
+                        </li>
             }
             return (
                 answerItem
@@ -903,60 +907,96 @@ var DDAudioQuizView = React.createClass({
             });
             // currently only 1 speaker allowed per line
             return (
-                <div key={page.xid + String(index)}>
+                <li key={page.xid + String(index)}>
                     <div className="dd-answer-area">
                         <div className="dd-answer-area-text">
                             <span className="dd-player-label">{speaker}&nbsp;</span>
                         </div>
                         {parts}
                     </div>
-                </div>
+                </li>
             )
         });
 
         var _buttons;
         if(!self.state.readOnly){
-            _buttons = [<button key={page.xid + "submitbtn"} className="btn btn-default submite-btn" onClick={this.submit}>{this.state.submitLabel}</button>,
-                        <button key={page.xid + "clearAllbtn"} className="btn btn-default clearAll-btn" onClick={this.clearAll}>{this.state.clearLabel}</button>];
+            _buttons = [<button key={page.xid + "submitbtn"} className="btn btn-default btn-success" onClick={this.submit}>{this.state.submitLabel}</button>,
+                        <button key={page.xid + "clearAllbtn"} className="btn btn-default btn-warning clearAll-btn" onClick={this.clearAll}>{this.state.clearLabel}</button>];
         }else{
             if(self.state.perfect){
                 _buttons = <span key={page.xid + "blankSpan"}></span>;
             }else {
-                _buttons = <button key={page.xid + "resetbtn"} className="btn btn-default reset-btn" onClick={this.reset}>{this.state.resetLabel}</button>;
+                _buttons = <button key={page.xid + "resetbtn"} className="btn btn-default btn-info reset-btn" onClick={this.reset}>{this.state.resetLabel}</button>;
             }
         }
 
+        /**
+         * <div className="row">
+         <div className="dd-quiz-container">
+
+         <div className="paragraph">
+         {lines}
+         </div>
+
+
+         <div className="dd-answer-list" >
+         <div className="word-list" onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
+         <ul className="dd-answer-list">
+         {answers}
+         </ul>
+         </div>
+         </div>
+
+         </div>
+         </div>
+         */
         // questions is a list of lines that contain a list of objects
+        var feedbackShow = "alert alert-warning hide";
+        if (this.state.feedback.label !== "") {
+            if (this.state.feedback.passed) {
+                feedbackShow = "alert alert-success show";
+            } else {
+                feedbackShow = "alert alert-danger show";
+            }
+
+        }
         return (
-            <div className="container dd-container">
-                <div className="row dd-quiz-title">
-                    <h4>{this.state.page.prompt}</h4>
-                </div>
-                <div className="row dd-quiz-feedback">
-                    <h4>{this.state.feedback}</h4>
-                </div>
-                <div className="row">
-                    <div className="dd-quiz-container">
-
-                            <div className="paragraph">
-                                {lines}
-                            </div>
-
-
-                            <div className="dd-answer-list" >
-                                <div className="word-list" onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
-                                    {answers}
-                                </div>
-                            </div>
-
+            <div>
+                <PageHeader sources={sources} title={title} key={page.xid}/>
+                <div className="container dd-container">
+                    <div className="row dd-quiz-title">
+                        <h4>{this.state.page.prompt}</h4>
                     </div>
-                </div>
-                <div className="row dd-quiz-feedback">
-                    {_buttons}
-                    <audio id="audio" volume={this.state.volume}>
-                        <source id="mp3Source" src="" type="audio/mp3"></source>
-                        Your browser does not support the audio format.
-                    </audio>
+                    <div className="row dd-quiz-feedback">
+                        <div className={feedbackShow} role="alert">
+                            <strong>{this.state.feedback.label}</strong>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-10">
+                            <ul className="dd-lines-list">
+                                {lines}
+                            </ul>
+                            <div className="dd-actions">
+                                {_buttons}
+                            </div>
+                        </div>
+                        <div className="col-md-2">
+                            <div className="word-list well well-lg" onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
+                                <ul className="dd-answer-list">
+                                    {answers}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row dd-quiz-feedback">
+
+                        <audio id="audio" volume={this.state.volume}>
+                            <source id="mp3Source" src="" type="audio/mp3"></source>
+                            Your browser does not support the audio format.
+                        </audio>
+                    </div>
                 </div>
             </div>
         );

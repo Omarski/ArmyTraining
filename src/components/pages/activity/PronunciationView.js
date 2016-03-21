@@ -144,7 +144,7 @@ function handleRecord(id, index, self){
 
 function getPageState(props) {
     var data = {
-        page: null,
+        page: "",
         sources: [],
         notes: [],
         recordingState: [],
