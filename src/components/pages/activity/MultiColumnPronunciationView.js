@@ -165,7 +165,7 @@ function play(id, colNumber, index, self){
     var a = document.getElementById(id);
     // might need to be $(a)
     $(a).bind('ended', function(){
-        stop(id, index, self);
+        stop(id, colNumber, index, self);
     });
     a.play();
     var newPlayingState = self.state.isPlaying;
@@ -189,7 +189,7 @@ function stop(id, colNumber, index, self){
 }
 
 function record(id, colNumber, index, self){
-    if(ASR.isInitialized){
+    if(ASR.isInitialized()){
         var pState = self.state.playableState;
         var oldCA = self.state.clickedAnswer;
         if(oldCA != 0){
@@ -212,7 +212,7 @@ function record(id, colNumber, index, self){
 
 // pass the audio handle to stopRecording
 function stopRecording(id, colNumber, index, self){
-    if(ASR.isInitialized){
+    if(ASR.isInitialized()){
         ASR.StopRecording();
         ASR.RecognizeRecording();
     }else {
@@ -225,10 +225,9 @@ function stopRecording(id, colNumber, index, self){
 }
 
 function handlePlaying(id, colNumber, index, self){
-    if(ASR.isInitialized){
+    if(ASR.isInitialized()){
         ASR.PlayRecording();
     }else {
-        //TODO: test if isplaying is a double array
         if (self.state.isPlaying[colNumber][index]) {
             stop(id, colNumber, index, self);
         } else {
@@ -270,6 +269,11 @@ var MultiColumnPronunciationView = React.createClass({
     componentDidMount: function() {
         ASRStore.addChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
+        if(hasGetUserMedia()){
+            // UserMedia allowed
+        }else{
+            // UserMedia not allowed
+        }
         positionDivs(this);
         if(ConfigStore.isASREnabled()){
             if(!ASR.isInitialized()){
@@ -335,7 +339,8 @@ var MultiColumnPronunciationView = React.createClass({
                         itemRecordedClass = recordedClass;
                     }
 
-                    if(self.state.message != "No data found.") {
+                    //if(self.state.message != "No data found.") {
+                    if(self.state.message != "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.") {
                         var isRecording = self.state.recordingState[colNumber][index];
                         if (isRecording) {
                             itemRecordingClass = recordingClass + " " + L2_GLYPHICON_STOP_CLS;
@@ -346,6 +351,7 @@ var MultiColumnPronunciationView = React.createClass({
 
                     return (
                         <div key={page.xid + String(index)} className="l2-vocal-answer">
+                            <audio id={id}></audio>
                             <div className="l2-note-text">{note}</div>
                             <span className={itemRecordingClass} onClick={function(){handleRecord(id, colNumber, index, self)}}></span>
                             <span className={itemRecordedClass} onClick={function(){handlePlaying(id, colNumber, index, self)}}></span>

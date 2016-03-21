@@ -240,6 +240,8 @@ var SortingView = React.createClass({
         }
         //a clear all button, and a reset button. These do the same thing but are displayed as different things
 
+        // TODO: change <img> tag to be a generic media object (i.e. image or text)
+            // check the matchsource media type, if audio then do the generic play image, else load specific image
 
         choices = state.page.matchSource.map(function(item, index){
             return (<img key={page.xid + "choice-"+index}
@@ -284,6 +286,10 @@ var SortingView = React.createClass({
                     feedbackA = incorrect;
                 }
             }
+
+            // TODO: change <img> tag to be a generic media object (i.e. image or text)
+            // check the matchsource media type, if audio then do the generic play image, else load specific image
+
             return( <div key={page.xid + "colA-"+itemA.label}
                          className="sorting-playicon"
                          data={itemA.label}
@@ -304,6 +310,10 @@ var SortingView = React.createClass({
                     feedbackB = incorrect;
                 }
             }
+
+            // TODO: change <img> tag to be a generic media object (i.e. image or text)
+            // check the matchsource media type, if audio then do the generic play image, else load specific image
+
             return( <div key={page.xid + "colB-"+itemB.label}
                          className="sorting-playicon"
                          data={itemB.label}
