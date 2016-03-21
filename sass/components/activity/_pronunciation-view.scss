@@ -4,6 +4,11 @@
   text-align: center;
 }
 
+.li-text-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .li-title{
   text-align: left;
 }
@@ -13,8 +18,8 @@
 }
 
 .li-answers-container{
-  width: 800px;
-  left: calc(50% - 400px);
+  margin-left: 50px;
+  margin-right: 50px;
   position: absolute;
 }
 
@@ -37,14 +42,14 @@
   pointer-events: all;
   margin: 9px;
   position: absolute;
-  top: calc(50% - 36px);
+  top: calc(50% - 23px);
 }
 
 .li-audio-buttons{
   height: 120px;
   position: absolute;
   width: 100px;
-  left: 0px;
+  left: 10px;
 }
 
 .li-record{

@@ -4,6 +4,7 @@ var SettingsStore = require('../../../stores/SettingsStore');
 var ColorText = require('../../../components/widgets/ColorText');
 var ASRStore = require('../../../stores/ASRStore');
 var ConfigStore = require('../../../stores/ConfigStore');
+var PageHeader = require('../../widgets/PageHeader');
 
 // CONSTANTS
 var LI_ANSWERS_CONTAINER_CLS = "li-answers-container";
@@ -144,6 +145,7 @@ function handleRecord(id, index, self){
 function getPageState(props) {
     var data = {
         page: null,
+        sources: [],
         notes: [],
         recordingState: [],
         playableState: [],
@@ -152,13 +154,17 @@ function getPageState(props) {
         utterings: [],
         message: "",
         recordedSpeech: "",
-        clickedAnswer: 0
+        clickedAnswer: 0,
+        title: "",
+        pageType: ""
     };
 
     data.message = ASRStore.GetMessage();
 
     if (props && props.page) {
         data.page = props.page;
+        data.title = props.page.title;
+        data.pageType = props.page.type;
     }
 
     var counter = 0;
@@ -262,6 +268,8 @@ var PronunciationView = React.createClass({
     render: function() {
         var self = this;
         var page = self.state.page;
+        var title = self.state.title;
+        var sources = self.state.sources;
         var questions = self.state.utterings || [];
         var nativeText = "";
         var translatedText = "";
@@ -324,7 +332,7 @@ var PronunciationView = React.createClass({
                             <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
                         </div>
                         <div className="li-text-container">
-                            <div className="li-note-text">{note}</div>
+                            <h4 className="li-note-text">{note}</h4>
                             <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
                                 <div className="li-native-text">
                                     <ColorText props={nativeText}/>
@@ -344,16 +352,17 @@ var PronunciationView = React.createClass({
         });
 
         return (
-            <div className="li-container">
-                <div className="row li-title">
-                    <h3>{page.title}</h3>
-                </div>
-                <div className="row">
-                    <div className="li-answers-container">
-                        <audio id="li-demo-audio"></audio>
-                        <div className="li-column">
-                            <div className="li-voice-answers">
-                                {vaList}
+            <div>
+                <PageHeader sources={sources} title={title} key={page.xid}/>
+                <div className="li-container">
+
+                    <div className="row">
+                        <div className="li-answers-container">
+                            <audio id="li-demo-audio"></audio>
+                            <div className="li-column">
+                                <div className="li-voice-answers">
+                                    {vaList}
+                                </div>
                             </div>
                         </div>
                     </div>
