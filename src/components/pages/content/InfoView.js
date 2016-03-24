@@ -31,6 +31,8 @@ function getPageState(props) {
             });
         }
 
+        // TODO: add check for if the video is full screen, and center it if there is no note
+
         if (props.page.media) {
             var media = props.page.media;
             mediaItems = media.map(function(item, index) {
@@ -38,6 +40,7 @@ function getPageState(props) {
                 var result = <div key={index}>Unknown File Type</div>;
 
                 if (item.type === "video") {
+                    // TODO: if video check for cutscene or fullcoach, check for mediaCaption videoTranscript
                     if(item.file.split(".")[1] == "mp4") {
                         result = <div key={index}>
                             <video width="320" height="240" controls>
