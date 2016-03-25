@@ -13,6 +13,7 @@ function getPageState(props) {
         note: "",
         page: "",
         media: "",
+        videoType: "",
         sources: [],
         volume: SettingsStore.voiceVolume()
     };
@@ -31,7 +32,23 @@ function getPageState(props) {
             });
         }
 
-        // TODO: add check for if the video is full screen, and center it if there is no note
+        if(props.page.info){
+            if(props.page.info.property){
+                props.page.info.property.map(function(item){
+                    switch(item.name){
+                        case "cutscene":
+                            // TODO: add a class that allows css to distinguish display types?
+                            data.videoType = "cutscene";
+                            break;
+                        case "fullcoach":
+                            data.videoType = "fullcoach";
+                            break;
+                        default:
+                            data.videoType = "";
+                    }
+                })
+            }
+        }
 
         if (props.page.media) {
             var media = props.page.media;
@@ -43,7 +60,7 @@ function getPageState(props) {
                     // TODO: if video check for cutscene or fullcoach, check for mediaCaption videoTranscript
                     if(item.file.split(".")[1] == "mp4") {
                         result = <div key={index}>
-                            <video width="320" height="240" controls>
+                            <video className={data.videoType} width="320" height="240" controls>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                         </div>
@@ -52,7 +69,7 @@ function getPageState(props) {
 
                 if (item.type === "image") {
                     result = <div key={index}>
-                        <img src={filePath}></img>
+                        <img className={data.videoType} src={filePath}></img>
                     </div>
                 }
 
