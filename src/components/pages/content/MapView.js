@@ -1,37 +1,36 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
+var SettingsStore = require('../../../stores/SettingsStore');
 var ReactBootstrap = require('react-bootstrap');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 function getPageState(props) {
-    var title = "";
-    var pageType = "";
-    var noteItems = "";
-    var mediaItems = "";
-    var json = "";
-    var hasMoved = [];
-    var page = null;
+    var data = {
+        page: "",
+        sources: [],
+        title: "",
+        pageType: "",
+        prompt: "",
+        volume: SettingsStore.voiceVolume(),
+        hasMoved: [],
+        noteItems: "",
+        mediaItems: "",
+        json: ""
+    };
 
     if (props && props.page) {
-        title = props.page.title;
-        pageType = props.page.type;
-        page = props.page;
+        data.title = props.page.title;
+        data.pageType = props.page.type;
+        data.page = props.page;
 
         if(props.page.MapData){
-            json = props.page.MapData;
-            json.nodes.map(function(){hasMoved.push(false)});
+            data.json = props.page.MapData;
+            data.json.nodes.map(function(){hasMoved.push(false)});
         }
     }
 
-    return {
-        title: title,
-        note: noteItems,
-        media: mediaItems,
-        pageType: pageType,
-        mapJSON: json,
-        hasMoved: hasMoved,
-        page: page
-    };
+    return data;
 }
 
 var MapView = React.createClass({
@@ -75,9 +74,12 @@ var MapView = React.createClass({
 
     render: function() {
         var self = this;
+        var state = self.state;
+        var page = state.page;
+        var title = state.title;
+        var sources = state.sources;
         var pins = "";
         var textBox = "";
-        var title = "";
         var backdropImage = "";
 
         title = self.state.mapJSON.title;
@@ -88,6 +90,7 @@ var MapView = React.createClass({
 
         return (
             <div className="container">
+                <PageHeader sources={sources} title={title} key={page.xid}/>
                 <audio id="audio"></audio>
                 <div className="mapContainer">
                     <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.mapJSON.title + "."}</div>
