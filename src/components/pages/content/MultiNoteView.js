@@ -70,12 +70,31 @@ var MultiNoteView = React.createClass({
             var text = item.note[0].text;
             var title = item.title;
             var image = <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
+            var caption = "";
+            var sources = [];
+            var info = item.info;
+            var properties = info.property;
+            if (properties) {
+                var len = properties.length;
+                while (len--) {
+                    var property = properties[len];
+                    switch (property.name) {
+                        case "mediadisplayblurb" :
+                            sources.push(property.value);
+                            break;
+                        case "mediacaption" :
+                            caption = property.value;
+                            break;
+                    }
+                };
+            }
 
             return({
                 imageURL: imageURL,
                 image: image,
                 title: title,
-                text: text
+                text: text,
+                caption: caption
             })
         });
 
@@ -99,9 +118,10 @@ var MultiNoteView = React.createClass({
                     <div className="row">
                         <div className="col-md-8">
                             <div className="multi-note-image">{pagesHTML[self.state.activePage].image}</div>
+                            <div className="multi-note-caption"><h5>{pagesHTML[self.state.activePage].caption}</h5></div>
                         </div>
                         <div className="col-md-4">
-                            <div className="multi-note-text">{pagesHTML[self.state.activePage].text}</div>
+                            <div className="multi-note-text"><p>{pagesHTML[self.state.activePage].text}</p></div>
                         </div>
 
                     </div>
