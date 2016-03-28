@@ -920,13 +920,13 @@ var DDAudioQuizView = React.createClass({
 
         var _buttons;
         if(!self.state.readOnly){
-            _buttons = [<button key={page.xid + "submitbtn"} className="btn btn-default btn-success" onClick={this.submit}>{this.state.submitLabel}</button>,
-                        <button key={page.xid + "clearAllbtn"} className="btn btn-default btn-warning clearAll-btn" onClick={this.clearAll}>{this.state.clearLabel}</button>];
+            _buttons = [<button key={page.xid + "submitbtn"} className="btn btn-default btn-action" onClick={this.submit}>{this.state.submitLabel}</button>,
+                        <button key={page.xid + "clearAllbtn"} className="btn btn-default btn-action clearAll-btn" onClick={this.clearAll}>{this.state.clearLabel}</button>];
         }else{
             if(self.state.perfect){
                 _buttons = <span key={page.xid + "blankSpan"}></span>;
             }else {
-                _buttons = <button key={page.xid + "resetbtn"} className="btn btn-default btn-info reset-btn" onClick={this.reset}>{this.state.resetLabel}</button>;
+                _buttons = <button key={page.xid + "resetbtn"} className="btn btn-default btn-action reset-btn" onClick={this.reset}>{this.state.resetLabel}</button>;
             }
         }
 
@@ -954,9 +954,9 @@ var DDAudioQuizView = React.createClass({
         var feedbackShow = "alert alert-warning hide";
         if (this.state.feedback.label !== "") {
             if (this.state.feedback.passed) {
-                feedbackShow = "alert alert-success show";
+                feedbackShow = "alert alert-passed show";
             } else {
-                feedbackShow = "alert alert-danger show";
+                feedbackShow = "alert alert-failed show";
             }
 
         }

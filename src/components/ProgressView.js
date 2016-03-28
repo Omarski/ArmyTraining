@@ -118,10 +118,10 @@ var ProgressView = React.createClass({
                             <div className="col-md-2">Lessons</div>
                             <div className="col-md-9">
                                 <div className="progress">
-                                    <div className="progress-bar progress-bar-success" style={{width: this.state.unitsPercent + '%'}}>
+                                    <div className="progress-bar progress-bar-unit" style={{width: this.state.unitsPercent + '%'}}>
                                         <span className="sr-only">{this.state.unitsPercent}% Complete (success)</span>
                                     </div>
-                                    <div className="progress-bar progress-bar-warning" style={{width: this.state.totalProgressPercent + '%'}}>
+                                    <div className="progress-bar progress-bar-total" style={{width: this.state.totalProgressPercent + '%'}}>
                                         <span className="sr-only">{this.state.totalProgressPercent}% Complete (success)</span>
                                     </div>
                                 </div>
@@ -136,10 +136,10 @@ var ProgressView = React.createClass({
                             <div className="col-md-2">Pages</div>
                             <div className="col-md-9">
                                 <div className="progress">
-                                    <div className="progress-bar progress-bar-success" style={{width: this.state.pagesPercent + '%'}}>
+                                    <div className="progress-bar progress-bar-pages" style={{width: this.state.pagesPercent + '%'}}>
                                         <span className="sr-only">{this.state.pagesPercent}% Complete (success)</span>
                                     </div>
-                                    <div className="progress-bar progress-bar-warning" style={{width: this.state.currentUnitCompletedPercent + '%'}}>
+                                    <div className="progress-bar progress-bar-unit-complete" style={{width: this.state.currentUnitCompletedPercent + '%'}}>
                                         <span className="sr-only">{this.state.currentUnitCompletedPercent}% Complete (success)</span>
                                     </div>
                                 </div>
