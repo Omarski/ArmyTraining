@@ -1,6 +1,6 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
-
+var PageHeader = require('../../widgets/PageHeader');
 
 function getPageState(props) {
     var title = "";
@@ -10,10 +10,12 @@ function getPageState(props) {
     var related = [];
     var xid = "page not found";
     var activePage = 0;
+    var page = "";
 
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
+        page = props.page;
         xid = props.page.xid;
         console.dir(props.page);
         if(props.page.related){
@@ -22,6 +24,8 @@ function getPageState(props) {
     }
 
     return {
+        page: page,
+        sources: [],
         title: title,
         note: noteItems,
         media: mediaItems,
@@ -57,12 +61,15 @@ var MultiNoteView = React.createClass({
     },
     render: function() {
         var self = this;
+        var page = self.state.page;
+        var title = self.state.title;
+        var sources = self.state.sources;
         var infoPages = self.state.related;
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
             var text = item.note[0].text;
             var title = item.title;
-            var image = <img className="MN-activeImage" alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
+            var image = <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
 
             return({
                 imageURL: imageURL,
@@ -75,7 +82,7 @@ var MultiNoteView = React.createClass({
         var pageChoices = pagesHTML.map(function(item, index){
             var imageURL = item.imageURL;
             var title = item.title;
-            var thumbnail = <img className="MN-thumbnail" data={index} onClick={self.handleClick} alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL}></img>;
+            var thumbnail = <li><img className="thumbnail multi-note-thumbnail" data={index} onClick={self.handleClick} alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL}></img></li>;
             return (thumbnail);
         });
 
@@ -86,10 +93,23 @@ var MultiNoteView = React.createClass({
         //mouse work for mouseover'ed selections
 
         return (
-            <div className="container">
-                <div className="MN-imageContainer">{pagesHTML[self.state.activePage].image} </div>
-                <div className="MN-imageText">{pagesHTML[self.state.activePage].text}</div>
-                <div className="MN-pageChoices">{pageChoices}</div>
+            <div>
+                <PageHeader sources={sources} title={title} key={page.xid}/>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8">
+                            <div className="multi-note-image">{pagesHTML[self.state.activePage].image}</div>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="multi-note-text">{pagesHTML[self.state.activePage].text}</div>
+                        </div>
+
+                    </div>
+                    <div className="row">
+                        <ul className="multi-note-choices">{pageChoices}</ul>
+                    </div>
+
+                </div>
             </div>
         );
     },
