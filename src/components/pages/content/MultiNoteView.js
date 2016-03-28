@@ -62,7 +62,7 @@ var MultiNoteView = React.createClass({
             var imageURL = item.media[0].xid;
             var text = item.note[0].text;
             var title = item.title;
-            var image = <img className="MN-activeImage" alt={title} key={self.state.xid + String(index)} src={"media/images/"+imageURL} alt={item.title}></img>;
+            var image = <img className="MN-activeImage" alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
 
             return({
                 imageURL: imageURL,
@@ -75,7 +75,7 @@ var MultiNoteView = React.createClass({
         var pageChoices = pagesHTML.map(function(item, index){
             var imageURL = item.imageURL;
             var title = item.title;
-            var thumbnail = <img className="MN-thumbnail" data={index} onClick={self.handleClick} alt={title} key={self.state.xid + String(index)} src={"media/images/"+imageURL}></img>;
+            var thumbnail = <img className="MN-thumbnail" data={index} onClick={self.handleClick} alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL}></img>;
             return (thumbnail);
         });
 

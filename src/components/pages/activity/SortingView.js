@@ -289,16 +289,54 @@ var SortingView = React.createClass({
 
             // TODO: change <img> tag to be a generic media object (i.e. image or text)
             // check the matchsource media type, if audio then do the generic play image, else load specific image
+            var result = "";
+            /*
+            if(mediaType == "image"){
+                result = <div key={page.xid + "colA-"+itemA.label}
+                              className="sorting-playicon"
+                              data={itemA.label}
+                              draggable="true"
+                              onDragStart={self.onDragging}
+                              onClick={self.onClick}>
+                    <img className="sorting-image" src={"./data/media/myPlay.jpg"}></img>
+                    <div className={feedbackA}></div>
+                </div>;
+            }else if(mediaType == "video"){
+                result = <div key={page.xid + "colA-"+itemA.label}
+                     className="sorting-playicon"
+                     data={itemA.label}
+                     draggable="true"
+                     onDragStart={self.onDragging}
+                     onClick={self.onClick}>
+                    <video width="320" height="240" controls>
+                        <source src={filePath} type="video/mp4"></source>
+                    </video>
+                    <div className={feedbackA}></div>
+                </div>;
+            }else if(mediaType == "text"){
+                result = <div key={page.xid + "colA-"+itemA.label}
+                              className="sorting-playicon"
+                              data={itemA.label}
+                              draggable="true"
+                              onDragStart={self.onDragging}
+                              onClick={self.onClick}>
+                    {text}
+                    <div className={feedbackA}></div>
+                </div>;
+            }
+*/
 
-            return( <div key={page.xid + "colA-"+itemA.label}
-                         className="sorting-playicon"
-                         data={itemA.label}
-                         draggable="true"
-                         onDragStart={self.onDragging}
-                         onClick={self.onClick}>
+            result = <div key={page.xid + "colA-"+itemA.label}
+                              className="sorting-playicon"
+                              data={itemA.label}
+                              draggable="true"
+                              onDragStart={self.onDragging}
+                              onClick={self.onClick}>
                 <img className="sorting-image" src={"./data/media/myPlay.jpg"}></img>
                 <div className={feedbackA}></div>
-            </div>);
+            </div>;
+
+            return(result );
         });
 
         colBRender = colBContent.map(function(itemB, index){

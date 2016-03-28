@@ -13,6 +13,7 @@ function getPageState(props) {
         note: "",
         page: "",
         media: "",
+        videoType: "",
         sources: [],
         volume: SettingsStore.voiceVolume()
     };
@@ -31,6 +32,24 @@ function getPageState(props) {
             });
         }
 
+        if(props.page.info){
+            if(props.page.info.property){
+                props.page.info.property.map(function(item){
+                    switch(item.name){
+                        case "cutscene":
+                            // TODO: add a class that allows css to distinguish display types?
+                            data.videoType = "cutscene";
+                            break;
+                        case "fullcoach":
+                            data.videoType = "fullcoach";
+                            break;
+                        default:
+                            data.videoType = "";
+                    }
+                })
+            }
+        }
+
         if (props.page.media) {
             var media = props.page.media;
             mediaItems = media.map(function(item, index) {
@@ -38,9 +57,10 @@ function getPageState(props) {
                 var result = <div key={index}>Unknown File Type</div>;
 
                 if (item.type === "video") {
+                    // TODO: if video check for cutscene or fullcoach, check for mediaCaption videoTranscript
                     if(item.file.split(".")[1] == "mp4") {
                         result = <div key={index}>
-                            <video width="320" height="240" controls>
+                            <video className={data.videoType} width="320" height="240" controls>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                         </div>
@@ -49,7 +69,7 @@ function getPageState(props) {
 
                 if (item.type === "image") {
                     result = <div key={index}>
-                        <img src={filePath}></img>
+                        <img className={data.videoType} src={filePath}></img>
                     </div>
                 }
 

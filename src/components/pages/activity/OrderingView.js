@@ -209,6 +209,9 @@ var OrderingView = React.createClass({
         }
 
         choices = state.page.matchSource.map(function(item, index){
+
+            //TODO: if(item is an image) return below, else construct other type
+
             return (<img key={page.xid +"choice-"+index}
                          src={"./data/media/myPlay.jpg"}
                          data={item.nut.uttering.utterance.native.text}
