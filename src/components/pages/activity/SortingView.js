@@ -235,8 +235,6 @@ var SortingView = React.createClass({
 
             if(!isCorrect) {
                 button = <button className="btn btn-action sorting-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
-            }else{
-
             }
         }
         if(numMoved > 0 && numMoved < numQuestions){
@@ -342,13 +340,13 @@ var SortingView = React.createClass({
                             {state.prompt}
                         </h4>
                     </div>
-                    <div className="row">
+                    <div className="row sorting-choices-container">
                         <ul className="sorting-choices-list">{choices}</ul>
                     </div>
                     <div className="row">
                         <div className="col-md-6 sorting-columnA">
                             <div className="panel panel-default">
-                                <div className="panel-heading">{colATitle}</div>
+                                <div className="panel-heading sorting-panel-heading">{colATitle}</div>
                                 <div className="panel-body">
                                     <div className="sorting-columnA-dropArea sorting-drop-area"
                                          onDragOver={self.onDraggingOver}
@@ -360,7 +358,7 @@ var SortingView = React.createClass({
                         </div>
                         <div className="col-md-6 sorting-columnB">
                             <div className="panel panel-default">
-                                <div className="panel-heading">{colBTitle}</div>
+                                <div className="panel-heading sorting-panel-heading">{colBTitle}</div>
                                 <div className="panel-body">
                                     <div className="sorting-columnB-dropArea sorting-drop-area"
                                          onDragOver={self.onDraggingOver}
