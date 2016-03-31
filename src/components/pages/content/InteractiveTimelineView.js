@@ -1,6 +1,7 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var ReactBootstrap = require('react-bootstrap');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 function getPageState(props) {
@@ -34,7 +35,8 @@ function getPageState(props) {
         timelineJSON: json,
         selectedDate: dateList[0],
         dateList: dateList,
-        page: page
+        page: page,
+        sources: []
     };
 }
 
@@ -62,27 +64,67 @@ var InteractiveTimelineView = React.createClass({
     render: function() {
         var self = this;
         var page = self.state.page;
+        var title = page.title;
+        var sources = self.state.sources;
         var image = "";
         var description = "";
 
         //image in center
         image = getImage(self.state.selectedDate, self.state.timelineJSON.nodes);
         description = getDescription(self.state.selectedDate, self.state.timelineJSON.nodes);
+
+        var row1 = [];
+        var row2 = [];
+        var nodes = this.state.timelineJSON.nodes;
+        var len = nodes.length;
+        for (var i = 0; i < len; i++) {
+            var node = nodes[i];
+            if (i % 2) {
+                row2.push(node);
+            } else {
+                row1.push(node);
+            }
+        }
+
         // dates along the bottom are selectable
-        var dates = this.state.timelineJSON.nodes.map(function(item, index){
-            return (<div id={item.title} className="timelineDate" key={page.xid + String(index)} onClick={self.handleClick}>
+        var datesRow1 = row1.map(function(item, index){
+            var selected = (item.title === self.state.selectedDate) ? "selected" : "";
+            var cls = "timeline-date top-row " + selected;
+            return (
+                    <div id={item.title} className={cls} key={page.xid + String(index)} onClick={self.handleClick}>
+                    {item.year}
+                    </div>
+                );
+        });
+        var datesRow2 = row2.map(function(item, index){
+            var selected = (item.title === self.state.selectedDate) ? "selected" : "";
+            var cls = "timeline-date bottom-row " + selected;
+            return (<div id={item.title} className={cls} key={page.xid + String(index)} onClick={self.handleClick}>
                 {item.year}</div>);
         });
 
 
         return (
-            <div className="container">
-                <div className="timelineImageContainer">
-                    {image}
-                    {description}
-                </div>
-                <div className="timelineContainer">
-                    {dates}
+            <div>
+                <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                <div className="container">
+                    <div className="timeline-image-container thumbnail">
+                        {image}
+                        <div className="alert timeline-img-text">
+                            {description}
+                        </div>
+                    </div>
+                    <div className="timeline-container well">
+                        <div className="container">
+                            <div className="row timeline-date-row first">
+                                {datesRow1}
+                            </div>
+                            <div className="row timeline-date-row last">
+                                {datesRow2}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         );
@@ -106,7 +148,7 @@ function getImage(selectedDateString, nodeList){
 function getDescription(selectedDateString, nodeList){
     for(var i=0;i<nodeList.length;i++){
         if(selectedDateString == nodeList[i].title){
-            return(<div className="timelineImageDescription"><b>{nodeList[i].year + ": "}</b>{nodeList[i].desc}</div>);
+            return(<span><b>{nodeList[i].year + ": "}</b>{nodeList[i].desc}</span>);
         }
     }
 }
