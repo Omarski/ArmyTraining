@@ -2,6 +2,7 @@
 css/
 data/
 dist/
+dist/bundle.js
 node_modules/
 .DS_Store
 .gitignore
