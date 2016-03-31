@@ -26,7 +26,7 @@ function getPageState(props) {
 
         if(props.page.MapData){
             data.json = props.page.MapData;
-            data.json.nodes.map(function(){hasMoved.push(false)});
+            data.json.nodes.map(function(){data.hasMoved.push(false)});
         }
     }
 
@@ -81,10 +81,11 @@ var MapView = React.createClass({
         var pins = "";
         var textBox = "";
         var backdropImage = "";
+        var mapTitle = "";
 
-        title = self.state.mapJSON.title;
-        pins = getPins(self.state.mapJSON.nodes, self.state.hasMoved, self);
-        backdropImage = self.state.mapJSON.backdrop;
+        mapTitle = self.state.json.title;
+        pins = getPins(self.state.json.nodes, self.state.hasMoved, self);
+        backdropImage = self.state.json.backdrop;
 
 
 
@@ -93,7 +94,7 @@ var MapView = React.createClass({
                 <PageHeader sources={sources} title={title} key={page.xid}/>
                 <audio id="audio"></audio>
                 <div className="mapContainer">
-                    <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.mapJSON.title + "."}</div>
+                    <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.json.title + "."}</div>
                     <img className="backdropImage" src={"data/media/" + backdropImage} alt={title}></img>
                     <img className="compass" src="data/media/compass.png"></img>
                     {pins}
@@ -111,7 +112,7 @@ var MapView = React.createClass({
 });
 
 function animatePins(self){
-    var nodes = self.state.mapJSON.nodes;
+    var nodes = self.state.json.nodes;
     var pins = document.getElementsByClassName('interactiveMapPin');
     var hasMoved = self.state.hasMoved;
 

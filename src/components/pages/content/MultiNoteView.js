@@ -1,39 +1,49 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
+var SettingsStore = require('../../../stores/SettingsStore');
 
 function getPageState(props) {
-    var title = "";
-    var pageType = "";
-    var noteItems = "";
-    var mediaItems = "";
-    var related = [];
-    var xid = "page not found";
-    var activePage = 0;
-    var page = "";
+    var data = {
+        page: "",
+        sources: [],
+        title: "",
+        note: "",
+        media: "",
+        pageType: "",
+        related: [],
+        xid: "page not found",
+        activePage: 0,
+        volume: SettingsStore.voiceVolume(),
+        pagesMedia: []
+    };
 
     if (props && props.page) {
-        title = props.page.title;
-        pageType = props.page.type;
-        page = props.page;
-        xid = props.page.xid;
+        data.title = props.page.title;
+        data.pageType = props.page.type;
+        data.page = props.page;
+        data.xid = props.page.xid;
         console.dir(props.page);
         if(props.page.related){
-            related = props.page.related;
+            data.related = props.page.related;
+            data.related.map(function(item, index){
+                var pageMediaArray = [];
+                item.note.map(function(itemNote, indexNote){
+                    if(itemNote.media){
+                        //assuming multinote will mimic info page and
+                        // the audio recording of the note will be associated
+                        // with said note
+                        pageMediaArray.push(itemNote.media.xid);
+                    }
+                });
+                // pageMediaArray should be a list of the media xid for the page
+                data.pagesMedia.push(pageMediaArray);
+                // and pagesMedia should be a list of pageMediaArrays
+            });
         }
     }
 
-    return {
-        page: page,
-        sources: [],
-        title: title,
-        note: noteItems,
-        media: mediaItems,
-        pageType: pageType,
-        related: related,
-        xid: xid,
-        activePage: activePage
-    };
+    return data;
 }
 
 var MultiNoteView = React.createClass({
@@ -54,6 +64,10 @@ var MultiNoteView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+    },
+
+    componentDidUpdate: function(){
+        //play audio recording for active info page
     },
 
     componentWillUnmount: function() {
@@ -114,6 +128,10 @@ var MultiNoteView = React.createClass({
         return (
             <div>
                 <PageHeader sources={sources} title={title} key={page.xid}/>
+                <audio id="audio" volume={this.state.volume}>
+                    <source id="mp3Source" src="" type="audio/mp3"></source>
+                    Your browser does not support the audio format.
+                </audio>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8">
