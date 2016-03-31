@@ -351,7 +351,7 @@ var SortingView = React.createClass({
                     <div className="row">
                         <div className="col-md-6 sorting-columnA">
                             <div className="panel panel-default">
-                                <div className="panel-heading">{colATitle}</div>
+                                <div className="panel-heading sorting-panel-heading">{colATitle}</div>
                                 <div className="panel-body">
                                     <div className="sorting-columnA-dropArea sorting-drop-area"
                                          onDragOver={self.onDraggingOver}
@@ -363,7 +363,7 @@ var SortingView = React.createClass({
                         </div>
                         <div className="col-md-6 sorting-columnB">
                             <div className="panel panel-default">
-                                <div className="panel-heading">{colBTitle}</div>
+                                <div className="panel-heading sorting-panel-heading">{colBTitle}</div>
                                 <div className="panel-body">
                                     <div className="sorting-columnB-dropArea sorting-drop-area"
                                          onDragOver={self.onDraggingOver}
