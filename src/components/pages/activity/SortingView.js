@@ -239,9 +239,9 @@ var SortingView = React.createClass({
 
             }
         }
-        if(numMoved > 0 && numMoved < numQuestions){
+        //if(numMoved > 0 && numMoved < numQuestions){
             button = <button className="btn btn-action sorting-clear" onClick={self.reset}>Clear All</button>; // clear all button
-        }
+        //}
         //a clear all button, and a reset button. These do the same thing but are displayed as different things
 
 
@@ -345,7 +345,7 @@ var SortingView = React.createClass({
                             {state.prompt}
                         </h4>
                     </div>
-                    <div className="row">
+                    <div className="row sorting-choices-container">
                         <ul className="sorting-choices-list">{choices}</ul>
                     </div>
                     <div className="row">
