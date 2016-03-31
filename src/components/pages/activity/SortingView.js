@@ -292,17 +292,17 @@ var SortingView = React.createClass({
             }
 
 
-            result = <div key={page.xid + "colA-"+itemA.label}
+            return (<li key={page.xid + "colA-"+itemA.label}>
+                        <div
                               className="sorting-playicon"
                               data={itemA.label}
                               draggable="true"
                               onDragStart={self.onDragging}
                               onClick={self.onClick}>
-                <span className="glyphicon glyphicon-play-circle"></span>
-                <div className={feedbackA}></div>
-            </div>;
-
-            return(result );
+                        <span className="glyphicon glyphicon-play-circle"></span>
+                        <div className={feedbackA}></div>
+                    </div>
+                </li>);
         });
 
         colBRender = colBContent.map(function(itemB, index){
@@ -315,15 +315,19 @@ var SortingView = React.createClass({
                 }
             }
 
-            return( <div key={page.xid + "colB-"+itemB.label}
-                         className="sorting-playicon"
-                         data={itemB.label}
-                         draggable="true"
-                         onDragStart={self.onDragging}
-                         onClick={self.onClick}>
-                        <span className="glyphicon glyphicon-play-circle"></span>
-                        <div className={feedbackB}></div>
-                    </div>);
+
+            return( <li key={page.xid + "colB-"+itemB.label}>
+                        <div
+                             className="sorting-playicon"
+                             data={itemB.label}
+                             draggable="true"
+                             onDragStart={self.onDragging}
+                             onClick={self.onClick}>
+                            <span className="glyphicon glyphicon-play-circle"></span>
+                            <div className={feedbackB}></div>
+                        </div>
+                    </li>
+                );
         });
 
         return (
@@ -355,7 +359,7 @@ var SortingView = React.createClass({
                                     <div className="sorting-columnA-dropArea sorting-drop-area"
                                          onDragOver={self.onDraggingOver}
                                          onDrop={self.onDropping}>
-                                        {colARender}
+                                        <ul className="sorting-choices-list">{colARender}</ul>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +371,8 @@ var SortingView = React.createClass({
                                     <div className="sorting-columnB-dropArea sorting-drop-area"
                                          onDragOver={self.onDraggingOver}
                                          onDrop={self.onDropping}>
-                                        {colBRender}
+                                        <ul className="sorting-choices-list">{colBRender}</ul>
+
                                     </div>
                                 </div>
                             </div>
