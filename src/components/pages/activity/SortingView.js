@@ -222,17 +222,26 @@ var SortingView = React.createClass({
         var incorrect = "glyphicon sorting-feedback sorting-incorrect glyphicon-remove-circle";
         var isGraded = state.isGraded;
         var numMoved = state.numMoved;
+        var numCorrect = 0;
+        var isCorrect = true;
+        var feedback = "";
 
         if(numMoved == numQuestions){
-            var isCorrect = true;
-            // check if correct and update accordingly
-
             for(var i = 0; i < answerState.length; i++){
-                if(answerState[i].currentBox != answerState[i].correctBox){
-                    isCorrect = false;
-                    break;
+                if(answerState[i].currentBox == answerState[i].correctBox){
+                    numCorrect++;
                 }
             }
+
+            if(numCorrect < answerState.length){
+                isCorrect = false;
+            }
+
+            feedback = <div className="row sorting-feedback-text">
+                            <h5>
+                                {"You got " + numCorrect + " out of " + answerState.length + " correct"}
+                            </h5>
+                        </div>;
 
             if(!isCorrect) {
                 button = <button className="btn btn-action sorting-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
@@ -343,11 +352,7 @@ var SortingView = React.createClass({
                             {state.prompt}
                         </h4>
                     </div>
-                    <div className="row sorting-feedback-text">
-                        <h5>
-                            You got 2 out of 3 correct
-                        </h5>
-                    </div>
+                    {feedback}
                     <div className="row sorting-choices-container">
                         <ul className="sorting-choices-list">{choices}</ul>
                     </div>
