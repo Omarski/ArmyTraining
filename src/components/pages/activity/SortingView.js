@@ -1,12 +1,14 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 function getPageState(props) {
     var data = {
         page: "",
         title: "",
+        sources: [],
         pageType: "",
         prompt: "",
         volume: SettingsStore.voiceVolume(),
@@ -202,15 +204,17 @@ var SortingView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
-        var page = state.page;
+        var page = self.state.page;
+        var title = page.title;
+        var sources = self.state.sources;
         var button = "";
         var choices;
         var answerState = state.answerState;
         var numQuestions = answerState.length;
-        var colATitle = "a little column A";
+        var colATitle = "";
         var colAContent = [];
         var colARender;
-        var colBTitle = "a little column B";
+        var colBTitle = "";
         var colBContent = [];
         var colBRender;
         var correct = "glyphicon sorting-feedback sorting-correct glyphicon-ok-circle";
@@ -230,29 +234,33 @@ var SortingView = React.createClass({
             }
 
             if(!isCorrect) {
-                button = <button className="btn-primary sorting-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
+                button = <button className="btn btn-action sorting-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
             }else{
 
             }
         }
         if(numMoved > 0 && numMoved < numQuestions){
-            button = <button className="btn-default sorting-clear" onClick={self.reset}>Clear All</button>; // clear all button
+            button = <button className="btn btn-action sorting-clear" onClick={self.reset}>Clear All</button>; // clear all button
         }
         //a clear all button, and a reset button. These do the same thing but are displayed as different things
 
-        // TODO: change <img> tag to be a generic media object (i.e. image or text)
-            // check the matchsource media type, if audio then do the generic play image, else load specific image
 
+            // check the matchsource media type, if audio then do the generic play image, else load specific image
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         choices = state.page.matchSource.map(function(item, index){
-            return (<img key={page.xid + "choice-"+index}
-                         src={"./data/media/myPlay.jpg"}
-                         data={item.nut.uttering.utterance.native.text}
-                         className="sorting-playicon"
-                         draggable="true"
-                         onDragStart={self.onDragging}
-                         onClick={self.onClick}>
-                    </img>);
+            return (<li className="sorting-choices-container" key={page.xid + "choice-"+index}>
+                        <div
+                             data={item.nut.uttering.utterance.native.text}
+                             draggable="true"
+                             onDragStart={self.onDragging}
+                             onClick={self.onClick}
+                             className="sorting-playicon"
+                            >
+                            <span className="glyphicon glyphicon-play-circle sorting-playicon"></span>
+                        </div>
+                    </li>);
         });
+
 
         state.page.matchTarget.map(function(item, index){
             var description = item.nut.uttering.utterance.translation.text;
@@ -287,44 +295,7 @@ var SortingView = React.createClass({
                 }
             }
 
-            // TODO: change <img> tag to be a generic media object (i.e. image or text)
-            // check the matchsource media type, if audio then do the generic play image, else load specific image
-            var result = "";
-            /*
-            if(mediaType == "image"){
-                result = <div key={page.xid + "colA-"+itemA.label}
-                              className="sorting-playicon"
-                              data={itemA.label}
-                              draggable="true"
-                              onDragStart={self.onDragging}
-                              onClick={self.onClick}>
-                    <img className="sorting-image" src={"./data/media/myPlay.jpg"}></img>
-                    <div className={feedbackA}></div>
-                </div>;
-            }else if(mediaType == "video"){
-                result = <div key={page.xid + "colA-"+itemA.label}
-                     className="sorting-playicon"
-                     data={itemA.label}
-                     draggable="true"
-                     onDragStart={self.onDragging}
-                     onClick={self.onClick}>
-                    <video width="320" height="240" controls>
-                        <source src={filePath} type="video/mp4"></source>
-                    </video>
-                    <div className={feedbackA}></div>
-                </div>;
-            }else if(mediaType == "text"){
-                result = <div key={page.xid + "colA-"+itemA.label}
-                              className="sorting-playicon"
-                              data={itemA.label}
-                              draggable="true"
-                              onDragStart={self.onDragging}
-                              onClick={self.onClick}>
-                    {text}
-                    <div className={feedbackA}></div>
-                </div>;
-            }
-*/
+
 
             result = <div key={page.xid + "colA-"+itemA.label}
                               className="sorting-playicon"
@@ -332,9 +303,10 @@ var SortingView = React.createClass({
                               draggable="true"
                               onDragStart={self.onDragging}
                               onClick={self.onClick}>
-                <img className="sorting-image" src={"./data/media/myPlay.jpg"}></img>
+                <span className="glyphicon glyphicon-play-circle"></span>
                 <div className={feedbackA}></div>
             </div>;
+
 
             return(result );
         });
@@ -349,46 +321,60 @@ var SortingView = React.createClass({
                 }
             }
 
-            // TODO: change <img> tag to be a generic media object (i.e. image or text)
-            // check the matchsource media type, if audio then do the generic play image, else load specific image
-
             return( <div key={page.xid + "colB-"+itemB.label}
                          className="sorting-playicon"
                          data={itemB.label}
                          draggable="true"
                          onDragStart={self.onDragging}
                          onClick={self.onClick}>
-                <img className="sorting-image" src={"./data/media/myPlay.jpg"}></img>
-                <div className={feedbackB}></div>
-            </div>);
+                        <span className="glyphicon glyphicon-play-circle"></span>
+                        <div className={feedbackB}></div>
+                    </div>);
         });
 
         return (
-            <div className="sorting-container">
-                <audio id="audio" volume={this.state.volume}>
-                    <source id="mp3Source" src="" type="audio/mp3"></source>
-                    Your browser does not support the audio format.
-                </audio>
-                <div className="sorting-prompt">{state.prompt}</div>
-                <div className="sorting-buttons-container">{button}</div>
-                <div className="sorting-choices-container">{choices}</div>
-                <div className="sorting-answers-container">
-                    <div className="sorting-columnA">
-                        <div className="sorting-columnA-title">{colATitle}</div>
-                        <div className="sorting-columnA-dropArea"
-                             onDragOver={self.onDraggingOver}
-                             onDrop={self.onDropping}>
-                            {colARender}
+            <div>
+                <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                <div className="container">
+                    <audio id="audio" volume={this.state.volume}>
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
+                    <div className="row">
+                        <h4>
+                            {state.prompt}
+                        </h4>
+                    </div>
+                    <div className="row">
+                        <ul className="sorting-choices-list">{choices}</ul>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6 sorting-columnA">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">{colATitle}</div>
+                                <div className="panel-body">
+                                    <div className="sorting-columnA-dropArea sorting-drop-area"
+                                         onDragOver={self.onDraggingOver}
+                                         onDrop={self.onDropping}>
+                                        {colARender}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6 sorting-columnB">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">{colBTitle}</div>
+                                <div className="panel-body">
+                                    <div className="sorting-columnB-dropArea sorting-drop-area"
+                                         onDragOver={self.onDraggingOver}
+                                         onDrop={self.onDropping}>
+                                        {colARender}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="sorting-columnB">
-                        <div className="sorting-columnB-title">{colBTitle}</div>
-                        <div className="sorting-columnB-dropArea"
-                             onDragOver={self.onDraggingOver}
-                             onDrop={self.onDropping}>
-                            {colBRender}
-                        </div>
-                    </div>
+                    <div className="row sorting-actions">{button}</div>
                 </div>
             </div>
         );
