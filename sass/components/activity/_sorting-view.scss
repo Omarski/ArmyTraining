@@ -8,6 +8,22 @@
 .sorting-playicon{
   margin: 20px;
   font-size: 72px;
+  position: relative;
+}
+
+.sorting-feedback {
+  position: absolute;
+  font-size: 24px;
+  left: 62px;
+  top: 0;
+}
+
+.sorting-incorrect {
+  color: red;
+}
+
+.sorting-correct {
+  color: green;
 }
 
 .sorting-drop-area {
@@ -25,4 +41,8 @@
 .sorting-panel-heading {
   text-align: center;
   font-weight: bold;
+}
+
+.sorting-feedback-text {
+  text-align: center;
 }

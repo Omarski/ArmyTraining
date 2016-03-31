@@ -339,6 +339,11 @@ var SortingView = React.createClass({
                             {state.prompt}
                         </h4>
                     </div>
+                    <div className="row sorting-feedback-text">
+                        <h5>
+                            You got 2 out of 3 correct
+                        </h5>
+                    </div>
                     <div className="row sorting-choices-container">
                         <ul className="sorting-choices-list">{choices}</ul>
                     </div>
