@@ -102,18 +102,19 @@ var SortingView = React.createClass({
 
         var dropLocation = "";
 
+        console.log($(e.target).attr("class"));
         switch($(e.target).attr("class")){
-            case "sorting-columnA-dropArea":
+            case "sorting-columnA-dropArea sorting-drop-area":
                 dropLocation = "A";
                 break;
-            case "sorting-columnB-dropArea":
+            case "sorting-columnB-dropArea sorting-drop-area":
                 dropLocation = "B";
                 break;
             default:
-                if($(e.target).parent().attr("class") == "sorting-columnA-dropArea"){
+                if($(e.target).parent().attr("class") == "sorting-columnA-dropArea sorting-drop-area"){
                     dropLocation = "A";
                 }
-                if($(e.target).parent().attr("class") == "sorting-columnB-dropArea"){
+                if($(e.target).parent().attr("class") == "sorting-columnB-dropArea sorting-drop-area"){
                     dropLocation = "B";
                 }
         }
@@ -242,9 +243,7 @@ var SortingView = React.createClass({
         }
         //a clear all button, and a reset button. These do the same thing but are displayed as different things
 
-
             // check the matchsource media type, if audio then do the generic play image, else load specific image
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         choices = state.page.matchSource.map(function(item, index){
             return (<li className="sorting-choices-container" key={page.xid + "choice-"+index}>
                         <div
@@ -258,7 +257,6 @@ var SortingView = React.createClass({
                         </div>
                     </li>);
         });
-
 
         state.page.matchTarget.map(function(item, index){
             var description = item.nut.uttering.utterance.translation.text;
@@ -294,7 +292,6 @@ var SortingView = React.createClass({
             }
 
 
-
             result = <div key={page.xid + "colA-"+itemA.label}
                               className="sorting-playicon"
                               data={itemA.label}
@@ -304,7 +301,6 @@ var SortingView = React.createClass({
                 <span className="glyphicon glyphicon-play-circle"></span>
                 <div className={feedbackA}></div>
             </div>;
-
 
             return(result );
         });
@@ -366,7 +362,7 @@ var SortingView = React.createClass({
                                     <div className="sorting-columnB-dropArea sorting-drop-area"
                                          onDragOver={self.onDraggingOver}
                                          onDrop={self.onDropping}>
-                                        {colARender}
+                                        {colBRender}
                                     </div>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var ReactBootstrap = require('react-bootstrap');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 function getPageState(props) {
@@ -13,22 +14,27 @@ function getPageState(props) {
     var mediaItems = "";
     var json = "";
 
+    var data = {
+        page: "",
+        title: "",
+        pageType: "",
+        noteItems: "",
+        mediaItems: "",
+        json: "",
+        sources: []
+    };
+
     if (props && props.page) {
-        title = props.page.title;
-        pageType = props.page.type;
+        data.page = props.page;
+        data.title = props.page.title;
+        data.pageType = props.page.type;
 
         if(props.page.EthnoData){
-            json = props.page.EthnoData;
+            data.json = props.page.EthnoData;
         }
     }
 
-    return {
-        title: title,
-        note: noteItems,
-        media: mediaItems,
-        pageType: pageType,
-        json: json
-    };
+    return data;
 }
 
 var EthnoMapView = React.createClass({
@@ -74,27 +80,35 @@ var EthnoMapView = React.createClass({
     },
     render: function() {
         var self = this;
+        var page = self.state.page;
+        var title = self.state.title;
+        var sources = self.state.sources;
         var background = getBackground(self);
         var layers = getLayers(self);
 
-        //return (
-        //    <div className="container">
-        //        <div className="ethnoMap">
-        //            <div className="mapLayers">
-        //                {background}
-        //                <svg className="layers" width="100%" height="100%">
-        //                    <mask id="mask1">
-        //                        <circle cx="-50%" cy="-50%" r="80" fill="white" />
-        //                    </mask>
-        //                    {layers}
-        //                </svg>
-        //                <canvas id="canvas" width="768" height="504"></canvas>
-        //
-        //            </div>
-        //        </div>
-        //    </div>
-        //);
-        return(<div>{"EthnoMap View"}</div>);
+        return (
+            <div className="container">
+                <PageHeader sources={sources} title={title} key={page.xid}/>
+            </div>
+
+        /*    <div className="container">
+                <PageHeader sources={sources} title={title} key={page.xid}/>
+                <div className="ethnoMap">
+                    <div className="mapLayers">
+                        {background}
+                        <svg className="layers" width="100%" height="100%">
+                            <mask id="mask1">
+                                <circle cx="-50%" cy="-50%" r="80" fill="white" />
+                            </mask>
+                            {layers}
+                        </svg>
+                        <canvas id="canvas" width="768" height="504"></canvas>
+
+                    </div>
+                </div>
+             </div>
+        */
+        );
     },
     /**
      * Event handler for 'change' events coming from the BookStore

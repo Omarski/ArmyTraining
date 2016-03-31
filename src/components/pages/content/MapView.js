@@ -1,37 +1,36 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
+var SettingsStore = require('../../../stores/SettingsStore');
 var ReactBootstrap = require('react-bootstrap');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 function getPageState(props) {
-    var title = "";
-    var pageType = "";
-    var noteItems = "";
-    var mediaItems = "";
-    var json = "";
-    var hasMoved = [];
-    var page = null;
+    var data = {
+        page: "",
+        sources: [],
+        title: "",
+        pageType: "",
+        prompt: "",
+        volume: SettingsStore.voiceVolume(),
+        hasMoved: [],
+        noteItems: "",
+        mediaItems: "",
+        json: ""
+    };
 
     if (props && props.page) {
-        title = props.page.title;
-        pageType = props.page.type;
-        page = props.page;
+        data.title = props.page.title;
+        data.pageType = props.page.type;
+        data.page = props.page;
 
         if(props.page.MapData){
-            json = props.page.MapData;
-            json.nodes.map(function(){hasMoved.push(false)});
+            data.json = props.page.MapData;
+            data.json.nodes.map(function(){data.hasMoved.push(false)});
         }
     }
 
-    return {
-        title: title,
-        note: noteItems,
-        media: mediaItems,
-        pageType: pageType,
-        mapJSON: json,
-        hasMoved: hasMoved,
-        page: page
-    };
+    return data;
 }
 
 var MapView = React.createClass({
@@ -75,22 +74,27 @@ var MapView = React.createClass({
 
     render: function() {
         var self = this;
+        var state = self.state;
+        var page = state.page;
+        var title = state.title;
+        var sources = state.sources;
         var pins = "";
         var textBox = "";
-        var title = "";
         var backdropImage = "";
+        var mapTitle = "";
 
-        title = self.state.mapJSON.title;
-        pins = getPins(self.state.mapJSON.nodes, self.state.hasMoved, self);
-        backdropImage = self.state.mapJSON.backdrop;
+        mapTitle = self.state.json.title;
+        pins = getPins(self.state.json.nodes, self.state.hasMoved, self);
+        backdropImage = self.state.json.backdrop;
 
 
 
         return (
             <div className="container">
+                <PageHeader sources={sources} title={title} key={page.xid}/>
                 <audio id="audio"></audio>
                 <div className="mapContainer">
-                    <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.mapJSON.title + "."}</div>
+                    <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.json.title + "."}</div>
                     <img className="backdropImage" src={"data/media/" + backdropImage} alt={title}></img>
                     <img className="compass" src="data/media/compass.png"></img>
                     {pins}
@@ -108,7 +112,7 @@ var MapView = React.createClass({
 });
 
 function animatePins(self){
-    var nodes = self.state.mapJSON.nodes;
+    var nodes = self.state.json.nodes;
     var pins = document.getElementsByClassName('interactiveMapPin');
     var hasMoved = self.state.hasMoved;
 

@@ -11,6 +11,7 @@ function getPageState(props) {
         title: "",
         pageType: "",
         note: "",
+        noteAudio: [],
         page: "",
         media: "",
         videoType: "",
@@ -25,7 +26,12 @@ function getPageState(props) {
         if (props.page.note) {
             var notes = props.page.note;
 
+
             noteItems = notes.map(function(item, index) {
+                if(item.media){
+                    // if statement to detect media in note, should be true
+                    data.noteAudio.push(item.media[0].xid);
+                }
                 return (
                     <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
                 );
@@ -57,10 +63,9 @@ function getPageState(props) {
                 var result = <div key={index}>Unknown File Type</div>;
 
                 if (item.type === "video") {
-                    // TODO: if video check for cutscene or fullcoach, check for mediaCaption videoTranscript
                     if(item.file.split(".")[1] == "mp4") {
-                        result = <div key={index}>
-                            <video className={data.videoType} width="320" height="240" controls>
+                        result = <div className={data.videoType} key={index}>
+                            <video controls>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                         </div>
@@ -97,6 +102,28 @@ function getPageState(props) {
     return data;
 }
 
+function playMediaAudio(xidArray){
+    //xid is of the form "000000000.mp3"
+    console.dir(xidArray);
+    if(xidArray.length > 0){
+        $("#audio").bind('ended', function(){
+            xidArray.shift();
+            playMediaAudio(xidArray);
+        });
+        playAudio(xidArray[0]);
+    }
+}
+
+function playAudio(xid){
+    console.log("play Audio "+ xid);
+    var audio = document.getElementById('audio');
+    var source = document.getElementById('mp3Source');
+    // construct file-path to audio file
+    source.src = "data/media/" + xid;
+    audio.load();
+    audio.play();
+}
+
 var InfoView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
@@ -113,6 +140,19 @@ var InfoView = React.createClass({
         $('[data-toggle="tooltip"]').tooltip();
     },
 
+    componentWillUpdate: function(){
+        console.log("componentWillUpdate");
+    },
+
+    componentDidUpdate: function(){
+        //play audio recording for info page
+        var self = this;
+        var noteMedia = self.state.noteAudio;
+        console.log("componentDidUpdate");
+        // play all note media in order (see dnd for example)
+        playMediaAudio(noteMedia);
+    },
+
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
         SettingsStore.removeChangeListener(this._onChange);
@@ -124,6 +164,7 @@ var InfoView = React.createClass({
         var pageType = state.pageType;
         var pageNotes = state.note;
         var media = state.media;
+        var mediaType = state.videoType;
 
         var mediaContainer = "";
         if (media) {
@@ -145,12 +186,16 @@ var InfoView = React.createClass({
         return (
 
             <div className="infoContainer">
+                <audio id="audio" volume={this.state.volume}>
+                    <source id="mp3Source" src="" type="audio/mp3"></source>
+                    Your browser does not support the audio format.
+                </audio>
                 <div className="infoTitle">
                     <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
                 </div>
                 <div className="infoDataContainer col-md-6 col-md-offset-3">
                     {mediaContainer}
-                    <div className="infoNoteContainer">{pageNotes}</div>
+                    <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>
                 </div>
             </div>
         );

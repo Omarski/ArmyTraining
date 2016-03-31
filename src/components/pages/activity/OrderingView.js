@@ -1,10 +1,13 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
+var SettingsStore = require('../../../stores/SettingsStore');
+var PageHeader = require('../../widgets/PageHeader');
 
 
 function getPageState(props) {
     var data = {
         page: "",
+        sources: [],
         title: "",
         pageType: "",
         prompt: "",
@@ -175,7 +178,9 @@ var OrderingView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
-        var page = state.page;
+        var page = self.state.page;
+        var title = self.state.title;
+        var sources = self.state.sources;
         var button = "";
         var choices;
         var answerState = state.answerState;
@@ -264,6 +269,7 @@ var OrderingView = React.createClass({
 
         return (
             <div className="OR-container">
+                <PageHeader sources={sources} title={title} key={page.xid}/>
                 <audio id="audio" volume={this.state.volume}>
                     <source id="mp3Source" src="" type="audio/mp3"></source>
                     Your browser does not support the audio format.
