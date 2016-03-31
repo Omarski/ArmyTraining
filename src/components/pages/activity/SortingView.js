@@ -235,13 +235,11 @@ var SortingView = React.createClass({
 
             if(!isCorrect) {
                 button = <button className="btn btn-action sorting-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
-            }else{
-
             }
         }
-        //if(numMoved > 0 && numMoved < numQuestions){
+        if(numMoved > 0 && numMoved < numQuestions){
             button = <button className="btn btn-action sorting-clear" onClick={self.reset}>Clear All</button>; // clear all button
-        //}
+        }
         //a clear all button, and a reset button. These do the same thing but are displayed as different things
 
 
