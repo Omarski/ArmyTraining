@@ -18,7 +18,8 @@ function getPageState(props) {
         haveAnswered: false,
         isCorrect: false,
         answerFeedback: "",
-        correctAnswer: ""
+        correctAnswer: "",
+        isQuestionaire: false
     };
 
     if (props && props.page) {
@@ -27,12 +28,27 @@ function getPageState(props) {
         data.pageType = props.page.type;
         data.answers = props.page.answer;
         data.prompt = props.page.prompt.text;
+
+        if (data.page.info && data.page.info.property) {
+            var properties = data.page.info.property;
+            var len = properties.length;
+            while(len--) {
+                var property = properties[len];
+                if (property.name === "questionnaire") {
+                    data.isQuestionaire = true;
+                    break;
+                }
+            }
+        }
+
     }
 
     if(props && props.page && props.page.media){
         data.mediaType = props.page.media[0].type;
         data.mediaZid = props.page.media[0].zid;
     }
+
+
 
     data.answers = AGeneric().shuffle(data.answers);
     data.answers.map(function(item){
@@ -110,26 +126,28 @@ var MultipleChoiceView = React.createClass({
         var title = page.title;
         var sources = self.state.sources;
         var responder = "";
-        var question = <div>{state.prompt}</div>;
         var feedbackClass = "glyphicon MC-glyphicon MC-feedback";
         var imageSource = "data/media/MainlandFemale_Render01_exercisecrop.jpg";
         var response = state.answerFeedback;
 
-        if(state.haveAnswered) {
-            coach = <img className="MC-coachImage" src={imageSource}></img>;
+        if(state.haveAnswered && !self.state.isQuestionaire) {
+            coach = (
+                <div className="thumbnail">
+                    <img src={imageSource}></img>
+                </div>
+            );
 
             if(state.isCorrect){
-                feedbackClass += " multiple-choice-correct " + MC_GLYPHICON_CORRECT_CLS;
+                feedbackClass += " multiple-choice-feedback-icon multiple-choice-correct " + MC_GLYPHICON_CORRECT_CLS;
             }else{
-                feedbackClass += " multiple-choice-incorrect " + MC_GLYPHICON_INCORRECT_CLS;
+                feedbackClass += " multiple-choice-feedback-icon multiple-choice-incorrect " + MC_GLYPHICON_INCORRECT_CLS;
             }
 
             responder = (
-            <div className="alert multiple-choice-alert">
-                <div className="MC-coachContainer">
-                    <div className="MC-coach">{coach}</div>
-                    <div className="MC-response">{response}</div>
-                    <div className={feedbackClass}></div>
+            <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
+                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div className="multiple-choice-alert-text">
+                    {coach}<h5><span className={feedbackClass}></span>{response}</h5>
                 </div>
             </div>
                 );

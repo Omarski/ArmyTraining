@@ -9,9 +9,22 @@ input[type=checkbox] {
 }
 
 .multiple-choice-alert {
-  padding: 9px 14px;
-  margin-bottom: 14px;
   background-color: #f7f7f9;
-  border: 1px solid #e1e1e8;
-  border-radius: 4px
+  border-color: #e1e1e8;
+}
+
+.multiple-choice-feedback-icon {
+  margin-right: 5px;
+}
+
+.multiple-choice-alert-text {
+  display: inline-flex;
+  h5 {
+    margin-left: 20px;
+  }
+  .thumbnail {
+    width: 120px;
+    height: 120px;
+    margin: 0;
+  }
 }
