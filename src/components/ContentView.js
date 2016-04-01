@@ -59,13 +59,13 @@ var ContentView = React.createClass({
 
     render: function() {
 
-
-
         var page = <div></div>;
+        var pageId = (this.state.page) ? this.state.page.xid : "";
 
         if (this.state.page) {
             console.log(this.state.page.type);
             console.log(this.state.page.title);
+            console.log(this.state.page);
             switch (this.state.page.type) {
                 case "ActiveDialog":
                     page = <ActiveDialogView page={this.state.page} />;
@@ -160,7 +160,9 @@ var ContentView = React.createClass({
 
         return (
             <div className="container main-content">
-                {page}
+                <div key={"content-" + pageId}>
+                    {page}
+                </div>
             </div>
         );
     },

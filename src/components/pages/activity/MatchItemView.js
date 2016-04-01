@@ -32,6 +32,8 @@ function getPageState(props) {
         });
     }
 
+    console.dir(data);
+
     return data;
 }
 
@@ -180,6 +182,7 @@ var MatchItemView = React.createClass({
     },
 
     componentWillMount: function() {
+        //PageStore.removeChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
     },
 
@@ -188,7 +191,7 @@ var MatchItemView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+        PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
         var self = this;
@@ -231,76 +234,80 @@ var MatchItemView = React.createClass({
         // TODO: change <img> tag to be a generic media object (i.e. image or text)
         // check the matchsource media type, if audio then do the generic play image, else load specific image
 
-        choices = state.page.matchSource.map(function(item, index){
+        if (state.page.matchSource) {
+            choices = state.page.matchSource.map(function(item, index){
 
-            return (
-                <li key={page.xid + "choice-"+index}>
-                    <div
-                     data={item.nut.uttering.utterance.native.text}
-                     className="match-item-play-icon"
-                     draggable="true"
-                     onDragStart={self.onDragging}
-                     onClick={self.onClick}>
-                        <span className="glyphicon glyphicon-play-circle"></span>
-                    </div>
-                </li>);
-        });
+                return (
+                    <li key={page.xid + "choice-"+index}>
+                        <div
+                            data={item.nut.uttering.utterance.native.text}
+                            className="match-item-play-icon"
+                            draggable="true"
+                            onDragStart={self.onDragging}
+                            onClick={self.onClick}>
+                            <span className="glyphicon glyphicon-play-circle"></span>
+                        </div>
+                    </li>);
+            });
+        }
 
-        answerContainers = state.page.matchTarget.map(function(item, index){
-            var answerPrompt = item.nut.uttering.utterance.translation.text;
-            var letter = item.letter;
-            var answerRender = "";
-            var feedback = "";
-            var needCheck = state.numMoved == answerState.length;
 
-            for(var i=0;i<state.answerState.length;i++){
-                if(letter == state.answerState[i].currentBox){
+        if (state.page.matchTarget) {
+            answerContainers = state.page.matchTarget.map(function (item, index) {
+                var answerPrompt = item.nut.uttering.utterance.translation.text;
+                var letter = item.letter;
+                var answerRender = "";
+                var feedback = "";
+                var needCheck = state.numMoved == answerState.length;
 
-                    if(needCheck){
-                        if(state.answerState[i].currentBox == state.answerState[i].correctBox){
-                            feedback = correct;
-                        }else{
-                            feedback = incorrect;
+                for (var i = 0; i < state.answerState.length; i++) {
+                    if (letter == state.answerState[i].currentBox) {
+
+                        if (needCheck) {
+                            if (state.answerState[i].currentBox == state.answerState[i].correctBox) {
+                                feedback = correct;
+                            } else {
+                                feedback = incorrect;
+                            }
                         }
+
+                        // check the matchsource media type, if audio then do the generic play image, else load specific image
+
+                        answerRender = (
+                            <div
+                                data={state.answerState[i].label}
+                                className="match-item-play-icon"
+                                draggable="true"
+                                onDragStart={self.onDragging}
+                                onClick={self.onClick}>
+                                <span className="glyphicon glyphicon-play-circle"></span>
+                                <div className={feedback}></div>
+                            </div>
+                        );
                     }
-
-                    // check the matchsource media type, if audio then do the generic play image, else load specific image
-
-                    answerRender = (
-                                <div
-                                    data={state.answerState[i].label}
-                                    className="match-item-play-icon"
-                                    draggable="true"
-                                    onDragStart={self.onDragging}
-                                    onClick={self.onClick}>
-                                    <span className="glyphicon glyphicon-play-circle"></span>
-                                    <div className={feedback}></div>
-                                </div>
-                            );
                 }
-            }
 
-           return(<li key={page.xid + String(index)} className = "match-item-answer" key={"answer-"+index}>
-                        <div className="content">
-                            <div className="row match-item-answer-row">
-                                <div className="col-md-2">
-                                    <div className="match-item-answer-drop-area thumbnail"
-                                         data-letter={letter}
-                                         onDragOver={self.onDraggingOver}
-                                         onDrop={self.onDropping}>
-                                        {answerRender}
-                                    </div>
-                                </div>
-                                <div className="col-md-10">
-                                    <div className="match-item-answer-prompt">{answerPrompt}</div>
+                return (<li key={page.xid + String(index)} className="match-item-answer" key={"answer-"+index}>
+                    <div className="content">
+                        <div className="row match-item-answer-row">
+                            <div className="col-md-2">
+                                <div className="match-item-answer-drop-area thumbnail"
+                                     data-letter={letter}
+                                     onDragOver={self.onDraggingOver}
+                                     onDrop={self.onDropping}>
+                                    {answerRender}
                                 </div>
                             </div>
+                            <div className="col-md-10">
+                                <div className="match-item-answer-prompt">{answerPrompt}</div>
+                            </div>
                         </div>
+                    </div>
 
 
-                   </li>);
-        });
-
+                </li>);
+            });
+        }
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
