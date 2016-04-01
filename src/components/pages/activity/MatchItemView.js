@@ -303,30 +303,32 @@ var MatchItemView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={page.xid}/>
-                <div className="container">
-                    <audio id="audio" volume={this.state.volume}>
-                        <source id="mp3Source" src="" type="audio/mp3"></source>
-                        Your browser does not support the audio format.
-                    </audio>
-                    <div className="row">
-                        <h4 className="match-item-prompt">{state.prompt}</h4>
-                    </div>
-                    
-                    <div className="row">
-                        <div className="col-md-2">
-                            <ul className="match-item-choices-container">{choices}</ul>
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <div className="container">
+                        <audio id="audio" volume={this.state.volume}>
+                            <source id="mp3Source" src="" type="audio/mp3"></source>
+                            Your browser does not support the audio format.
+                        </audio>
+                        <div className="row">
+                            <h4 className="match-item-prompt">{state.prompt}</h4>
                         </div>
-                        <div className="col-md-10">
-                            <ul className="match-item-answers-container">
-                                {answerContainers}
-                            </ul>
+
+                        <div className="row">
+                            <div className="col-md-2">
+                                <ul className="match-item-choices-container">{choices}</ul>
+                            </div>
+                            <div className="col-md-10">
+                                <ul className="match-item-answers-container">
+                                    {answerContainers}
+                                </ul>
+                            </div>
                         </div>
+                        <div className="row">
+                            <div className="match-item-buttons">{button}</div>
+                        </div>
+
                     </div>
-                    <div className="row">
-                        <div className="match-item-buttons">{button}</div>
-                    </div>
-                    
                 </div>
             </div>
         );

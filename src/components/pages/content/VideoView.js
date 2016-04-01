@@ -74,11 +74,13 @@ var VideoView = React.createClass({
     render: function() {
 
         return (
-            <div className="container">
-                <h3>{this.state.title} : {this.state.pageType}</h3>
-                <div>
-                    {this.state.note}
-                    {this.state.media}
+            <div>
+                <div className="container" key={"page-" + this.state.page.xid}>
+                    <h3>{this.state.title} : {this.state.pageType}</h3>
+                    <div>
+                        {this.state.note}
+                        {this.state.media}
+                    </div>
                 </div>
             </div>
         );

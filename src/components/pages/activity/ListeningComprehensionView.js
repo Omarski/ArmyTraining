@@ -216,29 +216,31 @@ var ListeningComprehensionView = React.createClass({
 
 
         return (
-        <div>
-            <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-            <div className="container">
-                <audio id="audio" volume={this.state.volume}>
-                    <source id="mp3Source" src="" type="audio/mp3"></source>
-                    Your browser does not support the audio format.
-                </audio>
-                <div className="row">
-                    <div className={interactionColumn}>
-                        <div className="container-fluid">
-                            <div className="listening-comp-interaction-container">
-                                <img className="row listening-comp-image" src={state.image}></img>
-                                <div className="listening-comp-prompt" onClick={function(){listenCheck(self)}}>
-                                    <span className="glyphicon glyphicon-play-circle"></span>
+            <div>
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                    <div className="container">
+                        <audio id="audio" volume={this.state.volume}>
+                            <source id="mp3Source" src="" type="audio/mp3"></source>
+                            Your browser does not support the audio format.
+                        </audio>
+                        <div className="row">
+                            <div className={interactionColumn}>
+                                <div className="container-fluid">
+                                    <div className="listening-comp-interaction-container">
+                                        <img className="row listening-comp-image" src={state.image}></img>
+                                        <div className="listening-comp-prompt" onClick={function(){listenCheck(self)}}>
+                                            <span className="glyphicon glyphicon-play-circle"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            {question}
                         </div>
-                    </div>
-                    {question}
-                </div>
 
+                    </div>
+                </div>
             </div>
-        </div>
         );
     },
     /**

@@ -268,17 +268,19 @@ var OrderingView = React.createClass({
         });
 
         return (
-            <div className="OR-container">
-                <PageHeader sources={sources} title={title} key={page.xid}/>
-                <audio id="audio" volume={this.state.volume}>
-                    <source id="mp3Source" src="" type="audio/mp3"></source>
-                    Your browser does not support the audio format.
-                </audio>
-                <div className="OR-prompt">{state.prompt}</div>
-                <div className="OR-buttons-container">{button}</div>
-                <div className="OR-choices-container">{choices}</div>
-                <div className="OR-answers-container">
-                    {answerContainers}
+            <div>
+                <div className="OR-container" key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <audio id="audio" volume={this.state.volume}>
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
+                    <div className="OR-prompt">{state.prompt}</div>
+                    <div className="OR-buttons-container">{button}</div>
+                    <div className="OR-choices-container">{choices}</div>
+                    <div className="OR-answers-container">
+                        {answerContainers}
+                    </div>
                 </div>
             </div>
         );

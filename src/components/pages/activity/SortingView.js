@@ -341,49 +341,50 @@ var SortingView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                <div className="container">
-                    <audio id="audio" volume={this.state.volume}>
-                        <source id="mp3Source" src="" type="audio/mp3"></source>
-                        Your browser does not support the audio format.
-                    </audio>
-                    <div className="row">
-                        <h4>
-                            {state.prompt}
-                        </h4>
-                    </div>
-                    {feedback}
-                    <div className="row sorting-choices-container">
-                        <ul className="sorting-choices-list">{choices}</ul>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-6 sorting-columnA">
-                            <div className="panel panel-default">
-                                <div className="panel-heading sorting-panel-heading">{colATitle}</div>
-                                <div className="panel-body">
-                                    <div className="sorting-columnA-dropArea sorting-drop-area"
-                                         onDragOver={self.onDraggingOver}
-                                         onDrop={self.onDropping}>
-                                        <ul className="sorting-choices-list">{colARender}</ul>
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                    <div className="container">
+                        <audio id="audio" volume={this.state.volume}>
+                            <source id="mp3Source" src="" type="audio/mp3"></source>
+                            Your browser does not support the audio format.
+                        </audio>
+                        <div className="row">
+                            <h4>
+                                {state.prompt}
+                            </h4>
+                        </div>
+                        {feedback}
+                        <div className="row sorting-choices-container">
+                            <ul className="sorting-choices-list">{choices}</ul>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6 sorting-columnA">
+                                <div className="panel panel-default">
+                                    <div className="panel-heading sorting-panel-heading">{colATitle}</div>
+                                    <div className="panel-body">
+                                        <div className="sorting-columnA-dropArea sorting-drop-area"
+                                             onDragOver={self.onDraggingOver}
+                                             onDrop={self.onDropping}>
+                                            <ul className="sorting-choices-list">{colARender}</ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-6 sorting-columnB">
+                                <div className="panel panel-default">
+                                    <div className="panel-heading sorting-panel-heading">{colBTitle}</div>
+                                    <div className="panel-body">
+                                        <div className="sorting-columnB-dropArea sorting-drop-area"
+                                             onDragOver={self.onDraggingOver}
+                                             onDrop={self.onDropping}>
+                                            <ul className="sorting-choices-list">{colBRender}</ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-6 sorting-columnB">
-                            <div className="panel panel-default">
-                                <div className="panel-heading sorting-panel-heading">{colBTitle}</div>
-                                <div className="panel-body">
-                                    <div className="sorting-columnB-dropArea sorting-drop-area"
-                                         onDragOver={self.onDraggingOver}
-                                         onDrop={self.onDropping}>
-                                        <ul className="sorting-choices-list">{colBRender}</ul>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div className="row sorting-actions">{button}</div>
                     </div>
-                    <div className="row sorting-actions">{button}</div>
                 </div>
             </div>
         );

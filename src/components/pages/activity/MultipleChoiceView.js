@@ -168,20 +168,22 @@ var MultipleChoiceView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                <div className="container">
-                    <div className="row">
-                        <h4>
-                            {state.prompt}
-                        </h4>
-                    </div>
-                    <div className="row">
-                        <ul className="list-group multiple-choice-choices-container">
-                            {choices}
-                        </ul>
-                    </div>
-                    <div className="row">
-                        {responder}
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                    <div className="container">
+                        <div className="row">
+                            <h4>
+                                {state.prompt}
+                            </h4>
+                        </div>
+                        <div className="row">
+                            <ul className="list-group multiple-choice-choices-container">
+                                {choices}
+                            </ul>
+                        </div>
+                        <div className="row">
+                            {responder}
+                        </div>
                     </div>
                 </div>
             </div>

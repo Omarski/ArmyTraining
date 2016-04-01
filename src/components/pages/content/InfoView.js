@@ -184,18 +184,19 @@ var InfoView = React.createClass({
             return {__html: str};
         }
         return (
-
-            <div className="infoContainer">
-                <audio id="audio" volume={this.state.volume}>
-                    <source id="mp3Source" src="" type="audio/mp3"></source>
-                    Your browser does not support the audio format.
-                </audio>
-                <div className="infoTitle">
-                    <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                </div>
-                <div className="infoDataContainer col-md-6 col-md-offset-3">
-                    {mediaContainer}
-                    <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>
+            <div>
+                <div className="infoContainer" key={"page-" + this.state.page.xid}>
+                    <audio id="audio" volume={this.state.volume}>
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
+                    <div className="infoTitle">
+                        <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
+                    </div>
+                    <div className="infoDataContainer col-md-6 col-md-offset-3">
+                        {mediaContainer}
+                        <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>
+                    </div>
                 </div>
             </div>
         );

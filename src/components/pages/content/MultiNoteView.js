@@ -127,26 +127,28 @@ var MultiNoteView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={page.xid}/>
-                <audio id="audio" volume={this.state.volume}>
-                    <source id="mp3Source" src="" type="audio/mp3"></source>
-                    Your browser does not support the audio format.
-                </audio>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8">
-                            <div className="multi-note-image">{pagesHTML[self.state.activePage].image}</div>
-                            <div className="multi-note-caption"><h5>{pagesHTML[self.state.activePage].caption}</h5></div>
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <audio id="audio" volume={this.state.volume}>
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-8">
+                                <div className="multi-note-image">{pagesHTML[self.state.activePage].image}</div>
+                                <div className="multi-note-caption"><h5>{pagesHTML[self.state.activePage].caption}</h5></div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="multi-note-text"><p>{pagesHTML[self.state.activePage].text}</p></div>
+                            </div>
+
                         </div>
-                        <div className="col-md-4">
-                            <div className="multi-note-text"><p>{pagesHTML[self.state.activePage].text}</p></div>
+                        <div className="row">
+                            <ul className="multi-note-choices">{pageChoices}</ul>
                         </div>
 
                     </div>
-                    <div className="row">
-                        <ul className="multi-note-choices">{pageChoices}</ul>
-                    </div>
-
                 </div>
             </div>
         );
