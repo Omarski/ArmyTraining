@@ -101,11 +101,11 @@ var MatchItemView = React.createClass({
 
         //TODO: don't allow more than 1 answer
         switch($(e.target).attr("class")){
-            case "MI-answer-dropArea":
+            case "match-item-answer-drop-area":
                 dropLocation = $(e.target).attr("data-letter");
                 break;
             default:
-                //if($(e.target).parent().attr("class") == "MI-answer-dropArea"){
+                //if($(e.target).parent().attr("class") == "match-item-answer-drop-area"){
                 //    dropLocation = $(e.target).parent().attr("data-letter");
                 //}
         }
@@ -117,7 +117,7 @@ var MatchItemView = React.createClass({
                     if (draggedItemData == item.label) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        if ($($(draggedItemTarget).parent()).attr("class") == "MI-choices-container") {
+                        if ($($(draggedItemTarget).parent()).attr("class") == "match-item-choices-container") {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;
                         }
@@ -139,7 +139,7 @@ var MatchItemView = React.createClass({
         var playable = true;
         var answerState = state.answerState;
 
-        if($($(e.target).parent()).attr("class") == "MI-choices-container"){
+        if($($(e.target).parent()).attr("class") == "match-item-choices-container"){
             answerState.map(function(item){
                 if($(e.target).attr("data") == item.label){
                     if(item.isMoved){
@@ -169,7 +169,7 @@ var MatchItemView = React.createClass({
             item.currentBox = "";
         });
 
-        $(".MI-playicon").each(function(i, item){
+        $(".match-item-play-icon").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 
@@ -232,14 +232,18 @@ var MatchItemView = React.createClass({
         // check the matchsource media type, if audio then do the generic play image, else load specific image
 
         choices = state.page.matchSource.map(function(item, index){
-            return (<img key={page.xid + "choice-"+index}
-                         src={"./data/media/myPlay.jpg"}
-                         data={item.nut.uttering.utterance.native.text}
-                         className="MI-playicon"
-                         draggable="true"
-                         onDragStart={self.onDragging}
-                         onClick={self.onClick}>
-            </img>);
+
+            return (
+                <li key={page.xid + "choice-"+index}>
+                    <div
+                     data={item.nut.uttering.utterance.native.text}
+                     className="match-item-play-icon"
+                     draggable="true"
+                     onDragStart={self.onDragging}
+                     onClick={self.onClick}>
+                        <span className="glyphicon glyphicon-play-circle"></span>
+                    </div>
+                </li>);
         });
 
         answerContainers = state.page.matchTarget.map(function(item, index){
@@ -260,46 +264,69 @@ var MatchItemView = React.createClass({
                         }
                     }
 
-                    // TODO: change <img> tag to be a generic media object (i.e. image or text)
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
 
-                    answerRender = <div src={"./data/media/myPlay.jpg"}
-                                        data={state.answerState[i].label}
-                                        className="MI-playicon"
-                                        draggable="true"
-                                        onDragStart={self.onDragging}
-                                        onClick={self.onClick}>
-                        <img className="MI-image" src={"./data/media/myPlay.jpg"}></img>
-                        <div className={feedback}></div>
-                    </div>;
+                    answerRender = (
+                                <div
+                                    data={state.answerState[i].label}
+                                    className="match-item-play-icon"
+                                    draggable="true"
+                                    onDragStart={self.onDragging}
+                                    onClick={self.onClick}>
+                                    <span className="glyphicon glyphicon-play-circle"></span>
+                                    <div className={feedback}></div>
+                                </div>
+                            );
                 }
             }
 
-           return(<div key={page.xid + String(index)} className = "MI-answer" key={"answer-"+index}>
-               <div className="MI-answer-prompt">{answerPrompt}</div>
-               <div className="MI-answer-dropArea"
-                    data-letter={letter}
-                    onDragOver={self.onDraggingOver}
-                    onDrop={self.onDropping}>
-                   {answerRender}
-               </div>
-           </div>);
+           return(<li key={page.xid + String(index)} className = "match-item-answer" key={"answer-"+index}>
+                        <div className="content">
+                            <div className="row">
+                                <div className="col-md-1">
+                                    <div className="match-item-answer-drop-area thumbnail"
+                                         data-letter={letter}
+                                         onDragOver={self.onDraggingOver}
+                                         onDrop={self.onDropping}>
+                                        {answerRender}
+                                    </div>
+                                </div>
+                                <div className="col-md-11">
+                                    <div className="match-item-answer-prompt">{answerPrompt}</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                   </li>);
         });
 
         return (
             <div>
                 <PageHeader sources={sources} title={title} key={page.xid}/>
-                <div className="MI-container">
+                <div className="container">
                     <audio id="audio" volume={this.state.volume}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="MI-prompt">{state.prompt}</div>
-                    <div className="MI-buttons-container">{button}</div>
-                    <div className="MI-choices-container">{choices}</div>
-                    <div className="MI-answers-container">
-                        {answerContainers}
+                    <div className="row">
+                        <h4 className="match-item-prompt">{state.prompt}</h4>
                     </div>
+                    
+                    <div className="row">
+                        <div className="col-md-2">
+                            <ul className="match-item-choices-container">{choices}</ul>
+                        </div>
+                        <div className="col-md-10">
+                            <ul className="match-item-answers-container">
+                                {answerContainers}
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="match-item-buttons">{button}</div>
+                    </div>
+                    
                 </div>
             </div>
         );
