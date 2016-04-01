@@ -58,7 +58,6 @@ var InteractiveTimelineView = React.createClass({
         PageStore.removeChangeListener(this._onChange);
     },
     handleClick: function(e){
-        console.dir(e.target.id);
         this.setState({selectedDate: e.target.id});
     },
     render: function() {

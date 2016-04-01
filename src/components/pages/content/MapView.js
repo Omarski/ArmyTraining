@@ -146,9 +146,6 @@ function animatePins(self){
 }
 
 function getPins(nodeList, hasMoved, self){
-    console.log("getPins");
-    console.log(self.state);
-
     var pins = nodeList.map(function(item, i){
 
         if(hasMoved[i]) {

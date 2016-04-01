@@ -23,7 +23,6 @@ function getPageState(props) {
         data.pageType = props.page.type;
         data.page = props.page;
         data.xid = props.page.xid;
-        console.dir(props.page);
         if(props.page.related){
             data.related = props.page.related;
             data.related.map(function(item, index){

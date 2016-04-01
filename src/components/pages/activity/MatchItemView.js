@@ -32,8 +32,6 @@ function getPageState(props) {
         });
     }
 
-    console.dir(data);
-
     return data;
 }
 

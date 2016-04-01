@@ -47,8 +47,6 @@ var ActiveDialogCOAs = React.createClass({
         var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
         this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
         ActiveDialogActions.handleInput(coa);
-        console.log('realization')
-        console.log(realization)
 
         var outputs = ActiveDialogStore.activeDialog().outputs;
         var speaker = "";
@@ -66,7 +64,7 @@ var ActiveDialogCOAs = React.createClass({
                 this.play(ActiveDialogStore.info().composition, oSymbol.symbolName, oSymbol.videoName, oAni.animationName, oAni.start, oAni.stop);
             }
         }
-        console.log('in coaAction')
+
         ActiveDialogHistoryActions.create({coa: coa, realization:realization, speaker: speaker});
         this.playSounds(sounds);
     },

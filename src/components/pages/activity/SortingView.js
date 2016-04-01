@@ -102,7 +102,6 @@ var SortingView = React.createClass({
 
         var dropLocation = "";
 
-        console.log($(e.target).attr("class"));
         switch($(e.target).attr("class")){
             case "sorting-columnA-dropArea sorting-drop-area":
                 dropLocation = "A";

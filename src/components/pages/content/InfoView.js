@@ -104,7 +104,7 @@ function getPageState(props) {
 
 function playMediaAudio(xidArray){
     //xid is of the form "000000000.mp3"
-    console.dir(xidArray);
+
     if(xidArray.length > 0){
         $("#audio").bind('ended', function(){
             xidArray.shift();
@@ -115,7 +115,6 @@ function playMediaAudio(xidArray){
 }
 
 function playAudio(xid){
-    console.log("play Audio "+ xid);
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
@@ -141,14 +140,12 @@ var InfoView = React.createClass({
     },
 
     componentWillUpdate: function(){
-        console.log("componentWillUpdate");
     },
 
     componentDidUpdate: function(){
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
-        console.log("componentDidUpdate");
         // play all note media in order (see dnd for example)
         playMediaAudio(noteMedia);
     },
@@ -205,9 +202,7 @@ var InfoView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        console.log("is mounted?")
         if (this.isMounted()) {
-            console.log("mounted setstate")
             this.setState(getPageState(this.props));
         }
 

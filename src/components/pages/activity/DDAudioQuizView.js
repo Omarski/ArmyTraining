@@ -758,7 +758,7 @@ var DDAudioQuizView = React.createClass({
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
-        console.log(title + " asdf");
+
         // word bank, answers are MatchSources
         var answers = st.answers.map(function(item, index) {
             var component = <div key={page.xid + "component" + String(index)} className="dd-word-bank-text">{item.answer.nut.uttering.utterance.native.text}</div>;
