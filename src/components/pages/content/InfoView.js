@@ -141,15 +141,14 @@ var InfoView = React.createClass({
     },
 
     componentWillUpdate: function(){
-        console.log("componentWillUpdate");
+
     },
 
     componentDidUpdate: function(){
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
-        console.log("componentDidUpdate");
-        // play all note media in order (see dnd for example)
+        // play all note media in order
         playMediaAudio(noteMedia);
     },
 
