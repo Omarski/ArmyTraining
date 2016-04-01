@@ -1,6 +1,6 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
-
+var PageHeader = require('../../widgets/PageHeader');
 var MC_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var MC_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
@@ -8,6 +8,7 @@ function getPageState(props) {
     var data = {
         page: null,
         title: "",
+        sources: [],
         pageType: "",
         answers: [],
         prompt: "",
@@ -77,10 +78,10 @@ var MultipleChoiceView = React.createClass({
         var feedback = state.answerFeedback;
         var target = state.correctAnswer;
         if(!state.addClickComplete) {
-            $(".MC-answerCheckbox").click(function (e) {
+            $(".multiple-choice-checkbox").click(function (e) {
                 selectedAns = e.target.value;
                 haveAnswered = true;
-                $(".MC-answerCheckbox").each(function () {
+                $(".multiple-choice-checkbox").each(function () {
                     if (this.value == selectedAns) {
                         this.checked = true;
                         isCorrect = (selectedAns == target);
@@ -106,10 +107,8 @@ var MultipleChoiceView = React.createClass({
         var self = this;
         var state = this.state;
         var page = self.state.page;
-        var mediaType;
-        var mediaContainer;
-        var questionContainer;
-        var choicesContainer;
+        var title = page.title;
+        var sources = self.state.sources;
         var responder = "";
         var question = <div>{state.prompt}</div>;
         var feedbackClass = "glyphicon MC-glyphicon MC-feedback";
@@ -120,42 +119,53 @@ var MultipleChoiceView = React.createClass({
             coach = <img className="MC-coachImage" src={imageSource}></img>;
 
             if(state.isCorrect){
-                feedbackClass += " MC-correct " + MC_GLYPHICON_CORRECT_CLS;
+                feedbackClass += " multiple-choice-correct " + MC_GLYPHICON_CORRECT_CLS;
             }else{
-                feedbackClass += " MC-incorrect " + MC_GLYPHICON_INCORRECT_CLS;
+                feedbackClass += " multiple-choice-incorrect " + MC_GLYPHICON_INCORRECT_CLS;
             }
 
-            responder = <div className="MC-coachContainer">
-                <div className="MC-coach">{coach}</div>
-                <div className="MC-response">{response}</div>
-                <div className={feedbackClass}></div>
-            </div>;
-        }
-
-        mediaType = state.mediaType;
-        if(mediaType != ""){
-
-        }else{
-            mediaContainer = <div className="MC-mediaContainer"></div>;
+            responder = (
+            <div className="alert multiple-choice-alert">
+                <div className="MC-coachContainer">
+                    <div className="MC-coach">{coach}</div>
+                    <div className="MC-response">{response}</div>
+                    <div className={feedbackClass}></div>
+                </div>
+            </div>
+                );
         }
 
         var choices;
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
-            return (<div key={page.xid + String(index)} className="MC-answers"><input type="checkbox" className="MC-answerCheckbox" value={ans}>{ans + "\n"}<br /></input></div>);
+            return (<li key={page.xid + String(index)} className="list-group-item" >
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" className="multiple-choice-checkbox" value={ans}>{ans}</input>
+                            </label>
+                        </div>
+                    </li>);
         });
 
-        choicesContainer = <div className="MC-choicesContainer">{choices}</div>;
-        questionContainer = <div className="MC-questionContainer">
-            {question}
-            {choicesContainer}
-            {responder}
-        </div>;
 
         return (
-            <div className="MC-container">
-                {mediaContainer}
-                {questionContainer}
+            <div>
+                <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                <div className="container">
+                    <div className="row">
+                        <h4>
+                            {state.prompt}
+                        </h4>
+                    </div>
+                    <div className="row">
+                        <ul className="list-group multiple-choice-choices-container">
+                            {choices}
+                        </ul>
+                    </div>
+                    <div className="row">
+                        {responder}
+                    </div>
+                </div>
             </div>
         );
     },
