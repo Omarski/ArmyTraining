@@ -45,11 +45,12 @@ var ContentView = React.createClass({
     },
 
     componentWillMount: function() {
+        PageStore.removeChangeListener(this._onChange);
         PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
-        PageStore.addChangeListener(this._onChange);
+
     },
 
     componentWillUnmount: function() {
