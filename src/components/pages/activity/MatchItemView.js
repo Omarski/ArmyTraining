@@ -282,8 +282,8 @@ var MatchItemView = React.createClass({
 
            return(<li key={page.xid + String(index)} className = "match-item-answer" key={"answer-"+index}>
                         <div className="content">
-                            <div className="row">
-                                <div className="col-md-1">
+                            <div className="row match-item-answer-row">
+                                <div className="col-md-2">
                                     <div className="match-item-answer-drop-area thumbnail"
                                          data-letter={letter}
                                          onDragOver={self.onDraggingOver}
@@ -291,7 +291,7 @@ var MatchItemView = React.createClass({
                                         {answerRender}
                                     </div>
                                 </div>
-                                <div className="col-md-11">
+                                <div className="col-md-10">
                                     <div className="match-item-answer-prompt">{answerPrompt}</div>
                                 </div>
                             </div>
