@@ -131,7 +131,7 @@ var MultipleChoiceView = React.createClass({
         var response = state.answerFeedback;
 
         if(state.haveAnswered && !self.state.isQuestionaire) {
-            coach = (
+            var coach = (
                 <div className="thumbnail">
                     <img src={imageSource}></img>
                 </div>
