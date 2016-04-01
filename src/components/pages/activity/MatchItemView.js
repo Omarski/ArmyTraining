@@ -13,7 +13,7 @@ function getPageState(props) {
         prompt: "",
         volume: SettingsStore.voiceVolume(),
         answerState: [],
-        draggedItemData: "",
+        draggedItemLetter: "",
         draggedItemTarget: "",
         isGraded: false,
         numMoved: 0
@@ -26,20 +26,46 @@ function getPageState(props) {
         data.page = props.page;
 
         props.page.matchSource.map(function(item, index){
-            var label = item.nut.uttering.utterance.native.text;
-            data.answerState.push({label: label, isMoved: false, currentBox: "", correctBox: item.letter});
+          //  var label = item.nut.uttering.utterance.native.text;
+          //  data.answerState.push({label: label, isMoved: false, currentBox: "", correctBox: item.letter});
+            var mediaType = "audio";
+            var letter = item.letter;
+            var displayField = "";
+            var uttering = item.nut.uttering;
+            var utterance = uttering.utterance;
+            var passedData = ""
 
+            if(uttering.media){
+                mediaType = uttering.media[0].type;
+            }else{
+                mediaType = "string";
+                if(utterance.ezread.text != ""){
+                    displayField = "ezread";
+                    passedData = utterance.ezread.text;
+                }else if(utterance.translation.text != ""){
+                    displayField = "translation";
+                    passedData = utterance.translation.text;
+                }else if(utterance.native.text != ""){
+                    displayField = "native"
+                    passedData = utterance.native.text;
+                }else{
+                    displayField = "phonetic";
+                    passedData = utterance.phonetic.text;
+                }
+            }
+
+            data.answerState.push({letter: letter, isMoved: false, currentBox: "", mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
 
     return data;
 }
 
-function playAudio(xid){
+function playAudio(zid){
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
-    source.src = "data/media/" + xid + ".mp3";
+    source.src = "data/media/" + zid + ".mp3";
     // play audio, or stop the audio if currently playing
     if(audio.paused){
         audio.load();
@@ -60,21 +86,21 @@ var MatchItemView = React.createClass({
         e.dataTransfer.setData('text/plain', 'anything');
         var self = this;
         var state = self.state;
-        var draggedItemData = "";
+        var draggedItemLetter = "";
         var draggedItemTarget = "";
 
         if(state.numMoved != state.answerState.length && $(e.target).css("opacity") != 0.3) {
             if (e.target) {
-                draggedItemData = $(e.target).attr("data");
+                draggedItemLetter = $(e.target).attr("data");
                 draggedItemTarget = e.target;
             }
         }else{
-            draggedItemData = "";
+            draggedItemLetter = "";
             draggedItemTarget = "";
         }
 
         self.setState({
-            draggedItemData: draggedItemData,
+            draggedItemLetter: draggedItemLetter,
             draggedItemTarget: draggedItemTarget
         });
     },
@@ -95,7 +121,7 @@ var MatchItemView = React.createClass({
 
         // get dragged item
         var draggedItemTarget = state.draggedItemTarget;
-        var draggedItemData = state.draggedItemData;
+        var draggedItemLetter = state.draggedItemLetter;
 
         var dropLocation = "";
 
@@ -111,10 +137,10 @@ var MatchItemView = React.createClass({
         }
 
         var itemFound = false;
-        if(state.numMoved != state.answerState && $(draggedItemTarget).css("opacity") != 0.3) {
-            if (draggedItemData != "" && dropLocation != "") {
+        if(state.numMoved != state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
+            if (draggedItemLetter != "" && dropLocation != "") {
                 answerState.map(function (item) {
-                    if (draggedItemData == item.label) {
+                    if (draggedItemLetter == item.label) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
                         if ($($(draggedItemTarget).parent()).attr("class") == "match-item-choices-container") {
@@ -138,10 +164,17 @@ var MatchItemView = React.createClass({
         var state = self.state;
         var playable = true;
         var answerState = state.answerState;
-
+//answerState {
+    // letter: letter,
+    // isMoved: false,
+    // currentBox: "",
+    // mediaType: mediaType,
+    // displayField: displayField,
+    // passedData: passedData
+    // }
         if($($(e.target).parent()).attr("class") == "match-item-choices-container"){
             answerState.map(function(item){
-                if($(e.target).attr("data") == item.label){
+                if($(e.target).attr("data") == item.passedData){
                     if(item.isMoved){
                         playable = false;
                     }
@@ -150,12 +183,7 @@ var MatchItemView = React.createClass({
         }
 
         if(playable) {
-            state.page.matchSource.map(function (item) {
-                uttering = item.nut.uttering;
-                if ($(e.target).attr("data") == uttering.utterance.native.text) {
-                    playAudio(uttering.media[0].zid);
-                }
-            });
+            playAudio($(e.target).attr("data"));
         }
     },
 
@@ -231,33 +259,70 @@ var MatchItemView = React.createClass({
         // TODO: change <img> tag to be a generic media object (i.e. image or text)
         // check the matchsource media type, if audio then do the generic play image, else load specific image
 
-        choices = state.page.matchSource.map(function(item, index){
+        choices = state.answerState.map(function(item, index){
+            var draggable = "";
+            // if(audio)
+            switch(item.mediaType){
+                case "audio":
+                    var zid = item.nut.uttering.media[0].zid;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            data={zid}
+                            className="match-item-play-icon"
+                            draggable="true"
+                            onDragStart={self.onDragging}
+                            onClick={self.onClick}>
+                            <span className="glyphicon glyphicon-play-circle"></span>
+                        </div>
+                    </li>;
+                    break;
+                case "image":
+                    break;
+                case "string":
+                    // the letter of the answer in current answer Container
+                    var answerLetter = item.letter;
+                    var displayField = item.displayField;
+                    // convert letter to int, this will be used to access the matchSource array
+                    var matchSourceEquivalentIndex = answerLetter.charCodeAt(0)-65;
+                    // get the display field of the media object associated with this answer
+                    var text = item.passedData;
 
-            return (
-                <li key={page.xid + "choice-"+index}>
-                    <div
-                     data={item.nut.uttering.utterance.native.text}
-                     className="match-item-play-icon"
-                     draggable="true"
-                     onDragStart={self.onDragging}
-                     onClick={self.onClick}>
-                        <span className="glyphicon glyphicon-play-circle"></span>
-                    </div>
-                </li>);
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            data={answerLetter}
+                            className="match-item-play-icon"
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            {text}
+                        </div>
+                    </li>;
+                    break;
+                default:
+                // this shouldn't be reached unless you are moving videos
+            }
+
+
+
+
+            return (draggable)
         });
 
         answerContainers = state.page.matchTarget.map(function(item, index){
+            // for each Answer Area...
             var answerPrompt = item.nut.uttering.utterance.translation.text;
+            // prompt should be whatever text it decides is appropriate, i.e. native/ezread/phonetic/translation
+
             var letter = item.letter;
             var answerRender = "";
             var feedback = "";
             var needCheck = state.numMoved == answerState.length;
 
             for(var i=0;i<state.answerState.length;i++){
-                if(letter == state.answerState[i].currentBox){
+                // loop through the answerState array
+                if(letter == state.answerState[i].currentBox){ // if there is an answer in this box
 
-                    if(needCheck){
-                        if(state.answerState[i].currentBox == state.answerState[i].correctBox){
+                    if(needCheck){ // does it need to be graded?
+                        if(state.answerState[i].currentBox == state.answerState[i].letter){ // if correct
                             feedback = correct;
                         }else{
                             feedback = incorrect;
@@ -265,10 +330,17 @@ var MatchItemView = React.createClass({
                     }
 
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
-
-                    answerRender = (
+                    switch(state.answerState[i].mediaType){
+                        case "audio":
+                            // the letter of the answer in current answer Container
+                            var answerLetter = state.answerState[i].letter;
+                            // convert letter to int, this will be used to access the matchSource array
+                            var matchSourceEquivalentIndex = answerLetter.charCodeAt(0)-65;
+                            // get the Zid of the media object associated with this answer
+                            var matchSourceEquivalentZid = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.media[0].zid;
+                            answerRender = (
                                 <div
-                                    data={state.answerState[i].label}
+                                    data={matchSourceEquivalentZid}
                                     className="match-item-play-icon"
                                     draggable="true"
                                     onDragStart={self.onDragging}
@@ -277,6 +349,51 @@ var MatchItemView = React.createClass({
                                     <div className={feedback}></div>
                                 </div>
                             );
+                            break;
+                        case "image":
+                            // todo: image
+                            break;
+                        case "string":
+                            // the letter of the answer in current answer Container
+                            var answerLetter = state.answerState[i].letter;
+                            var displayField = state.answerState[i].displayField;
+                            // convert letter to int, this will be used to access the matchSource array
+                            var matchSourceEquivalentIndex = answerLetter.charCodeAt(0)-65;
+                            // get the display field of the media object associated with this answer
+                            var matchSourceEquivalentText = "";
+
+                            switch (displayField){
+                                case "ezread":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.ezread.text;
+                                    break;
+                                case "native":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.native.text;
+                                    break;
+                                case "phonetic":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.phonetic.text;
+                                    break;
+                                case "translation":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.translation.text;
+                                    break;
+                                default:
+                                    matchSourceEquivalentText = "Expected Text Not Found."
+                            }
+
+                            answerRender = (
+                                <div
+                                    className="match-item-play-icon"
+                                    draggable="true"
+                                    onDragStart={self.onDragging}
+                                    >
+                                    {matchSourceEquivalentText}
+                                    <div className={feedback}></div>
+                                </div>
+                            );
+                            break;
+                        default:
+                            // this shouldn't be reached unless you are moving videos
+                    }
+
                 }
             }
 
