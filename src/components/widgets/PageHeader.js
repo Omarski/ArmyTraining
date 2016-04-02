@@ -28,7 +28,7 @@ var PageHeader = React.createClass({
 
     },
     render: function() {
-        var attributions = <Tooltip>{this.state.sources}</Tooltip>;
+        var attributions = <Tooltip id="sourcesTooltip">{this.state.sources}</Tooltip>;
         var info = "";
         if (this.state.sources !== "") {
             info = <OverlayTrigger placement="right" overlay={attributions}>

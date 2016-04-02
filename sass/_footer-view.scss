@@ -19,7 +19,7 @@
 
 
 .main-footer {
-  height: 105px;
+  height: 115px;
   padding-top: 12px;
   padding-bottom: 0;
   background-color: #eaeaea;
@@ -67,7 +67,10 @@
 }
 
 
-
+.main-footer-accordian-table:hover {
+  background: #eaeaea;
+  cursor: pointer;
+}
 .main-footer-accordian-table>tbody>tr>td {
   vertical-align: middle;
   border-top: none;

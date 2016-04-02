@@ -58,7 +58,7 @@ function getUnitState(expanded) {
         }
 
         var unitCls = '';
-        var unitExpandedCls = 'panel-collapse collapse';
+        var unitExpandedCls = ' panel-collapse collapse ';
         if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
             currentUnitIndex = totalUnits;
             unitCls = 'main-footer-accordian-table-row-active';
@@ -98,6 +98,11 @@ var FooterView = React.createClass({
     previous: function() {
         PageActions.loadPrevious({});
     },
+    panelHeaderClick: function(index) {
+
+        console.log(index);
+
+    },
     _onLoadChange: function() {
         if (this.isMounted()) {
             this.setState(getUnitState(false));
@@ -122,7 +127,9 @@ var FooterView = React.createClass({
     componentDidMount: function() {
         LoaderStore.addChangeListener(this._onLoadChange);
         PageStore.addChangeListener(this._onPageChange);
+        $('.collapse').collapse();
     },
+
 
     componentWillUnmount: function() {
         LoaderStore.removeChangeListener(this._onLoadChange);
@@ -134,12 +141,13 @@ var FooterView = React.createClass({
         this.setState(getUnitState(!this.state.expanded));
     },
     render: function() {
+        var self = this;
         var items = this.state.data.map(function(item, index) {
             return (
                 <div className="panel-group main-footer-accordian" id={'accordion' + index} role="tablist" aria-multiselectable="true" key={index}>
                     <div className="panel panel-default">
-                        <div className="panel-heading" role="tab" id={'heading' + index}>
-                            <table className="panel-title table table-condensed main-footer-accordian-table">
+                        <div className="panel-heading" role="tab" id={'heading' + index} >
+                            <table className="panel-title table table-condensed main-footer-accordian-table" onClick={self.panelHeaderClick.bind(self, index)}>
                                 <tr className={item.unitCls}>
                                     <td>
                                         <div className="main-footer-table-icon-col">
