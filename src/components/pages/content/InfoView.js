@@ -28,7 +28,8 @@ function getPageState(props) {
 
 
             noteItems = notes.map(function(item, index) {
-                if(item.media){
+                console.dir(item.media );
+                if(item.media && item.media[0]){
                     // if statement to detect media in note, should be true
                     data.noteAudio.push(item.media[0].xid);
                 }
@@ -104,7 +105,7 @@ function getPageState(props) {
 
 function playMediaAudio(xidArray){
     //xid is of the form "000000000.mp3"
-    console.dir(xidArray);
+
     if(xidArray.length > 0){
         $("#audio").bind('ended', function(){
             xidArray.shift();
@@ -115,7 +116,6 @@ function playMediaAudio(xidArray){
 }
 
 function playAudio(xid){
-    console.log("play Audio "+ xid);
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
@@ -148,7 +148,7 @@ var InfoView = React.createClass({
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
-        // play all note media in order
+        // play all note media in order (see dnd for example)
         playMediaAudio(noteMedia);
     },
 
@@ -183,18 +183,19 @@ var InfoView = React.createClass({
             return {__html: str};
         }
         return (
-
-            <div className="infoContainer">
-                <audio id="audio" volume={this.state.volume}>
-                    <source id="mp3Source" src="" type="audio/mp3"></source>
-                    Your browser does not support the audio format.
-                </audio>
-                <div className="infoTitle">
-                    <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                </div>
-                <div className="infoDataContainer col-md-6 col-md-offset-3">
-                    {mediaContainer}
-                    <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>
+            <div>
+                <div className="infoContainer" key={"page-" + this.state.page.xid}>
+                    <audio id="audio" volume={this.state.volume}>
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
+                    <div className="infoTitle">
+                        <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
+                    </div>
+                    <div className="infoDataContainer col-md-6 col-md-offset-3">
+                        {mediaContainer}
+                        <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>
+                    </div>
                 </div>
             </div>
         );
@@ -203,9 +204,7 @@ var InfoView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        console.log("is mounted?")
         if (this.isMounted()) {
-            console.log("mounted setstate")
             this.setState(getPageState(this.props));
         }
 

@@ -87,8 +87,10 @@ var EthnoMapView = React.createClass({
         var layers = getLayers(self);
 
         return (
-            <div className="container">
-                <PageHeader sources={sources} title={title} key={page.xid}/>
+            <div>
+                <div className="container" key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                </div>
             </div>
 
         /*    <div className="container">

@@ -131,7 +131,7 @@ var MultipleChoiceView = React.createClass({
         var response = state.answerFeedback;
 
         if(state.haveAnswered && !self.state.isQuestionaire) {
-            coach = (
+            var coach = (
                 <div className="thumbnail">
                     <img src={imageSource}></img>
                 </div>
@@ -157,7 +157,7 @@ var MultipleChoiceView = React.createClass({
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
             return (<li key={page.xid + String(index)} className="list-group-item" >
-                        <div class="checkbox">
+                        <div className="checkbox">
                             <label>
                                 <input type="checkbox" className="multiple-choice-checkbox" value={ans}>{ans}</input>
                             </label>
@@ -168,20 +168,22 @@ var MultipleChoiceView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                <div className="container">
-                    <div className="row">
-                        <h4>
-                            {state.prompt}
-                        </h4>
-                    </div>
-                    <div className="row">
-                        <ul className="list-group multiple-choice-choices-container">
-                            {choices}
-                        </ul>
-                    </div>
-                    <div className="row">
-                        {responder}
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                    <div className="container">
+                        <div className="row">
+                            <h4>
+                                {state.prompt}
+                            </h4>
+                        </div>
+                        <div className="row">
+                            <ul className="list-group multiple-choice-choices-container">
+                                {choices}
+                            </ul>
+                        </div>
+                        <div className="row">
+                            {responder}
+                        </div>
                     </div>
                 </div>
             </div>

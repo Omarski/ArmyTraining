@@ -75,12 +75,14 @@ var DefaultPageView = React.createClass({
     render: function() {
 
         return (
-            <div className="container">
-                <h1>Unknown Page Type {this.state.pageType}</h1>
-                <h3>{this.state.title}</h3>
-                <div>
-                    {this.state.note}
-                    {this.state.media}
+            <div>
+                <div className="container" key={"page-" + this.state.page.xid}>
+                    <h1>Unknown Page Type {this.state.pageType}</h1>
+                    <h3>{this.state.title}</h3>
+                    <div>
+                        {this.state.note}
+                        {this.state.media}
+                    </div>
                 </div>
             </div>
         );

@@ -380,17 +380,19 @@ var MultiColumnPronunciationView = React.createClass({
         });
 
         return (
-            <div className="l2-container">
-                <div className="row l2-title">
-                    <h3>{page.title}</h3>
-                </div>
-                <div className="row">
-                    <h4>{self.state.note}</h4>
-                </div>
-                <div className="row">
-                    <div className="l2-answers-container">
-                        <audio id="l2-demo-audio"></audio>
-                        {columns}
+            <div>
+                <div className="l2-container" key={"page-" + this.state.page.xid}>
+                    <div className="row l2-title">
+                        <h3>{page.title}</h3>
+                    </div>
+                    <div className="row">
+                        <h4>{self.state.note}</h4>
+                    </div>
+                    <div className="row">
+                        <div className="l2-answers-container">
+                            <audio id="l2-demo-audio"></audio>
+                            {columns}
+                        </div>
                     </div>
                 </div>
             </div>

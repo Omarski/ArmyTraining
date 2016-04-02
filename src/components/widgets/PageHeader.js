@@ -5,7 +5,6 @@ var Tooltip = ReactBootstrap.Tooltip;
 
 var PageHeader = React.createClass({
     getInitialState: function() {
-        console.log(this.props.sources)
         var sources = "";
         if (this.props.sources && this.props.sources.length) {
             sources = this.props.sources.concat(", ")

@@ -330,17 +330,19 @@ var PronunciationView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={page.xid}/>
-                <div className="li-container">
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <div className="li-container">
 
-                    <div className="row">
-                        <div className="li-answers-container">
-                            <audio id="li-demo-audio"></audio>
-                            <div className="li-column">
-                                <div className="li-voice-answers">
-                                    <ul className="li-items-list">
-                                    {vaList}
-                                    </ul>
+                        <div className="row">
+                            <div className="li-answers-container">
+                                <audio id="li-demo-audio"></audio>
+                                <div className="li-column">
+                                    <div className="li-voice-answers">
+                                        <ul className="li-items-list">
+                                        {vaList}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

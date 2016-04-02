@@ -758,7 +758,7 @@ var DDAudioQuizView = React.createClass({
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
-        console.log(title + " asdf");
+
         // word bank, answers are MatchSources
         var answers = st.answers.map(function(item, index) {
             var component = <div key={page.xid + "component" + String(index)} className="dd-word-bank-text">{item.answer.nut.uttering.utterance.native.text}</div>;
@@ -962,40 +962,42 @@ var DDAudioQuizView = React.createClass({
         }
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={page.xid}/>
-                <div className="container dd-container">
-                    <div className="row dd-quiz-title">
-                        <h4>{this.state.page.prompt}</h4>
-                    </div>
-                    <div className="row dd-quiz-feedback">
-                        <div className={feedbackShow} role="alert">
-                            <strong>{this.state.feedback.label}</strong>
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <div className="container dd-container">
+                        <div className="row dd-quiz-title">
+                            <h4>{this.state.page.prompt}</h4>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-10">
-                            <ul className="dd-lines-list">
-                                {lines}
-                            </ul>
-                            <div className="dd-actions">
-                                {_buttons}
+                        <div className="row dd-quiz-feedback">
+                            <div className={feedbackShow} role="alert">
+                                <strong>{this.state.feedback.label}</strong>
                             </div>
                         </div>
-                        <div className="col-md-2">
-                            <div className="word-list well well-lg" onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
-                                <ul className="dd-answer-list">
-                                    {answers}
+                        <div className="row">
+                            <div className="col-md-10">
+                                <ul className="dd-lines-list">
+                                    {lines}
                                 </ul>
+                                <div className="dd-actions">
+                                    {_buttons}
+                                </div>
+                            </div>
+                            <div className="col-md-2">
+                                <div className="word-list well well-lg" onDrop={self.onDropping} onDragOver={self.onDraggingOver}>
+                                    <ul className="dd-answer-list">
+                                        {answers}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="row dd-quiz-feedback">
+                        <div className="row dd-quiz-feedback">
 
-                        <audio id="audio" volume={this.state.volume}>
-                            <source id="mp3Source" src="" type="audio/mp3"></source>
-                            Your browser does not support the audio format.
-                        </audio>
+                            <audio id="audio" volume={this.state.volume}>
+                                <source id="mp3Source" src="" type="audio/mp3"></source>
+                                Your browser does not support the audio format.
+                            </audio>
+                        </div>
                     </div>
                 </div>
             </div>

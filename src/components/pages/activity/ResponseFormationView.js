@@ -288,37 +288,39 @@ var ResponseFormationView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={page.xid}/>
-                <div className="RF-container">
-                    <audio id="audio" volume={this.state.volume}>
-                        <source id="mp3Source" src="" type="audio/mp3"></source>
-                        Your browser does not support the audio format.
-                    </audio>
-                    <div className="RF-InteractionContainer">
-                        <img className="row RF-Image" src={state.image}></img>
-                        <ul>
-                            <li>
-                                <div className="RF-promptContainer" onClick={function(){promptClick(self)}}>
-                                    Click to Listen
-                                </div>
-                            </li>
-                            <li>
-                                <div className="RF-RecorderContainer">
-                                    <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
-                                    <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
-                                    <div className="RF-recorderTextContainer">{state.page.prompt.text}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="RF-ResponseContainer">
-                        <div className="RF-coach">{coach}</div>
-                        <div className="RF-answerString">{answerString}</div>
-                        <div className="RF-response">{response}</div>
-                        <div className={feedbackClass}></div>
-                        <div className="RF-spokenContainer">{spoken}</div>
-                        {requestAnswer}
-                        {showAnswer}
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <div className="RF-container">
+                        <audio id="audio" volume={this.state.volume}>
+                            <source id="mp3Source" src="" type="audio/mp3"></source>
+                            Your browser does not support the audio format.
+                        </audio>
+                        <div className="RF-InteractionContainer">
+                            <img className="row RF-Image" src={state.image}></img>
+                            <ul>
+                                <li>
+                                    <div className="RF-promptContainer" onClick={function(){promptClick(self)}}>
+                                        Click to Listen
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="RF-RecorderContainer">
+                                        <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
+                                        <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
+                                        <div className="RF-recorderTextContainer">{state.page.prompt.text}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="RF-ResponseContainer">
+                            <div className="RF-coach">{coach}</div>
+                            <div className="RF-answerString">{answerString}</div>
+                            <div className="RF-response">{response}</div>
+                            <div className={feedbackClass}></div>
+                            <div className="RF-spokenContainer">{spoken}</div>
+                            {requestAnswer}
+                            {showAnswer}
+                        </div>
                     </div>
                 </div>
             </div>
