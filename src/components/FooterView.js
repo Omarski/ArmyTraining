@@ -58,11 +58,15 @@ function getUnitState(expanded) {
         }
 
         var unitCls = '';
+        var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
         var unitExpandedCls = ' panel-collapse collapse ';
         if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
             currentUnitIndex = totalUnits;
             unitCls = 'main-footer-accordian-table-row-active';
             unitExpandedCls += ' in';
+            expandCollapseIconCls += ' glyphicon-minus-sign';
+        } else {
+            expandCollapseIconCls += ' glyphicon-plus-sign';
         }
         if (completed) {
             totalUnitsComplete++;
@@ -70,6 +74,7 @@ function getUnitState(expanded) {
         data.push(
             {
                 unitExpandedCls: unitExpandedCls,
+                expandCollapseIconCls: expandCollapseIconCls,
                 unitCls: unitCls,
                 unit: unit,
                 completed:completed,
@@ -100,8 +105,14 @@ var FooterView = React.createClass({
     },
     panelHeaderClick: function(index) {
 
-        $('#collapse' + index).toggle();
-
+        var btn = $('#heading' + index).find('.footer-expand-collapse-btn');
+        if (btn.hasClass('glyphicon-plus-sign')) {
+            btn.removeClass('glyphicon-plus-sign').addClass('glyphicon-minus-sign');
+            $('#collapse' + index).collapse('show');
+        } else {
+            btn.removeClass('glyphicon-minus-sign').addClass('glyphicon-plus-sign');
+            $('#collapse' + index).collapse('hide');
+        }
     },
     _onLoadChange: function() {
         if (this.isMounted()) {
@@ -157,7 +168,7 @@ var FooterView = React.createClass({
                                     <td>
                                         <div className="main-footer-table-icon-col">
                                             <a role="button" data-toggle="collapse" data-parent={'#accordion' + index} href={'#collapse' + index} aria-expanded="true" aria-controls={'collapse' + index}>
-                                                <span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                                <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
                                             </a>
                                         </div>
                                     </td>
