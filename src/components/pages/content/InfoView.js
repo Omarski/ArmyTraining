@@ -28,7 +28,8 @@ function getPageState(props) {
 
 
             noteItems = notes.map(function(item, index) {
-                if(item.media){
+                console.dir(item.media );
+                if(item.media && item.media[0]){
                     // if statement to detect media in note, should be true
                     data.noteAudio.push(item.media[0].xid);
                 }
@@ -140,6 +141,7 @@ var InfoView = React.createClass({
     },
 
     componentWillUpdate: function(){
+
     },
 
     componentDidUpdate: function(){
