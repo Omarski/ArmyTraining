@@ -100,7 +100,7 @@ var FooterView = React.createClass({
     },
     panelHeaderClick: function(index) {
 
-        console.log(index);
+        $('#collapse' + index).toggle();
 
     },
     _onLoadChange: function() {
