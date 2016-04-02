@@ -14,8 +14,7 @@ function getPageState(props) {
         related: [],
         xid: "page not found",
         activePage: 0,
-        volume: SettingsStore.voiceVolume(),
-        pagesMedia: []
+        volume: SettingsStore.voiceVolume()
     };
 
     if (props && props.page) {
@@ -24,25 +23,32 @@ function getPageState(props) {
         data.page = props.page;
         data.xid = props.page.xid;
         if(props.page.related){
+            // if there is a "related" object in the json
             data.related = props.page.related;
-            data.related.map(function(item, index){
-                var pageMediaArray = [];
-                item.note.map(function(itemNote, indexNote){
-                    if(itemNote.media){
-                        //assuming multinote will mimic info page and
-                        // the audio recording of the note will be associated
-                        // with said note
-                        pageMediaArray.push(itemNote.media.xid);
-                    }
-                });
-                // pageMediaArray should be a list of the media xid for the page
-                data.pagesMedia.push(pageMediaArray);
-                // and pagesMedia should be a list of pageMediaArrays
-            });
         }
     }
 
     return data;
+}
+
+function playMediaAudio(xidArray){
+    //xid is of the form "000000000.mp3"
+    if(xidArray.length > 0){
+        $("#audio").bind('ended', function(){
+            xidArray.shift();
+            playMediaAudio(xidArray);
+        });
+        playAudio(xidArray[0]);
+    }
+}
+
+function playAudio(xid){
+    var audio = document.getElementById('audio');
+    var source = document.getElementById('mp3Source');
+    // construct file-path to audio file
+    source.src = "data/media/" + xid;
+    audio.load();
+    audio.play();
 }
 
 var MultiNoteView = React.createClass({
@@ -67,6 +73,20 @@ var MultiNoteView = React.createClass({
 
     componentDidUpdate: function(){
         //play audio recording for active info page
+        var self = this;
+        var related = self.state.related;
+        var activePageIndex = self.state.activePage;
+        var pageMediaArray = []; // make a pageMediaArray
+        related[activePageIndex].note.map(function(itemNote, indexNote){
+            // for each "note" json object the "related" json object has
+            if(itemNote.media){
+                // if that note has a "media" json object
+                pageMediaArray.push(itemNote.media[0].xid); // add it's xid to that page's pageMediaArray
+            }
+        });
+
+        // play all note media in order
+        playMediaAudio(pageMediaArray);
     },
 
     componentWillUnmount: function() {
@@ -80,7 +100,7 @@ var MultiNoteView = React.createClass({
         var infoPages = self.state.related;
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
-            var text = item.note[0].text;
+            var text = item.note[0].text; // needs to be changed to all notes
             var title = item.title;
             var image = <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
             var caption = "";
