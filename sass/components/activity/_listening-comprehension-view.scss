@@ -1,3 +1,45 @@
+input[type=checkbox] {
+  &.listening-comp-checkbox {
+    margin-right: 15px;
+  }
+}
+
+.listening-comp-choices-container {
+  margin-top: 20px;
+}
+
+.listening-comp-alert {
+  background-color: #f7f7f9;
+  border-color: #e1e1e8;
+}
+
+.listening-comp-feedback-icon {
+  margin-right: 5px;
+}
+
+.listening-comp-alert-text {
+  display: inline-flex;
+  h5 {
+    margin-left: 20px;
+  }
+  .thumbnail {
+    width: 120px;
+    height: 120px;
+    margin: 0;
+  }
+}
+
+.listening-comp-prompt {
+  font-size: 72px;
+  text-align: center;
+}
+
+.listening-comp-interaction-container {
+  text-align: center;
+}
+
+/*
+
 .LC-container{
   text-align: center;
 }
@@ -93,3 +135,4 @@ input[class="LC-answerCheckbox"]{
   left: 55px;
   font-weight: bold;
 }
+*/

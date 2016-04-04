@@ -105,29 +105,33 @@ var ActiveDialogView = React.createClass({
         var content = <div></div>;
         if (this.state.data && this.state.info) {
 
-            content = <div className="container active-dialog-view">
-                    <h3>{this.state.title} : {this.state.pageType}</h3>
-                    <div className="active-dialog-toolbar">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-10">
-                                    <ActiveDialogHints />
-                                    <ActiveDialogCOAs />
-                                </div>
-                                <div className="col-md-1">
-                                    <ActiveDialogHistory />
-                                </div>
-                                <div className="col-md-1">
-                                    <ActiveDialogObjectives />
+            content = (
+                <div>
+                    <div className="container active-dialog-view" key={"page-" + this.state.page.xid}>
+                        <h3>{this.state.title} : {this.state.pageType}</h3>
+                        <div className="active-dialog-toolbar">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-md-10">
+                                        <ActiveDialogHints />
+                                        <ActiveDialogCOAs />
+                                    </div>
+                                    <div className="col-md-1">
+                                        <ActiveDialogHistory />
+                                    </div>
+                                    <div className="col-md-1">
+                                        <ActiveDialogObjectives />
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <ActiveDialogScenarioView composition={this.state.info.composition} />
+                        <ActiveDialogIntro />
+                        <ActiveDialogEvaluation />
+                        <ActiveDialogAudio />
                     </div>
-                    <ActiveDialogScenarioView composition={this.state.info.composition} />
-                    <ActiveDialogIntro />
-                    <ActiveDialogEvaluation />
-                    <ActiveDialogAudio />
                 </div>
+            );
 
         }
 

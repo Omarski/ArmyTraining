@@ -237,25 +237,25 @@ var UtteranceFormationView = React.createClass({
 
 
         return (
-
-            <div className="UF-container">
-                <audio id="audio"></audio>
-                <div className="UF-InteractionContainer">
-                    <img className="row UF-Image" src={state.image}></img>
-                    <div className="UF-RecorderContainer">
-                        <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
-                        <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
-                        <div className="UF-recorderTextContainer">{state.page.prompt.text}</div>
+            <div>
+                <div className="UF-container" key={"page-" + this.state.page.xid}>
+                    <audio id="audio"></audio>
+                    <div className="UF-InteractionContainer">
+                        <img className="row UF-Image" src={state.image}></img>
+                        <div className="UF-RecorderContainer">
+                            <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
+                            <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
+                            <div className="UF-recorderTextContainer">{state.page.prompt.text}</div>
+                        </div>
+                    </div>
+                    <div className="UF-ResponseContainer">
+                        <div className="UF-coach">{coach}</div>
+                        <div className="UF-answerString">{answerString}</div>
+                        <div className="UF-response">{response}</div>
+                        <div className={feedbackClass}></div>
+                        <div className="UF-spokenContainer">{spoken}</div>
                     </div>
                 </div>
-                <div className="UF-ResponseContainer">
-                    <div className="UF-coach">{coach}</div>
-                    <div className="UF-answerString">{answerString}</div>
-                    <div className="UF-response">{response}</div>
-                    <div className={feedbackClass}></div>
-                    <div className="UF-spokenContainer">{spoken}</div>
-                </div>
-
             </div>
         );
     },

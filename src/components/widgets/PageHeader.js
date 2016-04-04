@@ -5,7 +5,6 @@ var Tooltip = ReactBootstrap.Tooltip;
 
 var PageHeader = React.createClass({
     getInitialState: function() {
-        console.log(this.props.sources)
         var sources = "";
         if (this.props.sources && this.props.sources.length) {
             sources = this.props.sources.concat(", ")
@@ -29,7 +28,7 @@ var PageHeader = React.createClass({
 
     },
     render: function() {
-        var attributions = <Tooltip>{this.state.sources}</Tooltip>;
+        var attributions = <Tooltip id="sourcesTooltip">{this.state.sources}</Tooltip>;
         var info = "";
         if (this.state.sources !== "") {
             info = <OverlayTrigger placement="right" overlay={attributions}>

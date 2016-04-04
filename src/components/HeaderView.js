@@ -60,7 +60,7 @@ var HeaderView = React.createClass({
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container main-nav-container">
-                    <img src="images/ART_Logo.png" />
+                    <img src="images/VCAT_H5_logo.png" />
                     <div className="navbar-header main-nav-bar-header">
 
                         <a className="navbar-brand" href="#">{this.state.title}</a>

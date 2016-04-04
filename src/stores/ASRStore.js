@@ -34,7 +34,6 @@ function getGrammarID(){
         case "ResponseFormation":
         case "UtteranceFormation":
             grammarID = lesson;
-            console.log(grammarID);
             return ("utt_" + grammarID);
             break; //break just in case
 
@@ -42,7 +41,6 @@ function getGrammarID(){
         case "MultiColumnPronunciation":
         default:
             grammarID = lesson;
-            console.log(grammarID);
             return ("msb_" + grammarID);
     }
 }

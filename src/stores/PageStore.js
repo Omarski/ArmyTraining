@@ -190,6 +190,7 @@ function load(data) {
     });
 
     _loaded = false;
+    console.log("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json");
     $.getJSON("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json", function(result) {
 
         _currentUnit = data.unit;

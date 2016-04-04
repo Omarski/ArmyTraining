@@ -90,15 +90,17 @@ var MapView = React.createClass({
 
 
         return (
-            <div className="container">
-                <PageHeader sources={sources} title={title} key={page.xid}/>
-                <audio id="audio"></audio>
-                <div className="mapContainer">
-                    <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.json.title + "."}</div>
-                    <img className="backdropImage" src={"data/media/" + backdropImage} alt={title}></img>
-                    <img className="compass" src="data/media/compass.png"></img>
-                    {pins}
-                    {textBox}
+            <div>
+                <div className="container" key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <audio id="audio"></audio>
+                    <div className="mapContainer">
+                        <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.json.title + "."}</div>
+                        <img className="backdropImage" src={"data/media/" + backdropImage} alt={title}></img>
+                        <img className="compass" src="data/media/compass.png"></img>
+                        {pins}
+                        {textBox}
+                    </div>
                 </div>
             </div>
         );
@@ -144,9 +146,6 @@ function animatePins(self){
 }
 
 function getPins(nodeList, hasMoved, self){
-    console.log("getPins");
-    console.log(self.state);
-
     var pins = nodeList.map(function(item, i){
 
         if(hasMoved[i]) {
