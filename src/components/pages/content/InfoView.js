@@ -20,6 +20,7 @@ function getPageState(props) {
         volume: SettingsStore.voiceVolume()
     };
 
+    var caption = "";
     if (props && props.page) {
         data.title = props.page.title;
         data.pageType = props.page.type;
@@ -27,15 +28,14 @@ function getPageState(props) {
         if (props.page.note) {
             var notes = props.page.note;
 
-            if(props.page.note.length > 1){
+            if(notes && notes.length > 1){
                 noteItems = notes.map(function(item, index) {
-                    console.dir(item.media );
                     if(item.media && item.media[0]){
                         // if statement to detect media in note, should be true
                         data.noteAudio.push(item.media[0].xid);
                     }
                     return (
-                        <li>
+                        <li key={index}>
                             <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
                         </li>
                     );
@@ -176,8 +176,9 @@ var InfoView = React.createClass({
         var media = state.media;
         var mediaType = state.videoType;
 
+
         var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
-        if(state.page.note.length > 1){
+        if(state.page.note && state.page.note.length > 1){
             noteDisplay = <div className={mediaType + " infoNoteContainer"}>
                 <ul>{pageNotes}</ul>
             </div>;
