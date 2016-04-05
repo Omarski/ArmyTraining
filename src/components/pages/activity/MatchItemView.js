@@ -127,7 +127,16 @@ var MatchItemView = React.createClass({
 
         switch($(e.target).attr("class")){
             case "match-item-answer-drop-area thumbnail":
-                dropLocation = $(e.target).attr("data-letter");
+                //if(drop location isn't taken)
+                var spotTaken = false;
+                answerState.map(function(item){
+                    if(item.currentBox === $(e.target).attr("data-letter")){
+                        draggedItemLetter = "";
+                    }
+                });
+                if(!spotTaken){
+                    dropLocation = $(e.target).attr("data-letter");
+                }
                 break;
             default:
                 //if($(e.target).parent().attr("class") == "match-item-answer-drop-area"){
@@ -136,13 +145,20 @@ var MatchItemView = React.createClass({
         }
 
         var itemFound = false;
-        if(state.numMoved != state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
-            if (draggedItemLetter != "" && dropLocation != "") {
+        if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
+            console.log(state.numMoved);
+            console.log(state.answerState.length);
+            if (draggedItemLetter !== "" && dropLocation !== "") {
+                console.dir(answerState);
                 answerState.map(function (item) {
-                    if (draggedItemLetter == item.letter) {
+
+
+                    if (draggedItemLetter === item.letter) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        if ($($(draggedItemTarget).parent()).attr("class") == "match-item-choices-container thumbnail") {
+                        console.log($(draggedItemTarget).attr("class"));
+                        console.log($(draggedItemTarget).parent().parent().attr("class"));
+                        if ($(draggedItemTarget).parent().parent().attr("class") === "match-item-choices-container") {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;
                         }
@@ -228,12 +244,12 @@ var MatchItemView = React.createClass({
         var isGraded = state.isGraded;
         var numMoved = state.numMoved;
 
-        if(numMoved == numQuestions){
+        if(numMoved === numQuestions){
             var isCorrect = true;
             // check if correct and update accordingly
 
             for(var i = 0; i < answerState.length; i++){
-                if(answerState[i].currentBox != answerState[i].correctBox){
+                if(answerState[i].currentBox !== answerState[i].letter){
                     isCorrect = false;
                     break;
                 }
