@@ -86,6 +86,14 @@ var MultipleChoiceView = React.createClass({
     },
 
     componentDidUpdate: function(){
+
+    },
+
+    componentWillUnmount: function() {
+        PageStore.removeChangeListener(this._onChange);
+    },
+
+    answerChange: function(answer) {
         var self = this;
         var state = this.state;
         var selectedAns;
@@ -116,9 +124,6 @@ var MultipleChoiceView = React.createClass({
         }
     },
 
-    componentWillUnmount: function() {
-        PageStore.removeChangeListener(this._onChange);
-    },
     render: function() {
         var self = this;
         var state = this.state;
@@ -154,12 +159,13 @@ var MultipleChoiceView = React.createClass({
         }
 
         var choices;
+        var _this = this;
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
             return (<li key={page.xid + String(index)} className="list-group-item" >
                         <div className="checkbox">
                             <label>
-                                <input type="checkbox" className="multiple-choice-checkbox" value={ans}>{ans}</input>
+                                <input type="checkbox" className="multiple-choice-checkbox" value={ans} onClick={_this.answerChange.bind(_this, ans)}>{ans}</input>
                             </label>
                         </div>
                     </li>);
