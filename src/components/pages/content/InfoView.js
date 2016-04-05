@@ -39,6 +39,7 @@ function getPageState(props) {
             });
         }
 
+
         if(props.page.info){
             if(props.page.info.property){
                 props.page.info.property.map(function(item){
@@ -49,6 +50,9 @@ function getPageState(props) {
                             break;
                         case "fullcoach":
                             data.videoType = "fullcoach";
+                            break;
+                        case "mediadisplayblurb":
+                            caption = (<p>{item.value}</p>);
                             break;
                         default:
                             data.videoType = "";
@@ -64,11 +68,12 @@ function getPageState(props) {
                 var result = <div key={index}>Unknown File Type</div>;
 
                 if (item.type === "video") {
-                    if(item.file.split(".")[1] == "mp4") {
+                    if(item.file.split(".")[1] === "mp4") {
                         result = <div className={data.videoType} key={index}>
                             <video controls>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
+                            {caption}
                         </div>
                     }
                 }
@@ -76,21 +81,11 @@ function getPageState(props) {
                 if (item.type === "image") {
                     result = <div key={index}>
                         <img className={data.videoType} src={filePath}></img>
+                        {caption}
                     </div>
                 }
 
-                if(item.info){
-                    if(item.info.property){
-                        data.sources = item.info.property.map(function(mediaProperty){
-                            if(mediaProperty.name == "mediacaption"){
-                                //console.log("mediacaption found: " + mediaProperty.value);
-                                return(mediaProperty.value);
-                            }else{
-                                return("");
-                            }
-                        });
-                    }
-                }
+
                 return result;
 
             });
