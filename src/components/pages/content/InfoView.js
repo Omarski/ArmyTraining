@@ -30,13 +30,26 @@ function getPageState(props) {
 
             if(notes && notes.length > 1){
                 noteItems = notes.map(function(item, index) {
+                    var hasBullet = (item.text.indexOf('-') === 0);
+
+                    var str = item.text;
+                    if (hasBullet) {
+                        str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
+                        str = str.replace(new RegExp('- ', 'g'), '<br/><span class="info-view-bullet-item"></span>');
+                    }
+
                     if(item.media && item.media[0]){
                         // if statement to detect media in note, should be true
                         data.noteAudio.push(item.media[0].xid);
                     }
+
+                    function createNote() {
+                        return {__html: str};
+                    }
+
                     return (
                         <li key={index}>
-                            <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
+                            <p className="lead" key={data.page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
                         </li>
                     );
                 });

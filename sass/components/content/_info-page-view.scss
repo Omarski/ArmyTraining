@@ -10,6 +10,11 @@
 
 }
 
+.info-view-bullet-item:before {
+  content: "• ";
+  color: #000;
+}
+
 .infoMediaContainer{
   margin: 0 auto;
   margin-top: 40px;
