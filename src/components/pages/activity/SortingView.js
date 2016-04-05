@@ -377,12 +377,12 @@ var SortingView = React.createClass({
                 case "image":
                     break;
                 case "string":
-                    answerRender = <li key={page.xid + "colA-"+index+itemA.passedData}>
+                    answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+index+itemA.passedData}>
                         <div
                             draggable="true"
                             onDragStart={self.onDragging}>
                             {itemA.passedData}
-                            <div className={feedbackA}></div>
+                            <span className={feedbackA}></span>
                         </div>
                     </li>;
                     break;
@@ -425,12 +425,12 @@ var SortingView = React.createClass({
                 case "image":
                     break;
                 case "string":
-                    answerRender = <li key={page.xid + "colA-"+itemB.passedData}>
+                    answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+itemB.passedData}>
                         <div
                             draggable="true"
                             onDragStart={self.onDragging}>
                             {itemB.passedData}
-                            <div className={feedbackB}></div>
+                            <span className={feedbackB}></span>
                         </div>
                     </li>;
                     break;
