@@ -294,6 +294,14 @@ var SortingView = React.createClass({
 
                     break;
                 case "image":
+                    var source = item.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
                     break;
                 case "string":
                     // the letter of the answer in current answer Container
@@ -375,6 +383,14 @@ var SortingView = React.createClass({
                         </li>;
                     break;
                 case "image":
+                    var source = itemA.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
                     break;
                 case "string":
                     answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+index+itemA.passedData}>
@@ -423,6 +439,14 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "image":
+                    var source = itemB.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
                     break;
                 case "string":
                     answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+itemB.passedData}>

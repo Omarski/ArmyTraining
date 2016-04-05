@@ -16,6 +16,7 @@ function getPageState(props) {
         media: "",
         videoType: "",
         sources: [],
+        caption: "",
         volume: SettingsStore.voiceVolume()
     };
 
@@ -26,17 +27,32 @@ function getPageState(props) {
         if (props.page.note) {
             var notes = props.page.note;
 
+            if(props.page.note.length > 1){
+                noteItems = notes.map(function(item, index) {
+                    console.dir(item.media );
+                    if(item.media && item.media[0]){
+                        // if statement to detect media in note, should be true
+                        data.noteAudio.push(item.media[0].xid);
+                    }
+                    return (
+                        <li>
+                            <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
+                        </li>
+                    );
+                });
+            }else{
+                noteItems = notes.map(function(item, index) {
+                    console.dir(item.media );
+                    if(item.media && item.media[0]){
+                        // if statement to detect media in note, should be true
+                        data.noteAudio.push(item.media[0].xid);
+                    }
+                    return (
+                        <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
+                    );
+                });
+            }
 
-            noteItems = notes.map(function(item, index) {
-                console.dir(item.media );
-                if(item.media && item.media[0]){
-                    // if statement to detect media in note, should be true
-                    data.noteAudio.push(item.media[0].xid);
-                }
-                return (
-                    <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
-                );
-            });
         }
 
 
@@ -52,7 +68,7 @@ function getPageState(props) {
                             data.videoType = "fullcoach";
                             break;
                         case "mediadisplayblurb":
-                            caption = (<p>{item.value}</p>);
+                            data.caption = (<p>{item.value}</p>);
                             break;
                         default:
                             data.videoType = "";
@@ -73,7 +89,7 @@ function getPageState(props) {
                             <video controls>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
-                            {caption}
+                            {data.caption}
                         </div>
                     }
                 }
@@ -81,7 +97,7 @@ function getPageState(props) {
                 if (item.type === "image") {
                     result = <div key={index}>
                         <img className={data.videoType} src={filePath}></img>
-                        {caption}
+                        {data.caption}
                     </div>
                 }
 
@@ -160,6 +176,13 @@ var InfoView = React.createClass({
         var media = state.media;
         var mediaType = state.videoType;
 
+        var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
+        if(state.page.note.length > 1){
+            noteDisplay = <div className={mediaType + " infoNoteContainer"}>
+                <ul>{pageNotes}</ul>
+            </div>;
+        }
+
         var mediaContainer = "";
         if (media) {
             mediaContainer = <div className="infoMediaContainer">{media}</div>;
@@ -189,7 +212,7 @@ var InfoView = React.createClass({
                     </div>
                     <div className="infoDataContainer col-md-6 col-md-offset-3">
                         {mediaContainer}
-                        <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>
+                        {noteDisplay}
                     </div>
                 </div>
             </div>

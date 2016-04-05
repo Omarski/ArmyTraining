@@ -37,6 +37,7 @@ function getPageState(props) {
 
             if(uttering.media){
                 mediaType = uttering.media[0].type;
+                passedData = uttering.media[0].xid;
             }else{
                 mediaType = "string";
                 if(utterance.ezread.text != ""){
@@ -269,6 +270,14 @@ var MatchItemView = React.createClass({
                     </li>;
                     break;
                 case "image":
+                    var source = item.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
                     break;
                 case "string":
                     // the letter of the answer in current answer Container
@@ -339,7 +348,14 @@ var MatchItemView = React.createClass({
                                 </div>;
                             break;
                         case "image":
-                            // todo: image
+                            var source = answerState[i].passedData;
+                            draggable = <li key={page.xid + "choice-"+index}>
+                                <div
+                                    draggable="true"
+                                    onDragStart={self.onDragging}>
+                                    <img src={"data/media/"+source}></img>
+                                </div>
+                            </li>;
                             break;
                         case "string":
                             // the letter of the answer in current answer Container
