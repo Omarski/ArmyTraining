@@ -189,7 +189,7 @@ var MatchItemView = React.createClass({
             item.currentBox = "";
         });
 
-        $(".match-item-play-icon").each(function(i, item){
+        $(".match-item-choices-container div").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 

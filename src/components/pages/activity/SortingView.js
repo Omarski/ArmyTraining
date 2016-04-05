@@ -200,7 +200,7 @@ var SortingView = React.createClass({
             item.currentBox = "";
         });
 
-        $(".sorting-playicon").each(function(i, item){
+        $(".sorting-choices-list div").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 
