@@ -118,7 +118,6 @@ var MatchItemView = React.createClass({
         var state = self.state;
         var numMoved = state.numMoved;
         var answerState = state.answerState;
-        // {label: label, isMoved: false, currentBox: ""}
 
         // get dragged item
         var draggedItemTarget = state.draggedItemTarget;
@@ -132,6 +131,7 @@ var MatchItemView = React.createClass({
                 answerState.map(function(item){
                     if(item.currentBox === $(e.target).attr("data-letter")){
                         draggedItemLetter = "";
+                        spotTaken = true;
                     }
                 });
                 if(!spotTaken){
@@ -146,18 +146,11 @@ var MatchItemView = React.createClass({
 
         var itemFound = false;
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
-            console.log(state.numMoved);
-            console.log(state.answerState.length);
             if (draggedItemLetter !== "" && dropLocation !== "") {
-                console.dir(answerState);
                 answerState.map(function (item) {
-
-
                     if (draggedItemLetter === item.letter) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        console.log($(draggedItemTarget).attr("class"));
-                        console.log($(draggedItemTarget).parent().parent().attr("class"));
                         if ($(draggedItemTarget).parent().parent().attr("class") === "match-item-choices-container") {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;

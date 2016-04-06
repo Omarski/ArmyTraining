@@ -13,7 +13,7 @@ function getPageState(props) {
         prompt: "",
         volume: SettingsStore.voiceVolume(),
         answerState: [],
-        draggedItemData: "",
+        draggedItemLetter: "",
         draggedItemTarget: "",
         isGraded: false,
         numMoved: 0
@@ -26,9 +26,35 @@ function getPageState(props) {
         data.page = props.page;
 
         props.page.matchSource.map(function(item, index){
-            var label = item.nut.uttering.utterance.native.text;
-            data.answerState.push({label: label, isMoved: false, currentBox: "", correctBox: item.letter});
+            //  var label = item.nut.uttering.utterance.native.text;
+            //  data.answerState.push({label: label, isMoved: false, currentBox: "", correctBox: item.letter});
+            var mediaType = "audio";
+            var letter = item.letter;
+            var displayField = "";
+            var uttering = item.nut.uttering;
+            var utterance = uttering.utterance;
+            var passedData = "";
 
+            if(uttering.media){
+                mediaType = uttering.media[0].type;
+                passedData = uttering.media[0].xid;
+            }else{
+                mediaType = "string";
+                if(utterance.ezread.text != ""){
+                    displayField = "ezread";
+                    passedData = utterance.ezread.text;
+                }else if(utterance.translation.text != ""){
+                    displayField = "translation";
+                    passedData = utterance.translation.text;
+                }else if(utterance.native.text != ""){
+                    displayField = "native";
+                    passedData = utterance.native.text;
+                }else{
+                    displayField = "phonetic";
+                    passedData = utterance.phonetic.text;
+                }
+            }
+            data.answerState.push({letter: letter, isMoved: false, currentBox: "", mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
 
@@ -61,21 +87,21 @@ var OrderingView = React.createClass({
         e.dataTransfer.setData('text/plain', 'anything');
         var self = this;
         var state = self.state;
-        var draggedItemData = "";
+        var draggedItemLetter = "";
         var draggedItemTarget = "";
 
         if(state.numMoved != state.answerState.length && $(e.target).css("opacity") != 0.3) {
             if (e.target) {
-                draggedItemData = $(e.target).attr("data");
+                draggedItemLetter = $(e.target).attr("data");
                 draggedItemTarget = e.target;
             }
         }else{
-            draggedItemData = "";
+            draggedItemLetter = "";
             draggedItemTarget = "";
         }
 
         self.setState({
-            draggedItemData: draggedItemData,
+            draggedItemLetter: draggedItemLetter,
             draggedItemTarget: draggedItemTarget
         });
     },
@@ -92,33 +118,40 @@ var OrderingView = React.createClass({
         var state = self.state;
         var numMoved = state.numMoved;
         var answerState = state.answerState;
-        // {label: label, isMoved: false, currentBox: ""}
 
         // get dragged item
         var draggedItemTarget = state.draggedItemTarget;
-        var draggedItemData = state.draggedItemData;
+        var draggedItemLetter = state.draggedItemLetter;
 
         var dropLocation = "";
 
-        //TODO: don't allow more than 1 answer
         switch($(e.target).attr("class")){
             case "or-answer-dropArea":
-                dropLocation = $(e.target).attr("data-letter");
+                //if(drop location isn't taken)
+                var spotTaken = false;
+                answerState.map(function(item){
+                    if(item.currentBox === $(e.target).attr("data-letter")){
+                        draggedItemLetter = "";
+                        spotTaken = true;
+                    }
+                });
+                if(!spotTaken){
+                    dropLocation = $(e.target).attr("data-letter");
+                }
                 break;
             default:
             //if($(e.target).parent().attr("class") == "OR-answer-dropArea"){
             //    dropLocation = $(e.target).parent().attr("data-letter");
             //}
         }
-
         var itemFound = false;
-        if(state.numMoved != state.answerState && $(draggedItemTarget).css("opacity") != 0.3) {
-            if (draggedItemData != "" && dropLocation != "") {
+        if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
+            if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item) {
-                    if (draggedItemData == item.label) {
+                    if (draggedItemLetter === item.letter) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        if ($($(draggedItemTarget).parent()).attr("class") == "or-choices-container") {
+                        if ($(draggedItemTarget).parent().parent().attr("class") === "or-choices-container") {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;
                         }
@@ -142,7 +175,7 @@ var OrderingView = React.createClass({
 
         if($($(e.target).parent()).attr("class") == "or-choices-container"){
             answerState.map(function(item){
-                if($(e.target).attr("data") == item.label){
+                if($(e.target).attr("data") == item.passedData){
                     if(item.isMoved){
                         playable = false;
                     }
@@ -151,14 +184,7 @@ var OrderingView = React.createClass({
         }
 
         if(playable) {
-            state.page.matchSource.map(function (item) {
-                uttering = item.nut.uttering;
-                if ($(e.target).attr("data") == uttering.utterance.native.text) {
-                    if(uttering.media){
-                        playAudio(uttering.media[0].zid);
-                    }
-                }
-            });
+            playAudio($(e.target).attr("data"));
         }
     },
 
@@ -172,7 +198,8 @@ var OrderingView = React.createClass({
             item.currentBox = "";
         });
 
-        $(".or-playicon").each(function(i, item){
+        // change class to be the container of the media object
+        $(".or-choices-container div").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 
@@ -210,12 +237,12 @@ var OrderingView = React.createClass({
         var isGraded = state.isGraded;
         var numMoved = state.numMoved;
 
-        if(numMoved == numQuestions){
+        if(numMoved === numQuestions){
             var isCorrect = true;
             // check if correct and update accordingly
 
             for(var i = 0; i < answerState.length; i++){
-                if(answerState[i].currentBox != answerState[i].correctBox){
+                if(answerState[i].currentBox !== answerState[i].letter){
                     isCorrect = false;
                     break;
                 }
@@ -231,18 +258,56 @@ var OrderingView = React.createClass({
             button = <button className="btn-default or-clear" onClick={self.reset}>Clear All</button>; // clear all button
         }
 
-        choices = state.page.matchSource.map(function(item, index){
+        choices = state.answerState.map(function(item, index){
+            var draggable = "";
+            switch (item.mediaType){
+                case "audio":
+                    var zid = item.nut.uttering.media[0].zid;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            data={zid}
+                            className="or-playicon"
+                            draggable="true"
+                            onDragStart={self.onDragging}
+                            onClick={self.onClick}>
+                            <span className="glyphicon glyphicon-play-circle"></span>
+                        </div>
+                    </li>;
+                    break;
+                case "image":
+                    var source = item.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
+                    break;
+                case "string":
+                    // the letter of the answer in current answer Container
+                    var answerLetter = item.letter;
+                    var displayField = item.displayField;
+                    // convert letter to int, this will be used to access the matchSource array
+                    var matchSourceEquivalentIndex = answerLetter.charCodeAt(0)-65;
+                    // get the display field of the media object associated with this answer
+                    var text = item.passedData;
 
-            //TODO: if(item is an image) return below, else construct other type
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            data={answerLetter}
+                            className="or-text-choice"
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            {text}
+                        </div>
+                    </li>;
+                    break;
+                default:
+                    // this shouldn't be reached unless you are moving videos
+            }
 
-            return (<img key={page.xid +"choice-"+index}
-                         src={"./data/media/myPlay.jpg"}
-                         data={item.nut.uttering.utterance.native.text}
-                         className="or-playicon"
-                         draggable="true"
-                         onDragStart={self.onDragging}
-                         onClick={self.onClick}>
-            </img>);
+            return (draggable);
         });
 
         answerContainers = state.page.matchTarget.map(function(item, index){
@@ -256,25 +321,86 @@ var OrderingView = React.createClass({
                 if(letter == state.answerState[i].currentBox){
 
                     if(needCheck){
-                        if(state.answerState[i].currentBox == state.answerState[i].correctBox){
+                        if(state.answerState[i].currentBox == state.answerState[i].letter){
                             feedback = correct;
                         }else{
                             feedback = incorrect;
                         }
                     }
 
-                    answerRender = <div src={"./data/media/myPlay.jpg"}
-                                        data={state.answerState[i].label}
-                                        className="or-playicon"
-                                        draggable="true"
-                                        onDragStart={self.onDragging}
-                                        onClick={self.onClick}>
-                        <img className="or-image" src={"./data/media/myPlay.jpg"}></img>
-                        <div className={feedback}></div>
-                    </div>;
+                    // check the matchsource media type, if audio then do the generic play image, else load specific image
+                    switch (state.answerState[i].mediaType) {
+                        case "audio":
+                            // the letter of the answer in current answer Container
+                            var answerLetter = state.answerState[i].letter;
+                            // convert letter to int, this will be used to access the matchSource array
+                            var matchSourceEquivalentIndex = answerLetter.charCodeAt(0) - 65;
+                            // get the Zid of the media object associated with this answer
+                            var matchSourceEquivalentZid = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.media[0].zid;
+                            answerRender = <div
+                                data={matchSourceEquivalentZid}
+                                className="or-play-icon"
+                                draggable="true"
+                                onDragStart={self.onDragging}
+                                onClick={self.onClick}>
+                                <span className="glyphicon glyphicon-play-circle"></span>
+
+                                <div className={feedback}></div>
+                            </div>;
+                            break;
+                        case "image":
+                            var source = answerState[i].passedData;
+                            draggable = <li key={page.xid + "choice-"+index}>
+                                <div
+                                    draggable="true"
+                                    onDragStart={self.onDragging}>
+                                    <img src={"data/media/"+source}></img>
+                                </div>
+                            </li>;
+                            break;
+                        case "string":
+                            // the letter of the answer in current answer Container
+                            var answerLetter = state.answerState[i].letter;
+                            var displayField = state.answerState[i].displayField;
+                            // convert letter to int, this will be used to access the matchSource array
+                            var matchSourceEquivalentIndex = answerLetter.charCodeAt(0) - 65;
+                            // get the display field of the media object associated with this answer
+                            var matchSourceEquivalentText = "";
+
+                            switch (displayField) {
+                                case "ezread":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.ezread.text;
+                                    break;
+                                case "native":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.native.text;
+                                    break;
+                                case "phonetic":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.phonetic.text;
+                                    break;
+                                case "translation":
+                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.translation.text;
+                                    break;
+                                default:
+                                    matchSourceEquivalentText = "Expected Text Not Found."
+                            }
+
+                            answerRender = (
+                                <div
+                                    className="or-text-choice"
+                                    draggable="true"
+                                    onDragStart={self.onDragging}
+                                    >
+                                    {matchSourceEquivalentText}
+                                    <div className={feedback}></div>
+                                </div>
+                            );
+                            break;
+                        default:
+                        // this shouldn't be reached unless you are moving videos
+                    }
                 }
             }
-            return(<div className = "or-answer" key={page.xid + "answer-"+index}>
+            return(<li className = "or-answer" key={page.xid + "answer-"+index}>
                 <div className="or-answer-prompt">{answerPrompt}</div>
                 <div className="or-answer-dropArea"
                      data-letter={letter}
@@ -282,7 +408,7 @@ var OrderingView = React.createClass({
                      onDrop={self.onDropping}>
                     {answerRender}
                 </div>
-            </div>);
+            </li>);
         });
 
         return (
@@ -295,10 +421,10 @@ var OrderingView = React.createClass({
                     </audio>
                     <div className="or-prompt">{state.prompt}</div>
                     <div className="or-buttons-container">{button}</div>
-                    <div className="or-choices-container">{choices}</div>
-                    <div className="or-answers-container">
+                    <ul className="or-choices-container">{choices}</ul>
+                    <ul className="or-answers-container">
                         {answerContainers}
-                    </div>
+                    </ul>
                 </div>
             </div>
         );
