@@ -151,7 +151,6 @@ var SortingView = React.createClass({
                     if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        console.log($($(draggedItemTarget).parent()).attr("class"));
                         if ($($(draggedItemTarget).parent()).attr("class") == "sorting-choices-container-text") {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;
@@ -200,7 +199,7 @@ var SortingView = React.createClass({
             item.currentBox = "";
         });
 
-        $(".sorting-playicon").each(function(i, item){
+        $(".sorting-choices-list div").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 
