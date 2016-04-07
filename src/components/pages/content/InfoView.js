@@ -99,7 +99,7 @@ function getPageState(props) {
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
                         result = <div className={data.videoType} key={index}>
-                            <video controls>
+                            <video controls autoPlay>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                             {data.caption}
