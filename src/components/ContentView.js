@@ -4,6 +4,7 @@ var DefaultPageView = require('../components/pages/content/DefaultPageView');
 var DDAudioQuizView = require('../components/pages/activity/DDAudioQuizView');
 
 var InfoView = require('../components/pages/content/InfoView');
+var LessonStartView = require('../components/pages/content/LessonStartView');
 var InteractiveTimelineView = require('../components/pages/content/InteractiveTimelineView');
 var IntroductionPageView = require('../components/pages/content/IntroductionPageView');
 var MapView = require('../components/pages/content/MapView');
@@ -130,7 +131,23 @@ var ContentView = React.createClass({
                     page = <SortingView page={this.state.page} />;
                     break;
                 case "Info":
-                    page = <InfoView page={this.state.page} />;
+                    var foundType = false;
+                    if (this.state.page.info) {
+                        var properties = this.state.page.info.property || [];
+                        var propLen = properties.length;
+
+                        while (propLen--) {
+                            if (properties[propLen].name === "lessonstart") {
+                                page = <LessonStartView page={this.state.page} />
+                                foundType = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!foundType) {
+                        page = <InfoView page={this.state.page} />;
+                    }
                     break;
                 case "InteractiveTimeline":
                     page = <InteractiveTimelineView page={this.state.page} />;

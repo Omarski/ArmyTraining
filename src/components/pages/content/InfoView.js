@@ -160,6 +160,11 @@ var InfoView = React.createClass({
     },
 
     componentDidMount: function() {
+        //play audio recording for info page
+        var self = this;
+        var noteMedia = self.state.noteAudio;
+        // play all note media in order (see dnd for example)
+        playMediaAudio(noteMedia);
         //PageStore.addChangeListener(this._onChange);
         $('[data-toggle="tooltip"]').tooltip();
     },
@@ -169,11 +174,7 @@ var InfoView = React.createClass({
     },
 
     componentDidUpdate: function(){
-        //play audio recording for info page
-        var self = this;
-        var noteMedia = self.state.noteAudio;
-        // play all note media in order (see dnd for example)
-        playMediaAudio(noteMedia);
+
     },
 
     componentWillUnmount: function() {
@@ -188,7 +189,6 @@ var InfoView = React.createClass({
         var pageNotes = state.note;
         var media = state.media;
         var mediaType = state.videoType;
-
 
         var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
         if(state.page.note && state.page.note.length > 1){
@@ -217,7 +217,7 @@ var InfoView = React.createClass({
         return (
             <div>
                 <div className="infoContainer" key={"page-" + this.state.page.xid}>
-                    <audio id="audio" volume={this.state.volume}>
+                    <audio autoPlay id="audio" volume={this.state.volume}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
