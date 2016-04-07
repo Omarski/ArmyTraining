@@ -61,13 +61,16 @@ function loadUnitData(units, cb) {
 }
 
 function loadChapterPages(units, unit, index) {
-    if (index < unit.data.chapter.length) {
-        setTimeout(function() {
+
+
+
+    if ((unit.data.chapter) && (index < unit.data.chapter.length)) {
+        setTimeout(function () {
             var chapter = unit.data.chapter[index];
             chapter.pages = [];
             NotificationActions.updateBody("Loading  " + unit.data.title + " : " + chapter.title);
             if (index && units) {
-                NotificationActions.updatePercent( Math.round(((_parsedUnitIndex)/ _totalUnits) * 100));
+                NotificationActions.updatePercent(Math.round(((_parsedUnitIndex) / _totalUnits) * 100));
             }
 
             index++;
@@ -83,8 +86,8 @@ function loadChapterPages(units, unit, index) {
                     var pages = sections[i].pageRef;
                     for (var j = 0; j < pages.length; j++) {
                         var page = pages[j];
-                        if(storedPages) {
-                            var storeId = unit.data.xid + '_' + chapter.xid + '_' +  page.xid
+                        if (storedPages) {
+                            var storeId = unit.data.xid + '_' + chapter.xid + '_' + page.xid
                             if (storedPages[storeId]) {
                                 page.state = storedPages[storeId];
                             }
@@ -102,7 +105,7 @@ function loadChapterPages(units, unit, index) {
 
 
     } else {
-        loadUnitData(units, function() {
+        loadUnitData(units, function () {
 
             var units = UnitStore.getAll();
             for (key in units) {
@@ -112,12 +115,12 @@ function loadChapterPages(units, unit, index) {
 
                 NotificationActions.updateBody("Loading Page : " + page.title);
 
-                setTimeout(function() {
+                setTimeout(function () {
                     var bookmark = BookmarkStore.bookmark();
                     if (bookmark) {
                         PageActions.jump(bookmark);
                     } else {
-                        PageActions.load({unit:unit, chapter:chapter, page:page});
+                        PageActions.load({unit: unit, chapter: chapter, page: page});
                     }
 
                     LoaderActions.complete({});
