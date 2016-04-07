@@ -15,6 +15,7 @@ function getPageState(props) {
         answerState: [],
         draggedItemLetter: "",
         draggedItemTarget: "",
+        draggedItemData: "",
         isGraded: false,
         numMoved: 0
     } ;
@@ -37,7 +38,7 @@ function getPageState(props) {
 
             if(uttering.media){
                 mediaType = uttering.media[0].type;
-                passedData = uttering.media[0].xid;
+                passedData = uttering.media[0].zid;
             }else{
                 mediaType = "string";
                 if(utterance.ezread.text != ""){
@@ -54,7 +55,7 @@ function getPageState(props) {
                     passedData = utterance.phonetic.text;
                 }
             }
-            data.answerState.push({letter: letter, isMoved: false, currentBox: "", mediaType: mediaType, displayField: displayField, passedData: passedData});
+            data.answerState.push({letter: letter, isMoved: false, currentBox: "", currentBoxIndex: -1, mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
 
@@ -94,15 +95,18 @@ var OrderingView = React.createClass({
             if (e.target) {
                 draggedItemLetter = $(e.target).attr("data");
                 draggedItemTarget = e.target;
+                draggedItemData = $(e.target).attr("data-passed");
             }
         }else{
             draggedItemLetter = "";
             draggedItemTarget = "";
+            draggedItemData = "";
         }
 
         self.setState({
             draggedItemLetter: draggedItemLetter,
-            draggedItemTarget: draggedItemTarget
+            draggedItemTarget: draggedItemTarget,
+            draggedItemData: draggedItemData
         });
     },
 
@@ -122,21 +126,23 @@ var OrderingView = React.createClass({
         // get dragged item
         var draggedItemTarget = state.draggedItemTarget;
         var draggedItemLetter = state.draggedItemLetter;
-
+        var draggedItemData = state.draggedItemData;
         var dropLocation = "";
+        var dropLocationIndex = -1;
 
         switch($(e.target).attr("class")){
             case "or-answer-dropArea":
                 //if(drop location isn't taken)
                 var spotTaken = false;
                 answerState.map(function(item){
-                    if(item.currentBox === $(e.target).attr("data-letter")){
+                    if(item.currentBoxIndex === Math.floor($(e.target).attr("data-index")) ){
                         draggedItemLetter = "";
                         spotTaken = true;
                     }
                 });
                 if(!spotTaken){
                     dropLocation = $(e.target).attr("data-letter");
+                    dropLocationIndex = Math.floor($(e.target).attr("data-index"));
                 }
                 break;
             default:
@@ -148,8 +154,9 @@ var OrderingView = React.createClass({
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item) {
-                    if (draggedItemLetter === item.letter) {
+                    if (draggedItemData === item.passedData) {
                         item.currentBox = dropLocation;
+                        item.currentBoxIndex = dropLocationIndex;
                         item.isMoved = true;
                         if ($(draggedItemTarget).parent().parent().attr("class") === "or-choices-container") {
                             $(draggedItemTarget).css("opacity", "0.3");
@@ -196,6 +203,7 @@ var OrderingView = React.createClass({
         answerState.map(function (item) {
             item.isMoved = false;
             item.currentBox = "";
+            item.currentBoxIndex = -1;
         });
 
         // change class to be the container of the media object
@@ -262,10 +270,11 @@ var OrderingView = React.createClass({
             var draggable = "";
             switch (item.mediaType){
                 case "audio":
-                    var zid = item.nut.uttering.media[0].zid;
+                    var zid = item.passedData;
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
                             data={zid}
+                            data-passed={item.passedData}
                             className="or-playicon"
                             draggable="true"
                             onDragStart={self.onDragging}
@@ -279,6 +288,7 @@ var OrderingView = React.createClass({
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
                             draggable="true"
+                            data-passed={item.passedData}
                             onDragStart={self.onDragging}>
                             <img src={"data/media/"+source}></img>
                         </div>
@@ -287,15 +297,12 @@ var OrderingView = React.createClass({
                 case "string":
                     // the letter of the answer in current answer Container
                     var answerLetter = item.letter;
-                    var displayField = item.displayField;
-                    // convert letter to int, this will be used to access the matchSource array
-                    var matchSourceEquivalentIndex = answerLetter.charCodeAt(0)-65;
-                    // get the display field of the media object associated with this answer
                     var text = item.passedData;
 
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
                             data={answerLetter}
+                            data-passed={item.passedData}
                             className="or-text-choice"
                             draggable="true"
                             onDragStart={self.onDragging}>
@@ -304,7 +311,7 @@ var OrderingView = React.createClass({
                     </li>;
                     break;
                 default:
-                    // this shouldn't be reached unless you are moving videos
+                    // this shouldn't be reached unless you are moving videos, i hope
             }
 
             return (draggable);
@@ -318,7 +325,7 @@ var OrderingView = React.createClass({
             var needCheck = state.numMoved == answerState.length;
 
             for(var i=0;i<state.answerState.length;i++){
-                if(letter == state.answerState[i].currentBox){
+                if(index === state.answerState[i].currentBoxIndex){
 
                     if(needCheck){
                         if(state.answerState[i].currentBox == state.answerState[i].letter){
@@ -331,14 +338,8 @@ var OrderingView = React.createClass({
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
                     switch (state.answerState[i].mediaType) {
                         case "audio":
-                            // the letter of the answer in current answer Container
-                            var answerLetter = state.answerState[i].letter;
-                            // convert letter to int, this will be used to access the matchSource array
-                            var matchSourceEquivalentIndex = answerLetter.charCodeAt(0) - 65;
-                            // get the Zid of the media object associated with this answer
-                            var matchSourceEquivalentZid = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.media[0].zid;
                             answerRender = <div
-                                data={matchSourceEquivalentZid}
+                                data={state.answerState[i].passedData}
                                 className="or-play-icon"
                                 draggable="true"
                                 onDragStart={self.onDragging}
@@ -354,43 +355,18 @@ var OrderingView = React.createClass({
                                 <div
                                     draggable="true"
                                     onDragStart={self.onDragging}>
-                                    <img src={"data/media/"+source}></img>
+                                    <img src={"data/media/"+source+".jpg"}></img>
                                 </div>
                             </li>;
                             break;
                         case "string":
-                            // the letter of the answer in current answer Container
-                            var answerLetter = state.answerState[i].letter;
-                            var displayField = state.answerState[i].displayField;
-                            // convert letter to int, this will be used to access the matchSource array
-                            var matchSourceEquivalentIndex = answerLetter.charCodeAt(0) - 65;
-                            // get the display field of the media object associated with this answer
-                            var matchSourceEquivalentText = "";
-
-                            switch (displayField) {
-                                case "ezread":
-                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.ezread.text;
-                                    break;
-                                case "native":
-                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.native.text;
-                                    break;
-                                case "phonetic":
-                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.phonetic.text;
-                                    break;
-                                case "translation":
-                                    matchSourceEquivalentText = state.page.matchSource[matchSourceEquivalentIndex].nut.uttering.utterance.translation.text;
-                                    break;
-                                default:
-                                    matchSourceEquivalentText = "Expected Text Not Found."
-                            }
-
                             answerRender = (
                                 <div
                                     className="or-text-choice"
                                     draggable="true"
                                     onDragStart={self.onDragging}
                                     >
-                                    {matchSourceEquivalentText}
+                                    {state.answerState[i].passedData}
                                     <div className={feedback}></div>
                                 </div>
                             );
@@ -404,6 +380,7 @@ var OrderingView = React.createClass({
                 <div className="or-answer-prompt">{answerPrompt}</div>
                 <div className="or-answer-dropArea"
                      data-letter={letter}
+                     data-index={index}
                      onDragOver={self.onDraggingOver}
                      onDrop={self.onDropping}>
                     {answerRender}

@@ -278,7 +278,7 @@ var SortingView = React.createClass({
 
             switch(item.mediaType){
                 case "audio":
-                    var zid = item.nut.uttering.media[0].zid;
+                    var zid = item.passedData;
                     draggable = <li className="sorting-choices-container" key={page.xid + "choice-"+index}>
                         <div
                             data={zid}
@@ -305,10 +305,6 @@ var SortingView = React.createClass({
                 case "string":
                     // the letter of the answer in current answer Container
                     var answerLetter = item.letter;
-                    var displayField = item.displayField;
-                    // convert letter to int, this will be used to access the matchSource array
-                    var matchSourceEquivalentIndex = answerLetter.charCodeAt(0)-65;
-                    // get the display field of the media object associated with this answer
                     var text = item.passedData;
 
                     draggable = <li className="sorting-choices-container-text" key={page.xid + "choice-"+index}>
