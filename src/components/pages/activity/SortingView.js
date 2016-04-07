@@ -151,7 +151,6 @@ var SortingView = React.createClass({
                     if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        console.log($($(draggedItemTarget).parent()).attr("class"));
                         if ($($(draggedItemTarget).parent()).attr("class") == "sorting-choices-container-text") {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;
@@ -200,7 +199,7 @@ var SortingView = React.createClass({
             item.currentBox = "";
         });
 
-        $(".sorting-playicon").each(function(i, item){
+        $(".sorting-choices-list div").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 
@@ -279,7 +278,7 @@ var SortingView = React.createClass({
 
             switch(item.mediaType){
                 case "audio":
-                    var zid = item.nut.uttering.media[0].zid;
+                    var zid = item.passedData;
                     draggable = <li className="sorting-choices-container" key={page.xid + "choice-"+index}>
                         <div
                             data={zid}
@@ -294,14 +293,18 @@ var SortingView = React.createClass({
 
                     break;
                 case "image":
+                    var source = item.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
                     break;
                 case "string":
                     // the letter of the answer in current answer Container
                     var answerLetter = item.letter;
-                    var displayField = item.displayField;
-                    // convert letter to int, this will be used to access the matchSource array
-                    var matchSourceEquivalentIndex = answerLetter.charCodeAt(0)-65;
-                    // get the display field of the media object associated with this answer
                     var text = item.passedData;
 
                     draggable = <li className="sorting-choices-container-text" key={page.xid + "choice-"+index}>
@@ -375,6 +378,14 @@ var SortingView = React.createClass({
                         </li>;
                     break;
                 case "image":
+                    var source = itemA.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
                     break;
                 case "string":
                     answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+index+itemA.passedData}>
@@ -423,6 +434,14 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "image":
+                    var source = itemB.passedData;
+                    draggable = <li key={page.xid + "choice-"+index}>
+                        <div
+                            draggable="true"
+                            onDragStart={self.onDragging}>
+                            <img src={"data/media/"+source}></img>
+                        </div>
+                    </li>;
                     break;
                 case "string":
                     answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+itemB.passedData}>

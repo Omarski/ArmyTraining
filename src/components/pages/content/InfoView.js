@@ -16,9 +16,11 @@ function getPageState(props) {
         media: "",
         videoType: "",
         sources: [],
+        caption: "",
         volume: SettingsStore.voiceVolume()
     };
 
+    var caption = "";
     if (props && props.page) {
         data.title = props.page.title;
         data.pageType = props.page.type;
@@ -26,18 +28,46 @@ function getPageState(props) {
         if (props.page.note) {
             var notes = props.page.note;
 
+            if(notes && notes.length > 1){
+                noteItems = notes.map(function(item, index) {
+                    var hasBullet = (item.text.indexOf('-') === 0);
 
-            noteItems = notes.map(function(item, index) {
-                console.dir(item.media );
-                if(item.media && item.media[0]){
-                    // if statement to detect media in note, should be true
-                    data.noteAudio.push(item.media[0].xid);
-                }
-                return (
-                    <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
-                );
-            });
+                    var str = item.text;
+                    if (hasBullet) {
+                        str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
+                        str = str.replace(new RegExp('- ', 'g'), '<br/><span class="info-view-bullet-item"></span>');
+                    }
+
+                    if(item.media && item.media[0]){
+                        // if statement to detect media in note, should be true
+                        data.noteAudio.push(item.media[0].xid);
+                    }
+
+                    function createNote() {
+                        return {__html: str};
+                    }
+
+                    return (
+                        <li key={index}>
+                            <p className="lead" key={data.page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
+                        </li>
+                    );
+                });
+            }else{
+                noteItems = notes.map(function(item, index) {
+                    console.dir(item.media );
+                    if(item.media && item.media[0]){
+                        // if statement to detect media in note, should be true
+                        data.noteAudio.push(item.media[0].xid);
+                    }
+                    return (
+                        <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
+                    );
+                });
+            }
+
         }
+
 
         if(props.page.info){
             if(props.page.info.property){
@@ -49,6 +79,9 @@ function getPageState(props) {
                             break;
                         case "fullcoach":
                             data.videoType = "fullcoach";
+                            break;
+                        case "mediadisplayblurb":
+                            data.caption = (<p>{item.value}</p>);
                             break;
                         default:
                             data.videoType = "";
@@ -64,11 +97,12 @@ function getPageState(props) {
                 var result = <div key={index}>Unknown File Type</div>;
 
                 if (item.type === "video") {
-                    if(item.file.split(".")[1] == "mp4") {
+                    if(item.file.split(".")[1] === "mp4") {
                         result = <div className={data.videoType} key={index}>
                             <video controls>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
+                            {data.caption}
                         </div>
                     }
                 }
@@ -76,21 +110,11 @@ function getPageState(props) {
                 if (item.type === "image") {
                     result = <div key={index}>
                         <img className={data.videoType} src={filePath}></img>
+                        {data.caption}
                     </div>
                 }
 
-                if(item.info){
-                    if(item.info.property){
-                        data.sources = item.info.property.map(function(mediaProperty){
-                            if(mediaProperty.name == "mediacaption"){
-                                //console.log("mediacaption found: " + mediaProperty.value);
-                                return(mediaProperty.value);
-                            }else{
-                                return("");
-                            }
-                        });
-                    }
-                }
+
                 return result;
 
             });
@@ -165,6 +189,14 @@ var InfoView = React.createClass({
         var media = state.media;
         var mediaType = state.videoType;
 
+
+        var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
+        if(state.page.note && state.page.note.length > 1){
+            noteDisplay = <div className={mediaType + " infoNoteContainer"}>
+                <ul>{pageNotes}</ul>
+            </div>;
+        }
+
         var mediaContainer = "";
         if (media) {
             mediaContainer = <div className="infoMediaContainer">{media}</div>;
@@ -194,7 +226,7 @@ var InfoView = React.createClass({
                     </div>
                     <div className="infoDataContainer col-md-6 col-md-offset-3">
                         {mediaContainer}
-                        <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>
+                        {noteDisplay}
                     </div>
                 </div>
             </div>

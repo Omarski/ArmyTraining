@@ -25,6 +25,18 @@ function getPageState(props) {
                 dateList.push(item.title);
             });
         }
+        if(props.page.info){
+            if(props.page.info.property){
+                props.page.info.property.map(function(item) {
+                    if(item.name === "builtTimeline"){
+                        json = JSON.parse(item.value);
+                        json.nodes.map(function(item, index){
+                            dateList.push(item.title);
+                        });
+                    }
+                });
+            }
+        }
     }
 
     return {

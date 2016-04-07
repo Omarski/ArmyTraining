@@ -10,10 +10,16 @@
 
 }
 
+.info-view-bullet-item:before {
+  content: "• ";
+  color: #000;
+}
+
 .infoMediaContainer{
   margin: 0 auto;
   margin-top: 40px;
   img {
+    max-height: 300px;
     max-width: 400px;
   }
 }
@@ -25,6 +31,7 @@
   p {
     font-size: 21px;
     font-weight: 300;
+    white-space: pre-wrap;
   }
 }
 

@@ -28,6 +28,16 @@ function getPageState(props) {
             data.json = props.page.MapData;
             data.json.nodes.map(function(){data.hasMoved.push(false)});
         }
+        if(props.page.info){
+            if(props.page.info.property){
+                props.page.info.property.map(function(item){
+                    if(item.name === "builtMap"){
+                        data.json = JSON.parse(item.value);
+                        data.json.nodes.map(function(){data.hasMoved.push(false)});
+                    }
+                });
+            }
+        }
     }
 
     return data;
