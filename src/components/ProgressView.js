@@ -23,47 +23,49 @@ function getUnitState() {
         if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
             currentUnitIndex = totalUnits;
         }
+        if (unit.data.chapter) {
+            for (var i = 0; i < unit.data.chapter.length; i++) {
+                var c = unit.data.chapter[i];
+                if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
+                    currentUnitTotalPages += c.pages.length;
+                    for( var j = 0; j < c.pages.length; j++) {
+                        var page = c.pages[j];
+                        if (PageStore.page() && PageStore.page().xid === page.xid) {
+                            currentPageIndex = j + 1;
+                        }
 
-        for (var i = 0; i < unit.data.chapter.length; i++) {
-            var c = unit.data.chapter[i];
-            if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
-                currentUnitTotalPages += c.pages.length;
-                for( var j = 0; j < c.pages.length; j++) {
-                    var page = c.pages[j];
-                    if (PageStore.page() && PageStore.page().xid === page.xid) {
-                        currentPageIndex = j + 1;
+                        if (page.state && page.state.visited) {
+                            currentUnitCompletedCount++;
+                        }
+
                     }
+                }
 
-                    if (page.state && page.state.visited) {
-                        currentUnitCompletedCount++;
+
+                // check pages to see if everything has been
+                // viewed in the chapter to determine unit
+                // complete state
+
+                var pages = c.pages;
+                var pagesLen = pages.length;
+
+                for( var j = 0; j < pagesLen; j++) {
+                    totalPages++;
+                    var page = pages[j];
+
+                    if (!page.state || !page.state.visited) {
+                        completed = false;
+                    } else {
+                        completedCount++;
                     }
-
                 }
+
+                totalUnitPagesComplete += completedCount;
+                totalUnitPages += pagesLen;
+
             }
-
-
-            // check pages to see if everything has been
-            // viewed in the chapter to determine unit
-            // complete state
-
-            var pages = c.pages;
-            var pagesLen = pages.length;
-
-            for( var j = 0; j < pagesLen; j++) {
-                totalPages++;
-                var page = pages[j];
-
-                if (!page.state || !page.state.visited) {
-                    completed = false;
-                } else {
-                    completedCount++;
-                }
-            }
-
-            totalUnitPagesComplete += completedCount;
-            totalUnitPages += pagesLen;
-
         }
+
 
         if (completed) {
             totalUnitsComplete++;

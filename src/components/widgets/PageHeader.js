@@ -37,10 +37,10 @@ var PageHeader = React.createClass({
         }
 
         return  <div className="page-header">
-            <h1>{this.state.title}<small>
+            <div className="page-header-title">{this.state.title}<small>
                 {info}
             </small>
-            </h1>
+            </div>
         </div>;
     }
 });

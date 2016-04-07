@@ -23,66 +23,67 @@ function getUnitState(expanded) {
         var completed = true;
         var completedCount = 0;
         var totalPages = 0;
-        for (var i = 0; i < unit.data.chapter.length; i++) {
-            var c = unit.data.chapter[i];
+        if (unit.data.chapter) {
+            for (var i = 0; i < unit.data.chapter.length; i++) {
+                var c = unit.data.chapter[i];
 
 
+                // check pages to see if everything has been
+                // viewed in the chapter to determine unit
+                // complete state
 
-            // check pages to see if everything has been
-            // viewed in the chapter to determine unit
-            // complete state
-
-            var pages = c.pages;
-            var pagesLen = pages.length;
-            var tcpCompleted = 0;
-            var tcpTotal = pages.length;
-            while(pagesLen--) {
-                totalPages++;
-                var page = pages[pagesLen];
-                if (!page.state || !page.state.visited) {
-                    completed = false;
-                } else {
-                    completedCount++;
-                    tcpCompleted++;
+                var pages = c.pages;
+                var pagesLen = pages.length;
+                var tcpCompleted = 0;
+                var tcpTotal = pages.length;
+                while (pagesLen--) {
+                    totalPages++;
+                    var page = pages[pagesLen];
+                    if (!page.state || !page.state.visited) {
+                        completed = false;
+                    } else {
+                        completedCount++;
+                        tcpCompleted++;
+                    }
                 }
+
+                chapters.push({
+                    completed: false,
+                    title: c.title,
+                    percent: Math.round((tcpCompleted / tcpTotal) * 100),
+                    data: c
+                });
+
+
             }
 
-            chapters.push({
-                completed:false,
-                title:c.title,
-                percent:Math.round((tcpCompleted / tcpTotal) * 100),
-                data: c
-            });
-
-
-        }
-
-        var unitCls = '';
-        var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
-        var unitExpandedCls = ' panel-collapse collapse ';
-        if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
-            currentUnitIndex = totalUnits;
-            unitCls = 'main-footer-accordian-table-row-active';
-            unitExpandedCls += ' in';
-            expandCollapseIconCls += ' glyphicon-minus-sign';
-        } else {
-            expandCollapseIconCls += ' glyphicon-plus-sign';
-        }
-        if (completed) {
-            totalUnitsComplete++;
-        }
-        data.push(
-            {
-                unitExpandedCls: unitExpandedCls,
-                expandCollapseIconCls: expandCollapseIconCls,
-                unitCls: unitCls,
-                unit: unit,
-                completed:completed,
-                title:unit.data.title,
-                percent:Math.round((completedCount / totalPages) * 100),
-                rows:chapters
+            var unitCls = '';
+            var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
+            var unitExpandedCls = ' panel-collapse collapse ';
+            if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
+                currentUnitIndex = totalUnits;
+                unitCls = 'main-footer-accordian-table-row-active';
+                unitExpandedCls += ' in';
+                expandCollapseIconCls += ' glyphicon-minus-sign';
+            } else {
+                expandCollapseIconCls += ' glyphicon-plus-sign';
             }
-        );
+            if (completed) {
+                totalUnitsComplete++;
+            }
+            data.push(
+                {
+                    unitExpandedCls: unitExpandedCls,
+                    expandCollapseIconCls: expandCollapseIconCls,
+                    unitCls: unitCls,
+                    unit: unit,
+                    completed: completed,
+                    title: unit.data.title,
+                    percent: Math.round((completedCount / totalPages) * 100),
+                    rows: chapters
+                }
+            );
+        }
     }
 
     return {
