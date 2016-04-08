@@ -69,6 +69,21 @@ var MultiNoteView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+        //play audio recording for active info page
+        var self = this;
+        var related = self.state.related;
+        var activePageIndex = self.state.activePage;
+        var pageMediaArray = []; // make a pageMediaArray
+        related[activePageIndex].note.map(function(itemNote, indexNote){
+            // for each "note" json object the "related" json object has
+            if(itemNote.media){
+                // if that note has a "media" json object
+                pageMediaArray.push(itemNote.media[0].xid); // add it's xid to that page's pageMediaArray
+            }
+        });
+
+        // play all note media in order
+        playMediaAudio(pageMediaArray);
     },
 
     componentDidUpdate: function(){
@@ -100,7 +115,35 @@ var MultiNoteView = React.createClass({
         var infoPages = self.state.related;
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
-            var text = item.note[0].text; // needs to be changed to all notes
+            var text = ""; //item.note[0].text; // needs to be changed to all notes
+            if (item.note) {
+                var notes = item.note;
+                if(notes && notes.length > 1){
+                    text = notes.map(function(item, index) {
+                        var hasBullet = (item.text.indexOf('-') === 0);
+
+                        var str = item.text;
+                        if (hasBullet) {
+                            str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
+                            str = str.replace(new RegExp('- ', 'g'), '<br/><span class="info-view-bullet-item"></span>');
+                        }
+
+                        function createNote() {
+                            return {__html: str};
+                        }
+
+                        return (<li key={page.xid + String(index) + "li"}>
+                                    <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
+                        </li>);
+                    });
+                }else{
+
+                     text = <p key={page.xid + String(index) + "note"}>{item.text}</p>;
+
+                }
+
+            }
+
             var title = item.title;
             var image = <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
             var caption = "";
@@ -134,7 +177,7 @@ var MultiNoteView = React.createClass({
         var pageChoices = pagesHTML.map(function(item, index){
             var imageURL = item.imageURL;
             var title = item.title;
-            var thumbnail = <li><img className="thumbnail multi-note-thumbnail" data={index} onClick={self.handleClick} alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL}></img></li>;
+            var thumbnail = <li key={self.state.xid + String(index)+"thumbnail"}><img  className="thumbnail multi-note-thumbnail" data={index} onClick={self.handleClick} alt={title}  src={"data/media/"+imageURL}></img></li>;
             return (thumbnail);
         });
 
@@ -155,11 +198,11 @@ var MultiNoteView = React.createClass({
                     <div className="container">
                         <div className="row">
                             <div className="col-md-8">
-                                <div className="multi-note-image">{pagesHTML[self.state.activePage].image}</div>
-                                <div className="multi-note-caption"><h5>{pagesHTML[self.state.activePage].caption}</h5></div>
+                                <div className="multi-note-image" key={self.state.xid +"activeimage"}>{pagesHTML[self.state.activePage].image}</div>
+                                <div className="multi-note-caption" key={self.state.xid + "activecaption"}><h5>{pagesHTML[self.state.activePage].caption}</h5></div>
                             </div>
                             <div className="col-md-4">
-                                <div className="multi-note-text"><p>{pagesHTML[self.state.activePage].text}</p></div>
+                                <div className="multi-note-text" key={self.state.xid + "activetext"}><p>{pagesHTML[self.state.activePage].text}</p></div>
                             </div>
 
                         </div>
