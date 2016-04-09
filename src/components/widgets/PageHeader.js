@@ -36,8 +36,8 @@ var PageHeader = React.createClass({
                     </OverlayTrigger>;
         }
 
-        return  <div className="page-header">
-            <div className="page-header-title">{this.state.title}<small>
+        return  <div className="page-header-custom">
+            <div className="page-header-custom-title">{this.state.title}<small>
                 {info}
             </small>
             </div>

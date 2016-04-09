@@ -74,13 +74,16 @@ var MultiNoteView = React.createClass({
         var related = self.state.related;
         var activePageIndex = self.state.activePage;
         var pageMediaArray = []; // make a pageMediaArray
-        related[activePageIndex].note.map(function(itemNote, indexNote){
-            // for each "note" json object the "related" json object has
-            if(itemNote.media){
-                // if that note has a "media" json object
-                pageMediaArray.push(itemNote.media[0].xid); // add it's xid to that page's pageMediaArray
-            }
-        });
+        if (related[activePageIndex] && related[activePageIndex].note) {
+            related[activePageIndex].note.map(function (itemNote, indexNote) {
+                // for each "note" json object the "related" json object has
+                if (itemNote.media) {
+                    // if that note has a "media" json object
+                    pageMediaArray.push(itemNote.media[0].xid); // add it's xid to that page's pageMediaArray
+                }
+            });
+        }
+
 
         // play all note media in order
         playMediaAudio(pageMediaArray);
@@ -187,6 +190,27 @@ var MultiNoteView = React.createClass({
 
         //mouse work for mouseover'ed selections
 
+        var noteImage = "";
+        var text = "";
+        var activePage = self.state.activePage;
+        if (activePage && activePage.image) {
+            noteImage = (
+                <div className="col-md-8">
+                    <div className="multi-note-image" key={self.state.xid +"activeimage"}>{pagesHTML[activePage].image}</div>
+                    <div className="multi-note-caption" key={self.state.xid + "activecaption"}><h5>{pagesHTML[activePage].caption}</h5></div>
+                </div>
+            );
+            text = (
+                <div className="col-md-4">
+                    <div className="multi-note-text" key={self.state.xid + "activetext"}><p>{pagesHTML[activePage].text}</p></div>
+                </div>
+            );
+        } else if(activePage.text && activePage.text) {
+            text = (
+                <div className="multi-note-text" key={self.state.xid + "activetext"}><p>{pagesHTML[activePage].text}</p></div>
+            );
+        }
+
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
@@ -197,19 +221,12 @@ var MultiNoteView = React.createClass({
                     </audio>
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-8">
-                                <div className="multi-note-image" key={self.state.xid +"activeimage"}>{pagesHTML[self.state.activePage].image}</div>
-                                <div className="multi-note-caption" key={self.state.xid + "activecaption"}><h5>{pagesHTML[self.state.activePage].caption}</h5></div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="multi-note-text" key={self.state.xid + "activetext"}><p>{pagesHTML[self.state.activePage].text}</p></div>
-                            </div>
-
+                            {noteImage}
+                            {text}
                         </div>
                         <div className="row">
                             <ul className="multi-note-choices">{pageChoices}</ul>
                         </div>
-
                     </div>
                 </div>
             </div>

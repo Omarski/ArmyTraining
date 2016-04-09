@@ -113,12 +113,12 @@ var ProgressView = React.createClass({
 
         return (
             <div className="row">
-                <div className="col-md-2"></div>
-                <div className="col-md-4">
+                <div className="col-sm-1 col-md-1"></div>
+                <div className="col-sm-5 col-md-5">
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-md-2">Lessons</div>
-                            <div className="col-md-9">
+                            <div className="col-sm-2 col-md-2">Lessons</div>
+                            <div className="col-sm-9 col-md-9">
                                 <div className="progress">
                                     <div className="progress-bar progress-bar-unit" style={{width: this.state.unitsPercent + '%'}}>
                                         <span className="sr-only">{this.state.unitsPercent}% Complete (success)</span>
@@ -128,15 +128,15 @@ var ProgressView = React.createClass({
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-1">{this.state.currentUnitIndex}/{this.state.totalUnits}</div>
+                            <div className="col-sm-1 col-md-1">{this.state.currentUnitIndex}/{this.state.totalUnits}</div>
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-sm-5 col-md-5">
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-md-2">Pages</div>
-                            <div className="col-md-9">
+                            <div className="col-sm-1 col-md-2">Pages</div>
+                            <div className="col-sm-9 col-md-9">
                                 <div className="progress">
                                     <div className="progress-bar progress-bar-pages" style={{width: this.state.pagesPercent + '%'}}>
                                         <span className="sr-only">{this.state.pagesPercent}% Complete (success)</span>
@@ -146,11 +146,11 @@ var ProgressView = React.createClass({
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-1">{this.state.currentPageIndex}/{this.state.currentUnitTotalPages}</div>
+                            <div className="col-sm-1 col-md-1">{this.state.currentPageIndex}/{this.state.currentUnitTotalPages}</div>
                         </div>
                     </div>
                 </div>
-                <div className="col-md-2"></div>
+                <div className="col-sm-1 col-md-1"></div>
             </div>
 
         );

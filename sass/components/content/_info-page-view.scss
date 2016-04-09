@@ -17,7 +17,7 @@
 
 .infoMediaContainer{
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 20px;
   img {
     max-height: 300px;
     max-width: 400px;
@@ -26,10 +26,10 @@
 
 .infoNoteContainer{
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 20px;
   text-align: left;
   p {
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 300;
     white-space: pre-wrap;
   }
@@ -42,4 +42,11 @@
 .infoAttributions{
   pointer-events: all;
   font-size: 16px;
+}
+
+.fullcoach {
+  video {
+    width:100%;
+    max-height: 350px;
+  }
 }

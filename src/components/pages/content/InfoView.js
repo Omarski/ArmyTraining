@@ -17,6 +17,7 @@ function getPageState(props) {
         videoType: "",
         sources: [],
         caption: "",
+        fullCoach: false,
         volume: SettingsStore.voiceVolume()
     };
 
@@ -25,6 +26,30 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
+
+        if(props.page.info){
+            if(props.page.info.property){
+                props.page.info.property.map(function(item){
+                    switch(item.name){
+                        case "cutscene":
+                            // TODO: add a class that allows css to distinguish display types?
+                            data.videoType = "cutscene";
+                            break;
+                        case "fullcoach":
+                            data.videoType = "fullcoach";
+                            data.fullCoach = true;
+                            break;
+                        case "mediadisplayblurb":
+                            data.caption = (<p>{item.value}</p>);
+                            break;
+                        default:
+                            data.videoType = "";
+                    }
+                })
+            }
+        }
+
+
         if (props.page.note) {
             var notes = props.page.note;
 
@@ -49,45 +74,22 @@ function getPageState(props) {
 
                     return (
                         <li key={index}>
-                            <p className="lead" key={data.page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
+                            <p  key={data.page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
                         </li>
                     );
                 });
             }else{
                 noteItems = notes.map(function(item, index) {
-                    console.dir(item.media );
                     if(item.media && item.media[0]){
                         // if statement to detect media in note, should be true
                         data.noteAudio.push(item.media[0].xid);
                     }
                     return (
-                        <p className="lead" key={data.page.xid + String(index) + "note"}>{item.text}</p>
+                        <p key={data.page.xid + String(index) + "note"}>{item.text}</p>
                     );
                 });
             }
 
-        }
-
-
-        if(props.page.info){
-            if(props.page.info.property){
-                props.page.info.property.map(function(item){
-                    switch(item.name){
-                        case "cutscene":
-                            // TODO: add a class that allows css to distinguish display types?
-                            data.videoType = "cutscene";
-                            break;
-                        case "fullcoach":
-                            data.videoType = "fullcoach";
-                            break;
-                        case "mediadisplayblurb":
-                            data.caption = (<p>{item.value}</p>);
-                            break;
-                        default:
-                            data.videoType = "";
-                    }
-                })
-            }
         }
 
         if (props.page.media) {
@@ -189,7 +191,8 @@ var InfoView = React.createClass({
         var pageNotes = state.note;
         var media = state.media;
         var mediaType = state.videoType;
-
+        var isFullCoach = state.fullCoach;
+        var content = "";
         var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
         if(state.page.note && state.page.note.length > 1){
             noteDisplay = <div className={mediaType + " infoNoteContainer"}>
@@ -200,6 +203,27 @@ var InfoView = React.createClass({
         var mediaContainer = "";
         if (media) {
             mediaContainer = <div className="infoMediaContainer">{media}</div>;
+        }
+
+        if (isFullCoach) {
+            content = (
+                <div className="row">
+                    <div className="col-sm-6 col-md-6">
+                        {mediaContainer}
+                    </div>
+                    <div className="col-sm-6 col-md-6">
+                        {noteDisplay}
+                    </div>
+                </div>
+            );
+
+        } else {
+            content = (
+                <div>
+                    {mediaContainer}
+                    {noteDisplay}
+                </div>
+            );
         }
 
         function createMarkup(n) {
@@ -216,17 +240,14 @@ var InfoView = React.createClass({
         }
         return (
             <div>
+                <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
                 <div className="infoContainer" key={"page-" + this.state.page.xid}>
                     <audio autoPlay id="audio" volume={this.state.volume}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="infoTitle">
-                        <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                    </div>
-                    <div className="infoDataContainer col-md-6 col-md-offset-3">
-                        {mediaContainer}
-                        {noteDisplay}
+                    <div className="infoDataContainer container-fluid">
+                        {content}
                     </div>
                 </div>
             </div>
