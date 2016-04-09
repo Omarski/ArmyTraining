@@ -59,8 +59,15 @@ function getPageState(props) {
 
                     var str = item.text;
                     if (hasBullet) {
-                        str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
-                        str = str.replace(new RegExp('- ', 'g'), '<br/><span class="info-view-bullet-item"></span>');
+                        //str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
+                        //str = str.replace(new RegExp('- ', 'g'), '<span class="info-view-bullet-item"></span>');
+                        var arr = str.split('- ');
+                        var len = arr.length;
+                        var result = "";
+                        for ( var i = 1; i < len; i++) {
+                            result += '<p><span class="info-view-bullet-item"></span>' + arr[i] + '</p>';
+                        }
+                        str = result;
                     }
 
                     if(item.media && item.media[0]){
@@ -110,10 +117,12 @@ function getPageState(props) {
                 }
 
                 if (item.type === "image") {
-                    result = <div key={index}>
-                        <img className={data.videoType} src={filePath}></img>
-                        {data.caption}
-                    </div>
+                    result = (<div className="image-caption-container" key={index}>
+                                <figure>
+                                    <img className={data.videoType} src={filePath}></img>
+                                    <figcaption>{data.caption}</figcaption>
+                                </figure>
+                            </div>);
                 }
 
 

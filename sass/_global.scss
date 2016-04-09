@@ -17,3 +17,22 @@
 .alert-failed {
   background-color: #eaeaea;
 }
+
+.image-caption-container {
+  position: relative;
+  display: inline-block;
+  figure {
+    margin:0;
+  }
+  figcaption {
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background-color:black;
+    font-size:15px;
+    color:white;
+    opacity:0.6;
+    filter:alpha(opacity=60);
+  }
+}
