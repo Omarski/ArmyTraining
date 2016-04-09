@@ -2,6 +2,7 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
+var ClosedCaption = require('../../widgets/ClosedCaption');
 
 
 function getPageState(props) {
@@ -17,6 +18,7 @@ function getPageState(props) {
         videoType: "",
         sources: [],
         caption: "",
+        transcript: "",
         fullCoach: false,
         volume: SettingsStore.voiceVolume()
     };
@@ -41,6 +43,12 @@ function getPageState(props) {
                             break;
                         case "mediadisplayblurb":
                             data.caption = (<p>{item.value}</p>);
+                            break;
+                        case "mediacaption":
+                            data.sources.push(item.value);
+                            break;
+                        case "videoTranscript":
+                            data.transcript = item.value;
                             break;
                         default:
                             data.videoType = "";
@@ -209,9 +217,22 @@ var InfoView = React.createClass({
             </div>;
         }
 
+        var cc = "";
+        if (state.transcript !== "") {
+            cc = (
+                <div>
+                    <ClosedCaption transcript={state.transcript}/>
+                </div>
+            );
+        }
+
         var mediaContainer = "";
         if (media) {
-            mediaContainer = <div className="infoMediaContainer">{media}</div>;
+            mediaContainer = (
+                <div className="infoMediaContainer">
+                    {media}
+                </div>
+                );
         }
 
         if (isFullCoach) {
@@ -235,22 +256,12 @@ var InfoView = React.createClass({
             );
         }
 
-        function createMarkup(n) {
-            var str = "";
-            if (n.length) {
-                for (var i = 0; i < n.length; i++) {
-                    str += n[i];
-                }
-            } else {
-                n = str;
-            }
 
-            return {__html: str};
-        }
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
                 <div className="infoContainer" key={"page-" + this.state.page.xid}>
+                    {cc}
                     <audio autoPlay id="audio" volume={this.state.volume}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
