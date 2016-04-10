@@ -131,25 +131,19 @@ var MatchItemView = React.createClass({
         var dropLocation = "";
         var dropLocationIndex = -1;
 
-        switch($(e.target).attr("class")){
-            case "match-item-answer-drop-area thumbnail":
-                //if(drop location isn't taken)
-                var spotTaken = false;
-                answerState.map(function(item){
-                    if(item.currentBoxIndex === Math.floor($(e.target).attr("data-index")) ){
-                        draggedItemLetter = "";
-                        spotTaken = true;
-                    }
-                });
-                if(!spotTaken){
-                    dropLocation = $(e.target).attr("data-letter");
-                    dropLocationIndex = Math.floor($(e.target).attr("data-index"));
+        if($(e.target).hasClass("match-item-answer-drop-area")){
+            //if(drop location isn't taken)
+            var spotTaken = false;
+            answerState.map(function(item){
+                if(item.currentBoxIndex === Math.floor($(e.target).attr("data-index")) ){
+                    draggedItemLetter = "";
+                    spotTaken = true;
                 }
-                break;
-            default:
-                //if($(e.target).parent().attr("class") == "match-item-answer-drop-area"){
-                //    dropLocation = $(e.target).parent().attr("data-letter");
-                //}
+            });
+            if(!spotTaken){
+                dropLocation = $(e.target).attr("data-letter");
+                dropLocationIndex = Math.floor($(e.target).attr("data-index"));
+            }
         }
 
         var itemFound = false;
@@ -259,14 +253,14 @@ var MatchItemView = React.createClass({
             }
 
             if(!isCorrect) {
-                button = <button className="btn-primary MI-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
+                button = <button className="btn btn-action MI-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
             }else{
 
             }
         }
 
         if(numMoved > 0 && numMoved < numQuestions){
-            button = <button className="btn-default MI-clear" onClick={self.reset}>Clear All</button>; // clear all button
+            button = <button className="btn btn-action MI-clear" onClick={self.reset}>Clear All</button>; // clear all button
         }
 
         // check the matchsource media type, if audio then do the generic play image, else load specific image
@@ -390,7 +384,7 @@ var MatchItemView = React.createClass({
                 <div className="content">
                     <div className="row match-item-answer-row">
                         <div className="col-md-2">
-                            <div className="match-item-answer-drop-area thumbnail"
+                            <div className="match-item-answer-drop-area dropped"
                                  data-letter={letter}
                                  data-index={index}
                                  onDragOver={self.onDraggingOver}
