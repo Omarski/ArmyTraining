@@ -429,8 +429,8 @@ var SortingView = React.createClass({
                             onDragStart={self.onDragging}
                             onClick={self.onClick}>
                             <span className="glyphicon glyphicon-play-circle"></span>
-                            <div className={feedbackB}></div>
                         </div>
+                        <div className={feedbackB}></div>
                     </li>;
                     break;
                 case "image":
@@ -449,8 +449,8 @@ var SortingView = React.createClass({
                             draggable="true"
                             onDragStart={self.onDragging}>
                             {itemB.passedData}
-                            <span className={feedbackB}></span>
                         </div>
+                        <span className={feedbackB}></span>
                     </li>;
                     break;
                 default:
@@ -480,8 +480,8 @@ var SortingView = React.createClass({
                             <ul className="sorting-choices-list">{choices}</ul>
                         </div>
                         <div className="row">
-                            <div className="col-md-6 sorting-columnA">
-                                <div className="panel panel-default">
+                            <div className="col-md-6 sorting-column sorting-columnA">
+                                <div className="panel panel-default sorting-panel">
                                     <div className="panel-heading sorting-panel-heading">{colATitle}</div>
                                     <div className="panel-body">
                                         <div className="sorting-columnA-dropArea sorting-drop-area"
@@ -492,8 +492,8 @@ var SortingView = React.createClass({
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-6 sorting-columnB">
-                                <div className="panel panel-default">
+                            <div className="col-md-6 sorting-column sorting-columnB">
+                                <div className="panel panel-default sorting-panel">
                                     <div className="panel-heading sorting-panel-heading">{colBTitle}</div>
                                     <div className="panel-body">
                                         <div className="sorting-columnB-dropArea sorting-drop-area"

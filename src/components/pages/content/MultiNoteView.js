@@ -58,7 +58,7 @@ var MultiNoteView = React.createClass({
     },
 
     componentWillMount: function() {
-        PageStore.addChangeListener(this._onChange);
+        //PageStore.addChangeListener(this._onChange);
     },
 
     handleClick: function(e){
@@ -96,7 +96,7 @@ var MultiNoteView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        PageStore.removeChangeListener(this._onChange);
+        //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
         var self = this;
@@ -159,7 +159,7 @@ var MultiNoteView = React.createClass({
             var image = (
                 <div className="image-caption-container" key={index}>
                     <figure>
-                        <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
+                        <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>
                         <figcaption>{caption}</figcaption>
                     </figure>
                 </div>
@@ -201,12 +201,12 @@ var MultiNoteView = React.createClass({
             );
             text = (
                 <div className="col-md-4">
-                    <div className="multi-note-text" key={xid + "activetext"}><p>{p.text}</p></div>
+                    <p className="multi-note-text" key={xid + "activetext"}>{p.text}</p>
                 </div>
             );
         } else if(p && p.text) {
             text = (
-                <div className="multi-note-text" key={xid + "activetext"}><p>{p.text}</p></div>
+                <p className="multi-note-text" key={xid + "activetext"}>{p.text}</p>
             );
         }
 
@@ -235,7 +235,7 @@ var MultiNoteView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        //this.setState(getPageState());
     }
 });
 

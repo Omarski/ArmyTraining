@@ -1,5 +1,6 @@
 .sorting-choices-list {
   list-style-type: none;
+  padding: 0;
   li {
     display: inline-block;
   }
@@ -9,8 +10,7 @@
   text-align: center;
   border: 1px solid #ddd;
   padding: 10px;
-  margin-left: 10px;
-  margin-top: 10px;
+  margin: 5px;
   border-radius: 4px;
   position: relative;
   div {
@@ -20,6 +20,8 @@
   .sorting-feedback {
     top: -10px;
     right: -10px;
+    position: absolute;
+    font-size: 24px;
     .sorting-correct {
       color: red;
     }
@@ -27,20 +29,16 @@
       color: green;
     }
   }
+}
 
+.sorting-column {
+  margin-bottom: 0;
 }
 
 .sorting-playicon{
   margin: 20px;
   font-size: 72px;
   position: relative;
-}
-
-.sorting-feedback {
-  position: absolute;
-  font-size: 24px;
-  left: 62px;
-  top: 0;
 }
 
 .sorting-incorrect {
@@ -52,7 +50,7 @@
 }
 
 .sorting-drop-area {
-  min-height: 200px;
+  min-height: 125px;
 }
 
 .sorting-actions {
@@ -63,6 +61,14 @@
   text-align: center;
 }
 
+.sorting-panel {
+  padding: 0;
+  margin-bottom: 10px;
+  .panel-body {
+    padding: 0;
+    margin: 0;
+  }
+}
 
 .sorting-panel-heading {
   text-align: center;
