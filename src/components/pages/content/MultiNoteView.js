@@ -67,8 +67,7 @@ var MultiNoteView = React.createClass({
         })
     },
 
-    componentDidMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+    updateMediaAndPlay: function() {
         //play audio recording for active info page
         var self = this;
         var related = self.state.related;
@@ -84,27 +83,16 @@ var MultiNoteView = React.createClass({
             });
         }
 
-
         // play all note media in order
         playMediaAudio(pageMediaArray);
     },
 
-    componentDidUpdate: function(){
-        //play audio recording for active info page
-        var self = this;
-        var related = self.state.related;
-        var activePageIndex = self.state.activePage;
-        var pageMediaArray = []; // make a pageMediaArray
-        related[activePageIndex].note.map(function(itemNote, indexNote){
-            // for each "note" json object the "related" json object has
-            if(itemNote.media){
-                // if that note has a "media" json object
-                pageMediaArray.push(itemNote.media[0].xid); // add it's xid to that page's pageMediaArray
-            }
-        });
+    componentDidMount: function() {
+        this.updateMediaAndPlay();
+    },
 
-        // play all note media in order
-        playMediaAudio(pageMediaArray);
+    componentDidUpdate: function(){
+        this.updateMediaAndPlay();
     },
 
     componentWillUnmount: function() {
@@ -148,7 +136,6 @@ var MultiNoteView = React.createClass({
             }
 
             var title = item.title;
-            var image = <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
             var caption = "";
             var sources = [];
             var info = item.info;
@@ -167,6 +154,17 @@ var MultiNoteView = React.createClass({
                     }
                 };
             }
+
+
+            var image = (
+                <div className="image-caption-container" key={index}>
+                    <figure>
+                        <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
+                        <figcaption>{caption}</figcaption>
+                    </figure>
+                </div>
+            );// <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
+
 
             return({
                 imageURL: imageURL,
@@ -192,22 +190,23 @@ var MultiNoteView = React.createClass({
 
         var noteImage = "";
         var text = "";
-        var activePage = self.state.activePage;
-        if (activePage && activePage.image) {
+
+        var p = pagesHTML[self.state.activePage];
+        var xid = self.state.xid;
+        if (p && p.image) {
             noteImage = (
                 <div className="col-md-8">
-                    <div className="multi-note-image" key={self.state.xid +"activeimage"}>{pagesHTML[activePage].image}</div>
-                    <div className="multi-note-caption" key={self.state.xid + "activecaption"}><h5>{pagesHTML[activePage].caption}</h5></div>
+                    <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
                 </div>
             );
             text = (
                 <div className="col-md-4">
-                    <div className="multi-note-text" key={self.state.xid + "activetext"}><p>{pagesHTML[activePage].text}</p></div>
+                    <div className="multi-note-text" key={xid + "activetext"}><p>{p.text}</p></div>
                 </div>
             );
-        } else if(activePage.text && activePage.text) {
+        } else if(p && p.text) {
             text = (
-                <div className="multi-note-text" key={self.state.xid + "activetext"}><p>{pagesHTML[activePage].text}</p></div>
+                <div className="multi-note-text" key={xid + "activetext"}><p>{p.text}</p></div>
             );
         }
 
