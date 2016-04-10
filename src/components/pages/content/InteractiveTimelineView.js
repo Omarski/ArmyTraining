@@ -116,27 +116,31 @@ var InteractiveTimelineView = React.createClass({
 
 
         return (
-            <div>
-                <div key={"page-" + this.state.page.xid}>
+            <div className="absolute-full">
+                <div className="absolute-full" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
-                        <div className="timeline-image-container thumbnail">
-                            {image}
-                            <div className="alert timeline-img-text">
-                                {description}
-                            </div>
-                        </div>
-                        <div className="timeline-container well">
-                            <div className="container">
-                                <div className="row timeline-date-row first">
-                                    {datesRow1}
-                                </div>
-                                <div className="row timeline-date-row last">
-                                    {datesRow2}
+                    <div className="absolute-full">
+
+                            <div className="timeline-image-container thumbnail">
+                                {image}
+                                <div className="alert timeline-img-text">
+                                    {description}
                                 </div>
                             </div>
 
-                        </div>
+
+                            <div className="timeline-container well">
+                                <div className="container">
+                                    <div className="row timeline-date-row first">
+                                        {datesRow1}
+                                    </div>
+                                    <div className="row timeline-date-row last">
+                                        {datesRow2}
+                                    </div>
+                                </div>
+
+                            </div>
+
                     </div>
                 </div>
             </div>

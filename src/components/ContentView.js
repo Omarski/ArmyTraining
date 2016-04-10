@@ -62,7 +62,7 @@ var ContentView = React.createClass({
 
         var page = <div></div>;
         var pageId = (this.state.page) ? this.state.page.xid : "";
-
+        var isFullScreen = false;
         if (this.state.page) {
             console.log(this.state.page.type);
             console.log(this.state.page.title);
@@ -150,6 +150,7 @@ var ContentView = React.createClass({
                     }
                     break;
                 case "InteractiveTimeline":
+                    isFullScreen = true;
                     page = <InteractiveTimelineView page={this.state.page} />;
                     break;
                 case "IntroductionPage":
@@ -175,9 +176,13 @@ var ContentView = React.createClass({
             }
         }
 
+        var cls = "";
+        if (isFullScreen) {
+            cls = "absolute-full";
+        }
         return (
-            <div className="container main-content">
-                <div key={"content-" + pageId}>
+            <div className={'container main-content ' + cls}>
+                <div className={cls} key={"content-" + pageId}>
                     {page}
                 </div>
             </div>
