@@ -5,12 +5,17 @@ input[type=checkbox] {
 }
 
 .multiple-choice-choices-container {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .multiple-choice-alert {
   background-color: #f7f7f9;
   border-color: #e1e1e8;
+  padding: 5px;
+  margin-right: 10px;
+  &.alert-dismissible .close {
+    right: 5px;
+  }
 }
 
 .multiple-choice-feedback-icon {
@@ -27,4 +32,20 @@ input[type=checkbox] {
     height: 120px;
     margin: 0;
   }
+}
+
+.multiple-choice-list-group-item, .multiple-choice-checkbox {
+  margin-top: -1px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.multiple-choice-incorrect {
+  color: red;
+}
+
+.multiple-choice-correct {
+  color: green;
 }

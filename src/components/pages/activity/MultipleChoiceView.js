@@ -263,8 +263,8 @@ var MultipleChoiceView = React.createClass({
         var _this = this;
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
-            return (<li key={page.xid + String(index)} className="list-group-item" >
-                        <div className="checkbox">
+            return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
+                        <div className="checkbox multiple-choice-checkbox">
                             <label>
                                 <input type="checkbox" className="multiple-choice-checkbox" value={ans} onClick={_this.answerChange.bind(_this, ans)}>{ans}</input>
                             </label>
