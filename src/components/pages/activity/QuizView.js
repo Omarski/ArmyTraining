@@ -33,8 +33,7 @@ var QuizView = React.createClass({
     },
 
     componentWillMount: function() {
-        PageStore.addChangeListener(this._onChange);
-        SettingsStore.addChangeListener(this._onChange);
+
     },
 
     componentDidMount: function() {
@@ -51,8 +50,7 @@ var QuizView = React.createClass({
     },
 
     componentWillUnmount: function() {
-        PageStore.removeChangeListener(this._onChange);
-        SettingsStore.removeChangeListener(this._onChange);
+
     },
     render: function() {
         var self = this;
@@ -63,7 +61,8 @@ var QuizView = React.createClass({
 
         return (
             <div>
-                <h2>Quiz</h2>
+                <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
+
             </div>
         );
     },
