@@ -109,7 +109,7 @@ var MultiNoteView = React.createClass({
             var text = ""; //item.note[0].text; // needs to be changed to all notes
             if (item.note) {
                 var notes = item.note;
-                if(notes && notes.length > 1){
+                if(notes && notes.length){
                     text = notes.map(function(item, index) {
                         var hasBullet = (item.text.indexOf('-') === 0);
 
@@ -127,12 +127,7 @@ var MultiNoteView = React.createClass({
                                     <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
                         </li>);
                     });
-                }else{
-
-                     text = <p key={page.xid + String(index) + "note"}>{item.text}</p>;
-
                 }
-
             }
 
             var title = item.title;
@@ -189,7 +184,8 @@ var MultiNoteView = React.createClass({
         //mouse work for mouseover'ed selections
 
         var noteImage = "";
-        var text = "";
+        var text = (<div className="col-md-4" key={xid + "activetext"}></div>);
+
 
         var p = pagesHTML[self.state.activePage];
         var xid = self.state.xid;
@@ -199,9 +195,11 @@ var MultiNoteView = React.createClass({
                     <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
                 </div>
             );
+            console.log(p.text)
+
             text = (
-                <div className="col-md-4">
-                    <p className="multi-note-text" key={xid + "activetext"}>{p.text}</p>
+                <div className="col-md-4" key={xid + "activetext"}>
+                    <p className="multi-note-text">{p.text}</p>
                 </div>
             );
         } else if(p && p.text) {
