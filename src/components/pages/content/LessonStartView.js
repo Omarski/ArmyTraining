@@ -57,11 +57,14 @@ var LessonStartView = React.createClass({
         var title = state.title;
         var pageType = state.pageType;
 
+        // please update
         //TODO: get default lesson landing page background, display time estimate, name of book/lesson
 
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
+                <h2>{PageStore.chapter().title + ": " + PageStore.page().title + ".\n"}</h2>
+                <h3>Estimated Time: 15 minutes.</h3>
             </div>
         );
     },

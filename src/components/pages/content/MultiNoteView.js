@@ -109,7 +109,7 @@ var MultiNoteView = React.createClass({
             var text = ""; //item.note[0].text; // needs to be changed to all notes
             if (item.note) {
                 var notes = item.note;
-                if(notes && notes.length > 1){
+                if(notes && notes.length){
                     text = notes.map(function(item, index) {
                         var hasBullet = (item.text.indexOf('-') === 0);
 
@@ -127,10 +127,6 @@ var MultiNoteView = React.createClass({
                                     <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
                         </li>);
                     });
-                }else{
-
-                     text = <p key={page.xid + String(index) + "note"}>{item.text}</p>;
-
                 }
 
             }
@@ -145,10 +141,10 @@ var MultiNoteView = React.createClass({
                 while (len--) {
                     var property = properties[len];
                     switch (property.name) {
-                        case "mediadisplayblurb" :
+                        case "mediacaption" :
                             sources.push(property.value);
                             break;
-                        case "mediacaption" :
+                        case "mediadisplayblurb" :
                             caption = property.value;
                             break;
                     }
