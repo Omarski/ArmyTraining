@@ -1,5 +1,5 @@
 /**
- * Created by Alec on 4/7/2016.
+ * Created by Alec on 4/11/2016.
  */
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
@@ -26,7 +26,7 @@ function getPageState(props) {
     return data;
 }
 
-var LessonStartView = React.createClass({
+var QuizView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
         return pageState;
@@ -37,6 +37,7 @@ var LessonStartView = React.createClass({
     },
 
     componentDidMount: function() {
+        //PageStore.addChangeListener(this._onChange);
         $('[data-toggle="tooltip"]').tooltip();
     },
 
@@ -57,11 +58,11 @@ var LessonStartView = React.createClass({
         var title = state.title;
         var pageType = state.pageType;
 
-        //TODO: get default lesson landing page background, display time estimate, name of book/lesson
 
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
+
             </div>
         );
     },
@@ -76,4 +77,4 @@ var LessonStartView = React.createClass({
     }
 });
 
-module.exports = LessonStartView;
+module.exports = QuizView;

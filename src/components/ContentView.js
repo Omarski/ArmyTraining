@@ -18,6 +18,7 @@ var MatchItemView = require('../components/pages/activity/MatchItemView');
 var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
 var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceView');
 var OrderingView = require('../components/pages/activity/OrderingView');
+var QuizView = require('../components/pages/activity/QuizView');
 var PronunciationView = require('../components/pages/activity/PronunciationView');
 var ResponseFormationView = require('../components/pages/activity/ResponseFormationView');
 var SortingView = require('../components/pages/activity/SortingView');
@@ -148,6 +149,10 @@ var ContentView = React.createClass({
                     if (!foundType) {
                         page = <InfoView page={this.state.page} />;
                     }
+                    break;
+                case "quiz_page":
+                case "Quiz":
+                    page = <QuizView page={this.state.page} />;
                     break;
                 case "InteractiveTimeline":
                     isFullScreen = true;
