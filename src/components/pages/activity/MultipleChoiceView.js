@@ -17,7 +17,8 @@ function getPageState(props) {
         haveAnswered: false,
         answerFeedback: "",
         correctAnswer: "",
-        isQuestionaire: false
+        isQuestionaire: false,
+        bShuffle: true,
     };
 
     if (props && props.page) {
@@ -34,6 +35,12 @@ function getPageState(props) {
                 var property = properties[len];
                 if (property.name === "questionnaire") {
                     data.isQuestionaire = true;
+                    data.bShuffle = false;
+                    break;
+                }
+
+                if (property.name === "noshuffle") {
+                    data.bShuffle = false;
                     break;
                 }
             }
@@ -47,8 +54,10 @@ function getPageState(props) {
     }
 
 
+    if (data.bShuffle) {
+        data.answers = AGeneric().shuffle(data.answers);
+    }
 
-    data.answers = AGeneric().shuffle(data.answers);
     data.answers.map(function(item){
         if(item.correct == true){
             data.correctAnswer = item.nut.uttering.utterance.translation.text;
