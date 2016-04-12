@@ -370,7 +370,7 @@ var MatchItemView = React.createClass({
                                 <div
                                     draggable="true"
                                     onDragStart={self.onDragging}>
-                                    <img className="match-item-image" src={"data/media/"+source}></img>
+                                    <img draggable="false" className="match-item-image" src={"data/media/"+source}></img>
                                     <div className={feedback}></div>
                                 </div>
                             </li>;
