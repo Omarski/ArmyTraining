@@ -31,28 +31,36 @@ function getPageState(props) {
             var mediaType = "audio";
             var letter = item.letter;
             var displayField = "";
-            var uttering = item.nut.uttering;
-            var utterance = uttering.utterance;
+            var uttering = "";
+            var utterance = "";
             var passedData = "";
 
-            if(uttering.media){
-                mediaType = uttering.media[0].type;
-                passedData = uttering.media[0].zid;
-            }else{
-                mediaType = "string";
-                if(utterance.ezread.text != ""){
-                    displayField = "ezread";
-                    passedData = utterance.ezread.text;
-                }else if(utterance.translation.text != ""){
-                    displayField = "translation";
-                    passedData = utterance.translation.text;
-                }else if(utterance.native.text != ""){
-                    displayField = "native";
-                    passedData = utterance.native.text;
+            if(item.nut){
+                uttering = item.nut.uttering;
+                utterance = uttering.utterance;
+
+                if(uttering.media){
+                    mediaType = uttering.media[0].type;
+                    passedData = uttering.media[0].zid;
                 }else{
-                    displayField = "phonetic";
-                    passedData = utterance.phonetic.text;
+                    mediaType = "string";
+                    if(utterance.ezread.text != ""){
+                        displayField = "ezread";
+                        passedData = utterance.ezread.text;
+                    }else if(utterance.translation.text != ""){
+                        displayField = "translation";
+                        passedData = utterance.translation.text;
+                    }else if(utterance.native.text != ""){
+                        displayField = "native";
+                        passedData = utterance.native.text;
+                    }else{
+                        displayField = "phonetic";
+                        passedData = utterance.phonetic.text;
+                    }
                 }
+            }else if (item.media){
+                mediaType = item.media.type;
+                passedData = item.media.xid;
             }
 
             data.answerState.push({letter: letter, isMoved: false, currentBox: "", mediaType: mediaType, displayField: displayField, passedData: passedData});
@@ -160,7 +168,6 @@ var SortingView = React.createClass({
                 });
             }
         }
-        console.dir(answerState);
         self.setState({
             answerState: answerState,
             numMoved: numMoved
@@ -294,11 +301,13 @@ var SortingView = React.createClass({
                     break;
                 case "image":
                     var source = item.passedData;
+                    var letter = item.letter;
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
                             draggable="true"
+                            data={letter}
                             onDragStart={self.onDragging}>
-                            <img src={"data/media/"+source}></img>
+                            <img draggable="false" src={"data/media/"+source}></img>
                         </div>
                     </li>;
                     break;
@@ -359,8 +368,6 @@ var SortingView = React.createClass({
                 }
             }
 
-            console.log(itemA);
-
             switch(itemA.mediaType){
                 case "audio":
                     var answerLetter = itemA.letter;
@@ -379,11 +386,12 @@ var SortingView = React.createClass({
                     break;
                 case "image":
                     var source = itemA.passedData;
-                    draggable = <li key={page.xid + "choice-"+index}>
+                    answerRender = <li key={page.xid + "choice-"+index}>
                         <div
                             draggable="true"
                             onDragStart={self.onDragging}>
                             <img src={"data/media/"+source}></img>
+                            <div draggable="false" className={feedbackA}></div>
                         </div>
                     </li>;
                     break;
@@ -435,11 +443,12 @@ var SortingView = React.createClass({
                     break;
                 case "image":
                     var source = itemB.passedData;
-                    draggable = <li key={page.xid + "choice-"+index}>
+                    answerRender = <li key={page.xid + "choice-"+index}>
                         <div
                             draggable="true"
                             onDragStart={self.onDragging}>
-                            <img src={"data/media/"+source}></img>
+                            <img draggable="false" src={"data/media/"+source}></img>
+                            <div className={feedbackB}></div>
                         </div>
                     </li>;
                     break;
