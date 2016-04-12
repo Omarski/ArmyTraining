@@ -227,9 +227,9 @@ var FooterView = React.createClass({
                         </div>
                         <div className={this.state.expanded ? "main-footer-tab-container-expanded" : "main-footer-tab-container"}>
                             <ul className="nav nav-tabs nav-justified main-footer-tab" role="tablist">
-                                <li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">Home</a></li>
+                                {/*    <li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">Home</a></li>
                                 <li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">Profile</a></li>
-                            </ul>
+                           */} </ul>
                             <div className="tab-content main-footer-tab-content">
                                 <div role="tabpanel" className="tab-pane active main-footer-tab-pane" id="mainFooterLessonsTab">
                                     {items}
