@@ -257,9 +257,11 @@ var MultipleChoiceView = React.createClass({
         var coachVideo = document.getElementById("coachVideo");
 
         // load and play it
-        if (coachVideo != null)
+        if (coachVideo != null) {
             coachVideo.load();
             coachVideo.play();
+        }
+
         // TODO end hack------------------------------------------------------------------------------------------------
     },
 
