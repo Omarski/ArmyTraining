@@ -128,7 +128,6 @@ var MultiNoteView = React.createClass({
                         </li>);
                     });
                 }
-
             }
 
             var title = item.title;
@@ -185,7 +184,8 @@ var MultiNoteView = React.createClass({
         //mouse work for mouseover'ed selections
 
         var noteImage = "";
-        var text = "";
+        var text = (<div className="col-md-4" key={xid + "activetext"}></div>);
+
 
         var p = pagesHTML[self.state.activePage];
         var xid = self.state.xid;
@@ -195,9 +195,11 @@ var MultiNoteView = React.createClass({
                     <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
                 </div>
             );
+            console.log(p.text)
+
             text = (
-                <div className="col-md-4">
-                    <p className="multi-note-text" key={xid + "activetext"}>{p.text}</p>
+                <div className="col-md-4" key={xid + "activetext"}>
+                    <p className="multi-note-text">{p.text}</p>
                 </div>
             );
         } else if(p && p.text) {
