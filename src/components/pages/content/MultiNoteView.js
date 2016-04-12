@@ -124,7 +124,7 @@ var MultiNoteView = React.createClass({
                         }
 
                         return (<li key={page.xid + String(index) + "li"}>
-                                    <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
+                                    <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()} className="multi-note-text"></p>
                         </li>);
                     });
                 }
@@ -195,16 +195,17 @@ var MultiNoteView = React.createClass({
                     <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
                 </div>
             );
-            console.log(p.text)
 
             text = (
                 <div className="col-md-4" key={xid + "activetext"}>
-                    <p className="multi-note-text">{p.text}</p>
+                    {p.text}
                 </div>
             );
         } else if(p && p.text) {
             text = (
-                <p className="multi-note-text" key={xid + "activetext"}>{p.text}</p>
+                <div className="multi-note-text" key={xid + "activetext"}>
+                    {p.text}
+                </div>
             );
         }
 
