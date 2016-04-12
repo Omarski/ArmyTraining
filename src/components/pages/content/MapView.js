@@ -173,7 +173,7 @@ function getPins(nodeList, hasMoved, self){
             };
         }
         return (
-            <ReactBootstrap.OverlayTrigger key={self.state.page.xid + "BBOT"+i} id="RBOT" trigger="click" placement="top" overlay={<ReactBootstrap.Popover key={self.state.page.xid + "Popover"+i} id="Popover" title="">{nodeList[i].mouseover}</ReactBootstrap.Popover>}>
+            <ReactBootstrap.OverlayTrigger key={self.state.page.xid + "BBOT"+i} id="RBOT" trigger="click" rootClose={true} placement="top" overlay={<ReactBootstrap.Popover key={self.state.page.xid + "Popover"+i} id="Popover" title="">{nodeList[i].mouseover}</ReactBootstrap.Popover>}>
                 <img key={self.state.page.xid + i}
                      style={pinstyle}
                      className="interactiveMapPin"

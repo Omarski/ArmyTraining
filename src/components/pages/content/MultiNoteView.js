@@ -140,10 +140,10 @@ var MultiNoteView = React.createClass({
                 while (len--) {
                     var property = properties[len];
                     switch (property.name) {
-                        case "mediadisplayblurb" :
+                        case "mediacaption" :
                             sources.push(property.value);
                             break;
-                        case "mediacaption" :
+                        case "mediadisplayblurb" :
                             caption = property.value;
                             break;
                     }
