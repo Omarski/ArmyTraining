@@ -168,7 +168,6 @@ var SortingView = React.createClass({
                 });
             }
         }
-        console.dir(answerState);
         self.setState({
             answerState: answerState,
             numMoved: numMoved
@@ -368,8 +367,6 @@ var SortingView = React.createClass({
                     feedbackA = incorrect;
                 }
             }
-
-            console.log(itemA);
 
             switch(itemA.mediaType){
                 case "audio":

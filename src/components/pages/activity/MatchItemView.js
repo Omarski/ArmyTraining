@@ -349,7 +349,6 @@ var MatchItemView = React.createClass({
                             feedback = incorrect;
                         }
                     }
-                    console.log("mediaType: " + state.answerState[i].mediaType);
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
                     switch (state.answerState[i].mediaType) {
                         case "audio":
