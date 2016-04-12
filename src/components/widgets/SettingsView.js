@@ -15,6 +15,7 @@ var SettingsActions = require('../../actions/SettingsActions');
 
 function getSettingsState() {
     var settings = store.get('settings') || {};
+
     return {
         autoPlaySound: settings.autoPlaySound,
         backgroundVolume: settings.backgroundVolume || 1.0,
@@ -79,9 +80,9 @@ var SettingsView = React.createClass({
                                 <ListGroupItem>
                                     <h5>Voice Volume</h5>
                                     <Slider
-                                        min={0}
+                                        min={0.0}
                                         max={this.state.max}
-                                        step={.1}
+                                        step={0.1}
                                         value={this.state.voiceVolume}
                                         toolTip={false}
                                         onSlide={this.voiceVolumeChange} />
@@ -89,9 +90,9 @@ var SettingsView = React.createClass({
                                 <ListGroupItem>
                                     <h5>Background Sound Volume</h5>
                                     <Slider
-                                        min={0}
+                                        min={0.0}
                                         max={this.state.max}
-                                        step={.1}
+                                        step={0.1}
                                         value={this.state.backgroundVolume}
                                         toolTip={false}
                                         onSlide={this.backgroundVolumeChange} />

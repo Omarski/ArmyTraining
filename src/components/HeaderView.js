@@ -26,8 +26,14 @@ function getBookState() {
 
 var HeaderView = React.createClass({
     toggleMute: function() {
+        var settings = store.get('settings') || {};
+        var vol = 1.0;
+        if(settings.voiceVolume){
+            vol = settings.voiceVolume;
+        }
+
         if(this.state.muted) {
-            $('audio,video').prop("volume", 1.0);
+            $('audio,video').prop("volume", vol);
         } else {
             $('audio,video').prop("volume", 0.0);
         }

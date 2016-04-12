@@ -13,6 +13,7 @@ function getPageState(props) {
         pageType: "",
         page: "",
         sources: [],
+        image: "",
         volume: SettingsStore.voiceVolume()
     };
 
@@ -20,6 +21,10 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
+
+        if(props.page.media){
+            data.image = props.page.media[0].xid;
+        }
 
     }
 
@@ -56,15 +61,19 @@ var LessonStartView = React.createClass({
         var state = self.state;
         var title = state.title;
         var pageType = state.pageType;
+        var imageXid = state.image;
+        var imageHtml = "";
 
-        // please update
-        //TODO: get default lesson landing page background, display time estimate, name of book/lesson
+        if(imageXid !== ""){
+            imageHtml = <img src={"data/media/"+imageXid}></img>;
+        }
+
 
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                <h2>{PageStore.chapter().title + ": " + PageStore.page().title + ".\n"}</h2>
-                <h3>Estimated Time: 15 minutes.</h3>
+                <h3>This Lesson Will take approximately 25 minutes to complete</h3>
+                {imageHtml}
             </div>
         );
     },
