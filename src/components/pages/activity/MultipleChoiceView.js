@@ -203,6 +203,43 @@ var MultipleChoiceView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+
+        // TODO remove me after alpha-----------------------------------------------------------------------------------
+        // iterate over answer objects
+        var recommendedMap = {};
+        for (var answerIndex in this.state.answers) {
+
+            var answerObj = this.state.answers[answerIndex];
+
+            if (answerObj && answerObj.nut && answerObj.nut.uttering && answerObj.nut.uttering.info && answerObj.nut.uttering.info.property) {
+
+                // iterate over each property object
+                for (var propertyIndex in answerObj.nut.uttering.info.property) {
+
+                    var propertyObject = answerObj.nut.uttering.info.property[propertyIndex];
+
+                    // if recommended found put into map
+                    if (propertyObject.name && propertyObject.name == "recommended") {
+
+                        if (answerObj.nut.uttering.utterance && answerObj.nut.uttering.utterance.translation) {
+                            recommendedMap[answerObj.nut.uttering.utterance.translation.text] = 1;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        // iterate over each item and check if recommended
+        $(".multiple-choice-checkbox").each(function () {
+            // check if text is in the recommended if so mark it checked
+            if (this.value in recommendedMap) {
+                this.checked = true;
+            }
+        });
+        // TODO end of remove me----------------------------------------------------------------------------------------
+
+
     },
 
     componentDidUpdate: function(){
