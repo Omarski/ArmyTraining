@@ -143,7 +143,7 @@ function getPageState(props) {
     var data = {
         page: "",
         sources: [],
-        notes: "",
+        notes: [],
         recordingState: [],
         playableState: [],
         isPlaying: [],
@@ -153,6 +153,7 @@ function getPageState(props) {
         recordedSpeech: "",
         clickedAnswer: 0,
         title: "",
+        displayTracker: [],
         pageType: ""
     };
 
@@ -165,18 +166,20 @@ function getPageState(props) {
     }
 
     var counter = 0;
-    data.notes = data.page.nut.map(function(item, index){
+    data.page.nut.map(function(item, index){
         if(item.uttering){
             data.recordingState.push(false);
             data.playableState.push(false);
             data.isPlaying.push(false);
             data.isCorrect.push(null);
             data.utterings.push(item);
-            counter++;
+            data.displayTracker.push("question");
         }
         if(item.note){
-            return(<p key={data.page.xid + "note" + index} >{item.note.text}</p>);
-            //data.notes[counter] = item.note.text;
+            //return(<p key={data.page.xid + "note" + index} >{item.note.text}</p>);
+            data.notes[counter] = item.note.text;
+            data.displayTracker.push("note");
+            counter++;
             //possible error if 2 notes in a row
         }
     });
@@ -239,32 +242,38 @@ var PronunciationView = React.createClass({
 
     render: function() {
         var self = this;
-        var page = self.state.page;
-        var title = self.state.title;
-        var sources = self.state.sources;
-        var questions = self.state.utterings || [];
+        var state = self.state;
+        var page = state.page;
+        var title = state.title;
+        var sources = state.sources;
+        var questions = state.utterings || [];
         var nativeText = "";
         var translatedText = "";
         var ezreadText = "";
-        var note = self.state.notes || "";
+        var note = "";
         var feedbackClass = "glyphicon li-glyphicon li-feedback";
         var recordedClass = "glyphicon li-glyphicon li-playback";
         var recordingClass = "glyphicon li-glyphicon li-record";
+        var displayTracker = state.displayTracker;
+        var questionCounter = 0;
+        var noteCounter = 0;
+
 
         // need to check for notes and send those  to top of page
-        var vaList = questions.map(function(item, index){
-            if(item && item.uttering && item.uttering.utterance) {
-                //note = self.state.notes[index] || "";
-                nativeText = item.uttering.utterance.native.text || "";
-                translatedText = item.uttering.utterance.translation.text || "";
-                ezreadText = item.uttering.utterance.ezread.text || "";
-                var id = "audio" + index;
+        var vaList = displayTracker.map(function(item, index){
+            if(item === "question"){
+                var qcIndex = questionCounter;
+                questionCounter++;
+                nativeText = questions[qcIndex].uttering.utterance.native.text || "";
+                translatedText = questions[qcIndex].uttering.utterance.translation.text || "";
+                ezreadText = questions[qcIndex].uttering.utterance.ezread.text || "";
+
+                var id = "audio" + qcIndex;
                 var itemFeedbackClass = "";
                 var itemRecordedClass = "";
                 var itemRecordingClass = "";
 
-
-                var isCorrect = self.state.isCorrect[index];
+                var isCorrect = self.state.isCorrect[qcIndex];
                 if(isCorrect != null){
                     if (isCorrect) {
                         itemFeedbackClass = feedbackClass + " li-correct " + LI_GLYPHICON_CORRECT_CLS;
@@ -275,9 +284,9 @@ var PronunciationView = React.createClass({
                     itemFeedbackClass = feedbackClass;
                 }
 
-                var hasRecorded = self.state.playableState[index];
+                var hasRecorded = self.state.playableState[qcIndex];
                 if (hasRecorded) {
-                    if (self.state.isPlaying[index]) {
+                    if (self.state.isPlaying[qcIndex]) {
                         itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
                     } else {
                         itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
@@ -285,10 +294,9 @@ var PronunciationView = React.createClass({
                 } else {
                     itemRecordedClass = recordedClass;
                 }
-
                 //if(self.state.message != "No data found.") {
                 if(self.state.message != "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.") {
-                    var isRecording = self.state.recordingState[index];
+                    var isRecording = self.state.recordingState[qcIndex];
                     if (isRecording) {
                         itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
                     } else {
@@ -297,17 +305,17 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <div className="row pronunciation-item-row" key={page.xid + String(index)}>
+                    <div className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
                         <div className="col-sm-1 col-md-2">
                             <audio id={id}></audio>
                             <div className="pronunciation-audio-button">
-                                <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
-                                <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
+                                <span className={itemRecordingClass} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                                <span className={itemRecordedClass} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
                             </div>
                         </div>
                         <div className="col-sm-11 col-md-10">
                             <div className="pronunciation-text-container">
-                                <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
+                                <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, qcIndex, self)}}>
                                     <div className="li-native-text">
                                         <ColorText props={nativeText}/>
                                     </div>
@@ -323,7 +331,16 @@ var PronunciationView = React.createClass({
                         </div>
                     </div>
                 );
+
+            }else if(item === "note"){
+                note = self.state.notes[noteCounter] || "";
+                noteCounter++;
+                return(<p key={page.xid + "note" + String(noteCounter-1)} >{note}</p>);
+            }else{
+                return("");
             }
+
+
         });
 
         return (
@@ -332,7 +349,6 @@ var PronunciationView = React.createClass({
                     <audio id="li-demo-audio"></audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <div className="container-fluid li-container">
-                        <h4 className="li-note-text">{note}</h4>
                         {vaList}
                     </div>
                 </div>
