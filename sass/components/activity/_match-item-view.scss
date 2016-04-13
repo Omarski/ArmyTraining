@@ -93,3 +93,28 @@
   margin-top: 20px;
   text-align: center;
 }
+
+.match-item-feedback-audio {
+
+}
+
+.match-item-answer-image {
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  img {
+    margin: 0;
+  }
+}
+
+.match-item-feedback-image {
+  position: absolute;
+  font-size: 22px;
+  top: 2px;
+  right: 2px;
+  color: green;
+}
+
+.match-item-feedback-text {
+
+}

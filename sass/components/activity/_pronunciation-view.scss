@@ -1,92 +1,26 @@
-.li-items-list {
-  li {
-    background: #f9f9f9;
-    border-top: 1px solid #ddd
-  }
-  li:nth-child(odd) { background: #fff; }
-  li:last-child {
-    border-bottom: 1px solid #ddd
-  }
+
+.pronunciation-item-row {
+  background: #f9f9f9;
+  border-top: 1px solid #ddd
 }
 
-.li-container{
-  height: 100%;
-  width: 100%;
+.pronunciation-item-row:nth-child(odd) {
+  background: #fff;
+}
+
+.pronunciation-item-row:last-child {
+  border-bottom: 1px solid #ddd
+}
+
+
+.pronunciation-text-container {
   text-align: center;
+  vertical-align: middle;
 }
 
-.li-text-container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.li-title{
-  text-align: left;
-}
-
-.li-note{
-  text-align: left;
-}
-
-.li-answers-container{
-  margin-left: 50px;
-  margin-right: 50px;
-  position: absolute;
-}
-
-.li-text-area{
-  font-family: "Myriad Pro", Times, serif;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.li-vocal-answer{
-  min-height: 120px;
-  position: relative;
-  padding-left: 100px;
-  padding-right: 100px;
-  cursor: default;
-}
-
-.li-glyphicon{
+.pronunciation-audio-button {
+  text-align: center;
+  vertical-align: middle;
   font-size: 36px;
-  pointer-events: all;
-  margin: 9px;
-  position: absolute;
-  top: calc(50% - 23px);
-}
-
-.li-audio-buttons{
-  height: 120px;
-  position: absolute;
-  width: 100px;
-  left: 10px;
-}
-
-.li-record{
-  cursor: pointer;
-  left: 0px;
-}
-
-.li-stop{
-  cursor: pointer;
-}
-
-.li-playback{
-  cursor: pointer;
-  left: 44px;
-}
-
-.li-correct{
-  color: green;
-}
-
-.li-incorrect{
-  color: red;
-}
-
-.li-feedback{
-  position: absolute;
-  top: 30px;
-  right: 10px;
+  margin-top: 13px;
 }

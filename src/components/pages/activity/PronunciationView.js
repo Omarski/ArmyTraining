@@ -7,16 +7,13 @@ var ConfigStore = require('../../../stores/ConfigStore');
 var PageHeader = require('../../widgets/PageHeader');
 
 // CONSTANTS
-var LI_ANSWERS_CONTAINER_CLS = "li-answers-container";
-var LI_COLUMN_CLS = "li-column";
-var LI_VOICE_ANSWERS_CLS = "li-voice-answers";
-var LI_VOCAL_ANSWER_CLS = "li-vocal-answer";
+
 var LI_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var LI_GLYPHICON_STOP_CLS = "glyphicon-stop";
 var LI_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
 var LI_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var LI_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
-var LI_GLYPHICON_CLS = "li-glyphicon";
+
 
 var recorder;
 
@@ -300,14 +297,16 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <li>
-                        <div className="li-vocal-answer" key={page.xid + String(index)}>
+                    <div className="row pronunciation-item-row" key={page.xid + String(index)}>
+                        <div className="col-sm-1 col-md-2">
                             <audio id={id}></audio>
-                            <div className="li-audio-buttons">
+                            <div className="pronunciation-audio-button">
                                 <span className={itemRecordingClass} onClick={function(){handleRecord(id, index, self)}}></span>
                                 <span className={itemRecordedClass} onClick={function(){handlePlaying(id, index, self)}}></span>
                             </div>
-                            <div className="li-text-container">
+                        </div>
+                        <div className="col-sm-11 col-md-10">
+                            <div className="pronunciation-text-container">
                                 <h4 className="li-note-text">{note}</h4>
                                 <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, index, self)}}>
                                     <div className="li-native-text">
@@ -323,7 +322,7 @@ var PronunciationView = React.createClass({
                             </div>
                             <span className={itemFeedbackClass}></span>
                         </div>
-                    </li>
+                    </div>
                 );
             }
         });
@@ -331,21 +330,10 @@ var PronunciationView = React.createClass({
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
+                    <audio id="li-demo-audio"></audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
-                    <div className="li-container">
-
-                        <div className="row">
-                            <div className="li-answers-container">
-                                <audio id="li-demo-audio"></audio>
-                                <div className="li-column">
-                                    <div className="li-voice-answers">
-                                        <ul className="li-items-list">
-                                        {vaList}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="container-fluid li-container">
+                        {vaList}
                     </div>
                 </div>
             </div>
