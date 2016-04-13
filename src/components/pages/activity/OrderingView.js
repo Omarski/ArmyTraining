@@ -80,6 +80,7 @@ function playAudio(zid){
     if(audio.paused){
         audio.load();
         audio.play();
+        audio.volume = SettingsStore.voiceVolume();
     }else{
         audio.pause();
     }

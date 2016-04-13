@@ -116,7 +116,7 @@ function getPageState(props) {
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
                         result = <div className={data.videoType} key={index}>
-                            <video controls autoPlay>
+                            <video controls autoPlay volume={SettingsStore.voiceVolume()}>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                             {data.caption}
@@ -165,6 +165,7 @@ function playAudio(xid){
     source.src = "data/media/" + xid;
     audio.load();
     audio.play();
+    audio.volume = SettingsStore.voiceVolume();
 }
 
 var InfoView = React.createClass({

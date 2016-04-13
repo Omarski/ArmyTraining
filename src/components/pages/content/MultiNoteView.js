@@ -49,6 +49,7 @@ function playAudio(xid){
     source.src = "data/media/" + xid;
     audio.load();
     audio.play();
+    audio.volume = SettingsStore.voiceVolume();
 }
 
 var MultiNoteView = React.createClass({
@@ -208,7 +209,8 @@ var MultiNoteView = React.createClass({
                 </div>
             );
         }
-
+        console.log(this.state.volume);
+        console.log(SettingsStore.voiceVolume());
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
