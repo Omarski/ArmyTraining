@@ -17,7 +17,8 @@ function getPageState(props) {
         haveAnswered: false,
         answerFeedback: "",
         correctAnswer: "",
-        isQuestionaire: false
+        isQuestionaire: false,
+        bShuffle: true,
     };
 
     if (props && props.page) {
@@ -34,6 +35,12 @@ function getPageState(props) {
                 var property = properties[len];
                 if (property.name === "questionnaire") {
                     data.isQuestionaire = true;
+                    data.bShuffle = false;
+                    break;
+                }
+
+                if (property.name === "noshuffle") {
+                    data.bShuffle = false;
                     break;
                 }
             }
@@ -47,8 +54,10 @@ function getPageState(props) {
     }
 
 
+    if (data.bShuffle) {
+        data.answers = AGeneric().shuffle(data.answers);
+    }
 
-    data.answers = AGeneric().shuffle(data.answers);
     data.answers.map(function(item){
         if(item.correct == true){
             data.correctAnswer = item.nut.uttering.utterance.translation.text;
@@ -203,6 +212,43 @@ var MultipleChoiceView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+
+        // TODO remove me after alpha-----------------------------------------------------------------------------------
+        // iterate over answer objects
+        var recommendedMap = {};
+        for (var answerIndex in this.state.answers) {
+
+            var answerObj = this.state.answers[answerIndex];
+
+            if (answerObj && answerObj.nut && answerObj.nut.uttering && answerObj.nut.uttering.info && answerObj.nut.uttering.info.property) {
+
+                // iterate over each property object
+                for (var propertyIndex in answerObj.nut.uttering.info.property) {
+
+                    var propertyObject = answerObj.nut.uttering.info.property[propertyIndex];
+
+                    // if recommended found put into map
+                    if (propertyObject.name && propertyObject.name == "recommended") {
+
+                        if (answerObj.nut.uttering.utterance && answerObj.nut.uttering.utterance.translation) {
+                            recommendedMap[answerObj.nut.uttering.utterance.translation.text] = 1;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        // iterate over each item and check if recommended
+        $(".multiple-choice-checkbox").each(function () {
+            // check if text is in the recommended if so mark it checked
+            if (this.value in recommendedMap) {
+                this.checked = true;
+            }
+        });
+        // TODO end of remove me----------------------------------------------------------------------------------------
+
+
     },
 
     componentDidUpdate: function(){
@@ -211,9 +257,11 @@ var MultipleChoiceView = React.createClass({
         var coachVideo = document.getElementById("coachVideo");
 
         // load and play it
-        if (coachVideo != null)
+        if (coachVideo != null) {
             coachVideo.load();
             coachVideo.play();
+        }
+
         // TODO end hack------------------------------------------------------------------------------------------------
     },
 
