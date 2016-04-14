@@ -9,8 +9,9 @@ var PageHeader = require('../../widgets/PageHeader');
 // CONSTANTS
 
 var LI_GLYPHICON_RECORD_CLS = "glyphicon-record";
+var LI_GLYPHICON_LISTEN_CLS = "glyphicon-play-circle";
 var LI_GLYPHICON_STOP_CLS = "glyphicon-stop";
-var LI_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
+var LI_GLYPHICON_PLAY_CLS = "glyphicon-refresh";
 var LI_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var LI_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
@@ -154,7 +155,8 @@ function getPageState(props) {
         clickedAnswer: 0,
         title: "",
         displayTracker: [],
-        pageType: ""
+        pageType: "",
+        volume: SettingsStore.voiceVolume()
     };
 
     data.message = ASRStore.GetMessage();
@@ -198,6 +200,7 @@ function playAudio(xid){
     if(audio.paused){
         audio.load();
         audio.play();
+        audio.volume = SettingsStore.voiceVolume();
     }else{
         audio.pause();
     }
@@ -305,31 +308,36 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <div className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
-                        <div className="col-sm-1 col-md-2">
-                            <audio id={id}></audio>
-                            <div className="pronunciation-audio-button">
-                                <span className={itemRecordingClass} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
-                                <span className={itemRecordedClass} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
-                            </div>
-                        </div>
-                        <div className="col-sm-11 col-md-10">
-                            <div className="pronunciation-text-container">
-                                <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, qcIndex, self)}}>
-                                    <div className="li-native-text">
-                                        <ColorText props={nativeText}/>
-                                    </div>
-                                    <div className="li-ezread-text">
-                                        <ColorText props={ezreadText}/>
-                                    </div>
-                                    <div className="li-translated-text">
-                                        <ColorText props={translatedText}/>
+                    <table className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
+                        <col width="150" />
+                        <col width="100%" />
+                        <tr>
+                            <td className="col-sm-1 col-md-2">
+                                <audio id={id}></audio>
+                                <div className="pronunciation-audio-button">
+                                    <span className={"glyphicon li-glyphicon "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                                    <span className={itemRecordingClass} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                                    <span className={itemRecordedClass} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
+                                </div>
+                            </td>
+                            <td className="col-sm-11 col-md-10">
+                                <div className="pronunciation-text-container">
+                                    <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, qcIndex, self)}}>
+                                        <div className="li-native-text">
+                                            <ColorText props={nativeText}/>
+                                        </div>
+                                        <div className="li-ezread-text">
+                                            <ColorText props={ezreadText}/>
+                                        </div>
+                                        <div className="li-translated-text">
+                                            <ColorText props={translatedText}/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <span className={itemFeedbackClass}></span>
-                        </div>
-                    </div>
+                                <span className={itemFeedbackClass}></span>
+                            </td>
+                        </tr>
+                    </table>
                 );
 
             }else if(item === "note"){
