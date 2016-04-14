@@ -72,7 +72,7 @@ var LessonStartView = React.createClass({
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                <h3>This Lesson Will take approximately 25 minutes to complete</h3>
+                <h3>This lesson will take approximately 25 minutes to complete</h3>
                 {imageHtml}
             </div>
         );
