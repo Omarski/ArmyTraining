@@ -51,6 +51,8 @@ function getPageState(props) {
                             data.transcript = item.value;
                             break;
                         default:
+                            // TODO: Doesn't this reset the video type if the last info.property is
+                            // anything other than one of the above?
                             data.videoType = "";
                     }
                 })
@@ -116,7 +118,7 @@ function getPageState(props) {
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
                         result = <div className={data.videoType} key={index}>
-                            <video controls autoPlay volume={SettingsStore.voiceVolume()}>
+                            <video id="video" controls autoPlay volume={SettingsStore.voiceVolume()}>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                             {data.caption}
@@ -183,9 +185,13 @@ var InfoView = React.createClass({
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
+        var video = null;
         // play all note media in order (see dnd for example)
         playMediaAudio(noteMedia);
-        //PageStore.addChangeListener(this._onChange);
+        video = document.getElementById("video");
+        if(video){
+            video.volume = SettingsStore.voiceVolume();
+        }
         $('[data-toggle="tooltip"]').tooltip();
     },
 
