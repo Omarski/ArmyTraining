@@ -308,10 +308,7 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <table className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
-                        <col width="150" />
-                        <col width="100%" />
-                        <tr>
+                    <tr className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
                             <td className="col-sm-1 col-md-2">
                                 <audio id={id}></audio>
                                 <div className="pronunciation-audio-button">
@@ -336,18 +333,16 @@ var PronunciationView = React.createClass({
                                 </div>
                                 <span className={itemFeedbackClass}></span>
                             </td>
-                        </tr>
-                    </table>
+                    </tr>
                 );
 
             }else if(item === "note"){
                 note = self.state.notes[noteCounter] || "";
                 noteCounter++;
-                return(<p key={page.xid + "note" + String(noteCounter-1)} >{note}</p>);
+                return(<tr><td colSpan="3"><p key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
             }else{
                 return("");
             }
-
 
         });
 
@@ -356,9 +351,12 @@ var PronunciationView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <audio id="li-demo-audio"></audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
-                    <div className="container-fluid li-container">
+                    <table className="container-fluid li-container">
+                        <col width="0" />
+                        <col width="150" />
+                        <col width="100%" />
                         {vaList}
-                    </div>
+                    </table>
                 </div>
             </div>
         );
