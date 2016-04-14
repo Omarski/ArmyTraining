@@ -306,40 +306,42 @@ var PronunciationView = React.createClass({
                         itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
                     }
                 }
-
+                //please upd
                 return (
                     <tr className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
-                            <td className="col-sm-1 col-md-2">
-                                <audio id={id}></audio>
-                                <div className="pronunciation-audio-button">
-                                    <span className={"glyphicon li-glyphicon "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
-                                    <span className={itemRecordingClass} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
-                                    <span className={itemRecordedClass} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
-                                </div>
-                            </td>
-                            <td className="col-sm-11 col-md-10">
-                                <div className="pronunciation-text-container">
-                                    <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, qcIndex, self)}}>
-                                        <div className="li-native-text">
-                                            <ColorText props={nativeText}/>
-                                        </div>
-                                        <div className="li-ezread-text">
-                                            <ColorText props={ezreadText}/>
-                                        </div>
-                                        <div className="li-translated-text">
-                                            <ColorText props={translatedText}/>
-                                        </div>
+                        <td className="pronunciation-audio-button">
+                            <audio id={id}></audio>
+                            <span className={"glyphicon li-glyphicon "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                        </td>
+                        <td className="pronunciation-audio-button">
+                            <span className={itemRecordingClass} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                        </td>
+                        <td className="pronunciation-audio-button">
+                            <span className={itemRecordedClass} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
+                        </td>
+                        <td className="col-sm-11 col-md-10">
+                            <div className="pronunciation-text-container">
+                                <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, qcIndex, self)}}>
+                                    <div className="li-native-text">
+                                        <ColorText props={nativeText}/>
+                                    </div>
+                                    <div className="li-ezread-text">
+                                        <ColorText props={ezreadText}/>
+                                    </div>
+                                    <div className="li-translated-text">
+                                        <ColorText props={translatedText}/>
                                     </div>
                                 </div>
-                                <span className={itemFeedbackClass}></span>
-                            </td>
+                            </div>
+                            <span className={itemFeedbackClass}></span>
+                        </td>
                     </tr>
                 );
 
             }else if(item === "note"){
                 note = self.state.notes[noteCounter] || "";
                 noteCounter++;
-                return(<tr><td colSpan="3"><p key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
+                return(<tr><td colSpan="5"><p key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
             }else{
                 return("");
             }
@@ -353,7 +355,9 @@ var PronunciationView = React.createClass({
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <table className="container-fluid li-container">
                         <col width="0" />
-                        <col width="150" />
+                        <col width="50" />
+                        <col width="50" />
+                        <col width="50" />
                         <col width="100%" />
                         {vaList}
                     </table>
