@@ -13,8 +13,7 @@ function getPageState(props) {
         pageType: "",
         page: "",
         sources: [],
-        image: "",
-        volume: SettingsStore.voiceVolume()
+        image: ""
     };
 
     if (props && props.page) {

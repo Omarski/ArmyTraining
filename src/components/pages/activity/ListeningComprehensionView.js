@@ -14,7 +14,6 @@ function getPageState(props) {
         sources: [],
         image: "",
         prompt: "",
-        volume: SettingsStore.voiceVolume(),
         haveListened: false,
         haveAnswered: false,
         isCorrect: false,
@@ -220,7 +219,7 @@ var ListeningComprehensionView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
                     <div className="container">
-                        <audio id="audio" volume={this.state.volume}>
+                        <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.
                         </audio>

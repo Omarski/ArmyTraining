@@ -19,8 +19,7 @@ function getPageState(props) {
         sources: [],
         caption: "",
         transcript: "",
-        fullCoach: false,
-        volume: SettingsStore.voiceVolume()
+        fullCoach: false
     };
 
     var caption = "";
@@ -118,7 +117,7 @@ function getPageState(props) {
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
                         result = <div className={data.videoType} key={index}>
-                            <video id="video" controls autoPlay volume={SettingsStore.voiceVolume()}>
+                            <video id="video" controls autoPlay volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                             {data.caption}
@@ -167,7 +166,7 @@ function playAudio(xid){
     source.src = "data/media/" + xid;
     audio.load();
     audio.play();
-    audio.volume = SettingsStore.voiceVolume();
+    audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
 }
 
 var InfoView = React.createClass({
@@ -190,7 +189,7 @@ var InfoView = React.createClass({
         playMediaAudio(noteMedia);
         video = document.getElementById("video");
         if(video){
-            video.volume = SettingsStore.voiceVolume();
+            video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
         }
         $('[data-toggle="tooltip"]').tooltip();
     },
@@ -200,7 +199,6 @@ var InfoView = React.createClass({
     },
 
     componentDidUpdate: function(){
-
     },
 
     componentWillUnmount: function() {
@@ -218,6 +216,7 @@ var InfoView = React.createClass({
         var isFullCoach = state.fullCoach;
         var content = "";
         var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
+
         if(state.page.note && state.page.note.length > 1){
             noteDisplay = <div className={mediaType + " infoNoteContainer"}>
                 <ul>{pageNotes}</ul>
@@ -269,7 +268,7 @@ var InfoView = React.createClass({
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
                 <div className="infoContainer" key={"page-" + this.state.page.xid}>
                     {cc}
-                    <audio autoPlay id="audio" volume={this.state.volume}>
+                    <audio autoPlay id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>

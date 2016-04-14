@@ -30,7 +30,6 @@ function getPageState(props) {
         incorrectResponses: [],
         message: "No data found.",
         recordedSpeech: "",
-        volume: SettingsStore.voiceVolume(),
         feedbackResponse: "Not quite.",
         showAnswer: false,
         answer: "",
@@ -220,11 +219,7 @@ var ResponseFormationView = React.createClass({
         }
         Setup();
         var audioTarget = $('audio,video');
-        audioTarget.prop("volume", SettingsStore.voiceVolume());
-        // if muted, then reduce volume to 0
-        if(audioTarget.prop("muted")){
-            audioTarget.prop("volume", 0);
-        }
+        audioTarget.prop("volume", SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume());
     },
 
     componentWillUnmount: function() {
@@ -291,7 +286,7 @@ var ResponseFormationView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <div className="RF-container">
-                        <audio id="audio" volume={this.state.volume}>
+                        <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.
                         </audio>
@@ -394,7 +389,6 @@ var ResponseFormationView = React.createClass({
             message: newMessage,
             recordedSpeech: recordedSpeech,
             isCorrect: isCorrect,
-            volume: SettingsStore.voiceVolume(),
             feedbackResponse: feedbackResponse,
             spoken: spoken
         });

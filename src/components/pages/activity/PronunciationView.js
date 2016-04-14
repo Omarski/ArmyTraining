@@ -155,8 +155,7 @@ function getPageState(props) {
         clickedAnswer: 0,
         title: "",
         displayTracker: [],
-        pageType: "",
-        volume: SettingsStore.voiceVolume()
+        pageType: ""
     };
 
     data.message = ASRStore.GetMessage();
@@ -200,7 +199,7 @@ function playAudio(xid){
     if(audio.paused){
         audio.load();
         audio.play();
-        audio.volume = SettingsStore.voiceVolume();
+        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
     }else{
         audio.pause();
     }
@@ -306,7 +305,7 @@ var PronunciationView = React.createClass({
                         itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
                     }
                 }
-                //please upd
+
                 return (
                     <tr className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
                         <td className="pronunciation-audio-button">
@@ -353,13 +352,10 @@ var PronunciationView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <audio id="li-demo-audio"></audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
-                    <table className="container-fluid li-container">
-                        <col width="0" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="100%" />
+                    <table className="table table-striped">
+                        <tbody>
                         {vaList}
+                        </tbody>
                     </table>
                 </div>
             </div>

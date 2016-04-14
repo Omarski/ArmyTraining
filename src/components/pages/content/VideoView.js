@@ -29,7 +29,7 @@ function getPageState(props) {
 
                 if (item.type === "video") {
                     result = <div key={index}>
-                        <video width="320" height="240" controls volume={SettingsStore.voiceVolume()}>
+                        <video width="320" height="240" controls volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source src={filePath} type="video/mp4"></source>
                         </video>
                     </div>

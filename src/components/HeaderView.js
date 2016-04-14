@@ -19,7 +19,7 @@ function getBookState() {
     }
     return {
         title: title,
-        muted: false
+        muted: SettingsStore.muted()
 
     };
 }
@@ -31,14 +31,13 @@ var HeaderView = React.createClass({
         if(settings.voiceVolume){
             vol = settings.voiceVolume;
         }
-
-        if(this.state.muted) {
+        this.state.muted = !this.state.muted;
+        if(!this.state.muted) {
             $('audio,video').prop("volume", vol);
         } else {
             $('audio,video').prop("volume", 0.0);
         }
 
-        this.state.muted = !this.state.muted;
         this.setState({});
         SettingsActions.updateMuted(this.state.muted);
     },
