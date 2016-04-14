@@ -65,6 +65,7 @@ var MapView = React.createClass({
         audio.src = "data/media/pin_bounce2_v2.mp3";
         audio.load();
         audio.play();
+        audio.volume = SettingsStore.voiceVolume();
     },
 
     mouseLeave: function(e){
@@ -76,6 +77,7 @@ var MapView = React.createClass({
         audio.src = "data/media/info.mp3";
         audio.load();
         audio.play();
+        audio.volume = SettingsStore.voiceVolume();
     },
 
     componentWillUnmount: function() {
