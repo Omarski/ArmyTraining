@@ -25,9 +25,10 @@
   vertical-align: middle;
   font-size: 36px;
   margin-top: 13px;
+  pointer-events: all;
+  cursor: pointer;
+
   .glyphicon{
-    pointer-events: all;
-    cursor: pointer;
     display: inline;
     margin-right: 5px;
   }
