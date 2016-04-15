@@ -9,8 +9,9 @@ var PageHeader = require('../../widgets/PageHeader');
 // CONSTANTS
 
 var LI_GLYPHICON_RECORD_CLS = "glyphicon-record";
+var LI_GLYPHICON_LISTEN_CLS = "glyphicon-play-circle";
 var LI_GLYPHICON_STOP_CLS = "glyphicon-stop";
-var LI_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
+var LI_GLYPHICON_PLAY_CLS = "glyphicon-refresh";
 var LI_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var LI_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
@@ -61,7 +62,7 @@ function record(id, index, self){
             playableState: pState
         });
     }else {
-        var audio = document.getElementById("li-demo-audio");
+        var audio = document.getElementById("audio");
         navigator.getUserMedia({video: false, audio: true}, onSuccess, onFail);
     }
 }
@@ -190,7 +191,7 @@ function getPageState(props) {
 
 // Plays Audio filed named with the xid(zid?) given
 function playAudio(xid){
-    var audio = document.getElementById('li-demo-audio');
+    var audio = document.getElementById('audio');
     //var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     audio.src = "data/media/" + xid + ".mp3";
@@ -198,6 +199,7 @@ function playAudio(xid){
     if(audio.paused){
         audio.load();
         audio.play();
+        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
     }else{
         audio.pause();
     }
@@ -251,9 +253,9 @@ var PronunciationView = React.createClass({
         var translatedText = "";
         var ezreadText = "";
         var note = "";
-        var feedbackClass = "glyphicon li-glyphicon li-feedback";
-        var recordedClass = "glyphicon li-glyphicon li-playback";
-        var recordingClass = "glyphicon li-glyphicon li-record";
+        var feedbackClass = "glyphicon";
+        var recordedClass = "glyphicon";
+        var recordingClass = "glyphicon";
         var displayTracker = state.displayTracker;
         var questionCounter = 0;
         var noteCounter = 0;
@@ -273,12 +275,41 @@ var PronunciationView = React.createClass({
                 var itemRecordedClass = "";
                 var itemRecordingClass = "";
 
+                if(nativeText !== ""){
+                    nativeText = (<tr>
+                        <td colSpan="4">
+                            <div>
+                                <ColorText props={nativeText}/>
+                            </div>
+                        </td>
+                    </tr>);
+                }
+
+                if(translatedText !== ""){
+                    translatedText = (<tr>
+                        <td colSpan="4">
+                            <div>
+                                <ColorText props={translatedText}/>
+                            </div>
+                        </td>
+                    </tr>);
+                }
+
+                if(ezreadText !== ""){
+                    ezreadText = (<td>
+                        <div>
+                            <ColorText props={ezreadText}/>
+                        </div>
+                    </td>);
+                }
+
+
                 var isCorrect = self.state.isCorrect[qcIndex];
                 if(isCorrect != null){
                     if (isCorrect) {
-                        itemFeedbackClass = feedbackClass + " li-correct " + LI_GLYPHICON_CORRECT_CLS;
+                        itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_CORRECT_CLS;
                     } else {
-                        itemFeedbackClass = feedbackClass + " li-incorrect " + LI_GLYPHICON_INCORRECT_CLS;
+                        itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_INCORRECT_CLS;
                     }
                 }else{
                     itemFeedbackClass = feedbackClass;
@@ -305,82 +336,51 @@ var PronunciationView = React.createClass({
                 }
 
                 return (
-                    <div className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
-                        <div className="col-sm-1 col-md-2">
-                            <audio id={id}></audio>
-                            <div className="pronunciation-audio-button">
-                                <span className={itemRecordingClass} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
-                                <span className={itemRecordedClass} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
-                            </div>
-                        </div>
-                        <div className="col-sm-11 col-md-10">
-                            <div className="pronunciation-text-container">
-                                <div className="li-text-area" id={"text-"+id} onClick={function(){textClick(id, qcIndex, self)}}>
-                                    <div className="li-native-text">
-                                        <ColorText props={nativeText}/>
-                                    </div>
-                                    <div className="li-ezread-text">
-                                        <ColorText props={ezreadText}/>
-                                    </div>
-                                    <div className="li-translated-text">
-                                        <ColorText props={translatedText}/>
-                                    </div>
-                                </div>
-                            </div>
-                            <span className={itemFeedbackClass}></span>
-                        </div>
-                    </div>
+                    <tbody className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
+
+                        {nativeText}
+
+                        <tr>
+                            <td rowSpan="2" width="25">
+                                <audio id={id}></audio>
+                                <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                            </td>
+                            <td rowSpan="2" width="25">
+                                <span className={itemRecordingClass + " pronunciation-audio-button"} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                            </td>
+                            <td rowSpan="2" width="25">
+                                <span className={itemRecordedClass + " pronunciation-audio-button"} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
+                            </td>
+                            {ezreadText}
+                        </tr>
+
+                        {translatedText}
+
+                        <span className={itemFeedbackClass}></span>
+                    </tbody>
                 );
 
             }else if(item === "note"){
                 note = self.state.notes[noteCounter] || "";
                 noteCounter++;
-                return(<p key={page.xid + "note" + String(noteCounter-1)} >{note}</p>);
+                return(<tr><td colSpan="4"><p key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
             }else{
                 return("");
             }
-
 
         });
 
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
-                    <audio id="li-demo-audio"></audio>
+                    <audio id="audio"></audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
-                    <div className="container-fluid li-container">
-                        {vaList}
-                    </div>
-                </div>
-                <table className="table">
-                    <tbody>
-                        <tr>
-                            <td colSpan="4">Native Text</td>
-                        </tr>
-                        <tr>
-                            <td rowSpan="2" width="25">
-                                <div className="pronunciation-audio-button">
-                                    <span className="glyphicon li-glyphicon li-record glyphicon-record"></span>
-                                </div>
-                            </td>
-                            <td rowSpan="2" width="25">
-                                <div className="pronunciation-audio-button">
-                                    <span className="glyphicon li-glyphicon li-record glyphicon-record"></span>
-                                </div>
-                            </td>
-                            <td rowSpan="2" width="25">
-                                <div className="pronunciation-audio-button">
-                                    <span className="glyphicon li-glyphicon li-record glyphicon-record"></span>
-                                </div>
-                            </td>
-                            <td>EZ Read Text</td>
-                        </tr>
-                        <tr>
-                            <td colSpan="4">Translated text</td>
-                        </tr>
+                    <table className="table table-striped">
 
-                    </tbody>
-                </table>
+                        {vaList}
+
+                    </table>
+                </div>
             </div>
         );
     },

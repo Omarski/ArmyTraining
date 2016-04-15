@@ -12,8 +12,7 @@ function getPageState(props) {
         title: "",
         pageType: "",
         page: "",
-        sources: [],
-        volume: SettingsStore.voiceVolume()
+        sources: []
     };
 
     if (props && props.page) {

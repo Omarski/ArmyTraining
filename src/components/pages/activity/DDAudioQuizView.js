@@ -63,7 +63,6 @@ function getPageState(props) {
         dragSrc: null,
         childHTML: null,
         needsRender: null,
-        volume: SettingsStore.voiceVolume(),
         readOnly: false,
         selection: [],
         isCorrect: [],
@@ -599,12 +598,7 @@ var DDAudioQuizView = React.createClass({
         //PageStore.addChangeListener(this._onChange);
         setDraggableSize();
         var audioTarget = $('audio,video');
-        audioTarget.prop("volume", SettingsStore.voiceVolume());
-        // if muted, then reduce volume to 0
-        if(audioTarget.prop("muted")){
-            audioTarget.prop("volume", 0);
-        }
-
+        audioTarget.prop("volume", SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume());
     },
 
     componentWillUnmount: function() {
@@ -993,7 +987,7 @@ var DDAudioQuizView = React.createClass({
 
                         <div className="row dd-quiz-feedback">
 
-                            <audio id="audio" volume={this.state.volume}>
+                            <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                                 <source id="mp3Source" src="" type="audio/mp3"></source>
                                 Your browser does not support the audio format.
                             </audio>

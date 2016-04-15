@@ -11,7 +11,6 @@ function getPageState(props) {
         title: "",
         pageType: "",
         prompt: "",
-        volume: SettingsStore.voiceVolume(),
         answerState: [],
         draggedItemLetter: "",
         draggedItemTarget: "",
@@ -81,7 +80,7 @@ function playAudio(zid){
     if(audio.paused){
         audio.load();
         audio.play();
-        audio.volume = SettingsStore.voiceVolume();
+        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
     }else{
         audio.pause();
     }
@@ -421,7 +420,7 @@ var MatchItemView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <div className="container">
-                        <audio id="audio" volume={this.state.volume}>
+                        <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.
                         </audio>
