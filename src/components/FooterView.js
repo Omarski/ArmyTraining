@@ -23,10 +23,28 @@ function getUnitState(expanded) {
         var completed = true;
         var completedCount = 0;
         var totalPages = 0;
+
         if (unit.data.chapter) {
             for (var i = 0; i < unit.data.chapter.length; i++) {
+                var bHidden = false;
                 var c = unit.data.chapter[i];
 
+                // look up properties
+                if (c.info && c.info.property) {
+                    c.info.property.map(function(item) {
+                        switch (item.name) {
+                            case "prologue":
+                                bHidden = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    })
+                }
+
+                // stop if hidden
+                if (bHidden)
+                    break;
 
                 // check pages to see if everything has been
                 // viewed in the chapter to determine unit
@@ -56,6 +74,11 @@ function getUnitState(expanded) {
 
 
             }
+
+
+            // skip if marked as hidden
+            if (bHidden)
+                continue;
 
             var unitCls = '';
             var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
