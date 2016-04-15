@@ -308,15 +308,15 @@ var PronunciationView = React.createClass({
 
                 return (
                     <tr className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
-                        <td className="pronunciation-audio-button">
+                        <td>
                             <audio id={id}></audio>
-                            <span className={"glyphicon li-glyphicon "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                            <span className={"glyphicon li-glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
                         </td>
-                        <td className="pronunciation-audio-button">
-                            <span className={itemRecordingClass} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                        <td>
+                            <span className={itemRecordingClass + " pronunciation-audio-button"} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
                         </td>
-                        <td className="pronunciation-audio-button">
-                            <span className={itemRecordedClass} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
+                        <td>
+                            <span className={itemRecordedClass + " pronunciation-audio-button"} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
                         </td>
                         <td className="col-sm-11 col-md-10">
                             <div className="pronunciation-text-container">
