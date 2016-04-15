@@ -358,6 +358,35 @@ var PronunciationView = React.createClass({
                         </tbody>
                     </table>
                 </div>
+                <table className="table">
+                    <tbody>
+                        <tr>
+                            <td colSpan="4">Native Text</td>
+                        </tr>
+                        <tr>
+                            <td rowSpan="2" width="25">
+                                <div className="pronunciation-audio-button">
+                                    <span className="glyphicon li-glyphicon li-record glyphicon-record"></span>
+                                </div>
+                            </td>
+                            <td rowSpan="2" width="25">
+                                <div className="pronunciation-audio-button">
+                                    <span className="glyphicon li-glyphicon li-record glyphicon-record"></span>
+                                </div>
+                            </td>
+                            <td rowSpan="2" width="25">
+                                <div className="pronunciation-audio-button">
+                                    <span className="glyphicon li-glyphicon li-record glyphicon-record"></span>
+                                </div>
+                            </td>
+                            <td>EZ Read Text</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4">Translated text</td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
         );
     },
