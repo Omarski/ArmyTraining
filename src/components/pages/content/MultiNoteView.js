@@ -6,7 +6,6 @@ var SettingsStore = require('../../../stores/SettingsStore');
 function getPageState(props) {
     var data = {
         page: "",
-        sources: [],
         title: "",
         note: "",
         media: "",
@@ -103,10 +102,11 @@ var MultiNoteView = React.createClass({
         var self = this;
         var page = self.state.page;
         var title = self.state.title;
-        var sources = self.state.sources;
+        var sourceInfo = "";
         var infoPages = self.state.related;
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
+            var sources = "";
             var text = ""; //item.note[0].text; // needs to be changed to all notes
             if (item.note) {
                 var notes = item.note;
@@ -133,7 +133,7 @@ var MultiNoteView = React.createClass({
 
             var title = item.title;
             var caption = "";
-            var sources = [];
+
             var info = item.info;
             var properties = info.property;
             if (properties) {
@@ -142,7 +142,7 @@ var MultiNoteView = React.createClass({
                     var property = properties[len];
                     switch (property.name) {
                         case "mediacaption" :
-                            sources.push(property.value);
+                            sources = property.value;
                             break;
                         case "mediadisplayblurb" :
                             caption = property.value;
@@ -167,6 +167,7 @@ var MultiNoteView = React.createClass({
                 image: image,
                 title: title,
                 text: text,
+                sources: sources,
                 caption: caption
             })
         });
@@ -190,6 +191,7 @@ var MultiNoteView = React.createClass({
 
         var p = pagesHTML[self.state.activePage];
         var xid = self.state.xid;
+        sourceInfo = p.sources;
         if (p && p.image) {
             noteImage = (
                 <div className="col-md-8">
@@ -209,12 +211,10 @@ var MultiNoteView = React.createClass({
                 </div>
             );
         }
-        console.log(this.state.volume);
-        console.log(SettingsStore.voiceVolume());
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
-                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <PageHeader sources={sourceInfo} title={title} key={page.xid + "source" + sourceInfo}/>
                     <audio id="audio" volume={this.state.volume}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
