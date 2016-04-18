@@ -190,7 +190,9 @@ var MultiNoteView = React.createClass({
 
         var p = pagesHTML[self.state.activePage];
         var xid = self.state.xid;
-        sourceInfo = p.sources;
+        if(p){
+            sourceInfo = p.sources;
+        }
         if (p && p.image) {
             noteImage = (
                 <div className="col-md-8">
