@@ -2,7 +2,10 @@ var React = require('react');
 
 function getImageCaptionState(props) {
     return {
-        transcript: props.transcript || ''
+        videoType: props.videoType || "",
+        filePath: props.src || "",
+        caption: props.caption || "",
+        altText: props.altText || ""
     };
 }
 
@@ -12,7 +15,11 @@ var ImageCaptionView = React.createClass({
     },
     render: function() {
         return  (
-            <div>
+            <div className="image-caption-container">
+                <img className={this.state.videoType} src={this.state.filePath} alt={this.state.altText}></img>
+                <div className="caption">
+                        {this.state.caption}
+                </div>
             </div>
         );
     }

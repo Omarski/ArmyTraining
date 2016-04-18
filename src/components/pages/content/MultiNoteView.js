@@ -2,6 +2,7 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var SettingsStore = require('../../../stores/SettingsStore');
+var ImageCaption = require('../../widgets/ImageCaption');
 
 function getPageState(props) {
     var data = {
@@ -135,30 +136,28 @@ var MultiNoteView = React.createClass({
             var caption = "";
 
             var info = item.info;
-            var properties = info.property;
-            if (properties) {
-                var len = properties.length;
-                while (len--) {
-                    var property = properties[len];
-                    switch (property.name) {
-                        case "mediacaption" :
-                            sources = property.value;
-                            break;
-                        case "mediadisplayblurb" :
-                            caption = property.value;
-                            break;
-                    }
-                };
+            if (info) {
+                var properties = info.property;
+                if (properties) {
+                    var len = properties.length;
+                    while (len--) {
+                        var property = properties[len];
+                        switch (property.name) {
+                            case "mediacaption" :
+                                sources = property.value;
+                                break;
+                            case "mediadisplayblurb" :
+                                caption = property.value;
+                                break;
+                        }
+                    };
+                }
             }
 
 
+
             var image = (
-                <div className="image-caption-container" key={index}>
-                    <figure>
-                        <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>
-                        <figcaption>{caption}</figcaption>
-                    </figure>
-                </div>
+                <ImageCaption videoType="" src={"data/media/"+imageURL} caption={caption} key={index} altText={item.title}/>
             );// <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
 
 
