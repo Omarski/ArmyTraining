@@ -135,6 +135,7 @@ var InteractiveTimelineView = React.createClass({
                                         {datesRow1}
                                     </div>
                                     <div className="row timeline-date-row last">
+                                        <div className="timeline-date bottom-row spacer" >&nbsp;</div>
                                         {datesRow2}
                                     </div>
                                 </div>
