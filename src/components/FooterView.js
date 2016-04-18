@@ -274,7 +274,7 @@ var TOCDetails = React.createClass({
         var items = this.props.data.map(function(item, index) {
             return (
                 <div key={index}>
-                <TOCChapterRow item={item} />
+                <TOCChapterRow item={item} chapter={item} unit={unit}/>
                 <TOCPages data={item.data.pages} chapter={item} unit={unit}/>
                     </div>
             );
@@ -288,13 +288,19 @@ var TOCDetails = React.createClass({
 });
 
 var TOCChapterRow = React.createClass({
+    loadPage: function(item, chapter, unit) {
+        PageActions.jump({page:item.xid, chapter:chapter.data.xid, unit:unit.id});
+
+    },
     render: function() {
         var cls = '';
         if (PageStore.chapter() && this.props.item.data.xid === PageStore.chapter().xid) {
             cls += ' main-footer-accordian-table-row-active';
         }
         return (
-            <table className="panel-title table table-condensed main-footer-accordian-table">
+            <table
+                onClick={this.loadPage.bind(this, this.props.item.data.pages[0], this.props.chapter, this.props.unit)}
+                className="panel-title table table-condensed main-footer-accordian-table">
                 <tr className={cls}>
                     <td>
                         <div className="main-footer-table-icon-col">
