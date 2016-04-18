@@ -335,29 +335,35 @@ var PronunciationView = React.createClass({
                     }
                 }
 
+                var cls = (index % 2) ? "pronunciation-item-row-odd" : "pronunciation-item-row-even";
+
+
                 return (
-                    <tbody className="row pronunciation-item-row" key={page.xid + String(qcIndex)}>
+                    <table className={"table pronunciation-view-table pronunciation-item-row " + cls}>
+                        <tbody>
+                            {nativeText}
 
-                        {nativeText}
+                            <tr>
+                                <td rowSpan="2" width="25">
+                                    <audio id={id}></audio>
+                                    <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                                </td>
+                                <td rowSpan="2" width="25">
+                                    <span className={itemRecordingClass + " pronunciation-audio-button"} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                                </td>
+                                <td rowSpan="2" width="25">
+                                    <span className={itemRecordedClass + " pronunciation-audio-button"} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
 
-                        <tr>
-                            <td rowSpan="2" width="25">
-                                <audio id={id}></audio>
-                                <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
-                            </td>
-                            <td rowSpan="2" width="25">
-                                <span className={itemRecordingClass + " pronunciation-audio-button"} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
-                            </td>
-                            <td rowSpan="2" width="25">
-                                <span className={itemRecordedClass + " pronunciation-audio-button"} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
-                            </td>
-                            {ezreadText}
-                        </tr>
+                                    <span className={itemFeedbackClass}></span>
 
-                        {translatedText}
+                                </td>
+                                {ezreadText}
+                            </tr>
 
-                        <span className={itemFeedbackClass}></span>
-                    </tbody>
+                            {translatedText}
+                        </tbody>
+                    </table>
+
                 );
 
             }else if(item === "note"){
@@ -375,11 +381,7 @@ var PronunciationView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <audio id="audio"></audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
-                    <table className="table table-striped">
-
-                        {vaList}
-
-                    </table>
+                    {vaList}
                 </div>
             </div>
         );

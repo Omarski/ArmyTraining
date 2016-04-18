@@ -1,17 +1,31 @@
-
-.pronunciation-item-row {
-  background: #f9f9f9;
-  border-top: 1px solid #ddd
+.table {
+  &.pronunciation-view-table {
+    tr, td {
+      background: #fff;
+      border: none;
+    }
+  }
 }
 
-.pronunciation-item-row:nth-child(odd) {
-  background: #fff;
-}
 
-.pronunciation-item-row:last-child {
-  border-bottom: 1px solid #ddd
-}
 
+.table {
+  &.pronunciation-item-row {
+    margin: 0;
+    td {
+      background: #f9f9f9;
+    }
+    border-top: 1px solid #ddd
+  }
+  &.pronunciation-item-row-odd {
+    td {
+      background: #fff;
+    }
+  }
+  &.pronunciation-item-row:last-child {
+    border-bottom: 1px solid #ddd
+  }
+}
 
 .pronunciation-text-container {
   text-align: center;
