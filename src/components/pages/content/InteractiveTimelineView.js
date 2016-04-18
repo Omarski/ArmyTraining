@@ -47,8 +47,7 @@ function getPageState(props) {
         timelineJSON: json,
         selectedDate: dateList[0],
         dateList: dateList,
-        page: page,
-        sources: []
+        page: page
     };
 }
 
