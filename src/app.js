@@ -7,3 +7,8 @@ React.render(
     <MainView />,
     document.getElementById('mainView')
 );
+/*
+$('.btn-action').on('click', function(){
+    var audio = document.getElementById('audio');
+});
+    */
