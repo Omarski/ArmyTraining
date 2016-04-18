@@ -92,6 +92,7 @@ function getPageState(props) {
     return data;
 }
 
+// TODO <----------------------------- REMOVE ME ONCE COMPONENT IS ADDED------------------------------------------------
 function getFeedbackTest(feedbackText, isCorrect) {
     var feedbackClass = "glyphicon MC-glyphicon MC-feedback";
     var feedbackObject = null;
@@ -213,6 +214,7 @@ function getFeedbackTest(feedbackText, isCorrect) {
     return responder;
 
 }
+// TODO END <----------------------------- REMOVE ME ONCE COMPONENT IS ADDED--------------------------------------------
 
 function getFeedback(answers, selectedAnswer){
     var getter = "getFeedback could not find selected Answer.";
@@ -286,7 +288,6 @@ var MultipleChoiceView = React.createClass({
             coachVideo.load();
             coachVideo.play();
         }
-
         // TODO end hack------------------------------------------------------------------------------------------------
     },
 
