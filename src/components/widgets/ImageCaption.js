@@ -16,13 +16,20 @@ var ImageCaptionView = React.createClass({
     render: function() {
         captionDiv = "";
 
-        // if caption exists add it
-        if (this.state.caption && this.state.caption.length > 0) {
-            captionDiv = (
-                <div className="caption">
-                    {this.state.caption}
-                </div>
-            );
+        // check if caption object pass in is valid
+        switch(typeof this.state.caption) {
+            case "undefined":
+                break;
+            case "string":
+                if (this.state.caption.length < 1) {
+                    break;
+                }
+            default:
+                captionDiv = (
+                    <div className="caption">
+                        {this.state.caption}
+                    </div>
+                );
         }
 
         return  (
