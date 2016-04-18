@@ -3,6 +3,7 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
 var ClosedCaption = require('../../widgets/ClosedCaption');
+var ImageCaption = require('../../widgets/ImageCaption');
 
 
 function getPageState(props) {
@@ -126,12 +127,7 @@ function getPageState(props) {
                 }
 
                 if (item.type === "image") {
-                    result = (<div className="image-caption-container" key={index}>
-                                <figure>
-                                    <img className={data.videoType} src={filePath}></img>
-                                    <figcaption>{data.caption}</figcaption>
-                                </figure>
-                            </div>);
+                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index} altText={item.title} />);
                 }
 
 

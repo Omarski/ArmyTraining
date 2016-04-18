@@ -75,6 +75,9 @@
     top: 50%;
 
     text-align: center;
+    &.spacer {
+      opacity: 0;
+    }
 
     &.selected {
       border: 1px solid #000;
