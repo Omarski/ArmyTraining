@@ -64,14 +64,14 @@ var LessonStartView = React.createClass({
         var imageHtml = "";
 
         if(imageXid !== ""){
-            imageHtml = <img src={"data/media/"+imageXid}></img>;
+            imageHtml = <img className="lesson-start-image" src={"data/media/"+imageXid}></img>;
         }
 
 
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                <h3>This lesson will take approximately 25 minutes to complete.</h3>
+                <h3 className="lesson-start-timer">This lesson will take approximately 25 minutes to complete.</h3>
                 {imageHtml}
             </div>
         );
