@@ -407,7 +407,7 @@ var OrderingView = React.createClass({
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="or-prompt">{state.prompt}</div>
+                    <h4 className="or-prompt">{state.prompt}</h4>
                     <div className="or-buttons-container">{button}</div>
                     <ul className="or-choices-container">{choices}</ul>
                     <ul className="or-answers-container">
