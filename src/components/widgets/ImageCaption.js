@@ -14,12 +14,28 @@ var ImageCaptionView = React.createClass({
         return getImageCaptionState(this.props);
     },
     render: function() {
+        captionDiv = "";
+
+        // check if caption object pass in is valid
+        switch(typeof this.state.caption) {
+            case "undefined":
+                break;
+            case "string":
+                if (this.state.caption.length < 1) {
+                    break;
+                }
+            default:
+                captionDiv = (
+                    <div className="caption">
+                        {this.state.caption}
+                    </div>
+                );
+        }
+
         return  (
             <div className="image-caption-container">
                 <img className={this.state.videoType} src={this.state.filePath} alt={this.state.altText}></img>
-                <div className="caption">
-                        {this.state.caption}
-                </div>
+                {captionDiv}
             </div>
         );
     }

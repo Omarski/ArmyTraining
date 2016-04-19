@@ -1,10 +1,12 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
+var ImageCaption = require('../../widgets/ImageCaption');
 var MC_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var MC_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
 function getPageState(props) {
+    var mediaItems = "";
     var data = {
         page: null,
         title: "",
@@ -12,8 +14,7 @@ function getPageState(props) {
         pageType: "",
         answers: [],
         prompt: "",
-        mediaType: "",
-        mediaZid: "",
+        media: "",
         haveAnswered: false,
         answerFeedback: "",
         correctAnswer: "",
@@ -49,9 +50,33 @@ function getPageState(props) {
     }
 
     if(props && props.page && props.page.media){
-        data.mediaType = props.page.media[0].type;
-        data.mediaZid = props.page.media[0].zid;
+
+        // iterate over each media object composing the html
+        mediaItems = props.page.media.map(function(item, index) {
+            var filePath = "data/media/" + item.file;
+            var result = <div key={index}>Unknown File Type</div>;
+
+            if (item.type === "video") {
+                if(item.file.split(".")[1] === "mp4") {
+                    result = <div className={data.videoType} key={index}>
+                        <video id="video" controls autoPlay volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                            <source src={filePath} type="video/mp4"></source>
+                        </video>
+                        {data.caption}
+                    </div>
+                }
+            }
+
+            if (item.type === "image") {
+                result = (<ImageCaption videoType={data.videoType} src={filePath} key={index} altText={item.title} />);
+            }
+
+            return result;
+        });
     }
+
+    // assign result to data
+    data.media = mediaItems;
 
 
     if (data.bShuffle) {
@@ -67,6 +92,7 @@ function getPageState(props) {
     return data;
 }
 
+// TODO <----------------------------- REMOVE ME ONCE COMPONENT IS ADDED------------------------------------------------
 function getFeedbackTest(feedbackText, isCorrect) {
     var feedbackClass = "glyphicon MC-glyphicon MC-feedback";
     var feedbackObject = null;
@@ -188,6 +214,7 @@ function getFeedbackTest(feedbackText, isCorrect) {
     return responder;
 
 }
+// TODO END <----------------------------- REMOVE ME ONCE COMPONENT IS ADDED--------------------------------------------
 
 function getFeedback(answers, selectedAnswer){
     var getter = "getFeedback could not find selected Answer.";
@@ -261,7 +288,6 @@ var MultipleChoiceView = React.createClass({
             coachVideo.load();
             coachVideo.play();
         }
-
         // TODO end hack------------------------------------------------------------------------------------------------
     },
 
@@ -301,7 +327,18 @@ var MultipleChoiceView = React.createClass({
         var page = self.state.page;
         var title = page.title;
         var sources = self.state.sources;
+        var media = state.media;
         var feedbackElement = "";
+
+        // construct media container
+        var mediaContainer = "";
+        if (media) {
+            mediaContainer = (
+                <div className="infoMediaContainer">
+                    {media}
+                </div>
+            );
+        }
 
         if(state.haveAnswered && !self.state.isQuestionaire) {
             feedbackElement = state.answerFeedback
@@ -330,6 +367,9 @@ var MultipleChoiceView = React.createClass({
                             <h4>
                                 {state.prompt}
                             </h4>
+                        </div>
+                        <div>
+                            {mediaContainer}
                         </div>
                         <div className="row">
                             <ul className="list-group multiple-choice-choices-container">
