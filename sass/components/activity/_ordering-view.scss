@@ -3,4 +3,34 @@
   height: 150px;
   width: 150px;
   margin: 10px;
+  position: relative;
+}
+
+.or-answers-container{
+  display: flex;
+  li{
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+}
+
+.or-text-choice{
+  margin-bottom: 10px;
+  font-size: 12px;
+  padding: 10px;
+  line-height: 1.42857143;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+  .or-feedback {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    &.or-correct {
+      color: green;
+    }
+    &.or-incorrect {
+      color: red;
+    }
+  }
 }
