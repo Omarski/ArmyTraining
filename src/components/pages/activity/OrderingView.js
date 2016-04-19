@@ -139,7 +139,7 @@ var OrderingView = React.createClass({
         var dropLocationIndex = -1;
 
         switch($(e.target).attr("class")){
-            case "or-answer-dropArea":
+            case "or-answer-drop-area":
                 //if(drop location isn't taken)
                 var spotTaken = false;
                 answerState.map(function(item){
@@ -265,13 +265,13 @@ var OrderingView = React.createClass({
             }
 
             if(!isCorrect) {
-                button = <button className="btn-primary or-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
+                button = <button className="btn btn-action or-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
             }else{
 
             }
         }
         if(numMoved > 0 && numMoved < numQuestions){
-            button = <button className="btn-default or-clear" onClick={self.reset}>Clear All</button>; // clear all button
+            button = <button className="btn btn-action or-clear" onClick={self.reset}>Clear All</button>; // clear all button
         }
 
         choices = state.answerState.map(function(item, index){
@@ -330,7 +330,11 @@ var OrderingView = React.createClass({
         answerContainers = state.page.matchTarget.map(function(item, index){
             var answerPrompt = item.nut.uttering.utterance.translation.text;
             var letter = item.letter;
-            var answerRender = "";
+            var answerRender = (<div className="or-drop-area-index">
+                                    <span>
+                                        {index + 1}
+                                    </span>
+                                </div>);
             var feedback = "";
             var needCheck = state.numMoved == answerState.length;
 
@@ -389,7 +393,7 @@ var OrderingView = React.createClass({
             }
             return(<li className = "or-answer" key={page.xid + "answer-"+index}>
                 <div className="or-answer-prompt">{answerPrompt}</div>
-                <div className="or-answer-dropArea"
+                <div className="or-answer-drop-area"
                      data-letter={letter}
                      data-index={index}
                      onDragOver={self.onDraggingOver}
@@ -408,11 +412,20 @@ var OrderingView = React.createClass({
                         Your browser does not support the audio format.
                     </audio>
                     <h4 className="or-prompt">{state.prompt}</h4>
-                    <div className="or-buttons-container">{button}</div>
-                    <ul className="or-choices-container">{choices}</ul>
-                    <ul className="or-answers-container">
-                        {answerContainers}
-                    </ul>
+
+                    <div className="container-fluid or-choice-answer-container">
+                        <div className="row">
+                            <ul className="or-choices-container">{choices}</ul>
+                        </div>
+                        <div className="row">
+                            <ul className="or-answers-container">
+                                {answerContainers}
+                            </ul>
+                        </div>
+                        <div className="row">
+                            {button}
+                        </div>
+                    </div>
                 </div>
             </div>
         );
