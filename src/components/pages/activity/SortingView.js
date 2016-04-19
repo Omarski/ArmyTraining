@@ -151,15 +151,17 @@ var SortingView = React.createClass({
                     dropLocation = "B";
                 }
         }
-
         var itemFound = false;
         if(state.numMoved != state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter != "" && dropLocation != "") {
                 answerState.map(function (item) {
+                    console.log("dragged html: " + $(draggedItemTarget)[0].innerHTML);
+                    console.log("item.passed data: " + item.passedData);
+                    console.log($(draggedItemTarget)[0].innerHTML == item.passedData);
                     if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        if ($($(draggedItemTarget).parent()).attr("class") == "sorting-choices-container-text") {
+                        if ($($(draggedItemTarget).parent()).attr("class") == "sorting-choices-container-text choice") {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;
                         }
@@ -316,7 +318,7 @@ var SortingView = React.createClass({
                     var answerLetter = item.letter;
                     var text = item.passedData;
 
-                    draggable = <li className="sorting-choices-container-text" key={page.xid + "choice-"+index}>
+                    draggable = <li className="sorting-choices-container-text choice" key={page.xid + "choice-"+index}>
                         <div
                             data={answerLetter}
                             draggable="true"
@@ -396,13 +398,13 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "string":
-                    answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+index+itemA.passedData}>
+                    answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+index+itemA.passedData}>
                         <div
                             draggable="true"
                             onDragStart={self.onDragging}>
                             {itemA.passedData}
-                            <span className={feedbackA}></span>
                         </div>
+                        <span className={feedbackA}></span>
                     </li>;
                     break;
                 default:
@@ -453,7 +455,7 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "string":
-                    answerRender = <li className="sorting-choices-container-text" key={page.xid + "colA-"+itemB.passedData}>
+                    answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+itemB.passedData}>
                         <div
                             draggable="true"
                             onDragStart={self.onDragging}>

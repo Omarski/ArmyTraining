@@ -22,10 +22,12 @@ var _compositionLoaded = false;
 function getPageState(props) {
     var title = "";
     var pageType = "";
+    var page = "";
 
     if (props && props.page) {
         title = props.page.title;
         pageType = props.page.type;
+        page = props.page;
     }
 
     if (PageStore.page() && PageStore.page().dialog && PageStore.page().dialog.lgid) {
@@ -39,6 +41,7 @@ function getPageState(props) {
 
     return {
         title: title,
+        page: page,
         pageType: pageType,
         data: ActiveDialogStore.activeDialog(),
         activeCOA: null
