@@ -195,13 +195,13 @@ var MultiNoteView = React.createClass({
         }
         if (p && p.image) {
             noteImage = (
-                <div className="col-md-8">
+                <div className="col-md-6">
                     <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
                 </div>
             );
 
             text = (
-                <div className="col-md-4" key={xid + "activetext"}>
+                <div className="col-md-6" key={xid + "activetext"}>
                     {p.text}
                 </div>
             );
