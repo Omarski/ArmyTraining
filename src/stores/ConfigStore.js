@@ -5,6 +5,13 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ConfigConstants = require('../constants/ConfigConstants');
 var PageStore = require('../stores/PageStore');
+var React = require('react');
+var ReactBootstrap = require('react-bootstrap');
+var Popover = ReactBootstrap.Popover;
+var ListGroup = ReactBootstrap.ListGroup;
+var ListGroupItem = ReactBootstrap.ListGroupItem;
+var Button = ReactBootstrap.Button;
+var ButtonGroup = ReactBootstrap.ButtonGroup;
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -36,6 +43,30 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
 
     isASREnabled: function(){
         return _needsASR;
+    },
+
+    getDLIGuides: function(){
+        //jquery ajax load please
+        console.log(".load");
+        console.dir("#modalbody");
+        $("#modalbody").load("../../reference/dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html");
+    },
+
+    constructDLI: function(){
+
+        var popOverList = <Popover id="settingsPopover" title='Reference Section [NYI]'>
+            <ButtonGroup vertical>
+                <Button>Baluchi</Button>
+                <Button>Dari</Button>
+                <Button>Pahsto(Afghanistan)</Button>
+                <Button>Pashto(Pakistan)</Button>
+                <Button>Punjabi</Button>
+                <Button>Sindhi</Button>
+                <Button>Urdu</Button>
+            </ButtonGroup>
+        </Popover>;
+
+        return popOverList;
     },
 
     emitChange: function() {

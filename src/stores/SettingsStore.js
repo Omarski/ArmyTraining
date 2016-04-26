@@ -46,6 +46,9 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
         if (settings && settings.voiceVolume) {
             v = settings.voiceVolume;
         }
+        if(settings && settings.voiceVolume == 0){ // intentionally == instead of === because not sure if 0 or 0.0
+            v = 0.0;
+        }
         return v;
     },
 
@@ -54,6 +57,9 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
         var settings = store.get('settings');
         if (settings && settings.backgroundVolume) {
             v = settings.backgroundVolume;
+        }
+        if(settings && settings.backgroundVolume == 0){ // intentionally == instead of === because not sure if 0 or 0.0
+            v = 0.0;
         }
         return v;
     },
