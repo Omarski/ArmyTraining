@@ -17,17 +17,13 @@ function getSettingsState() {
     var settings = store.get('settings') || {};
 
     var v = 1.0;
-    if(settings.voiceVolume){
+    if(settings.voiceVolume || settings.voiceVolume === 0){
         v = settings.voiceVolume;
-    }else if (settings.voiceVolume == 0){
-        v = 0.0;
     }
 
     var bv = 1.0;
-    if(settings.backgroundVolume){
+    if(settings.backgroundVolume || settings.backgroundVolume === 0){
         bv = settings.backgroundVolume;
-    }else if (settings.backgroundVolume == 0){
-        bv = 0.0;
     }
 
     return {

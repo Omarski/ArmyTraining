@@ -189,12 +189,12 @@ var InfoView = React.createClass({
         video = document.getElementById("video");
         if(video){
             video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            video.onvolumechange=function(){
+                self.updateVolume();
+            };
         }
         $('[data-toggle="tooltip"]').tooltip();
 
-        video.onvolumechange=function(){
-            self.updateVolume();
-        };
     },
 
     updateVolume: function(){
