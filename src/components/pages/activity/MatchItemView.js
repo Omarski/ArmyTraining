@@ -67,7 +67,7 @@ function getPageState(props) {
             data.answerState.push({letter: letter, isMoved: false, currentBox: "", currentBoxIndex: -1, mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
-
+    data.answerState = AGeneric().shuffle(data.answerState);
     return data;
 }
 
@@ -213,6 +213,8 @@ var MatchItemView = React.createClass({
             item.currentBox = "";
             item.currentBoxIndex = -1;
         });
+
+        answerState = AGeneric().shuffle(answerState);
 
         $(".match-item-choices-container div").each(function(i, item){
             $(item).css("opacity", "1.0");

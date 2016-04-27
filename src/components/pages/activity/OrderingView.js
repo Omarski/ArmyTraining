@@ -65,7 +65,7 @@ function getPageState(props) {
             data.answerState.push({letter: letter, isMoved: false, currentBox: "", currentBoxIndex: -1, mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
-
+    data.answerState = AGeneric().shuffle(data.answerState);
     return data;
 }
 
@@ -213,6 +213,8 @@ var OrderingView = React.createClass({
             item.currentBox = "";
             item.currentBoxIndex = -1;
         });
+
+        answerState = AGeneric().shuffle(answerState);
 
         // change class to be the container of the media object
         $(".or-choices-container div").each(function(i, item){
