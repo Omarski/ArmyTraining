@@ -18,7 +18,7 @@ function getSettingsState(props) {
         data.modalControl = props.modalControl;
     }
 
-    return {data};
+    return data;
 }
 
 var DliView = React.createClass({
