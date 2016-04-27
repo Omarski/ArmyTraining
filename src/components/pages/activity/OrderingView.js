@@ -162,7 +162,7 @@ var OrderingView = React.createClass({
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item) {
-                    if (draggedItemData === item.passedData) {
+                    if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.currentBoxIndex = dropLocationIndex;
                         item.isMoved = true;

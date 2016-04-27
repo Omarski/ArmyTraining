@@ -155,9 +155,6 @@ var SortingView = React.createClass({
         if(state.numMoved != state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter != "" && dropLocation != "") {
                 answerState.map(function (item) {
-                    console.log("dragged html: " + $(draggedItemTarget)[0].innerHTML);
-                    console.log("item.passed data: " + item.passedData);
-                    console.log($(draggedItemTarget)[0].innerHTML == item.passedData);
                     if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
