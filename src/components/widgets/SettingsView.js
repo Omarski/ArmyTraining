@@ -16,11 +16,21 @@ var SettingsActions = require('../../actions/SettingsActions');
 function getSettingsState() {
     var settings = store.get('settings') || {};
 
+    var v = 1.0;
+    if(settings.voiceVolume || settings.voiceVolume === 0){
+        v = settings.voiceVolume;
+    }
+
+    var bv = 1.0;
+    if(settings.backgroundVolume || settings.backgroundVolume === 0){
+        bv = settings.backgroundVolume;
+    }
+
     return {
         autoPlaySound: settings.autoPlaySound,
-        backgroundVolume: settings.backgroundVolume || 1.0,
+        backgroundVolume: bv,
         muted: settings.muted,
-        voiceVolume: settings.voiceVolume || 1.0,
+        voiceVolume: v,
         max : 1.0
     };
 }

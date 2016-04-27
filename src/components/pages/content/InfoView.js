@@ -6,6 +6,9 @@ var ClosedCaption = require('../../widgets/ClosedCaption');
 var ImageCaption = require('../../widgets/ImageCaption');
 
 
+var SettingsActions = require('../../../actions/SettingsActions');
+
+
 function getPageState(props) {
     var noteItems = "";
     var mediaItems = "";
@@ -186,8 +189,30 @@ var InfoView = React.createClass({
         video = document.getElementById("video");
         if(video){
             video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            video.onvolumechange=function(){
+                self.updateVolume();
+            };
         }
         $('[data-toggle="tooltip"]').tooltip();
+
+    },
+
+    updateVolume: function(){
+        var settings = store.get('settings') || {};
+        var video = document.getElementById("video");
+        var vol = 1.0;
+
+        if(settings.voiceVolume){
+            vol = settings.voiceVolume;
+        }
+        vol = video.volume;
+
+        //this is a bad fix, do not do this
+       // settings['voiceVolume'] = vol;
+       // store.set('settings', settings);
+        // ...
+
+        SettingsActions.updateVoiceVolume(vol);
     },
 
     componentWillUpdate: function(){
@@ -195,6 +220,7 @@ var InfoView = React.createClass({
     },
 
     componentDidUpdate: function(){
+
     },
 
     componentWillUnmount: function() {
@@ -258,7 +284,7 @@ var InfoView = React.createClass({
             );
         }
 
-
+        //update Please
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
