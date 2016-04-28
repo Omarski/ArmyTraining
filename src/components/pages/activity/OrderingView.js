@@ -65,7 +65,7 @@ function getPageState(props) {
             data.answerState.push({letter: letter, isMoved: false, currentBox: "", currentBoxIndex: -1, mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
-
+    data.answerState = AGeneric().shuffle(data.answerState);
     return data;
 }
 
@@ -162,7 +162,7 @@ var OrderingView = React.createClass({
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item) {
-                    if (draggedItemData === item.passedData) {
+                    if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.currentBoxIndex = dropLocationIndex;
                         item.isMoved = true;
@@ -213,6 +213,8 @@ var OrderingView = React.createClass({
             item.currentBox = "";
             item.currentBoxIndex = -1;
         });
+
+        answerState = AGeneric().shuffle(answerState);
 
         // change class to be the container of the media object
         $(".or-choices-container div").each(function(i, item){

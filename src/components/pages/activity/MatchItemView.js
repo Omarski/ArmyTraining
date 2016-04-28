@@ -67,7 +67,7 @@ function getPageState(props) {
             data.answerState.push({letter: letter, isMoved: false, currentBox: "", currentBoxIndex: -1, mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
-
+    data.answerState = AGeneric().shuffle(data.answerState);
     return data;
 }
 
@@ -153,6 +153,8 @@ var MatchItemView = React.createClass({
             if(!spotTaken){
                 dropLocation = $(e.target).attr("data-letter");
                 dropLocationIndex = Math.floor($(e.target).attr("data-index"));
+            }else{
+                //console .log("spot taken");
             }
         }
 
@@ -160,7 +162,7 @@ var MatchItemView = React.createClass({
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item, index) {
-                    if (draggedItemData === item.passedData) {
+                    if ($(draggedItemTarget)[0].textContent === item.passedData) {
                         item.currentBox = dropLocation;
                         item.currentBoxIndex = dropLocationIndex;
                         item.isMoved = true;
@@ -211,6 +213,8 @@ var MatchItemView = React.createClass({
             item.currentBox = "";
             item.currentBoxIndex = -1;
         });
+
+        answerState = AGeneric().shuffle(answerState);
 
         $(".match-item-choices-container div").each(function(i, item){
             $(item).css("opacity", "1.0");

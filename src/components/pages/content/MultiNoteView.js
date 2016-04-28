@@ -49,7 +49,7 @@ function playAudio(xid){
     source.src = "data/media/" + xid;
     audio.load();
     audio.play();
-    audio.volume = SettingsStore.voiceVolume();
+    audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
 }
 
 var MultiNoteView = React.createClass({
