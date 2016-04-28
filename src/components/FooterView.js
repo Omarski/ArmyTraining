@@ -172,6 +172,28 @@ var FooterView = React.createClass({
     },
 
     toggleTOC: function(event) {
+        // pause videos before opening TOC
+        var video = document.getElementById("video");
+        var audio = document.getElementById("audio");
+        if(video){
+            if(!this.state.expanded){
+                video.pause();
+            }else{
+                if(!video.ended){
+                    video.play();
+                }
+            }
+        }
+        if(audio){
+            if(!this.state.expanded){
+                audio.pause();
+            }else{
+                if(audio.ended) {
+                    audio.play();
+                }
+            }
+        }
+
         window.location.hash = "#" + PageStore.chapter().title + PageStore.page().title;
         this.setState(getUnitState(!this.state.expanded));
     },
