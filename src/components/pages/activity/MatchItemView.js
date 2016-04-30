@@ -141,6 +141,7 @@ var MatchItemView = React.createClass({
         var dropLocation = "";
         var dropLocationIndex = -1;
 
+
         if($(e.target).hasClass("match-item-answer-drop-area")){
             //if(drop location isn't taken)
             var spotTaken = false;
@@ -155,6 +156,48 @@ var MatchItemView = React.createClass({
                 dropLocationIndex = Math.floor($(e.target).attr("data-index"));
             }else{
                 //console .log("spot taken");
+            }
+        }
+
+        if($(e.target).hasClass("match-item-text-choice") || $(e.target).hasClass("match-item-image") || $(e.target).hasClass("match-item-play-icon")) {
+            if( !!$(draggedItemTarget).css("opacity")){
+                if($(draggedItemTarget).parent().parent().hasClass("col-md-3")){
+                    console.log("TRIED TO REMOVE ANSWER and it's not transparent");
+                    console.log("dragged item class: " + $(draggedItemTarget).attr("class"));
+                    console.log("dragged item- parent parent class: " + $(draggedItemTarget).parent().parent().attr("class"));
+                    console.dir($(draggedItemTarget));
+                    console.log("================");
+
+                    console.dir(answerState);
+                    answerState.map(function (item) {
+                        if($(draggedItemTarget)[0].textContent === item.passedData){
+                            item.isMoved = false;
+                            item.currentBox = "";
+                            item.currentBoxIndex = -1;
+                        }
+                    });
+
+                    $(".match-item-choices-container div").each(function(i, item){
+                        if(item.textContent == $(draggedItemTarget)[0].textContent){
+                            $(item).css("opacity", "1.0");
+                            numMoved--;
+                        }
+
+                        console.log("--------------");
+                        console.dir(item);
+                        console.log(item.innerText);
+                        console.log(item.outerHTML);
+                        console.log(item.textContent);
+                        console.log($(draggedItemTarget)[0].innerText);
+                        console.log($(draggedItemTarget)[0].outerHTML);
+                        console.log($(draggedItemTarget)[0].textContent);
+                        console.log(item.innerText == $(draggedItemTarget)[0].innerText);
+                        console.log(item.outerHTML == $(draggedItemTarget)[0].outerHTML);
+                        console.log(item.textContent == $(draggedItemTarget)[0].textContent);
+
+                        console.log("--------------");
+                    });
+                }
             }
         }
 
@@ -434,7 +477,11 @@ var MatchItemView = React.createClass({
 
                         <div className="row">
                             <div className="col-md-2">
-                                <ul className="match-item-choices-container">{choices}</ul>
+                                <ul className="match-item-choices-container"
+                                    onDragOver={self.onDraggingOver}
+                                    onDrop={self.onDropping}>
+                                    {choices}
+                                </ul>
                             </div>
                             <div className="col-md-10">
                                 <ul className="match-item-answers-container">
