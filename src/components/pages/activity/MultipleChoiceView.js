@@ -1,9 +1,8 @@
 var React = require('react');
+var CoachFeedbackView = require('../../widgets/CoachFeedbackView');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var ImageCaption = require('../../widgets/ImageCaption');
-var MC_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
-var MC_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
 function getPageState(props) {
     var mediaItems = "";
@@ -92,130 +91,6 @@ function getPageState(props) {
     return data;
 }
 
-// TODO <----------------------------- REMOVE ME ONCE COMPONENT IS ADDED------------------------------------------------
-function getFeedbackTest(feedbackText, isCorrect) {
-    var feedbackClass = "glyphicon MC-glyphicon MC-feedback";
-    var feedbackObject = null;
-    var mediaDir = "data/media/"; // TODO <-------------should be a global setting--------------------------------------
-    var coachMedia = "";
-    var imageSource = "MainlandFemale_Render01_exercisecrop.jpg";
-    var responder = "";
-
-    // construct sample data
-    // TODO these should be authorable <--------------------------------------------------------------------------------
-    var positiveFeedback = [
-        {
-            "asset": "coach_feedback_GREATJOB.mp4",
-            "text": "Great job!",
-            "type": "video/mp4"
-        },
-        {
-            "asset": "coach_feedback_OUTSTANDING.mp4",
-            "text": "Outstanding!",
-            "type": "video/mp4"
-        },
-        {
-            "asset": "coach_feedback_THATSEXACTLYRIGHT.mp4",
-            "text": "That's exactly right.",
-            "type": "video/mp4"
-        },
-        {
-            "asset": "coach_feedback_WELLDONE.mp4",
-            "text": "Well done!",
-            "type": "video/mp4"
-        },
-    ];
-
-    var negativeFeedback = [
-        {
-            "asset": "coach_feedback_THATSNOTQUITERIGHT.mp4",
-            "text": "That's not quite right.",
-            "type": "video/mp4"
-        },
-        {
-            "asset": "coach_feedback_KEEPTRYING.mp4",
-            "text": "Keep Trying.",
-            "type": "video/mp4"
-        },
-        {
-            "asset": "coach_feedback_NOTQUITE.mp4",
-            "text": "Not quite.",
-            "type": "video/mp4"
-        },
-        {
-            "asset": "coach_feedback_IMSORRYBUT.mp4",
-            "text": "I'm sorry, but that is not correct.",
-            "type": "video/mp4"
-        },
-    ];
-
-    // check if correct
-    if (isCorrect) {
-        feedbackClass += " multiple-choice-feedback-icon multiple-choice-correct " + MC_GLYPHICON_CORRECT_CLS;
-        feedbackObject = positiveFeedback[Math.floor(Math.random() * positiveFeedback.length)];
-    } else {
-        feedbackClass += " multiple-choice-feedback-icon multiple-choice-incorrect " + MC_GLYPHICON_INCORRECT_CLS;
-        feedbackObject = negativeFeedback[Math.floor(Math.random() * negativeFeedback.length)];
-    }
-
-    // construct feedback object
-    if (feedbackObject) {
-        // check if asset exists
-        if ("asset" in feedbackObject && feedbackObject["asset"].length > 0) {
-
-            // check asset type
-            // TODO make more robust
-            if (feedbackObject["type"] === "video/mp4") {
-                // TODO move video style to css <-----------------------------------------------------------------------
-                coachMedia = (
-                    <div className="thumbnail">
-                         <video id="coachVideo" width="110" height="110">
-                            <source src={mediaDir + feedbackObject["asset"]} type="video/mp4"></source>
-                         </video>
-                    </div>
-                );
-            } else if (feedbackObject["type"] === "image/jpeg") {
-                coachMedia = (
-                    <div className="thumbnail">
-                        <img src={mediaDir + feedbackObject["asset"]}></img>
-                    </div>
-                );
-            } else {
-                // TODO add default <-----------------------------------------------------------------------------------
-            }
-        }
-
-        // check if text exists
-        var cannedText = "";
-        if ("text" in feedbackObject && feedbackObject["text"].length > 0) {
-            cannedText = feedbackObject["text"];
-        }
-
-        responder = (
-            <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div className="multiple-choice-alert-text">
-                    {coachMedia}<h5><span className={feedbackClass}></span>{cannedText}<br>{feedbackText}</br></h5>
-                </div>
-            </div>
-        );
-
-    } else {
-        responder = (
-            <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div className="multiple-choice-alert-text">
-                    {coach}<h5><span className={feedbackClass}></span>{feedbackText}</h5>
-                </div>
-            </div>
-        );
-    }
-
-    return responder;
-
-}
-// TODO END <----------------------------- REMOVE ME ONCE COMPONENT IS ADDED--------------------------------------------
-
 function getFeedback(answers, selectedAnswer){
     var getter = "getFeedback could not find selected Answer.";
     answers.map(function(item){
@@ -274,21 +149,9 @@ var MultipleChoiceView = React.createClass({
             }
         });
         // TODO end of remove me----------------------------------------------------------------------------------------
-
-
     },
 
     componentDidUpdate: function(){
-        // TODO remove hack to play updated coach video-----------------------------------------------------------------
-        // find video
-        var coachVideo = document.getElementById("coachVideo");
-
-        // load and play it
-        if (coachVideo != null) {
-            coachVideo.load();
-            coachVideo.play();
-        }
-        // TODO end hack------------------------------------------------------------------------------------------------
     },
 
     componentWillUnmount: function() {
@@ -307,8 +170,7 @@ var MultipleChoiceView = React.createClass({
             if (this.value == answer) {
                 this.checked = true;
                 isCorrect = (answer == target);
-                feedback = getFeedback(state.answers, answer);
-                feedback = getFeedbackTest(feedback, isCorrect);
+                feedback = (<CoachFeedbackView text={getFeedback(state.answers, answer)} isCorrect={isCorrect} />);
             } else {
                 this.checked = false;
             }
@@ -388,7 +250,9 @@ var MultipleChoiceView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        if(this.isMounted()) {
+            this.setState(getPageState());
+        }
     }
 });
 

@@ -1,5 +1,6 @@
 var React = require('react');
 var BookStore = require('../stores/BookStore');
+var CoachFeedbackActions = require('../actions/CoachFeedbackActions');
 var LoaderStore = require('../stores/LoaderStore');
 var LoaderActions = require('../actions/LoaderActions');
 var HeaderView = require('../components/HeaderView');
@@ -36,6 +37,7 @@ var MainView = React.createClass({
     componentDidMount: function() {
         LoaderStore.addChangeListener(this._onChange);
         NotificationActions.show({title:'Please wait', body:'Loading...'});
+        CoachFeedbackActions.load();
         LoaderActions.load();
     },
 
