@@ -12,6 +12,18 @@ function getCoachFeedbackState(props) {
     };
 }
 
+function playCoachFeedback() {
+    // find video
+    var coachVideo = document.getElementById("coachVideo");
+
+    // load and play it
+    if (coachVideo != null) {
+        coachVideo.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        coachVideo.load();
+        coachVideo.play();
+    }
+}
+
 var CoachFeedbackView = React.createClass({
 
     propTypes: {
@@ -31,27 +43,11 @@ var CoachFeedbackView = React.createClass({
     },
 
     componentDidMount: function() {
-        // find video
-        var coachVideo = document.getElementById("coachVideo");
-
-        // load and play it
-        if (coachVideo != null) {
-            coachVideo.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-            coachVideo.load();
-            coachVideo.play();
-        }
+        playCoachFeedback();
     },
 
     componentDidUpdate: function() {
-        // find video
-        var coachVideo = document.getElementById("coachVideo");
-
-        // load and play it
-        if (coachVideo != null) {
-            coachVideo.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-            coachVideo.load();
-            coachVideo.play();
-        }
+        playCoachFeedback();
     },
 
     componentWillMount: function() {
