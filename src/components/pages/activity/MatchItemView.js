@@ -161,41 +161,20 @@ var MatchItemView = React.createClass({
 
         if($(e.target).hasClass("match-item-text-choice") || $(e.target).hasClass("match-item-image") || $(e.target).hasClass("match-item-play-icon")) {
             if( !!$(draggedItemTarget).css("opacity")){
-                if($(draggedItemTarget).parent().parent().hasClass("col-md-3")){
-                    console.log("TRIED TO REMOVE ANSWER and it's not transparent");
-                    console.log("dragged item class: " + $(draggedItemTarget).attr("class"));
-                    console.log("dragged item- parent parent class: " + $(draggedItemTarget).parent().parent().attr("class"));
-                    console.dir($(draggedItemTarget));
-                    console.log("================");
-
-                    console.dir(answerState);
+                if($(draggedItemTarget).parent().parent().hasClass("col-md-3") || $(draggedItemTarget).parent().parent().hasClass("match-item-answer-drop-area")) {
                     answerState.map(function (item) {
-                        if($(draggedItemTarget)[0].textContent === item.passedData){
+                        if(draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData){
                             item.isMoved = false;
                             item.currentBox = "";
                             item.currentBoxIndex = -1;
                         }
                     });
 
-                    $(".match-item-choices-container div").each(function(i, item){
-                        if(item.textContent == $(draggedItemTarget)[0].textContent){
-                            $(item).css("opacity", "1.0");
+                    $(".match-item-choices-container div").map(function(i, index){
+                        if(index.attributes.getNamedItem("data-passed").value === draggedItemTarget.attributes.getNamedItem("data-passed").value ){
+                            $(index).css("opacity", "1.0");
                             numMoved--;
                         }
-
-                        console.log("--------------");
-                        console.dir(item);
-                        console.log(item.innerText);
-                        console.log(item.outerHTML);
-                        console.log(item.textContent);
-                        console.log($(draggedItemTarget)[0].innerText);
-                        console.log($(draggedItemTarget)[0].outerHTML);
-                        console.log($(draggedItemTarget)[0].textContent);
-                        console.log(item.innerText == $(draggedItemTarget)[0].innerText);
-                        console.log(item.outerHTML == $(draggedItemTarget)[0].outerHTML);
-                        console.log(item.textContent == $(draggedItemTarget)[0].textContent);
-
-                        console.log("--------------");
                     });
                 }
             }
@@ -205,16 +184,30 @@ var MatchItemView = React.createClass({
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item, index) {
-                    if ($(draggedItemTarget)[0].textContent === item.passedData) {
-                        item.currentBox = dropLocation;
-                        item.currentBoxIndex = dropLocationIndex;
-                        item.isMoved = true;
-                        if ($(draggedItemTarget).parent().parent().attr("class") === "match-item-choices-container") {
-                            $(draggedItemTarget).css("opacity", "0.3");
-                            numMoved++;
+                    if(item.mediaType === "string"){
+                        if ($(draggedItemTarget)[0].textContent === item.passedData) {
+                            item.currentBox = dropLocation;
+                            item.currentBoxIndex = dropLocationIndex;
+                            item.isMoved = true;
+                            if ($(draggedItemTarget).parent().parent().attr("class") === "match-item-choices-container") {
+                                $(draggedItemTarget).css("opacity", "0.3");
+                                numMoved++;
+                            }
+                            itemFound = true;
                         }
-                        itemFound = true;
+                    }else{ // if( "image" || "audio" )
+                        if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
+                            item.currentBox = dropLocation;
+                            item.currentBoxIndex = dropLocationIndex;
+                            item.isMoved = true;
+                            if ($(draggedItemTarget).parent().parent().attr("class") === "match-item-choices-container") {
+                                $(draggedItemTarget).css("opacity", "0.3");
+                                numMoved++;
+                            }
+                            itemFound = true;
+                        }
                     }
+
                 });
             }
         }
@@ -346,8 +339,8 @@ var MatchItemView = React.createClass({
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
                             draggable="true"
-                            data={letter}
                             data-passed={item.passedData}
+                            data={letter}
                             onDragStart={self.onDragging}>
                             <img draggable="false" className="match-item-image" src={"data/media/"+source}></img>
                         </div>
@@ -401,8 +394,9 @@ var MatchItemView = React.createClass({
                         case "audio":
                             answerRender = <div
                                     data={state.answerState[i].passedData}
-                                    className="match-item-play-icon"
+                                    data-passed={state.answerState[i].passedData}
                                     draggable="true"
+                                    className="match-item-play-icon"
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
                                     <span className="glyphicon glyphicon-play-circle"></span>
@@ -415,6 +409,7 @@ var MatchItemView = React.createClass({
                             answerRender = <li key={page.xid + "choice-"+index}>
                                 <div
                                     draggable="true"
+                                    data-passed={source}
                                     onDragStart={self.onDragging}
                                     className="match-item-answer-image"
                                 >
@@ -428,6 +423,7 @@ var MatchItemView = React.createClass({
                             answerRender = (
                                 <div
                                     className="match-item-text-choice"
+                                    data-passed={answerState[i].passedData}
                                     draggable="true"
                                     onDragStart={self.onDragging}
                                     >
