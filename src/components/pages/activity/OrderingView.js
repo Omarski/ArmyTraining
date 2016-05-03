@@ -158,19 +158,56 @@ var OrderingView = React.createClass({
             //    dropLocation = $(e.target).parent().attr("data-letter");
             //}
         }
+
+        if($(e.target).hasClass("or-text-choice") || $(e.target).hasClass("or-image") || $(e.target).hasClass("or-play-icon")) {
+            if( !!$(draggedItemTarget).css("opacity")){
+                if($(draggedItemTarget).parent().parent().hasClass("col-md-3") || $(draggedItemTarget).parent().parent().hasClass("or-answer")) {
+                    answerState.map(function (item) {
+
+
+                        if(draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
+                            item.isMoved = false;
+                            item.currentBox = "";
+                            item.currentBoxIndex = -1;
+                        }
+                    });
+
+                    $(".or-choices-container div").map(function(i, index){
+                        if(index.attributes.getNamedItem("data-passed").value === draggedItemTarget.attributes.getNamedItem("data-passed").value ){
+                            $(index).css("opacity", "1.0");
+                            numMoved--;
+                        }
+                    });
+                }
+            }
+        }
+
         var itemFound = false;
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item) {
-                    if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
-                        item.currentBox = dropLocation;
-                        item.currentBoxIndex = dropLocationIndex;
-                        item.isMoved = true;
-                        if ($(draggedItemTarget).parent().parent().attr("class") === "or-choices-container") {
-                            $(draggedItemTarget).css("opacity", "0.3");
-                            numMoved++;
+                    if(item.mediaType === "string"){
+                        if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
+                            item.currentBox = dropLocation;
+                            item.currentBoxIndex = dropLocationIndex;
+                            item.isMoved = true;
+                            if ($(draggedItemTarget).parent().parent().attr("class") === "or-choices-container") {
+                                $(draggedItemTarget).css("opacity", "0.3");
+                                numMoved++;
+                            }
+                            itemFound = true;
                         }
-                        itemFound = true;
+                    }else{ // if ("image" || "audio")
+                        if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
+                            item.currentBox = dropLocation;
+                            item.currentBoxIndex = dropLocationIndex;
+                            item.isMoved = true;
+                            if ($(draggedItemTarget).parent().parent().attr("class") === "or-choices-container") {
+                                $(draggedItemTarget).css("opacity", "0.3");
+                                numMoved++;
+                            }
+                            itemFound = true;
+                        }
                     }
                 });
             }
@@ -283,8 +320,8 @@ var OrderingView = React.createClass({
                     var zid = item.passedData;
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
-                            data={zid}
                             data-passed={item.passedData}
+                            data={zid}
                             className="or-playicon"
                             draggable="true"
                             onDragStart={self.onDragging}
@@ -298,9 +335,9 @@ var OrderingView = React.createClass({
                     var letter = item.letter;
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
+                            data-passed={item.passedData}
                             draggable="true"
                             data={letter}
-                            data-passed={item.passedData}
                             onDragStart={self.onDragging}>
                             <img draggable="false" src={"data/media/"+source}></img>
                         </div>
@@ -313,8 +350,8 @@ var OrderingView = React.createClass({
 
                     draggable = <li key={page.xid + "choice-"+index}>
                         <div
-                            data={answerLetter}
                             data-passed={item.passedData}
+                            data={answerLetter}
                             className="or-text-choice"
                             draggable="true"
                             onDragStart={self.onDragging}>
@@ -355,6 +392,7 @@ var OrderingView = React.createClass({
                     switch (state.answerState[i].mediaType) {
                         case "audio":
                             answerRender = <div
+                                data-passed={state.answerState[i].passedData}
                                 data={state.answerState[i].passedData}
                                 className="or-play-icon"
                                 draggable="true"
@@ -369,6 +407,7 @@ var OrderingView = React.createClass({
                             var source = answerState[i].passedData;
                             answerRender = <li key={page.xid + "choice-"+index}>
                                 <div
+                                    data-passed={source}
                                     draggable="true"
                                     onDragStart={self.onDragging}>
                                     <img draggable="false" src={"data/media/"+source}></img>
@@ -379,6 +418,7 @@ var OrderingView = React.createClass({
                         case "string":
                             answerRender = (
                                 <div
+                                    data-passed={state.answerState[i].passedData}
                                     className="or-text-choice"
                                     draggable="true"
                                     onDragStart={self.onDragging}
@@ -417,7 +457,11 @@ var OrderingView = React.createClass({
 
                     <div className="container-fluid or-choice-answer-container">
                         <div className="row">
-                            <ul className="or-choices-container">{choices}</ul>
+                            <ul className="or-choices-container"
+                                onDragOver={self.onDraggingOver}
+                                onDrop={self.onDropping}>
+                                {choices}
+                            </ul>
                         </div>
                         <div className="row">
                             <ul className="or-answers-container">
