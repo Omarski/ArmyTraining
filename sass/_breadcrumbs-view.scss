@@ -10,6 +10,9 @@
   position: absolute;
   top: 70px;
   font-size: 20px;
+  &.selected{
+    color: #000;
+  }
 }
 
 .main-nav-bookmark-add {

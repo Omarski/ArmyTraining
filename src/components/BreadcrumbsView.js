@@ -2,13 +2,15 @@ var React = require('react');
 var PageStore = require('../stores/PageStore');
 var PageActions = require('../actions/PageActions');
 var BookmarkActions = require('../actions/BookmarkActions');
+var BookmarkStore = require('../stores/BookmarkStore');
+var NotificationActions = require('../actions/NotificationActions');
 
 function getPageState() {
     var page = null;
     var unitTitle = "";
     var chapterTitle = "";
     var pageTitle = "";
-
+    var bookmarked = false;
 
     if (PageStore.loadingComplete()) {
         page = PageStore.page();
@@ -18,10 +20,18 @@ function getPageState() {
 
     }
 
+    if (BookmarkStore.bookmark() &&
+        BookmarkStore.bookmark().page &&
+        page &&
+        (BookmarkStore.bookmark().page === page.xid)) {
+        bookmarked = true;
+    }
+
     return {
         pageTitle: pageTitle,
         unitTitle: unitTitle,
-        chapterTitle: chapterTitle
+        chapterTitle: chapterTitle,
+        bookmarked: bookmarked
     };
 }
 
@@ -33,7 +43,14 @@ var BreadcrumbsView = React.createClass({
             page: PageStore.page().xid
         };
 
+        NotificationActions.show({
+            title:'Bookmark',
+            body: PageStore.page().title + ' bookmarked!',
+            allowDismiss: true,
+            percent: ""
+        });
         BookmarkActions.create(bm);
+        this.setState(getPageState());
 
     },
     getInitialState: function() {
@@ -62,14 +79,15 @@ var BreadcrumbsView = React.createClass({
                     <li><a href="#" className="active">{this.state.pageTitle}</a></li>
                 </ol>
 
-                    <button
-                        id="breadcrumbsButton"
-                        type="button"
-                        className="btn btn-default btn-link main-nav-bookmark"
-                        onClick={this.bookmark}
-                        >
-                        <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
-                    </button>
+
+                <button
+                    id="breadcrumbsButton"
+                    type="button"
+                    className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
+                    onClick={this.bookmark}
+                    >
+                    <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                </button>
 
             </div>
 
