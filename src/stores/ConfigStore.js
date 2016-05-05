@@ -52,6 +52,14 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
         $("#modalbody").load("../../reference/dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html");
     },
 
+    getDliList: function(){
+        var list = ["Baluchi", "Dari", "Pahsto(Afghanistan)", "Pashto(Pakistan)", "Punjabi", "Sindhi", "Urdu"];
+
+        return({
+            names: list
+        })
+    },
+
     constructDLI: function(){
 
         var popOverList = <Popover id="settingsPopover" title='Reference Section [NYI]'>

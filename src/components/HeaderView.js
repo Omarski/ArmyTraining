@@ -10,6 +10,7 @@ var DliView = require("../components/widgets/DliView");
 var Modal = ReactBootstrap.Modal;
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
+var Popover = ReactBootstrap.Popover;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -83,6 +84,18 @@ var HeaderView = React.createClass({
         this.setState({ showModal: false });
     },
 
+    constructDLI: function(){
+        var nameList = ConfigStore.getDliList().names;
+
+        var selections = nameList.map(function(item, index){
+            return(<ReactBootstrap.MenuItem key={"menuItem"+index} onClick={this.openDliWindow}>{item}</ReactBootstrap.MenuItem>);
+        });
+        console.dir(nameList);
+        return(<Popover key={"dlipopoverList"} id="dliPopover" title='DLI Section [NYI]'>
+            {selections}
+        </Popover>);
+    },
+
     openDliWindow: function(){
         this.setState({ showModal: true }); /* show modal */
     },
@@ -95,15 +108,10 @@ var HeaderView = React.createClass({
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
         var dliIcon = <span className="glyphicon glyphicon-book btn-icon" aria-hidden="true"></span>;
         var referenceIcon = <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>;
+        var self = this;
         if (this.state.muted) {
             muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
         }
-
-        var popover =   (<OverlayTrigger trigger='click' placement='left' overlay={ConfigStore.constructDLI()}>
-            <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
-                <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
-            </Button>
-        </OverlayTrigger>);
 
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -118,7 +126,7 @@ var HeaderView = React.createClass({
                             <button onClick={this.openDliWindow} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
                                 {dliIcon}
                             </button>
-                            <OverlayTrigger trigger='click' placement='left' overlay={ConfigStore.constructDLI()}>
+                            <OverlayTrigger trigger='click' rootClose placement='left' id="DliOverlayTrigger" overlay={self.constructDLI()}>
                                 <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
                                     {referenceIcon}
                                 </Button>
