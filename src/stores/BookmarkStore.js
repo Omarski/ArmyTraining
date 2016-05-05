@@ -5,9 +5,33 @@ var BookmarkConstants = require('../constants/BookmarkConstants');
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
+function setCurrent(data) {
+    var bm = store.get('bookmark');
+    var obj = {};
+    if (bm) {
+        obj.current = data;
+        obj.bookmarks = bm.bookmarks;
+    } else {
+        obj['current'] = data;
+        obj['bookmarks'] = [];
+    }
+    store.set('bookmark', obj);
+}
+
 
 function create(data) {
-    store.set('bookmark', data);
+    var bm = store.get('bookmark');
+    var obj = {};
+    if (bm) {
+        obj.current = data;
+        obj.bookmarks = bm.bookmarks;
+        obj.bookmarks.push(data);
+    } else {
+        obj['current'] = data;
+        obj['bookmarks'] = [data];
+    }
+
+    store.set('bookmark', obj);
 }
 
 function destroy() {
@@ -16,8 +40,14 @@ function destroy() {
 
 var BookmarkStore = assign({}, EventEmitter.prototype, {
 
-    bookmark: function() {
-        return store.get('bookmark');
+    current: function() {
+        var bm = store.get('bookmark');
+        return (bm) ? bm.current : null;
+    },
+
+    bookmarks: function() {
+        var bm = store.get('bookmark');
+        return (bm) ? bm.bookmarks : null;
     },
 
     emitChange: function() {
@@ -36,6 +66,10 @@ var BookmarkStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     switch(action.actionType) {
+        case BookmarkConstants.BOOKMARK_SET_CURRENT:
+            setCurrent(action.data);
+            BookmarkStore.emitChange();
+            break;
         case BookmarkConstants.BOOKMARK_CREATE:
             create(action.data);
             BookmarkStore.emitChange();

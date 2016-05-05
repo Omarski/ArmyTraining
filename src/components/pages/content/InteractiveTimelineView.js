@@ -117,8 +117,9 @@ var InteractiveTimelineView = React.createClass({
         return (
             <div className="absolute-full">
                 <div className="absolute-full" key={"page-" + this.state.page.xid}>
-                    <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+
                     <div className="absolute-full">
+                            <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
 
                             <div className="timeline-image-container thumbnail">
                                 {image}

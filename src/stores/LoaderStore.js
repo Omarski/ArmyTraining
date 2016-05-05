@@ -116,7 +116,7 @@ function loadChapterPages(units, unit, index) {
                 NotificationActions.updateBody("Loading Page : " + page.title);
 
                 setTimeout(function () {
-                    var bookmark = BookmarkStore.bookmark();
+                    var bookmark = BookmarkStore.current();
                     if (bookmark) {
                         PageActions.jump(bookmark);
                     } else {
