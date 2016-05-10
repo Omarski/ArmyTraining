@@ -26,8 +26,13 @@ function getSettingsState() {
         bv = settings.backgroundVolume;
     }
 
+    var aps = true;
+    if(settings.autoPlaySound === false){
+        aps = false;
+    }
+
     return {
-        autoPlaySound: settings.autoPlaySound,
+        autoPlaySound: aps,
         backgroundVolume: bv,
         muted: settings.muted,
         voiceVolume: v,

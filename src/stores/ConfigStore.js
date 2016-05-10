@@ -45,36 +45,36 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
         return _needsASR;
     },
 
-    getDLIGuides: function(){
-        //jquery ajax load please
-        console.log(".load");
-        console.dir("#modalbody");
-        $("#modalbody").load("../../reference/dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html");
-    },
-
     getDliList: function(){
-        var list = ["Baluchi", "Dari", "Pahsto(Afghanistan)", "Pashto(Pakistan)", "Punjabi", "Sindhi", "Urdu"];
+        // var list = ["Baluchi", "Dari", "Pahsto(Afghanistan)", "Pashto(Pakistan)", "Punjabi", "Sindhi", "Urdu"];
+        var list = [{
+            name: "Baluchi",
+            path: "dli/Baluchi_SCO_bt_bc_LSK/bt_bc_LSK/default.html"
+        },{
+            name: "Dari",
+            path: "dli/Dari_pg_bc_SCORM_2004/pg_bc_LSK/default.html"
+        },{
+            name: "Pahsto(Afghanistan)",
+            path: "dli/Pahsto(Afghanistan)_SCO_pu_bc_SCORM_2004/pu_bc_LSK/default.html"
+        },{
+            name: "Pashto(Pakistan)",
+            path: "dli/Pashto(Pakistan)_pw_bc_SCORM_2004/pw_bc_LSK/default.html"
+        },{
+            name: "Punjabi",
+            path: "dli/Punjabi_pj_bc_SCORM_2004/pj_bc_LSK/default.html"
+        },{
+            name: "Sindhi",
+            path: "dli/Sindhi_sd_bc_SCORM_2004/sd/bc/LSK/default.html"
+        },{
+            name: "Urdu",
+            path: "dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html"
+        }];
+        // read which DLI Guides are available from the config file
+
 
         return({
-            names: list
+            dli: list
         })
-    },
-
-    constructDLI: function(){
-
-        var popOverList = <Popover id="settingsPopover" title='Reference Section [NYI]'>
-            <ButtonGroup vertical>
-                <Button>Baluchi</Button>
-                <Button>Dari</Button>
-                <Button>Pahsto(Afghanistan)</Button>
-                <Button>Pashto(Pakistan)</Button>
-                <Button>Punjabi</Button>
-                <Button>Sindhi</Button>
-                <Button>Urdu</Button>
-            </ButtonGroup>
-        </Popover>;
-
-        return popOverList;
     },
 
     emitChange: function() {

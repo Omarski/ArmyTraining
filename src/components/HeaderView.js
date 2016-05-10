@@ -16,6 +16,7 @@ function getBookState() {
     var books = BookStore.getAll();
     var book = null;
     var title = "";
+    var nameList = ConfigStore.getDliList().dli;
     for (var key in books) {
         book = books[key];
         break;
@@ -28,7 +29,9 @@ function getBookState() {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
-        previousVolume: null
+        previousVolume: null,
+        nameList: nameList,
+        iframeSrc: ""
     };
 }
 
@@ -74,34 +77,33 @@ var HeaderView = React.createClass({
         BookStore.removeChangeListener(this._onChange);
     },
 
-    openDLI: function(){
-        var dliGuides = ConfigStore.getDLIGuides();
-
-        return (dliGuides);
-    },
-
     close: function(){
         this.setState({ showModal: false });
     },
 
-    constructDLI: function(){
-        var nameList = ConfigStore.getDliList().names;
-
-        var selections = nameList.map(function(item, index){
-            return(<ReactBootstrap.MenuItem key={"menuItem"+index} onClick={this.openDliWindow}>{item}</ReactBootstrap.MenuItem>);
+    openDliWindow: function(name, e){
+        var self = this;
+        var list = this.state.nameList;
+        var src = "";
+        // get list of default.html's and open the correct one in the modal
+        list.map(function(item, index){
+            if(name === item.name){
+                src = item.path;
+            }
         });
-        console.dir(nameList);
-        return(<Popover key={"dlipopoverList"} id="dliPopover" title='DLI Section [NYI]'>
-            {selections}
-        </Popover>);
-    },
-
-    openDliWindow: function(){
-        this.setState({ showModal: true }); /* show modal */
+        this.setState({ showModal: true, iframeSrc: src }); /* show modal */
     },
 
     openReference: function(){
         console.log("attempting to open reference section...(NYI)");
+    },
+
+    getCurrentDliPath: function(){
+
+    },
+
+    updateDliPath:function(){
+
     },
 
     render: function() {
@@ -113,6 +115,21 @@ var HeaderView = React.createClass({
             muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
         }
 
+        var nameList = self.state.nameList;
+        var selections = nameList.map(function(item, index){
+            return(<ReactBootstrap.ListGroupItem>
+                <a key={"dliPopoverLinks"+index}  href="#" onClick={self.openDliWindow.bind(self, item.name)}>{item.name}</a>
+            </ReactBootstrap.ListGroupItem>);
+        });
+
+        var popOver = (<Popover key={"dlipopoverList"} id="dliPopover" title='DLI Section [NYI]'>
+            <ReactBootstrap.ListGroup>
+                {selections}
+            </ReactBootstrap.ListGroup>
+        </Popover>);
+
+
+
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container main-nav-container">
@@ -123,14 +140,14 @@ var HeaderView = React.createClass({
                     </div>
                     <div id="navbar" className="navbar main-nav-bar">
                         <div className="nav navbar-nav main-nav-bar-nav">
-                            <button onClick={this.openDliWindow} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
-                                {dliIcon}
-                            </button>
-                            <OverlayTrigger trigger='click' rootClose placement='left' id="DliOverlayTrigger" overlay={self.constructDLI()}>
+                            <OverlayTrigger trigger='click' rootClose placement='left' id="DliOverlayTrigger" overlay={popOver}>
                                 <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
-                                    {referenceIcon}
+                                    {dliIcon}
                                 </Button>
                             </OverlayTrigger>
+                            <button onClick={this.openReference} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
+                               {referenceIcon}
+                            </button>
                             <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
                                 {muteIcon}
                             </button>
@@ -146,7 +163,7 @@ var HeaderView = React.createClass({
                         <Modal.Title>DLI Guides</Modal.Title>
                     </Modal.Header>
                     <Modal.Body id="modalbody">
-                        <iframe className="dliframe" src="dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html"></iframe>
+                        <iframe id="iframe" className="dliframe" src={self.state.iframeSrc}></iframe>
                     </Modal.Body>
                 </Modal>
 
