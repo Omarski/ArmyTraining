@@ -47,6 +47,7 @@ var DliView = React.createClass({
                 src = item.path;
             }
         });
+        document.getElementById("dliPopover").setAttribute("class", "fade out"); /* hide popover */
         this.setState({ showModal: true, iframeSrc: src }); /* show modal */
     },
 
@@ -72,7 +73,7 @@ var DliView = React.createClass({
             </ReactBootstrap.ListGroupItem>);
         });
 
-        var popOver = (<Popover key={"dlipopoverList"} id="dliPopover" title='DLI Section [NYI]'>
+        var popOver = (<Popover key={"dlipopoverList"} id="dliPopover" title='DLI Section'>
             <ReactBootstrap.ListGroup>
                 {selections}
             </ReactBootstrap.ListGroup>

@@ -64,7 +64,7 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
             path: "dli/Punjabi_pj_bc_SCORM_2004/pj_bc_LSK/default.html"
         },{
             name: "Sindhi",
-            path: "dli/Sindhi_sd_bc_SCORM_2004/sd/bc/LSK/default.html"
+            path: "dli/Sindhi_sd_bc_SCORM_2004/sd_bc_LSK/default.html"
         },{
             name: "Urdu",
             path: "dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html"
