@@ -7,6 +7,7 @@ var SettingsActions = require('../actions/SettingsActions');
 var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
 var DliView = require("../components/widgets/DliView");
+var ReferenceView = require("../components/reference_guide/ReferenceView");
 var Modal = ReactBootstrap.Modal;
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
