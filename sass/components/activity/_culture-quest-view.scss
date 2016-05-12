@@ -3,14 +3,10 @@
   margin-right:auto;
 }
 
-.cultureQuest-region {
-  z-index:1;
-  position: absolute;
-  cursor: pointer;
-}
-
 .cultureQuest-region-canvas {
-  z-index:1;
+  display:block;
+  z-index:2;
+  pointer-events: auto;
   position: absolute;
   cursor: pointer;
 }
