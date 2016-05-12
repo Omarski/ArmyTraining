@@ -7,6 +7,7 @@ var SettingsActions = require('../actions/SettingsActions');
 var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
 var DliView = require("../components/widgets/DliView");
+
 var Modal = ReactBootstrap.Modal;
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
@@ -16,7 +17,6 @@ function getBookState() {
     var books = BookStore.getAll();
     var book = null;
     var title = "";
-    var nameList = ConfigStore.getDliList().dli;
     for (var key in books) {
         book = books[key];
         break;
@@ -29,9 +29,7 @@ function getBookState() {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
-        previousVolume: null,
-        nameList: nameList,
-        iframeSrc: ""
+        previousVolume: null
     };
 }
 
@@ -77,22 +75,6 @@ var HeaderView = React.createClass({
         BookStore.removeChangeListener(this._onChange);
     },
 
-    close: function(){
-        this.setState({ showModal: false });
-    },
-
-    openDliWindow: function(name, e){
-        var self = this;
-        var list = this.state.nameList;
-        var src = "";
-        // get list of default.html's and open the correct one in the modal
-        list.map(function(item, index){
-            if(name === item.name){
-                src = item.path;
-            }
-        });
-        this.setState({ showModal: true, iframeSrc: src }); /* show modal */
-    },
 
     openReference: function(){
         console.log("attempting to open reference section...(NYI)");
@@ -108,25 +90,11 @@ var HeaderView = React.createClass({
 
     render: function() {
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
-        var dliIcon = <span className="glyphicon glyphicon-book btn-icon" aria-hidden="true"></span>;
         var referenceIcon = <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>;
         var self = this;
         if (this.state.muted) {
             muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
         }
-
-        var nameList = self.state.nameList;
-        var selections = nameList.map(function(item, index){
-            return(<ReactBootstrap.ListGroupItem>
-                <a key={"dliPopoverLinks"+index}  href="#" onClick={self.openDliWindow.bind(self, item.name)}>{item.name}</a>
-            </ReactBootstrap.ListGroupItem>);
-        });
-
-        var popOver = (<Popover key={"dlipopoverList"} id="dliPopover" title='DLI Section [NYI]'>
-            <ReactBootstrap.ListGroup>
-                {selections}
-            </ReactBootstrap.ListGroup>
-        </Popover>);
 
 
 
@@ -140,11 +108,7 @@ var HeaderView = React.createClass({
                     </div>
                     <div id="navbar" className="navbar main-nav-bar">
                         <div className="nav navbar-nav main-nav-bar-nav">
-                            <OverlayTrigger trigger='click' rootClose placement='left' id="DliOverlayTrigger" overlay={popOver}>
-                                <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
-                                    {dliIcon}
-                                </Button>
-                            </OverlayTrigger>
+                            <DliView />
                             <button onClick={this.openReference} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
                                {referenceIcon}
                             </button>
@@ -156,16 +120,6 @@ var HeaderView = React.createClass({
                     </div>
                     <BreadcrumbsView />
                 </div>
-
-
-                <Modal dialogClassName="dlimodal" bsSize="large" show={this.state.showModal} onHide={this.close}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>DLI Guides</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body id="modalbody">
-                        <iframe id="iframe" className="dliframe" src={self.state.iframeSrc}></iframe>
-                    </Modal.Body>
-                </Modal>
 
             </nav>
         );
