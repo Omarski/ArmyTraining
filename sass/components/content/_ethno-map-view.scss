@@ -1,0 +1,11 @@
+.ethno-map {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.ethnoMap-region-canvas {
+  display:block;
+  z-index:10;
+  position: absolute;
+  cursor: pointer;
+}
