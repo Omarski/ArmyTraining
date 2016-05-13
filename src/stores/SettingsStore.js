@@ -67,8 +67,8 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
     autoPlaySound: function() {
         var aps = true;
         var settings = store.get('settings');
-        if (settings && settings.autoPlaySound) {
-            aps = settings.autoPlaySound;
+        if (settings && settings.autoPlaySound === false) {
+            aps = false;
         }
         return aps;
     },

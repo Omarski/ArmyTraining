@@ -126,7 +126,7 @@ var BreadcrumbsView = React.createClass({
         </Popover>;
 
         var bookmarkBtn = (
-            <OverlayTrigger trigger='click' placement='left' overlay={popover}>
+            <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
                     id="breadcrumbsButton"
                     type="button"
