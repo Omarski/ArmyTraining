@@ -2,7 +2,7 @@
  * Created by omaramer on 5/9/16.
  */
 var React = require('react');
-var CultureQuestMap = require('./CultureQuestMap');
+var ImageLayersView = require('../../../widgets/ImageLayersView');
 var PageStore = require('../../../../stores/PageStore');
 var PageHeader = require('../../../widgets/PageHeader');
 
@@ -23,9 +23,8 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
-        data.mapData = JSON.parse(data.page.info.property[2].value);
-        //for (var s in data.page) console.log(s + " : " + data.page[s]);
-
+        data.imageData = JSON.parse(data.page.info.property[2].value);
+        
         if (props.page.note) {
 
         }
@@ -56,6 +55,11 @@ var CultureQuestView = React.createClass({
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
     },
+    
+    onRegionClicked: function(regionData){
+        if (regionData.lastHighlightedRegion)
+            console.log("Clicked on: " + regionData.lastHighlightedRegion.getAttribute('id'));
+    },
 
     render: function() {
         var self = this;
@@ -67,7 +71,9 @@ var CultureQuestView = React.createClass({
         return (
             <div>
                 <PageHeader sources={sources} title={title} key={state.page.xid}/>
-                <CultureQuestMap mediaPath={state.mediaPath} mapData={state.mapData} />
+                <ImageLayersView mediaPath={state.mediaPath}
+                                 imageData={state.imageData}
+                                 onRegionClicked={this.onRegionClicked}/>
                 {self.state.showQuiz? <CultureQuestQuiz />:null}
                 {self.state.showPop? <CultureQuestPopup />:null}
                 

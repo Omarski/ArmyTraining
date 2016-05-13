@@ -1,10 +1,22 @@
+/**
+ * Created by omaramer on 5/13/16.
+ */
 
 var React = require('react');
 
-var CultureQuestMap = React.createClass({
+var ImageLayersView = React.createClass({
 
     getInitialState: function() {
-        return {loadedImageColl:[], loadCounter:0, totalImages:0, canvasColl:[], lastHighlightedRegion:null};
+        var mapWidth  = this.props.imageData.regions[0].nearWidth;
+        var mapHeight = this.props.imageData.regions[0].nearHeight;
+        var state = { mapWidth:mapWidth,
+            mapHeight:mapHeight,
+            loadedImageColl:[],
+            loadCounter:0,
+            totalImages:0,
+            canvasColl:[],
+            lastHighlightedRegion:null};
+        return state;
     },
 
     componentWillMount: function() {
@@ -18,7 +30,7 @@ var CultureQuestMap = React.createClass({
         var state = self.state;
         var imageColl = [];
 
-        self.props.mapData.regions.map(function(region,index){
+        self.props.imageData.regions.map(function(region,index){
             imageColl.push(self.props.mediaPath+region.image);
         });
 
@@ -58,7 +70,7 @@ var CultureQuestMap = React.createClass({
         canv.setAttribute('id',canvasData.canvasId);
         canv.style = canvasData.canvasStyle;
         canv.state = "idle";
-        canv.className = "cultureQuest-region-canvas";
+        canv.className = "imageLayerView-region-canvas";
         var context = canv.getContext("2d");
         var image = new Image();
         image.src = canvasData.mapSrc;
@@ -68,10 +80,12 @@ var CultureQuestMap = React.createClass({
 
         //events
         canv.addEventListener("click", function(e){
-            self.onRegionClick(e);
+            self.pixelTracker(e, "click");
+            //self.onRegionClick(e);
         });
         canv.addEventListener("mousemove", function(e){
-            self.onRegionOver(e);
+            self.pixelTracker(e, "mousemove");
+            //self.onRegionOver(e);
         });
 
         return canv;
@@ -84,17 +98,17 @@ var CultureQuestMap = React.createClass({
         var canvasColl = [];
 
         //loop through regions
-        self.props.mapData.regions.map(function(region,index){
+        self.props.imageData.regions.map(function(region,index){
 
             var regionCanvas =  self.createCanvas({
                 canvasWidth:region.nearWidth,
                 canvasHeight:region.nearHeight,
-                canvasId:"cultureQuest_canvas_" + index,
+                canvasId:"imageLayer_canvas_" + index,
                 canvasStyle:"{z-index:"+index+1+"}",
                 mapSrc: self.state.loadedImageColl[index].src
             });
 
-            document.getElementById("cultureQuest-map").appendChild(regionCanvas);
+            document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
 
             canvasColl.push(regionCanvas);
         });
@@ -120,13 +134,13 @@ var CultureQuestMap = React.createClass({
 
                     case "idle":
                         pixelHit = true;
-                        if (!canvasElement.classList.contains("cultureQuest-fade-in")){
-                            canvasElement.classList.add("cultureQuest-fade-in");
-                            canvasElement.classList.remove("cultureQuest-fade-out");
+                        if (!canvasElement.classList.contains("imageLayerView-fade-in")){
+                            canvasElement.classList.add("imageLayerView-fade-in");
+                            canvasElement.classList.remove("imageLayerView-fade-out");
                             if (state.lastHighlightedRegion) {
-                                state.lastHighlightedRegion.classList.remove("cultureQuest-fade-in");
-                                if (!state.lastHighlightedRegion.classList.contains("cultureQuest-fade-out")){
-                                    state.lastHighlightedRegion.classList.add("cultureQuest-fade-out");
+                                state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
+                                if (!state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")){
+                                    state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
                                 }
                             }
                         }
@@ -134,17 +148,13 @@ var CultureQuestMap = React.createClass({
                         state.lastHighlightedRegion = canvasElement;
                         break;
                 }
-
-            }else{
-
-
             }
         }
 
         if (!pixelHit && state.lastHighlightedRegion &&
-            !state.lastHighlightedRegion.classList.contains("cultureQuest-fade-out")) {
-            state.lastHighlightedRegion.classList.remove("cultureQuest-fade-in");
-            state.lastHighlightedRegion.classList.add("cultureQuest-fade-out");
+            !state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")) {
+            state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
+            state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
             state.lastHighlightedRegion = null;
         }
     },
@@ -154,52 +164,41 @@ var CultureQuestMap = React.createClass({
     },
 
     onRegionOver: function(e) {
-        this.pixelTracker(e, "hover");
+        this.pixelTracker(e, "mousemove");
     },
 
     pixelTracker: function(e, mode) {
 
         var self = this;
-        function findPos(obj) {
 
-            var curleft = 0, curtop = 0;
-            if (obj.offsetParent) {
-                do {
-                    curleft += obj.offsetLeft;
-                    curtop += obj.offsetTop;
-                } while (obj = obj.offsetParent);
-                return {x: curleft, y: curtop};
-            }
-            return undefined;
-        }
-
-        // get the position of clicked pixel
-        var pos = findPos(e.target);
-        var x = e.pageX - pos.x;
-        var y = e.pageY - pos.y;
-
-        if (mode == "hover"){
+        if (mode == "mousemove"){
+            var offset = $("#imageLayerView-back-image").offset();
+            var x = e.pageX - offset.left;
+            var y = e.pageY - offset.top;
             self.detectRegion(e, x, y);
         }
         else if (mode == "click"){
-            if (self.state.lastHighlightedRegion)
-                console.log("Clicked on: " + self.state.lastHighlightedRegion.getAttribute('id'));
+            self.props.onRegionClicked({clickEvent:e, regionCanvasColl:self.state.canvasColl,
+                lastHighlightedRegion:self.state.lastHighlightedRegion});
+
+            // if (self.state.lastHighlightedRegion)
+            //     console.log("Clicked on: " + self.state.lastHighlightedRegion.getAttribute('id'));
         }
     },
 
     render: function() {
         var self = this;
-        var mapData = self.props.mapData;
-        var mapBackground = self.props.mediaPath + mapData.mapBackground;
+        var imageData = self.props.imageData;
+        var mapBackground = self.props.mediaPath + imageData.mapBackground;
         var mapStyle = {background:"#000 url("+mapBackground+") no-repeat 100% 100%",
-            position:"relative", width:"768px" , height:"504px", textAlign:"center"};
+            position:"relative", width:self.state.mapWidth+"px", height:self.state.mapHeight, textAlign:"center"};
 
         return (
-            <div id="cultureQuest-map" className="cultureQuest-map" style={mapStyle}>
+            <div id="imageLayerView-back-image" className="imageLayerView-back-image" style={mapStyle}>
 
             </div>
         );
     }
 });
 
-module.exports = CultureQuestMap;
+module.exports = ImageLayersView;
