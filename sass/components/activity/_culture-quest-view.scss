@@ -1,3 +1,9 @@
+@mixin trans($transType) {
+  transition: $transType .25s ease-in-out;
+  -moz-transition: $transType .25s ease-in-out;
+  -webkit-transition: $transType .25s ease-in-out;
+}
+
 .cultureQuest-map {
   margin-left:auto;
   margin-right:auto;
@@ -9,4 +15,15 @@
   pointer-events: auto;
   position: absolute;
   cursor: pointer;
+  opacity:0;
+}
+
+.cultureQuest-fade-out {
+  opacity: 0;
+  @include trans(opacity);
+}
+
+.cultureQuest-fade-in {
+  opacity: 1;
+  @include trans(opacity);
 }

@@ -25,7 +25,7 @@ var SortingView = require('../components/pages/activity/SortingView');
 var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
 var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
 var NotificationActions = require('../actions/NotificationActions');
-var CultureQuestView = require('../components/pages/activity/CultureQuestView');
+var CultureQuestView = require('../components/pages/activity/cultureQuest/CultureQuestView');
 
 function getPageState() {
     var page = null;
