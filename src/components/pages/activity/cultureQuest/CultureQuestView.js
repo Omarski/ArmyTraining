@@ -2,8 +2,7 @@
  * Created by omaramer on 5/9/16.
  */
 var React = require('react');
-var ImageLayersView = require('../../../widgets/ImageLayersView');
-var PageStore = require('../../../../stores/PageStore');
+var CultureQuestMap = require('./CultureQuestMap');
 var PageHeader = require('../../../widgets/PageHeader');
 
 function getPageState(props) {
@@ -14,8 +13,7 @@ function getPageState(props) {
         title: "",
         pageType: "",
         showQuiz: false,
-        showPop: false,
-        mediaPath: "data/media/"
+        showPop: false
     } ;
 
 
@@ -24,7 +22,7 @@ function getPageState(props) {
         data.pageType = props.page.type;
         data.page = props.page;
         data.imageData = JSON.parse(data.page.info.property[2].value);
-        
+        data.imageLayersData = {};
         if (props.page.note) {
 
         }
@@ -45,6 +43,7 @@ var CultureQuestView = React.createClass({
     },
 
     componentWillMount: function() {
+        
         //PageStore.addChangeListener(this._onChange);
     },
 
@@ -56,11 +55,6 @@ var CultureQuestView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     
-    onRegionClicked: function(regionData){
-        if (regionData.lastHighlightedRegion)
-            console.log("Clicked on: " + regionData.lastHighlightedRegion.getAttribute('id'));
-    },
-
     render: function() {
         var self = this;
         var state = self.state;
@@ -71,12 +65,9 @@ var CultureQuestView = React.createClass({
         return (
             <div>
                 <PageHeader sources={sources} title={title} key={state.page.xid}/>
-                <ImageLayersView mediaPath={state.mediaPath}
-                                 imageData={state.imageData}
-                                 onRegionClicked={this.onRegionClicked}/>
+                <CultureQuestMap imageData={state.imageData} />
                 {self.state.showQuiz? <CultureQuestQuiz />:null}
                 {self.state.showPop? <CultureQuestPopup />:null}
-                
             </div>
         );
     },
