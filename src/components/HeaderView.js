@@ -29,7 +29,9 @@ function getBookState() {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
-        previousVolume: null
+        previousVolume: null,
+        hasDLI: ConfigStore.hasDLI(),
+        hasReference: ConfigStore.hasReference()
     };
 }
 
@@ -65,6 +67,7 @@ var HeaderView = React.createClass({
 
     componentWillMount: function() {
         BookStore.addChangeListener(this._onChange);
+        ConfigStore.addChangeListener((this._onChange));
     },
 
     componentDidMount: function() {
@@ -73,6 +76,7 @@ var HeaderView = React.createClass({
 
     componentWillUnmount: function() {
         BookStore.removeChangeListener(this._onChange);
+        ConfigStore.removeChangeListener((this._onChange));
     },
 
 
@@ -95,8 +99,16 @@ var HeaderView = React.createClass({
         if (this.state.muted) {
             muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
         }
-
-
+        var dliView = "";
+        var referenceView = "";
+        if(self.state.hasDLI){
+            dliView = (<DliView />);
+        }
+        if(self.state.hasReference){
+            referenceView = (<button onClick={this.openReference} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
+                {referenceIcon}
+            </button>);
+        }
 
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -108,10 +120,8 @@ var HeaderView = React.createClass({
                     </div>
                     <div id="navbar" className="navbar main-nav-bar">
                         <div className="nav navbar-nav main-nav-bar-nav">
-                            <DliView />
-                            <button onClick={this.openReference} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
-                               {referenceIcon}
-                            </button>
+                            {dliView}
+                            {referenceView}
                             <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
                                 {muteIcon}
                             </button>

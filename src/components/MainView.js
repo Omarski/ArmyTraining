@@ -8,6 +8,7 @@ var ContentView = require('../components/ContentView');
 var FooterView = require('../components/FooterView');
 var NotificationView = require('../components/widgets/NotificationView');
 var NotificationActions = require('../actions/NotificationActions');
+var ConfigActions = require('../actions/ConfigActions');
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -37,6 +38,7 @@ var MainView = React.createClass({
     componentDidMount: function() {
         LoaderStore.addChangeListener(this._onChange);
         NotificationActions.show({title:'Please wait', body:'Loading...'});
+        ConfigActions.load();
         CoachFeedbackActions.load();
         LoaderActions.load();
     },
