@@ -5,18 +5,18 @@
  *
  * How to use:
  * require the widget from components/widgets/ImageLayersView
- * Pass the widget the attribute imageLayersData as an object:
- * <ImageLayersView imageLayersData = {
+ * Pass the widget the following attributes:
+ * <ImageLayersView
  *
- *      areaWidth: //width of your image stack,
- *      areaHeight: //height of your image stack,
- *      imageColl: array of objects representing your image data (harvest from your page's JSON),
- *      backgroundImage: //URL to the non responsive background image,
- *      onLayersReady: a function that will be passed an array of the image layers (canvas elements) when ready,
- *      onRollover: a function that is passed a layer (canvas) element if cursor is on a live area or null otherwise,
- *      onClick: a function that is passed the canvas element clicked on or null if clicked on empty area.
+ *      areaWidth =  //width of your image stack,
+ *      areaHeight =  //height of your image stack,
+ *      imageColl = array of objects representing your image data (harvest from your page's JSON),
+ *      backgroundImage = URL to the non responsive background image,
+ *      onLayersReady = a function that will be passed an array of the image layers (canvas elements) when ready,
+ *      onRollover = a function that is passed a layer (canvas) element if cursor is on a live area or null otherwise,
+ *      onClick= a function that is passed the canvas element clicked on or null if clicked on empty area.
  *
- * } />
+ *  />
  */
 
 var React = require('react');
@@ -27,8 +27,8 @@ var ImageLayersView = React.createClass({
 
         var state = {
                         mediaPath: 'data/media/',
-                        mapWidth: this.props.imageLayersData.areaWidth,
-                        mapHeight: this.props.imageLayersData.areaHeight,
+                        mapWidth: this.props.areaWidth,
+                        mapHeight: this.props.areaHeight,
                         loadedImageColl:[],
                         loadCounter:0,
                         totalImages:0,
@@ -50,7 +50,7 @@ var ImageLayersView = React.createClass({
         var state = self.state;
         var imageColl = [];
 
-        self.props.imageLayersData.imageColl.map(function(region,index){
+        self.props.imageColl.map(function(region,index){
             imageColl.push(self.state.mediaPath+region.image);
         });
 
@@ -116,7 +116,7 @@ var ImageLayersView = React.createClass({
         var canvasColl = [];
 
         //loop through regions
-        self.props.imageLayersData.imageColl.map(function(image,index){
+        self.props.imageColl.map(function(image,index){
 
             var regionCanvas =  self.createCanvas({
                 canvasWidth:image.nearWidth,
@@ -129,7 +129,7 @@ var ImageLayersView = React.createClass({
             document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
 
             canvasColl.push(regionCanvas);
-            self.props.imageLayersData.onLayersReady(regionCanvas);
+            self.props.onLayersReady(regionCanvas);
         });
 
         self.setState({canvasColl:canvasColl});
@@ -149,12 +149,12 @@ var ImageLayersView = React.createClass({
             if (pixel[3] != 0) {
                 pixelHit = true;
                 self.state.lastHighlightedRegion = canvasElement;
-                self.props.imageLayersData.onRollover(canvasElement);
+                self.props.onRollover(canvasElement);
             }
         }
 
         if (!pixelHit) {
-            self.props.imageLayersData.onRollover(null);
+            self.props.onRollover(null);
             self.state.lastHighlightedRegion = null;
         }
     },
@@ -170,15 +170,14 @@ var ImageLayersView = React.createClass({
                 self.detectRegion(e, x, y);
         }
         else if (mode == "click"){
-            self.props.imageLayersData.onClick(self.state.lastHighlightedRegion);
+            self.props.onClick(self.state.lastHighlightedRegion);
         }
     },
 
     render: function() {
         
         var self = this;
-        var imageLayersData = self.props.imageLayersData;
-        var mapBackground = self.state.mediaPath + imageLayersData.backgroundImage;
+        var mapBackground = self.state.mediaPath + self.props.backgroundImage;
         var mapStyle = {background:"#000 url("+mapBackground+") no-repeat 100% 100%",
             position:"relative", width:self.state.mapWidth+"px", height:self.state.mapHeight, textAlign:"center"};
 

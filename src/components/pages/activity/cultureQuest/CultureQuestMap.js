@@ -91,7 +91,18 @@ var CultureQuestMap = React.createClass({
     render: function() {
 
         return (
-            <ImageLayersView imageLayersData = {this.state.imageLayersData} >
+           
+            <ImageLayersView
+
+                areaWidth       = {this.state.imageLayersData.areaWidth}
+                areaHeight      = {this.state.imageLayersData.areaHeight}
+                imageColl       = {this.state.imageLayersData.imageColl}
+                backgroundImage = {this.state.imageLayersData.backgroundImage}
+                onLayersReady   = {this.state.imageLayersData.onLayersReady}
+                onRollover      = {this.state.imageLayersData.onRollover}
+                onClick         = {this.state.imageLayersData.onClick}
+
+            >
             </ImageLayersView>
 
         );
