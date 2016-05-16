@@ -131,17 +131,17 @@ function animatePins(self){
     var hasMoved = self.state.hasMoved;
 
     Array.prototype.forEach.call(pins, function(item, index){
-        setTimeout(function(){
+       // setTimeout(function(){
             setTimeout(function(){
                 item.style.display = "inline-block";
-            },1400);
+            },(index)*500);
 
             setTimeout(function(){
                 hasMoved[index] = true;
                 self.setState({
                     hasMoved: hasMoved
                 })
-            },1500);
+            },(index)*550);
             var y = 0;
             for(var i=0;i<nodes.length;i++){
                 if(item.alt == nodes[i].mouseover){
@@ -153,7 +153,7 @@ function animatePins(self){
             self.setState({
                 hasMoved: hasMoved
             });
-        },(index)*1500);
+       // },(index)*600);
     });
 }
 
