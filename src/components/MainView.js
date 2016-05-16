@@ -36,7 +36,7 @@ var MainView = React.createClass({
     },
 
     componentDidMount: function() {
-        LoaderStore.addChangeListener(this._onChange);
+        //LoaderStore.addChangeListener(this._onChange);
         NotificationActions.show({title:'Please wait', body:'Loading...'});
         ConfigActions.load();
         CoachFeedbackActions.load();

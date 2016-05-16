@@ -25,6 +25,7 @@ var SortingView = require('../components/pages/activity/SortingView');
 var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
 var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
 var NotificationActions = require('../actions/NotificationActions');
+var CultureQuestView = require('../components/pages/activity/cultureQuest/CultureQuestView');
 
 function getPageState() {
     var page = null;
@@ -175,6 +176,9 @@ var ContentView = React.createClass({
                     break;
                 case "EthnoMap":
                     page = <EthnoMapView page={this.state.page} />;
+                    break;
+                case "CultureQuest":
+                    page= <CultureQuestView page={this.state.page} />;
                     break;
                 default:
                     page = <DefaultPageView page={this.state.page} />;
