@@ -5,8 +5,9 @@
   /* Set the fixed height of the footer here */
 
   background-color: #fff;
-  left: 20px;
-  right: 20px;
+  left: 0px;
+  right: 0px;
+  z-index: 9999;
 }
 
 .footer-nav {
@@ -19,8 +20,7 @@
 
 
 .main-footer {
-  height: 115px;
-  padding-top: 12px;
+  height: 40px;
   padding-bottom: 0;
   background-color: #eaeaea;
 }
@@ -30,9 +30,20 @@
 
 }
 
+.footer-table {
+  &>tbody>tr>td {
+    border: none;
+    padding: 0;
+    line-height:2.5;
+    button {
+      padding-top: 5px;
+    }
+  }
+}
+
 .main-footer-tab-container {
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 0px;
+  margin-right: 0px;
   margin-top: 40px;
   height: 100%;
   margin-bottom: 100px;
@@ -62,8 +73,8 @@
 
 .main-footer-accordian {
   margin-bottom: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 
@@ -83,10 +94,11 @@
   line-height: .75;
 }
 
-.expanded{
+.footer.expanded{
 
   height: 100%;
   padding-top: 0;
+  top: 0;
 
 }
 
@@ -125,11 +137,25 @@
 .main-footer-tab-container-expanded {
   margin-top: 0;
   padding-top: 0px;
-  padding-bottom: 200px;
+  padding-bottom: 39px;
   height: 100%;
+  border-top-style: solid;
+  border-top-color: #eaeaea;
+  border-top-width: 1px;
+  .main-footer-tab-content {
+    padding-top: 0;
+  }
 }
 .main-footer-page-nav-buttons-expanded {
-  padding-top: 110px;
+  padding-top: 0px;
+  height: 40px;
+  .progress-table, .btn-step {
+    display: none;
+  }
+  .main-footer-page-nav-row {
+    background-color: #ececec;
+  }
+
 }
 
 .main-footer-accordian {
