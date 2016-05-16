@@ -3,7 +3,6 @@
  */
 var React = require('react');
 var CultureQuestMap = require('./CultureQuestMap');
-var PageStore = require('../../../../stores/PageStore');
 var PageHeader = require('../../../widgets/PageHeader');
 
 function getPageState(props) {
@@ -14,8 +13,7 @@ function getPageState(props) {
         title: "",
         pageType: "",
         showQuiz: false,
-        showPop: false,
-        mediaPath: "data/media/"
+        showPop: false
     } ;
 
 
@@ -23,9 +21,8 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
-        data.mapData = JSON.parse(data.page.info.property[2].value);
-        //for (var s in data.page) console.log(s + " : " + data.page[s]);
-
+        data.imageData = JSON.parse(data.page.info.property[2].value);
+        data.imageLayersData = {};
         if (props.page.note) {
 
         }
@@ -46,6 +43,7 @@ var CultureQuestView = React.createClass({
     },
 
     componentWillMount: function() {
+        
         //PageStore.addChangeListener(this._onChange);
     },
 
@@ -56,7 +54,7 @@ var CultureQuestView = React.createClass({
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
     },
-
+    
     render: function() {
         var self = this;
         var state = self.state;
@@ -67,10 +65,9 @@ var CultureQuestView = React.createClass({
         return (
             <div>
                 <PageHeader sources={sources} title={title} key={state.page.xid}/>
-                <CultureQuestMap mediaPath={state.mediaPath} mapData={state.mapData} />
+                <CultureQuestMap imageData={state.imageData} />
                 {self.state.showQuiz? <CultureQuestQuiz />:null}
                 {self.state.showPop? <CultureQuestPopup />:null}
-                
             </div>
         );
     },

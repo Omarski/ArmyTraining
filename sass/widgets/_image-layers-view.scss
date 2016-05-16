@@ -4,12 +4,12 @@
   -webkit-transition: $transType .25s ease-in-out;
 }
 
-.cultureQuest-map {
+.imageLayerView-back-image {
   margin-left:auto;
   margin-right:auto;
 }
 
-.cultureQuest-region-canvas {
+.imageLayerView-region-canvas {
   display:block;
   z-index:2;
   pointer-events: auto;
@@ -18,12 +18,12 @@
   opacity:0;
 }
 
-.cultureQuest-fade-out {
+.imageLayerView-fade-out {
   opacity: 0;
   @include trans(opacity);
 }
 
-.cultureQuest-fade-in {
+.imageLayerView-fade-in {
   opacity: 1;
   @include trans(opacity);
 }
