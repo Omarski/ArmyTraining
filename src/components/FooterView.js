@@ -16,6 +16,9 @@ function getUnitState(expanded) {
     var currentUnitIndex = 0;
     var currentPageIndex = 0;
 
+
+
+
     for (var key in units) {
         totalUnits++;
         var unit = units[key];
@@ -116,7 +119,8 @@ function getUnitState(expanded) {
         currentPageIndex: currentPageIndex,
         totalPages: totalPages,
         unitsPercent: Math.round((totalUnitsComplete / totalUnits) * 100),
-        expanded: expanded
+        expanded: expanded,
+        contentLoaded: LoaderStore.loadingComplete()
     };
 }
 
@@ -160,8 +164,8 @@ var FooterView = React.createClass({
     },
 
     componentDidMount: function() {
-        LoaderStore.addChangeListener(this._onLoadChange);
-        PageStore.addChangeListener(this._onPageChange);
+        //LoaderStore.addChangeListener(this._onLoadChange);
+        //PageStore.addChangeListener(this._onPageChange);
         $('.collapse').collapse();
     },
 
@@ -244,30 +248,45 @@ var FooterView = React.createClass({
                 </div>
             )
         });
+
+        var footerElements = "";
+        if (this.state.contentLoaded) {
+            footerElements = (
+                <table className="table footer-table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <button id="lessonsIndexBtn" type="button" className="btn btn-default btn-lg btn-link btn-text-icon" aria-label="Left Align" onClick={this.toggleTOC}>
+                                <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-download btn-icon" : "glyphicon glyphicon-upload btn-icon"} aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td width="100%">
+                            <ProgressView />
+                        </td>
+                        <td>
+                            <button type="button" onClick={this.previous} className="btn btn-default btn-lg btn-link btn-step" aria-label="Left Align">
+                                <span className="glyphicon glyphicon-circle-arrow-left btn-icon" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" onClick={this.next} className="btn btn-default btn-lg btn-link btn-step" aria-label="Left Align">
+                                <span className="glyphicon glyphicon-circle-arrow-right btn-icon" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            );
+        }
+
         return (
             <footer className={this.state.expanded ? "footer main-footer expanded" : "footer main-footer"}>
                 <div className="container-fluid footer-nav">
-                    <ProgressView />
+
                     <div id="mainFooterPageNav" className="row main-footer-page-nav">
                         <div className={this.state.expanded ? "container-fluid main-footer-page-nav-buttons-expanded" : "container-fluid"}>
                             <div className="row main-footer-page-nav-row">
-                                <div className="col-md-3">
-                                    <button id="lessonsIndexBtn" type="button" className="btn btn-default btn-lg btn-link btn-text-icon" aria-label="Left Align" onClick={this.toggleTOC}>
-                                        <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-download btn-icon" : "glyphicon glyphicon-upload btn-icon"} aria-hidden="true"></span>
-                                        Lessons | Index
-                                    </button>
-                                </div>
-                                <div className="col-md-7"></div>
-                                <div className="col-md-1">
-                                    <button type="button" onClick={this.previous} className="btn btn-default btn-lg btn-link" aria-label="Left Align">
-                                        <span className="glyphicon glyphicon-circle-arrow-left btn-icon" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div className="col-md-1">
-                                    <button type="button" onClick={this.next} className="btn btn-default btn-lg btn-link" aria-label="Left Align">
-                                        <span className="glyphicon glyphicon-circle-arrow-right btn-icon" aria-hidden="true"></span>
-                                    </button>
-                                </div>
+                                {footerElements}
                             </div>
                         </div>
                         <div className={this.state.expanded ? "main-footer-tab-container-expanded" : "main-footer-tab-container"}>

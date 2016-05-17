@@ -112,46 +112,60 @@ var ProgressView = React.createClass({
     render: function() {
 
         return (
-            <div className="row">
-                <div className="col-sm-1 col-md-1"></div>
-                <div className="col-sm-5 col-md-5">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-2 col-md-2">Lessons</div>
-                            <div className="col-sm-9 col-md-9">
-                                <div className="progress">
-                                    <div className="progress-bar progress-bar-unit" style={{width: this.state.unitsPercent + '%'}}>
-                                        <span className="sr-only">{this.state.unitsPercent}% Complete (success)</span>
-                                    </div>
-                                    <div className="progress-bar progress-bar-total" style={{width: this.state.totalProgressPercent + '%'}}>
-                                        <span className="sr-only">{this.state.totalProgressPercent}% Complete (success)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-1 col-md-1">{this.state.currentUnitIndex}/{this.state.totalUnits}</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-5 col-md-5">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-1 col-md-2">Pages</div>
-                            <div className="col-sm-9 col-md-9">
-                                <div className="progress">
-                                    <div className="progress-bar progress-bar-pages" style={{width: this.state.pagesPercent + '%'}}>
-                                        <span className="sr-only">{this.state.pagesPercent}% Complete (success)</span>
-                                    </div>
-                                    <div className="progress-bar progress-bar-unit-complete" style={{width: this.state.currentUnitCompletedPercent + '%'}}>
-                                        <span className="sr-only">{this.state.currentUnitCompletedPercent}% Complete (success)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-1 col-md-1">{this.state.currentPageIndex}/{this.state.currentUnitTotalPages}</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-1 col-md-1"></div>
-            </div>
+            <table className="table progress-table">
+                <tbody>
+                    <tr>
+                        <td nowrap width="50%">
+                            <table className="table progress-sub-table">
+                                <tbody>
+                                    <tr>
+                                        <td nowrap>
+                                            Lessons
+                                        </td>
+                                        <td nowrap width="100%">
+                                            <div className="progress">
+                                                <div className="progress-bar progress-bar-unit" style={{width: this.state.unitsPercent + '%'}}>
+                                                    <span className="sr-only">{this.state.unitsPercent}% Complete (success)</span>
+                                                </div>
+                                                <div className="progress-bar progress-bar-total" style={{width: this.state.totalProgressPercent + '%'}}>
+                                                    <span className="sr-only">{this.state.totalProgressPercent}% Complete (success)</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td nowrap>
+                                            {this.state.currentUnitIndex}/{this.state.totalUnits}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td nowrap width="50%">
+                            <table className="table progress-sub-table">
+                                <tbody>
+                                    <tr>
+                                        <td nowrap>
+                                            Pages
+                                        </td>
+                                        <td nowrap width="100%">
+                                            <div className="progress">
+                                                <div className="progress-bar progress-bar-pages" style={{width: this.state.pagesPercent + '%'}}>
+                                                    <span className="sr-only">{this.state.pagesPercent}% Complete (success)</span>
+                                                </div>
+                                                <div className="progress-bar progress-bar-unit-complete" style={{width: this.state.currentUnitCompletedPercent + '%'}}>
+                                                    <span className="sr-only">{this.state.currentUnitCompletedPercent}% Complete (success)</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td nowrap>
+                                            {this.state.currentPageIndex}/{this.state.currentUnitTotalPages}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
         );
     },

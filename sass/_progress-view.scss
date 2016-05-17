@@ -17,3 +17,18 @@
   background-color: #ddd;
   background-image: none;
 }
+
+.progress-table {
+  &>tbody>tr>td {
+    border: none;
+    padding: 0;
+
+  }
+}
+
+.progress-sub-table {
+  &>tbody>tr>td {
+    border: none;
+
+  }
+}

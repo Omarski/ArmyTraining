@@ -192,7 +192,7 @@ function getPageState(props) {
 // Plays Audio filed named with the xid(zid?) given
 function playAudio(xid){
     var audio = document.getElementById('audio');
-    //var source = document.getElementById('mp3Source');
+    var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     audio.src = "data/media/" + xid + ".mp3";
     // play audio, or stop the audio if currently playing
@@ -379,7 +379,10 @@ var PronunciationView = React.createClass({
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
-                    <audio id="audio"></audio>
+                    <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                        <source id="mp3Source" src="" type="audio/mp3"></source>
+                        Your browser does not support the audio format.
+                    </audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     {vaList}
                 </div>

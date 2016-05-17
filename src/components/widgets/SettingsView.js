@@ -26,8 +26,13 @@ function getSettingsState() {
         bv = settings.backgroundVolume;
     }
 
+    var aps = true;
+    if(settings.autoPlaySound === false){
+        aps = false;
+    }
+
     return {
-        autoPlaySound: settings.autoPlaySound,
+        autoPlaySound: aps,
         backgroundVolume: bv,
         muted: settings.muted,
         voiceVolume: v,
@@ -122,7 +127,7 @@ var SettingsView = React.createClass({
                             </ListGroup>
                         </Popover>;
 
-        return  <OverlayTrigger trigger='click' placement='left' overlay={popover}>
+        return  <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                     <Button className="btn btn-default btn-link btn-lg main-nav-bar-button">
                         <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                     </Button>

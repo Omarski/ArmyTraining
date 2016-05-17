@@ -50,8 +50,8 @@ var NotificationView = React.createClass({
             dismiss = <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>;
             close = <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>;
         }
-        return <div id="notificationView" className="modal fade">
-                <div className="modal-dialog notification-view-dialog">
+        return <div id="notificationView" className="modal fade" data-backdrop="static">
+                <div className="modal-dialog notification-view-dialog" >
                     <div className="modal-content">
                         <div className="modal-header">
                             {dismiss}

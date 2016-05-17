@@ -4,6 +4,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ConfigConstants = require('../constants/ConfigConstants');
+var ConfigActions = require('../actions/ConfigActions');
 var PageStore = require('../stores/PageStore');
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
@@ -29,7 +30,34 @@ function destroy() {
 }
 
 var _needsASR = false;
+var _hasDLI = false;
+var _DliList = null;
+var _hasReference = false;
 
+// initialize this configStore from relevant json files
+ function loadConfig() {
+    //get asr data from file
+    $.getJSON("data/ASR/asr.json", function(data){
+        if(data && data.needsASR){
+            _needsASR = data.needsASR;
+        }
+    });
+
+    // get dli data....
+    $.getJSON("data/dli/dli.json", function(data){
+        if(data && data.dliPaths){
+            _DliList = data.dliPaths;
+        }
+    });
+
+     setTimeout(function () {
+         if(_DliList){
+             _hasDLI = true;
+         }
+         ConfigActions.loadComplete();
+     }, 100);
+
+}
 
 var ConfigStore = assign({}, EventEmitter.prototype, {
 
@@ -37,36 +65,25 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
         return _data;
     },
 
-    loadConfig: function() {
-        // read in config file and store in memeory
-    },
-
     isASREnabled: function(){
-        return _needsASR;
+        console.log("reading ASR", _needsASR);
+        return (_needsASR);
     },
 
-    getDLIGuides: function(){
-        //jquery ajax load please
-        console.log(".load");
-        console.dir("#modalbody");
-        $("#modalbody").load("../../reference/dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html");
+    hasDLI: function(){
+        // this doesnt exist???
+        return(_hasDLI);
     },
 
-    constructDLI: function(){
+    hasReference: function(){
+        return (_hasReference);
+    },
 
-        var popOverList = <Popover id="settingsPopover" title='Reference Section [NYI]'>
-            <ButtonGroup vertical>
-                <Button>Baluchi</Button>
-                <Button>Dari</Button>
-                <Button>Pahsto(Afghanistan)</Button>
-                <Button>Pashto(Pakistan)</Button>
-                <Button>Punjabi</Button>
-                <Button>Sindhi</Button>
-                <Button>Urdu</Button>
-            </ButtonGroup>
-        </Popover>;
-
-        return popOverList;
+    getDliList: function(){
+        console.dir("reading DLI", _DliList);
+        return({
+            dli: _DliList
+        })
     },
 
     emitChange: function() {
@@ -85,11 +102,17 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     switch(action.actionType) {
-        case ConfigConstants.ACTIVE_DIALOG_OBJECTIVE_CREATE:
+        case ConfigConstants.CONFIG_CREATE:
             create(action.data);
             ConfigStore.emitChange();
             break;
-        case ConfigConstants.ACTIVE_DIALOG_OBJECTIVE_DESTROY:
+        case ConfigConstants.CONFIG_LOAD:
+            loadConfig();
+            break;
+        case ConfigConstants.CONFIG_LOAD_COMPLETE:
+            ConfigStore.emitChange();
+            break;
+        case ConfigConstants.CONFIG_DESTROY:
             destroy();
             ConfigStore.emitChange();
             break;

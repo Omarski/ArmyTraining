@@ -7,9 +7,11 @@ var SettingsActions = require('../actions/SettingsActions');
 var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
 var DliView = require("../components/widgets/DliView");
+var ReferenceView = require("../components/reference_guide/ReferenceView");
 var Modal = ReactBootstrap.Modal;
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
+var Popover = ReactBootstrap.Popover;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -27,7 +29,9 @@ function getBookState() {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
-        previousVolume: null
+        previousVolume: null,
+        hasDLI: ConfigStore.hasDLI(),
+        hasReference: ConfigStore.hasReference()
     };
 }
 
@@ -63,6 +67,7 @@ var HeaderView = React.createClass({
 
     componentWillMount: function() {
         BookStore.addChangeListener(this._onChange);
+        ConfigStore.addChangeListener((this._onChange));
     },
 
     componentDidMount: function() {
@@ -71,39 +76,39 @@ var HeaderView = React.createClass({
 
     componentWillUnmount: function() {
         BookStore.removeChangeListener(this._onChange);
+        ConfigStore.removeChangeListener((this._onChange));
     },
 
-    openDLI: function(){
-        var dliGuides = ConfigStore.getDLIGuides();
-
-        return (dliGuides);
-    },
-
-    close: function(){
-        this.setState({ showModal: false });
-    },
-
-    openDliWindow: function(){
-        this.setState({ showModal: true }); /* show modal */
-    },
 
     openReference: function(){
         console.log("attempting to open reference section...(NYI)");
     },
 
+    getCurrentDliPath: function(){
+
+    },
+
+    updateDliPath:function(){
+
+    },
+
     render: function() {
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
-        var dliIcon = <span className="glyphicon glyphicon-book btn-icon" aria-hidden="true"></span>;
         var referenceIcon = <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>;
+        var self = this;
         if (this.state.muted) {
             muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
         }
-
-        var popover =   (<OverlayTrigger trigger='click' placement='left' overlay={ConfigStore.constructDLI()}>
-            <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
-                <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
-            </Button>
-        </OverlayTrigger>);
+        var dliView = "";
+        var referenceView = "";
+        if(self.state.hasDLI){
+            dliView = (<DliView />);
+        }
+        if(self.state.hasReference){
+            referenceView = (<button onClick={this.openReference} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
+                {referenceIcon}
+            </button>);
+        }
 
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -115,14 +120,8 @@ var HeaderView = React.createClass({
                     </div>
                     <div id="navbar" className="navbar main-nav-bar">
                         <div className="nav navbar-nav main-nav-bar-nav">
-                            <button onClick={this.openDliWindow} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
-                                {dliIcon}
-                            </button>
-                            <OverlayTrigger trigger='click' placement='left' overlay={ConfigStore.constructDLI()}>
-                                <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
-                                    {referenceIcon}
-                                </Button>
-                            </OverlayTrigger>
+                            {dliView}
+                            {referenceView}
                             <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
                                 {muteIcon}
                             </button>
@@ -131,16 +130,6 @@ var HeaderView = React.createClass({
                     </div>
                     <BreadcrumbsView />
                 </div>
-
-
-                <Modal dialogClassName="dlimodal" bsSize="large" show={this.state.showModal} onHide={this.close}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>DLI Guides</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body id="modalbody">
-                        <iframe className="dliframe" src="dli/Urdu_SCO_ur_bc_LSK/ur_bc_LSK/default.html"></iframe>
-                    </Modal.Body>
-                </Modal>
 
             </nav>
         );
