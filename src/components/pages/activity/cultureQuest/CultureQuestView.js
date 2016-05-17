@@ -22,7 +22,8 @@ function getPageState(props) {
         data.pageType = props.page.type;
         data.page = props.page;
         data.imageData = JSON.parse(data.page.info.property[2].value);
-        data.imageLayersData = {};
+        data.layersColl = [];
+        
         if (props.page.note) {
 
         }
@@ -54,6 +55,49 @@ var CultureQuestView = React.createClass({
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
     },
+
+    onLayersReady:function(layersColl){
+        this.setState({layersColl:layersColl});
+    },
+
+    onRegionClicked: function(canvasElement){
+
+        this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
+        console.log("In View - Clicked on: " + canvasElement.getAttribute('id'));
+        // this.updateLayersColl({
+        //
+        //    'layerId': canvasElement,
+        //    'attributeAdd':[
+        //        {'lastClicked':true}],
+        //    'classAdd': [],
+        //    'classRemove': [],
+        //    'classAddAll':[],
+        //    'classRemoveAll':[]
+        //    })
+    },
+
+    updateLayersColl:function(layer, changeMode, changesColl){
+
+        var self = this;
+        var state = self.state;
+        var layerId = layer.getAttribute('id');
+
+        switch(changeMode){
+
+            case 'attributeAdd':
+                for (var l = 0; l < state.layersColl.length; l++){
+                    if (state.layersColl[l].getAttribute('id') == layerId){
+                        for (var c = 0; c < changesColl.length; c++){
+                            state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
+                        }
+                    }
+
+                }
+                break;
+        }
+
+
+    },
     
     render: function() {
         var self = this;
@@ -64,9 +108,16 @@ var CultureQuestView = React.createClass({
 
         return (
             <div>
-                <PageHeader sources={sources} title={title} key={state.page.xid}/>
-                <CultureQuestMap imageData={state.imageData} />
-                {self.state.showQuiz? <CultureQuestQuiz />:null}
+                <PageHeader sources={sources} title={title} key={state.page.xid} />
+                <CultureQuestMap
+                    imageData = {state.imageData}
+                    onLayersReady = {self.onLayersReady}
+                    onRegionClicked = {self.onRegionClicked}
+                />
+                {self.state.showQuiz? <CultureQuestQuiz
+                    imageData={state.imageData}
+                    layersColl={state.layersColl}
+                />:null}
                 {self.state.showPop? <CultureQuestPopup />:null}
             </div>
         );
