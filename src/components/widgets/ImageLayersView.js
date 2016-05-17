@@ -49,6 +49,7 @@ var ImageLayersView = React.createClass({
         var self = this;
         var state = self.state;
         var imageColl = [];
+        console.log("self", self);
 
         self.props.imageColl.map(function(region,index){
             imageColl.push(self.state.mediaPath+region.image);
@@ -107,7 +108,6 @@ var ImageLayersView = React.createClass({
         });
 
         return canv;
-
     },
 
     placeRegions: function(){
@@ -116,29 +116,43 @@ var ImageLayersView = React.createClass({
         var canvasColl = [];
 
         //loop through regions
+
+        /*
+
+        canvasWidth:image.nearWidth,
+         canvasHeight:image.nearHeight,
+         replaced above lines with actual pixels
+
+         */
+
+        console.log("imageColl", self.props.imageColl);
+
         self.props.imageColl.map(function(image,index){
 
             var regionCanvas =  self.createCanvas({
-                canvasWidth:image.nearWidth,
-                canvasHeight:image.nearHeight,
+                canvasWidth: self.props.areaWidth,
+                canvasHeight: self.props.areaHeight,
                 canvasId:"imageLayer_canvas_" + index,
-                canvasStyle:"{z-index:"+index+1+"}",
+                canvasStyle:"{z-index:"+index+"}",
                 mapSrc: self.state.loadedImageColl[index].src
             });
 
             document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
-
             canvasColl.push(regionCanvas);
-            self.props.onLayersReady(regionCanvas);
         });
 
+        console.log("canvasColl", canvasColl);
+
         self.setState({canvasColl:canvasColl});
+        self.props.onLayersReady(self.state.canvasColl);
     },
 
     detectRegion: function(e,pixelX,pixelY) {
 
         var self = this;
         var pixelHit = false;
+
+        // console.log("canvasColl", self.state.canvasColl);
 
         for (var i = 0; i < self.state.canvasColl.length; i++) {
 
@@ -161,15 +175,17 @@ var ImageLayersView = React.createClass({
 
     pixelTracker: function(e, mode) {
 
+        console.log("e", e);
+
         var self = this;
 
-        if (mode == "mousemove"){
+        if (mode === "mousemove"){
             var offset = $("#imageLayerView-back-image").offset();
             var x = e.pageX - offset.left;
             var y = e.pageY - offset.top;
                 self.detectRegion(e, x, y);
         }
-        else if (mode == "click"){
+        else if (mode === "click"){
             self.props.onClick(self.state.lastHighlightedRegion);
         }
     },
@@ -178,8 +194,9 @@ var ImageLayersView = React.createClass({
         
         var self = this;
         var mapBackground = self.state.mediaPath + self.props.backgroundImage;
+        console.log("mapBackground", mapBackground);
         var mapStyle = {background:"#000 url("+mapBackground+") no-repeat 100% 100%",
-            position:"relative", width:self.state.mapWidth+"px", height:self.state.mapHeight, textAlign:"center"};
+            position:"relative", width:self.state.mapWidth, height:self.state.mapHeight, textAlign:"center"};
 
         return (
             <div id="imageLayerView-back-image" className="imageLayerView-back-image" style={mapStyle}>

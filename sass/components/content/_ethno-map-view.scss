@@ -33,3 +33,10 @@
 .regionNameOnMapText {
   z-index: 15;
 }
+
+.imageLayerView-region-canvas{
+  display:block;
+  z-index:10;
+  position: absolute;
+  cursor: pointer;
+}
