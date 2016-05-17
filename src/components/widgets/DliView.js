@@ -20,8 +20,7 @@ function getSettingsState(props) {
     };
 
     if(props){
-        console.log("DliView props...");
-        console.dir(props);
+
     }
 
     return data;

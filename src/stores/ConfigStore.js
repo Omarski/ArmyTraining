@@ -66,12 +66,10 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
     },
 
     isASREnabled: function(){
-        console.log("reading ASR", _needsASR);
         return (_needsASR);
     },
 
     hasDLI: function(){
-        // this doesnt exist???
         return(_hasDLI);
     },
 
@@ -80,7 +78,6 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
     },
 
     getDliList: function(){
-        console.dir("reading DLI", _DliList);
         return({
             dli: _DliList
         })
