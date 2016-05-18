@@ -32,7 +32,7 @@ function destroy() {
 var _needsASR = false;
 var _hasDLI = false;
 var _DliList = null;
-var _hasReference = false;
+var _hasReference = true;
 
 // initialize this configStore from relevant json files
  function loadConfig() {

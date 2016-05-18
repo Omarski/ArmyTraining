@@ -8,10 +8,6 @@ var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
 var DliView = require("../components/widgets/DliView");
 var ReferenceView = require("../components/reference_guide/ReferenceView");
-var Modal = ReactBootstrap.Modal;
-var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-var Button = ReactBootstrap.Button;
-var Popover = ReactBootstrap.Popover;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -71,6 +67,7 @@ var HeaderView = React.createClass({
     },
 
     componentDidMount: function() {
+        BookStore.removeChangeListener(this._onChange);
         BookStore.addChangeListener(this._onChange);
     },
 
@@ -79,22 +76,8 @@ var HeaderView = React.createClass({
         ConfigStore.removeChangeListener((this._onChange));
     },
 
-
-    openReference: function(){
-        console.log("attempting to open reference section...(NYI)");
-    },
-
-    getCurrentDliPath: function(){
-
-    },
-
-    updateDliPath:function(){
-
-    },
-
     render: function() {
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
-        var referenceIcon = <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>;
         var self = this;
         if (this.state.muted) {
             muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
@@ -105,9 +88,7 @@ var HeaderView = React.createClass({
             dliView = (<DliView />);
         }
         if(self.state.hasReference){
-            referenceView = (<button onClick={this.openReference} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
-                {referenceIcon}
-            </button>);
+            referenceView = (<ReferenceView />);
         }
 
         return (
