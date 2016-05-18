@@ -46,17 +46,12 @@ var CultureQuestView = React.createClass({
     },
 
     componentWillMount: function() {
-        
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
-        
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
     },
 
     onLayersReady:function(layersColl){
@@ -64,14 +59,20 @@ var CultureQuestView = React.createClass({
     },
 
     onHideQuiz: function(){
+
         self.setState({showQuiz:false});
+
+        //allow map interactions
+        $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
     },
 
     onRegionClicked: function(canvasElement){
 
-            this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
-            this.setState({'lastSelected': canvasElement, showQuiz:true});
+        this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
+        this.setState({'lastSelected': canvasElement, showQuiz:true});
 
+        //kill map interactions
+        $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
     },
 
     updateLayersColl:function(layer, changeMode, changesColl){
@@ -79,125 +80,52 @@ var CultureQuestView = React.createClass({
         var self = this;
         var state = self.state;
         var layerId = layer.getAttribute('id');
+        var applyToAll  = changeMode.indexOf("All") !== -1;
+        var applyExcept = changeMode.indexOf("Except") !== -1;
 
-        switch(changeMode){
+        for (var l = 0; l < state.layersColl.length; l++){
 
-            case 'attributeAdd':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
+            if ((state.layersColl[l].getAttribute('id') === layerId && !applyExcept) || applyToAll){
+                for (var c = 0; c < changesColl.length; c++){
+
+                    switch(changeMode){
+                        case 'attributeAdd': case 'attributeAddAll':
                             state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
-                        }
+                            break;
+                        case 'attributeRemove': case 'attributeRemoveAll':
+                            state.layersColl[l].removeAttribute(changesColl[c].name);
+                            break;
+                        case 'classAdd': case 'classAddAll':
+                            state.layersColl[l].classList.add(changesColl[c].name);
+                            break;
+                        case 'classRemove': case 'classRemoveAll':
+                            state.layersColl[l].classList.remove(changesColl[c].name);
+                            break;
                     }
                 }
-                break;
 
-            case 'attributeAddExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
-                        }
-                    }
-                }
-                break;
+            }else if (applyExcept) {
 
-            case 'attributeAddAll':
-                for (var l = 0; l < state.layersColl.length; l++){
+                if (state.layersColl[l].getAttribute('id') !== layerId){
                     for (var c = 0; c < changesColl.length; c++){
-                        state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
-                    }
-                }
-                break;
 
-            case 'attributeRemove':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].removeAttribute(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'attributeRemoveExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].removeAttribute(changesColl[c].name);
+                        switch(changeMode){
+                            case 'attributeAddExcept':
+                                state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
+                                break;
+                            case 'attributeRemoveExcept':
+                                state.layersColl[l].removeAttribute(changesColl[c].name);
+                                break;
+                            case 'classAddExcept':
+                                state.layersColl[l].classList.add(changesColl[c].name);
+                                break;
+                            case 'classRemoveExcept':
+                                state.layersColl[l].classList.remove(changesColl[c].name);
+                            break;
                         }
                     }
                 }
-                break;
-
-            case 'attributeRemoveAll':
-                for (var l = 0; l < state.layersColl.length; l++){
-                        for (var c = 0; c < changesColl.length; c++) {
-                            state.layersColl[l].removeAttribute(changesColl[c].name);
-                        }
-                }
-                break;
-
-            case 'classAdd':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.add(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classAddExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.add(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classAddAll':
-                for (var l = 0; l < state.layersColl.length; l++){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.add(changesColl[c].name);
-                        }
-                }
-                break;
-
-            case 'classRemove':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.remove(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classRemoveExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.remove(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classRemoveAll':
-                for (var l = 0; l < state.layersColl.length; l++){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.remove(changesColl[c].name);
-                        }
-                }
-                break;
+            }
         }
     },
     

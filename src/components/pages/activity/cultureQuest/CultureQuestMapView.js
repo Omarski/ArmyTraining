@@ -95,8 +95,7 @@ var CultureQuestMap = React.createClass({
 
         return (
            
-            <ImageLayersView className = {this.props.showQuiz ?
-                                          "CultureQuestQuizView-killInteraction":""}
+            <ImageLayersView
 
                 areaWidth       = {this.state.imageLayersData.areaWidth}
                 areaHeight      = {this.state.imageLayersData.areaHeight}
