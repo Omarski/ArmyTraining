@@ -5,6 +5,8 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 
 var ReferenceStore = require('../../stores/ReferenceStore');
+var Modal = ReactBootstrap.Modal;
+var Button = ReactBootstrap.Button;
 
 function getSettingsState(props) {
     var data = {
@@ -17,6 +19,11 @@ function getSettingsState(props) {
 var ReferenceView = React.createClass({
     close: function(){
         this.setState({ showModal: false });
+    },
+
+    openModal: function(){
+        console.log('here')
+        this.setState({ showModal: !this.state.showModal });
     },
 
     getInitialState: function() {
@@ -37,14 +44,20 @@ var ReferenceView = React.createClass({
     },
     render: function() {
         return (
-            <Modal dialogClassName="referenceModal" bsSize="large" show={this.state.showModal} onHide={this.close}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Reference Guide</Modal.Title>
-                </Modal.Header>
-                <Modal.Body id="referenceModalBody">
-                    Here
-                </Modal.Body>
-            </Modal>
+            <div id="referenceView">
+
+                <Modal dialogClassName="referenceModal" bsSize="large" show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Reference Guide</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body id="referenceModalBody">
+                        Here
+                    </Modal.Body>
+                </Modal>
+                <button onClick={this.openModal} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="reference">
+                    <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
+                </button>
+            </div>
         );
     },
     _onChange: function() {

@@ -10,7 +10,6 @@ var CultureQuestMap = React.createClass({
     getInitialState: function() {
 
         return {imageLayersData:{},
-                layerColl:[],
                 lastHighlightedRegion:null
         };
     },
@@ -45,12 +44,16 @@ var CultureQuestMap = React.createClass({
     },
 
     onLayersReady:function(layersColl){
-        this.setState({layersColl:layersColl});
+
+        //bubble up to parent comp
+        this.props.onLayersReady(layersColl);
     },
 
     onRegionClicked: function(canvasElement){
 
-        if (canvasElement) console.log("Clicked on: " + canvasElement.getAttribute('id'));
+        if (canvasElement) {
+            this.props.onRegionClicked(canvasElement);
+        }
     },
 
     onRegionRollover: function(canvasElement) {
@@ -92,7 +95,8 @@ var CultureQuestMap = React.createClass({
 
         return (
            
-            <ImageLayersView
+            <ImageLayersView className = {this.props.showQuiz ?
+                                          "CultureQuestQuizView-killInteraction":""}
 
                 areaWidth       = {this.state.imageLayersData.areaWidth}
                 areaHeight      = {this.state.imageLayersData.areaHeight}

@@ -4,7 +4,7 @@
 
 var React = require('react');
 
-var CultureQuestQuiz = React.createClass({
+var TimerCountdown = React.createClass({
 
     getInitialState: function() {
 
@@ -29,11 +29,10 @@ var CultureQuestQuiz = React.createClass({
     render: function() {
 
         return (
-            <temp>
-            </temp>
+           <div></div>
 
-        );
+        )
     }
 });
 
-module.exports = CultureQuestQuiz;
+module.exports = TimerCountdown;

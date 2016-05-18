@@ -4,6 +4,7 @@ var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
+var BookmarkStore = require('../stores/BookmarkStore');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -185,34 +186,38 @@ function loadPrevious() {
  * @param  {string} text The content of the PAGE
  */
 function load(data) {
-    setTimeout(function() {
-        NotificationActions.updateBody("Loading Page : " + data.page.title );
-    });
+    if (data && data.chapter && data.page) {
+        setTimeout(function() {
+            NotificationActions.updateBody("Loading Page : " + data.page.title );
+        });
 
-    _loaded = false;
-    console.log("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json");
-    $.getJSON("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json", function(result) {
+        _loaded = false;
+        $.getJSON("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json", function(result) {
 
-        _currentUnit = data.unit;
-        _currentChapter = data.chapter;
-        _currentPage = data.page;
+            _currentUnit = data.unit;
+            _currentChapter = data.chapter;
+            _currentPage = data.page;
 
-        _data = result.page;
+            _data = result.page;
 
 
-        var storedPages = store.get('pages');
-        if (!storedPages) {
-            storedPages = {};
-        }
+            var storedPages = store.get('pages');
+            if (!storedPages) {
+                storedPages = {};
+            }
 
-        var state = {visited: true};
-        _currentPage.state = state;
-        storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = state;
+            var state = {visited: true};
+            _currentPage.state = state;
+            storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = state;
 
-        store.set('pages', storedPages);
+            store.set('pages', storedPages);
 
-        PageActions.complete(result);
-    });
+            PageActions.complete(result);
+        });
+    } else {
+        BookmarkActions.destroy(); // if the data directory has changed, it can mess up the bookmark situation.  force remove bookmark and alert user
+        alert("An error has occurred, please reload this browser");
+    }
 }
 
 function jump(data) {
