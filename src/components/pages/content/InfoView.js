@@ -69,7 +69,6 @@ function getPageState(props) {
             if(notes && notes.length > 1){
                 noteItems = notes.map(function(item, index) {
                     var hasBullet = (item.text.indexOf('-') === 0);
-
                     var str = item.text;
                     if (hasBullet) {
                         //str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash

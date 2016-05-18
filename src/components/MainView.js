@@ -5,6 +5,7 @@ var LoaderStore = require('../stores/LoaderStore');
 var LoaderActions = require('../actions/LoaderActions');
 var HeaderView = require('../components/HeaderView');
 var ContentView = require('../components/ContentView');
+var ConfigStore = require('../stores/ConfigStore');
 var FooterView = require('../components/FooterView');
 var NotificationView = require('../components/widgets/NotificationView');
 var NotificationActions = require('../actions/NotificationActions');
@@ -33,12 +34,12 @@ var MainView = React.createClass({
 
     componentWillMount: function() {
         LoaderStore.addChangeListener(this._onChange);
+        ConfigActions.load();
     },
 
     componentDidMount: function() {
         //LoaderStore.addChangeListener(this._onChange);
         NotificationActions.show({title:'Please wait', body:'Loading...'});
-        ConfigActions.load();
         CoachFeedbackActions.load();
         LoaderActions.load();
     },

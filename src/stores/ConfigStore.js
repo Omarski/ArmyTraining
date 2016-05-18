@@ -6,13 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var ConfigConstants = require('../constants/ConfigConstants');
 var ConfigActions = require('../actions/ConfigActions');
 var PageStore = require('../stores/PageStore');
-var React = require('react');
-var ReactBootstrap = require('react-bootstrap');
-var Popover = ReactBootstrap.Popover;
-var ListGroup = ReactBootstrap.ListGroup;
-var ListGroupItem = ReactBootstrap.ListGroupItem;
-var Button = ReactBootstrap.Button;
-var ButtonGroup = ReactBootstrap.ButtonGroup;
+var DliView = require("../components/widgets/DliView");
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -31,32 +25,26 @@ function destroy() {
 
 var _needsASR = false;
 var _hasDLI = false;
-var _DliList = null;
 var _hasReference = false;
 
-// initialize this configStore from relevant json files
+
  function loadConfig() {
-    //get asr data from file
-    $.getJSON("data/ASR/asr.json", function(data){
-        if(data && data.needsASR){
-            _needsASR = data.needsASR;
-        }
-    });
-
-    // get dli data....
-    $.getJSON("data/dli/dli.json", function(data){
-        if(data && data.dliPaths){
-            _DliList = data.dliPaths;
-        }
-    });
-
-     setTimeout(function () {
-         if(_DliList){
+     $.getJSON("data/config.json", function(data){
+         // is there a DLI file?
+         if(data.hasOwnProperty('dli')){
              _hasDLI = true;
          }
-         ConfigActions.loadComplete();
-     }, 100);
 
+         // is there an asr?
+         if(data.hasOwnProperty('asr')){
+             _needsASR = true;
+         }
+
+         // is there are reference section?
+         if(data.hasOwnProperty('reference')){
+             _hasReference = true;
+         }
+     });
 }
 
 var ConfigStore = assign({}, EventEmitter.prototype, {
@@ -75,12 +63,6 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
 
     hasReference: function(){
         return (_hasReference);
-    },
-
-    getDliList: function(){
-        return({
-            dli: _DliList
-        })
     },
 
     emitChange: function() {

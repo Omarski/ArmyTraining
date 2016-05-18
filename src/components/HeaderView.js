@@ -29,9 +29,7 @@ function getBookState() {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
-        previousVolume: null,
-        hasDLI: ConfigStore.hasDLI(),
-        hasReference: ConfigStore.hasReference()
+        previousVolume: null
     };
 }
 
@@ -101,10 +99,10 @@ var HeaderView = React.createClass({
         }
         var dliView = "";
         var referenceView = "";
-        if(self.state.hasDLI){
+        if(ConfigStore.hasDLI()){
             dliView = (<DliView />);
         }
-        if(self.state.hasReference){
+        if(ConfigStore.hasReference()){
             referenceView = (<button onClick={this.openReference} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
                 {referenceIcon}
             </button>);

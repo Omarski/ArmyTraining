@@ -11,11 +11,12 @@ var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 
 
+var _DliList = null;
 
 function getSettingsState(props) {
     var data = {
         modalControl: null,
-        nameList: ConfigStore.getDliList().dli,
+        nameList: [],
         iframeSrc: ""
     };
 
@@ -25,6 +26,8 @@ function getSettingsState(props) {
 
     return data;
 }
+
+
 
 var DliView = React.createClass({
     getInitialState: function() {
@@ -52,6 +55,15 @@ var DliView = React.createClass({
 
     componentWillMount: function() {
       //  SettingsStore.addChangeListener(this._onChange);
+        var self = this;
+        // get dli data....
+        $.getJSON("data/dli/dli.json", function(data){
+            if(data && data.dliPaths){
+                self.setState({
+                    nameList: data.dliPaths
+                });
+            }
+        });
     },
 
     componentDidMount: function() {
