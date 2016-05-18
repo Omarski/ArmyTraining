@@ -1,0 +1,64 @@
+@mixin cultureQuestQuizView-trans($transType) {
+  transition: $transType .25s ease-in-out;
+  -moz-transition: $transType .25s ease-in-out;
+  -webkit-transition: $transType .25s ease-in-out;
+}
+
+.cultureQuestQuizView-quizPop{
+  z-index: 15;
+  background-color: #000;
+  display:block;
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: -630px;
+  top: 200px;
+  left:15px;
+  width:700px;
+  height:275px;
+  opacity:0;
+  overflow: hidden;
+
+  .cultureQuestQuizView-quizCont{
+    width:100%;
+    height:100%;
+
+    .cultureQuestQuizView-instructorImg{
+      background-color: #fff;
+      display:block;
+      width:200px;
+      height:275px;
+      position: absolute;
+      top:0;
+      left:0;
+    }
+
+    .cultureQuestQuizView-quizBody{
+      background:#fff;
+      position: absolute;
+      width:470px;
+      height:200px;
+      top:35px;
+      left:210px;
+      overflow:auto;
+
+      .cultureQuestQuizView-quizText{
+
+      }
+    }
+  }
+}
+
+.cultureQuestQuizView-fade-out {
+  opacity: 0;
+  @include cultureQuestQuizView-trans(opacity);
+}
+
+.cultureQuestQuizView-fade-in {
+  opacity: 1;
+  @include cultureQuestQuizView-trans(opacity);
+}
+
+.CultureQuestQuizView-killInteraction{
+  pointer-events:none;
+}
