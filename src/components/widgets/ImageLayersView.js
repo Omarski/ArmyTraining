@@ -119,8 +119,8 @@ var ImageLayersView = React.createClass({
         self.props.imageColl.map(function(image,index){
 
             var regionCanvas =  self.createCanvas({
-                canvasWidth:image.nearWidth,
-                canvasHeight:image.nearHeight,
+                canvasWidth:self.props.areaWidth,
+                canvasHeight:self.props.areaHeight,
                 canvasId:"imageLayer_canvas_" + index,
                 canvasStyle:"{z-index:"+index+1+"}",
                 mapSrc: self.state.loadedImageColl[index].src
@@ -129,10 +129,11 @@ var ImageLayersView = React.createClass({
             document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
 
             canvasColl.push(regionCanvas);
-            self.props.onLayersReady(regionCanvas);
+            // self.props.onLayersReady(regionCanvas);
         });
 
         self.setState({canvasColl:canvasColl});
+        self.props.onLayersReady(self.state.canvasColl);
     },
 
     detectRegion: function(e,pixelX,pixelY) {
