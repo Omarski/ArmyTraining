@@ -139,6 +139,19 @@ function findCurrentPageIndex() {
     return result;
 }
 
+function answer(data) {
+    // get current page
+    if (_currentPage) {
+
+        console.log(_currentPage);
+
+        // get timestamp
+        data = assign({}, data, {lastUpdated: Date.now()});
+
+        // save answer data in state
+        _currentPage.state = assign({}, _currentPage.state, data);
+    }
+}
 
 
 function loadNext() {
@@ -287,6 +300,9 @@ AppDispatcher.register(function(action) {
 
 
     switch(action.actionType) {
+        case PageConstants.PAGE_ANSWER:
+            answer(action.data);
+            break;
         case PageConstants.PAGE_COMPLETE:
             _loaded = true;
             PageStore.emitChange();
