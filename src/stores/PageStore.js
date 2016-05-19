@@ -224,7 +224,7 @@ function load(data) {
             // check if page is marked as a quiz page
             var quizTag = Utils.findInfo(_data.info, InfoTagConstants.INFO_PROP_QUIZ);
             var quizPageTag = Utils.findInfo(_data.info, InfoTagConstants.INFO_PROP_QUIZPAGE);
-            if (quizPageTag != null && quizTag === null) {
+            if (quizPageTag !== null && quizTag === null) {
                 state = assign({}, state, {quizpage: true});
             }
 
