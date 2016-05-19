@@ -7,12 +7,20 @@ var ReactBootstrap = require('react-bootstrap');
 var ReferenceStore = require('../../stores/ReferenceStore');
 var Modal = ReactBootstrap.Modal;
 var Button = ReactBootstrap.Button;
+var Nav = ReactBootstrap.Nav;
+var NavItem = ReactBootstrap.NavItem;
+var NavDropdown = ReactBootstrap.NavDropdown;
+var MenuItem = ReactBootstrap.MenuItem;
+var DropdownButton = ReactBootstrap.DropdownButton;
 var Tabs = ReactBootstrap.Tabs;
 var Tab = ReactBootstrap.Tab;
+var MenuItem = ReactBootstrap.MenuItem;
 
 function getSettingsState(props) {
     var data = {
-        showModal: false
+        showModal: false,
+        selectedIndex: 1,
+        content: null
     };
 
     return data;
@@ -24,8 +32,12 @@ var ReferenceView = React.createClass({
     },
 
     openModal: function(){
-        console.log('here')
         this.setState({ showModal: !this.state.showModal });
+    },
+
+    handleSelect: function(event) {
+        console.log(event);
+        this.setState({ selectedIndex: event });
     },
 
     getInitialState: function() {
@@ -45,6 +57,26 @@ var ReferenceView = React.createClass({
         //  SettingsStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        var content = "";
+        var dropdownButton = (<DropdownButton bsStyle="success" title="Dropdown">
+            <MenuItem key="1">Dropdown link</MenuItem>
+            <MenuItem key="2">Dropdown link</MenuItem>
+        </DropdownButton>);
+
+        switch (this.state.selectedIndex) {
+            case 1:
+                content = (<h2>First Tab</h2>);
+                break;
+            case 2:
+                content = (<h2>Second Tab</h2>);
+                break;
+            case 3:
+                content = (<h2>Third Tab</h2>);
+                break;
+            case 4:
+                content = (<h2>Fourth Tab</h2>);
+                break;
+        }
         return (
             <div id="referenceView">
 
@@ -53,11 +85,27 @@ var ReferenceView = React.createClass({
                         <Modal.Title>Reference Guide</Modal.Title>
                     </Modal.Header>
                     <Modal.Body id="referenceModalBody">
-                        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                            <Tab eventKey={1} title="Tab 1">Tab 1 content</Tab>
-                            <Tab eventKey={2} title="Tab 2">Tab 2 content</Tab>
-                            <Tab eventKey={3} title="Tab 3" disabled>Tab 3 content</Tab>
-                        </Tabs>
+                        <Nav bsStyle="tabs" activeKey={2} onSelect={this.handleSelect.bind(this)}>
+                            <NavItem eventKey={1}>
+                                NavItem 1 content
+                            </NavItem>
+                            <NavItem eventKey={2} title="Item">
+                                NavItem 2 content
+                            </NavItem>
+                            <NavItem eventKey={3}>
+                                NavItem 3 content
+                            </NavItem>
+                            <NavDropdown eventKey={4} title="Dropdown" id="nav-dropdown">
+                                <MenuItem eventKey="4.1">Action</MenuItem>
+                                <MenuItem eventKey="4.2">Another action</MenuItem>
+                                <MenuItem eventKey="4.3">Something else here</MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="4.4">Separated link</MenuItem>
+                            </NavDropdown>
+                        </Nav>
+                        <div className="container-fluid">
+                            {content}
+                        </div>
                     </Modal.Body>
                 </Modal>
                 <button onClick={this.openModal} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="reference">
