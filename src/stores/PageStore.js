@@ -1,10 +1,13 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
+var InfoTagConstants = require('../constants/InfoTagConstants');
 var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
+var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
+var Utils = require('../components/widgets/Utils');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -140,6 +143,17 @@ function findCurrentPageIndex() {
     return result;
 }
 
+function answer(data) {
+    // get current page
+    if (_currentPage) {
+
+        // get timestamp
+        data = assign({}, data, {lastUpdated: Date.now()});
+
+        // save answer data in state
+        _currentPage.state = assign({}, _currentPage.state, data);
+    }
+}
 
 
 function loadNext() {
@@ -200,13 +214,22 @@ function load(data) {
 
             _data = result.page;
 
-
             var storedPages = store.get('pages');
             if (!storedPages) {
                 storedPages = {};
             }
 
+            // create state property
             var state = {visited: true};
+
+            // check if page is marked as a quiz page
+            var quizTag = Utils.findInfo(_data.info, InfoTagConstants.INFO_PROP_QUIZ);
+            var quizPageTag = Utils.findInfo(_data.info, InfoTagConstants.INFO_PROP_QUIZPAGE);
+            if (quizPageTag !== null && quizTag === null) {
+                state = assign({}, state, {quizpage: true});
+            }
+
+            // add state property to page
             _currentPage.state = state;
             storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = state;
 
@@ -273,6 +296,28 @@ var PageStore = assign({}, EventEmitter.prototype, {
     },
 
     /**
+     * @returns (Array) Returns an ordered list of pages that match
+     */
+    getChapterQuizPages: function() {
+        var results = [];
+
+        if (_currentChapter) {
+            var pages = _currentChapter.pages;
+            var pagesLen = pages.length;
+
+            for (var i = 0; i < pagesLen; i++) {
+                var page = pages[i];
+
+                if (page.state && page.state.quizpage) {
+                    results.push(page);
+                }
+            }
+        }
+
+        return results;
+    },
+
+    /**
      * @param {function} callback
      */
     addChangeListener: function(callback) {
@@ -292,6 +337,9 @@ AppDispatcher.register(function(action) {
 
 
     switch(action.actionType) {
+        case PageConstants.PAGE_ANSWER:
+            answer(action.data);
+            break;
         case PageConstants.PAGE_COMPLETE:
             _loaded = true;
             PageStore.emitChange();
