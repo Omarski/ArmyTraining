@@ -8,37 +8,16 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 var _loading = false;
 var _loaded = false;
-var _totalUnits = 0;
-var _parsedUnitIndex = 0;
+var _data = 0;
 
 /**
  * Create a LOADER item.
  * @param  {string} text The content of the LOADER
  */
 function load() {
-
     _loading = true;
-    $.getJSON("data/content/toc.json", function(result) {
-
-        /*
-        BookActions.create(result.book);
-        var books = BookStore.getAll();
-
-        for (var key in books) {
-            var book = books[key];
-            var uLen = book.data.unit.length;
-            for ( var i = 0; i < uLen; i++ ) {
-                UnitStore.create(book.data.unit[i]);
-            }
-            var units = UnitStore.getAll();
-            var copy = [];
-            for (var uKey in units) {
-                copy.push({key: uKey, unit:units[uKey]});
-            }
-            _totalUnits = copy.length;
-            loadUnitData(copy);
-        }*/
-
+    $.getJSON("data/reference/reference.json", function(result) {
+        _data = result;
     });
 }
 
@@ -78,11 +57,11 @@ AppDispatcher.register(function(action) {
 
 
     switch(action.actionType) {
-        case ReferenceConstants.LOADER_COMPLETE:
+        case ReferenceConstants.REFERENCE_COMPLETE:
             _loading = false;
             ReferenceStore.emitChange();
             break;
-        case ReferenceConstants.LOADER_LOAD:
+        case ReferenceConstants.REFERENCE_LOAD:
             load();
             ReferenceStore.emitChange();
             break;
