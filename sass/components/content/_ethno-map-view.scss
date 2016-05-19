@@ -12,7 +12,7 @@
 }
 
 .visible {
-  visibility: visible;
+  visibility: visible !important;
   z-index: 12;
 }
 
@@ -40,8 +40,8 @@
   position: absolute;
   cursor: pointer;
 }
-
 .labels {
   position: absolute;
-
+  left:0;
+  visibility: hidden;
 }

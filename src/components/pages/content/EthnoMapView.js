@@ -112,32 +112,42 @@ var EthnoMap = React.createClass({
             var canvasId = canvasElement.id;
             console.log("test", canvasId);
             var isVisible = $("#" + canvasId).hasClass("visible");
-            if(isVisible === true){
+            if(isVisible === true) {
                 var zIndex = getComputedStyle(canvasElement).getPropertyValue("z-index");
                 var newzIndex = this.state.topZindex + 1;
                 this.setState({topZindex: newzIndex});
                 console.log("SUCCESSS!!!!!");
                 $("#" + canvasId).css("zIndex", newzIndex);
+                var index = canvasId.slice(-1);
+
+                // var oldLabel = self.state.label.getAttribute('id');
+                // $("#" + oldLabel).removeClass("visible");
+                //
+                // var labelVisible = $("#canvas-label-" + index).hasClass("visible");
+                // console.log("labelVisible", labelVisible);
+                // if (labelVisible === false) {
+                //     $("#canvas-label-" + index).addClass("visible");
+                //     self.setState({label: document.getElementById("canvas-label-" + index)});
+                // }
             }
         }
     },
     onLayersReady: function(x){
-        // console.log("x", x);
-        // console.log("this.props", this.props);
 
         var canvasNames = [];
         this.props.mapData.areas.map(function(region, index){
             canvasNames.push(region.label);
-        })
-        console.log("canvasNames", canvasNames);
-        x.map(function(item, i){
-            console.log("item", item, "i", i);
-            var canvas = document.getElementById("imageLayer_canvas_" + i);
-            console.log("canvas", canvas);
-            var ctx = canvas.getContext("2d");
+            var canv = document.createElement("canvas");
+            canv.setAttribute("width", "768");
+            canv.setAttribute("height", "504");
+            canv.setAttribute("id", "canvas-label-" + index);
+            // canv.className("invisible")
+            var ctx = canv.getContext("2d");
             ctx.font = "30px Arial";
-            ctx.fillStyle = "Red";
-            ctx.strokeText(canvasNames[i], 100, 180);
+            ctx.strokeText(canvasNames[index], 100, 180);
+
+            document.getElementById("imageLayerView-back-image").appendChild(canv);
+            $("#" + "canvas-label-" + index).addClass("labels");
         });
     },
     placeLabels: function(label){
@@ -168,7 +178,8 @@ var EthnoMap = React.createClass({
 var EthnoToggleDiv = React.createClass({
     getInitialState: function() {
         return {
-            topZindex: 10
+            topZindex: 10,
+            label: null
         };
     },
     toggleOnClick: function(e){
@@ -182,16 +193,54 @@ var EthnoToggleDiv = React.createClass({
             var opacity = getComputedStyle(target).getPropertyValue("opacity");
             var visibleTrueFalse = $("#imageLayer_canvas_" + index).hasClass("visible");
             var zIndex = getComputedStyle(target).getPropertyValue("z-index");
+            var labelVisible = $("#canvas-label-" + index).hasClass("visible");
+            console.log("labelVisible", labelVisible);
+
+
             if(opacity === 0 || visibleTrueFalse === false){
                 var newzIndex = self.state.topZindex + 1;
                 self.setState({topZindex: newzIndex}, function(){console.log("self.state", self.state)});
                 $("#imageLayer_canvas_" + index).addClass("visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "1");
                 $("#imageLayer_canvas_" + index).css("zIndex", newzIndex);
+
+                if(labelVisible === false){
+                    if(self.state.label !== null){
+                        console.log("self.state.label", self.state.label);
+                        var oldLabel = self.state.label.getAttribute('id');
+                        $("#" + oldLabel).removeClass("visible");
+                    }
+                    $("#canvas-label-" + index).addClass("visible");
+                    self.setState({label: document.getElementById("canvas-label-" + index)});
+                }
+
             } else if (opacity === "1" && visibleTrueFalse === true){
                 $("#imageLayer_canvas_" + index).removeClass("visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "0");
+
+                // if(labelVisible === false && self.state.label !== null){
+                //     var oldLabel = self.state.label.getAttribute('id');
+                //     $("#" + oldLabel).removeClass("visible");
+                //
+                // }
+                if(labelVisible === true){
+                    $("#canvas-label-" + index).removeClass("visible");
+                    self.setState({label: null});
+                }
             }
+
+            // if(labelVisible === true){
+            //     $("#canvas-label-" + index).removeClass("visible");
+            //     self.setState({label: null});
+            // } else if (labelVisible === false){
+            //     if(self.state.label !== null){
+            //         console.log("self.state.label", self.state.label);
+            //         var oldLabel = self.state.label.getAttribute('id');
+            //         $("#" + oldLabel).removeClass("visible");
+            //     }
+            //     $("#canvas-label-" + index).addClass("visible");
+            //     self.setState({label: document.getElementById("canvas-label-" + index)});
+            // }
         };
         checkOpacity(targetCanvas);
     },
