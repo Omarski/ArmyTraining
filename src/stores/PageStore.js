@@ -5,6 +5,7 @@ var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
+var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
 var Utils = require('../components/widgets/Utils');
 
