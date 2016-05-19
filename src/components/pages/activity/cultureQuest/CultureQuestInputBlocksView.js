@@ -4,27 +4,35 @@
 
 var React = require('react');
 
-var CultureQuestInputBlocks = React.createClass({
+var CultureQuestInputBlocksView = React.createClass({
+
+    //props: selectedJSON, question, answers
 
     getInitialState: function() {
 
         return {
-            mediaPath:'data/media/',
+            mediaPath:'data/media/'
         };
     },
 
     componentWillMount: function() {
-
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
-
-        //PageStore.addChangeListener(this._onChange);
+        this.renderBlocks();
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+    },
+
+    renderBlocks: function(){
+        var self = this;
+        var question = self.props.question;
+        var answers = self.props.answers;
+        var selectedJSON = self.props.selectedJSON;
+
+        var answer = selectedJSON["answer"+answers.onQuestion];
+        console.log("answer is :" + answer);
     },
 
     render: function() {
@@ -37,4 +45,4 @@ var CultureQuestInputBlocks = React.createClass({
     }
 });
 
-module.exports = CultureQuestInputBlocks;
+module.exports = CultureQuestInputBlocksView;

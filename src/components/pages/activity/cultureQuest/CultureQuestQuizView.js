@@ -70,7 +70,6 @@ var CultureQuestQuiz = React.createClass({
                         'question': selectedJSON['prompt'+ answerObj.onQuestion]
                         };
         self.setState({question:question});
-        console.log("Question: " + self.state.question.question);
     },
 
     render: function() {
@@ -79,13 +78,16 @@ var CultureQuestQuiz = React.createClass({
 
         var quizPopClasses = (self.props.showQuiz) ? "cultureQuestQuizView-fade-in" : ".cultureQuestQuizView-fade-out";
 
-        var btnRespondClasses = "btn btn-primary cultureQuestQuizView-btnRespond" + self.state.btnRespondHovered;
-        var btnSkipClasses = "btn btn-primary cultureQuestQuizView-btnSkip" + self.state.btnSkipHovered;
+        var btnRespondClasses = "btn btn-primary";
+        var btnRespondStyle = {position: 'absolute', zIndex:20, top:'238px', left:'400px'};
+        var btnSkipClasses = "btn btn-primary";
+        var btnSkipStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px'};
 
         var instImg = self.state.mediaPath + self.getSelectedJSON()['face'];
         var instStyle = {background:"#000 url("+instImg+") no-repeat 100% 100%"};
 
         var timerStyle = {};
+
 
         return (
                 <div className={"cultureQuestQuizView-quizPop "+quizPopClasses}>
@@ -110,16 +112,18 @@ var CultureQuestQuiz = React.createClass({
 
                             <CultureQuestInputBlocksView
                                 selectedJSON={self.getSelectedJSON()}
+                                question={self.state.question}
+                                answers={self.state.answersColl[self.getSelectedIndex()]}
                             />
-                            
-                            <button type="button" className={btnRespondClasses}>Respond</button>
-                            <button type="button" className={btnSkipClasses}>Skip question</button>
+
                         </div>
-
                     </div>
 
-                    <div className="cultureQuestQuiz-puzzleCont" id="cultureQuestQuiz-puzzleCont">
-                    </div>
+                    <div className="cultureQuestQuiz-puzzleCont" id="cultureQuestQuiz-puzzleCont"></div>
+
+                    <button type="button" style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
+                    <button type="button" style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
+
                 </div>
 
         );
