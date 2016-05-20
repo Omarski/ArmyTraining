@@ -25,6 +25,7 @@ function getPageState(props) {
         data.imageData = JSON.parse(data.page.info.property[2].value);
         data.layersColl = [];
         data.lastSelected = null;
+        data.answersColl = [];
 
         if (props.page.note) {
 
@@ -45,6 +46,10 @@ var CultureQuestView = React.createClass({
         return pageState;
     },
 
+    // shouldComponentUpdate: function(nextProps, nextState) {
+    //     //return nextProps.email != this.props.email;
+    // },
+
     componentWillMount: function() {
     },
 
@@ -56,23 +61,37 @@ var CultureQuestView = React.createClass({
 
     onLayersReady:function(layersColl){
         this.setState({layersColl:layersColl});
+        this.prepAnswersColl();
     },
 
-    onHideQuiz: function(){
+    prepAnswersColl: function() {
 
-        self.setState({showQuiz:false});
+        var objColl = [];
+        for (var l = 0; l < this.state.layersColl.length; l++){
+            var obj = {'layerNumber': l, 'completed': false, onQuestion:1,
+                'question1':{'answered':false, attempts:0},
+                'question2':{'answered':false, attempts:0}};
+            objColl.push(obj);
+        }
+        this.setState({answersColl:objColl});
+    },
 
-        //allow map interactions
-        $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
+    showQuizUpdate: function(mode){
+
+        if (mode === "show"){
+            this.setState({showQuiz:true});
+            $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
+        }else{
+            this.setState({showQuiz:false});
+            $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
+        }
     },
 
     onRegionClicked: function(canvasElement){
 
         this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
-        this.setState({'lastSelected': canvasElement, showQuiz:true});
-
-        //kill map interactions
-        $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
+        this.setState({'lastSelected': canvasElement});//, showQuiz:true
+        this.showQuizUpdate("show");
     },
 
     updateLayersColl:function(layer, changeMode, changesColl){
@@ -128,6 +147,10 @@ var CultureQuestView = React.createClass({
             }
         }
     },
+
+    saveAnswersColl: function(answersColl){
+        this.state.answersColl = answersColl;
+    },
     
     render: function() {
         var self = this;
@@ -138,7 +161,6 @@ var CultureQuestView = React.createClass({
 
         return (
             <div id="CultureQuestViewBlock" onclick={self.onHideQuiz}>
-               
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
                 
                 <CultureQuestMapView
@@ -153,6 +175,9 @@ var CultureQuestView = React.createClass({
                     layersColl={state.layersColl}
                     lastSelected={state.lastSelected}
                     showQuiz = {state.showQuiz}
+                    showQuizUpdate = {self.showQuizUpdate}
+                    answersColl = {state.answersColl}
+                    saveAnswersColl = {self.saveAnswersColl}
                     />:null}
                 
                 {self.state.showPop? <CultureQuestPopup />:null}

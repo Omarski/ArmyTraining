@@ -1,7 +1,7 @@
 @mixin cultureQuestQuizView-trans($transType) {
-  transition: $transType .25s ease-in-out;
-  -moz-transition: $transType .25s ease-in-out;
-  -webkit-transition: $transType .25s ease-in-out;
+  transition: $transType .75s ease-in-out;
+  -moz-transition: $transType .75s ease-in-out;
+  -webkit-transition: $transType .75s ease-in-out;
 }
 
 .cultureQuestQuizView-quizPop{
@@ -41,9 +41,16 @@
       left:210px;
       overflow:auto;
 
+      .cultureQuestQuizView-input-blocks-cont{
+        position: absolute;
+        top:140px;
+        left:30px;
+      }
+
       .cultureQuestQuizView-quizText{
 
       }
+
     }
   }
 }

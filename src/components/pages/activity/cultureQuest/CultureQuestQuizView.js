@@ -7,23 +7,23 @@ var TimerCountdownView = require('../../../widgets/TimerCountdownView');
 var CultureQuestInputBlocksView = require('./CultureQuestInputBlocksView');
 
 var CultureQuestQuiz = React.createClass({
-
+    
+    //props 
     getInitialState: function() {
 
         return {
             mediaPath:'data/media/',
             timerController: {},
-            btnRespondHovered: "",
-            btnSkipHovered: "",
-            answersColl:[],
-            question:{},
+            questionDisplayObj:{},
+            correctAnswer:"",
             questionIntro1: "Remember, you can press BACKSPACE to erase letters.",
-            questionIntro2: "Oh, you don't know? Let me give you a hint."
+            questionIntro2: "Oh, you don't know? Let me give you a hint.",
+            inputBlocksColl:[]
         };
     },
 
     componentWillMount: function() {
-        this.prepAnswersColl();
+        //this.prepAnswersColl();
     },
 
     componentDidMount: function() {
@@ -31,18 +31,6 @@ var CultureQuestQuiz = React.createClass({
     },
 
     componentWillUnmount: function() {
-    },
-
-    prepAnswersColl: function() {
-
-       var objColl = [];
-       for (var l = 0; l < this.props.layersColl.length; l++){
-            var obj = {'layerNumber': l, 'completed': false, onQuestion:1,
-                       'question1':{'answered':false, attempts:0},
-                       'question2':{'answered':false, attempts:0}};
-           objColl.push(obj);
-       }
-        this.setState({answersColl:objColl});
     },
 
     getSelectedIndex: function(){
@@ -63,19 +51,70 @@ var CultureQuestQuiz = React.createClass({
     renderQuestionText:function(){
 
         var self = this;
-        var answerObj = self.state.answersColl[self.getSelectedIndex()];
+        var answerObj = self.props.answersColl[self.getSelectedIndex()];
         var selectedJSON = self.getSelectedJSON();
-        var question = {'intro': 'I\'ve been expecting you. I don\'t have much time.',
+        var questionDisplayObj = {'intro': 'I\'ve been expecting you. I don\'t have much time.',
                         'introL2': self.state['questionIntro' + answerObj.onQuestion],
                         'question': selectedJSON['prompt'+ answerObj.onQuestion]
                         };
-        self.setState({question:question});
+        self.setState({questionDisplayObj:questionDisplayObj});
+    },
+    
+    renderBlocks: function(){
+
+        var self = this;
+        var answerObj = self.props.answersColl[self.getSelectedIndex()];
+        var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
+
+        self .state.correctAnswer = answer;
+        var answerArray = answer.split('');
+
+        var blocks = answerArray.map(function(letter, index){
+            return (
+                <CultureQuestInputBlocksView id={"CultureQuestQuizView-inputBlock"+index} key={index} />
+            )
+        });
+
+        return blocks;
+    },
+
+    checkAnswer: function(){
+
+        var self = this;
+        var completeAnswer = "";
+        var answerObj = self.props.answersColl[self.getSelectedIndex()];
+
+        answerObj["question"+ answerObj.onQuestion].attempts++;
+
+        //check if correct
+        $("input[id^='CultureQuestQuizView-inputBlock']").each(function(){
+            completeAnswer+= $(this).val();
+        });
+        if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase()) {
+            console.log("Correct....!!");
+            answerObj["question"+ answerObj.onQuestion].answered = true;
+
+            //done with area?
+            if (answerObj.onQuestion === 2) {
+                answerObj.completed = true;
+                self.props.showQuizUpdate("hide");
+
+            }else{
+                answerObj.onQuestion = 2;
+                this.renderQuestionText();
+            }
+        }else console.log("wrong....!!");
+
+        //remove
+        for (var key in answerObj) console.log(key + ": " + answerObj[key]);
     },
 
     render: function() {
 
         var self = this;
 
+        // var quizPopClasses = (self.props.showQuiz) ? setTimeout(function(){return "cultureQuestQuizView-fade-in"},1000):
+        //                                              setTimeout(function(){return "cultureQuestQuizView-fade-out"},1000);
         var quizPopClasses = (self.props.showQuiz) ? "cultureQuestQuizView-fade-in" : ".cultureQuestQuizView-fade-out";
 
         var btnRespondClasses = "btn btn-primary";
@@ -105,23 +144,22 @@ var CultureQuestQuiz = React.createClass({
                         <div className="cultureQuestQuizView-quizBody" id="cultureQuestQuizView-quizBody">
 
                             <div className="cultureQuestQuizView-quizText" id="cultureQuestQuizView-quizText">
-                                <div className="cultureQuestQuizView-questionText">{self.state.question.intro}</div>
-                                <div className="cultureQuestQuizView-questionText">{self.state.question.introL2}</div>
-                                <div className="cultureQuestQuizView-questionText">{self.state.question.question}</div>
+                                <div className="cultureQuestQuizView-questionText">{self.state.questionDisplayObj.intro}</div>
+                                <div className="cultureQuestQuizView-questionText">{self.state.questionDisplayObj.introL2}</div>
+                                <div className="cultureQuestQuizView-questionText">{self.state.questionDisplayObj.question}</div>
                             </div>
-
-                            <CultureQuestInputBlocksView
-                                selectedJSON={self.getSelectedJSON()}
-                                question={self.state.question}
-                                answers={self.state.answersColl[self.getSelectedIndex()]}
-                            />
-
+                            
+                            <div className="cultureQuestQuizView-input-blocks-cont" id="cultureQuestQuizView-input-blocks-cont">
+                                {this.renderBlocks()}
+                            </div>
                         </div>
+
+                       
                     </div>
 
                     <div className="cultureQuestQuiz-puzzleCont" id="cultureQuestQuiz-puzzleCont"></div>
 
-                    <button type="button" style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
+                    <button type="button" onClick={self.checkAnswer} style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
                     <button type="button" style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
 
                 </div>

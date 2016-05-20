@@ -5,13 +5,11 @@
 var React = require('react');
 
 var CultureQuestInputBlocksView = React.createClass({
-
-    //props: selectedJSON, question, answers
+    
 
     getInitialState: function() {
 
         return {
-            mediaPath:'data/media/'
         };
     },
 
@@ -19,28 +17,19 @@ var CultureQuestInputBlocksView = React.createClass({
     },
 
     componentDidMount: function() {
-        this.renderBlocks();
     },
 
     componentWillUnmount: function() {
     },
 
-    renderBlocks: function(){
-        var self = this;
-        var question = self.props.question;
-        var answers = self.props.answers;
-        var selectedJSON = self.props.selectedJSON;
-
-        var answer = selectedJSON["answer"+answers.onQuestion];
-        console.log("answer is :" + answer);
-    },
-
     render: function() {
 
         var self = this;
+        var blockStyle = {'fontSize': '25px', 'width':'40px','marginRight':'15px', 'padding':'5px',
+            'border':'5px solid #333333', 'textAlign':'center'};
 
         return (
-           <div></div>
+           <input type = "text" style = {blockStyle} id={self.props.id} />
         )
     }
 });
