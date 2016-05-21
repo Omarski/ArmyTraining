@@ -13,7 +13,7 @@ var CultureQuestQuiz = React.createClass({
 
         return {
             mediaPath:'data/media/',
-            timerController: {},
+            timerObj: {duration:59, message:null, controller:"play", reportAt:{time:30, alert:"hintTime"}},
             questionDisplayObj:{},
             correctAnswer:"",
             questionIntro1: "Remember, you can press BACKSPACE to erase letters.",
@@ -62,6 +62,7 @@ var CultureQuestQuiz = React.createClass({
     
     renderBlocks: function(){
 
+        $("#cultureQuestQuizView-input-blocks-cont").children().val("");
         var self = this;
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
         var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
@@ -109,6 +110,18 @@ var CultureQuestQuiz = React.createClass({
         for (var key in answerObj) console.log(key + ": " + answerObj[key]);
     },
 
+    timerStatusListener: function(status){
+
+        switch (status){
+            case "timeUp":
+                console.log("Time up!!!");
+                break;
+            case "hintTime":
+                console.log("Show hint now!!!");
+                break;
+        }
+    },
+
     render: function() {
 
         var self = this;
@@ -125,17 +138,22 @@ var CultureQuestQuiz = React.createClass({
         var instImg = self.state.mediaPath + self.getSelectedJSON()['face'];
         var instStyle = {background:"#000 url("+instImg+") no-repeat 100% 100%"};
 
-        var timerStyle = {};
+        var timerStyle = {fontSize:'20px',color:'red',textAlign:'center',zIndex:'20'};
 
 
         return (
                 <div className={"cultureQuestQuizView-quizPop "+quizPopClasses}>
 
-                    <TimerCountdownView
-                        styling     = {timerStyle}
-                        startTime   = {60}
-                        controller  = {self.state.timerController}
-                    />
+                    <div className="cultureQuestQuizView-timer" id="cultureQuestQuizView-timer">
+                        <TimerCountdownView
+                            styling     = {timerStyle}
+                            duration    = {self.state.timerObj.duration}
+                            controller  = {self.state.timerObj.controller}
+                            message     = {self.state.timerObj.message}
+                            reportAt    = {self.state.timerObj.reportAt}
+                            timerStatusReporter = {self.timerStatusListener}
+                        />
+                    </div>
 
                     <div className="cultureQuestQuizView-quizCont" id="cultureQuestQuizView-quizCont">
 

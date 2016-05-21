@@ -19,6 +19,12 @@
   opacity:0;
   overflow: hidden;
 
+  .cultureQuestQuizView-timer{
+    position: absolute;
+    left:350px;
+    top:10px;
+  }
+
   .cultureQuestQuizView-quizCont{
     width:100%;
     height:100%;

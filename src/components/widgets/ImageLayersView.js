@@ -144,6 +144,7 @@ var ImageLayersView = React.createClass({
         for (var i = 0; i < self.state.canvasColl.length; i++) {
 
             var canvasElement = self.state.canvasColl[i];
+            if (canvasElement.getAttribute('hidden') === true) continue;
             var canvas = canvasElement.getContext('2d');
             var pixel = canvas.getImageData(pixelX, pixelY, 1, 1).data;
 
@@ -151,6 +152,7 @@ var ImageLayersView = React.createClass({
                 pixelHit = true;
                 self.state.lastHighlightedRegion = canvasElement;
                 self.props.onRollover(canvasElement);
+                break;
             }
         }
 
