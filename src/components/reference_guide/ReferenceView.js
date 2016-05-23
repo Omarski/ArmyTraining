@@ -47,6 +47,8 @@ var ReferenceView = React.createClass({
 
     componentWillMount: function() {
         //  SettingsStore.addChangeListener(this._onChange);
+
+        // get reference view files
     },
 
     componentDidMount: function() {

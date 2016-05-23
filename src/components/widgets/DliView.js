@@ -79,8 +79,8 @@ var DliView = React.createClass({
 
         var nameList = self.state.nameList;
         var selections = nameList.map(function(item, index){
-            return(<ReactBootstrap.ListGroupItem>
-                <a key={"dliPopoverLinks"+index}  href="#" onClick={self.openDliWindow.bind(self, item.name)}>{item.name}</a>
+            return(<ReactBootstrap.ListGroupItem key={"dliPopoverLinks"+index}>
+                <a href="#" onClick={self.openDliWindow.bind(self, item.name)}>{item.name}</a>
             </ReactBootstrap.ListGroupItem>);
         });
 
