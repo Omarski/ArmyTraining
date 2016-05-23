@@ -65,7 +65,7 @@ var CultureQuestView = React.createClass({
     },
 
     prepAnswersColl: function() {
-
+         //populate from previous data if any - otherwise init here:
         var objColl = [];
         for (var l = 0; l < this.state.layersColl.length; l++){
             var obj = {'layerNumber': l, 'completed': false, onQuestion:1,
@@ -115,7 +115,8 @@ var CultureQuestView = React.createClass({
                             state.layersColl[l].removeAttribute(changesColl[c].name);
                             break;
                         case 'classAdd': case 'classAddAll':
-                            state.layersColl[l].classList.add(changesColl[c].name);
+                            if (!state.layersColl[l].classList.contains(changesColl[c].name))
+                                 state.layersColl[l].classList.add(changesColl[c].name);
                             break;
                         case 'classRemove': case 'classRemoveAll':
                             state.layersColl[l].classList.remove(changesColl[c].name);
@@ -165,10 +166,15 @@ var CultureQuestView = React.createClass({
                 
                 <CultureQuestMapView
                     imageData = {state.imageData}
+                    layersColl = {state.layersColl}
                     onLayersReady = {self.onLayersReady}
                     onRegionClicked = {self.onRegionClicked}
-                    showQuiz = {state.showQuiz}>
-                    </CultureQuestMapView>
+                    answersColl = {state.answersColl}
+                    lastSelected={state.lastSelected}
+                    updateLayersColl = {self.updateLayersColl}
+                >
+                    
+                </CultureQuestMapView>
 
                     {self.state.showQuiz? <CultureQuestQuizView
                     imageData={state.imageData}

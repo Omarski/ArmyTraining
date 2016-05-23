@@ -40,7 +40,6 @@ var ImageLayersView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -61,12 +60,9 @@ var ImageLayersView = React.createClass({
             state.loadedImageColl[i].src = imageColl[i];
             state.loadedImageColl[i].onload = self.loadCounter;
         }
-
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
     },
 
     loadCounter: function(){

@@ -8,22 +8,22 @@ var CultureQuestInputBlocksView = require('./CultureQuestInputBlocksView');
 
 var CultureQuestQuiz = React.createClass({
     
-    //props 
+    //props: layersColl, showQuiz, lastSelected, showQuizUpdate, answersColl, saveAnswersColl
+
     getInitialState: function() {
 
         return {
             mediaPath:'data/media/',
-            timerObj: {duration:59, message:null, controller:"play", reportAt:{time:30, alert:"hintTime"}},
+            timerController:"play",
+            timerObj: {duration:59, message:null, reportAt:{time:30, alert:"hintTime"}},
             questionDisplayObj:{},
             correctAnswer:"",
             questionIntro1: "Remember, you can press BACKSPACE to erase letters.",
-            questionIntro2: "Oh, you don't know? Let me give you a hint.",
-            inputBlocksColl:[]
+            questionIntro2: "Oh, you don't know? Let me give you a hint."
         };
     },
 
     componentWillMount: function() {
-        //this.prepAnswersColl();
     },
 
     componentDidMount: function() {
@@ -62,12 +62,14 @@ var CultureQuestQuiz = React.createClass({
     
     renderBlocks: function(){
 
-        $("#cultureQuestQuizView-input-blocks-cont").children().val("");
         var self = this;
+
+        $("#cultureQuestQuizView-input-blocks-cont").children().val("");
+
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
         var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
 
-        self .state.correctAnswer = answer;
+        self.state.correctAnswer = answer;
         var answerArray = answer.split('');
 
         var blocks = answerArray.map(function(letter, index){
@@ -75,7 +77,7 @@ var CultureQuestQuiz = React.createClass({
                 <CultureQuestInputBlocksView id={"CultureQuestQuizView-inputBlock"+index} key={index} />
             )
         });
-
+        this.state.inputBlocksColl = blocks;
         return blocks;
     },
 
@@ -94,9 +96,10 @@ var CultureQuestQuiz = React.createClass({
         if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase()) {
             console.log("Correct....!!");
             answerObj["question"+ answerObj.onQuestion].answered = true;
-
+            self.updateTimerController("pause");
             //done with area?
             if (answerObj.onQuestion === 2) {
+                //change in answersColl triggers CQMap updateAccess
                 answerObj.completed = true;
                 self.props.showQuizUpdate("hide");
 
@@ -120,6 +123,10 @@ var CultureQuestQuiz = React.createClass({
                 console.log("Show hint now!!!");
                 break;
         }
+    },
+    
+    updateTimerController: function(mode){
+       this.setState({timerController:mode});
     },
 
     render: function() {
@@ -146,11 +153,12 @@ var CultureQuestQuiz = React.createClass({
 
                     <div className="cultureQuestQuizView-timer" id="cultureQuestQuizView-timer">
                         <TimerCountdownView
-                            styling     = {timerStyle}
-                            duration    = {self.state.timerObj.duration}
-                            controller  = {self.state.timerObj.controller}
-                            message     = {self.state.timerObj.message}
-                            reportAt    = {self.state.timerObj.reportAt}
+                            styling                 = {timerStyle}
+                            duration                = {self.state.timerObj.duration}
+                            timerController         = {self.state.timerController}
+                            updateTimerController   = {self.updateTimerController}
+                            message                 = {self.state.timerObj.message}
+                            reportAt                = {self.state.timerObj.reportAt}
                             timerStatusReporter = {self.timerStatusListener}
                         />
                     </div>
