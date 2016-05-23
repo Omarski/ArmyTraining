@@ -40,7 +40,6 @@ var ImageLayersView = React.createClass({
     },
 
     componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -61,12 +60,9 @@ var ImageLayersView = React.createClass({
             state.loadedImageColl[i].src = imageColl[i];
             state.loadedImageColl[i].onload = self.loadCounter;
         }
-
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
     },
 
     loadCounter: function(){
@@ -144,6 +140,7 @@ var ImageLayersView = React.createClass({
         for (var i = 0; i < self.state.canvasColl.length; i++) {
 
             var canvasElement = self.state.canvasColl[i];
+            if (canvasElement.getAttribute('hidden') === true) continue;
             var canvas = canvasElement.getContext('2d');
             var pixel = canvas.getImageData(pixelX, pixelY, 1, 1).data;
 
@@ -151,6 +148,7 @@ var ImageLayersView = React.createClass({
                 pixelHit = true;
                 self.state.lastHighlightedRegion = canvasElement;
                 self.props.onRollover(canvasElement);
+                break;
             }
         }
 

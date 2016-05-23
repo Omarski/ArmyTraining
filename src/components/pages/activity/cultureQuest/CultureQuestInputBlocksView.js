@@ -4,37 +4,34 @@
 
 var React = require('react');
 
-var CultureQuestInputBlocks = React.createClass({
+var CultureQuestInputBlocksView = React.createClass({
+    
 
     getInitialState: function() {
 
         return {
-            mediaPath:'data/media/',
         };
     },
 
     componentWillMount: function() {
-
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
-
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
     },
 
     render: function() {
 
         var self = this;
+        var blockStyle = {'fontSize': '25px', 'width':'40px','marginRight':'15px', 'padding':'5px',
+            'border':'5px solid #333333', 'textAlign':'center'};
 
         return (
-           <div></div>
+           <input type = "text" style = {blockStyle} id={self.props.id} />
         )
     }
 });
 
-module.exports = CultureQuestInputBlocks;
+module.exports = CultureQuestInputBlocksView;
