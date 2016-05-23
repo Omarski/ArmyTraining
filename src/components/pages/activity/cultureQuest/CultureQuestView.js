@@ -25,6 +25,7 @@ function getPageState(props) {
         data.imageData = JSON.parse(data.page.info.property[2].value);
         data.layersColl = [];
         data.lastSelected = null;
+        data.answersColl = [];
 
         if (props.page.note) {
 
@@ -45,33 +46,52 @@ var CultureQuestView = React.createClass({
         return pageState;
     },
 
+    // shouldComponentUpdate: function(nextProps, nextState) {
+    //     //return nextProps.email != this.props.email;
+    // },
+
     componentWillMount: function() {
-        
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
-        
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
     },
 
     onLayersReady:function(layersColl){
         this.setState({layersColl:layersColl});
+        this.prepAnswersColl();
     },
 
-    onHideQuiz: function(){
-        self.setState({showQuiz:false});
+    prepAnswersColl: function() {
+         //populate from previous data if any - otherwise init here:
+        var objColl = [];
+        for (var l = 0; l < this.state.layersColl.length; l++){
+            var obj = {'layerNumber': l, 'completed': false, onQuestion:1,
+                'question1':{'answered':false, attempts:0},
+                'question2':{'answered':false, attempts:0}};
+            objColl.push(obj);
+        }
+        this.setState({answersColl:objColl});
+    },
+
+    showQuizUpdate: function(mode){
+
+        if (mode === "show"){
+            this.setState({showQuiz:true});
+            $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
+        }else{
+            this.setState({showQuiz:false});
+            $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
+        }
     },
 
     onRegionClicked: function(canvasElement){
 
-            this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
-            this.setState({'lastSelected': canvasElement, showQuiz:true});
-
+        this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
+        this.setState({'lastSelected': canvasElement});//, showQuiz:true
+        this.showQuizUpdate("show");
     },
 
     updateLayersColl:function(layer, changeMode, changesColl){
@@ -79,126 +99,58 @@ var CultureQuestView = React.createClass({
         var self = this;
         var state = self.state;
         var layerId = layer.getAttribute('id');
+        var applyToAll  = changeMode.indexOf("All") !== -1;
+        var applyExcept = changeMode.indexOf("Except") !== -1;
 
-        switch(changeMode){
+        for (var l = 0; l < state.layersColl.length; l++){
 
-            case 'attributeAdd':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
+            if ((state.layersColl[l].getAttribute('id') === layerId && !applyExcept) || applyToAll){
+                for (var c = 0; c < changesColl.length; c++){
+
+                    switch(changeMode){
+                        case 'attributeAdd': case 'attributeAddAll':
                             state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
-                        }
+                            break;
+                        case 'attributeRemove': case 'attributeRemoveAll':
+                            state.layersColl[l].removeAttribute(changesColl[c].name);
+                            break;
+                        case 'classAdd': case 'classAddAll':
+                            if (!state.layersColl[l].classList.contains(changesColl[c].name))
+                                 state.layersColl[l].classList.add(changesColl[c].name);
+                            break;
+                        case 'classRemove': case 'classRemoveAll':
+                            state.layersColl[l].classList.remove(changesColl[c].name);
+                            break;
                     }
                 }
-                break;
 
-            case 'attributeAddExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
-                        }
-                    }
-                }
-                break;
+            }else if (applyExcept) {
 
-            case 'attributeAddAll':
-                for (var l = 0; l < state.layersColl.length; l++){
+                if (state.layersColl[l].getAttribute('id') !== layerId){
                     for (var c = 0; c < changesColl.length; c++){
-                        state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
-                    }
-                }
-                break;
 
-            case 'attributeRemove':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].removeAttribute(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'attributeRemoveExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].removeAttribute(changesColl[c].name);
+                        switch(changeMode){
+                            case 'attributeAddExcept':
+                                state.layersColl[l].setAttribute(changesColl[c].name, changesColl[c].value);
+                                break;
+                            case 'attributeRemoveExcept':
+                                state.layersColl[l].removeAttribute(changesColl[c].name);
+                                break;
+                            case 'classAddExcept':
+                                state.layersColl[l].classList.add(changesColl[c].name);
+                                break;
+                            case 'classRemoveExcept':
+                                state.layersColl[l].classList.remove(changesColl[c].name);
+                            break;
                         }
                     }
                 }
-                break;
-
-            case 'attributeRemoveAll':
-                for (var l = 0; l < state.layersColl.length; l++){
-                        for (var c = 0; c < changesColl.length; c++) {
-                            state.layersColl[l].removeAttribute(changesColl[c].name);
-                        }
-                }
-                break;
-
-            case 'classAdd':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.add(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classAddExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.add(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classAddAll':
-                for (var l = 0; l < state.layersColl.length; l++){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.add(changesColl[c].name);
-                        }
-                }
-                break;
-
-            case 'classRemove':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') == layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.remove(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classRemoveExcept':
-                for (var l = 0; l < state.layersColl.length; l++){
-                    if (state.layersColl[l].getAttribute('id') != layerId){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.remove(changesColl[c].name);
-                        }
-                    }
-
-                }
-                break;
-
-            case 'classRemoveAll':
-                for (var l = 0; l < state.layersColl.length; l++){
-                        for (var c = 0; c < changesColl.length; c++){
-                            state.layersColl[l].classList.remove(changesColl[c].name);
-                        }
-                }
-                break;
+            }
         }
+    },
+
+    saveAnswersColl: function(answersColl){
+        this.state.answersColl = answersColl;
     },
     
     render: function() {
@@ -210,21 +162,28 @@ var CultureQuestView = React.createClass({
 
         return (
             <div id="CultureQuestViewBlock" onclick={self.onHideQuiz}>
-               
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
                 
                 <CultureQuestMapView
                     imageData = {state.imageData}
+                    layersColl = {state.layersColl}
                     onLayersReady = {self.onLayersReady}
                     onRegionClicked = {self.onRegionClicked}
-                    showQuiz = {state.showQuiz}>
-                    </CultureQuestMapView>
+                    answersColl = {state.answersColl}
+                    lastSelected={state.lastSelected}
+                    updateLayersColl = {self.updateLayersColl}
+                >
+                    
+                </CultureQuestMapView>
 
                     {self.state.showQuiz? <CultureQuestQuizView
                     imageData={state.imageData}
                     layersColl={state.layersColl}
                     lastSelected={state.lastSelected}
                     showQuiz = {state.showQuiz}
+                    showQuizUpdate = {self.showQuizUpdate}
+                    answersColl = {state.answersColl}
+                    saveAnswersColl = {self.saveAnswersColl}
                     />:null}
                 
                 {self.state.showPop? <CultureQuestPopup />:null}
