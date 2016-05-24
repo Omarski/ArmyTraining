@@ -6,7 +6,6 @@ var Utils = (function() {
      * @returns (string|null) Value of the first matching property name or null if not found
      */
     function findInfo(info, name) {
-
         if (info !== null && info.property) {
             var properties = info.property;
             var propLen = properties.length;
