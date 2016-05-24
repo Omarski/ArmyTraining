@@ -59,13 +59,10 @@ var CultureQuestMap = React.createClass({
 
     onRegionRollover: function(canvasElement) {
 
-        //if (canvasElement && canvasElement.state !== 'static'){
-
             var self = this;
             var state = self.state;
 
-            if (canvasElement) {
-
+            if (canvasElement && !canvasElement.hidden) {
                 switch(canvasElement.state){
 
                     case "idle":
@@ -83,34 +80,28 @@ var CultureQuestMap = React.createClass({
                         state.lastHighlightedRegion = canvasElement;
                         break;
                 }
-            }else {
+            }else{
 
-                if (state.lastHighlightedRegion && !state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")) {
+                if (state.lastHighlightedRegion && !state.lastHighlightedRegion.hidden &&
+                    !state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")) {
                     state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
                     state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
                     state.lastHighlightedRegion = null;
                 }
             }
-        //}
-
-
     },
 
     updateLayersAccess: function(){
         if (this.props.answersColl.length > 0){
-            console.log("Updating access:...................");
-
             for (var i=0; i < this.props.layersColl.length; i++){
                 if (this.props.answersColl[i].completed){
                     this.props.updateLayersColl(this.props.lastSelected, "attributeAdd", [{name:'state', value:"static"}]);
                     this.props.updateLayersColl(this.props.lastSelected, "classRemove", [{name:'imageLayerView-fade-out'}]);
-                    this.props.updateLayersColl(this.props.lastSelected, "classAdd", [{name:'imageLayerView-fade-in'},
-                                                                                      {name:'CultureQuestQuizView-killInteraction'}]);
-
-                    console.log("xxxxxxxxxx Layer completed : " + this.props.layersColl[i].getAttribute('id'));
-                    
+                    this.props.updateLayersColl(this.props.lastSelected, "classAdd", [{name:'imageLayerView-fade-in'}]);
                 }
             }
+
+            this.state.lastHighlightedRegion = null;
         }
 
     },
