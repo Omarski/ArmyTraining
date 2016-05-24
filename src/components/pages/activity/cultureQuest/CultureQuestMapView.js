@@ -52,12 +52,12 @@ var CultureQuestMap = React.createClass({
 
     onRegionClicked: function(canvasElement){
 
-        if (canvasElement) {
+        if (canvasElement && !canvasElement.hidden) {
             this.props.onRegionClicked(canvasElement);
         }
     },
 
-    onRegionRollover: function(canvasElement) {
+    onRegionRollover: function(canvasElement, pageX, pageY) {
 
             var self = this;
             var state = self.state;

@@ -18,10 +18,12 @@ var CultureQuestQuiz = React.createClass({
             timerDuration:30,
             timerMessage:"",
             timerReportAt:{time:20, alert:"hintTime"},
+            timerParentAlerts:null,
             questionDisplayObj:{},
             correctAnswer:"",
             questionIntro: "Remember, you can press BACKSPACE to erase letters.",
             hintIntro: "Oh, you don't know? Let me give you a hint.",
+            answerRevealIntro: "Not quite, but here's the answer you are looking for.",
             hintMode: false,
             skipMode: false,
             leaveRegionMode: false,
@@ -76,20 +78,18 @@ var CultureQuestQuiz = React.createClass({
     },
 
     resetQuestion: function(){
-        console.log("reset...");
-        $("#cultureQuestQuizView-input-blocks-cont").children().val("");
 
+        $("#cultureQuestQuizView-input-blocks-cont").children().val("");
         this.setState({hintMode:false, skipMode:false, timerDuration:30, timerMessage:null,
-                       timerReportAt:{time:20, alert:"hintTime"}});
-        this.updateTimerController("play");
-        this.renderQuestionText();
+                       timerReportAt:{time:20, alert:"hintTime"}}, function(){
+            this.setState({timerParentAlerts:"timerReset"});
+            this.renderQuestionText();
+        });
     },
     
     renderBlocks: function(){
 
         var self = this;
-
-        //$("#cultureQuestQuizView-input-blocks-cont").children().val("");
 
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
         var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
@@ -111,23 +111,26 @@ var CultureQuestQuiz = React.createClass({
         var answerObj = this.props.answersColl[this.getSelectedIndex()];
 
         switch (status){
+
             case "timeUp":
-                console.log("Time up!!!");
+
                 if (answerObj.onQuestion === 1) {
                     answerObj.onQuestion = 2;
                     this.resetQuestion();
                 }else{
                     this.updateTimerController("pause");
-                    this.setState({timerMessage:"Out of time!", leaveRegionMode:true, showInputBlocks:false});
+                    this.setState({timerMessage:"Out of time!", leaveRegionMode:true, skipMode:false, showInputBlocks:false});
                 }
-
                 break;
 
             case "hintTime":
                 if (!this.state.hintMode) this.setState({hintMode:true}, function(){
                     this.renderQuestionText();
                 });
+                break;
 
+            case "clearParentResetEvent":
+                this.setState({timerParentAlerts:null});
                 break;
         }
     },
@@ -167,7 +170,7 @@ var CultureQuestQuiz = React.createClass({
             }
         //incorrect
         }else{
-            console.log("wrong....!!");
+
             //1st attempt
             if (answerObj["question"+answerObj.onQuestion].attempts++ === 1){
                 $("input[id^='CultureQuestQuizView-inputBlock']").each(function(){$(this).val("");});
@@ -179,19 +182,41 @@ var CultureQuestQuiz = React.createClass({
                 var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
                 var answerArray = answer.split('');
                 $("input[id^='CultureQuestQuizView-inputBlock']").each(function(index,value){
-                    $(this).val(answerArray[index]).css("border","5px solid red");
+                    $(this).val(answerArray[index]);
                 });
-            }
+                answerObj["question"+answerObj.onQuestion].answered = true;
 
-            if (answerObj["question"+answerObj.onQuestion].attempts === 2 && answerObj.onQuestion === 1 ){
-                //show answer - go to q2
-            }else if (answerObj["question"+answerObj.onQuestion].attempts === 2 && answerObj.onQuestion === 2 ){
-                //show answer - go to gift anyway
+                //after answer displayed, on which question?
+                var delay = window.setTimeout(function(){
+                    if (answerObj.onQuestion === 1){
+                        answerObj.onQuestion = 2;
+                        self.resetQuestion();
+                        self.updateTimerController("play");
+                    }else{
+                        console.log("........... give gift!");
+                        self.props.lastSelected = null;
+                        self.props.showQuizUpdate("hide");
+                    }
+                }, 2000);
             }
-
         }
         //remove
         //for (var key in answerObj) console.log(key + ": " + answerObj[key]);
+    },
+
+    onSkipAnswer: function(){
+        this.props.answersColl[this.getSelectedIndex()].onQuestion = 2;
+        this.resetQuestion();
+    },
+
+    onSkipRegion: function(){
+        var self = this;
+        var answerObj = self.props.answersColl[self.getSelectedIndex()];
+        answerObj.onQuestion = 1;
+        answerObj.question1.attempts = answerObj.question2.attempts = 0;
+
+        this.props.lastSelected = null;
+        this.props.showQuizUpdate("hide");
     },
     
     updateTimerController: function(mode){
@@ -205,13 +230,13 @@ var CultureQuestQuiz = React.createClass({
         var quizPopClasses = (self.props.showQuiz) ? "cultureQuestQuizView-fade-in" : ".cultureQuestQuizView-fade-out";
 
         var btnRespondClasses = "btn btn-primary";
-        var btnRespondStyle = {position: 'absolute', zIndex:20, top:'238px', left:'400px'};
+        var btnRespondStyle = {position: 'absolute', zIndex:20, top:'238px', left:'400px', display:(self.state.showInputBlocks)? "block":"none"};
 
         var btnSkipClasses = "btn btn-primary";
-        var btnSkipStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', opacity:(self.state.skipMode)?1:0};
+        var btnSkipStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', display:(self.state.skipMode)? "block":"none"};
 
         var btnLeaveRegionClasses = "btn btn-primary";
-        var btnLeaveRegionStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', opacity:(self.state.leaveRegionMode)?1:0};
+        var btnLeaveRegionStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', display:(self.state.leaveRegionMode)? "block":"none"};
 
         var instImg = self.state.mediaPath + self.getSelectedJSON()['face'];
         var instStyle = {background:"#000 url("+instImg+") no-repeat 100% 100%"};
@@ -226,11 +251,12 @@ var CultureQuestQuiz = React.createClass({
                         <TimerCountdownView
                             styling                 = {timerStyle}
                             duration                = {self.state.timerDuration}
+                            timerParentAlerts       = {self.state.timerParentAlerts}
                             timerController         = {self.state.timerController}
                             updateTimerController   = {self.updateTimerController}
                             message                 = {self.state.timerMessage}
                             reportAt                = {self.state.timerReportAt}
-                            timerStatusReporter = {self.timerStatusListener}
+                            timerStatusReporter     = {self.timerStatusListener}
                         />
                     </div>
 
@@ -254,11 +280,9 @@ var CultureQuestQuiz = React.createClass({
                        
                     </div>
 
-                    <div className="cultureQuestQuiz-puzzleCont" id="cultureQuestQuiz-puzzleCont"></div>
-
                     <button type="button" onClick={self.checkAnswer} style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
-                    <button type="button" style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
-                    <button type="button" style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</button>
+                    <button type="button" onClick={self.onSkipAnswer} style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
+                    <button type="button" onClick={self.onSkipRegion} style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</button>
 
                 </div>
 

@@ -4,6 +4,7 @@
 var React = require('react');
 var CultureQuestMapView = require('./CultureQuestMapView');
 var CultureQuestQuizView = require('./CultureQuestQuizView');
+var CultureQuestPuzzleView = require('./CultureQuestPuzzleView');
 var PageHeader = require('../../../widgets/PageHeader');
 
 function getPageState(props) {
@@ -14,7 +15,8 @@ function getPageState(props) {
         title: "",
         pageType: "",
         showQuiz: false,
-        showPop: false
+        showPopup: false,
+        showPuzzle: false
     } ;
 
 
@@ -26,14 +28,6 @@ function getPageState(props) {
         data.layersColl = [];
         data.lastSelected = null;
         data.answersColl = [];
-
-        if (props.page.note) {
-
-        }
-
-        if (props.page.media) {
-
-        }
     }
 
     return data;
@@ -161,7 +155,7 @@ var CultureQuestView = React.createClass({
         var sources = self.state.sources;
 
         return (
-            <div id="CultureQuestViewBlock" onclick={self.onHideQuiz}>
+            <div id="CultureQuestViewBlock">
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
                 
                 <CultureQuestMapView
@@ -186,8 +180,15 @@ var CultureQuestView = React.createClass({
                     saveAnswersColl = {self.saveAnswersColl}
                     />:null}
                 
-                {self.state.showPop? <CultureQuestPopup />:null}
+                {self.state.showPopup? <CultureQuestPopup />:null}
+                {self.state.showPuzzle? <CultureQuestPuzzleView
+
+
+                />:null}
+
             </div>
+
+
         );
     },
     /**

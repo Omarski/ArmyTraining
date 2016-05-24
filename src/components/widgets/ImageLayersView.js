@@ -125,7 +125,6 @@ var ImageLayersView = React.createClass({
             document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
 
             canvasColl.push(regionCanvas);
-            // self.props.onLayersReady(regionCanvas);
         });
 
         self.setState({canvasColl:canvasColl});
@@ -147,7 +146,7 @@ var ImageLayersView = React.createClass({
             if (pixel[3] != 0) {
                 pixelHit = true;
                 self.state.lastHighlightedRegion = canvasElement;
-                self.props.onRollover(canvasElement);
+                self.props.onRollover(canvasElement, e.pageX, e.pageY);
                 break;
             }
         }
