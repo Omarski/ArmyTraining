@@ -40,6 +40,14 @@ var PageActions = {
             data: data
         });
     },
+    /**
+     * Marks the current chapter complete
+     */
+    markChapterComplete: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.CHAPTER_MARK_COMPLETE
+        });
+    },
     jump: function(data) {
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_JUMP,
