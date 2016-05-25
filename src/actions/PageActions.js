@@ -4,6 +4,15 @@ var PageConstants = require('../constants/PageConstants');
 var PageActions = {
 
     /**
+     * @param  {map} data
+     */
+    answer: function(data) {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.PAGE_ANSWER,
+            data: data
+        });
+    },
+    /**
      * @param  {string} text
      */
     complete: function(data) {
