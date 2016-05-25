@@ -152,7 +152,7 @@ var ContentView = React.createClass({
                     }
                     break;
                 case "quiz_page":
-                case "Quiz":
+                case "QuizEnd":
                     page = <QuizView page={this.state.page} />;
                     break;
                 case "InteractiveTimeline":
