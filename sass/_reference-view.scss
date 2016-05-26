@@ -1,3 +1,16 @@
 #referenceView {
   display: inline;
 }
+
+#gesture-video{
+  background-color: grey;
+}
+
+.referenceTable{
+ tr {
+   background: #f9f9f9;
+ }
+  tr:nth-child(odd) {
+    background: lightgrey;
+  }
+}

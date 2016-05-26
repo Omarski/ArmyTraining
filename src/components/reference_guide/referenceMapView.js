@@ -12,7 +12,6 @@ function getSettingsState(props) {
 
     if(props && props.mapSource){
         data.mapSource = props.mapSource;
-        console.log(props.mapSource);
     }
 
     return data;

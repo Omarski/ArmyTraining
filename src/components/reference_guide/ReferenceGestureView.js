@@ -2,6 +2,7 @@
  * Created by Alec on 5/23/2016.
  */
 var React = require('react');
+var SettingsStore = require('../../stores/SettingsStore');
 var ReactBootstrap = require('react-bootstrap');
 
 
@@ -36,9 +37,6 @@ var ReferenceGestureView = React.createClass({
     },
     render: function() {
         var self = this;
-        console.log("Gesture View");
-        console.dir(self.state.gestureSources);
-
         return (
             <div id="referenceGestureView">
                 <FilterableGestureTable gestures={self.state.gestureSources} />
@@ -89,9 +87,9 @@ var GestureRow = React.createClass({
         var name = this.props.name;
         var desc = this.props.description;
         return (
-            <tr>
-                <td>{name}</td>
-                <td>{desc}</td>
+            <tr onClick={this.props.handleClick} >
+                <td data-source={this.props.path}>{name}</td>
+                <td data-source={this.props.path}>{desc}</td>
             </tr>
         );
     }
@@ -102,10 +100,12 @@ var GestureTable = React.createClass({
         var rows = [];
         var self = this;
         this.props.gestures.forEach(function(item) {
-            if(item.name.indexOf(self.props.filterText) === -1){
+            // check the gesture name and the description of the gesture
+            if(item.name.indexOf(self.props.filterText) === -1 && item.description.indexOf(self.props.filterText) === -1){
                 return;
             }
-            rows.push(<GestureRow name={item.name} description={item.description} path={item.path}/>);
+
+            rows.push(<GestureRow name={item.name} handleClick={this.props.handleClick} description={item.description} path={item.path}/>);
         }.bind(self) );
         return (
             <table>
@@ -115,42 +115,17 @@ var GestureTable = React.createClass({
                     <th>Description</th>
                 </tr>
                 </thead>
-                <tbody>{rows}</tbody>
+                <tbody className="referenceTable">{rows}</tbody>
             </table>
         );
     }
 });
-
-/*
-var ProductTable = React.createClass({
-    render: function() {
-        this.props.products.forEach(function(product) {
-            if (product.name.indexOf(this.props.filterText) === -1 ) {
-                return;
-            }
-
-            rows.push(<ProductRow product={product} key={product.name} />);
-            lastCategory = product.category;
-        }.bind(this) );
-        return (
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </table>
-        );
-    }
-});
-*/
 
 var FilterableGestureTable = React.createClass({
     getInitialState: function() {
         return {
-            filterText: ""
+            filterText: "",
+            videoSource: ""
         };
     },
 
@@ -160,15 +135,26 @@ var FilterableGestureTable = React.createClass({
         });
     },
 
+    handleClick: function(e){
+        // get source url for gesture clicked
+        var video = document.getElementById("gesture-video");
+        video.src = $(e.target).attr("data-source");
+        video.load();
+    },
+
     render: function() {
-        console.log(this.state.filterText);
+        // add video for the gesture
         return (
         <div>
+            <video id="gesture-video" width="320" height="240" autoPlay={SettingsStore.autoPlaySound()} volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                <source src={""} type="video/mp4"></source>
+            </video>
             <SearchBar filterText={this.state.filterText}
                        onUserInput={this.handleUserInput}
                 />
             <GestureTable filterText={this.state.filterText}
                           gestures={this.props.gestures}
+                          handleClick={this.handleClick}
                 />
         </div>
         );

@@ -122,8 +122,6 @@ var ReferenceView = React.createClass({
         }
 
         if(state.pdfSources){
-            console.dir(state.pdfSources);
-
             var dropdownItems = state.pdfSources.map(function(item, index){
                 return (<MenuItem eventKey={"4." + (index+1) } href={item.path} target={"_blank"}>{item.name}</MenuItem>);
             });
@@ -153,7 +151,8 @@ var ReferenceView = React.createClass({
                 content = (<ReferenceGestureView gestureSources={self.state.gestureSources} />);
                 break;
             case 3:
-                content = (<ReferenceDictionaryView dictionarySources={self.state.dictionarySources} />);
+                // this needs to create one for each dictionary source
+                content = (<ReferenceDictionaryView source={self.state.dictionarySources[0].path} />);
                 break;
             default:
                 // no op, PDFs open in new tab/window
