@@ -197,13 +197,16 @@ function loadPrevious() {
 
 /**
  * Create a PAGE item.
- * @param  {string} text The content of the PAGE
+ * @param  {string} data The content of the PAGE
  */
 function load(data) {
     if (data && data.chapter && data.page) {
         setTimeout(function() {
             NotificationActions.updateBody("Loading Page : " + data.page.title );
         });
+
+        // save current page before changing to new one
+        saveCurrentPage();
 
         _loaded = false;
         $.getJSON("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json", function(result) {
@@ -213,11 +216,6 @@ function load(data) {
             _currentPage = data.page;
 
             _data = result.page;
-
-            var storedPages = store.get('pages');
-            if (!storedPages) {
-                storedPages = {};
-            }
 
             // create state property
             var state = {visited: true};
@@ -230,10 +228,10 @@ function load(data) {
             }
 
             // add state property to page
-            _currentPage.state = state;
-            storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = state;
+            _currentPage.state = assign({}, state, _currentPage.state);
 
-            store.set('pages', storedPages);
+            // save current page
+            saveCurrentPage();
 
             PageActions.complete(result);
         });
@@ -289,6 +287,43 @@ function reset() {
         break;
     }
 
+}
+
+function saveCurrentPage() {
+
+    // check for valid current unit
+    if (!(_currentUnit && _currentUnit.data && _currentUnit.data.xid)) {
+        return false;
+    }
+
+    // check for valid current chapter
+    if (!(_currentChapter && _currentChapter.xid)) {
+        return false;
+    }
+
+    // check for valid current page
+    if (!(_currentPage && _currentPage.xid)) {
+        return false;
+    }
+
+    // check fo anything to save
+    if (!(_currentPage.state)) {
+        return false;
+    }
+
+    // load pages
+    var storedPages = store.get('pages');
+    if (!storedPages) {
+        storedPages = {};
+    }
+
+    // update data
+    storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = _currentPage.state;
+
+    // save page
+    store.set('pages', storedPages);
+
+    return true;
 }
 
 var PageStore = assign({}, EventEmitter.prototype, {
