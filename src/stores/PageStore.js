@@ -243,6 +243,24 @@ function load(data) {
     }
 }
 
+/**
+ * Marks the current chapter as complete
+ */
+function markChapterComplete() {
+    // get current chapter
+    if (_currentChapter) {
+        var state = {};
+
+        // get chapter state
+        if (_currentChapter.state) {
+            state = _currentChapter.state;
+        }
+
+        // mark it as complete
+        _currentChapter.state = assign({}, state, {completed: true});
+    }
+}
+
 function jump(data) {
     var pageId = data.page;
     var chapterId = data.chapter;
@@ -337,6 +355,9 @@ AppDispatcher.register(function(action) {
 
 
     switch(action.actionType) {
+        case PageConstants.CHAPTER_MARK_COMPLETE:
+            markChapterComplete();
+            break;
         case PageConstants.PAGE_ANSWER:
             answer(action.data);
             break;
