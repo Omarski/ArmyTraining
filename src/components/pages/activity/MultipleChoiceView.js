@@ -98,7 +98,9 @@ function getFeedback(answers, selectedAnswer){
     answers.map(function(item){
         var text = item.nut.uttering.utterance.translation.text;
         if(selectedAnswer == text){
-            getter = item.feedback.text;
+            if (item.feedback) {
+                getter = item.feedback.text;
+            }
         }
     });
     return(getter);
@@ -188,7 +190,7 @@ var MultipleChoiceView = React.createClass({
             // create new answer object
             var answerObj = {
                 answer: {
-                    answer: answer,
+                    answer: target,
                     question: state.prompt,
                     passed: isCorrect
                 }
