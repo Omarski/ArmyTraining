@@ -190,9 +190,10 @@ var MultipleChoiceView = React.createClass({
             // create new answer object
             var answerObj = {
                 answer: {
-                    answer: target,
+                    answer: answer,
+                    passed: isCorrect,
                     question: state.prompt,
-                    passed: isCorrect
+                    target: target
                 }
             }
             // TODO END <-------------- MOVE TO ITS OWN OBJECT---------------------------------------

@@ -53,9 +53,9 @@ function getPageState(props) {
             var passed;
             var question;
 
-            // get answer
-            if (quizAnswer.answer) {
-                answer = quizAnswer.answer
+            // get correct answer
+            if (quizAnswer.target) {
+                answer = quizAnswer.target
             }
 
             // get question
