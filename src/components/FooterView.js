@@ -23,7 +23,7 @@ function getUnitState(expanded) {
         totalUnits++;
         var unit = units[key];
         var chapters = [];
-        var completed = true;
+        var unitCompleted = true;
         var completedCount = 0;
         var totalPages = 0;
 
@@ -52,16 +52,25 @@ function getUnitState(expanded) {
                 // check pages to see if everything has been
                 // viewed in the chapter to determine unit
                 // complete state
-
+                var chapterCompleted = false;
                 var pages = c.pages;
                 var pagesLen = pages.length;
                 var tcpCompleted = 0;
                 var tcpTotal = pages.length;
+
+                // check if chapter has been marked complete
+                // if just one is not then mark the whole unit as incomplete
+                if (c.state && c.state.completed) {
+                    chapterCompleted = true;
+                } else {
+                    unitCompleted = false
+                }
+
                 while (pagesLen--) {
                     totalPages++;
                     var page = pages[pagesLen];
                     if (!page.state || !page.state.visited) {
-                        completed = false;
+                        //completed = false;
                     } else {
                         completedCount++;
                         tcpCompleted++;
@@ -69,7 +78,7 @@ function getUnitState(expanded) {
                 }
 
                 chapters.push({
-                    completed: false,
+                    completed: chapterCompleted,
                     title: c.title,
                     percent: Math.round((tcpCompleted / tcpTotal) * 100),
                     data: c
@@ -94,16 +103,19 @@ function getUnitState(expanded) {
             } else {
                 expandCollapseIconCls += ' glyphicon-plus-sign';
             }
-            if (completed) {
+
+            // increase unit completed count
+            if (unitCompleted) {
                 totalUnitsComplete++;
             }
+
             data.push(
                 {
                     unitExpandedCls: unitExpandedCls,
                     expandCollapseIconCls: expandCollapseIconCls,
                     unitCls: unitCls,
                     unit: unit,
-                    completed: completed,
+                    completed: unitCompleted,
                     title: unit.data.title,
                     percent: Math.round((completedCount / totalPages) * 100),
                     rows: chapters
