@@ -8,7 +8,7 @@ var CultureQuestInputBlocksView = require('./CultureQuestInputBlocksView');
 
 var CultureQuestQuiz = React.createClass({
     
-    //props: layersColl, showQuiz, lastSelected, showQuizUpdate, answersColl, saveAnswersColl
+    //props: layersColl, imageData, showQuiz, lastSelected, showQuizUpdate, showPuzzleUpdate, answersColl, saveAnswersColl
 
     getInitialState: function() {
 
@@ -24,10 +24,14 @@ var CultureQuestQuiz = React.createClass({
             questionIntro: "Remember, you can press BACKSPACE to erase letters.",
             hintIntro: "Oh, you don't know? Let me give you a hint.",
             answerRevealIntro: "Not quite, but here's the answer you are looking for.",
+            earnedPuzzleAwardText:"I want you to take this with you.",
             hintMode: false,
             skipMode: false,
             leaveRegionMode: false,
-            showInputBlocks: true
+            showInputBlocks: true,
+            puzzleAwardMode:false,
+            atInputBlock:1,
+            inputBlocksTotal:0
         };
     },
 
@@ -75,6 +79,7 @@ var CultureQuestQuiz = React.createClass({
                         'question': question
                         };
         self.setState({questionDisplayObj:questionDisplayObj});
+        self.setInputTabbing();
     },
 
     resetQuestion: function(){
@@ -104,6 +109,23 @@ var CultureQuestQuiz = React.createClass({
         });
         self.state.inputBlocksColl = blocks;
         return blocks;
+    },
+
+    setInputTabbing: function(){
+        var self = this;
+        self.state.inputBlocksTotal = $("[id^='CultureQuestQuizView-inputBlock']").length - 1;
+        $("#CultureQuestQuizView-inputBlock0").focus();
+        $("[id^='CultureQuestQuizView-inputBlock']").on('input', function(){
+            self.state.atInputBlock = $(this).attr('id').substring(31);
+            if ($(this).val().length === 1) {
+                if (parseInt(self.state.atInputBlock) < parseInt(self.state.inputBlocksTotal)) {
+                    self.state.atInputBlock++;
+                    $("#CultureQuestQuizView-inputBlock"+ self.state.atInputBlock).focus();
+                }
+            }else{
+                $(this).val("");
+            }
+        });
     },
 
     timerStatusListener: function(status){
@@ -150,23 +172,19 @@ var CultureQuestQuiz = React.createClass({
 
         //correct
         if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase()) {
-            console.log("Correct....!!");
+           
             answerObj["question"+ answerObj.onQuestion].answered = true;
 
             //Question 2 correct
             if (answerObj.onQuestion === 2) {
                 //change in answersColl triggers CQ-Map updateLayerAccess
-                answerObj.question2.answered = true;
-                answerObj.completed = true;
-                self.props.lastSelected.setAttribute('hidden',true);
-                self.props.lastSelected = null;
-                self.props.showQuizUpdate("hide");
+                self.awardPuzzlePiece();
 
             //Question 1 correct
             }else{
                 answerObj.question1.answered = true;
                 answerObj.onQuestion = 2;
-                this.renderQuestionText();
+                this.resetQuestion();
             }
         //incorrect
         }else{
@@ -187,21 +205,19 @@ var CultureQuestQuiz = React.createClass({
                 answerObj["question"+answerObj.onQuestion].answered = true;
 
                 //after answer displayed, on which question?
-                var delay = window.setTimeout(function(){
+                var delay = setTimeout(function(){
                     if (answerObj.onQuestion === 1){
                         answerObj.onQuestion = 2;
                         self.resetQuestion();
                         self.updateTimerController("play");
                     }else{
-                        console.log("........... give gift!");
-                        self.props.lastSelected = null;
-                        self.props.showQuizUpdate("hide");
+                        setTimeout(function(){
+                            self.awardPuzzlePiece();
+                        },3000);
                     }
                 }, 2000);
             }
         }
-        //remove
-        //for (var key in answerObj) console.log(key + ": " + answerObj[key]);
     },
 
     onSkipAnswer: function(){
@@ -221,6 +237,17 @@ var CultureQuestQuiz = React.createClass({
     
     updateTimerController: function(mode){
        this.setState({timerController:mode});
+    },
+
+    awardPuzzlePiece: function(){
+        var self = this;
+        var answerObj = self.props.answersColl[self.getSelectedIndex()];
+        self.props.showPuzzleUpdate("show");
+        answerObj.question2.answered = true;
+        answerObj.completed = true;
+        self.props.lastSelected.setAttribute('hidden',true);
+        self.updateTimerController("pause");
+        self.setState({puzzleAwardMode:true});
     },
 
     render: function() {
@@ -243,22 +270,26 @@ var CultureQuestQuiz = React.createClass({
 
         var timerStyle = {fontSize:'20px',color:'red',textAlign:'center',zIndex:'20'};
 
+        var quizTextClass = "cultureQuestQuizView-quizText";
+
+        var puzzleAwardTextClass = "cultureQuestQuizView-quizText " + (self.state.puzzleAwardMode) ? "cultureQuestQuizView-show":"cultureQuestQuizView-hide";
 
         return (
                 <div className={"cultureQuestQuizView-quizPop "+quizPopClasses}>
 
-                    <div className="cultureQuestQuizView-timer" id="cultureQuestQuizView-timer">
-                        <TimerCountdownView
-                            styling                 = {timerStyle}
-                            duration                = {self.state.timerDuration}
-                            timerParentAlerts       = {self.state.timerParentAlerts}
-                            timerController         = {self.state.timerController}
-                            updateTimerController   = {self.updateTimerController}
-                            message                 = {self.state.timerMessage}
-                            reportAt                = {self.state.timerReportAt}
-                            timerStatusReporter     = {self.timerStatusListener}
-                        />
-                    </div>
+                    {!self.state.puzzleAwardMode ?
+                        <div className="cultureQuestQuizView-timer" id="cultureQuestQuizView-timer">
+                            <TimerCountdownView
+                                styling                 = {timerStyle}
+                                duration                = {self.state.timerDuration}
+                                timerParentAlerts       = {self.state.timerParentAlerts}
+                                timerController         = {self.state.timerController}
+                                updateTimerController   = {self.updateTimerController}
+                                message                 = {self.state.timerMessage}
+                                reportAt                = {self.state.timerReportAt}
+                                timerStatusReporter     = {self.timerStatusListener}
+                            />
+                    </div>:null}
 
                     <div className="cultureQuestQuizView-quizCont" id="cultureQuestQuizView-quizCont">
 
@@ -266,24 +297,29 @@ var CultureQuestQuiz = React.createClass({
 
                         <div className="cultureQuestQuizView-quizBody" id="cultureQuestQuizView-quizBody">
 
-                            <div className="cultureQuestQuizView-quizText" id="cultureQuestQuizView-quizText">
-                                <div className="cultureQuestQuizView-questionText">{self.state.questionDisplayObj.intro}</div>
-                                <div className="cultureQuestQuizView-questionText">{self.state.questionDisplayObj.introL2}</div>
-                                <div className="cultureQuestQuizView-questionText">{self.state.questionDisplayObj.question}</div>
-                            </div>
+                            {!self.state.puzzleAwardMode?
+                                <div className={quizTextClass} id="cultureQuestQuizView-quizText">
+                                    <div className="cultureQuestQuizView-questionText-intro">{self.state.questionDisplayObj.intro}</div>
+                                    <div className="cultureQuestQuizView-questionText-intro">{self.state.questionDisplayObj.introL2}</div>
+                                    <div className="cultureQuestQuizView-questionText">{self.state.questionDisplayObj.question}</div>
+                                </div>:null}
+
+                            {self.state.puzzleAwardMode ?
+                                <div>
+                                    <div className={puzzleAwardTextClass}>{self.state.earnedPuzzleAwardText}</div>
+                                </div>:null}
                             
-                            {self.state.showInputBlocks? <div className="cultureQuestQuizView-input-blocks-cont" id="cultureQuestQuizView-input-blocks-cont">
+                            {self.state.showInputBlocks && !self.state.puzzleAwardMode? <div className="cultureQuestQuizView-input-blocks-cont" id="cultureQuestQuizView-input-blocks-cont">
                                 {this.renderBlocks()}
                             </div>:null}
                         </div>
-
-                       
                     </div>
 
+                    {!self.state.puzzleAwardMode ? <div>
                     <button type="button" onClick={self.checkAnswer} style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
                     <button type="button" onClick={self.onSkipAnswer} style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
                     <button type="button" onClick={self.onSkipRegion} style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</button>
-
+                    </div>:null}
                 </div>
 
         );

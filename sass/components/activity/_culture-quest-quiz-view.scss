@@ -6,13 +6,10 @@
 
 .cultureQuestQuizView-quizPop{
   z-index: 15;
-  background-color: #000;
+  background-color: #fff;
   display:block;
-  position:relative;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top: -630px;
-  top: 200px;
+  position:absolute;
+  top: 150px;
   left:15px;
   width:700px;
   height:275px;
@@ -30,7 +27,7 @@
     height:100%;
 
     .cultureQuestQuizView-instructorImg{
-      background-color: #fff;
+      background-color: #000;
       display:block;
       width:200px;
       height:275px;
@@ -43,18 +40,19 @@
       position: absolute;
       width:470px;
       height:200px;
-      top:35px;
+      top:45px;
       left:210px;
       overflow:auto;
 
       .cultureQuestQuizView-input-blocks-cont{
         position: absolute;
-        top:140px;
+        top:125px;
         left:30px;
       }
 
-      .cultureQuestQuizView-quizText{
-
+      .cultureQuestQuizView-questionText{
+        color:#325B75;
+        font-weight:400;
       }
 
     }

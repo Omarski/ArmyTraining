@@ -1,0 +1,60 @@
+@mixin cultureQuestPuzzleView-trans($transType) {
+  transition: $transType .75s ease-in-out;
+  -moz-transition: $transType .75s ease-in-out;
+  -webkit-transition: $transType .75s ease-in-out;
+}
+
+.CultureQuestPuzzleView-puzzleCont{
+
+  position:absolute;
+  display:block;
+  top:30px;
+  width: 768px;
+  height: 504px;
+  z-index:25;
+  overflow: hidden;
+
+  .cultureQuestPuzzleView-puzzleAwardImg{
+    position: absolute;
+    top:200px;
+    left:404px;
+    width:112px;
+    height:168px;
+    z-index: 25;
+  }
+
+  .CultureQuestPuzzleView-puzzleSlider{
+    position: absolute;
+    background-color:#fff;
+    height: 430px;
+    width: 72px;
+    right: -75px;
+    top: 45px;
+    border: 1px solid gray;
+
+    .CultureQuestPuzzleView-sliderPuzzle{
+
+      position: absolute;
+      width:40px;
+      height:50px;
+      left:15px;
+    }
+  }
+
+  .CultureQuestPuzzleView-awardPuzzle{
+
+    position: absolute;
+    top: 300px;
+    left: 450px;
+    width: 112px;
+    height: 168px;
+  }
+
+  .CultureQuestPuzzleView-slideIn{
+    right:0;
+  }
+
+  .CultureQuestPuzzleView-slideOut{
+    right:-40px;
+  }
+}

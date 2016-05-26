@@ -17,7 +17,7 @@ function getPageState(props) {
         showQuiz: false,
         showPopup: false,
         showPuzzle: false
-    } ;
+    };
 
 
     if (props && props.page) {
@@ -72,12 +72,33 @@ var CultureQuestView = React.createClass({
 
     showQuizUpdate: function(mode){
 
-        if (mode === "show"){
-            this.setState({showQuiz:true});
-            $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
-        }else{
-            this.setState({showQuiz:false});
-            $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
+        var self = this;
+
+        if (mode === "show") {
+            self.setState({showQuiz: true});
+            $("#cultureQuestQuizView-quizCont").animate({opacity:'1'}, 500, 'linear', function(){
+                $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
+            });
+        } else {
+            $("#cultureQuestQuizView-quizCont").animate({opacity:'0'}, 500, 'linear', function(){
+                self.setState({showQuiz: false});
+                $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
+            });
+        }
+    },
+
+    showPuzzleUpdate: function(mode){
+
+        var self = this;
+
+        if (mode === "show") {
+            self.setState({showPuzzle:true});
+            $("#CultureQuestPuzzleView-puzzleCont").animate({opacity: '1'}, 300, 'linear', function () {
+            });
+        } else {
+            $("#CultureQuestPuzzleView-puzzleCont").animate({opacity: '0'}, 300, 'linear', function () {
+                self.setState({showPuzzle:false});
+            });
         }
     },
 
@@ -153,39 +174,47 @@ var CultureQuestView = React.createClass({
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
-
+        var blockStyle = {position:'relative', width:'768px', height:'504px', marginLeft:'auto', marginRight:'auto'};
+        
         return (
-            <div id="CultureQuestViewBlock">
+            <div style={blockStyle}>
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
-                
-                <CultureQuestMapView
-                    imageData = {state.imageData}
-                    layersColl = {state.layersColl}
-                    onLayersReady = {self.onLayersReady}
-                    onRegionClicked = {self.onRegionClicked}
-                    answersColl = {state.answersColl}
-                    lastSelected={state.lastSelected}
-                    updateLayersColl = {self.updateLayersColl}
-                >
-                    
-                </CultureQuestMapView>
 
-                    {self.state.showQuiz? <CultureQuestQuizView
-                    imageData={state.imageData}
-                    layersColl={state.layersColl}
-                    lastSelected={state.lastSelected}
-                    showQuiz = {state.showQuiz}
-                    showQuizUpdate = {self.showQuizUpdate}
-                    answersColl = {state.answersColl}
-                    saveAnswersColl = {self.saveAnswersColl}
+                <div id="CultureQuestViewBlock">
+
+                    <CultureQuestMapView
+                        imageData = {state.imageData}
+                        layersColl = {state.layersColl}
+                        onLayersReady = {self.onLayersReady}
+                        onRegionClicked = {self.onRegionClicked}
+                        answersColl = {state.answersColl}
+                        lastSelected = {state.lastSelected}
+                        updateLayersColl = {self.updateLayersColl}
+                    >
+
+                    </CultureQuestMapView>
+
+                        {self.state.showQuiz? <CultureQuestQuizView
+                        imageData={state.imageData}
+                        layersColl={state.layersColl}
+                        lastSelected={state.lastSelected}
+                        showQuiz = {state.showQuiz}
+                        showQuizUpdate = {self.showQuizUpdate}
+                        showPuzzleUpdate = {self.showPuzzleUpdate}
+                        answersColl = {state.answersColl}
+                        saveAnswersColl = {self.saveAnswersColl}
+                        />:null}
+
+                    {self.state.showPopup? <CultureQuestPopup />:null}
+                    {self.state.showPuzzle? <CultureQuestPuzzleView
+                        imageData = {state.imageData}
+                        lastSelected = {state.lastSelected}
+                        answersColl = {state.answersColl}
+                        showQuizUpdate = {self.showQuizUpdate}
+                        showPuzzleUpdate = {self.showPuzzleUpdate}
                     />:null}
-                
-                {self.state.showPopup? <CultureQuestPopup />:null}
-                {self.state.showPuzzle? <CultureQuestPuzzleView
 
-
-                />:null}
-
+                </div>
             </div>
 
 
