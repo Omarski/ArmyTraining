@@ -2,6 +2,7 @@
  * Created by Alec on 4/11/2016.
  */
 var React = require('react');
+var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
@@ -20,6 +21,7 @@ function getPageState(props) {
         move on to the next section in your course of instruction.", // TODO <--- should be moved to store and localization text
         pageType: "",
         page: "",
+        quizPassed: false,
         sources: [],
         scorePercent: 0
     }
@@ -84,8 +86,7 @@ function getPageState(props) {
         // get feedback text
         if (data.scorePercent === 100) {
             feedback = data.pageFeedback3;
-        } else if (data.scorePercent >= 80) {
-            feedback = data.pageFeedback2;
+            data.quizPassed = true;
         } else {
             feedback = data.pageFeedback1;
         }
@@ -107,6 +108,13 @@ function replaceScoreText(score, text) {
 var QuizView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
+
+        if (pageState.quizPassed) {
+            setTimeout(function() {
+                PageActions.markChapterComplete();
+            });
+        }
+
         return pageState;
     },
 
