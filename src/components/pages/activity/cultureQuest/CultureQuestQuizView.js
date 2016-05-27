@@ -120,7 +120,7 @@ var CultureQuestQuiz = React.createClass({
             if ($(this).val().length === 1) {
                 if (parseInt(self.state.atInputBlock) < parseInt(self.state.inputBlocksTotal)) {
                     self.state.atInputBlock++;
-                    $("#CultureQuestQuizView-inputBlock"+ self.state.atInputBlock).focus();
+                    $("#CultureQuestQuizView-inputBlock"+ self.state.atInputBlock).focus().val("");
                 }
             }else{
                 $(this).val("");
@@ -192,7 +192,8 @@ var CultureQuestQuiz = React.createClass({
             //1st attempt
             if (answerObj["question"+answerObj.onQuestion].attempts++ === 1){
                 $("input[id^='CultureQuestQuizView-inputBlock']").each(function(){$(this).val("");});
-                self.setState({hintMode:true, skipMode:true},function(){self.renderQuestionText();});
+                if (answerObj.onQuestion === 1) self.setState({hintMode:true, skipMode:true},function(){self.renderQuestionText();});
+                else self.setState({hintMode:true, skipMode:false},function(){self.renderQuestionText();});
 
             //2nd attempt
             }else{
@@ -213,7 +214,7 @@ var CultureQuestQuiz = React.createClass({
                     }else{
                         setTimeout(function(){
                             self.awardPuzzlePiece();
-                        },3000);
+                        },2000);
                     }
                 }, 2000);
             }
@@ -242,9 +243,10 @@ var CultureQuestQuiz = React.createClass({
     awardPuzzlePiece: function(){
         var self = this;
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
-        self.props.showPuzzleUpdate("show");
-        answerObj.question2.answered = true;
         answerObj.completed = true;
+        answerObj.onQuestion = 2;
+        answerObj.question1.answered = answerObj.question2.answered = true;
+        self.props.showPuzzleUpdate("show");
         self.props.lastSelected.setAttribute('hidden',true);
         self.updateTimerController("pause");
         self.setState({puzzleAwardMode:true});
