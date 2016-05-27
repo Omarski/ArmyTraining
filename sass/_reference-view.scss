@@ -2,15 +2,26 @@
   display: inline;
 }
 
-#gesture-video{
+#gestureVideo{
   background-color: grey;
+  margin-top: 10px;
 }
 
-.referenceTable{
- tr {
-   background: #f9f9f9;
- }
-  tr:nth-child(odd) {
-    background: lightgrey;
-  }
+.reference-view-search-form {
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.video-wrapper{
+  text-align: center;
+}
+
+#referenceMapView{
+  margin: 10px;
+  text-align: center;
+}
+
+.filterable-table-header{
+  cursor: pointer;
 }

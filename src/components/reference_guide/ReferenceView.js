@@ -37,17 +37,24 @@ function getSettingsState(props) {
 
 var ReferenceView = React.createClass({
     close: function(){
-        this.setState({ showModal: false });
+        this.setState({ showModal: false, dictionarySourceKey: 0 });
     },
 
     openModal: function(){
         this.setState({ showModal: !this.state.showModal });
     },
 
+
     handleSelect: function(eventKey, e) {
         //event.preventDefault();
         if(typeof(eventKey) === "object"){
-            this.setState({ selectedIndex: 1, showModal: false});
+            // eventKey === "object" means you selected a dropdown menu
+            if(e > 4){
+                this.setState({ selectedIndex: 1, showModal: false});
+            }else{
+                var sourceKey = (e.split('.')[1] - 1);
+                this.setState({selectedIndex: 3, dictionarySourceKey: sourceKey });
+            }
         }else if(typeof(eventKey) === "number"){
             this.setState({ selectedIndex: eventKey });
         }
@@ -116,14 +123,19 @@ var ReferenceView = React.createClass({
         var gestureNav = "";
 
         if(state.dictionarySources){
-            dictionaryNav = (<NavItem eventKey={3} hidden={true}>
-                Dictionary
-            </NavItem>);
-        }
+            //dictionaryNav = (<NavItem eventKey={3} hidden={true}>Dictionary</NavItem>);
+            var dictionaryDropdownItems = state.dictionarySources.map(function(item, index){
+                return (<MenuItem key={"dropdownDictKey" + index} eventKey={"3." + (index+1) }>{item.name}</MenuItem>);
+            });
 
+            dictionaryNav = (<NavDropdown eventKey={3} title={"Words "+ '\u0026' +" Phrases"} id="nav-dropdown2">
+                {dictionaryDropdownItems}
+            </NavDropdown>);
+        }
+        // pdf sources
         if(state.pdfSources){
             var dropdownItems = state.pdfSources.map(function(item, index){
-                return (<MenuItem eventKey={"4." + (index+1) } href={item.path} target={"_blank"}>{item.name}</MenuItem>);
+                return (<MenuItem key={"dropdownItemsKey" + index} eventKey={"4." + (index+1) } href={item.path} target={"_blank"}>{item.name}</MenuItem>);
             });
 
             pdfNav = (<NavDropdown eventKey={4} title="PDF Takeaways" id="nav-dropdown">
@@ -138,21 +150,19 @@ var ReferenceView = React.createClass({
         }
 
         if(state.gestureSources){
-            gestureNav = (<NavItem eventKey={2} title="Item">
-                Gestures
-            </NavItem>);
+            gestureNav = (<NavItem eventKey={2} title="Item">Gestures</NavItem>);
         }
 
         switch (state.selectedIndex) {
             case 1:
-                content = (<ReferenceMapView mapSource={self.state.mapSource} />);
+                content = (<ReferenceMapView key={"referenceMapViewKey"+state.selectedIndex} mapSource={self.state.mapSource} />);
                 break;
             case 2:
-                content = (<ReferenceGestureView gestureSources={self.state.gestureSources} />);
+                content = (<ReferenceGestureView key={"referenceGestureViewKey"+state.selectedIndex} gestureSources={self.state.gestureSources} />);
                 break;
             case 3:
                 // this needs to create one for each dictionary source
-                content = (<ReferenceDictionaryView source={self.state.dictionarySources[0].path} />);
+                content = (<ReferenceDictionaryView key={"referenceDictionaryViewKey"+state.selectedIndex + state.dictionarySourceKey} source={self.state.dictionarySources[state.dictionarySourceKey].path} />);
                 break;
             default:
                 // no op, PDFs open in new tab/window

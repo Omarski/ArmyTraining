@@ -3,9 +3,7 @@
  */
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
-var FormGroup = ReactBootstrap.FormGroup;
-var FormControl = ReactBootstrap.FormControl;
-
+var FilterableTable = require('../widgets/FilterableTable');
 
 
 function getInitialState(props, self) {
@@ -71,7 +69,7 @@ var ReferenceDictionaryView = React.createClass({
 
         return (
             <div id="referenceDictionaryView">
-                <FilterableDictionaryTable dictionary={source} />
+                <FilterableTable dictionary={source} hasVideo={false} hasHeaders={true} />
             </div>
         );
     },
@@ -81,112 +79,3 @@ var ReferenceDictionaryView = React.createClass({
 });
 
 module.exports = ReferenceDictionaryView;
-
-
-var SearchBar = React.createClass({
-    handleChange: function(event){
-        var self = this;
-        self.setState({
-            filterText: event.target.value
-        });
-        this.props.onUserInput(event.target.value);
-    },
-
-    getInitialState: function(){
-        var self = this;
-        return(
-        {filterText: self.props.filterText}
-        );
-    },
-
-    render: function(){
-        var self = this;
-        return(
-            <form>
-                <input type="text"
-                       value={self.state.filterText}
-                       placeholder="Search..."
-                       ref="filterTextInput"
-                       onChange={self.handleChange}
-                    />
-            </form>
-        )
-    }
-});
-
-var DictionaryRow = React.createClass({
-    render: function() {
-        var name = this.props.translated;
-        var desc = this.props.native;
-        return (
-            <tr>
-                <td>{name}</td>
-                <td>{desc}</td>
-            </tr>
-        );
-    }
-});
-
-var DictionaryTable = React.createClass({
-    getInitialState: function(){
-        // save list order in the state
-        var data = {
-            alpha: true,
-            column: 0
-        };
-        return (data);
-    },
-    handleClick: function(e){
-        //read which column is clicked on and save it to the state
-
-
-    },
-    render: function() {
-        var rows = [];
-        var self = this;
-        this.props.dictionary.forEach(function(item) {
-            if(item.native.indexOf(self.props.filterText) === -1 && item.translated.indexOf(self.props.filterText) === -1){
-                return;
-            }
-            rows.push(<DictionaryRow translated={item.translated} native={item.native} />);
-        }.bind(self) );
-        return (
-            <table>
-                <thead>
-                <tr>
-                    <th onClick={this.handleClick}>Translation</th>
-                    <th onClick={this.handleClick}>Native</th>
-                </tr>
-                </thead>
-                <tbody className="referenceTable">{rows}</tbody>
-            </table>
-        );
-    }
-});
-
-var FilterableDictionaryTable = React.createClass({
-    getInitialState: function() {
-        return {
-            filterText: ""
-        };
-    },
-
-    handleUserInput: function(ft) {
-        this.setState({
-            filterText: ft
-        });
-    },
-
-    render: function() {
-        return (
-            <div>
-                <SearchBar filterText={this.state.filterText}
-                           onUserInput={this.handleUserInput}
-                    />
-                <DictionaryTable filterText={this.state.filterText}
-                              dictionary={this.props.dictionary}
-                    />
-            </div>
-        );
-    }
-});
