@@ -390,7 +390,19 @@ var TOCPages = React.createClass({
         var chapter = this.props.chapter;
         var unit = this.props.unit;
 
+        // TODO clean up hack
+        var firstQuizPage = false;
+        // TODO end clean up hack
+
         var items = this.props.data.map(function(item, index) {
+            // hide all but the first quiz page
+            if (item.state && item.state.quizpage) {
+                if (firstQuizPage) {
+                    return;
+                } else {
+                    firstQuizPage = true;
+                }
+            }
             return (
                 <TOCPageRow item={item} key={index} chapter={chapter} unit={unit} />
             );
