@@ -6,7 +6,8 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var ReactBootstrap = require('react-bootstrap');
 var PageHeader = require('../../widgets/PageHeader');
-var ImageLayersView = require("../../widgets/ImageLayersView");
+var EthnoLayersView = require("../../widgets/EthnoLayersView");
+var EthnoMapPopover = require("../../widgets/EthnoMapPopover");
 
 
 function getPageState(props) {
@@ -51,7 +52,6 @@ var EthnoMapView = React.createClass({
         return pageState;
     },
     onLayersReady: function(x){
-        console.log("x", x);
     },
     render: function() {
         var self = this;
@@ -85,15 +85,16 @@ var EthnoMap = React.createClass({
         return {imageLayersData:{},
             layerColl:[],
             lastHighlightedRegion:null,
-            topZindex: 10
+            topZindex: 10,
+            toolTipText: "",
+            popoverIndex: 1,
+            popoverShow: false
         };
     },
     componentWillMount: function() {
         //prep CultureQuestMap data from original JSON
         var self = this;
-        console.log("self", self);
         var imageData = self.props.imageData;
-        console.log("imageData", imageData);
         self.setState({
             areaWidth: "768",
             areaHeight: "504",
@@ -101,57 +102,58 @@ var EthnoMap = React.createClass({
             backgroundImage: imageData.background,
             onLayersReady: self.onLayersReady,
             onRollover: self.onRegionRollover,
-            onClick: self.onRegionClicked
+            onClick: self.onRegionClick
         });
     },
     onRegionClick: function(canvasElement) {
-        if (canvasElement) console.log("Clicked on: " + canvasElement.getAttribute('id'));
+        var self = this;
+        if(canvasElement !== null) {
+            var canvasId = canvasElement.getAttribute('id').slice(-1);
+        }
+
+        if(self.state.popoverShow === false) {
+            self.setState({popoverIndex: [canvasId], popoverShow: true});
+        }
+
     },
-    onRegionRollover: function(canvasElement) {
+    onRegionRollover: function(canvasElement, x, y) {
+        var self = this;
         if(canvasElement !== null) {
             var canvasId = canvasElement.id;
-            console.log("test", canvasId);
-            var isVisible = $("#" + canvasId).hasClass("visible");
+            var isVisible = $("#" + canvasId).hasClass("ethno-visible");
             if(isVisible === true) {
                 var zIndex = getComputedStyle(canvasElement).getPropertyValue("z-index");
                 var newzIndex = this.state.topZindex + 1;
-                this.setState({topZindex: newzIndex});
-                console.log("SUCCESSS!!!!!");
+                self.setState({topZindex: newzIndex});
                 $("#" + canvasId).css("zIndex", newzIndex);
                 var index = canvasId.slice(-1);
-
-                // var oldLabel = self.state.label.getAttribute('id');
-                // $("#" + oldLabel).removeClass("visible");
-                //
-                // var labelVisible = $("#canvas-label-" + index).hasClass("visible");
-                // console.log("labelVisible", labelVisible);
-                // if (labelVisible === false) {
-                //     $("#canvas-label-" + index).addClass("visible");
-                //     self.setState({label: document.getElementById("canvas-label-" + index)});
-                // }
             }
         }
+
+        var toolTipper = document.getElementById("toolTipperId");
+
+        if(canvasElement !== null) {
+            $("#toolTipperId").removeClass("ethno-not-visible");
+            var regionNameToolTip = self.props.mapData.areas[canvasElement.id.slice(-1)].label;
+            self.setState({toolTipText: regionNameToolTip});
+        }
+
+        if(canvasElement === null){
+            $("#toolTipperId").addClass("ethno-not-visible");
+        }
+
+        var toolTipper = document.getElementById("toolTipperId");
+        console.log("y:", y, "x", x);
+        toolTipper.style.top = (y - 50) + 'px';
+        toolTipper.style.left = (x + 100) + 'px';
+        toolTipper.style.zIndex = self.state.topZindex + 20;
+    },
+    togglePopoverShow: function (){
+        var self = this;
+        self.setState({popoverShow: !self.state.popoverShow});
     },
     onLayersReady: function(x){
-
-        var canvasNames = [];
-        this.props.mapData.areas.map(function(region, index){
-            canvasNames.push(region.label);
-            var canv = document.createElement("canvas");
-            canv.setAttribute("width", "768");
-            canv.setAttribute("height", "504");
-            canv.setAttribute("id", "canvas-label-" + index);
-            // canv.className("invisible")
-            var ctx = canv.getContext("2d");
-            ctx.font = "30px Arial";
-            ctx.strokeText(canvasNames[index], 100, 180);
-
-            document.getElementById("imageLayerView-back-image").appendChild(canv);
-            $("#" + "canvas-label-" + index).addClass("labels");
-        });
-    },
-    placeLabels: function(label){
-        document.getElementById("imageLayerView-back-image").appendChild(label);
+        $("#toolTipperId").addClass("ethno-not-visible");
     },
     render: function() {
         var self = this;
@@ -162,13 +164,21 @@ var EthnoMap = React.createClass({
         var mapBackground = self.props.mediaPath + backgroundImage;
         var mapStyle = {background:"#000 url("+mapBackground+") no-repeat", width:"768px" , height:"504px"};
         var canvasColl = this.state.canvasColl;
+        var toolTipperInRender = toolTipper(self.state.toolTipText);
+        var popoverInRender = popoverFunction(mapData.areas[self.state.popoverIndex], self.state.popoverShow, self.togglePopoverShow);
+
+        var popoverMapData = mapData.areas[self.state.popoverIndex];
+        var popoverShowHide = self.state.popoverShow;
+        var toggleParentPopoverState = self.togglePopoverShow;
+
         return (
-            <div>
-                <div id="ethnoToggle">
-                    <EthnoToggleDiv mapData = {mapData} canvasColl = {canvasColl}/>
+            <div className="ethno-map-container">
+                {toolTipperInRender}
+                <div id="wrapperDiv"  className = "container ethno-wrapper-div">
+                    {popoverInRender}
+                    <EthnoLayersView className="ethno-image-layers-view" areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick} />
+                    <EthnoToggleDiv id="ethnoToggle" mapData = {mapData} changeLabelState = {this.changeLabelState} whatIsLabelState ={this.whatIsLabelState} canvasColl = {canvasColl}/>
                 </div>
-                <ImageLayersView areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick}/>
-                <EthnoMapLabels mapData = {mapData} className="ethno-labels"/>
             </div>
         );
     }
@@ -179,108 +189,76 @@ var EthnoToggleDiv = React.createClass({
     getInitialState: function() {
         return {
             topZindex: 10,
-            label: null
+            regionColors: ["blue", "blue", "green", "blue", "green", "pink", "purple", "pink", "red", "yellow" ]
         };
     },
     toggleOnClick: function(e){
         var self = this;
-        console.log("this", self);
         var index = e.target.attributes['data-index'].value;
         var targetCanvas = document.getElementById("imageLayer_canvas_" + index);
-        console.log("targetCanvas", targetCanvas);
         // CHECK VISIBLE --- determines if a given ethno map (parameter is a canvas element) has the custom CSS class visible
         var checkOpacity = function(target){
             var opacity = getComputedStyle(target).getPropertyValue("opacity");
-            var visibleTrueFalse = $("#imageLayer_canvas_" + index).hasClass("visible");
+            var visibleTrueFalse = $("#imageLayer_canvas_" + index).hasClass("ethno-visible");
             var zIndex = getComputedStyle(target).getPropertyValue("z-index");
-            var labelVisible = $("#canvas-label-" + index).hasClass("visible");
-            console.log("labelVisible", labelVisible);
-
-
             if(opacity === 0 || visibleTrueFalse === false){
                 var newzIndex = self.state.topZindex + 1;
-                self.setState({topZindex: newzIndex}, function(){console.log("self.state", self.state)});
-                $("#imageLayer_canvas_" + index).addClass("visible");
+                self.setState({topZindex: newzIndex});
+                $("#imageLayer_canvas_" + index).addClass("ethno-visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "1");
                 $("#imageLayer_canvas_" + index).css("zIndex", newzIndex);
-
-                if(labelVisible === false){
-                    if(self.state.label !== null){
-                        console.log("self.state.label", self.state.label);
-                        var oldLabel = self.state.label.getAttribute('id');
-                        $("#" + oldLabel).removeClass("visible");
-                    }
-                    $("#canvas-label-" + index).addClass("visible");
-                    self.setState({label: document.getElementById("canvas-label-" + index)});
-                }
-
+                $("#ethno-toggle-name-" + index).css("color", self.state.regionColors[index]);
             } else if (opacity === "1" && visibleTrueFalse === true){
-                $("#imageLayer_canvas_" + index).removeClass("visible");
+                $("#ethno-toggle-name-" + index).css("color", "black");
+                $("#imageLayer_canvas_" + index).removeClass("ethno-visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "0");
-
-                // if(labelVisible === false && self.state.label !== null){
-                //     var oldLabel = self.state.label.getAttribute('id');
-                //     $("#" + oldLabel).removeClass("visible");
-                //
-                // }
-                if(labelVisible === true){
-                    $("#canvas-label-" + index).removeClass("visible");
-                    self.setState({label: null});
-                }
             }
-
-            // if(labelVisible === true){
-            //     $("#canvas-label-" + index).removeClass("visible");
-            //     self.setState({label: null});
-            // } else if (labelVisible === false){
-            //     if(self.state.label !== null){
-            //         console.log("self.state.label", self.state.label);
-            //         var oldLabel = self.state.label.getAttribute('id');
-            //         $("#" + oldLabel).removeClass("visible");
-            //     }
-            //     $("#canvas-label-" + index).addClass("visible");
-            //     self.setState({label: document.getElementById("canvas-label-" + index)});
-            // }
         };
         checkOpacity(targetCanvas);
     },
     render: function () {
         var self = this;
         var mapData = self.props.mapData;
-        return (
-            <div>
-                { mapData.areas.map(function(region,index){
-                    return  <div>
-                                <p>{region.label}</p>
-                                <button data-region = {region.label} data-index={index} onClick = {self.toggleOnClick}>Toggle</button>
-                            </div>
-                    })
-                }
-            </div>
-        );
-    }
-});
 
-var EthnoMapLabels = React.createClass({
-    getInitialState: function(){
-        return {};
-    },
-    render: function(){
-        var mapData = this.props.mapData;
         return (
-            <div>
-            {mapData.areas.map(function(region, i){
-                return (
-                  <div>
-                      <p id={"#ethnoMapCanvas_" + i + "_text"} className="labels">{mapData.areas[i].label}</p>
-                  </div>
+            <form className="well ethno-sidebar-form">
+                { mapData.areas.map(function(region,index){
+                    return (
+                        <div className="checkbox">
+                            <label>
+                                <input type="checkbox" data-region = {region.label} data-index={index} onClick = {self.toggleOnClick} />
+                                <span id={"ethno-toggle-name-" + index}>{region.label + " "} </span>
+                            </label>
+                        </div>
                     );
                 })
-            }
-            </div>
+                }
+            </form>
         );
     }
 });
 
+function popoverFunction(mapDataArgument, popoverShowHide, popoverSetter){
+    var mapData = mapDataArgument;
+    var showHide = popoverShowHide
+    var toggleParentPopoverState = popoverSetter;
+    return (<EthnoMapPopover mapData={mapData} showHide={showHide} toggleParentPopoverState={toggleParentPopoverState}/>);
+}
+
+
+function toolTipper(region, x, y){
+
+    var xVal = x - 100;
+    var yVal = y - 100;
+    console.log("x", x, "x - 100 =", xVal);
+    console.log("y", y, "y - 100 =", yVal);
+    var regionName = region;
+    var mouseX;
+    var mouseY;
+
+    return (<div>
+        <ReactBootstrap.Tooltip id="toolTipperId"  placement="top" className="in">{regionName}</ReactBootstrap.Tooltip>
+    </div>);
+}
 
 module.exports = EthnoMapView;
