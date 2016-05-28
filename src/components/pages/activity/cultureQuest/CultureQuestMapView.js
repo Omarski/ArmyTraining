@@ -7,6 +7,8 @@ var ImageLayersView = require('../../../widgets/ImageLayersView');
 
 var CultureQuestMap = React.createClass({
 
+    // props:  imageData, onLayersReady, onRegionClicked
+    
     getInitialState: function() {
 
         return {imageLayersData:{},
@@ -30,17 +32,16 @@ var CultureQuestMap = React.createClass({
             onRollover: self.onRegionRollover,
             onClick: self.onRegionClicked
         }});
-
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
-
-        //PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
+    },
+
+    componentDidUpdate: function(prevProps, prevState){
+        this.updateLayersAccess();
     },
 
     onLayersReady:function(layersColl){
@@ -58,35 +59,58 @@ var CultureQuestMap = React.createClass({
 
     onRegionRollover: function(canvasElement) {
 
-        var self = this;
-        var state = self.state;
-        
-        if (canvasElement) {
+        //if (canvasElement && canvasElement.state !== 'static'){
 
-                    switch(canvasElement.state){
+            var self = this;
+            var state = self.state;
 
-                        case "idle":
-                            if (!canvasElement.classList.contains("imageLayerView-fade-in")){
-                                canvasElement.classList.add("imageLayerView-fade-in");
-                                canvasElement.classList.remove("imageLayerView-fade-out");
-                                if (state.lastHighlightedRegion) {
-                                    state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
-                                    if (!state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")){
-                                        state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
-                                    }
+            if (canvasElement) {
+
+                switch(canvasElement.state){
+
+                    case "idle":
+                        if (!canvasElement.classList.contains("imageLayerView-fade-in")){
+                            canvasElement.classList.add("imageLayerView-fade-in");
+                            canvasElement.classList.remove("imageLayerView-fade-out");
+                            if (state.lastHighlightedRegion) {
+                                state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
+                                if (!state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")){
+                                    state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
                                 }
                             }
-
-                            state.lastHighlightedRegion = canvasElement;
-                            break;
                         }
-                }else {
 
-                    if (state.lastHighlightedRegion && !state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")) {
-                        state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
-                        state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
-                        state.lastHighlightedRegion = null;
-                    }
+                        state.lastHighlightedRegion = canvasElement;
+                        break;
+                }
+            }else {
+
+                if (state.lastHighlightedRegion && !state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")) {
+                    state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
+                    state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
+                    state.lastHighlightedRegion = null;
+                }
+            }
+        //}
+
+
+    },
+
+    updateLayersAccess: function(){
+        if (this.props.answersColl.length > 0){
+            console.log("Updating access:...................");
+
+            for (var i=0; i < this.props.layersColl.length; i++){
+                if (this.props.answersColl[i].completed){
+                    this.props.updateLayersColl(this.props.lastSelected, "attributeAdd", [{name:'state', value:"static"}]);
+                    this.props.updateLayersColl(this.props.lastSelected, "classRemove", [{name:'imageLayerView-fade-out'}]);
+                    this.props.updateLayersColl(this.props.lastSelected, "classAdd", [{name:'imageLayerView-fade-in'},
+                                                                                      {name:'CultureQuestQuizView-killInteraction'}]);
+
+                    console.log("xxxxxxxxxx Layer completed : " + this.props.layersColl[i].getAttribute('id'));
+                    
+                }
+            }
         }
 
     },
@@ -95,8 +119,7 @@ var CultureQuestMap = React.createClass({
 
         return (
            
-            <ImageLayersView className = {this.props.showQuiz ?
-                                          "CultureQuestQuizView-killInteraction":""}
+            <ImageLayersView
 
                 areaWidth       = {this.state.imageLayersData.areaWidth}
                 areaHeight      = {this.state.imageLayersData.areaHeight}
