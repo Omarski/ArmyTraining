@@ -42,13 +42,11 @@ function getPageState(props) {
             if (Utils.findInfo(data.page.info, InfoTagConstants.INFO_PROP_NOSHUFFLE) != null) {
                 data.bShuffle = false;
             }
-
-            if (Utils.findInfo(data.page.info, InfoTagConstants.INFO_PROP_QUIZPAGE ) != null) {
-                data.isQuizPage = true;
-            }
         }
-
     }
+
+    // set if quiz page
+    data.isQuizPage = PageStore.isQuizPage();
 
     if(props && props.page && props.page.media){
 
