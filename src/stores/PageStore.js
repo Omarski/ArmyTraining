@@ -217,17 +217,8 @@ function load(data) {
 
             _data = result.page;
 
-            // create state property
+            // create and add state property
             var state = {visited: true};
-
-            // check if page is marked as a quiz page
-            var quizTag = Utils.findInfo(_data.info, InfoTagConstants.INFO_PROP_QUIZ);
-            var quizPageTag = Utils.findInfo(_data.info, InfoTagConstants.INFO_PROP_QUIZPAGE);
-            if (quizPageTag !== null && quizTag === null) {
-                state = assign({}, state, {quizpage: true});
-            }
-
-            // add state property to page
             _currentPage.state = assign({}, state, _currentPage.state);
 
             // save current page
@@ -289,6 +280,21 @@ function reset() {
 
 }
 
+function resetQuiz() {
+
+    // get current chapter
+    if (_currentChapter) {
+
+        // TODO
+
+        // get quiz pages
+
+        // for each quiz page remove the answer state object
+
+    }
+
+}
+
 function saveCurrentPage() {
 
     // check for valid current unit
@@ -342,6 +348,14 @@ var PageStore = assign({}, EventEmitter.prototype, {
 
     loadingComplete: function() {
         return _loaded;
+    },
+
+    isQuizPage: function() {
+        if (_currentPage && _currentPage.state && _currentPage.state.quizpage) {
+            return true;
+        }
+
+        return false;
     },
 
     emitChange: function() {
@@ -419,6 +433,9 @@ AppDispatcher.register(function(action) {
         case PageConstants.PAGE_RESET:
             reset();
             PageStore.emitChange();
+            break;
+        case PageConstants.QUIZ_RESET:
+            resetQuiz();
             break;
 
         default:
