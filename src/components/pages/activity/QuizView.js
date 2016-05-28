@@ -34,6 +34,7 @@ function getPageState(props) {
 
     // get all quiz pages for this section
     var quizPages = PageStore.getChapterQuizPages();
+    var quizPageCount = 0;
     var quizPagesIter = 0;
     var quizPagesPassed = 0;
 
@@ -52,6 +53,9 @@ function getPageState(props) {
             var answer;
             var passed;
             var question;
+
+            // increase count
+            quizPageCount++;
 
             // get correct answer
             if (quizAnswer.target) {
@@ -80,8 +84,8 @@ function getPageState(props) {
 
     // calculate score
     var feedback = "";
-    if (quizPages.length > 0) {
-        data.scorePercent = Math.round((quizPagesPassed / quizPages.length) * 100);
+    if (quizPageCount > 0) {
+        data.scorePercent = Math.round((quizPagesPassed / quizPageCount) * 100);
 
         // get feedback text
         if (data.scorePercent === 100) {
