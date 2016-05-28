@@ -55,7 +55,6 @@ var CultureQuestPuzzleView = React.createClass({
         for (var i = 0 ; i < self.props.answersColl.length; i++){
             if (self.props.answersColl[i].completed) completedData.push(regionsColl[i]);
         }
-        console.log(">>>> Completed data regions: " + completedData.length);
 
         var sliderPuzzles = completedData.map(function(region,index){
 

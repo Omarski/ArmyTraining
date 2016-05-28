@@ -4,7 +4,8 @@
 var React = require('react');
 var CultureQuestMapView = require('./CultureQuestMapView');
 var CultureQuestQuizView = require('./CultureQuestQuizView');
-var CultureQuestPuzzleView = require('./CultureQuestPuzzleView');
+var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
+var CultureQuestPuzzleGameView = require('./CultureQuestPuzzleGameView');
 var PageHeader = require('../../../widgets/PageHeader');
 
 function getPageState(props) {
@@ -93,10 +94,10 @@ var CultureQuestView = React.createClass({
 
         if (mode === "show") {
             self.setState({showPuzzle:true});
-            $("#CultureQuestPuzzleView-puzzleCont").animate({opacity: '1'}, 300, 'linear', function () {
+            $("#CultureQuestPuzzleAwardView-puzzleCont").animate({opacity: '1'}, 300, 'linear', function () {
             });
         } else {
-            $("#CultureQuestPuzzleView-puzzleCont").animate({opacity: '0'}, 300, 'linear', function () {
+            $("#CultureQuestPuzzleAwardView-puzzleCont").animate({opacity: '0'}, 300, 'linear', function () {
                 self.setState({showPuzzle:false});
             });
         }
@@ -206,14 +207,18 @@ var CultureQuestView = React.createClass({
                         />:null}
 
                     {self.state.showPopup? <CultureQuestPopup />:null}
-                    {self.state.showPuzzle? <CultureQuestPuzzleView
+                    {self.state.showPuzzle? <CultureQuestPuzzleAwardView
                         imageData = {state.imageData}
                         lastSelected = {state.lastSelected}
                         answersColl = {state.answersColl}
                         showQuizUpdate = {self.showQuizUpdate}
                         showPuzzleUpdate = {self.showPuzzleUpdate}
                     />:null}
-
+                    
+                    <CulturQuestPuzzleGameView
+                        imageData={state.imageData}
+                    />
+                    
                 </div>
             </div>
 

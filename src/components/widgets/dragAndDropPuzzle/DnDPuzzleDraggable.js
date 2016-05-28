@@ -8,6 +8,7 @@ var puzzlePieceSource = {
     beginDrag: function (props) {
         // Return the data describing the dragged item
         console.log("Dragging....");
+        props.onItemDrag({id: props.id});
         return {id: props.id};
     }
 };
@@ -30,11 +31,18 @@ var DnDPuzzleDraggable = React.createClass({
     },
 
     propTypes: {
+        
         connectDragSource: PropTypes.func.isRequired,
         isDragging: PropTypes.bool.isRequired,
+        
         id:PropTypes.string.isRequired,
-        imgUrl:PropTypes.string.isRequired,
-        draggableStyle:PropTypes.object.isRequired
+        imgUrl:PropTypes.string,
+        width:PropTypes.number.isRequired,
+        height:PropTypes.number.isRequired,
+        posX:PropTypes.number.isRequired,
+        posY:PropTypes.number.isRequired,
+        draggableStyle:PropTypes.object.isRequired,
+        onDraggableDrag:PropTypes.object
     },
 
     componentWillMount: function() {

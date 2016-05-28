@@ -1,10 +1,10 @@
-@mixin cultureQuestPuzzleView-trans($transType) {
+@mixin CultureQuestPuzzleAwardView-trans($transType) {
   transition: $transType .75s ease-in-out;
   -moz-transition: $transType .75s ease-in-out;
   -webkit-transition: $transType .75s ease-in-out;
 }
 
-.CultureQuestPuzzleView-puzzleCont{
+.CultureQuestPuzzleAwardView-puzzleCont{
 
   position:absolute;
   display:block;
@@ -14,7 +14,7 @@
   z-index:25;
   overflow: hidden;
 
-  .cultureQuestPuzzleView-puzzleAwardImg{
+  .CultureQuestPuzzleAwardView-puzzleAwardImg{
     position: absolute;
     top:200px;
     left:404px;
@@ -23,7 +23,7 @@
     z-index: 25;
   }
 
-  .CultureQuestPuzzleView-puzzleSlider{
+  .CultureQuestPuzzleAwardView-puzzleSlider{
     position: absolute;
     background-color:#fff;
     height: 430px;
@@ -32,7 +32,7 @@
     top: 45px;
     border: 1px solid gray;
 
-    .CultureQuestPuzzleView-sliderPuzzle{
+    .CultureQuestPuzzleAwardView-sliderPuzzle{
 
       position: absolute;
       width:40px;
@@ -41,7 +41,7 @@
     }
   }
 
-  .CultureQuestPuzzleView-awardPuzzle{
+  .CultureQuestPuzzleAwardView-awardPuzzle{
 
     position: absolute;
     top: 300px;
@@ -50,11 +50,11 @@
     height: 168px;
   }
 
-  .CultureQuestPuzzleView-slideIn{
+  .CultureQuestPuzzleAwardView-slideIn{
     right:0;
   }
 
-  .CultureQuestPuzzleView-slideOut{
+  .CultureQuestPuzzleAwardView-slideOut{
     right:-40px;
   }
 }
