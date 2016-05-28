@@ -82,16 +82,32 @@ function loadChapterPages(units, unit, index) {
                 var sections = result.chapter.section;
                 for (var i = 0; i < sections.length; i++) {
 
+                    // get section mode
+                    var sectionMode = "practice"; // default
+                    if (sections[i].mode) {
+                        sectionMode = sections[i].mode;
+                    }
 
                     var pages = sections[i].pageRef;
                     for (var j = 0; j < pages.length; j++) {
                         var page = pages[j];
+
+                        // mark as a quiz page
+                        if (sectionMode == "quiz") {
+                            page.state = {quizpage: true};
+                        }
+
+                        // load saved page state
                         if (storedPages) {
                             var storeId = unit.data.xid + '_' + chapter.xid + '_' + page.xid
                             if (storedPages[storeId]) {
                                 page.state = storedPages[storeId];
+
+                                page.state = assign({}, storedPages[storeId], page.state);
                             }
                         }
+
+                        // add page to list
                         chapter.pages.push(page);
                     }
 
