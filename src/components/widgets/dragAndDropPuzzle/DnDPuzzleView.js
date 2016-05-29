@@ -74,7 +74,7 @@ var DnDPuzzleView = React.createClass({
 
             return (
 
-                <DnDPuzzleDraggable
+                <DnDPuzzleDropTarget
                     id = {"puzzleTarget"+index}
                     imgUrl = {itemObj.imgUrl?itemObj.imgUrl:null}
                     width = {itemObj.width}
@@ -82,6 +82,7 @@ var DnDPuzzleView = React.createClass({
                     posX = {itemObj.posX}
                     posY = {itemObj.posY}
                     targetStyle = {itemObj.style}
+                    targetOverStyle = {itemObj.targetOverStyle}
                     onTargetDrop = self.onTargetDrop
                 />
             )

@@ -3,6 +3,7 @@ var ItemTypes = require('./Constants').ItemTypes;
 var DropTarget = require('react-dnd').DropTarget;
 var PropTypes = React.PropTypes;
 
+//target contract
 var dropTarget = {
 
     canDrop: function (props) {
@@ -10,11 +11,12 @@ var dropTarget = {
     },
     drop: function (props) {
        //to do at drop
-        console.log("Dropped into !!!");
+        console.log("Dropped into: " + props.id);
+        props.onTargetDrop({id:props.id});
     },
     over: function (props) {
        //to do at over
-        console.log("Over target !!!");
+        console.log("Over target: " + props.id);
     }
 };
 
@@ -38,7 +40,7 @@ var DnDPuzzleDropTarget = React.createClass({
         id: PropTypes.string.isRequired,
         targetStyle: PropTypes.object.isRequired,
         targetOverStyle: PropTypes.object.isRequired,
-
+        onTargetDrop: PropTypes.func.isRequired
     },
 
     render: function () {
