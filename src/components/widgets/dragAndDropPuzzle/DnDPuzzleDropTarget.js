@@ -36,11 +36,6 @@ var DnDPuzzleDropTarget = React.createClass({
         canDrop: PropTypes.bool.isRequired,
 
         id: PropTypes.string.isRequired,
-        imgUrl:PropTypes.string,
-        width:PropTypes.number.isRequired,
-        height:PropTypes.number.isRequired,
-        posX:PropTypes.number.isRequired,
-        posY:PropTypes.number.isRequired,
         targetStyle: PropTypes.object.isRequired,
         targetOverStyle: PropTypes.object.isRequired,
 

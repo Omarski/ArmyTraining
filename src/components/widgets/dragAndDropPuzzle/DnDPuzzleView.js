@@ -21,23 +21,19 @@ var DnDPuzzleView = React.createClass({
 
     propTypes: {
 
-        stageWidth: PropTypes.number.isRequired,
-        stageHeight: PropTypes.number.isRequired,
         stageStyle: PropTypes.object.isRequired,
-
         draggableColl:PropTypes.arrayOf.object.isRequired,
         targetsColl:PropTypes.arrayOf.object.isRequired,
-        onItemDrag:PropTypes.func,
+        onDraggableDrag:PropTypes.func,
         onTargetDrop:PropTypes.func,
         onPuzzleReady:PropTypes.func
-
     },
 
     componentWillMount: function() {
     },
 
     componentDidMount: function() {
-        this.renderDraggables();
+        this.renderDraggableColl();
     },
 
     componentWillUnmount: function() {
@@ -46,7 +42,7 @@ var DnDPuzzleView = React.createClass({
     componentDidUpdate: function(prevProps, prevState){
     },
 
-    renderDraggables: function(){
+    renderDraggableColl: function(){
 
         var self = this;
         var draggableCollRender = self.draggableColl.map(function(itemObj,index){
@@ -67,11 +63,11 @@ var DnDPuzzleView = React.createClass({
         });
 
         self.state.renderedDraggableColl = draggableCollRender;
-        this.renderDropTargets();
+        this.renderDropTargetColl();
         return draggableCollRender;
     },
 
-    renderDropTargets: function(){
+    renderDropTargetColl: function(){
 
         var self = this;
         var dropTargetsRender = self.targetsColl.map(function(itemObj,index){
@@ -103,10 +99,18 @@ var DnDPuzzleView = React.createClass({
         this.props.onDraggableDrag(itemObj);
     },
 
+    onTargetDrop: function(itemObj){
+        //bubble up to parent
+        this.props.onTargetDrop(itemObj);
+    },
+
     render: function() {
 
         return (
-            <div></div>
+            <div style={this.props.stageStyle}>
+                {this.renderDraggableColl()}
+                {this.renderDropTargetColl()}
+            </div>
         )
     }
 });
