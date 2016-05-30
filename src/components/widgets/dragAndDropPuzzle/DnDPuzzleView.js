@@ -1,12 +1,10 @@
 
 var React = require('react');
-//using HTML5 backend
-var DragDropContext = require('react-dnd').DragDropContext;
-var HTML5Backend = require('react-dnd-html5-backend');
+
+var PropTypes = React.PropTypes;
 
 var DnDPuzzleDraggable = require('./DnDPuzzleDraggable');
 var DnDPuzzleDropTarget = require('./DnDPuzzleDropTarget');
-var PropTypes = React.propTypes;
 
 var DnDPuzzleView = React.createClass({
 
@@ -22,18 +20,17 @@ var DnDPuzzleView = React.createClass({
     propTypes: {
 
         stageStyle: PropTypes.object.isRequired,
-        draggableColl:PropTypes.arrayOf.object.isRequired,
-        targetsColl:PropTypes.arrayOf.object.isRequired,
-        onDraggableDrag:PropTypes.func,
-        onTargetDrop:PropTypes.func,
-        onPuzzleReady:PropTypes.func
+        draggableColl: PropTypes.array.isRequired,
+        targetsColl: PropTypes.array.isRequired,
+        onDraggableDrag: PropTypes.func,
+        onTargetDrop: PropTypes.func,
+        onPuzzleReady: PropTypes.func
     },
 
     componentWillMount: function() {
     },
 
     componentDidMount: function() {
-        this.renderDraggableColl();
     },
 
     componentWillUnmount: function() {
@@ -45,52 +42,42 @@ var DnDPuzzleView = React.createClass({
     renderDraggableColl: function(){
 
         var self = this;
-        var draggableCollRender = self.draggableColl.map(function(itemObj,index){
+        var draggableCollRender = self.props.draggableColl.map(function(itemObj,index){
 
             return (
 
-                <DnDPuzzleDraggable
+                <DnDPuzzleDraggable key={index}
                     id={"puzzleDraggable"+index}
                     imgUrl={itemObj.imgUrl?itemObj.imgUrl:null}
-                    width={itemObj.width}
-                    height={itemObj.height}
-                    posX={itemObj.posX}
-                    posY={itemObj.posY}
-                    draggableStyle={itemObj.style}
-                    onDraggableDrag=self.onDraggableDrag
+                    draggableStyle={itemObj.draggableStyle}
+                    onDraggableDrag={self.onDraggableDrag}
                     />
             )
         });
 
         self.state.renderedDraggableColl = draggableCollRender;
-        this.renderDropTargetColl();
         return draggableCollRender;
     },
 
     renderDropTargetColl: function(){
 
         var self = this;
-        var dropTargetsRender = self.targetsColl.map(function(itemObj,index){
+        var dropTargetsRender = self.props.targetsColl.map(function(itemObj,index){
 
             return (
 
-                <DnDPuzzleDropTarget
+                <DnDPuzzleDropTarget key={index}
                     id = {"puzzleTarget"+index}
                     imgUrl = {itemObj.imgUrl?itemObj.imgUrl:null}
-                    width = {itemObj.width}
-                    height = {itemObj.height}
-                    posX = {itemObj.posX}
-                    posY = {itemObj.posY}
-                    targetStyle = {itemObj.style}
+                    targetStyle = {itemObj.targetStyle}
                     targetOverStyle = {itemObj.targetOverStyle}
-                    onTargetDrop = self.onTargetDrop
+                    onTargetDrop = {self.onTargetDrop}
                 />
             )
         });
 
         self.state.renderedDropTargetsColl = dropTargetsRender;
-        self.props.onPuzzleReady(self.state.renderedDraggableColl,
-                                 self.state.renderedDropTargetsColl);
+        self.props.onPuzzleReady(self.state.renderedDraggableColl,self.state.renderedDropTargetsColl);
 
         return dropTargetsRender;
     },
@@ -116,4 +103,4 @@ var DnDPuzzleView = React.createClass({
     }
 });
 
-module.exports = DragDropContext(HTML5Backend)(DnDPuzzleView);
+module.exports = DnDPuzzleView;

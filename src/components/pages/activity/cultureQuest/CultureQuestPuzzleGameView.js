@@ -1,21 +1,20 @@
 
 var React = require('react');
-
 var DnDPuzzleView = require('../../../widgets/DragAndDropPuzzle/DnDPuzzleView');
-var PropTypes = React.propTypes;
+var PropTypes = React.PropTypes;
 
 var CultureQuestPuzzleGameView = React.createClass({
 
     getInitialState: function() {
 
         return {
-            mediaPath: 'data/media/',
+            mediaPath: 'data/media/'
         };
     },
 
     propTypes: {
 
-        imageData: PropTypes.arrayOf.object.isRequired
+        imageData: PropTypes.object.isRequired
     },
 
     componentWillMount: function() {
@@ -36,11 +35,14 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         var imageData = this.props.imageData;
         var draggableColl = [];
-        var pieceHeight = 55, topStart = 140, left = 705;
-        var draggableStyle = {position:'absolute', width:'55px', height:'60px',
-                              background:null,left:null, top:null};
+        var pieceHeight = 55, topStart = 110, left = 710;
 
         for (var i=0; i < imageData.regions.length; i++){
+
+            var imgUrl = this.state.mediaPath + imageData.regions[i].tile;
+            var draggableStyle = {position:'absolute', width:'40px', height:'50px',
+                background: "url('"+imgUrl+"') no-repeat 100% 100%",
+                left: left+"px", top:topStart+(pieceHeight * i)+"px"};
 
             var draggableObj = {
                 
@@ -50,14 +52,10 @@ var CultureQuestPuzzleGameView = React.createClass({
                 onDraggableDrag: this.onDraggableDrag 
                 };
 
-            //amend style unique
-            var imgUrl = this.state.mediaPath + imageData.regions[i].tile;
-            draggableObj.draggableStyle.background = "url('"+imgUrl+"') no-repeat 100% 100%";
-            draggableObj.draggableStyle.left = left+"px";
-            draggableObj.draggableStyle.top = topStart+(pieceHeight * i)+"px";
-
             draggableColl.push(draggableObj);
         }
+        //remove
+        // for (var item in draggableColl[0]) console.log(item + " : " + draggableColl[0][item]);
         return draggableColl;
     },
 
@@ -65,42 +63,42 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         var imageData = this.props.imageData;
         var targetColl = [];
-        var targetStyle = {position:'absolute', width:'110px', height:'168px',
-                              background:'#fff', left:null, top:null,
-                              border:'1px solid #000'};
-
-        var targetOverStyle = {position:'absolute', width:'110px', height:'168px',
-            background:'#fff', left:null, top:null,
-            border:'1px solid red'};
-
-        var gridOrigin = {x:215, y:113}, targetWidth = 110, targetHeight = 165;
+        var gridOrigin = {x:215, y:113}, padding= '5px', targetWidth = 110, targetHeight = 165;
         var targetPosColl = [];
 
         for (var r = 0 ; r < 3; r++){
             for (var c = 0 ; c < 3 ; c++){
+                var x = parseInt(gridOrigin.x + (targetWidth * c));
+                var y = parseInt(gridOrigin.y + (targetHeight * r));
                 targetPosColl.push({
-                    x:gridOrigin.x + (targetWidth * c),
-                    y:gridOrigin.y + (targetHeight * r)
+                    x:x,
+                    y:y
                 });
             }
         }
 
         for (var i=0; i < imageData.regions.length; i++){
 
+            var targetStyle = {position:'absolute', width:'110px', height:'165px',
+                background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
+                border:'1px solid #000'};
+
+            var targetOverStyle = {position:'absolute', width:'110px', height:'165px',
+                background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
+                border:'1px solid red'};
+
             var targetObj = {
 
                 id:"puzzleTarget"+i,
+                imgUrl:null,
                 targetStyle: targetStyle,
                 targetOverStyle: targetOverStyle,
                 onTargetDrop: this.onTargetDrop
                 };
 
-            //amend style unique
-            targetObj.targetStyle.left = targetPosColl[i].x + "px";
-            targetObj.targetStyle.top  = targetPosColl[i].y + "px";
-
             targetColl.push(targetObj);
         }
+        //console.log("targetObj 0 x: " + targetColl[0].targetOverStyle.left + "targetObj 1 x: " + targetColl[1].targetOverStyle.left);
         return targetColl;
     },
     
@@ -119,7 +117,7 @@ var CultureQuestPuzzleGameView = React.createClass({
     render: function() {
 
         var stageStyle = {width:'768px', height:'506px', display:'block',
-                          position:'absolute', zIndex:'25'};
+                          top: '34px', left:'0', position:'absolute', zIndex:'25'};
 
         return (
             <div>

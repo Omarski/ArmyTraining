@@ -7,7 +7,7 @@ var CultureQuestQuizView = require('./CultureQuestQuizView');
 var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
 var CultureQuestPuzzleGameView = require('./CultureQuestPuzzleGameView');
 var PageHeader = require('../../../widgets/PageHeader');
-
+//var DragTest = require('./DragTest');
 function getPageState(props) {
 
     var data = {
@@ -17,7 +17,8 @@ function getPageState(props) {
         pageType: "",
         showQuiz: false,
         showPopup: false,
-        showPuzzle: false
+        showPuzzle: false,
+        showPuzzleGame: true
     };
 
 
@@ -214,11 +215,11 @@ var CultureQuestView = React.createClass({
                         showQuizUpdate = {self.showQuizUpdate}
                         showPuzzleUpdate = {self.showPuzzleUpdate}
                     />:null}
-                    
-                    <CulturQuestPuzzleGameView
-                        imageData={state.imageData}
-                    />
-                    
+
+                    {self.state.showPuzzleGame? <CultureQuestPuzzleGameView
+                    imageData={state.imageData}
+                    />:null}
+
                 </div>
             </div>
 
