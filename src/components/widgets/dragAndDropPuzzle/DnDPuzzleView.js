@@ -22,21 +22,13 @@ var DnDPuzzleView = React.createClass({
         stageStyle: PropTypes.object.isRequired,
         draggableColl: PropTypes.array.isRequired,
         targetsColl: PropTypes.array.isRequired,
-        onDraggableDrag: PropTypes.func,
-        onTargetDrop: PropTypes.func,
+        onDraggableBeginDrag: PropTypes.func,
+        onDraggableEndDrag: PropTypes.func.isRequired,
+        draggableCanDragCond: PropTypes.func,
+        onTargetDrop:  PropTypes.func.isRequired,
+        onTargetHover: PropTypes.func,
+        targetCanDropCond: PropTypes.func,
         onPuzzleReady: PropTypes.func
-    },
-
-    componentWillMount: function() {
-    },
-
-    componentDidMount: function() {
-    },
-
-    componentWillUnmount: function() {
-    },
-
-    componentDidUpdate: function(prevProps, prevState){
     },
 
     renderDraggableColl: function(){
@@ -50,8 +42,10 @@ var DnDPuzzleView = React.createClass({
                     id={"puzzleDraggable"+index}
                     imgUrl={itemObj.imgUrl?itemObj.imgUrl:null}
                     draggableStyle={itemObj.draggableStyle}
-                    onDraggableDrag={self.onDraggableDrag}
-                    />
+                    onDraggableBeginDrag={itemObj.onDraggableBeginDrag ? self.onDraggableBeginDrag:null}
+                    onDraggableEndDrag={self.onDraggableEndDrag}
+                    draggableCanDragCond={itemObj.draggableCanDragCond ? self.draggableCanDragCond:null}
+                />
             )
         });
 
@@ -72,6 +66,8 @@ var DnDPuzzleView = React.createClass({
                     targetStyle = {itemObj.targetStyle}
                     targetOverStyle = {itemObj.targetOverStyle}
                     onTargetDrop = {self.onTargetDrop}
+                    onTargetHover = {itemObj.onTargetHover ? self.onTargetHover:null}
+                    targetCanDropCond = {itemObj.targetCanDropCond ? self.targetCanDropCond:null}
                 />
             )
         });
@@ -82,14 +78,34 @@ var DnDPuzzleView = React.createClass({
         return dropTargetsRender;
     },
 
-    onDraggableDrag: function(itemObj){
+    onDraggableBeginDrag: function(itemObj, monitor, component){
         //bubble up to parent
-        this.props.onDraggableDrag(itemObj);
+        this.props.onDraggableBeginDrag(itemObj, monitor, component);
     },
 
-    onTargetDrop: function(itemObj){
+    onDraggableEndDrag: function(itemObj,monitor,component){
         //bubble up to parent
-        this.props.onTargetDrop(itemObj);
+        this.props.onDraggableEndDrag(itemObj,monitor,component);
+    },
+
+    draggableCanDragCond: function(itemObj){
+        //bubble up to parent
+        if (this.props.draggableCanDragCond) this.props.draggableCanDragCond(itemObj);
+    },
+
+    onTargetDrop: function(targetObj, monitor, component){
+        //bubble up to parent
+        this.props.onTargetDrop(targetObj,monitor,component);
+    },
+
+    onTargetHover: function(targetObj, monitor, component){
+        //bubble up to parent
+        this.props.onTargetHover(targetObj,monitor,component);
+    },
+
+    targetCanDropCond: function(targetObj){
+        //bubble up to parent
+        if (this.props.targetCanDropCond) this.props.targetCanDropCond(targetObj);
     },
 
     render: function() {

@@ -8,7 +8,9 @@ var CultureQuestPuzzleGameView = React.createClass({
     getInitialState: function() {
 
         return {
-            mediaPath: 'data/media/'
+            mediaPath: 'data/media/',
+            draggableColl: [],
+            targetColl: []
         };
     },
 
@@ -49,7 +51,9 @@ var CultureQuestPuzzleGameView = React.createClass({
                 id:"puzzleDraggable"+i,
                 draggableStyle : draggableStyle,
                 imgUrl:null,
-                onDraggableDrag: this.onDraggableDrag 
+                onDraggableBeginDrag: this.onDraggableBeginDrag,
+                onDraggableEndDrag: this.onDraggableEndDrag,
+                draggableCanDragCond: null
                 };
 
             draggableColl.push(draggableObj);
@@ -93,7 +97,9 @@ var CultureQuestPuzzleGameView = React.createClass({
                 imgUrl:null,
                 targetStyle: targetStyle,
                 targetOverStyle: targetOverStyle,
-                onTargetDrop: this.onTargetDrop
+                onTargetDrop: this.onTargetDrop,
+                onTargetHover: this.onTargetHover,
+                targetCanDropCond: null
                 };
 
             targetColl.push(targetObj);
@@ -102,16 +108,41 @@ var CultureQuestPuzzleGameView = React.createClass({
         return targetColl;
     },
     
-    onPuzzleReady: function(){
+    onPuzzleReady: function(draggableColl, targetColl){
         console.log("At game - puzzle ready!");
+        this.state.draggableColl = draggableColl;
+        this.state.targetColl = targetColl;
     },
 
-    onDraggableDrag: function(itemObj){
+    onDraggableBeginDrag: function(itemObj, monitor, component){
+        for (var key in component.context) console.log(key + " - " + component.context[key]);
+
+        // component.attr('width','112px');
+        // component.attr('height','168px');
+        // component.setAttribute('width','112px');
+        // component.setAttribute('height','168px');
+    },
+
+    onDraggableEndDrag: function(itemObj, monitor, component){
         console.log("At game - dragged: " + itemObj.id);
     },
 
-    onTargetDrop: function(targetObj){
+    draggableCanDragCond: function(itemObj){
+        //return true or false according to target
+        return true;
+    },
+
+    onTargetDrop: function(targetObj, monitor, component){
         console.log("At game - target: " + targetObj.id);
+    }, 
+    
+    onTargetHover: function(targetObj, monitor, component){
+        console.log("At game - target Hovered: " + targetObj.id);
+    },
+
+    targetCanDropCond: function(targetObj){
+        //return true or false according to target
+        return true;
     },
 
     render: function() {
@@ -122,12 +153,16 @@ var CultureQuestPuzzleGameView = React.createClass({
         return (
             <div>
                 <DnDPuzzleView
-                    stageStyle      = {stageStyle}
-                    draggableColl   = {this.prepDraggableData()}
-                    targetsColl     = {this.prepTargetData()}
-                    onDraggableDrag = {this.onDraggableDrag}
-                    onTargetDrop    = {this.onTargetDrop}
-                    onPuzzleReady   = {this.onPuzzleReady}
+                    stageStyle           = {stageStyle}
+                    draggableColl        = {this.prepDraggableData()}
+                    targetsColl          = {this.prepTargetData()}
+                    onDraggableBeginDrag = {this.onDraggableBeginDrag}
+                    onDraggableEndDrag   = {this.onDraggableEndDrag}
+                    draggableCanDragCond = {null}
+                    onTargetDrop         = {this.onTargetDrop}
+                    onTargetHover        = {this.onTargetHover}
+                    targetCanDropCond    = {null}
+                    onPuzzleReady        = {this.onPuzzleReady}
                 />
                 <div className = "CultureQuestPuzzleGameView-puzzleSlider">
                 </div>

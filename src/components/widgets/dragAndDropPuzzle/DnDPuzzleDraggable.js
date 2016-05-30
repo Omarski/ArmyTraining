@@ -3,14 +3,21 @@ var PropTypes  = React.PropTypes;
 var ItemTypes  = require('./Constants').ItemTypes;
 var DragSource = require('react-dnd').DragSource;
 
-//draggable contract:
+//draggable contract - Return the data describing the dragged item:
+
 var puzzlePieceSource = {
-    beginDrag: function (props) {
-        // Return the data describing the dragged item
-        console.log("Dragging....");
-        props.onDraggableDrag({id: props.id});
+
+    canDrag: function (props) {
+        if (props.draggableCanDragCond) return props.draggableCanDragCond({id: props.id});
+        return true;
+    },
+    beginDrag: function (props, monitor, component) {
+        if (props.onDraggableBeginDrag) props.onDraggableBeginDrag({id: props.id}, monitor, component);
         return {id: props.id};
-        return({});
+    },
+    endDrag: function(props, monitor, component){
+        props.onDraggableEndDrag({id: props.id},monitor,component);
+        return {id: props.id};
     }
 };
 
@@ -33,7 +40,9 @@ var DnDPuzzleDraggable = React.createClass({
         id:PropTypes.string.isRequired,
         imgUrl:PropTypes.string,
         draggableStyle:PropTypes.object.isRequired,
-        onDraggableDrag:PropTypes.func.isRequired
+        onDraggableBeginDrag:PropTypes.func,
+        onDraggableEndDrag:PropTypes.func.isRequired,
+        draggableCanDragCond:PropTypes.func
     },
 
     render: function() {
@@ -52,7 +61,6 @@ var DnDPuzzleDraggable = React.createClass({
         //add passed style
         for (var style in draggableStyle) combinedStyle[style] = draggableStyle[style];
 
-        console.log("About to render....");
         return connectDragSource(
 
             <div id={id} style={combinedStyle}>

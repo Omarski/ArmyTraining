@@ -7,16 +7,18 @@ var PropTypes = React.PropTypes;
 var dropTarget = {
 
     canDrop: function (props) {
-        return true;
+        if (props.targetCanDropCond) return props.targetCanDropCond({id:props.id});
+        else return true;
     },
-    drop: function (props) {
-       //to do at drop
-        console.log("Dropped into: " + props.id);
-        props.onTargetDrop({id:props.id});
+
+    drop: function (props, monitor, component) {
+        props.onTargetDrop({id:props.id}, monitor, component);
+        return({id:props.id});
     },
-    hover: function (props) {
-       //to do at over
-        console.log("Over target: " + props.id);
+
+    hover: function (props, monitor, component) {
+        if (props.onTargetHover) props.onTargetHover({id:props.id}, monitor, component);
+        return({id:props.id});
     }
 };
 
@@ -38,11 +40,11 @@ var DnDPuzzleDropTarget = React.createClass({
         canDrop: PropTypes.bool.isRequired,
 
         id: PropTypes.string.isRequired,
-        posX: PropTypes.number.isRequired,
-        posY: PropTypes.number.isRequired,
         targetStyle: PropTypes.object.isRequired,
-        targetOverStyle: PropTypes.object.isRequired,
-        onTargetDrop: PropTypes.func.isRequired
+        targetOverStyle: PropTypes.object,
+        onTargetDrop: PropTypes.func.isRequired,
+        onTargetHover: PropTypes.func,
+        targetCanDropCond: PropTypes.func
     },
 
     render: function () {
@@ -55,7 +57,8 @@ var DnDPuzzleDropTarget = React.createClass({
         //wrapper
         return connectDropTarget(
 
-            <div id={id} style={isOver? self.props.targetOverStyle : self.props.targetStyle}>
+            <div id={id} style={isOver && self.props.targetOverStyle ?
+                self.props.targetOverStyle : self.props.targetStyle}>
             </div>
         );
     }
