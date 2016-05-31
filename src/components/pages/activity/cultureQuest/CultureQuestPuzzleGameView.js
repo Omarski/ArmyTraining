@@ -44,7 +44,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
             var imgUrl = this.state.mediaPath + imageData.regions[i].tile;
             var draggableStyle = {position:'absolute', width:'40px', height:'50px',
-                background: "url('"+imgUrl+"') no-repeat 100% 100%",
+                background: "url('"+imgUrl+"') no-repeat 100% 100%", zIndex:'30',
                 left: left+"px", top:topStart+(pieceHeight * i)+"px"};
 
             var draggableObj = {
@@ -114,9 +114,7 @@ var CultureQuestPuzzleGameView = React.createClass({
     },
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
-        var self = this;
         var dragItem = component.getDOMNode();
-
         dragItem.style.width  = "112px";
         dragItem.style.height = "168px";
     },
@@ -124,12 +122,11 @@ var CultureQuestPuzzleGameView = React.createClass({
     onDraggableEndDrag: function(itemObj, monitor, component){
 
         var dragItem = component.getDOMNode();
-        // console.log("Last: " + position.x + " xxx " + position.y);
-        dragItem.style.top  = this.state.lastDragged.top;
-        dragItem.style.left = this.state.lastDragged.left;
-        console.log("Post - position top: " + dragItem.style.left);
-        console.log("Post - position left: " + dragItem.getBoundingClientRect().left);
-
+        if (monitor.didDrop()) {
+            var target = $("#"+monitor.getDropResult().id);
+            dragItem.style.top  = $(target).position().top+"px";
+            dragItem.style.left = $(target).position().left+"px";
+        }
     },
 
      draggableCanDragCond: function(itemObj){
