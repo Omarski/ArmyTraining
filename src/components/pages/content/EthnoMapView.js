@@ -8,6 +8,7 @@ var ReactBootstrap = require('react-bootstrap');
 var PageHeader = require('../../widgets/PageHeader');
 var EthnoLayersView = require("../../widgets/EthnoLayersView");
 var EthnoMapPopover = require("../../widgets/EthnoMapPopover");
+var Utils = require("../../widgets/Utils");
 
 
 function getPageState(props) {
@@ -32,7 +33,13 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.info = props.info;
-        data.imageData = JSON.parse(props.page.info.property[2].value);
+
+        // Because the prebuild sends the data in a random order, the below line may not work
+        // data.imageData = JSON.parse(props.page.info.property[2].value);
+        // this uses a Util function to get the correct data if the name "builtEthnoMap" exists
+        data.imageData = JSON.parse(Utils.findInfo(props.info, "builtEthnoMap"));
+
+
 
 
         if(props.page.EthnoData){
