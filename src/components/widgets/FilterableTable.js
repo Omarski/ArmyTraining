@@ -42,6 +42,7 @@ var SearchBar = React.createClass({
     }
 });
 
+// returns a <tr> with 2 <td> elements
 var DictionaryRow = React.createClass({
     render: function() {
         var name = this.props.translated;
@@ -72,6 +73,10 @@ var DictionaryRow = React.createClass({
     }
 });
 
+
+// table that takes the search string from it's parent to filter what is shown
+// can choose to show headers or not
+// headers are clickable to sort the columns alphabetically
 var DictionaryTable = React.createClass({
     getInitialState: function(){
         // save list order in the state
@@ -144,11 +149,14 @@ var DictionaryTable = React.createClass({
         }.bind(self) );
 
         // sort rows by the method determined by where the user has clicked
+        // sortPreference is which column being sorted,
+        // sortReverse will toggle with consecutive clicks on a column header
         if(rows && rows[0]){
             rows = rows.sort(function(a, b){
                 var one = "";
                 var two = "";
 
+                // collect the strings to be tested
                 if(state.sortPreference === "translation") {
                     one = a.props.translated.toLowerCase();
                     two = b.props.translated.toLowerCase();
@@ -157,6 +165,9 @@ var DictionaryTable = React.createClass({
                     two = b.props.native.toLowerCase();
                 }
 
+                // return 1 if item a comes before item b,
+                // -1 if b comes before a,
+                // 0 if they are equal
                 if(!state.sortReverse){
                     if(one > two){
                         return (1);
@@ -166,6 +177,7 @@ var DictionaryTable = React.createClass({
                         return (0);
                     }
                 }else{
+                    // the opposite if we are reverse sorting the list
                     if(one < two){
                         return (1);
                     }else if(one > two){
@@ -192,6 +204,7 @@ var DictionaryTable = React.createClass({
     }
 });
 
+// returns the above table, search bar, and video player(for gestures)
 var FilterableTable = React.createClass({
     getInitialState: function() {
         var data = {

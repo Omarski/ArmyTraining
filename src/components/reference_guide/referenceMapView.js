@@ -38,9 +38,11 @@ var ReferenceMapView = React.createClass({
         var self = this;
         var source = self.state.mapSource;
 
+        // TODO: add alt text to image
+
         return (
             <div id="referenceMapView">
-                <img src={source}></img>
+                <img src={source} alt={""}></img>
             </div>
         );
     },
