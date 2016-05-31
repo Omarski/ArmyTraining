@@ -22,6 +22,7 @@ var DnDPuzzleView = React.createClass({
         stageStyle: PropTypes.object.isRequired,
         draggableColl: PropTypes.array.isRequired,
         targetsColl: PropTypes.array.isRequired,
+        stageTargetObj: PropTypes.object.isRequired,
         onDraggableBeginDrag: PropTypes.func,
         onDraggableEndDrag: PropTypes.func.isRequired,
         draggableCanDragCond: PropTypes.func,
@@ -39,7 +40,7 @@ var DnDPuzzleView = React.createClass({
             return (
 
                 <DnDPuzzleDraggable key={index}
-                    id={"puzzleDraggable"+index}
+                    id = {itemObj.id}
                     imgUrl={itemObj.imgUrl?itemObj.imgUrl:null}
                     draggableStyle={itemObj.draggableStyle}
                     onDraggableBeginDrag={itemObj.onDraggableBeginDrag ? self.onDraggableBeginDrag:null}
@@ -61,7 +62,7 @@ var DnDPuzzleView = React.createClass({
             return (
 
                 <DnDPuzzleDropTarget key={index}
-                    id = {"puzzleTarget"+index}
+                    id = {itemObj.id}
                     imgUrl = {itemObj.imgUrl?itemObj.imgUrl:null}
                     targetStyle = {itemObj.targetStyle}
                     targetOverStyle = {itemObj.targetOverStyle}
@@ -74,9 +75,32 @@ var DnDPuzzleView = React.createClass({
 
         self.state.renderedDropTargetsColl = dropTargetsRender;
         self.props.onPuzzleReady(self.state.renderedDraggableColl,self.state.renderedDropTargetsColl);
-
+        
         return dropTargetsRender;
     },
+    
+    // renderStageTarget: function(){
+    //
+    //     var self = this;
+    //     var stageTargetObj = self.props.stageTargetObj;
+    //     var stageRender = function(){
+    //        
+    //         return (
+    //
+    //             <DnDPuzzleDropTarget
+    //                 id = {stageTargetObj.id}
+    //                 imgUrl = {stageTargetObj.imgUrl?stageTargetObj.imgUrl:null}
+    //                 targetStyle = {stageTargetObj.targetStyle}
+    //                 targetOverStyle = {stageTargetObj.targetOverStyle}
+    //                 onTargetDrop = {stageTargetObj.onTargetDrop}
+    //                 onTargetHover = {stageTargetObj.onTargetHover ? self.onTargetHover:null}
+    //                 targetCanDropCond = {stageTargetObj.targetCanDropCond ? self.targetCanDropCond:null}
+    //             />
+    //         )
+    //     };
+    //       
+    //     return stageRender;
+    // },
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
         //bubble up to parent
@@ -110,10 +134,26 @@ var DnDPuzzleView = React.createClass({
 
     render: function() {
 
+        var self = this;
+        var stageTargetObj = self.props.stageTargetObj;
+        
         return (
             <div style={this.props.stageStyle}>
                 {this.renderDraggableColl()}
-                {this.renderDropTargetColl()}
+
+                <DnDPuzzleDropTarget
+                    
+                    id = {stageTargetObj.id}
+                    imgUrl = {stageTargetObj.imgUrl?stageTargetObj.imgUrl:null}
+                    targetStyle = {stageTargetObj.targetStyle}
+                    targetOverStyle = {stageTargetObj.targetOverStyle}
+                    onTargetDrop = {stageTargetObj.onTargetDrop}
+                    onTargetHover = {stageTargetObj.onTargetHover ? self.onTargetHover:null}
+                    targetCanDropCond = {stageTargetObj.targetCanDropCond ? self.targetCanDropCond:null}>
+
+                    {this.renderDropTargetColl()}
+                </DnDPuzzleDropTarget> 
+               
             </div>
         )
     }

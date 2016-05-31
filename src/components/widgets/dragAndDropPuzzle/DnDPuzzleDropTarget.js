@@ -59,7 +59,10 @@ var DnDPuzzleDropTarget = React.createClass({
 
             <div id={id} style={isOver && self.props.targetOverStyle ?
                 self.props.targetOverStyle : self.props.targetStyle}>
+                <div>{this.props.children}
+                </div>
             </div>
+
         );
     }
 });

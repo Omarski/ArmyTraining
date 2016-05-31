@@ -23,6 +23,7 @@ var CultureQuestPuzzleGameView = React.createClass({
     componentWillMount: function() {
         this.prepDraggableData();
         this.prepTargetData();
+        this.prepStageTargetObj();
     },
 
     componentDidMount: function() {
@@ -68,7 +69,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         var imageData = this.props.imageData;
         var targetColl = [];
-        var gridOrigin = {x:215, y:113}, padding= '5px', targetWidth = 110, targetHeight = 165;
+        var gridOrigin = {x:215, y:113}, targetWidth = 110, targetHeight = 165;
         var targetPosColl = [];
 
         for (var r = 0 ; r < 3; r++){
@@ -104,7 +105,40 @@ var CultureQuestPuzzleGameView = React.createClass({
 
             targetColl.push(targetObj);
         }
+
+            //stage as drop zone:
+            // var stageStyle = {position:'absolute', width:'765px', height:'502px',
+            //     background:'#fff', top: '0', left:'0', opacity:'.5',zIndex:'10'};
+            //
+            // var stageTargetObj = {
+            //     id:"puzzleStageTarget",
+            //     imgUrl:null,
+            //     targetStyle: stageStyle,
+            //     targetOverStyle: null,
+            //     onTargetDrop: this.onTargetDrop,
+            //     onTargetHover: this.onTargetHover,
+            //     targetCanDropCond: null
+            //};
+
+       //targetColl.push(stageTargetObj);
+
         return targetColl;
+    },
+
+    prepStageTargetObj: function(){
+
+        var stageStyle = {position:'absolute', width:'765px', height:'502px',
+            background:'#fff', top: '0', left:'0', opacity:'.5',zIndex:'10'};
+
+        return {
+            id:"puzzleStageTarget",
+            imgUrl:null,
+            targetStyle: stageStyle,
+            targetOverStyle: null,
+            onTargetDrop: this.onTargetDrop,
+            onTargetHover: this.onTargetHover,
+            targetCanDropCond: null
+        };
     },
     
     onPuzzleReady: function(draggableColl, targetColl){
@@ -122,10 +156,22 @@ var CultureQuestPuzzleGameView = React.createClass({
     onDraggableEndDrag: function(itemObj, monitor, component){
 
         var dragItem = component.getDOMNode();
+        var target;
+
         if (monitor.didDrop()) {
-            var target = $("#"+monitor.getDropResult().id);
-            dragItem.style.top  = $(target).position().top+"px";
-            dragItem.style.left = $(target).position().left+"px";
+            if (monitor.getDropResult().id !== "puzzleStageTarget") {
+                console.log("Normal - drop.......");
+                target = $("#"+monitor.getDropResult().id);
+                dragItem.style.top  = $(target).position().top+"px";
+                dragItem.style.left = $(target).position().left+"px";
+            }else{
+                //var offset = monitor.getSourceClientOffset();
+                //console.log("monitor.getSourceClientOffset: "+monitor.getSourceClientOffset());
+                //dragItem.style.top  = offset.y+"px";
+                //dragItem.style.left = offset.x+"px";
+                //console.log("offset: "+offset.x+ " ---- "+offset.y);
+            }
+
         }
     },
 
@@ -157,6 +203,7 @@ var CultureQuestPuzzleGameView = React.createClass({
                 <DnDPuzzleView
                     stageStyle           = {stageStyle}
                     draggableColl        = {this.prepDraggableData()}
+                    stageTargetObj       = {this.prepStageTargetObj()}
                     targetsColl          = {this.prepTargetData()}
                     onDraggableBeginDrag = {this.onDraggableBeginDrag}
                     onDraggableEndDrag   = {this.onDraggableEndDrag}

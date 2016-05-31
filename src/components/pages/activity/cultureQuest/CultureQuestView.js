@@ -18,7 +18,7 @@ function getPageState(props) {
         showQuiz: false,
         showPopup: false,
         showPuzzle: false,
-        showPuzzleGame: true
+        showPuzzleGame: false
     };
 
 
