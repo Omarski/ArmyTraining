@@ -1,27 +1,6 @@
-/*
- * Created by omaramer on 5/13/16.
- * This widget takes an object and creates layers of uncropped images that respond to
- * rollovers and clicks on a pixel level.
- *
- * How to use:
- * require the widget from components/widgets/ImageLayersView
- * Pass the widget the following attributes:
- * <ImageLayersView
- *
- *      areaWidth =  //width of your image stack,
- *      areaHeight =  //height of your image stack,
- *      imageColl = array of objects representing your image data (harvest from your page's JSON),
- *      backgroundImage = URL to the non responsive background image,
- *      onLayersReady = a function that will be passed an array of the image layers (canvas elements) when ready,
- *      onRollover = a function that is passed a layer (canvas) element if cursor is on a live area or null otherwise,
- *      onClick= a function that is passed the canvas element clicked on or null if clicked on empty area.
- *
- *  />
- */
-
 var React = require('react');
 
-var ImageLayersView = React.createClass({
+var EthnoLayersView = React.createClass({
 
     getInitialState: function() {
 
@@ -41,7 +20,6 @@ var ImageLayersView = React.createClass({
 
     componentWillMount: function() {
     },
-
     componentDidMount: function() {
 
         //preload images
@@ -61,7 +39,6 @@ var ImageLayersView = React.createClass({
             state.loadedImageColl[i].onload = self.loadCounter;
         }
     },
-
     componentWillUnmount: function() {
     },
 
@@ -102,6 +79,10 @@ var ImageLayersView = React.createClass({
             self.pixelTracker(e, "mousemove");
         });
 
+        canv.addEventListener("mouseout", function(e){
+            self.pixelTracker(e, "mouseout");
+        })
+
         return canv;
 
     },
@@ -132,23 +113,29 @@ var ImageLayersView = React.createClass({
         self.props.onLayersReady(self.state.canvasColl);
     },
 
-    detectRegion: function(e,pixelX,pixelY) {
-
+    detectRegion: function(e,pixelX,pixelY, pageX, pageY) {
+        // XXXXXXXXXX pageX and pageY are extra parameters that I pass into onRollover on line 153; This change also is related to the cahnge on line 173 which sets it up
         var self = this;
         var pixelHit = false;
+        console.log("pixelX", pixelX);
 
         for (var i = 0; i < self.state.canvasColl.length; i++) {
 
             var canvasElement = self.state.canvasColl[i];
-            if (canvasElement.getAttribute('hidden') === true) continue;
             var canvas = canvasElement.getContext('2d');
             var pixel = canvas.getImageData(pixelX, pixelY, 1, 1).data;
+            // XXXXXXXXXX  DAVID ---- You have .getAttribute('hidden') can we change it to find the opacity, like below? XXXXXXXXXX
+            var opacityLevel = getComputedStyle(canvasElement).getPropertyValue("opacity");
 
-            if (pixel[3] != 0) {
+            if (pixel[3] !== 0) {
                 pixelHit = true;
-                self.state.lastHighlightedRegion = canvasElement;
-                self.props.onRollover(canvasElement);
-                break;
+                // XXXXXXXXXX If the opacity is 1 (which is the default--we can change this to !== 0 if you'd like) then it changes the lastHighlightedRegion to the current element. XXXXXXXXXX
+                if(opacityLevel === "1") {
+                    self.state.lastHighlightedRegion = canvasElement;
+                    // I pass in pageX and pageY below. I added this because it is faster than setting up another listener in my component; this passes the XY mouse coordinates in context of the page not just the canvas
+                    console.log("pixelX", pixelX, "pixelY", pixelY);
+                    self.props.onRollover(canvasElement, pixelX, pixelY);
+                }
             }
         }
 
@@ -164,12 +151,21 @@ var ImageLayersView = React.createClass({
 
         if (mode == "mousemove"){
             var offset = $("#imageLayerView-back-image").offset();
-            var x = e.pageX - offset.left;
-            var y = e.pageY - offset.top;
-            self.detectRegion(e, x, y);
+            console.log("offset", offset, "offset.left", offset.left, "offset.top", offset.top);
+            console.log("typeof", typeof(e.pageX));
+            var x = function(){return e.pageX - offset.left}();
+            var y = function(){return e.pageY - offset.top}();
+            //XXXXXXXXXX below we pass the e.pageX and e.pageY so we get the mouse coordinates that I need
+            console.log("e.pageX", e.pageX, "e.pageY", e.pageY, "x", x, "y", y, "x = e.pageX - offset.left:", x, "y = e.pageY - offset.top:", y);
+            console.log("offset.left", offset.left, "offset.top", offset.top);
+            self.detectRegion(e, x, y, e.pageX, e.pageY);
         }
         else if (mode == "click"){
             self.props.onClick(self.state.lastHighlightedRegion);
+        } else if (mode = "mouseout") {
+            if(!$("#toolTipperId").hasClass("ethno-not-visible")) {
+                $("#toolTipperId").addClass("ethno-not-visible");
+            }
         }
     },
 
@@ -188,4 +184,5 @@ var ImageLayersView = React.createClass({
     }
 });
 
-module.exports = ImageLayersView;
+
+module.exports = EthnoLayersView;
