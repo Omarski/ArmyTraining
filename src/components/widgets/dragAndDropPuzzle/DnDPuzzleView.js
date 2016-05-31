@@ -87,7 +87,7 @@ var DnDPuzzleView = React.createClass({
         //bubble up to parent
         this.props.onDraggableEndDrag(itemObj,monitor,component);
     },
-
+    
     draggableCanDragCond: function(itemObj){
         //bubble up to parent
         if (this.props.draggableCanDragCond) this.props.draggableCanDragCond(itemObj);

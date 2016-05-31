@@ -10,7 +10,8 @@ var CultureQuestPuzzleGameView = React.createClass({
         return {
             mediaPath: 'data/media/',
             draggableColl: [],
-            targetColl: []
+            targetColl: [],
+            lastDragged: {}
         };
     },
 
@@ -53,13 +54,13 @@ var CultureQuestPuzzleGameView = React.createClass({
                 imgUrl:null,
                 onDraggableBeginDrag: this.onDraggableBeginDrag,
                 onDraggableEndDrag: this.onDraggableEndDrag,
+                onDraggableWhileDrag: this.onDraggableWhileDrag,
                 draggableCanDragCond: null
                 };
 
             draggableColl.push(draggableObj);
         }
-        //remove
-        // for (var item in draggableColl[0]) console.log(item + " : " + draggableColl[0][item]);
+
         return draggableColl;
     },
 
@@ -92,7 +93,6 @@ var CultureQuestPuzzleGameView = React.createClass({
                 border:'1px solid red'};
 
             var targetObj = {
-
                 id:"puzzleTarget"+i,
                 imgUrl:null,
                 targetStyle: targetStyle,
@@ -104,7 +104,6 @@ var CultureQuestPuzzleGameView = React.createClass({
 
             targetColl.push(targetObj);
         }
-        //console.log("targetObj 0 x: " + targetColl[0].targetOverStyle.left + "targetObj 1 x: " + targetColl[1].targetOverStyle.left);
         return targetColl;
     },
     
@@ -115,19 +114,25 @@ var CultureQuestPuzzleGameView = React.createClass({
     },
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
-        for (var key in component.context) console.log(key + " - " + component.context[key]);
+        var self = this;
+        var dragItem = component.getDOMNode();
 
-        // component.attr('width','112px');
-        // component.attr('height','168px');
-        // component.setAttribute('width','112px');
-        // component.setAttribute('height','168px');
+        dragItem.style.width  = "112px";
+        dragItem.style.height = "168px";
     },
 
     onDraggableEndDrag: function(itemObj, monitor, component){
-        console.log("At game - dragged: " + itemObj.id);
+
+        var dragItem = component.getDOMNode();
+        // console.log("Last: " + position.x + " xxx " + position.y);
+        dragItem.style.top  = this.state.lastDragged.top;
+        dragItem.style.left = this.state.lastDragged.left;
+        console.log("Post - position top: " + dragItem.style.left);
+        console.log("Post - position left: " + dragItem.getBoundingClientRect().left);
+
     },
 
-    draggableCanDragCond: function(itemObj){
+     draggableCanDragCond: function(itemObj){
         //return true or false according to target
         return true;
     },

@@ -7,7 +7,7 @@ var CultureQuestQuizView = require('./CultureQuestQuizView');
 var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
 var CultureQuestPuzzleGameView = require('./CultureQuestPuzzleGameView');
 var PageHeader = require('../../../widgets/PageHeader');
-//var DragTest = require('./DragTest');
+
 function getPageState(props) {
 
     var data = {
@@ -18,7 +18,7 @@ function getPageState(props) {
         showQuiz: false,
         showPopup: false,
         showPuzzle: false,
-        showPuzzleGame: true
+        showPuzzleGame: false
     };
 
 
