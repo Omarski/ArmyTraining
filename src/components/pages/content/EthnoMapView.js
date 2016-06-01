@@ -38,9 +38,6 @@ function getPageState(props) {
         // data.imageData = JSON.parse(props.page.info.property[2].value);
         // this uses a Util function to get the correct data if the name "builtEthnoMap" exists
         data.imageData = JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap"));
-        // console.log("test Utils #1", data.imageData);
-        //
-        // console.log("props.info", JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap")));
 
 
 
@@ -68,9 +65,6 @@ var EthnoMapView = React.createClass({
         var title = self.state.title;
         var sources = self.state.sources;
         var parsedJSON = JSON.parse(Utils.findInfo(self.props.page.info, "builtEthnoMap"));
-        console.log("parsedJSON", parsedJSON);
-        // var test = JSON.parse(Utils.findInfo(self.props.info, "builtEthnoMap"));
-        // console.log("test Utils #2", test);
 
         var backgroundImageURL = "data/media/" + parsedJSON.background;
         var areaWidth = "768";
@@ -156,7 +150,6 @@ var EthnoMap = React.createClass({
         }
 
         var toolTipper = document.getElementById("toolTipperId");
-        console.log("y:", y, "x", x);
         toolTipper.style.top = (y - 50) + 'px';
         toolTipper.style.left = (x - 28) + 'px';
         toolTipper.style.zIndex = self.state.topZindex + 20;
@@ -263,8 +256,6 @@ function toolTipper(region, x, y){
 
     var xVal = x - 100;
     var yVal = y - 100;
-    console.log("x", x, "x - 100 =", xVal);
-    console.log("y", y, "y - 100 =", yVal);
     var regionName = region;
     var mouseX;
     var mouseY;

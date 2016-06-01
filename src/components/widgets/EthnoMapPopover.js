@@ -21,7 +21,6 @@ var EthnoMapPopover = React.createClass({
     },
     componentDidMount: function(){
         var self = this;
-        console.log("INSIDE COMPONENT DID MOUNT");
         window.addEventListener("resize", self.handleResize);
         self.handleResize();
     },
