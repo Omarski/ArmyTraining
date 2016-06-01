@@ -117,7 +117,6 @@ var EthnoLayersView = React.createClass({
         // XXXXXXXXXX pageX and pageY are extra parameters that I pass into onRollover on line 153; This change also is related to the cahnge on line 173 which sets it up
         var self = this;
         var pixelHit = false;
-        console.log("pixelX", pixelX);
 
         for (var i = 0; i < self.state.canvasColl.length; i++) {
 
@@ -133,7 +132,6 @@ var EthnoLayersView = React.createClass({
                 if(opacityLevel === "1") {
                     self.state.lastHighlightedRegion = canvasElement;
                     // I pass in pageX and pageY below. I added this because it is faster than setting up another listener in my component; this passes the XY mouse coordinates in context of the page not just the canvas
-                    console.log("pixelX", pixelX, "pixelY", pixelY);
                     self.props.onRollover(canvasElement, pixelX, pixelY);
                 }
             }
@@ -151,13 +149,9 @@ var EthnoLayersView = React.createClass({
 
         if (mode == "mousemove"){
             var offset = $("#imageLayerView-back-image").offset();
-            console.log("offset", offset, "offset.left", offset.left, "offset.top", offset.top);
-            console.log("typeof", typeof(e.pageX));
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
             //XXXXXXXXXX below we pass the e.pageX and e.pageY so we get the mouse coordinates that I need
-            console.log("e.pageX", e.pageX, "e.pageY", e.pageY, "x", x, "y", y, "x = e.pageX - offset.left:", x, "y = e.pageY - offset.top:", y);
-            console.log("offset.left", offset.left, "offset.top", offset.top);
             self.detectRegion(e, x, y, e.pageX, e.pageY);
         }
         else if (mode == "click"){
