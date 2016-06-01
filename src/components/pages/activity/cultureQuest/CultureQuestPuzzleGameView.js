@@ -9,10 +9,11 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         return {
             mediaPath: 'data/media/',
-            draggableColl: [],
-            targetColl: [],
-            lastDragged: {}
-        };
+            //draggableColl: [],
+            //targetColl: [],
+            stageIsTarget:false,
+            pointerOffset:{x:0, y:0}
+        }
     },
 
     propTypes: {
@@ -100,27 +101,11 @@ var CultureQuestPuzzleGameView = React.createClass({
                 targetOverStyle: targetOverStyle,
                 onTargetDrop: this.onTargetDrop,
                 onTargetHover: this.onTargetHover,
-                targetCanDropCond: null
+                targetCanDropCond: true
                 };
 
             targetColl.push(targetObj);
         }
-
-            //stage as drop zone:
-            // var stageStyle = {position:'absolute', width:'765px', height:'502px',
-            //     background:'#fff', top: '0', left:'0', opacity:'.5',zIndex:'10'};
-            //
-            // var stageTargetObj = {
-            //     id:"puzzleStageTarget",
-            //     imgUrl:null,
-            //     targetStyle: stageStyle,
-            //     targetOverStyle: null,
-            //     onTargetDrop: this.onTargetDrop,
-            //     onTargetHover: this.onTargetHover,
-            //     targetCanDropCond: null
-            //};
-
-       //targetColl.push(stageTargetObj);
 
         return targetColl;
     },
@@ -128,7 +113,7 @@ var CultureQuestPuzzleGameView = React.createClass({
     prepStageTargetObj: function(){
 
         var stageStyle = {position:'absolute', width:'765px', height:'502px',
-            background:'#fff', top: '0', left:'0', opacity:'.5',zIndex:'10'};
+            top:'0', left:'0', zIndex:'10'};
 
         return {
             id:"puzzleStageTarget",
@@ -137,14 +122,11 @@ var CultureQuestPuzzleGameView = React.createClass({
             targetOverStyle: null,
             onTargetDrop: this.onTargetDrop,
             onTargetHover: this.onTargetHover,
-            targetCanDropCond: null
+            targetCanDropCond: this.state.stageIsTarget
         };
     },
     
     onPuzzleReady: function(draggableColl, targetColl){
-        console.log("At game - puzzle ready!");
-        this.state.draggableColl = draggableColl;
-        this.state.targetColl = targetColl;
     },
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
@@ -156,41 +138,35 @@ var CultureQuestPuzzleGameView = React.createClass({
     onDraggableEndDrag: function(itemObj, monitor, component){
 
         var dragItem = component.getDOMNode();
-        var target;
+        var target = $("#"+monitor.getDropResult().id);
 
         if (monitor.didDrop()) {
-            if (monitor.getDropResult().id !== "puzzleStageTarget") {
-                console.log("Normal - drop.......");
-                target = $("#"+monitor.getDropResult().id);
+            if (monitor.getDropResult().id !== "puzzleStageTarget"){
                 dragItem.style.top  = $(target).position().top+"px";
                 dragItem.style.left = $(target).position().left+"px";
             }else{
-                //var offset = monitor.getSourceClientOffset();
-                //console.log("monitor.getSourceClientOffset: "+monitor.getSourceClientOffset());
-                //dragItem.style.top  = offset.y+"px";
-                //dragItem.style.left = offset.x+"px";
-                //console.log("offset: "+offset.x+ " ---- "+offset.y);
+                dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
+                dragItem.style.left = (this.state.pointerOffset.x - parseInt(dragItem.style.width) / 2)+"px";
             }
-
         }
     },
 
-     draggableCanDragCond: function(itemObj){
+    draggableCanDragCond: function(itemObj){
         //return true or false according to target
         return true;
     },
 
     onTargetDrop: function(targetObj, monitor, component){
-        console.log("At game - target: " + targetObj.id);
-    }, 
+    },
     
     onTargetHover: function(targetObj, monitor, component){
-        console.log("At game - target Hovered: " + targetObj.id);
+        this.setState({stageIsTarget: targetObj.id === "puzzleStageTarget"});
+        var offset = monitor.getSourceClientOffset();
+        if (offset) this.setState({pointerOffset:{x:offset.x, y:offset.y}})
     },
 
     targetCanDropCond: function(targetObj){
         //return true or false according to target
-        return true;
     },
 
     render: function() {

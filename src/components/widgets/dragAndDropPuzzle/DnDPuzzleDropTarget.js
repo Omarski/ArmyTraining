@@ -6,9 +6,8 @@ var PropTypes = React.PropTypes;
 //target contract
 var dropTarget = {
 
-    canDrop: function (props) {
-        if (props.targetCanDropCond) return props.targetCanDropCond({id:props.id});
-        else return true;
+    canDrop: function (props, monitor) {
+       return props.targetCanDropCond;
     },
 
     drop: function (props, monitor, component) {
@@ -27,8 +26,7 @@ function collect(connect, monitor) {
     return {
         //designate as drop target
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver(),
-        canDrop: monitor.canDrop()
+        isOver: monitor.isOver()
     };
 }
 
@@ -37,14 +35,12 @@ var DnDPuzzleDropTarget = React.createClass({
     propTypes: {
 
         isOver: PropTypes.bool.isRequired,
-        canDrop: PropTypes.bool.isRequired,
-
         id: PropTypes.string.isRequired,
         targetStyle: PropTypes.object.isRequired,
         targetOverStyle: PropTypes.object,
         onTargetDrop: PropTypes.func.isRequired,
         onTargetHover: PropTypes.func,
-        targetCanDropCond: PropTypes.func
+        targetCanDropCond: PropTypes.bool
     },
 
     render: function () {

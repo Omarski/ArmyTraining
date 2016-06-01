@@ -26,9 +26,9 @@ var DnDPuzzleView = React.createClass({
         onDraggableBeginDrag: PropTypes.func,
         onDraggableEndDrag: PropTypes.func.isRequired,
         draggableCanDragCond: PropTypes.func,
-        onTargetDrop:  PropTypes.func.isRequired,
+        onTargetDrop: PropTypes.func.isRequired,
         onTargetHover: PropTypes.func,
-        targetCanDropCond: PropTypes.func,
+        targetCanDropCond: PropTypes.bool,
         onPuzzleReady: PropTypes.func
     },
 
@@ -68,7 +68,7 @@ var DnDPuzzleView = React.createClass({
                     targetOverStyle = {itemObj.targetOverStyle}
                     onTargetDrop = {self.onTargetDrop}
                     onTargetHover = {itemObj.onTargetHover ? self.onTargetHover:null}
-                    targetCanDropCond = {itemObj.targetCanDropCond ? self.targetCanDropCond:null}
+                    targetCanDropCond = {itemObj.targetCanDropCond}
                 />
             )
         });
@@ -78,29 +78,6 @@ var DnDPuzzleView = React.createClass({
         
         return dropTargetsRender;
     },
-    
-    // renderStageTarget: function(){
-    //
-    //     var self = this;
-    //     var stageTargetObj = self.props.stageTargetObj;
-    //     var stageRender = function(){
-    //        
-    //         return (
-    //
-    //             <DnDPuzzleDropTarget
-    //                 id = {stageTargetObj.id}
-    //                 imgUrl = {stageTargetObj.imgUrl?stageTargetObj.imgUrl:null}
-    //                 targetStyle = {stageTargetObj.targetStyle}
-    //                 targetOverStyle = {stageTargetObj.targetOverStyle}
-    //                 onTargetDrop = {stageTargetObj.onTargetDrop}
-    //                 onTargetHover = {stageTargetObj.onTargetHover ? self.onTargetHover:null}
-    //                 targetCanDropCond = {stageTargetObj.targetCanDropCond ? self.targetCanDropCond:null}
-    //             />
-    //         )
-    //     };
-    //       
-    //     return stageRender;
-    // },
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
         //bubble up to parent
@@ -127,11 +104,6 @@ var DnDPuzzleView = React.createClass({
         this.props.onTargetHover(targetObj,monitor,component);
     },
 
-    targetCanDropCond: function(targetObj){
-        //bubble up to parent
-        if (this.props.targetCanDropCond) this.props.targetCanDropCond(targetObj);
-    },
-
     render: function() {
 
         var self = this;
@@ -144,12 +116,12 @@ var DnDPuzzleView = React.createClass({
                 <DnDPuzzleDropTarget
                     
                     id = {stageTargetObj.id}
-                    imgUrl = {stageTargetObj.imgUrl?stageTargetObj.imgUrl:null}
+                    imgUrl = {stageTargetObj.imgUrl? stageTargetObj.imgUrl:null}
                     targetStyle = {stageTargetObj.targetStyle}
                     targetOverStyle = {stageTargetObj.targetOverStyle}
                     onTargetDrop = {stageTargetObj.onTargetDrop}
-                    onTargetHover = {stageTargetObj.onTargetHover ? self.onTargetHover:null}
-                    targetCanDropCond = {stageTargetObj.targetCanDropCond ? self.targetCanDropCond:null}>
+                    onTargetHover = {stageTargetObj.onTargetHover ? stageTargetObj.onTargetHover:null}
+                    targetCanDropCond = {stageTargetObj.targetCanDropCond}>
 
                     {this.renderDropTargetColl()}
                 </DnDPuzzleDropTarget> 
