@@ -17,13 +17,13 @@ var CultureQuestPuzzleView = React.createClass({
     componentDidMount: function() {
         var self = this;
         window.setTimeout(function(){
-            $("#CultureQuestPuzzleView-puzzleSlider").animate({right:'0'},1000,'swing');
+            $("#culture-quest-puzzle-award-view-puzzleSlider").animate({right:'0'},1000,'swing');
         },1200);
         
         window.setTimeout(function(){
-            $("#cultureQuestPuzzleView-puzzleAwardImg").animate({left:'590px'},1000,'swing',
+            $("#culture-quest-puzzle-award-view-puzzleAwardImg").animate({left:'590px'},1000,'swing',
             function(){
-                $("#cultureQuestPuzzleView-puzzleAwardImg").remove();
+                $("#culture-quest-puzzle-award-view-puzzleAwardImg").remove();
             });
         },2500);
 
@@ -61,7 +61,7 @@ var CultureQuestPuzzleView = React.createClass({
             var pieceImg = self.state.mediaPath + region.tile;
             var pieceStyle = {top: topPadding+(pieceHeight * index), background:"url("+pieceImg+") no-repeat 100% 100%"};
             return (
-                <div className="CultureQuestPuzzleView-sliderPuzzle" style={pieceStyle} key={index}></div>
+                <div className="culture-quest-puzzle-award-view-sliderPuzzle" style={pieceStyle} key={index}></div>
             )
         });
         return sliderPuzzles;
@@ -72,14 +72,14 @@ var CultureQuestPuzzleView = React.createClass({
         var self = this;
         var puzzleImg = self.state.mediaPath + self.props.imageData.regions[self.getSelectedIndex()].tile;
         var puzzleAwardStyle = {background:"url("+puzzleImg+") no-repeat 100% 100%"};
-        var sliderClasses = "CultureQuestPuzzleView-puzzleSlider";
+        var sliderClasses = "culture-quest-puzzle-award-view-puzzleSlider";
 
         return (
-            <div className="CultureQuestPuzzleView-puzzleCont" id="CultureQuestPuzzleView-puzzleCont">
-                <div className = {sliderClasses} id="CultureQuestPuzzleView-puzzleSlider">
+            <div className="culture-quest-puzzle-award-view-puzzleCont" id="culture-quest-puzzle-award-view-puzzleCont">
+                <div className = {sliderClasses} id="culture-quest-puzzle-award-view-puzzleSlider">
                     {self.renderSliderPieces()}
                 </div>
-                <div className="cultureQuestPuzzleView-puzzleAwardImg" id="cultureQuestPuzzleView-puzzleAwardImg"
+                <div className="culture-quest-puzzle-award-view-puzzleAwardImg" id="culture-quest-puzzle-award-view-puzzleAwardImg"
                      style={puzzleAwardStyle}>
                 </div>
             </div>

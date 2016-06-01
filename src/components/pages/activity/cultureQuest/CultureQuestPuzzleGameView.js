@@ -189,7 +189,7 @@ var CultureQuestPuzzleGameView = React.createClass({
                     targetCanDropCond    = {null}
                     onPuzzleReady        = {this.onPuzzleReady}
                 />
-                <div className = "CultureQuestPuzzleGameView-puzzleSlider">
+                <div className = "culture-quest-puzzle-game-view-puzzleSlider">
                 </div>
             </div>
         )

@@ -66,13 +66,13 @@ var CultureQuestMap = React.createClass({
                 switch(canvasElement.state){
 
                     case "idle":
-                        if (!canvasElement.classList.contains("imageLayerView-fade-in")){
-                            canvasElement.classList.add("imageLayerView-fade-in");
-                            canvasElement.classList.remove("imageLayerView-fade-out");
+                        if (!canvasElement.classList.contains("image-layers-view-fade-in")){
+                            canvasElement.classList.add("image-layers-view-fade-in");
+                            canvasElement.classList.remove("image-layers-view-fade-out");
                             if (state.lastHighlightedRegion) {
-                                state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
-                                if (!state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")){
-                                    state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
+                                state.lastHighlightedRegion.classList.remove("image-layers-view-fade-in");
+                                if (!state.lastHighlightedRegion.classList.contains("image-layers-view-fade-out")){
+                                    state.lastHighlightedRegion.classList.add("image-layers-view-fade-out");
                                 }
                             }
                         }
@@ -83,9 +83,9 @@ var CultureQuestMap = React.createClass({
             }else{
 
                 if (state.lastHighlightedRegion && !state.lastHighlightedRegion.hidden &&
-                    !state.lastHighlightedRegion.classList.contains("imageLayerView-fade-out")) {
-                    state.lastHighlightedRegion.classList.remove("imageLayerView-fade-in");
-                    state.lastHighlightedRegion.classList.add("imageLayerView-fade-out");
+                    !state.lastHighlightedRegion.classList.contains("image-layers-view-fade-out")) {
+                    state.lastHighlightedRegion.classList.remove("image-layers-view-fade-in");
+                    state.lastHighlightedRegion.classList.add("image-layers-view-fade-out");
                     state.lastHighlightedRegion = null;
                 }
             }
@@ -96,8 +96,8 @@ var CultureQuestMap = React.createClass({
             for (var i=0; i < this.props.layersColl.length; i++){
                 if (this.props.answersColl[i].completed){
                     this.props.updateLayersColl(this.props.lastSelected, "attributeAdd", [{name:'state', value:"static"}]);
-                    this.props.updateLayersColl(this.props.lastSelected, "classRemove", [{name:'imageLayerView-fade-out'}]);
-                    this.props.updateLayersColl(this.props.lastSelected, "classAdd", [{name:'imageLayerView-fade-in'}]);
+                    this.props.updateLayersColl(this.props.lastSelected, "classRemove", [{name:'image-layers-view-fade-out'}]);
+                    this.props.updateLayersColl(this.props.lastSelected, "classAdd", [{name:'image-layers-view-fade-in'}]);
                 }
             }
 

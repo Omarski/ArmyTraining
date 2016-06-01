@@ -86,7 +86,7 @@ var ImageLayersView = React.createClass({
         canv.setAttribute('id',canvasData.canvasId);
         canv.style = canvasData.canvasStyle;
         canv.state = "idle";
-        canv.className = "imageLayerView-region-canvas";
+        canv.className = "image-layers-view-region-canvas";
         var context = canv.getContext("2d");
         var image = new Image();
         image.src = canvasData.mapSrc;
@@ -122,7 +122,7 @@ var ImageLayersView = React.createClass({
                 mapSrc: self.state.loadedImageColl[index].src
             });
 
-            document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
+            document.getElementById("image-layers-view-back-image").appendChild(regionCanvas);
 
             canvasColl.push(regionCanvas);
         });
@@ -162,7 +162,7 @@ var ImageLayersView = React.createClass({
         var self = this;
 
         if (mode == "mousemove"){
-            var offset = $("#imageLayerView-back-image").offset();
+            var offset = $("#image-layers-view-back-image").offset();
             var x = e.pageX - offset.left;
             var y = e.pageY - offset.top;
                 self.detectRegion(e, x, y);
@@ -180,7 +180,7 @@ var ImageLayersView = React.createClass({
             position:"relative", width:self.state.mapWidth+"px", height:self.state.mapHeight, textAlign:"center"};
 
         return (
-            <div id="imageLayerView-back-image" className="imageLayerView-back-image" style={mapStyle}>
+            <div id="image-layers-view-back-image" className="image-layers-view-back-image" style={mapStyle}>
 
             </div>
         );

@@ -18,7 +18,7 @@ function getPageState(props) {
         showQuiz: false,
         showPopup: false,
         showPuzzle: false,
-        showPuzzleGame: true
+        showPuzzleGame: false
     };
 
 
@@ -78,13 +78,13 @@ var CultureQuestView = React.createClass({
 
         if (mode === "show") {
             self.setState({showQuiz: true});
-            $("#cultureQuestQuizView-quizCont").animate({opacity:'1'}, 500, 'linear', function(){
-                $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
+            $("#culture-quest-quiz-view-quizCont").animate({opacity:'1'}, 500, 'linear', function(){
+                $("#imageLayerView-back-image").children().addClass("culture-quest-quiz-view-killInteraction");
             });
         } else {
-            $("#cultureQuestQuizView-quizCont").animate({opacity:'0'}, 500, 'linear', function(){
+            $("#culture-quest-quiz-view-quizCont").animate({opacity:'0'}, 500, 'linear', function(){
                 self.setState({showQuiz: false});
-                $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
+                $("#imageLayerView-back-image").children().removeClass("culture-quest-quiz-view-killInteraction");
             });
         }
     },
@@ -95,10 +95,10 @@ var CultureQuestView = React.createClass({
 
         if (mode === "show") {
             self.setState({showPuzzle:true});
-            $("#CultureQuestPuzzleAwardView-puzzleCont").animate({opacity: '1'}, 300, 'linear', function () {
+            $("#culture-quest-puzzle-award-view-puzzleCont").animate({opacity: '1'}, 300, 'linear', function () {
             });
         } else {
-            $("#CultureQuestPuzzleAwardView-puzzleCont").animate({opacity: '0'}, 300, 'linear', function () {
+            $("#culture-quest-puzzle-award-view-puzzleCont").animate({opacity: '0'}, 300, 'linear', function () {
                 self.setState({showPuzzle:false});
             });
         }
