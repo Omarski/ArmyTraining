@@ -21,7 +21,6 @@ var EthnoMapPopover = React.createClass({
     },
     componentDidMount: function(){
         var self = this;
-        console.log("INSIDE COMPONENT DID MOUNT");
         window.addEventListener("resize", self.handleResize);
         self.handleResize();
     },
@@ -41,7 +40,7 @@ var EthnoMapPopover = React.createClass({
 
         return popoverPages;
     },
-    toggle() {
+    toggle: function() {
         this.setState({ show: !this.state.show });
     },
     toggleParentStateAndResetIndexOfOverlayInfo: function(){
@@ -78,10 +77,6 @@ var EthnoMapPopover = React.createClass({
             top: 0,
             left: 0
         };
-
-        // var marginLeftOfBackImage = $("#imageLayerView-back-image").css("margin-left");
-        // console.log("marginLeftOfBackImage", marginLeftOfBackImage);
-        // $("#ethnoOverlay").css("margin-left", marginLeftOfBackImage);
 
         var checkIfPrevButtonIsDisabled = function(){
             if(self.state.indexOfOverlayInfo === 0){
