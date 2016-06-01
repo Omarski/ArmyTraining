@@ -1,8 +1,11 @@
 var React = require('react');
 var CoachFeedbackView = require('../../widgets/CoachFeedbackView');
+var InfoTagConstants = require('../../../constants/InfoTagConstants');
+var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var ImageCaption = require('../../widgets/ImageCaption');
+var Utils = require('../../widgets/Utils');
 var SettingsStore = require('../../../stores/SettingsStore');
 
 function getPageState(props) {
@@ -19,6 +22,7 @@ function getPageState(props) {
         answerFeedback: "",
         correctAnswer: "",
         isQuestionaire: false,
+        isQuizPage: false,
         bShuffle: true,
     };
 
@@ -30,24 +34,20 @@ function getPageState(props) {
         data.prompt = props.page.prompt.text;
 
         if (data.page.info && data.page.info.property) {
-            var properties = data.page.info.property;
-            var len = properties.length;
-            while(len--) {
-                var property = properties[len];
-                if (property.name === "questionnaire") {
-                    data.isQuestionaire = true;
-                    data.bShuffle = false;
-                    break;
-                }
 
-                if (property.name === "noshuffle") {
-                    data.bShuffle = false;
-                    break;
-                }
+            if (Utils.findInfo(data.page.info, InfoTagConstants.INFO_PROP_QUESTIONNAIRE) != null) {
+                data.isQuestionaire = true;
+                data.bShuffle = false;
+            }
+
+            if (Utils.findInfo(data.page.info, InfoTagConstants.INFO_PROP_NOSHUFFLE) != null) {
+                data.bShuffle = false;
             }
         }
-
     }
+
+    // set if quiz page
+    data.isQuizPage = PageStore.isQuizPage();
 
     if(props && props.page && props.page.media){
 
@@ -97,7 +97,9 @@ function getFeedback(answers, selectedAnswer){
     answers.map(function(item){
         var text = item.nut.uttering.utterance.translation.text;
         if(selectedAnswer == text){
-            getter = item.feedback.text;
+            if (item.feedback) {
+                getter = item.feedback.text;
+            }
         }
     });
     return(getter);
@@ -114,8 +116,6 @@ var MultipleChoiceView = React.createClass({
     },
 
     componentDidMount: function() {
-        //PageStore.addChangeListener(this._onChange);
-
         // TODO remove me after alpha-----------------------------------------------------------------------------------
         // iterate over answer objects
         var recommendedMap = {};
@@ -180,8 +180,26 @@ var MultipleChoiceView = React.createClass({
         // update state
         self.setState({
             haveAnswered: true,
-            answerFeedback: feedback,
+            answerFeedback: feedback
         });
+
+        // for now only record if its a quiz page or questionnaire
+        if (state.isQuizPage || state.isQuestionaire) {
+            // TODO <-------------- MOVE TO ITS OWN OBJECT------------------------------------------
+            // create new answer object
+            var answerObj = {
+                answer: {
+                    answer: answer,
+                    passed: isCorrect,
+                    question: state.prompt,
+                    target: target
+                }
+            }
+            // TODO END <-------------- MOVE TO ITS OWN OBJECT---------------------------------------
+
+            // submit answer to page
+            PageActions.answer(answerObj);
+        }
     },
 
     render: function() {
@@ -203,7 +221,7 @@ var MultipleChoiceView = React.createClass({
             );
         }
 
-        if(state.haveAnswered && !self.state.isQuestionaire) {
+        if(state.haveAnswered && !self.state.isQuestionaire && !state.isQuizPage) {
             feedbackElement = state.answerFeedback
         }
 

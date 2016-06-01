@@ -1,0 +1,31 @@
+{
+  "header": {
+    "tooltipLogo": "Virtual Culture Awareness Trainer",
+    "tooltipDLI": "DLI",
+    "tooltipReference": "Reference",
+    "tooltipMute": "Mute Sound",
+    "tooltipUnMute": "Turn on Sound",
+    "tooltipSettings": "Settings"
+  },
+  "settings": {
+    "lblTitle": "Settings",
+    "lblAutoPlaySound": "Auto Play Sound",
+    "lblVoiceVolume": "Voice Volume"
+  },
+  "breadcrumbs": {
+    "tooltipBookmark": "Bookmarks"
+  },
+  "footer": {
+    "tooltipNext": "Next",
+    "tooltipPrevious": "Previous",
+    "tooltipIndexExpand": "Open Index",
+    "tooltipIndexCollapse": "Close Index"
+  },
+  "progress": {
+    "lblLessons": "Lessons",
+    "lblPages": "Pages"
+  },
+  "loader": {
+    "lblLoading": "Loading"
+  }
+}

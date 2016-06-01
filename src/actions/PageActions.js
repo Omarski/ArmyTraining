@@ -4,6 +4,15 @@ var PageConstants = require('../constants/PageConstants');
 var PageActions = {
 
     /**
+     * @param  {map} data
+     */
+    answer: function(data) {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.PAGE_ANSWER,
+            data: data
+        });
+    },
+    /**
      * @param  {string} text
      */
     complete: function(data) {
@@ -29,6 +38,14 @@ var PageActions = {
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_LOAD_PREVIOUS,
             data: data
+        });
+    },
+    /**
+     * Marks the current chapter complete
+     */
+    markChapterComplete: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.CHAPTER_MARK_COMPLETE
         });
     },
     jump: function(data) {

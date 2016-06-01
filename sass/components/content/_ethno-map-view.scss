@@ -1,0 +1,97 @@
+.ethno-map-container {
+  position: relative;
+}
+
+.ethno-image-layers-view{
+  margin-left: 10% !important;
+  margin-right: 10% !important;
+}
+
+.ethno-wrapper-div {
+  border-bottom-width: 1px;
+  display: flex;
+}
+
+.ethno-visible {
+  visibility: visible !important;
+  z-index: 12;
+}
+
+.imageLayerView-region-canvas{
+  display:block;
+  z-index:10;
+  position: absolute;
+  cursor: pointer;
+  left:0;
+  float: left;
+  margin: 0;
+}
+
+.ethno-not-visible {
+  visibility: hidden !important;
+}
+
+.ethno-sidebar-form {
+  margin-right: 20px;
+}
+
+.well {
+  margin-top: 20px;
+}
+
+
+.ethno-close-button-for-overlay {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+
+.ethno-overlay-main-div {
+  position: absolute;
+  background-color: #EEE;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #CCC;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 5px;
+  z-index: 9999;
+}
+
+
+
+.ethno-overlay-info{
+  height: 90px;
+  overflow-y: scroll;
+  margin-left: 5px;
+}
+
+#ethnoOverlay {
+  position: absolute;
+  width: 768px;
+  margin-left: 0px;
+  bottom: 0px;
+}
+
+.ethno-overlay-bottom-left {
+}
+
+.ethno-overlay-title {
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.ethno-overlay-next-button {
+  float: right;
+}
+
+.ethno-overlay-prev-button:focus {
+  border-color: #ccc;
+  background-color: #fff;
+}
+
+
+.ethno-overlay-next-button:focus {
+  border-color: #ccc;
+  background-color: #fff;
+}

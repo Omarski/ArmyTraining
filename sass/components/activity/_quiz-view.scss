@@ -1,0 +1,22 @@
+.quiz-feedback {
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+.quiz-feedback-table {
+  margin-top: 10px;
+}
+
+.quiz-feedback-icon {
+  display: flex;
+  justify-content: center;
+
+  &.quiz-feedback-icon-correct {
+    color: green;
+  }
+
+  &.quiz-feedback-icon-incorrect {
+    color: red;
+  }
+}
