@@ -25,4 +25,7 @@
     "lblLessons": "Lessons",
     "lblPages": "Pages"
   },
+  "loader": {
+    "lblLoading": "Loading"
+  }
 }
