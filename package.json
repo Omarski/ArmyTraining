@@ -24,7 +24,7 @@
     "start": "watchify -o dist/bundle.js -v -d src/app.js & npm run language:watch",
     "language": "cp language/en.json data/language/en.json",
     "language:watch": "onchange 'language/en.json' -v -- npm run language",
-    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > dist/bundle.min.js",
+    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > dist/bundle.min.js & npm run language",
     "test": "jest"
   },
   "author": "Curtis Wingert",
