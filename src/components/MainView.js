@@ -93,7 +93,6 @@ var MainView = React.createClass({
      * Event handler for 'change' events coming from the LocalizationStore
      */
     _onLocalizationChange: function() {
-        console.log("_onLocalizationChange")
         var self = this;
         setTimeout(function() {
             self.loadConfiguration();
@@ -104,7 +103,6 @@ var MainView = React.createClass({
      * Event handler for 'change' events coming from the ConfigStore
      */
     _onConfigChange: function() {
-        console.log("_onConfigChange")
         var self = this;
         setTimeout(function() {
             self.loadCoachFeedback();
@@ -115,7 +113,6 @@ var MainView = React.createClass({
      * Event handler for 'change' events coming from the CoachFeedbackStore
      */
     _onCoachFeedbackChange: function() {
-        console.log("_onCoachFeedbackChange")
         var self = this;
         setTimeout(function() {
             self.loadData();

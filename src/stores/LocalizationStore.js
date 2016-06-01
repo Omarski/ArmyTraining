@@ -12,8 +12,9 @@ function create(data) {
 }
 
 function loadLocalization() {
-    $.getJSON("data/language/en.json", function(data){
+    $.getJSON("/dist/en.json", function(data){
         setTimeout(function () {
+
             LocalizationActions.create(data);
         }, 100);
     });
