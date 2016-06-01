@@ -23,23 +23,14 @@ function getPageState(props) {
 var QuizStartView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
+
+        // TODO reset quiz answers
+
         return pageState;
     },
 
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
-    },
-
-    componentDidMount: function() {
-    },
-
-    componentWillUpdate: function(){
-    },
-
-    componentDidUpdate: function(){
-    },
-
-    componentWillUnmount: function() {
     },
 
     render: function() {
@@ -56,7 +47,6 @@ var QuizStartView = React.createClass({
         if (this.isMounted()) {
             this.setState(getPageState(this.props));
         }
-
     }
 
 })
