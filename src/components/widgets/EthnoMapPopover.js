@@ -5,7 +5,6 @@
 
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
-var ReactDOM = require('react-dom');
 
 var EthnoMapPopover = React.createClass({
     getInitialState: function() {
