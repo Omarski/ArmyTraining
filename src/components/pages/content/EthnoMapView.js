@@ -37,15 +37,17 @@ function getPageState(props) {
         // Because the prebuild sends the data in a random order, the below line may not work
         // data.imageData = JSON.parse(props.page.info.property[2].value);
         // this uses a Util function to get the correct data if the name "builtEthnoMap" exists
-        data.imageData = JSON.parse(Utils.findInfo(props.info, "builtEthnoMap"));
-
+        data.imageData = JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap"));
+        // console.log("test Utils #1", data.imageData);
+        //
+        // console.log("props.info", JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap")));
 
 
 
         if(props.page.EthnoData){
             data.json = props.page.EthnoData;
         } else {
-            data.json = JSON.parse(props.page.info.property[2].value);
+            data.json = JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap"));
         }
     }
 
@@ -65,7 +67,11 @@ var EthnoMapView = React.createClass({
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
-        var parsedJSON = JSON.parse(self.props.page.info.property[2].value);
+        var parsedJSON = JSON.parse(Utils.findInfo(self.props.page.info, "builtEthnoMap"));
+        console.log("parsedJSON", parsedJSON);
+        // var test = JSON.parse(Utils.findInfo(self.props.info, "builtEthnoMap"));
+        // console.log("test Utils #2", test);
+
         var backgroundImageURL = "data/media/" + parsedJSON.background;
         var areaWidth = "768";
         var areaHeight = "504px";
@@ -152,7 +158,7 @@ var EthnoMap = React.createClass({
         var toolTipper = document.getElementById("toolTipperId");
         console.log("y:", y, "x", x);
         toolTipper.style.top = (y - 50) + 'px';
-        toolTipper.style.left = (x + 100) + 'px';
+        toolTipper.style.left = (x - 28) + 'px';
         toolTipper.style.zIndex = self.state.topZindex + 20;
     },
     togglePopoverShow: function (){
