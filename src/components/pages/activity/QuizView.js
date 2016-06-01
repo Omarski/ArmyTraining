@@ -130,18 +130,6 @@ var QuizView = React.createClass({
         $('[data-toggle="tooltip"]').tooltip();
     },
 
-    componentWillUpdate: function(){
-
-    },
-
-    componentDidUpdate: function(){
-
-    },
-
-    componentWillUnmount: function() {
-
-    },
-
     render: function() {
         var self = this;
         var state = self.state;
