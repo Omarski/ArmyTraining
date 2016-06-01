@@ -33,12 +33,6 @@ var CultureQuestPuzzleView = React.createClass({
         },5500);
     },
 
-    componentWillUnmount: function() {
-    },
-
-    componentDidUpdate: function(prevProps, prevState){
-    },
-
     getSelectedIndex: function(){
 
         if (this.props.lastSelected) return parseInt(this.props.lastSelected.getAttribute('id').substring(18));

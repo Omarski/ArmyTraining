@@ -34,12 +34,6 @@ var CultureQuestMap = React.createClass({
         }});
     },
 
-    componentDidMount: function() {
-    },
-
-    componentWillUnmount: function() {
-    },
-
     componentDidUpdate: function(prevProps, prevState){
         this.updateLayersAccess();
     },

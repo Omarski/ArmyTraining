@@ -9,8 +9,6 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         return {
             mediaPath: 'data/media/',
-            //draggableColl: [],
-            //targetColl: [],
             stageIsTarget:false,
             pointerOffset:{x:0, y:0}
         }
@@ -25,15 +23,6 @@ var CultureQuestPuzzleGameView = React.createClass({
         this.prepDraggableData();
         this.prepTargetData();
         this.prepStageTargetObj();
-    },
-
-    componentDidMount: function() {
-    },
-
-    componentWillUnmount: function() {
-    },
-
-    componentDidUpdate: function(prevProps, prevState){
     },
 
     prepDraggableData: function(){

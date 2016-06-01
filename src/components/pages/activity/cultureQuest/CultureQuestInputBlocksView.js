@@ -13,15 +13,6 @@ var CultureQuestInputBlocksView = React.createClass({
         };
     },
 
-    componentWillMount: function() {
-    },
-
-    componentDidMount: function() {
-    },
-
-    componentWillUnmount: function() {
-    },
-
     render: function() {
 
         var self = this;

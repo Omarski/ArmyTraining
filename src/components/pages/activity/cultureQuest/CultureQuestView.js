@@ -42,19 +42,6 @@ var CultureQuestView = React.createClass({
         return pageState;
     },
 
-    // shouldComponentUpdate: function(nextProps, nextState) {
-    //     //return nextProps.email != this.props.email;
-    // },
-
-    componentWillMount: function() {
-    },
-
-    componentDidMount: function() {
-    },
-
-    componentWillUnmount: function() {
-    },
-
     onLayersReady:function(layersColl){
         this.setState({layersColl:layersColl});
         this.prepAnswersColl();
