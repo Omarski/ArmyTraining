@@ -6,6 +6,7 @@ var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
+var ResourceStore = require('../../../stores/ResourceStore');
 
 
 function getPageState(props) {
@@ -13,17 +14,10 @@ function getPageState(props) {
         answers: [],
         title: "",
         pageFeedback: "",
-        pageFeedback1: "Your score was {0}%. You may want to review the section and try this quiz again.", // TODO <--- should be moved to store and localization text
-        pageFeedback2: "Your score was {0}%. You're on the right track! I can see that you are working hard to \
-        remember all of the cultural information you have learned. However, your quiz score does not permit you to move \
-        on to the next section. Please take a few minutes to review this section. When you feel that you're ready, try the quiz again.", // TODO <--- should be moved to store and localization text
-        pageFeedback3: "Your score was {0}%. Congratulations! You have successfully completed this section. You may now \
-        move on to the next section in your course of instruction.", // TODO <--- should be moved to store and localization text
         pageType: "",
         page: "",
         quizPassed: false,
         sources: [],
-        scorePercent: 0
     }
 
     if (props && props.page) {
@@ -82,25 +76,20 @@ function getPageState(props) {
     }
 
 
-    // calculate score
-    var feedback = "";
+    // calculate score and update feedback text
     if (quizPageCount > 0) {
-        data.scorePercent = Math.round((quizPagesPassed / quizPageCount) * 100);
+        var scorePercent = Math.round((quizPagesPassed / quizPageCount) * 100);
 
         // get feedback text
-        if (data.scorePercent === 100) {
-            feedback = data.pageFeedback3;
+        if (scorePercent === 100) {
+            data.pageFeedback = ResourceStore.getText("quiz-view-quiz-complete", [scorePercent]);
             data.quizPassed = true;
         } else {
-            feedback = data.pageFeedback1;
+            data.pageFeedback = ResourceStore.getText("quiz-view-quiz-failed", [scorePercent]);
         }
     } else {
-        feedback = data.pageFeedback1;
+        data.pageFeedback= ResourceStore.getText("quiz-view-quiz-failed", [0]);
     }
-
-
-    // update text
-    data.pageFeedback = replaceScoreText(data.scorePercent, feedback);
 
     return data;
 }
