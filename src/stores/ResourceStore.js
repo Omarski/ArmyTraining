@@ -11,6 +11,7 @@ var resourceData = {
 var ResourceStore = assign({}, EventEmitter.prototype, {
     /**
      * @param (string) name - Key name of the resource to search for
+     * @param (array) parameters - Optional. List of parameters that will be replaced into the found resource
      * @returns (string) Value of resource if found or an empty string if not found
      */
     getText: function(name, parameters) {
@@ -22,7 +23,7 @@ var ResourceStore = assign({}, EventEmitter.prototype, {
                 var paramLen = parameters.length;
                 while(paramLen--) {
                     var regex = new RegExp("\\{" + paramLen + "\\}", 'g');
-                    resourceText = resourceText.replace(regex, parameters[paramLen]);
+                    resourceText = resourceText.replace(regex, parameters[paramLen].toString());
                 }
             }
 
