@@ -24,17 +24,6 @@ var ReferenceGestureView = React.createClass({
         return settingsState;
     },
 
-    componentWillMount: function() {
-        //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentDidMount: function() {
-        //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentWillUnmount: function() {
-        //  SettingsStore.removeChangeListener(this._onChange);
-    },
     render: function() {
         var self = this;
         return (

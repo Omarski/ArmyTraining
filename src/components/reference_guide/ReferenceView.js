@@ -7,7 +7,6 @@ var ReactBootstrap = require('react-bootstrap');
 var ReferenceStore = require('../../stores/ReferenceStore');
 var ReferenceGestureView = require('../../components/reference_guide/ReferenceGestureView');
 var ReferenceMapView = require('../../components/reference_guide/ReferenceMapView');
-var ReferencePdfView = require('../../components/reference_guide/ReferencePdfView');
 var ReferenceDictionaryView = require('../../components/reference_guide/ReferenceDictionaryView');
 var Modal = ReactBootstrap.Modal;
 var Button = ReactBootstrap.Button;
@@ -18,6 +17,11 @@ var MenuItem = ReactBootstrap.MenuItem;
 var Tabs = ReactBootstrap.Tabs;
 var Tab = ReactBootstrap.Tab;
 
+var REFERENCE_MAP_VIEW = 1;
+var REFERENCE_GESTURE_VIEW = 2;
+var REFERENCE_DICTIONARY_VIEW = 3;
+var REFERENCE_PDF_VIEW = 4;
+
 function getSettingsState(props) {
     var data = {
         showModal: false,
@@ -27,7 +31,8 @@ function getSettingsState(props) {
         mapSource: null,
         pdfSources: null,
         gestureSources: null,
-        dictionarySources: null
+        dictionarySources: null,
+        dictionarySourceKey: null
     };
 
 
@@ -46,14 +51,28 @@ var ReferenceView = React.createClass({
 
 
     handleSelect: function(eventKey, e) {
-        //event.preventDefault();
         if(typeof(eventKey) === "object"){
-            // eventKey === "object" means you selected a dropdown menu
-            if(e > 4){
-                this.setState({ selectedIndex: 1, showModal: false});
-            }else{
-                var sourceKey = (e.split('.')[1] - 1);
-                this.setState({selectedIndex: 3, dictionarySourceKey: sourceKey });
+            /* eventKey === "object" means you selected a drop-down menu sub-item and the event key
+                    is being passed in 'e' instead
+
+                e = <REFERENCE_PAGETYPE_CONSTANT>.<array index of source>
+
+                example: e = 3.2 means the selected item is a dictionary view (const value 3) and should display
+                    content from the dictionary with index [2]
+             */
+            var eventKeys = e.split('.');
+            var selectedIndex = parseInt(eventKeys[0]);
+            var sourceKey = parseInt(eventKeys[1]);
+
+            switch(selectedIndex){
+                case REFERENCE_PDF_VIEW:
+                    this.setState({ selectedIndex: REFERENCE_MAP_VIEW, showModal: false});
+                    break;
+                case REFERENCE_DICTIONARY_VIEW:
+                    this.setState({selectedIndex: REFERENCE_DICTIONARY_VIEW, dictionarySourceKey: sourceKey });
+                    break;
+                default:
+                    // no op, more reference page types may come later
             }
         }else if(typeof(eventKey) === "number"){
             this.setState({ selectedIndex: eventKey });
@@ -66,7 +85,6 @@ var ReferenceView = React.createClass({
     },
 
     componentWillMount: function() {
-        //  SettingsStore.addChangeListener(this._onChange);
         var self = this;
         // get reference.json
         $.getJSON("data/reference/reference.json", function(file){
@@ -106,13 +124,6 @@ var ReferenceView = React.createClass({
         });
     },
 
-    componentDidMount: function() {
-        //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentWillUnmount: function() {
-        //  SettingsStore.removeChangeListener(this._onChange);
-    },
     render: function() {
         var self = this;
         var state = self.state;
@@ -123,51 +134,67 @@ var ReferenceView = React.createClass({
         var gestureNav = "";
 
         if(state.dictionarySources){
-            //dictionaryNav = (<NavItem eventKey={3} hidden={true}>Dictionary</NavItem>);
             var dictionaryDropdownItems = state.dictionarySources.map(function(item, index){
-                return (<MenuItem key={"dropdownDictKey" + index} eventKey={"3." + (index+1) }>{item.name}</MenuItem>);
+                return (<MenuItem key={"dropdownDictKey" + index}
+                                  id={"WordsAndPhrasesDropdownItem" + item.name}
+                                  eventKey={REFERENCE_DICTIONARY_VIEW + "." + index}
+                    >
+                    {item.name}
+                </MenuItem>);
             });
 
-            dictionaryNav = (<NavDropdown eventKey={3} title={"Words "+ '\u0026' +" Phrases"} id="nav-dropdown2">
+            dictionaryNav = (<NavDropdown eventKey={REFERENCE_DICTIONARY_VIEW}
+                                          title={"Words "+ '\u0026' +" Phrases"}
+                                          id="WordsAndPhrasesDropdownMenu"
+                >
                 {dictionaryDropdownItems}
             </NavDropdown>);
         }
         // pdf sources
         if(state.pdfSources){
             var dropdownItems = state.pdfSources.map(function(item, index){
-                return (<MenuItem key={"dropdownItemsKey" + index} eventKey={"4." + (index+1) } href={item.path} target={"_blank"}>{item.name}</MenuItem>);
+                return (<MenuItem key={"dropdownItemsKey" + index}
+                                  eventKey={REFERENCE_PDF_VIEW + "." + index }
+                                  href={item.path} target={"_blank"}
+                                  id={"PDFTakeawaysItem"+item.name}
+                    >
+                    {item.name}
+                </MenuItem>);
             });
 
-            pdfNav = (<NavDropdown eventKey={4} title="PDF Takeaways" id="nav-dropdown">
+            pdfNav = (<NavDropdown eventKey={REFERENCE_PDF_VIEW} title="PDF Takeaways" id="PDFTakeawaysDropdownMenu">
                 {dropdownItems}
             </NavDropdown>);
         }
 
         if(state.mapSource){
-            mapNav = (<NavItem eventKey={1}>
+            mapNav = (<NavItem eventKey={REFERENCE_MAP_VIEW}>
                 Map
             </NavItem>);
         }
 
         if(state.gestureSources){
-            gestureNav = (<NavItem eventKey={2} title="Item">Gestures</NavItem>);
+            gestureNav = (<NavItem eventKey={REFERENCE_GESTURE_VIEW} title="Item">Gestures</NavItem>);
         }
 
         switch (state.selectedIndex) {
-            case 1:
-                content = (<ReferenceMapView key={"referenceMapViewKey"+state.selectedIndex} mapSource={self.state.mapSource} />);
+            case REFERENCE_MAP_VIEW:
+                content = (<ReferenceMapView key={"referenceMapViewKey"+state.selectedIndex}
+                                             mapSource={self.state.mapSource} />);
                 break;
-            case 2:
-                content = (<ReferenceGestureView key={"referenceGestureViewKey"+state.selectedIndex} gestureSources={self.state.gestureSources} />);
+            case REFERENCE_GESTURE_VIEW:
+                content = (<ReferenceGestureView key={"referenceGestureViewKey"+state.selectedIndex}
+                                                 gestureSources={self.state.gestureSources} />);
                 break;
-            case 3:
-                // this needs to create one for each dictionary source
-                content = (<ReferenceDictionaryView key={"referenceDictionaryViewKey"+state.selectedIndex + state.dictionarySourceKey} source={self.state.dictionarySources[state.dictionarySourceKey].path} />);
+            case REFERENCE_DICTIONARY_VIEW:
+                content = (<ReferenceDictionaryView key={"referenceDictionaryViewKey"+state.selectedIndex + state.dictionarySourceKey}
+                                                    source={self.state.dictionarySources[state.dictionarySourceKey].path} />);
                 break;
             default:
                 // no op, PDFs open in new tab/window
                 break;
         }
+        console.log(state.selectedIndex, typeof (state.selectedIndex));
         return (
             <div id="referenceView">
 

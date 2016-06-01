@@ -168,24 +168,19 @@ var DictionaryTable = React.createClass({
                 // return 1 if item a comes before item b,
                 // -1 if b comes before a,
                 // 0 if they are equal
-                if(!state.sortReverse){
-                    if(one > two){
-                        return (1);
-                    }else if(one < two){
-                        return (-1);
-                    }else{
-                        return (0);
-                    }
+                var val = 1;
+                if(one > two){
+                    val = 1;
+                }else if(one < two){
+                    val = -1;
                 }else{
-                    // the opposite if we are reverse sorting the list
-                    if(one < two){
-                        return (1);
-                    }else if(one > two){
-                        return (-1);
-                    }else{
-                        return (0);
-                    }
+                    val = 0;
                 }
+                // return the opposite if we are sorting in reverse order
+                if(state.sortReverse){
+                    val *= -1;
+                }
+                return (val);
             });
         }
 
@@ -214,7 +209,6 @@ var FilterableTable = React.createClass({
             initialSource: ""
         };
 
-        console.dir(this.props.dictionary);
         if(this.props && this.props.dictionary) {
             if(this.props.dictionary[0] && this.props.dictionary[0].hasOwnProperty('path')){
                 data.initialSource = this.props.dictionary[0].path;

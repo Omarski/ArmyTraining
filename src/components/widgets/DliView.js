@@ -4,6 +4,7 @@
 var React = require('react');
 var ConfigStore = require('../../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
+var DliStore = require('../../stores/DliStore');
 
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Modal = ReactBootstrap.Modal;
@@ -54,25 +55,13 @@ var DliView = React.createClass({
     },
 
     componentWillMount: function() {
-      //  SettingsStore.addChangeListener(this._onChange);
         var self = this;
         // get dli data....
-        $.getJSON("data/dli/dli.json", function(data){
-            if(data && data.dliPaths){
-                self.setState({
-                    nameList: data.dliPaths
-                });
-            }
+        self.setState({
+            nameList: DliStore.getDliPaths()
         });
     },
 
-    componentDidMount: function() {
-      //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentWillUnmount: function() {
-      //  SettingsStore.removeChangeListener(this._onChange);
-    },
     render: function() {
         var self = this;
         var dliIcon = <span className="glyphicon glyphicon-book btn-icon" aria-hidden="true"></span>;

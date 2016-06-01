@@ -10,6 +10,7 @@ var FooterView = require('../components/FooterView');
 var NotificationView = require('../components/widgets/NotificationView');
 var NotificationActions = require('../actions/NotificationActions');
 var ConfigActions = require('../actions/ConfigActions');
+var DliActions = require('../actions/DliActions');
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -35,6 +36,7 @@ var MainView = React.createClass({
     componentWillMount: function() {
         LoaderStore.addChangeListener(this._onChange);
         ConfigActions.load();
+        DliActions.load();
     },
 
     componentDidMount: function() {

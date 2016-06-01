@@ -15,29 +15,25 @@ function getInitialState(props, self) {
     if(props && props.source){
         data.source = props.source;
         $.getJSON(data.source, function(file) {
-            if(file.Dictionary){
-                if(file.Dictionary.Uttering){
-                    file.Dictionary.Uttering.map(function(item){
-                        if(item.Utterance){
-                            if(item.Utterance.AleloText){
-                                var nativeText = "";
-                                var translatedText = "";
-                                item.Utterance.AleloText.map(function(textItem){
-                                    if(textItem.hasOwnProperty("type")){
-                                        if(textItem.type === "native"){
-                                            nativeText = textItem.text;
-                                        }else if(textItem.type === "translation"){
-                                            translatedText = textItem.text;
-                                        }
-                                    }
-                                });
-                                data.list.push({translated: translatedText, native: nativeText});
+            if(file.Dictionary && file.Dictionary.Uttering){
+                file.Dictionary.Uttering.map(function(item){
+                    if(item.Utterance && item.Utterance.AleloText){
+                        var nativeText = "";
+                        var translatedText = "";
+                        item.Utterance.AleloText.map(function(textItem){
+                            if(textItem.hasOwnProperty("type")){
+                                if(textItem.type === "native"){
+                                    nativeText = textItem.text;
+                                }else if(textItem.type === "translation"){
+                                    translatedText = textItem.text;
+                                }
                             }
-                        }
-                    });
-                    // trigger re-render
-                    self.forceUpdate();
-                }
+                        });
+                        data.list.push({translated: translatedText, native: nativeText});
+                    }
+                });
+                // trigger re-render
+                self.forceUpdate();
             }
         });
     }
@@ -52,17 +48,6 @@ var ReferenceDictionaryView = React.createClass({
         return initialState;
     },
 
-    componentWillMount: function() {
-        //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentDidMount: function() {
-        //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentWillUnmount: function() {
-        //  SettingsStore.removeChangeListener(this._onChange);
-    },
     render: function() {
         var self = this;
         var source = self.state.list;
