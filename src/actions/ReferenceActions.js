@@ -6,9 +6,9 @@ var ReferenceActions = {
     /**
      * @param  {string} text
      */
-    complete: function(data) {
+    loadComplete: function(data) {
         AppDispatcher.dispatch({
-            actionType: ReferenceConstants.REFERENCE_COMPLETE,
+            actionType: ReferenceConstants.REFERENCE_LOAD_COMPLETE,
             data: data
         });
     },
