@@ -25,7 +25,8 @@ function destroy() {
 function loadDli(){
     $.getJSON("data/dli/dli.json", function(data){
         if(data && data.dliPaths){
-            _dliPathList = data.dliPaths
+            _dliPathList = data.dliPaths;
+            DliActions.loadComplete();
         }
     });
 }

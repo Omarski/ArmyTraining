@@ -44,6 +44,7 @@ var _hasReference = false;
          if(data.hasOwnProperty('reference')){
              _hasReference = true;
          }
+         ConfigActions.loadComplete();
      });
 }
 

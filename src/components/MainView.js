@@ -13,8 +13,10 @@ var ConfigActions = require('../actions/ConfigActions');
 var LocalizationStore = require('../stores/LocalizationStore');
 var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
-var ConfigStore = require('../stores/ConfigStore');
 var DliActions = require('../actions/DliActions');
+var DliStore = require('../stores/DliStore');
+var ReferenceActions = require('../actions/ReferenceActions');
+var ReferenceStore = require('../stores/ReferenceStore');
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -29,10 +31,20 @@ function getBookState() {
     };
 }
 
+
+
 var MainView = React.createClass({
 
     loadConfiguration: function() {
         ConfigActions.load();
+    },
+
+    loadDli: function(){
+        DliActions.load();
+    },
+
+    loadReference: function (){
+        ReferenceActions.load();
     },
 
     loadCoachFeedback: function() {
@@ -54,8 +66,9 @@ var MainView = React.createClass({
         ConfigStore.addChangeListener(this._onConfigChange);
         CoachFeedbackStore.addChangeListener(this._onCoachFeedbackChange);
         LoaderStore.addChangeListener(this._onChange);
-        ConfigActions.load();
-        DliActions.load();
+        DliStore.addChangeListener(this._onDliChange);
+        ReferenceStore.addChangeListener(this._onReferenceChange);
+
     },
 
     componentDidMount: function() {
@@ -119,9 +132,24 @@ var MainView = React.createClass({
     _onCoachFeedbackChange: function() {
         var self = this;
         setTimeout(function() {
+            self.loadDli();
+        }, 100)
+    },
+
+    _onDliChange: function (){
+        var self = this;
+        setTimeout(function() {
+            self.loadReference();
+        }, 100)
+    },
+
+    _onReferenceChange: function(){
+        var self = this;
+        setTimeout(function() {
             self.loadData();
         }, 100)
     }
+
 
 });
 

@@ -18,6 +18,7 @@ function load() {
     _loading = true;
     $.getJSON("data/reference/reference.json", function(result) {
         _data = result;
+        ReferenceActions.loadComplete();
     });
 }
 
@@ -31,6 +32,10 @@ var ReferenceStore = assign({}, EventEmitter.prototype, {
 
     loadingComplete: function() {
         return _loaded;
+    },
+
+    getData: function(){
+        return _data;
     },
 
     emitChange: function() {
@@ -57,13 +62,12 @@ AppDispatcher.register(function(action) {
 
 
     switch(action.actionType) {
-        case ReferenceConstants.REFERENCE_COMPLETE:
+        case ReferenceConstants.REFERENCE_LOAD_COMPLETE:
             _loading = false;
             ReferenceStore.emitChange();
             break;
         case ReferenceConstants.REFERENCE_LOAD:
             load();
-            ReferenceStore.emitChange();
             break;
 
         default:

@@ -27,12 +27,13 @@ function getSettingsState(props) {
         showModal: false,
         selectedIndex: 1,
         content: null,
-        referenceJson: [],
+        referenceJson: {},
         mapSource: null,
         pdfSources: null,
         gestureSources: null,
         dictionarySources: null,
-        dictionarySourceKey: null
+        dictionarySourceKey: null,
+        jsonItems: []
     };
 
 
@@ -84,44 +85,8 @@ var ReferenceView = React.createClass({
         return settingsState;
     },
 
-    componentWillMount: function() {
-        var self = this;
-        // get reference.json
-        $.getJSON("data/reference/reference.json", function(file){
-            if(file && file.items){
-                var mapSource = null;
-                var pdfSources = null;
-                var gestureSources = null;
-                var dictionarySources = null;
-
-                file.items.map(function(item){
-                    switch(item.type){
-                        case "gesture":
-                            gestureSources = item.assets;
-                            break;
-                        case "image":
-                            mapSource = item.assets[0].path;
-                            break;
-                        case "pdfList":
-                            pdfSources = item.assets;
-                            break;
-                        case "dictionary":
-                            dictionarySources = item.assets;
-                            break;
-                        default:
-                            // no op
-                    }
-                });
-
-                self.setState({
-                    referenceJson: file.items,
-                    mapSource: mapSource,
-                    pdfSources: pdfSources,
-                    gestureSources: gestureSources,
-                    dictionarySources: dictionarySources
-                })
-            }
-        });
+    componentDidMount: function() {
+        ReferenceStore.addChangeListener(this._onReferenceChange);
     },
 
     render: function() {
@@ -194,7 +159,7 @@ var ReferenceView = React.createClass({
                 // no op, PDFs open in new tab/window
                 break;
         }
-        console.log(state.selectedIndex, typeof (state.selectedIndex));
+
         return (
             <div id="referenceView">
 
@@ -222,6 +187,44 @@ var ReferenceView = React.createClass({
     },
     _onChange: function() {
         this.setState(getSettingsState());
+    },
+    _onReferenceChange: function(){
+        var self = this;
+        var referenceJson = ReferenceStore.getData();
+        console.dir(referenceJson);
+        if(referenceJson && referenceJson.items){
+            var mapSource = null;
+            var pdfSources = null;
+            var gestureSources = null;
+            var dictionarySources = null;
+
+            referenceJson.items.map(function(item){
+                switch(item.type){
+                    case "gesture":
+                        gestureSources = item.assets;
+                        break;
+                    case "image":
+                        mapSource = item.assets[0].path;
+                        break;
+                    case "pdfList":
+                        pdfSources = item.assets;
+                        break;
+                    case "dictionary":
+                        dictionarySources = item.assets;
+                        break;
+                    default:
+                    // no op
+                }
+            });
+
+            self.setState({
+                jsonItems: referenceJson.items,
+                mapSource: mapSource,
+                pdfSources: pdfSources,
+                gestureSources: gestureSources,
+                dictionarySources: dictionarySources
+            })
+        }
     }
 });
 

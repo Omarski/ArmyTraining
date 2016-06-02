@@ -20,11 +20,6 @@ function getSettingsState(props) {
         nameList: [],
         iframeSrc: ""
     };
-
-    if(props){
-
-    }
-
     return data;
 }
 
@@ -40,6 +35,10 @@ var DliView = React.createClass({
         this.setState({ showModal: false });
     },
 
+    componentDidMount: function(){
+        DliStore.addChangeListener(this._onDliChange);
+    },
+
     openDliWindow: function(name, e){
         var self = this;
         var list = this.state.nameList;
@@ -52,14 +51,6 @@ var DliView = React.createClass({
         });
         document.getElementById("dliPopover").setAttribute("class", "fade out"); /* hide popover */
         this.setState({ showModal: true, iframeSrc: src }); /* show modal */
-    },
-
-    componentWillMount: function() {
-        var self = this;
-        // get dli data....
-        self.setState({
-            nameList: DliStore.getDliPaths()
-        });
     },
 
     render: function() {
@@ -98,6 +89,11 @@ var DliView = React.createClass({
     },
     _onChange: function() {
         this.setState(getSettingsState());
+    },
+    _onDliChange:function(){
+        this.setState({
+            nameList: DliStore.getDliPaths()
+        });
     }
 });
 
