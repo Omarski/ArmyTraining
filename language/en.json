@@ -1,17 +1,4 @@
 {
-  "header": {
-    "tooltipLogo": "Virtual Culture Awareness Trainer",
-    "tooltipDLI": "DLI",
-    "tooltipReference": "Reference",
-    "tooltipMute": "Mute Sound",
-    "tooltipUnMute": "Turn on Sound",
-    "tooltipSettings": "Settings"
-  },
-  "settings": {
-    "lblTitle": "Settings",
-    "lblAutoPlaySound": "Auto Play Sound",
-    "lblVoiceVolume": "Voice Volume"
-  },
   "breadcrumbs": {
     "tooltipBookmark": "Bookmarks"
   },
@@ -21,11 +8,28 @@
     "tooltipIndexExpand": "Open Index",
     "tooltipIndexCollapse": "Close Index"
   },
+  "header": {
+    "tooltipLogo": "Virtual Culture Awareness Trainer",
+    "tooltipDLI": "DLI",
+    "tooltipReference": "Reference",
+    "tooltipMute": "Mute Sound",
+    "tooltipUnMute": "Turn on Sound",
+    "tooltipSettings": "Settings"
+  },
+  "loader": {
+    "lblLoading": "Loading"
+  },
   "progress": {
     "lblLessons": "Lessons",
     "lblPages": "Pages"
   },
-  "loader": {
-    "lblLoading": "Loading"
+  "settings": {
+    "lblTitle": "Settings",
+    "lblAutoPlaySound": "Auto Play Sound",
+    "lblVoiceVolume": "Voice Volume"
+  },
+  "quizEnd": {
+    "lblPassed": "Your score was {0}%. Congratulations! You have successfully completed this section. You may now move on to the next section in your course of instruction.",
+    "lblFailed": "Your score was {0}%. You may want to review the section and try this quiz again."
   }
 }
