@@ -1,6 +1,7 @@
 var React = require('react');
 var PageStore = require('../stores/PageStore');
 var UnitStore = require('../stores/UnitStore');
+var LocalizationStore = require('../stores/LocalizationStore');
 
 function getUnitState() {
     var units = UnitStore.getAll();
@@ -120,7 +121,7 @@ var ProgressView = React.createClass({
                                 <tbody>
                                     <tr>
                                         <td nowrap>
-                                            Lessons
+                                            {LocalizationStore.labelFor("progress", "lblLessons")}
                                         </td>
                                         <td nowrap width="100%">
                                             <div className="progress">
@@ -144,7 +145,7 @@ var ProgressView = React.createClass({
                                 <tbody>
                                     <tr>
                                         <td nowrap>
-                                            Pages
+                                            {LocalizationStore.labelFor("progress", "lblPages")}
                                         </td>
                                         <td nowrap width="100%">
                                             <div className="progress">
