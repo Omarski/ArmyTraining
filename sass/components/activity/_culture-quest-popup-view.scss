@@ -1,0 +1,19 @@
+.culture-quest-popup-view-background{
+
+  position: absolute;
+  display:block;
+  width: 760px;
+  height: 502px;
+  top: 40px;
+  left: 0;
+  background:#fff;
+  opacity:.5;
+
+  .culture-quest-popup-view-cont{
+    position: absolute;
+    width: 80%;
+    height: 60%;
+    top:0;
+    left:0
+  }
+}

@@ -8,7 +8,8 @@ var CultureQuestInputBlocksView = require('./CultureQuestInputBlocksView');
 
 var CultureQuestQuiz = React.createClass({
     
-    //props: layersColl, imageData, showQuiz, lastSelected, showQuizUpdate, showPuzzleUpdate, answersColl, saveAnswersColl
+    //props: layersColl, imageData, showQuiz, lastSelected, showQuizUpdate, showPuzzleUpdate,
+    // answersColl, saveAnswersColl, audioPlayer, setAudioControl
 
     getInitialState: function() {
 
@@ -154,6 +155,8 @@ var CultureQuestQuiz = React.createClass({
     checkAnswer: function(){
 
         var self = this;
+        var mediaPath = self.state.mediaPath;
+        var keepTryingAudio = mediaPath + self.props.imageData.keepTryingAudio;
         var completeAnswer = "";
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
 
@@ -166,7 +169,7 @@ var CultureQuestQuiz = React.createClass({
 
         //correct
         if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase()) {
-           
+
             answerObj["question"+ answerObj.onQuestion].answered = true;
 
             //Question 2 correct
@@ -182,6 +185,8 @@ var CultureQuestQuiz = React.createClass({
             }
         //incorrect
         }else{
+
+            self.props.playAudio({id:"wrongAnswer", autoPlay:true, sources:[{format:"mp3", url:keepTryingAudio}]});
 
             //1st attempt
             if (answerObj["question"+answerObj.onQuestion].attempts++ === 1){

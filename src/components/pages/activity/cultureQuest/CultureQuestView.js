@@ -2,6 +2,8 @@
  * Created by omaramer on 5/9/16.
  */
 var React = require('react');
+var AudioPlayer = require('../../../widgets/AudioPlayer');
+var CultureQuestPopupView = require('./CultureQuestPopupView');
 var CultureQuestMapView = require('./CultureQuestMapView');
 var CultureQuestQuizView = require('./CultureQuestQuizView');
 var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
@@ -18,7 +20,13 @@ function getPageState(props) {
         showQuiz: false,
         showPopup: false,
         showPuzzle: false,
-        showPuzzleGame: false
+        showPuzzleGame: false,
+        layersColl:[],
+        lastSelected: null,
+        answersColl:[],
+        audioObj:null,
+        audioController:"",
+        popupObj:null
     };
 
 
@@ -27,9 +35,6 @@ function getPageState(props) {
         data.pageType = props.page.type;
         data.page = props.page;
         data.imageData = JSON.parse(data.page.info.property[2].value);
-        data.layersColl = [];
-        data.lastSelected = null;
-        data.answersColl = [];
     }
 
     return data;
@@ -45,6 +50,36 @@ var CultureQuestView = React.createClass({
     onLayersReady:function(layersColl){
         this.setState({layersColl:layersColl});
         this.prepAnswersColl();
+        this.prepIntoPopup();
+    },
+
+    prepIntoPopup: function(){
+
+        var self = this;
+
+        var popupObj = {
+            id:"Intro",
+            onClickOutside: self.onClosePopup,
+            popupStyle: {height:'400px', background:'#fff'},
+            content: function(){
+                return(
+                    <div className="culture-quest-popup-view-content">
+                        <div className="culture-quest-popup-view-bodyText">
+                            {self.state.imageData.briefText}
+                        </div>
+                        <div className="culture-quest-popup-view-buttonCont">
+                            <button type="button" className="btn btn-default" onClick={self.onClosePopup()}>Start</button>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.setState({popupObj:popupObj});
+    },
+
+    onClosePopup: function(){
+        this.setState(({popupObj:null}));
     },
 
     prepAnswersColl: function() {
@@ -65,30 +100,19 @@ var CultureQuestView = React.createClass({
 
         if (mode === "show") {
             self.setState({showQuiz: true});
-            $("#culture-quest-quiz-view-quizCont").animate({opacity:'1'}, 500, 'linear', function(){
                 $("#imageLayerView-back-image").children().addClass("culture-quest-quiz-view-killInteraction");
-            });
+
         } else {
-            $("#culture-quest-quiz-view-quizCont").animate({opacity:'0'}, 500, 'linear', function(){
                 self.setState({showQuiz: false});
                 $("#imageLayerView-back-image").children().removeClass("culture-quest-quiz-view-killInteraction");
-            });
         }
     },
 
     showPuzzleUpdate: function(mode){
 
         var self = this;
-
-        if (mode === "show") {
-            self.setState({showPuzzle:true});
-            $("#culture-quest-puzzle-award-view-puzzleCont").animate({opacity: '1'}, 300, 'linear', function () {
-            });
-        } else {
-            $("#culture-quest-puzzle-award-view-puzzleCont").animate({opacity: '0'}, 300, 'linear', function () {
-                self.setState({showPuzzle:false});
-            });
-        }
+        if (mode === "show") self.setState({showPuzzle:true});
+        else self.setState({showPuzzle:false});
     },
 
     onRegionClicked: function(canvasElement){
@@ -156,7 +180,35 @@ var CultureQuestView = React.createClass({
     saveAnswersColl: function(answersColl){
         this.state.answersColl = answersColl;
     },
-    
+
+    playAudio: function(audioObj){
+        var self = this;
+
+        this.setState({audioObj:audioObj}, function(){
+            if (!audioObj.loop) {
+                $("#"+audioObj.id).on("ended", function(){
+                    self.setState({audioObj:null});
+                });
+            }
+        });
+    },
+
+    displayPopup: function(popupObj){
+
+        var self = this;
+        this.setState({popupObj:popupObj}, function(){
+
+        });
+    },
+
+    setAudioControl: function(mode){
+        this.setState({audioController:mode});
+    },
+
+    onAudioEnd: function(){
+        this.setState({audioObj:null});
+    },
+
     render: function() {
         var self = this;
         var state = self.state;
@@ -170,6 +222,22 @@ var CultureQuestView = React.createClass({
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
 
                 <div id="CultureQuestViewBlock">
+
+                    {self.state.audioObj ?
+                    <AudioPlayer
+                        id = {self.state.audioObj.id}
+                        sources    = {self.state.audioObj.sources}
+                        autoPlay   = {self.state.audioObj.autoPlay}
+                        controller = {self.state.audioController}
+                    /> : null}
+
+                    {self.state.popupObj ?
+                    <CultureQuestPopupView
+                        id = {self.state.popupObj.id}>
+                    {self.state.popupObj.content}
+                    </CultureQuestPopupView>:null}
+
+                    {self.state.showPopup ? <CultureQuestPopupView />:null}
 
                     <CultureQuestMapView
                         imageData = {state.imageData}
@@ -192,9 +260,10 @@ var CultureQuestView = React.createClass({
                         showPuzzleUpdate = {self.showPuzzleUpdate}
                         answersColl = {state.answersColl}
                         saveAnswersColl = {self.saveAnswersColl}
+                        playAudio = {self.playAudio}
+                        setAudioControl = {self.setAudioControl}
                         />:null}
 
-                    {self.state.showPopup? <CultureQuestPopup />:null}
                     {self.state.showPuzzle? <CultureQuestPuzzleAwardView
                         imageData = {state.imageData}
                         lastSelected = {state.lastSelected}
