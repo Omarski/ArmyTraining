@@ -45,7 +45,8 @@ var CultureQuestMap = React.createClass({
     },
 
     onRegionClicked: function(canvasElement){
-
+        
+        //bubble up
         if (canvasElement && !canvasElement.hidden) {
             this.props.onRegionClicked(canvasElement);
         }
@@ -59,7 +60,7 @@ var CultureQuestMap = React.createClass({
             if (canvasElement && !canvasElement.hidden) {
                 switch(canvasElement.state){
 
-                    case "idle":
+                    case "idle": case "last":
                         if (!canvasElement.classList.contains("image-layers-view-fade-in")){
                             canvasElement.classList.add("image-layers-view-fade-in");
                             canvasElement.classList.remove("image-layers-view-fade-out");

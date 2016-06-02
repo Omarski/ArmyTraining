@@ -48,9 +48,11 @@ var CultureQuestView = React.createClass({
     },
 
     onLayersReady:function(layersColl){
-        this.setState({layersColl:layersColl});
-        this.prepAnswersColl();
-        this.prepIntoPopup();
+        var self = this;
+        this.setState({layersColl:layersColl}, function(){
+            self.prepAnswersColl();
+            self.prepIntoPopup();
+        });
     },
 
     prepIntoPopup: function(){
@@ -60,15 +62,18 @@ var CultureQuestView = React.createClass({
         var popupObj = {
             id:"Intro",
             onClickOutside: self.onClosePopup,
-            popupStyle: {height:'400px', background:'#fff'},
+            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1},
+
             content: function(){
+                
                 return(
                     <div className="culture-quest-popup-view-content">
                         <div className="culture-quest-popup-view-bodyText">
                             {self.state.imageData.briefText}
                         </div>
                         <div className="culture-quest-popup-view-buttonCont">
-                            <button type="button" className="btn btn-default" onClick={self.onClosePopup()}>Start</button>
+                            <button type="button" className="btn btn-default"
+                                    onClick={self.onClosePopup}>Start</button>
                         </div>
                     </div>
                 )
@@ -76,9 +81,11 @@ var CultureQuestView = React.createClass({
         };
 
         self.setState({popupObj:popupObj});
+
     },
 
     onClosePopup: function(){
+        console.log("closing......");
         this.setState(({popupObj:null}));
     },
 
@@ -116,10 +123,15 @@ var CultureQuestView = React.createClass({
     },
 
     onRegionClicked: function(canvasElement){
-
-        this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
-        this.setState({'lastSelected': canvasElement});//, showQuiz:true
-        this.showQuizUpdate("show");
+        
+        if (canvasElement.getAttribute('state') !== "last"){
+            this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
+            this.setState({'lastSelected': canvasElement});
+            this.showQuizUpdate("show");
+        }else{
+            //if completed regions or not - popup or puzzle game
+        }
+        
     },
 
     updateLayersColl:function(layer, changeMode, changesColl){
@@ -233,8 +245,11 @@ var CultureQuestView = React.createClass({
 
                     {self.state.popupObj ?
                     <CultureQuestPopupView
-                        id = {self.state.popupObj.id}>
-                    {self.state.popupObj.content}
+                        id = {self.state.popupObj.id}
+                        popupStyle = {self.state.popupObj.popupStyle}
+                        onClickOutside = {self.state.popupObj.onClickOutside}
+                    >
+                    {self.state.popupObj.content()}
                     </CultureQuestPopupView>:null}
 
                     {self.state.showPopup ? <CultureQuestPopupView />:null}

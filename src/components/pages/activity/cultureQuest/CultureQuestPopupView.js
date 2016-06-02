@@ -23,10 +23,12 @@ var CultureQuestPopupView = React.createClass({
         return (
             <div id={"cultureQuestPopupContBack"+this.props.id}
                  className="culture-quest-popup-view-background"
-                 onclick={this.props.onClickOutside()}>
+                 onClick={this.props.onClickOutside}>
 
                 <div className="culture-quest-popup-view-cont"
-                id={"cultureQuestPopupCont"+this.props.id}>
+                id={"cultureQuestPopupCont"+this.props.id}
+                style={this.props.popupStyle}
+                >
                     {this.props.children}
                 </div>
 

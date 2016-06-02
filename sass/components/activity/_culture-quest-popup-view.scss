@@ -1,19 +1,34 @@
 .culture-quest-popup-view-background{
-
   position: absolute;
   display:block;
-  width: 760px;
-  height: 502px;
-  top: 40px;
+  width: 770px;
+  height: 505px;
+  top: 32px;
   left: 0;
-  background:#fff;
-  opacity:.5;
+  z-index:35;
+  background:transparent;
 
   .culture-quest-popup-view-cont{
     position: absolute;
-    width: 80%;
-    height: 60%;
-    top:0;
-    left:0
+
+    .culture-quest-popup-view-content {
+      position:absolute;
+      top:0;
+      left:0;
+      padding:15px;
+
+      .culture-quest-popup-view-bodyText{
+        color:#0a0a0a;
+      }
+
+      .culture-quest-popup-view-buttonCont{
+        position: relative;
+        width:80px;
+        height:30px;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:15px;
+      }
+    }
   }
 }
