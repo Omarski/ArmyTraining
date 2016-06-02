@@ -94,10 +94,6 @@ function getPageState(props) {
     return data;
 }
 
-function replaceScoreText(score, text) {
-    return text.replace("{0}", score.toString());
-}
-
 var QuizView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
@@ -168,9 +164,9 @@ var QuizTableHeader = React.createClass({
    render: function() {
        return (
            <tr className="">
-               <th>Correct</th>
-               <th>Question</th>
-               <th>Answer</th>
+               <th>{LocalizationStore.labelFor("quizEnd", "headerCorrect")}</th>
+               <th>{LocalizationStore.labelFor("quizEnd", "headerQuestion")}</th>
+               <th>{LocalizationStore.labelFor("quizEnd", "headerAnswer")}</th>
            </tr>
        );
    }
