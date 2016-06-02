@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "main": "src/app.js",
   "dependencies": {
+    "bootstrap-slider": "^4.3.0",
     "classnames": "^2.1.3",
     "flux": "^2.0.1",
+    "jquery": "^2.1.1",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
     "react": "^0.13.3",
@@ -13,7 +15,8 @@
     "react-dnd": "1.18",
     "react-dnd-html5-backend": "2.0.0",
     "jquery": "^2.1.1",
-    "bootstrap-slider": "^4.3.0"
+    "bootstrap-slider": "^4.3.0",
+    "onchange": "^2.4.0"
   },
   "devDependencies": {
     "browserify": "^6.2.0",
@@ -21,11 +24,13 @@
     "jest-cli": "^0.4.3",
     "reactify": "^0.15.2",
     "uglify-js": "~2.4.15",
-    "watchify": "^2.1.1"
+    "watchify": "2.1.1"
   },
   "scripts": {
-    "start": "watchify -o dist/bundle.js -v -d src/app.js",
-    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > dist/bundle.min.js",
+    "start": "watchify -o dist/bundle.js -v -d src/app.js & npm run language:watch",
+    "language": "cp language/en.json dist/en.json",
+    "language:watch": "onchange 'language/en.json' -v -- npm run language",
+    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > dist/bundle.min.js & npm run -v language",
     "test": "jest"
   },
   "author": "Curtis Wingert",

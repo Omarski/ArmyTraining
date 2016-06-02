@@ -90,6 +90,7 @@ var BreadcrumbsView = React.createClass({
     },
 
     componentDidMount: function() {
+        PageStore.removeChangeListener(this._onChange);
         PageStore.addChangeListener(this._onChange);
     },
 
@@ -109,7 +110,8 @@ var BreadcrumbsView = React.createClass({
             });
         }
 
-        var popover =   <Popover id="bookmarksPopover" title='Bookmarks'>
+
+        var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
             <ListGroup>
                 <Button
                     id="breadcrumbsButton"
@@ -123,7 +125,7 @@ var BreadcrumbsView = React.createClass({
             <ListGroup>
                 {items}
             </ListGroup>
-        </Popover>;
+        </Popover>);
 
         var bookmarkBtn = (
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>

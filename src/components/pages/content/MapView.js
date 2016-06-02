@@ -79,11 +79,9 @@ var MapView = React.createClass({
         audio.play();
         audio.volume = SettingsStore.voiceVolume();
     },
-
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
     },
-
     render: function() {
         var self = this;
         var state = self.state;

@@ -9,6 +9,9 @@
 @import "dli-view";
 @import "progress-view";
 @import "page-header";
+
+@import "reference-view";
+
 @import "widgets/image-caption";
 @import "widgets/image-layers-view";
 @import "components/activity/dd-audio-quiz-view";
@@ -16,6 +19,7 @@
 @import "components/activity/active-dialog-coas-view";
 @import "components/activity/network-activity-view";
 @import "components/activity/pronunciation-view";
+@import "components/activity/quiz-view";
 @import "components/activity/multi-column-pronunciation-view";
 @import "components/activity/utterance-formation-view";
 @import "components/activity/response-formation-view";
@@ -33,3 +37,5 @@
 @import "components/content/interactive-timeline-view";
 @import "components/content/multi-note";
 @import "components/content/lesson-start-view";
+@import "components/content/ethno-map-view";
+

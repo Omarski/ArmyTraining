@@ -1,9 +1,13 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
+var InfoTagConstants = require('../constants/InfoTagConstants');
 var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
+var BookmarkActions = require('../actions/BookmarkActions');
+var BookmarkStore = require('../stores/BookmarkStore');
+var Utils = require('../components/widgets/Utils');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -139,6 +143,17 @@ function findCurrentPageIndex() {
     return result;
 }
 
+function answer(data) {
+    // get current page
+    if (_currentPage) {
+
+        // get timestamp
+        data = assign({}, data, {lastUpdated: Date.now()});
+
+        // save answer data in state
+        _currentPage.state = assign({}, _currentPage.state, data);
+    }
+}
 
 
 function loadNext() {
@@ -182,37 +197,57 @@ function loadPrevious() {
 
 /**
  * Create a PAGE item.
- * @param  {string} text The content of the PAGE
+ * @param  {string} data The content of the PAGE
  */
 function load(data) {
-    setTimeout(function() {
-        NotificationActions.updateBody("Loading Page : " + data.page.title );
-    });
+    if (data && data.chapter && data.page) {
+        setTimeout(function() {
+            NotificationActions.updateBody("Loading Page : " + data.page.title );
+        });
 
-    _loaded = false;
-    console.log("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json");
-    $.getJSON("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json", function(result) {
+        // save current page before changing to new one
+        saveCurrentPage();
 
-        _currentUnit = data.unit;
-        _currentChapter = data.chapter;
-        _currentPage = data.page;
+        _loaded = false;
+        $.getJSON("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json", function(result) {
 
-        _data = result.page;
+            _currentUnit = data.unit;
+            _currentChapter = data.chapter;
+            _currentPage = data.page;
 
+            _data = result.page;
 
-        var storedPages = store.get('pages');
-        if (!storedPages) {
-            storedPages = {};
+            // create and add state property
+            var state = {visited: true};
+            _currentPage.state = assign({}, state, _currentPage.state);
+
+            // save current page
+            saveCurrentPage();
+
+            PageActions.complete(result);
+        });
+    } else {
+        BookmarkActions.destroy(); // if the data directory has changed, it can mess up the bookmark situation.  force remove bookmark and alert user
+        alert("An error has occurred, please reload this browser");
+    }
+}
+
+/**
+ * Marks the current chapter as complete
+ */
+function markChapterComplete() {
+    // get current chapter
+    if (_currentChapter) {
+        var state = {};
+
+        // get chapter state
+        if (_currentChapter.state) {
+            state = _currentChapter.state;
         }
 
-        var state = {visited: true};
-        _currentPage.state = state;
-        storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = state;
-
-        store.set('pages', storedPages);
-
-        PageActions.complete(result);
-    });
+        // mark it as complete
+        _currentChapter.state = assign({}, state, {completed: true});
+    }
 }
 
 function jump(data) {
@@ -245,6 +280,58 @@ function reset() {
 
 }
 
+function resetQuiz() {
+
+    // get current chapter
+    if (_currentChapter) {
+
+        // TODO
+
+        // get quiz pages
+
+        // for each quiz page remove the answer state object
+
+    }
+
+}
+
+function saveCurrentPage() {
+
+    // check for valid current unit
+    if (!(_currentUnit && _currentUnit.data && _currentUnit.data.xid)) {
+        return false;
+    }
+
+    // check for valid current chapter
+    if (!(_currentChapter && _currentChapter.xid)) {
+        return false;
+    }
+
+    // check for valid current page
+    if (!(_currentPage && _currentPage.xid)) {
+        return false;
+    }
+
+    // check fo anything to save
+    if (!(_currentPage.state)) {
+        return false;
+    }
+
+    // load pages
+    var storedPages = store.get('pages');
+    if (!storedPages) {
+        storedPages = {};
+    }
+
+    // update data
+    storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = _currentPage.state;
+
+    // save page
+    store.set('pages', storedPages);
+
+    return true;
+}
+
 var PageStore = assign({}, EventEmitter.prototype, {
 
     page: function() {
@@ -263,8 +350,38 @@ var PageStore = assign({}, EventEmitter.prototype, {
         return _loaded;
     },
 
+    isQuizPage: function() {
+        if (_currentPage && _currentPage.state && _currentPage.state.quizpage) {
+            return true;
+        }
+
+        return false;
+    },
+
     emitChange: function() {
         this.emit(CHANGE_EVENT);
+    },
+
+    /**
+     * @returns (Array) Returns an ordered list of pages that match
+     */
+    getChapterQuizPages: function() {
+        var results = [];
+
+        if (_currentChapter) {
+            var pages = _currentChapter.pages;
+            var pagesLen = pages.length;
+
+            for (var i = 0; i < pagesLen; i++) {
+                var page = pages[i];
+
+                if (page.state && page.state.quizpage) {
+                    results.push(page);
+                }
+            }
+        }
+
+        return results;
     },
 
     /**
@@ -287,6 +404,12 @@ AppDispatcher.register(function(action) {
 
 
     switch(action.actionType) {
+        case PageConstants.CHAPTER_MARK_COMPLETE:
+            markChapterComplete();
+            break;
+        case PageConstants.PAGE_ANSWER:
+            answer(action.data);
+            break;
         case PageConstants.PAGE_COMPLETE:
             _loaded = true;
             PageStore.emitChange();
@@ -310,6 +433,9 @@ AppDispatcher.register(function(action) {
         case PageConstants.PAGE_RESET:
             reset();
             PageStore.emitChange();
+            break;
+        case PageConstants.QUIZ_RESET:
+            resetQuiz();
             break;
 
         default:
