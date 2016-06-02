@@ -94,10 +94,6 @@ function getPageState(props) {
     return data;
 }
 
-function replaceScoreText(score, text) {
-    return text.replace("{0}", score.toString());
-}
-
 var QuizView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
