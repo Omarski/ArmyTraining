@@ -6,7 +6,7 @@ var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
-var ResourceStore = require('../../../stores/ResourceStore');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 
 
 function getPageState(props) {
@@ -82,13 +82,13 @@ function getPageState(props) {
 
         // get feedback text
         if (scorePercent === 100) {
-            data.pageFeedback = ResourceStore.getText("quiz-view-quiz-complete", [scorePercent]);
+            data.pageFeedback = LocalizationStore.labelFor("quizEnd", "lblPassed", [scorePercent]);
             data.quizPassed = true;
         } else {
-            data.pageFeedback = ResourceStore.getText("quiz-view-quiz-failed", [scorePercent]);
+            data.pageFeedback = LocalizationStore.labelFor("quizEnd", "lblFailed", [scorePercent]);
         }
     } else {
-        data.pageFeedback= ResourceStore.getText("quiz-view-quiz-failed", [0]);
+        data.pageFeedback= LocalizationStore.labelFor("quizEnd", "lblFailed", [0]);
     }
 
     return data;
