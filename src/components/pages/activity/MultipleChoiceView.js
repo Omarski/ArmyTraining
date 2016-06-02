@@ -23,7 +23,7 @@ function getPageState(props) {
         correctAnswer: "",
         isQuestionaire: false,
         isQuizPage: false,
-        bShuffle: true,
+        bShuffle: true
     };
 
     if (props && props.page) {
