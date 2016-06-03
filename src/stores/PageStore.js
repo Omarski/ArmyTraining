@@ -175,23 +175,85 @@ function loadNext() {
     load({unit:_currentUnit, chapter:_currentChapter, page:nextPage});
 }
 
+
+/**
+ * Checks current state to see if the requested previous unit is valid to switch
+ * @param unit
+ * @returns {boolean}
+ */
+function isValidPrevUnit(unit) {
+    if (unit.data && unit.data && unit.data.chapter) {
+        // iterate over chapters
+        var chapterLength = unit.data.chapter.length;
+        while (chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+
+            if (chapter.info) {
+                // return false if prologue chapter
+                if (Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Checks current state to see if the requested previous page is valid to show
+ * @param page
+ * @returns {boolean}
+ */
+function isValidPrevPage(page) {
+
+    var inQuiz = false
+    if (_currentPage && _currentPage.state && _currentPage.state.quizpage) {
+        inQuiz = true;
+    }
+
+    // return false if coming from a non quiz page
+    if (page.state && page.state.quizpage && inQuiz === false) {
+        return false;
+    }
+    return true;
+}
+
 function loadPrevious() {
 
     var currentIndex = findCurrentPageIndex();
     var newIndex = currentIndex - 1;
-    if (newIndex === -1) {
-        var chapIndex = findCurrentChapterIndex() - 1;
-        if (chapIndex === - 1) {
-            var unitKey = findCurrentUnitKey();
-            unitKey = findPrevUnitKey(unitKey);
-            if (!unitKey) return;
-            _currentUnit = UnitStore.getAll()[unitKey];
-            chapIndex = _currentUnit.data.chapter.length -1;
+    var validPrevPage = false;
+
+    while (validPrevPage === false) {
+        if (newIndex === -1) {
+            var chapIndex = findCurrentChapterIndex() - 1;
+            if (chapIndex === - 1) {
+                var unitKey = findCurrentUnitKey();
+                unitKey = findPrevUnitKey(unitKey);
+                if (!unitKey) return;
+
+                var prevUnit = UnitStore.getAll()[unitKey];
+                var validPrevUnit = isValidPrevUnit(prevUnit);
+                if (validPrevUnit === false) return;
+
+                _currentUnit = UnitStore.getAll()[unitKey];
+                chapIndex = _currentUnit.data.chapter.length -1;
+            }
+            _currentChapter = _currentUnit.data.chapter[chapIndex];
+            newIndex = _currentChapter.pages.length - 1;
         }
-        _currentChapter = _currentUnit.data.chapter[chapIndex];
-        newIndex = _currentChapter.pages.length - 1;
+        var prevPage = _currentChapter.pages[newIndex];
+
+        // if the previous page is a quiz then skip
+        validPrevPage = isValidPrevPage(prevPage);
+
+        // if not valid get next index
+        if (validPrevPage === false) {
+            newIndex--;
+        }
     }
-    var prevPage = _currentChapter.pages[newIndex];
+
     load({unit:_currentUnit, chapter:_currentChapter, page:prevPage});
 }
 
