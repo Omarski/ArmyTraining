@@ -49,13 +49,15 @@ var CultureQuestView = React.createClass({
 
     onLayersReady:function(layersColl){
         var self = this;
+        
         this.setState({layersColl:layersColl}, function(){
             self.prepAnswersColl();
-            self.prepIntoPopup();
+            self.prepIntroPopup();
+            self.markHomeRegion();
         });
     },
 
-    prepIntoPopup: function(){
+    prepIntroPopup: function(){
 
         var self = this;
 
@@ -80,13 +82,46 @@ var CultureQuestView = React.createClass({
             }
         };
 
-        self.setState({popupObj:popupObj});
+        self.displayPopup(popupObj);
+
+    },
+    
+    prepGoBackPopup: function(){
+
+        var self = this;
+
+        var popupObj = {
+            id:"GoBack",
+            onClickOutside: self.onClosePopup,
+            popupStyle: {height:'20%', width:'60%', top:'40%', left:'20%', background:'#fff', opacity:1},
+
+            content: function(){
+                
+                return(
+                    <div className="culture-quest-popup-view-content">
+                        <div className="culture-quest-popup-view-bodyText">
+                            {self.state.imageData.keepTryingText}
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
 
     },
 
     onClosePopup: function(){
-        console.log("closing......");
         this.setState(({popupObj:null}));
+    },
+
+    markHomeRegion: function(){
+        for (var i = 0; i < this.state.imageData.regions.length; i++){
+            if (this.state.imageData.regions[i].home === true) {
+                this.state.layersColl[i].setAttribute("state","homeState");
+                return false;
+            }
+        }
     },
 
     prepAnswersColl: function() {
@@ -124,12 +159,17 @@ var CultureQuestView = React.createClass({
 
     onRegionClicked: function(canvasElement){
         
-        if (canvasElement.getAttribute('state') !== "last"){
+        if (canvasElement.getAttribute('state') !== "homeState"){
             this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
             this.setState({'lastSelected': canvasElement});
             this.showQuizUpdate("show");
         }else{
-            //if completed regions or not - popup or puzzle game
+            //regions done
+            if (this.getCompletedRegions() >= this.state.imageData.regions.length - 1){
+                this.setState({showPuzzleGame:true});
+            }else{
+                this.prepGoBackPopup();
+            } 
         }
         
     },
@@ -193,6 +233,15 @@ var CultureQuestView = React.createClass({
         this.state.answersColl = answersColl;
     },
 
+    getCompletedRegions: function(){
+
+        var completed = 0;
+        for (var i = 0 ; i < this.state.answersColl.length; i++){
+            if (this.state.answersColl[i].completed) completed++;
+        }
+        return completed;
+    },
+
     playAudio: function(audioObj){
         var self = this;
 
@@ -207,18 +256,11 @@ var CultureQuestView = React.createClass({
 
     displayPopup: function(popupObj){
 
-        var self = this;
-        this.setState({popupObj:popupObj}, function(){
-
-        });
+        this.setState({popupObj:popupObj});
     },
 
     setAudioControl: function(mode){
         this.setState({audioController:mode});
-    },
-
-    onAudioEnd: function(){
-        this.setState({audioObj:null});
     },
 
     render: function() {

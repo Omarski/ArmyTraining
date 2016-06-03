@@ -10,10 +10,8 @@ var FooterView = require('../components/FooterView');
 var NotificationView = require('../components/widgets/NotificationView');
 var NotificationActions = require('../actions/NotificationActions');
 var ConfigActions = require('../actions/ConfigActions');
-<<<<<<< HEAD
 var DragDropContext = require('react-dnd').DragDropContext;
 var HTML5Backend = require('react-dnd-html5-backend');
-=======
 var LocalizationStore = require('../stores/LocalizationStore');
 var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
@@ -21,7 +19,6 @@ var DliActions = require('../actions/DliActions');
 var DliStore = require('../stores/DliStore');
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
->>>>>>> upstream/master
 
 function getBookState() {
     var books = BookStore.getAll();
