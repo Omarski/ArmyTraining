@@ -14,6 +14,8 @@ module.exports = {
     MULTIPLE_CHOICE: "MultipleChoice",
     ORDERING: "Ordering",
     PRONUNCIATION: "Pronunciation",
+    QUESTIONNAIRE: "Questionnaire",
+    QUESTIONNAIRE_END: "QuestionnaireEnd",
     QUIZ_END: "QuizEnd",
     QUIZ_START: "QuizStart",
     RESPONSE_FORMATION: "ResponseFormation",
