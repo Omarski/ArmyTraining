@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var InfoTagConstants = require('../constants/InfoTagConstants');
 var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
+var PageTypeConstants = require('../constants/PageTypeConstants');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
 var BookmarkActions = require('../actions/BookmarkActions');
@@ -425,7 +426,7 @@ var PageStore = assign({}, EventEmitter.prototype, {
     },
 
     /**
-     * @returns (Array) Returns an ordered list of pages that match
+     * @returns (Array) Returns an ordered list of pages that are valid quiz pages
      */
     getChapterQuizPages: function() {
         var results = [];
@@ -437,8 +438,16 @@ var PageStore = assign({}, EventEmitter.prototype, {
             for (var i = 0; i < pagesLen; i++) {
                 var page = pages[i];
 
+                // skip some page types that are in a quiz
                 if (page.state && page.state.quizpage) {
-                    results.push(page);
+                    switch(page.type) {
+                        case PageTypeConstants.QUIZ_END:
+                        case PageTypeConstants.QUIZ_START:
+                        case PageTypeConstants.SECTION_END:
+                            break;  // skip
+                        default:
+                            results.push(page);
+                    }
                 }
             }
         }
