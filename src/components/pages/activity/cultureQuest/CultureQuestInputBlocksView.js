@@ -16,11 +16,11 @@ var CultureQuestInputBlocksView = React.createClass({
     render: function() {
 
         var self = this;
-        var blockStyle = {'fontSize': '25px', 'width':'40px','marginRight':'15px', 'padding':'5px',
-            'border':'5px solid #333333', 'textAlign':'center'};
+        var blockStyle = {'fontSize': '20px', 'width':'30px','marginRight':'5px', 'padding':'2px',
+            'border':'3px solid #333333', 'textAlign':'center'};
 
         return (
-           <input type = "text" style = {blockStyle} id={self.props.id} />
+           <input className = "culture-quest-quiz-input-blocks" type = "text" style = {blockStyle} id={self.props.id} />
         )
     }
 });

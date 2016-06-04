@@ -26,7 +26,8 @@ function getPageState(props) {
         answersColl:[],
         audioObj:null,
         audioController:"",
-        popupObj:null
+        popupObj:null,
+        mediaPath:'data/media/'
     };
 
 
@@ -83,7 +84,9 @@ var CultureQuestView = React.createClass({
         };
 
         self.displayPopup(popupObj);
-
+        
+        var debriefAudio = self.state.mediaPath + self.state.imageData.briefAudio;
+        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
     
     prepGoBackPopup: function(){
@@ -112,7 +115,7 @@ var CultureQuestView = React.createClass({
     },
 
     onClosePopup: function(){
-        this.setState(({popupObj:null}));
+        this.setState(({popupObj:null,audioObj:null}));
     },
 
     markHomeRegion: function(){
@@ -158,7 +161,9 @@ var CultureQuestView = React.createClass({
     },
 
     onRegionClicked: function(canvasElement){
-        
+
+        var keepTryingAudio = this.state.mediaPath + this.state.imageData.keepTryingAudio;
+
         if (canvasElement.getAttribute('state') !== "homeState"){
             this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
             this.setState({'lastSelected': canvasElement});
@@ -167,8 +172,11 @@ var CultureQuestView = React.createClass({
             //regions done
             if (this.getCompletedRegions() >= this.state.imageData.regions.length - 1){
                 this.setState({showPuzzleGame:true});
+                var debriefAudio = self.state.mediaPath + self.state.imageData.debriefAudio;
+                this.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
             }else{
                 this.prepGoBackPopup();
+                this.playAudio({id:"wrongAnswer", autoPlay:true, sources:[{format:"mp3", url:keepTryingAudio}]});
             } 
         }
         

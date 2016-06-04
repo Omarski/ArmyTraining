@@ -79,14 +79,14 @@ var CultureQuestQuiz = React.createClass({
 
     resetQuestion: function(){
 
-        $("#culture-quest-quiz-view-input-blocks-cont").children().val("");
+        $("[id^='culture-quest-quiz-view-inputBlock']").val("");
         this.setState({hintMode:false, skipMode:false, timerDuration:30, timerMessage:null,
                        timerReportAt:{time:20, alert:"hintTime"}}, function(){
             this.setState({timerParentAlerts:"timerReset"});
             this.renderQuestionText();
         });
     },
-    
+
     renderBlocks: function(){
 
         var self = this;
@@ -95,15 +95,35 @@ var CultureQuestQuiz = React.createClass({
         var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
 
         self.state.correctAnswer = answer;
-        var answerArray = answer.split('');
+        var blocksColl = [];
 
-        var blocks = answerArray.map(function(letter, index){
+        var answerBlocksArray = answer.split(' ');
+
+        //for each word in answer
+        for (var i = 0 ; i < answerBlocksArray.length; i++) {
+
+            var blocks = answerBlocksArray[i].split('').map(function (letter, index) {
+                return (
+                    <CultureQuestInputBlocksView id={"culture-quest-quiz-view-inputBlock"+index} key={index}/>
+                )
+            });
+
+            blocksColl.push(blocks);
+        }
+
+        //wrap word blocks
+        var blocksRender = blocksColl.map(function(wordBlock,index){
+
             return (
-                <CultureQuestInputBlocksView id={"culture-quest-quiz-view-inputBlock"+index} key={index} />
+                <div className="culture-quest-quiz-view-blockGroup"
+                     id="culture-quest-quiz-view-blockGroup" key={index}>
+                    {wordBlock}
+                </div>
             )
         });
+
         self.state.inputBlocksColl = blocks;
-        return blocks;
+        return blocksRender;
     },
 
     setInputTabbing: function(){
@@ -185,9 +205,7 @@ var CultureQuestQuiz = React.createClass({
             }
         //incorrect
         }else{
-
-            self.props.playAudio({id:"wrongAnswer", autoPlay:true, sources:[{format:"mp3", url:keepTryingAudio}]});
-
+            
             //1st attempt
             if (answerObj["question"+answerObj.onQuestion].attempts++ === 1){
                 $("input[id^='culture-quest-quiz-view-inputBlock']").each(function(){$(this).val("");});
@@ -197,7 +215,7 @@ var CultureQuestQuiz = React.createClass({
             //2nd attempt
             }else{
                 self.updateTimerController("pause");
-                var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
+                var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion].replace(/\s/g, '');
                 var answerArray = answer.split('');
                 $("input[id^='culture-quest-quiz-view-inputBlock']").each(function(index,value){
                     $(this).val(answerArray[index]);

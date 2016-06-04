@@ -10,7 +10,8 @@ var CultureQuestPuzzleGameView = React.createClass({
         return {
             mediaPath: 'data/media/',
             stageIsTarget:false,
-            pointerOffset:{x:0, y:0}
+            pointerOffset:{x:0, y:0},
+            dragOriginX:0
         }
     },
 
@@ -120,6 +121,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
         var dragItem = component.getDOMNode();
+        this.setState({dragOriginX:parseInt(dragItem.style.left.replace("px",""))});
         dragItem.style.width  = "112px";
         dragItem.style.height = "168px";
     },
@@ -127,17 +129,39 @@ var CultureQuestPuzzleGameView = React.createClass({
     onDraggableEndDrag: function(itemObj, monitor, component){
 
         var dragItem = component.getDOMNode();
-        var target = $("#"+monitor.getDropResult().id);
 
-        if (monitor.didDrop()) {
-            if (monitor.getDropResult().id !== "puzzleStageTarget"){
-                dragItem.style.top  = $(target).position().top+"px";
-                dragItem.style.left = $(target).position().left+"px";
-            }else{
-                dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
-                dragItem.style.left = (this.state.pointerOffset.x - parseInt(dragItem.style.width) / 2)+"px";
+        if (monitor.getDropResult()) {
+            var target = $("#"+monitor.getDropResult().id);
+
+            if (monitor.didDrop()) {
+                if (monitor.getDropResult().id !== "puzzleStageTarget"){
+                    dragItem.style.top  = $(target).position().top+"px";
+                    dragItem.style.left = $(target).position().left+"px";
+                    $(target).attr("pieceNumber", $(dragItem).attr("id").substring(15));
+                    this.checkCompletion();
+                }else{
+                    dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
+                    dragItem.style.left = (this.state.pointerOffset.x - parseInt(dragItem.style.width) / 2)+"px";
+                }
             }
+        }else{
+            //dragged shrunk only if dragged from slider
+            if (this.state.dragOriginX > 700){
+                dragItem.style.width  = "40px";
+                dragItem.style.height = "50px";
+            }
+
         }
+    },
+
+    checkCompletion: function(){
+        var correctColl = "";
+        var placedPuzzles = "";
+        $("[id^='puzzleTarget']").each(function(){
+            if ($(this).attr('pieceNumber')) placedPuzzles += ($(this).attr('pieceNumber'));
+            correctColl += $(this).attr('id').substring(12);
+        });
+        if (placedPuzzles === correctColl) console.log("Completed....");
     },
 
     draggableCanDragCond: function(itemObj){

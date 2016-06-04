@@ -18,8 +18,12 @@ var puzzlePieceSource = {
         return {id: props.id, component:component};
     },
     endDrag: function(props, monitor, component){
-        props.onDraggableEndDrag({id: props.id},monitor,component);
-        return {id: props.id};
+
+        if (!monitor.didDrop()) {
+            props.onDraggableEndDrag({id: props.id},monitor,component);
+            return {id: props.id};
+        }
+        else return{}
     }
 };
 
