@@ -421,6 +421,14 @@ var PageStore = assign({}, EventEmitter.prototype, {
         return false;
     },
 
+    getPageAnswer: function() {
+        if(_currentPage && _currentPage.state && _currentPage.state.answer) {
+            return _currentPage.state.answer;
+        }
+
+        return null;
+    },
+
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
