@@ -1,7 +1,7 @@
 /**
  * Created by Alec on 6/2/2016.
  */
-var React = require('react');o
+var React = require('react');
 
 
 function getPageState(props) {
