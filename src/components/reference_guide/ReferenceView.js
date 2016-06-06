@@ -67,7 +67,7 @@ var ReferenceView = React.createClass({
 
             switch(selectedIndex){
                 case REFERENCE_PDF_VIEW:
-                    this.setState({ selectedIndex: REFERENCE_MAP_VIEW, showModal: false});
+                    this.setState({showModal: false});
                     break;
                 case REFERENCE_DICTIONARY_VIEW:
                     this.setState({selectedIndex: REFERENCE_DICTIONARY_VIEW, dictionarySourceKey: sourceKey });

@@ -29,23 +29,29 @@ var _hasReference = false;
 
 
  function loadConfig() {
-     $.getJSON("data/config.json", function(data){
+     $.getJSON("data/config.json")
+         .done(function(data){
          // is there a DLI file?
-         if(data.hasOwnProperty('dli')){
-             _hasDLI = true;
-         }
+         if(data){
+             if(data.hasOwnProperty('dli')){
+                 _hasDLI = true;
+             }
 
-         // is there an asr?
-         if(data.hasOwnProperty('asr')){
-             _needsASR = true;
-         }
+             // is there an asr?
+             if(data.hasOwnProperty('asr')){
+                 _needsASR = true;
+             }
 
-         // is there are reference section?
-         if(data.hasOwnProperty('reference')){
-             _hasReference = true;
+             // is there are reference section?
+             if(data.hasOwnProperty('reference')){
+                 _hasReference = true;
+             }
          }
          ConfigActions.loadComplete();
-     });
+        })
+        .fail(function(){
+             ConfigActions.loadComplete();
+         });
 }
 
 var ConfigStore = assign({}, EventEmitter.prototype, {
