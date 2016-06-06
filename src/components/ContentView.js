@@ -18,6 +18,7 @@ var ListeningComprehensionView = require('../components/pages/activity/Listening
 var MatchItemView = require('../components/pages/activity/MatchItemView');
 var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
 var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceView');
+var MiniCoachedConversationView = require('../components/pages/activity/MiniCoachedConversationView');
 var OrderingView = require('../components/pages/activity/OrderingView');
 var QuestionnaireView = require('../components/pages/content/QuestionnaireView');
 //var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
