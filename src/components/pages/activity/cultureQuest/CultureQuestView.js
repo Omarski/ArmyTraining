@@ -3,7 +3,7 @@
  */
 var React = require('react');
 var AudioPlayer = require('../../../widgets/AudioPlayer');
-var CultureQuestPopupView = require('./CultureQuestPopupView');
+var PopupView = require('./../../../widgets/PopupView');
 var CultureQuestMapView = require('./CultureQuestMapView');
 var CultureQuestQuizView = require('./CultureQuestQuizView');
 var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
@@ -70,11 +70,11 @@ var CultureQuestView = React.createClass({
             content: function(){
                 
                 return(
-                    <div className="culture-quest-popup-view-content">
-                        <div className="culture-quest-popup-view-bodyText">
+                    <div className="popup-view-content">
+                        <div className="popup-view-bodyText">
                             {self.state.imageData.briefText}
                         </div>
-                        <div className="culture-quest-popup-view-buttonCont">
+                        <div className="popup-view-buttonCont">
                             <button type="button" className="btn btn-default"
                                     onClick={self.onClosePopup}>Start</button>
                         </div>
@@ -101,8 +101,8 @@ var CultureQuestView = React.createClass({
             content: function(){
                 
                 return(
-                    <div className="culture-quest-popup-view-content">
-                        <div className="culture-quest-popup-view-bodyText">
+                    <div className="popup-view-content">
+                        <div className="popup-view-bodyText">
                             {self.state.imageData.keepTryingText}
                         </div>
                     </div>
@@ -162,6 +162,7 @@ var CultureQuestView = React.createClass({
 
     onRegionClicked: function(canvasElement){
 
+        var self = this;
         var keepTryingAudio = this.state.mediaPath + this.state.imageData.keepTryingAudio;
 
         if (canvasElement.getAttribute('state') !== "homeState"){
@@ -262,6 +263,10 @@ var CultureQuestView = React.createClass({
         });
     },
 
+    audioController: function(mode){
+        return mode;
+    },
+
     displayPopup: function(popupObj){
 
         this.setState({popupObj:popupObj});
@@ -294,15 +299,13 @@ var CultureQuestView = React.createClass({
                     /> : null}
 
                     {self.state.popupObj ?
-                    <CultureQuestPopupView
+                    <PopupView
                         id = {self.state.popupObj.id}
                         popupStyle = {self.state.popupObj.popupStyle}
                         onClickOutside = {self.state.popupObj.onClickOutside}
                     >
                     {self.state.popupObj.content()}
-                    </CultureQuestPopupView>:null}
-
-                    {self.state.showPopup ? <CultureQuestPopupView />:null}
+                    </PopupView>:null}
 
                     <CultureQuestMapView
                         imageData = {state.imageData}
@@ -339,6 +342,8 @@ var CultureQuestView = React.createClass({
 
                     {self.state.showPuzzleGame? <CultureQuestPuzzleGameView
                     imageData={state.imageData}
+                    displayPopup={this.displayPopup}
+                    onClosePopup={this.onClosePopup}
                     />:null}
 
                 </div>

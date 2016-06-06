@@ -6,27 +6,18 @@ var CultureQuestPopupView = React.createClass({
     propTypes: {
 
         popupStyle: PropTypes.object.isRequired,
-        onClickOutside: PropTypes.func.isRequired
-    },
-
-    getInitialState: function() {
-
-        return {
-        };
-    },
-
-    componentDidMount: function() {
+        onClickOutside: PropTypes.func
     },
 
     render: function() {
 
         return (
-            <div id={"cultureQuestPopupContBack"+this.props.id}
-                 className="culture-quest-popup-view-background"
+            <div id={"popupContBack"+this.props.id}
+                 className="popup-view-background"
                  onClick={this.props.onClickOutside}>
 
-                <div className="culture-quest-popup-view-cont"
-                id={"cultureQuestPopupCont"+this.props.id}
+                <div className="popup-view-cont"
+                id={"popupCont"+this.props.id}
                 style={this.props.popupStyle}
                 >
                     {this.props.children}

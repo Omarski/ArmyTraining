@@ -23,7 +23,7 @@ var CultureQuestQuiz = React.createClass({
             questionDisplayObj:{},
             correctAnswer:"",
             questionIntro: "Remember, you can press BACKSPACE to erase letters.",
-            hintIntro: "Oh, you don't know? Let me give you a hint.",
+            hintIntro: this.props.imageData.hintBlurb,
             answerRevealIntro: "Not quite, but here's the answer you are looking for.",
             earnedPuzzleAwardText:"I want you to take this with you.",
             hintMode: false,
@@ -37,6 +37,7 @@ var CultureQuestQuiz = React.createClass({
     },
 
     componentDidMount: function() {
+        this.getQuestionQuotes;
         this.renderQuestionText();
     },
 
@@ -44,6 +45,10 @@ var CultureQuestQuiz = React.createClass({
 
         if (this.props.lastSelected) return parseInt(this.props.lastSelected.getAttribute('id').substring(18));
         return false;
+    },
+
+    getQuestionQuotes: function(){
+        var questionIntr
     },
 
     getSelectedJSON: function(){

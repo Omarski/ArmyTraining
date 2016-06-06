@@ -1,6 +1,7 @@
 
 var React = require('react');
 var DnDPuzzleView = require('../../../widgets/DragAndDropPuzzle/DnDPuzzleView');
+var VideoPlayer = require('../../../widgets/VideoPlayer');
 var PropTypes = React.PropTypes;
 
 var CultureQuestPuzzleGameView = React.createClass({
@@ -11,7 +12,8 @@ var CultureQuestPuzzleGameView = React.createClass({
             mediaPath: 'data/media/',
             stageIsTarget:false,
             pointerOffset:{x:0, y:0},
-            dragOriginX:0
+            dragOriginX:0,
+            showVideo:false
         }
     },
 
@@ -21,9 +23,38 @@ var CultureQuestPuzzleGameView = React.createClass({
     },
 
     componentWillMount: function() {
+        this.displayPuzzlePopup();
         this.prepDraggableData();
         this.prepTargetData();
         this.prepStageTargetObj();
+    },
+
+    componentDidMount: function(){
+        //special gift piece
+        $("#puzzleTarget0").attr("pieceNumber","0");
+    },
+
+    displayPuzzlePopup: function(){
+
+        var self = this;
+        var popupObj = {
+            id:"PuzzleBackground",
+            //onClickOutside: this.props.onClosePopup,
+            popupStyle: {height:'80%', width:'70%', top:'10%', left:'10%', background:'#fff', zIndex:'25'},
+
+            content: function(){
+
+                return(
+                    <div className="popup-view-content">
+                        <div className="popup-view-bodyText">
+                            {self.props.imageData.debriefText}
+                        </div> 
+                    </div>
+                )
+            }
+        };
+
+        this.props.displayPopup(popupObj);
     },
 
     prepDraggableData: function(){
@@ -38,6 +69,13 @@ var CultureQuestPuzzleGameView = React.createClass({
             var draggableStyle = {position:'absolute', width:'40px', height:'50px',
                 background: "url('"+imgUrl+"') no-repeat 100% 100%", zIndex:'30',
                 left: left+"px", top:topStart+(pieceHeight * i)+"px"};
+
+            if (i === 0) {
+                draggableStyle.top = "113px";
+                draggableStyle.left = "215px";
+                draggableStyle.width = "112px";
+                draggableStyle.height = "168px";
+            }
 
             var draggableObj = {
                 
@@ -76,11 +114,11 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         for (var i=0; i < imageData.regions.length; i++){
 
-            var targetStyle = {position:'absolute', width:'110px', height:'165px',
+            var targetStyle = {position:'absolute', width:'110px', height:'165px', zIndex:'50px',
                 background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
                 border:'1px solid #000'};
 
-            var targetOverStyle = {position:'absolute', width:'110px', height:'165px',
+            var targetOverStyle = {position:'absolute', width:'110px', height:'165px', zIndex:'50px',
                 background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
                 border:'1px solid red'};
 
@@ -161,7 +199,12 @@ var CultureQuestPuzzleGameView = React.createClass({
             if ($(this).attr('pieceNumber')) placedPuzzles += ($(this).attr('pieceNumber'));
             correctColl += $(this).attr('id').substring(12);
         });
-        if (placedPuzzles === correctColl) console.log("Completed....");
+        
+        //completed
+        if (placedPuzzles === correctColl) {
+            this.setState({showVideo:true});
+        }
+
     },
 
     draggableCanDragCond: function(itemObj){
@@ -182,8 +225,16 @@ var CultureQuestPuzzleGameView = React.createClass({
         //return true or false according to target
     },
 
+    onClosePopup: function(){
+        //bubble up
+        this.props.onClosePopup();
+    },
+
     render: function() {
 
+        var self=this;
+        //var videoUrl = this.state.mediaPath + this.state.imageData.videoReward;
+        var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
         var stageStyle = {width:'768px', height:'506px', display:'block',
                           top: '34px', left:'0', position:'absolute', zIndex:'25'};
 
@@ -204,6 +255,16 @@ var CultureQuestPuzzleGameView = React.createClass({
                 />
                 <div className = "culture-quest-puzzle-game-view-puzzleSlider">
                 </div>
+
+                {self.state.showVideo ?
+                    <VideoPlayer
+                        id="puzzleAwardVideo"
+                        style={{zIndex:'50',position:'absolute',top:'20%',left:'10%'}}
+                        sources={[{format:"mp4",url:videoUrl}]}
+                        autoPlay={true}
+                        width="400"
+                        height="300"
+                    />:null}
             </div>
         )
     }
