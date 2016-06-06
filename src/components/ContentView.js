@@ -17,6 +17,7 @@ var ListeningComprehensionView = require('../components/pages/activity/Listening
 var MatchItemView = require('../components/pages/activity/MatchItemView');
 var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
 var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceView');
+var MiniCoachedConversationView = require('../components/pages/activity/MiniCoachedConversationView');
 var OrderingView = require('../components/pages/activity/OrderingView');
 var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizView = require('../components/pages/activity/QuizView');
