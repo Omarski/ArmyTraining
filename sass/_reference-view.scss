@@ -1,3 +1,27 @@
 #referenceView {
   display: inline;
 }
+
+#gestureVideo{
+  background-color: grey;
+  margin-top: 10px;
+}
+
+.reference-view-search-form {
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.video-wrapper{
+  text-align: center;
+}
+
+#referenceMapView{
+  margin: 10px;
+  text-align: center;
+}
+
+.filterable-table-header{
+  cursor: pointer;
+}

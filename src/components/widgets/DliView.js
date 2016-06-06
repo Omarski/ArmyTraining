@@ -4,6 +4,7 @@
 var React = require('react');
 var ConfigStore = require('../../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
+var DliStore = require('../../stores/DliStore');
 
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Modal = ReactBootstrap.Modal;
@@ -11,21 +12,18 @@ var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 
 
+var _DliList = null;
 
 function getSettingsState(props) {
     var data = {
         modalControl: null,
-        nameList: ConfigStore.getDliList().dli,
+        nameList: [],
         iframeSrc: ""
     };
-
-    if(props){
-        console.log("DliView props...");
-        console.dir(props);
-    }
-
     return data;
 }
+
+
 
 var DliView = React.createClass({
     getInitialState: function() {
@@ -35,6 +33,10 @@ var DliView = React.createClass({
 
     close: function(){
         this.setState({ showModal: false });
+    },
+
+    componentDidMount: function(){
+        DliStore.addChangeListener(this._onDliChange);
     },
 
     openDliWindow: function(name, e){
@@ -51,25 +53,14 @@ var DliView = React.createClass({
         this.setState({ showModal: true, iframeSrc: src }); /* show modal */
     },
 
-    componentWillMount: function() {
-      //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentDidMount: function() {
-      //  SettingsStore.addChangeListener(this._onChange);
-    },
-
-    componentWillUnmount: function() {
-      //  SettingsStore.removeChangeListener(this._onChange);
-    },
     render: function() {
         var self = this;
         var dliIcon = <span className="glyphicon glyphicon-book btn-icon" aria-hidden="true"></span>;
 
         var nameList = self.state.nameList;
         var selections = nameList.map(function(item, index){
-            return(<ReactBootstrap.ListGroupItem>
-                <a key={"dliPopoverLinks"+index}  href="#" onClick={self.openDliWindow.bind(self, item.name)}>{item.name}</a>
+            return(<ReactBootstrap.ListGroupItem key={"dliPopoverLinks"+index}>
+                <a href="#" onClick={self.openDliWindow.bind(self, item.name)}>{item.name}</a>
             </ReactBootstrap.ListGroupItem>);
         });
 
@@ -98,6 +89,11 @@ var DliView = React.createClass({
     },
     _onChange: function() {
         this.setState(getSettingsState());
+    },
+    _onDliChange:function(){
+        this.setState({
+            nameList: DliStore.getDliPaths()
+        });
     }
 });
 

@@ -5,6 +5,7 @@ var LoaderStore = require('../stores/LoaderStore');
 var LoaderActions = require('../actions/LoaderActions');
 var HeaderView = require('../components/HeaderView');
 var ContentView = require('../components/ContentView');
+var ConfigStore = require('../stores/ConfigStore');
 var FooterView = require('../components/FooterView');
 var NotificationView = require('../components/widgets/NotificationView');
 var NotificationActions = require('../actions/NotificationActions');
@@ -12,7 +13,10 @@ var ConfigActions = require('../actions/ConfigActions');
 var LocalizationStore = require('../stores/LocalizationStore');
 var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
-var ConfigStore = require('../stores/ConfigStore');
+var DliActions = require('../actions/DliActions');
+var DliStore = require('../stores/DliStore');
+var ReferenceActions = require('../actions/ReferenceActions');
+var ReferenceStore = require('../stores/ReferenceStore');
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -27,10 +31,20 @@ function getBookState() {
     };
 }
 
+
+
 var MainView = React.createClass({
 
     loadConfiguration: function() {
         ConfigActions.load();
+    },
+
+    loadDli: function(){
+        DliActions.load();
+    },
+
+    loadReference: function (){
+        ReferenceActions.load();
     },
 
     loadCoachFeedback: function() {
@@ -52,6 +66,9 @@ var MainView = React.createClass({
         ConfigStore.addChangeListener(this._onConfigChange);
         CoachFeedbackStore.addChangeListener(this._onCoachFeedbackChange);
         LoaderStore.addChangeListener(this._onChange);
+        DliStore.addChangeListener(this._onDliChange);
+        ReferenceStore.addChangeListener(this._onReferenceChange);
+
     },
 
     componentDidMount: function() {
@@ -93,7 +110,6 @@ var MainView = React.createClass({
      * Event handler for 'change' events coming from the LocalizationStore
      */
     _onLocalizationChange: function() {
-        console.log("_onLocalizationChange")
         var self = this;
         setTimeout(function() {
             self.loadConfiguration();
@@ -104,7 +120,6 @@ var MainView = React.createClass({
      * Event handler for 'change' events coming from the ConfigStore
      */
     _onConfigChange: function() {
-        console.log("_onConfigChange")
         var self = this;
         setTimeout(function() {
             self.loadCoachFeedback();
@@ -115,12 +130,26 @@ var MainView = React.createClass({
      * Event handler for 'change' events coming from the CoachFeedbackStore
      */
     _onCoachFeedbackChange: function() {
-        console.log("_onCoachFeedbackChange")
+        var self = this;
+        setTimeout(function() {
+            self.loadDli();
+        }, 100)
+    },
+
+    _onDliChange: function (){
+        var self = this;
+        setTimeout(function() {
+            self.loadReference();
+        }, 100)
+    },
+
+    _onReferenceChange: function(){
         var self = this;
         setTimeout(function() {
             self.loadData();
         }, 100)
     }
+
 
 });
 
