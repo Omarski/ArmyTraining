@@ -1,0 +1,26 @@
+@mixin puzzle-map-view-trans($transType) {
+  transition: $transType .75s ease-in-out;
+  -moz-transition: $transType .75s ease-in-out;
+  -webkit-transition: $transType .75s ease-in-out;
+}
+
+.puzzle-map-view-mapCont{
+
+  position:absolute;
+  display:block;
+  top:30px;
+  width: 768px;
+  height: 504px;
+  z-index:1;
+  overflow: hidden;
+
+  .puzzle-map-view-HUD-cont{
+
+    background: #686868;
+    position:absolute;
+    display:block;
+    width: 283px;
+    height:166px;
+    border: 2px solid #fff
+  }
+}

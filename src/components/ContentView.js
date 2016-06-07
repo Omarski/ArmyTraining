@@ -27,6 +27,7 @@ var UtteranceFormationView = require('../components/pages/activity/UtteranceForm
 var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
 var NotificationActions = require('../actions/NotificationActions');
 var CultureQuestView = require('../components/pages/activity/cultureQuest/CultureQuestView');
+var PuzzleMapView = require('../components/pages/activity/puzzleMap/PuzzleMapView');
 
 function getPageState() {
     var page = null;
@@ -183,6 +184,9 @@ var ContentView = React.createClass({
                     break;
                 case "CultureQuest":
                     page= <CultureQuestView page={this.state.page} />;
+                    break;
+                case "PuzzleMap":
+                    page= <PuzzleMapView page={this.state.page} />;
                     break;
                 default:
                     page = <DefaultPageView page={this.state.page} />;
