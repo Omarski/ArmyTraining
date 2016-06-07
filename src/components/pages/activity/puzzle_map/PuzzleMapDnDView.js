@@ -9,21 +9,21 @@ var PuzzleMapDnDView = React.createClass({
 
         return {
             mediaPath: 'data/media/',
-            stageIsTarget:false,
             pointerOffset:{x:0, y:0},
-            dragOriginX:0,
         }
     },
 
     propTypes: {
 
-        imageData: PropTypes.object.isRequired
+        imageData: PropTypes.object.isRequired,
+        puzzlePiecesObj: PropTypes.object.isRequired,
+        scoreObj: PropTypes.object.isRequired,
+        updateHUDView: PropTypes.func.isRequired
     },
 
     componentWillMount: function() {
         this.prepDraggableData();
         this.prepTargetData();
-        this.prepStageTargetObj();
     },
 
     componentDidMount: function(){
@@ -102,22 +102,6 @@ var PuzzleMapDnDView = React.createClass({
         return targetColl;
     },
 
-    prepStageTargetObj: function(){
-
-        var stageStyle = {position:'absolute', width:'765px', height:'502px',
-            top:'0', left:'0', zIndex:'10'};
-
-        return {
-            id:"puzzleStageTarget",
-            imgUrl:null,
-            targetStyle: stageStyle,
-            targetOverStyle: null,
-            onTargetDrop: this.onTargetDrop,
-            onTargetHover: this.onTargetHover,
-            targetCanDropCond: this.state.stageIsTarget
-        };
-    },
-
     onPuzzleReady: function(draggableColl, targetColl){
     },
 
@@ -140,7 +124,7 @@ var PuzzleMapDnDView = React.createClass({
                     dragItem.style.top  = $(target).position().top+"px";
                     dragItem.style.left = $(target).position().left+"px";
                     $(target).attr("pieceNumber", $(dragItem).attr("id").substring(15));
-                    this.checkCompletion();
+
                 }else{
                     dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
                     dragItem.style.left = (this.state.pointerOffset.x - parseInt(dragItem.style.width) / 2)+"px";
@@ -156,20 +140,6 @@ var PuzzleMapDnDView = React.createClass({
         }
     },
 
-    checkCompletion: function(){
-        var correctColl = "";
-        var placedPuzzles = "";
-        $("[id^='puzzleTarget']").each(function(){
-            if ($(this).attr('pieceNumber')) placedPuzzles += ($(this).attr('pieceNumber'));
-            correctColl += $(this).attr('id').substring(12);
-        });
-
-        //completed
-        if (placedPuzzles === correctColl) {
-            this.setState({showVideo:true});
-        }
-
-    },
 
     draggableCanDragCond: function(itemObj){
         //return true or false according to target
@@ -180,7 +150,6 @@ var PuzzleMapDnDView = React.createClass({
     },
 
     onTargetHover: function(targetObj, monitor, component){
-        this.setState({stageIsTarget: targetObj.id === "puzzleStageTarget"});
         var offset = monitor.getSourceClientOffset();
         if (offset) this.setState({pointerOffset:{x:offset.x, y:offset.y}})
     },
@@ -197,17 +166,14 @@ var PuzzleMapDnDView = React.createClass({
     render: function() {
 
         var self=this;
-        //var videoUrl = this.state.mediaPath + this.state.imageData.videoReward;
-        var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
-        var stageStyle = {width:'768px', height:'506px', display:'block',
-            top: '34px', left:'0', position:'absolute', zIndex:'25'};
+        var hudStyle = {};
 
         return (
             <div>
                 <DnDPuzzleView
-                    stageStyle           = {stageStyle}
+                    stageStyle           = {null}
                     draggableColl        = {this.prepDraggableData()}
-                    stageTargetObj       = {this.prepStageTargetObj()}
+                    stageTargetObj       = {null}
                     targetsColl          = {this.prepTargetData()}
                     onDraggableBeginDrag = {this.onDraggableBeginDrag}
                     onDraggableEndDrag   = {this.onDraggableEndDrag}
@@ -217,8 +183,16 @@ var PuzzleMapDnDView = React.createClass({
                     targetCanDropCond    = {null}
                     onPuzzleReady        = {this.onPuzzleReady}
                 />
-                <div className = "culture-quest-puzzle-game-view-puzzleSlider">
-                </div>
+
+                <PuzzleMapHUDView
+                    hudStyle = {hudStyle}
+                    imageData = {self.props.imageData}
+                    loadedImageColl = {self.props.loadedImageColl}
+                    scoreObj = {self.props.scoreObj}
+                />
+
+                <canvas width="768" height="504" className = "puzzle-map-view-bottom-canvas">
+                </canvas>
             </div>
         )
     }

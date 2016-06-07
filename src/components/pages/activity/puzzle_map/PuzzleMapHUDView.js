@@ -11,20 +11,23 @@ var PuzzleMapHUDView = React.createClass({
     },
 
     propTypes: {
-
         hudStyle: PropTypes.object.isRequired,
+        imageData: PropTypes.object.isRequired,
+        loadedImageColl: PropTypes.array.isRequired,
+        scoreObj: PropTypes.object.isRequired
     },
 
     render: function() {
 
         var self = this;
-        var blockStyle = {'fontSize': '20px', 'width':'30px','marginRight':'5px', 'padding':'2px',
-            'border':'3px solid #333333', 'textAlign':'center'};
 
         return (
-            <div className = "puzzle-map-view-HUD-cont" style = {self.props.hudStyle} />
+            <div className = "puzzle-map-view-HUD-cont" style = {self.props.hudStyle}>
+                <div className="puzzle-map-view-HUD-completed">{self.props.scoreObj.remaining} countries left</div>
+                <div className="puzzle-map-view-HUD-correct">{self.props.scoreObj.correct}/{self.props.scoreObj.totalCountries} correct</div>
+            </div>
         )
     }
 });
 
-module.exports = PuzzleMapHUDView
+module.exports = PuzzleMapHUDView;

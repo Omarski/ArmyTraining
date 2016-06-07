@@ -21,6 +21,38 @@
     display:block;
     width: 283px;
     height:166px;
-    border: 2px solid #fff
+    top:20px;
+    left:20px;
+    border: 2px solid #fff;
+
+    .puzzle-map-view-HUD-completed{
+
+      position:absolute;
+      display:block;
+      width: 160px;
+      height:25px;
+      bottom:10px;
+      left:20px;
+    }
+
+    .puzzle-map-view-HUD-correct{
+
+      position:absolute;
+      display:block;
+      width: 120px;
+      height:25px;
+      bottom:10px;
+      right:10px;
+    }
+  }
+
+  .puzzle-map-view-bottom-canvas{
+
+    position:absolute;
+    top:30px;
+    left:0;
+    width: 768px;
+    height: 504px;
+    z-index:2;
   }
 }

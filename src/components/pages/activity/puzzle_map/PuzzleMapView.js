@@ -6,6 +6,7 @@ var AudioPlayer = require('../../../widgets/AudioPlayer');
 var PopupView = require('./../../../widgets/PopupView');
 var PuzzleMapDnDView = require("./PuzzleMapDnDView");
 var PageHeader = require('../../../widgets/PageHeader');
+//var tempJson = require('./AfpakPuzzleMap.js');
 
 function getPageState(props) {
 
@@ -14,11 +15,17 @@ function getPageState(props) {
         sources: [],
         title: "",
         pageType: "",
-        showPopup: false,
+        showHUD: false,
         audioObj:null,
         audioController:"",
         popupObj:null,
-        mediaPath:'data/media/'
+        mediaPath:'data/media/',
+        loadedImageColl:[],
+        loadCounter:0,
+        totalImages:0,
+        scoreObj:{},
+        currentIndex:0,
+        puzzlePiecesColl:[]
     };
 
 
@@ -26,7 +33,8 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
-        data.imageData = JSON.parse(data.page.info.property[2].value);
+        data.imageData = JSON.parse(tempJSON);
+        //data.imageData = JSON.parse(data.page.info.property[2].value);
     }
 
     return data;
@@ -39,35 +47,58 @@ var PuzzleMapView = React.createClass({
         return pageState;
     },
 
-    renderPuzzlePopup: function(){
+    componentDidMount: function() {
+
+       this.preloadImages();
+       this.preparePuzzlePieces();
+    },
+
+    preloadImages: function(){
 
         var self = this;
+        var state = self.state;
+        var imageColl = [];
 
-        var popupObj = {
-            id:"PuzzlePopup",
-            onClickOutside: self.onClosePopup,
-            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1},
+        self.props.imageColl.map(function(region,index){
+            imageColl.push({correct:self.state.mediaPath+region.correctImageName,
+                labeled:self.state.mediaPath+region.labeledImageName,
+                hint:self.state.mediaPath+region.imageFileName});
+        });
 
-            content: function(){
+        self.setState({totalImages:imageColl.length * 3});
 
-                return(
-                    <div className="popup-view-content">
-                        <div className="popup-view-bodyText">
-
-                        </div>
-                        <div className="popup-view-buttonCont">
-                            <button type="button" className="btn btn-default"
-                                    onClick={self.onClosePopup}>Start</button>
-                        </div>
-                    </div>
-                )
+        for (var i=0 ; i < imageColl.length; i++){
+            for (var key in imageColl[i]){
+                state.loadedImageColl[i][key] = new Image();
+                state.loadedImageColl[i][key].src = imageColl[i];
+                state.loadedImageColl[i][key].onload = self.loadCounter;
             }
-        };
+        }
+    },
 
-        self.displayPopup(popupObj);
+    loadCounter: function(){
+        var self = this;
+        self.state.loadCounter++;
+        if (self.state.loadCounter == self.state.totalImages){
+            this.onImagesPreloaded();
+        }
+    },
 
-        var debriefAudio = self.state.mediaPath + self.state.imageData.briefAudio;
-        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
+    onImagesPreloaded: function(){
+        console.log("Images loaded...");
+        this.renderHUD();
+    },
+
+    preparePuzzlePieces: function(){
+
+    },
+
+    renderHUD: function(){
+
+    },
+
+    updateHUDView: function(mode){
+        this.setState({showHUD:mode});
     },
 
     onClosePopup: function(){
@@ -113,15 +144,15 @@ var PuzzleMapView = React.createClass({
                 <div id="puzzleMapViewBlock">
 
                     <div className="puzzle-map-view-mapCont" style={backMapStyle}>
-                        <PuzzleMapDnDView>
-
-                        </PuzzleMapDnDView>
+                       <PuzzleMapDnDView
+                           imageData = {state.imageData}
+                           puzzlePiecesObj = {state.puzzlePiecesColl[state.currentIndex]}
+                           scoreObj = {state.scoreObj}
+                           updateHUDView = {self.updateHUDView}
+                       />
                     </div>
-
                 </div>
             </div>
-
-
         );
     },
     
