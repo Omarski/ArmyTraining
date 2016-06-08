@@ -12,7 +12,6 @@ var PuzzleMapHUDView = React.createClass({
 
     propTypes: {
         hudStyle: PropTypes.object.isRequired,
-        imageData: PropTypes.object.isRequired,
         loadedImageColl: PropTypes.array.isRequired,
         scoreObj: PropTypes.object.isRequired
     },
@@ -24,7 +23,7 @@ var PuzzleMapHUDView = React.createClass({
         return (
             <div className = "puzzle-map-view-HUD-cont" style = {self.props.hudStyle}>
                 <div className="puzzle-map-view-HUD-completed">{self.props.scoreObj.remaining} countries left</div>
-                <div className="puzzle-map-view-HUD-correct">{self.props.scoreObj.correct}/{self.props.scoreObj.totalCountries} correct</div>
+                <div className="puzzle-map-view-HUD-correct">{self.props.scoreObj.correct}/{self.props.scoreObj.totalPieces} correct</div>
             </div>
         )
     }

@@ -6,7 +6,6 @@ var AudioPlayer = require('../../../widgets/AudioPlayer');
 var PopupView = require('./../../../widgets/PopupView');
 var PuzzleMapDnDView = require("./PuzzleMapDnDView");
 var PageHeader = require('../../../widgets/PageHeader');
-//var tempJson = require('./AfpakPuzzleMap.js');
 
 function getPageState(props) {
 
@@ -15,7 +14,7 @@ function getPageState(props) {
         sources: [],
         title: "",
         pageType: "",
-        showHUD: false,
+        showHUD: true,
         audioObj:null,
         audioController:"",
         popupObj:null,
@@ -25,7 +24,7 @@ function getPageState(props) {
         totalImages:0,
         scoreObj:{},
         currentIndex:0,
-        puzzlePiecesColl:[]
+        puzzlePiecesColl:null
     };
 
 
@@ -33,8 +32,7 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
-        data.imageData = JSON.parse(tempJSON);
-        //data.imageData = JSON.parse(data.page.info.property[2].value);
+        data.imageData = JSON.parse(data.page.info.property[1].value);
     }
 
     return data;
@@ -47,33 +45,52 @@ var PuzzleMapView = React.createClass({
         return pageState;
     },
 
+    componentWillMount: function(){
+    },
+
     componentDidMount: function() {
 
+       this.state.scoreObj["totalPieces"] = this.state.imageData.puzzleMapPieces.length - 1;
        this.preloadImages();
-       this.preparePuzzlePieces();
     },
 
     preloadImages: function(){
 
         var self = this;
-        var state = self.state;
         var imageColl = [];
+        var pieces = self.state.imageData.puzzleMapPieces;
 
-        self.props.imageColl.map(function(region,index){
-            imageColl.push({correct:self.state.mediaPath+region.correctImageName,
-                labeled:self.state.mediaPath+region.labeledImageName,
-                hint:self.state.mediaPath+region.imageFileName});
+        pieces.map(function(region,index){
+             if (index > 0) {
+                 imageColl.push({
+                     correct: self.state.mediaPath + region.correctImageName,
+                     labeled: self.state.mediaPath + region.labeledImageName,
+                     hint: self.state.mediaPath + region.imageFileName
+                 });
+             }
         });
 
-        self.setState({totalImages:imageColl.length * 3});
+        self.setState({totalImages:(imageColl.length * 3) + 1});
+
+        var loadedImageColl = [];
 
         for (var i=0 ; i < imageColl.length; i++){
+
+            var loadedObj = {};
             for (var key in imageColl[i]){
-                state.loadedImageColl[i][key] = new Image();
-                state.loadedImageColl[i][key].src = imageColl[i];
-                state.loadedImageColl[i][key].onload = self.loadCounter;
+                loadedObj[key] = new Image();
+                loadedObj[key].src = imageColl[i][key];
+                loadedObj[key].onload = self.loadCounter;
             }
+
+            loadedImageColl.push(loadedObj);
         }
+
+        var backgroundMap = new Image();
+        backgroundMap.src = self.state.mediaPath + self.state.imageData.puzzleMapPieces[0].imageFileName;
+        backgroundMap.onload = self.loadCounter;
+
+        self.setState({loadedImageColl:loadedImageColl});
     },
 
     loadCounter: function(){
@@ -85,12 +102,32 @@ var PuzzleMapView = React.createClass({
     },
 
     onImagesPreloaded: function(){
-        console.log("Images loaded...");
-        this.renderHUD();
+        this.preparePuzzlePieces();
+        //this.renderHUD();
     },
 
     preparePuzzlePieces: function(){
 
+        var self = this;
+        var puzzlePiecesColl = [];
+        var puzzlePieces = self.state.imageData.puzzleMapPieces;
+
+        for (var i = 0; i < puzzlePieces.length ; i++){
+            if (i == 0 ) continue;
+            var puzzleObj = {
+                index:i,
+                scale:puzzlePieces[i-1].scaleAmount,
+                offsetX:puzzlePieces[i-1].offsetX,
+                offsetY:puzzlePieces[i-1].offsetY,
+                correct:self.state.loadedImageColl[i-1].correct,
+                labeled:self.state.loadedImageColl[i-1].labeled,
+                hint:self.state.loadedImageColl[i-1].hint
+            };
+
+            puzzlePiecesColl.push(puzzleObj);
+        }
+        console.log("puzzlePiecesColl " + puzzlePiecesColl.length);
+        this.setState({puzzlePiecesColl:puzzlePiecesColl});
     },
 
     renderHUD: function(){
@@ -129,12 +166,12 @@ var PuzzleMapView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
-        var page = self.state.page;
+        var page  = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
         var blockStyle = {position:'relative', width:'768px', height:'504px', marginLeft:'auto', marginRight:'auto'};
 
-        var mapUrl = self.state.mediaPath + self.state.imageData.mapImage;
+        var mapUrl = self.state.mediaPath + self.state.imageData.puzzleMapPieces[0].imageFileName;
         var backMapStyle = {background:'url('+mapUrl+') no-repeat 100% 100%'};
 
         return (
@@ -144,12 +181,12 @@ var PuzzleMapView = React.createClass({
                 <div id="puzzleMapViewBlock">
 
                     <div className="puzzle-map-view-mapCont" style={backMapStyle}>
-                       <PuzzleMapDnDView
-                           imageData = {state.imageData}
-                           puzzlePiecesObj = {state.puzzlePiecesColl[state.currentIndex]}
-                           scoreObj = {state.scoreObj}
-                           updateHUDView = {self.updateHUDView}
-                       />
+                        {self.state.puzzlePiecesColl ? <PuzzleMapDnDView
+                            imageData = {self.state.imageData}
+                            puzzlePiecesObj = {self.state.puzzlePiecesColl[self.state.currentIndex]}
+                            scoreObj = {self.state.scoreObj}
+                            updateHUDView = {self.updateHUDView}
+                        />:null}
                     </div>
                 </div>
             </div>

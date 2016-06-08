@@ -19,10 +19,10 @@ var DnDPuzzleView = React.createClass({
 
     propTypes: {
 
-        stageStyle: PropTypes.object.isRequired,
+        stageStyle: PropTypes.object,
         draggableColl: PropTypes.array.isRequired,
         targetsColl: PropTypes.array.isRequired,
-        stageTargetObj: PropTypes.object.isRequired,
+        stageTargetObj: PropTypes.object,
         onDraggableBeginDrag: PropTypes.func,
         onDraggableEndDrag: PropTypes.func.isRequired,
         draggableCanDragCond: PropTypes.func,
@@ -108,23 +108,27 @@ var DnDPuzzleView = React.createClass({
 
         var self = this;
         var stageTargetObj = self.props.stageTargetObj;
-        
+
+        //donn't render a target stage if no data supplied
         return (
             <div style={this.props.stageStyle}>
                 {this.renderDraggableColl()}
+                {!stageTargetObj ? this.renderDropTargetColl():null}
 
-                <DnDPuzzleDropTarget
-                    
-                    id = {stageTargetObj.id}
-                    imgUrl = {stageTargetObj.imgUrl? stageTargetObj.imgUrl:null}
-                    targetStyle = {stageTargetObj.targetStyle}
-                    targetOverStyle = {stageTargetObj.targetOverStyle}
-                    onTargetDrop = {stageTargetObj.onTargetDrop}
-                    onTargetHover = {stageTargetObj.onTargetHover ? stageTargetObj.onTargetHover:null}
-                    targetCanDropCond = {stageTargetObj.targetCanDropCond}>
+                {stageTargetObj ?
 
-                    {this.renderDropTargetColl()}
-                </DnDPuzzleDropTarget> 
+                    <DnDPuzzleDropTarget
+                        id = {stageTargetObj.id}
+                        imgUrl = {stageTargetObj.imgUrl? stageTargetObj.imgUrl:null}
+                        targetStyle = {stageTargetObj.targetStyle}
+                        targetOverStyle = {stageTargetObj.targetOverStyle}
+                        onTargetDrop = {stageTargetObj.onTargetDrop}
+                        onTargetHover = {stageTargetObj.onTargetHover ? stageTargetObj.onTargetHover:null}
+                        targetCanDropCond = {stageTargetObj.targetCanDropCond}>
+
+                        {this.renderDropTargetColl()}
+                    </DnDPuzzleDropTarget> : null}
+                }
                
             </div>
         )

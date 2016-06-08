@@ -1,6 +1,7 @@
 
 var React = require('react');
 var DnDPuzzleView = require('../../../widgets/DragAndDropPuzzle/DnDPuzzleView');
+var PuzzleMapHUDView = require('./PuzzleMapHUDView');
 var PropTypes = React.PropTypes;
 
 var PuzzleMapDnDView = React.createClass({
@@ -22,8 +23,6 @@ var PuzzleMapDnDView = React.createClass({
     },
 
     componentWillMount: function() {
-        this.prepDraggableData();
-        this.prepTargetData();
     },
 
     componentDidMount: function(){
@@ -31,73 +30,49 @@ var PuzzleMapDnDView = React.createClass({
 
     prepDraggableData: function(){
 
-        var imageData = this.props.imageData;
+        var puzzlePiecesObj = this.props.puzzlePiecesObj;
         var draggableColl = [];
 
-        for (var i=0; i < imageData.regions.length; i++){
+        var imgUrl = this.state.mediaPath + puzzlePiecesObj.correct;
+        var draggableStyle = {position:'absolute', width:'768px', height:'504px',
+            background: "url('"+imgUrl+"') no-repeat 100% 100%", zIndex:'20',
+            left: puzzlePiecesObj.offsetX + "px", top:puzzlePiecesObj.offsetY + 30 + "px"};
 
-            var imgUrl = this.state.mediaPath + imageData.regions[i].tile;
-            var draggableStyle = {position:'absolute', width:'40px', height:'50px',
-                background: "url('"+imgUrl+"') no-repeat 100% 100%", zIndex:'30',
-                left: left+"px", top:topStart+(pieceHeight * i)+"px"};
+        var draggableObj = {
 
-            var draggableObj = {
+            id:"puzzleDraggable"+puzzlePiecesObj.index,
+            draggableStyle : draggableStyle,
+            imgUrl:null,
+            onDraggableBeginDrag: this.onDraggableBeginDrag,
+            onDraggableEndDrag: this.onDraggableEndDrag,
+            onDraggableWhileDrag: null,
+            draggableCanDragCond: null
+        };
 
-                id:"puzzleDraggable"+i,
-                draggableStyle : draggableStyle,
-                imgUrl:null,
-                onDraggableBeginDrag: this.onDraggableBeginDrag,
-                onDraggableEndDrag: this.onDraggableEndDrag,
-                onDraggableWhileDrag: this.onDraggableWhileDrag,
-                draggableCanDragCond: null
-            };
-
-            draggableColl.push(draggableObj);
-        }
+       draggableColl.push(draggableObj);
 
         return draggableColl;
     },
 
     prepTargetData: function(){
 
-        var imageData = this.props.imageData;
         var targetColl = [];
-        var gridOrigin = {x:215, y:113}, targetWidth = 110, targetHeight = 165;
-        var targetPosColl = [];
 
-        for (var r = 0 ; r < 3; r++){
-            for (var c = 0 ; c < 3 ; c++){
-                var x = parseInt(gridOrigin.x + (targetWidth * c));
-                var y = parseInt(gridOrigin.y + (targetHeight * r));
-                targetPosColl.push({
-                    x:x,
-                    y:y
-                });
-            }
-        }
-
-        for (var i=0; i < imageData.regions.length; i++){
-
-            var targetStyle = {position:'absolute', width:'110px', height:'165px', zIndex:'50px',
-                background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
+            var targetStyle = {position:'absolute', width:'768px', height:'504px', zIndex:'19',
+                background:'transparent', top: "0", left: "0",
                 border:'1px solid #000'};
 
-            var targetOverStyle = {position:'absolute', width:'110px', height:'165px', zIndex:'50px',
-                background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
-                border:'1px solid red'};
-
             var targetObj = {
-                id:"puzzleTarget"+i,
+                id:"puzzleTarget",
                 imgUrl:null,
                 targetStyle: targetStyle,
-                targetOverStyle: targetOverStyle,
+                targetOverStyle: null,
                 onTargetDrop: this.onTargetDrop,
                 onTargetHover: this.onTargetHover,
                 targetCanDropCond: true
             };
 
             targetColl.push(targetObj);
-        }
 
         return targetColl;
     },
@@ -187,7 +162,6 @@ var PuzzleMapDnDView = React.createClass({
                 <PuzzleMapHUDView
                     hudStyle = {hudStyle}
                     imageData = {self.props.imageData}
-                    loadedImageColl = {self.props.loadedImageColl}
                     scoreObj = {self.props.scoreObj}
                 />
 

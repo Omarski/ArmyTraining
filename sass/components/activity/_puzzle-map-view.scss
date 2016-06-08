@@ -21,8 +21,8 @@
     display:block;
     width: 283px;
     height:166px;
-    top:20px;
-    left:20px;
+    bottom:20px;
+    right:20px;
     border: 2px solid #fff;
 
     .puzzle-map-view-HUD-completed{
@@ -47,7 +47,6 @@
   }
 
   .puzzle-map-view-bottom-canvas{
-
     position:absolute;
     top:30px;
     left:0;
