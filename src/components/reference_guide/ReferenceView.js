@@ -191,7 +191,6 @@ var ReferenceView = React.createClass({
     _onReferenceChange: function(){
         var self = this;
         var referenceJson = ReferenceStore.getData();
-        console.dir(referenceJson);
         if(referenceJson && referenceJson.items){
             var mapSource = null;
             var pdfSources = null;

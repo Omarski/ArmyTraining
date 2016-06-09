@@ -229,6 +229,7 @@ var MultipleChoiceView = React.createClass({
         var _this = this;
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
+            // TODO: allow for the text to be any of the text channels
             return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
                             <label>

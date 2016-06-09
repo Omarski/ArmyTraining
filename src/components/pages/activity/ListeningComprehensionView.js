@@ -150,7 +150,20 @@ var ListeningComprehensionView = React.createClass({
 
         var choices;
         choices = state.answers.map(function(item, index){
-            var ans = item.nut.uttering.utterance.translation.text;
+            var ans = "";
+            if(item.nut && item.nut.uttering && item.nut.uttering.utterance){
+                var utterance = item.nut.uttering.utterance;
+                if(utterance.ezread && utterance.ezread.text !== ""){
+                    ans = utterance.ezread.text;
+                }else if(utterance.translation && utterance.translation.text !== ""){
+                    ans = utterance.translation.text;
+                }else if(utterance.native && utterance.native.text !== ""){
+                    ans = utterance.native.text;
+                }else if (utterance.phonetic && utterance.phonetic.text !== ""){
+                    ans = utterance.phonetic.text;
+                }
+            }
+
             return (<li key={page.xid + String(index)} className="list-group-item" >
                 <div class="checkbox">
                     <label>
