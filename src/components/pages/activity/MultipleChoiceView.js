@@ -21,7 +21,6 @@ function getPageState(props) {
         haveAnswered: false,
         answerFeedback: "",
         correctAnswer: "",
-        isQuestionaire: false,
         isQuizPage: false,
         bShuffle: true
     };
@@ -34,11 +33,6 @@ function getPageState(props) {
         data.prompt = props.page.prompt.text;
 
         if (data.page.info && data.page.info.property) {
-
-            if (Utils.findInfo(data.page.info, InfoTagConstants.INFO_PROP_QUESTIONNAIRE) != null) {
-                data.isQuestionaire = true;
-                data.bShuffle = false;
-            }
 
             if (Utils.findInfo(data.page.info, InfoTagConstants.INFO_PROP_NOSHUFFLE) != null) {
                 data.bShuffle = false;
@@ -78,7 +72,6 @@ function getPageState(props) {
     // assign result to data
     data.media = mediaItems;
 
-
     if (data.bShuffle) {
         data.answers = AGeneric().shuffle(data.answers);
     }
@@ -92,67 +85,31 @@ function getPageState(props) {
     return data;
 }
 
-function getFeedback(answers, selectedAnswer){
-    var getter = "getFeedback could not find selected Answer.";
-    answers.map(function(item){
-        var text = item.nut.uttering.utterance.translation.text;
-        if(selectedAnswer == text){
-            if (item.feedback) {
-                getter = item.feedback.text;
-            }
-        }
-    });
-    return(getter);
-}
-
 var MultipleChoiceView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
         return pageState;
     },
 
-    componentWillMount: function() {
-        PageStore.addChangeListener(this._onChange);
-    },
-
     componentDidMount: function() {
-        // TODO remove me after alpha-----------------------------------------------------------------------------------
-        // iterate over answer objects
-        var recommendedMap = {};
-        for (var answerIndex in this.state.answers) {
-
-            var answerObj = this.state.answers[answerIndex];
-
-            if (answerObj && answerObj.nut && answerObj.nut.uttering && answerObj.nut.uttering.info && answerObj.nut.uttering.info.property) {
-
-                // iterate over each property object
-                for (var propertyIndex in answerObj.nut.uttering.info.property) {
-
-                    var propertyObject = answerObj.nut.uttering.info.property[propertyIndex];
-
-                    // if recommended found put into map
-                    if (propertyObject.name && propertyObject.name == "recommended") {
-
-                        if (answerObj.nut.uttering.utterance && answerObj.nut.uttering.utterance.translation) {
-                            recommendedMap[answerObj.nut.uttering.utterance.translation.text] = 1;
-                        }
-                        break;
+        // only in a quiz for now
+        if (this.state.isQuizPage) {
+            // load previous selected answer for this page
+            var previousAnswer = PageStore.getPageAnswer();
+            if (previousAnswer !== null) {
+                // mark answer that matches
+                $(".multiple-choice-checkbox").each(function () {
+                    // TODO change to not assume it is the translation channel
+                    if (this.value && (this.value === previousAnswer.answer.nut.uttering.utterance.translation.text)) {
+                        this.checked = true;
                     }
-                }
+                });
             }
         }
-
-        // iterate over each item and check if recommended
-        $(".multiple-choice-checkbox").each(function () {
-            // check if text is in the recommended if so mark it checked
-            if (this.value in recommendedMap) {
-                this.checked = true;
-            }
-        });
-        // TODO end of remove me----------------------------------------------------------------------------------------
     },
 
-    componentDidUpdate: function(){
+    componentWillMount: function() {
+        PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
@@ -163,15 +120,14 @@ var MultipleChoiceView = React.createClass({
         var self = this;
         var state = this.state;
         var feedback = state.answerFeedback;
-        var target = state.correctAnswer;
-        var isCorrect = false;
 
         // iterate over each checkbox checking if it was correct
         $(".multiple-choice-checkbox").each(function () {
-            if (this.value == answer) {
+            if (this.value == answer.nut.uttering.utterance.translation.text) {
+                // search for feedback in answer
+                var feedbackText = (answer.feedback && answer.feedback.text) ? answer.feedback.text : "";
                 this.checked = true;
-                isCorrect = (answer == target);
-                feedback = (<CoachFeedbackView text={getFeedback(state.answers, answer)} isCorrect={isCorrect} />);
+                feedback = (<CoachFeedbackView text={feedbackText} isCorrect={answer.correct} />);
             } else {
                 this.checked = false;
             }
@@ -183,16 +139,16 @@ var MultipleChoiceView = React.createClass({
             answerFeedback: feedback
         });
 
-        // for now only record if its a quiz page or questionnaire
-        if (state.isQuizPage || state.isQuestionaire) {
+        // for now only record if its a quiz page
+        if (state.isQuizPage) {
             // TODO <-------------- MOVE TO ITS OWN OBJECT------------------------------------------
             // create new answer object
             var answerObj = {
                 answer: {
                     answer: answer,
-                    passed: isCorrect,
+                    passed: answer.correct,
                     question: state.prompt,
-                    target: target
+                    target: state.correctAnswer
                 }
             }
             // TODO END <-------------- MOVE TO ITS OWN OBJECT---------------------------------------
@@ -221,7 +177,7 @@ var MultipleChoiceView = React.createClass({
             );
         }
 
-        if(state.haveAnswered && !self.state.isQuestionaire && !state.isQuizPage) {
+        if(state.haveAnswered && !state.isQuizPage) {
             feedbackElement = state.answerFeedback
         }
 
@@ -233,7 +189,7 @@ var MultipleChoiceView = React.createClass({
             return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
                             <label>
-                                <input type="checkbox" className="multiple-choice-checkbox" value={ans} onClick={_this.answerChange.bind(_this, ans)}>{ans}</input>
+                                <input type="checkbox" className="multiple-choice-checkbox" value={ans} onClick={_this.answerChange.bind(_this, item)}>{ans}</input>
                             </label>
                         </div>
                     </li>);

@@ -1,5 +1,6 @@
 var React = require('react');
 var PageStore = require('../stores/PageStore');
+var PageTypeConstants = require('../constants/PageTypeConstants');
 var DefaultPageView = require('../components/pages/content/DefaultPageView');
 var DDAudioQuizView = require('../components/pages/activity/DDAudioQuizView');
 
@@ -18,10 +19,13 @@ var MatchItemView = require('../components/pages/activity/MatchItemView');
 var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
 var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceView');
 var OrderingView = require('../components/pages/activity/OrderingView');
+var QuestionnaireView = require('../components/pages/content/QuestionnaireView');
+//var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
 var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizView = require('../components/pages/activity/QuizView');
 var PronunciationView = require('../components/pages/activity/PronunciationView');
 var ResponseFormationView = require('../components/pages/activity/ResponseFormationView');
+var SectionEndView = require('../components/pages/content/SectionEndView');
 var SortingView = require('../components/pages/activity/SortingView');
 var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
 var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
@@ -71,13 +75,13 @@ var ContentView = React.createClass({
             console.log(this.state.page.title);
             console.log(this.state.page);
             switch (this.state.page.type) {
-                case "ActiveDialog":
+                case PageTypeConstants.ACTIVE_DIALOG:
                     page = <ActiveDialogView page={this.state.page} />;
                     break;
-                case "ListeningComprehension":
+                case PageTypeConstants.LISTENING_COMPREHENSION:
                     page = <ListeningComprehensionView page={this.state.page} />;
                     break;
-                case "MatchItem":
+                case PageTypeConstants.MATCH_ITEM:
                     var foundType = false;
                     if (this.state.page.info) {
                         var properties = this.state.page.info.property || [];
@@ -96,7 +100,7 @@ var ContentView = React.createClass({
                         page = <MatchItemView page={this.state.page} />;
                     }
                     break;
-                case "Generic":
+                case PageTypeConstants.GENERIC:
                     var foundType = false;
                     if (this.state.page.info) {
                         var properties = this.state.page.info.property || [];
@@ -115,25 +119,28 @@ var ContentView = React.createClass({
                         page = <InfoView page={this.state.page} />;
                     }
                     break;
-                case "MultiColumnPronunciation":
+                case PageTypeConstants.MULTI_COLUMN_PRONUNCIATION:
                     page = <MultiColumnPronunciationView page={this.state.page} />;
                     break;
-                case "MultipleChoice":
+                case PageTypeConstants.MULTIPLE_CHOICE:
                     page = <MultipleChoiceView page={this.state.page} />;
                     break;
-                case "Ordering":
+                case PageTypeConstants.ORDERING:
                     page = <OrderingView page={this.state.page} />;
                     break;
-                case "Pronunciation":
+                case PageTypeConstants.PRONUNCIATION:
                     page = <PronunciationView page={this.state.page} />;
                     break;
-                case "ResponseFormation":
+                case PageTypeConstants.RESPONSE_FORMATION:
                     page = <ResponseFormationView page={this.state.page} />;
                     break;
-                case "Sorting":
+                case PageTypeConstants.SECTION_END:
+                    page = <SectionEndView page={this.state.page} />;
+                    break;
+                case PageTypeConstants.SORTING:
                     page = <SortingView page={this.state.page} />;
                     break;
-                case "Info":
+                case PageTypeConstants.INFO:
                     var foundType = false;
                     if (this.state.page.info) {
                         var properties = this.state.page.info.property || [];
@@ -152,36 +159,39 @@ var ContentView = React.createClass({
                         page = <InfoView page={this.state.page} />;
                     }
                     break;
+                case PageTypeConstants.QUESTIONNAIRE:
+                    page = <QuestionnaireView page={this.state.page} />;
+                    break;
                 case "quiz_page":
-                case "QuizEnd":
+                case PageTypeConstants.QUIZ_END:
                     page = <QuizView page={this.state.page} />;
                     break;
-                case "QuizStart":
+                case PageTypeConstants.QUIZ_START:
                     page = <QuizStartView page={this.state.page} />;
                     break;
-                case "InteractiveTimeline":
+                case PageTypeConstants.INTERACTIVE_TIMELINE:
                     isFullScreen = true;
                     page = <InteractiveTimelineView page={this.state.page} />;
                     break;
-                case "IntroductionPage":
+                case PageTypeConstants.INTRODUCTION_PAGE:
                     page = <IntroductionPageView page={this.state.page} />;
                     break;
-                case "Map":
+                case PageTypeConstants.MAP:
                     page = <MapView page={this.state.page} />;
                     break;
-                case "MultiNote":
+                case PageTypeConstants.MULTI_NOTE:
                     page = <MultiNoteView page={this.state.page} />;
                     break;
-                case "Video":
+                case PageTypeConstants.VIDEO:
                     page = <VideoView page={this.state.page} />;
                     break;
-                case "UtteranceFormation":
+                case PageTypeConstants.UTTERANCE_FORMATION:
                     page = <UtteranceFormationView page={this.state.page} />;
                     break;
-                case "EthnoMap":
+                case PageTypeConstants.ETHNO_MAP:
                     page = <EthnoMapView page={this.state.page} />;
                     break;
-                case "CultureQuest":
+                case PageTypeConstants.CULTURE_QUEST:
                     page= <CultureQuestView page={this.state.page} />;
                     break;
                 default:
