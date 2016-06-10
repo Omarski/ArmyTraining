@@ -1,3 +1,4 @@
+var InfoTagConstants = require('../../../constants/InfoTagConstants');
 var ReactBootstrap = require('react-bootstrap');
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
@@ -10,6 +11,7 @@ var QuestionnaireActions = require('../../../actions/QuestionnaireActions');
 var QuestionnaireStore = require('../../../stores/QuestionnaireStore');
 var UnitActions = require('../../../actions/UnitActions');
 var UnitStore = require('../../../stores/UnitStore');
+var Utils = require('../../widgets/Utils');
 
 
 function getPageState(props) {
@@ -31,6 +33,8 @@ function getPageState(props) {
     // gather selected playlists
     var plists = QuestionnaireStore.getPlaylists();
 
+    var totalEstimatedTime = 0;
+
     // iterate over units gathering only selected units
     var selectedUnits = [];
     for (var unitIndex in units) {
@@ -41,12 +45,27 @@ function getPageState(props) {
         if (data.xid && (plists.indexOf(data.xid) !== -1)) {
             // create object and add it
             selectedUnits.push({id: unitId, title: data.title});
+
+
+            // gather minutes
+            if (data.playlistInfo !== null) {
+                var playlistInfoLength = data.playlistInfo.length;
+
+                while(playlistInfoLength--) {
+                    var pInfo = data.playlistInfo[playlistInfoLength];
+
+                    // find tag
+                    var minutes = Utils.findInfo(pInfo, InfoTagConstants.INFO_PROP_MINUTES);
+                    if (minutes !== null) {
+                        totalEstimatedTime += Number(minutes);
+                    }
+                }
+            }
         }
     }
 
-    // TODO gather estimated time
-    var estimatedTime = "50 Thousand Years";
-
+    // gather estimated time text
+    var estimatedTime = Utils.minutesToDisplayText(totalEstimatedTime);
 
     if (props && props.page) {
         data.btnConfirm = LocalizationStore.labelFor("questionnaireEnd", "btnConfirm");
