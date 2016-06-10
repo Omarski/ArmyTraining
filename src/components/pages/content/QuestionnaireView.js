@@ -174,9 +174,11 @@ var QuestionnaireView = React.createClass({
     },
 
     componentDidMount: function() {
-    },
-
-    componentDidUpdate: function(){
+        var self = this;
+        // check for any pre-selected items
+        setTimeout(function() {
+            self.answerChange(null, null);
+        }, 10);
     },
 
     componentWillUnmount: function() {
@@ -218,10 +220,16 @@ var QuestionnaireView = React.createClass({
             var inputElement = "";
             switch (item.type) {
                 case INPUT_TYPE_RADIO:
-                    inputElement = (<input name={item.groupid} type="radio" className="multiple-choice-checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
+                    if (item.checked)
+                        inputElement = (<input name={item.groupid} type="radio" className="multiple-choice-checkbox" value={item.text} defaultChecked onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
+                    else
+                        inputElement = (<input name={item.groupid} type="radio" className="multiple-choice-checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
                     break;
                 default:
-                    inputElement = (<input type="checkbox" className="multiple-choice-checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
+                    if (item.checked)
+                        inputElement = (<input type="checkbox" className="multiple-choice-checkbox" value={item.text} defaultChecked onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
+                    else
+                        inputElement = (<input type="checkbox" className="multiple-choice-checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
             }
 
             return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
