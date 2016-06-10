@@ -20,7 +20,8 @@ function create(data) {
     _units[id] = {
         id: id,
         complete: false,
-        data: data
+        data: data,
+        required: false
     };
 }
 
@@ -120,6 +121,10 @@ AppDispatcher.register(function(action) {
                 create(action.data);
                 UnitStore.emitChange();
             }
+            break;
+
+        case UnitConstants.UNIT_MARK_REQUIRED:
+            update(action.id, {required: true});
             break;
 
         case UnitConstants.UNIT_TOGGLE_COMPLETE_ALL:

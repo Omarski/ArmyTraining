@@ -34,5 +34,12 @@
     "headerAnswer": "Answer",
     "lblPassed": "Your score was {0}%. Congratulations! You have successfully completed this section. You may now move on to the next section in your course of instruction.",
     "lblFailed": "Your score was {0}%. You may want to review the section and try this quiz again."
+  },
+  "questionnaireEnd": {
+    "btnConfirm": "Confirm",
+    "btnRestart": "Start Over",
+    "lblConfirm": "Confirm your choice:",
+    "lblTime": "Estimated Training Time: {0}",
+    "lblLessons": "Lessons:"
   }
 }
