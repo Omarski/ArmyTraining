@@ -70,10 +70,34 @@ var Utils = (function() {
         return null;
     }
 
+    /**
+     * Converts minutes into a string in the format of hh:mm
+     * @param (string|number) minutes
+     * @returns {string}
+     */
+    function minutesToDisplayText(minutes) {
+        // convert minutes to number
+        var number = Number(minutes);
+
+        // check if valid
+        if (isNaN(number)) {
+            return "Cannot convert: " + minutes.toString() + "to a number";
+        }
+
+        if (number > 60) {
+            var hours = Math.floor(number / 60);
+            return hours + " hrs " + (number % 60 ) + " min";
+        } else {
+            return (number % 60 ) + " min";
+        }
+    }
+
+
     // public interface
     return {
         evalPostfix: evalPostfix,
-        findInfo: findInfo
+        findInfo: findInfo,
+        minutesToDisplayText: minutesToDisplayText
     }
 
 })();
