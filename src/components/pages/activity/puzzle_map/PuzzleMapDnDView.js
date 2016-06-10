@@ -11,7 +11,11 @@ var PuzzleMapDnDView = React.createClass({
             dragImg: null,
             isDragging:false,
             context:null,
-            canvas:null
+            canvas:null,
+            imgBounds:{},
+            bottomCanvas:null,
+            bottomCanvasContext:null,
+            dropStatus:""
         }
     },
 
@@ -20,6 +24,7 @@ var PuzzleMapDnDView = React.createClass({
         imageData: PropTypes.object.isRequired,
         puzzlePiecesObj: PropTypes.object.isRequired,
         scoreObj: PropTypes.object.isRequired,
+        renderHUD: PropTypes.func.isRequired,
         updateHUDView: PropTypes.func.isRequired
     },
 
@@ -28,6 +33,7 @@ var PuzzleMapDnDView = React.createClass({
 
     componentDidMount: function(){
         this.prepDraggableData();
+        this.prepBottomCanvas();
     },
 
     prepDraggableData: function(){
@@ -48,6 +54,13 @@ var PuzzleMapDnDView = React.createClass({
                               canvas.width * puzzlePiecesObj.scaleAmount,
                               canvas.height * puzzlePiecesObj.scaleAmount
             );
+
+            var imgBounds = {};
+
+            var factorToFull = 100/(100 - (self.props.puzzlePiecesObj.scaleAmount * 100));
+            imgBounds.width = self.getBounds().width * factorToFull;
+            imgBounds.height = self.getBounds().height * factorToFull;
+            self.setState({imgBounds:imgBounds});
         };
 
         imageObj.src = imgUrl;
@@ -60,18 +73,24 @@ var PuzzleMapDnDView = React.createClass({
         self.setState({context:context, dragImg:imageObj, canvas:canvas })
     },
 
+    prepBottomCanvas: function(){
+        var canvas = document.getElementById('puzzleMapViewBottomCanvas');
+        var context = canvas.getContext('2d');
+        this.setState({bottomCanvas:canvas, bottomCanvasContext:context});
+    },
+
     handleMouseDown: function(e){
-        console.log("Mousedown....");
-        var canvasOffset=$("#puzzleMapDragCanvas").offset();
-        var canMouseX=parseInt(e.clientX-canvasOffset.left);
-        var canMouseY=parseInt(e.clientY-canvasOffset.top);
+        // var canvasOffset=$("#puzzleMapDragCanvas").offset();
+        // var canMouseX=parseInt(e.clientX-canvasOffset.left);
+        // var canMouseY=parseInt(e.clientY-canvasOffset.top);
+        self.props.updateHUDView(true);
         this.setState({isDragging:true});
     },
 
     handleMouseUp: function(e){
-        var canvasOffset=$("#puzzleMapDragCanvas").offset();
-        var canMouseX=parseInt(e.clientX-canvasOffset.left);
-        var canMouseY=parseInt(e.clientY-canvasOffset.top);
+        // var canvasOffset=$("#puzzleMapDragCanvas").offset();
+        // var canMouseX=parseInt(e.clientX-canvasOffset.left);
+        // var canMouseY=parseInt(e.clientY-canvasOffset.top);
         this.setState({isDragging:false});
     },
 
@@ -79,25 +98,107 @@ var PuzzleMapDnDView = React.createClass({
         var canvasOffset=$("#puzzleMapDragCanvas").offset();
         var canMouseX=parseInt(e.clientX-canvasOffset.left);
         var canMouseY=parseInt(e.clientY-canvasOffset.top);
+        var imgOffsetX = (canMouseX - (canvasWidth  * scaleAmount)) - (parseInt(self.state.imgBounds.width)/2);
+        var imgOffsetY = (canMouseY - (canvasHeight * scaleAmount)) - (parseInt(self.state.imgBounds.height)/2);
+        if ((imgOffsetX >= -50 && imgOffsetX <= 50) && (imgOffsetY >= -50 && imgOffsetY <= 50)){
+            this.updateBottomCanvas("labeled");
+        }else this.updateBottomCanvas("hint");
     },
 
     handleMouseMove: function(e){
+
         var self = this;
+        var scaleAmount = parseFloat(self.props.puzzlePiecesObj.scaleAmount);
         var canvasOffset=$("#puzzleMapDragCanvas").offset();
         var canMouseX=parseInt(e.clientX-canvasOffset.left);
         var canMouseY=parseInt(e.clientY-canvasOffset.top);
 
-        // if the drag flag is set, clear the canvas and draw the image
         if (self.state.isDragging){
             var canvasWidth = parseInt(self.state.canvas.width);
             var canvasHeight = parseInt(self.state.canvas.height);
 
             self.state.context.clearRect(0,0, canvasWidth, canvasHeight);
-            self.state.context.drawImage(self.state.dragImg,canMouseX - (canvasWidth * .45), canMouseY - (canvasHeight * .45));
+            self.state.context.drawImage(self.state.dragImg,
+                (canMouseX - (canvasWidth  * scaleAmount)) - (parseInt(self.state.imgBounds.width)/2),
+                (canMouseY - (canvasHeight * scaleAmount)) - (parseInt(self.state.imgBounds.height)/2));
+
+            //console.log("x: " + (canMouseX - (canvasWidth * scaleAmount)) - (parseInt(self.state.imgBounds.width)/2));
+            //console.log((canMouseY - (canvasHeight * scaleAmount)) - (parseInt(self.state.imgBounds.height)/2));
         }
     },
 
-    onPuzzleReady: function(draggableColl, targetColl){
+    getBounds: function(){
+
+        var self = this;
+        var context = self.state.context;
+        var canvas = self.state.canvas;
+        var w = parseInt(canvas.width);
+        var h = parseInt(canvas.height);
+
+            var idata = context.getImageData(0, 0, w, h),
+                buffer = idata.data,
+                buffer32 = new Uint32Array(buffer.buffer),
+                x, y,
+                x1 = w, y1 = h, x2 = 0, y2 = 0;
+
+            // get left edge
+            for(y = 0; y < h; y++) {
+                for(x = 0; x < w; x++) {
+                    if (buffer32[x + y * w] > 0) {
+                        if (x < x1) x1 = x;
+                    }
+                }
+            }
+
+            // get right edge
+            for(y = 0; y < h; y++) {
+                for(x = w; x >= 0; x--) {
+                    if (buffer32[x + y * w] > 0) {
+                        if (x > x2) x2 = x;
+                    }
+                }
+            }
+
+            // get top edge
+            for(x = 0; x < w; x++) {
+                for(y = 0; y < h; y++) {
+                    if (buffer32[x + y * w] > 0) {
+                        if (y < y1) y1 = y;
+                    }
+                }
+            }
+
+            // get bottom edge
+            for(x = 0; x < w; x++) {
+                for(y = h; y >= 0; y--) {
+                    if (buffer32[x + y * w] > 0) {
+                        if (y > y2) y2 = y;
+                    }
+                }
+            }
+
+        return {width: x2-x1, height: y2-y1};
+    },
+
+    updateBottomCanvas: function(mode){
+
+        var self = this;
+        var imageObj = new Image();
+
+        imageObj.onload = function() {
+            self.state.bottomCanvasContext.drawImage(imageObj, 0, 0);
+        };
+
+        if (mode === "labeled"){
+            imageObj.src = self.props.puzzlePiecesObj.labeled.src;
+            self.props.updateHUDView(true);
+            self.state.dropStatus = "correct";
+        } else {
+            if (self.state.dropStatus !== "hint") {
+                imageObj.src = self.props.puzzlePiecesObj.hint.src;
+                self.state.dropStatus = "hint";
+            }
+        }
     },
 
     render: function() {

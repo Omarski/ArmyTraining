@@ -23,7 +23,7 @@ function getPageState(props) {
         loadedImageColl:[],
         loadCounter:0,
         totalImages:0,
-        scoreObj:{},
+        scoreObj:{totalPieces:0, correct:0},
         currentIndex:0,
         puzzlePiecesColl:null
     };
@@ -50,9 +50,7 @@ var PuzzleMapView = React.createClass({
     },
 
     componentDidMount: function() {
-
-       this.state.scoreObj["totalPieces"] = this.state.imageData.puzzleMapPieces.length - 1;
-       this.preloadImages();
+        this.preloadImages();
     },
 
     preloadImages: function(){
@@ -134,11 +132,19 @@ var PuzzleMapView = React.createClass({
     },
 
     renderHUD: function(){
-        this.setState({showHUD:true});
+        
+        this.setState({showHUD:true, currentIndex:
+            this.state.currentIndex === 0 ? 0 : this.state.currentIndex++});
     },
 
     updateHUDView: function(mode){
         this.setState({showHUD:mode});
+    },
+
+    updateScore: function(){
+        var currentIndex = this.state.currentIndex;
+        this.setState({scoreObj:{totalPieces:this.state.imageData.puzzleMapPieces.length - 1,
+                                correct:currentIndex === 0 ? 0 : currentIndex + 1}});
     },
 
     onClosePopup: function(){
@@ -188,7 +194,9 @@ var PuzzleMapView = React.createClass({
                             imageData = {self.state.imageData}
                             puzzlePiecesObj = {self.state.puzzlePiecesColl[self.state.currentIndex]}
                             scoreObj = {self.state.scoreObj}
+                            renderHUD = {self.renderHUD}
                             updateHUDView = {self.updateHUDView}
+                            updateScore = {self.updateScore}
                         />:null}
 
                         {state.showHUD ? <PuzzleMapHUDView
@@ -196,7 +204,7 @@ var PuzzleMapView = React.createClass({
                             scoreObj = {self.state.scoreObj}
                         />:null}
 
-                        <canvas width="768" height="504" className = "puzzle-map-view-bottom-canvas">
+                        <canvas width="768" height="504" id="puzzleMapViewBottomCanvas" className = "puzzle-map-view-bottom-canvas">
                         </canvas>
                     </div>
                 </div>
