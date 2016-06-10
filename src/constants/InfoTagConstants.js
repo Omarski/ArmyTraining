@@ -2,6 +2,7 @@ module.exports = {
     INFO_PROP_GROUPID: "exclusivegroupid",
     INFO_PROP_HIDDEN: "hidden",
     INFO_PROP_MINILESSONID: "minilessonID",
+    INFO_PROP_MINUTES: "minutes",
     INFO_PROP_NOSHUFFLE: "noshuffle",
     INFO_PROP_PLAYLIST: "playlist",
     INFO_PROP_PROLOGUE: "prologue",
