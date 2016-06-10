@@ -5,6 +5,7 @@ var React = require('react');
 var AudioPlayer = require('../../../widgets/AudioPlayer');
 var PopupView = require('./../../../widgets/PopupView');
 var PuzzleMapDnDView = require("./PuzzleMapDnDView");
+var PuzzleMapHUDView = require('./PuzzleMapHUDView');
 var PageHeader = require('../../../widgets/PageHeader');
 
 function getPageState(props) {
@@ -63,9 +64,9 @@ var PuzzleMapView = React.createClass({
         pieces.map(function(region,index){
              if (index > 0) {
                  imageColl.push({
-                     correct: self.state.mediaPath + region.correctImageName,
+                     correct: self.state.mediaPath + region.imageFileName,
                      labeled: self.state.mediaPath + region.labeledImageName,
-                     hint: self.state.mediaPath + region.imageFileName
+                     hint: self.state.mediaPath + region.correctImageName
                  });
              }
         });
@@ -103,7 +104,7 @@ var PuzzleMapView = React.createClass({
 
     onImagesPreloaded: function(){
         this.preparePuzzlePieces();
-        //this.renderHUD();
+        this.renderHUD();
     },
 
     preparePuzzlePieces: function(){
@@ -114,11 +115,14 @@ var PuzzleMapView = React.createClass({
 
         for (var i = 0; i < puzzlePieces.length ; i++){
             if (i == 0 ) continue;
+            
+            var correctUrl = self.state.imageData.puzzleMapPieces[i].imageFileName;
             var puzzleObj = {
                 index:i,
-                scale:puzzlePieces[i-1].scaleAmount,
-                offsetX:puzzlePieces[i-1].offsetX,
-                offsetY:puzzlePieces[i-1].offsetY,
+                scaleAmount:parseFloat(puzzlePieces[i].scaleAmount),
+                offsetX:parseInt(puzzlePieces[i].offsetX),
+                offsetY:parseInt(puzzlePieces[i].offsetY),
+                correctUrl:correctUrl,
                 correct:self.state.loadedImageColl[i-1].correct,
                 labeled:self.state.loadedImageColl[i-1].labeled,
                 hint:self.state.loadedImageColl[i-1].hint
@@ -126,12 +130,11 @@ var PuzzleMapView = React.createClass({
 
             puzzlePiecesColl.push(puzzleObj);
         }
-        console.log("puzzlePiecesColl " + puzzlePiecesColl.length);
         this.setState({puzzlePiecesColl:puzzlePiecesColl});
     },
 
     renderHUD: function(){
-
+        this.setState({showHUD:true});
     },
 
     updateHUDView: function(mode){
@@ -187,6 +190,14 @@ var PuzzleMapView = React.createClass({
                             scoreObj = {self.state.scoreObj}
                             updateHUDView = {self.updateHUDView}
                         />:null}
+
+                        {state.showHUD ? <PuzzleMapHUDView
+                            hudStyle = {null}
+                            scoreObj = {self.state.scoreObj}
+                        />:null}
+
+                        <canvas width="768" height="504" className = "puzzle-map-view-bottom-canvas">
+                        </canvas>
                     </div>
                 </div>
             </div>

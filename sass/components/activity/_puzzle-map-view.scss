@@ -1,57 +1,72 @@
-@mixin puzzle-map-view-trans($transType) {
+@mixin puzzle-map-view-transition($transType) {
   transition: $transType .75s ease-in-out;
   -moz-transition: $transType .75s ease-in-out;
   -webkit-transition: $transType .75s ease-in-out;
+}
+
+@mixin puzzle-map-view-scale($transType, $scaleX, $scaleY) {
+  -ms-transform: $transType($scaleX,$scaleY); /* IE 9 */
+  -ms-transform-origin: top left; /* IE 9 */
+  -webkit-transform: $transType($scaleX,$scaleY); /* Chrome, Safari, Opera */
+  -webkit-transform-origin: top left; /* Chrome, Safari, Opera */
+  transform: $transType($scaleX,$scaleY);
+  transform-origin: top left;
 }
 
 .puzzle-map-view-mapCont{
 
   position:absolute;
   display:block;
-  top:30px;
+  top:60px;
+  left:0;
   width: 768px;
   height: 504px;
   z-index:1;
   overflow: hidden;
+}
 
-  .puzzle-map-view-HUD-cont{
+.puzzle-map-view-HUD-cont{
 
-    background: #686868;
+  background: #686868;
+  position:absolute;
+  display:block;
+  width: 283px;
+  height:166px;
+  bottom:20px;
+  right:20px;
+  border: 2px solid #fff;
+  z-index:2;
+
+  .puzzle-map-view-HUD-completed{
+
     position:absolute;
     display:block;
-    width: 283px;
-    height:166px;
-    bottom:20px;
-    right:20px;
-    border: 2px solid #fff;
-
-    .puzzle-map-view-HUD-completed{
-
-      position:absolute;
-      display:block;
-      width: 160px;
-      height:25px;
-      bottom:10px;
-      left:20px;
-    }
-
-    .puzzle-map-view-HUD-correct{
-
-      position:absolute;
-      display:block;
-      width: 120px;
-      height:25px;
-      bottom:10px;
-      right:10px;
-    }
+    width: 160px;
+    height:25px;
+    bottom:10px;
+    left:20px;
   }
 
-  .puzzle-map-view-bottom-canvas{
+  .puzzle-map-view-HUD-correct{
+
     position:absolute;
-    top:30px;
-    left:0;
-    width: 768px;
-    height: 504px;
-    z-index:2;
+    display:block;
+    width: 120px;
+    height:25px;
+    bottom:10px;
+    right:10px;
   }
+}
+
+.puzzle-map-view-bottom-canvas{
+  position:absolute;
+  top:30px;
+  left:0;
+  width: 768px;
+  height: 504px;
+  z-index:2;
+}
+
+.puzzle-map-view-full-scale{
+  @include puzzle-map-view-scale(scale,1,1);
 }

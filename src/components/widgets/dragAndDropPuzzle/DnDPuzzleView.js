@@ -128,7 +128,6 @@ var DnDPuzzleView = React.createClass({
 
                         {this.renderDropTargetColl()}
                     </DnDPuzzleDropTarget> : null}
-                }
                
             </div>
         )

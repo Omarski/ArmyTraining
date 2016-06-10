@@ -26,7 +26,7 @@ function collect(connect, monitor) {
     return {
         //designate as drop target
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver()
+        isOver: monitor.isOver(),
     };
 }
 
