@@ -1,5 +1,6 @@
 var ImageCaption = require('../../widgets/ImageCaption');
 var PageHeader = require('../../widgets/PageHeader');
+var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
 var React = require('react');
 var SettingsStore = require('../../../stores/SettingsStore');
@@ -108,7 +109,10 @@ var QuizStartView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
 
-        // TODO reset quiz answers
+        // reset current quiz answers
+        setTimeout(function() {
+            PageActions.resetQuiz();
+        }, 10);
 
         return pageState;
     },
