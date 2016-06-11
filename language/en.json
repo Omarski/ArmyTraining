@@ -29,7 +29,7 @@
     "lblVoiceVolume": "Voice Volume"
   },
   "quizEnd": {
-    "headerCorrect": "Correct",
+    "headerResult": "Result",
     "headerQuestion": "Question",
     "headerAnswer": "Answer",
     "lblPassed": "Your score was {0}%. Congratulations! You have successfully completed this section. You may now move on to the next section in your course of instruction.",

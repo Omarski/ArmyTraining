@@ -160,7 +160,7 @@ var QuizTableHeader = React.createClass({
    render: function() {
        return (
            <tr className="">
-               <th>{LocalizationStore.labelFor("quizEnd", "headerCorrect")}</th>
+               <th>{LocalizationStore.labelFor("quizEnd", "headerResult")}</th>
                <th>{LocalizationStore.labelFor("quizEnd", "headerQuestion")}</th>
                <th>{LocalizationStore.labelFor("quizEnd", "headerAnswer")}</th>
            </tr>
