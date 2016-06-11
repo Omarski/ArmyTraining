@@ -32,18 +32,33 @@ var PuzzleMapDnDView = React.createClass({
     },
 
     componentDidMount: function(){
-        this.prepDraggableData();
-        this.prepBottomCanvas();
+        var self = this;
+
+        var canvas = document.getElementById('puzzleMapDragCanvas');
+        var context = canvas.getContext('2d');
+
+        self.setState({context:context, canvas:canvas}, function(){
+            this.prepDraggableData();
+            this.prepBottomCanvas();
+        });
+
+        $("#puzzleMapDragCanvas").mousedown(function(e){self.handleMouseDown(e);});
+        $("#puzzleMapDragCanvas").mousemove(function(e){self.handleMouseMove(e);});
+        $("#puzzleMapDragCanvas").mouseup(function(e){self.handleMouseUp(e);});
+        $("#puzzleMapDragCanvas").mouseout(function(e){self.handleMouseOut(e);});
     },
 
     prepDraggableData: function(){
 
         var self = this;
+        var canvas = self.state.canvas;
+        var context = self.state.context;
         var puzzlePiecesObj = self.props.puzzlePiecesObj;
         var imgUrl = self.state.mediaPath + puzzlePiecesObj.correctUrl;
 
-        var canvas = document.getElementById('puzzleMapDragCanvas');
-        var context = canvas.getContext('2d');
+        context.clearRect(0,0, parseInt(canvas.width), parseInt(canvas.height));
+        // var canvas = document.getElementById('puzzleMapDragCanvas');
+        // var context = canvas.getContext('2d');
 
         var imageObj = new Image();
 
@@ -65,12 +80,12 @@ var PuzzleMapDnDView = React.createClass({
 
         imageObj.src = imgUrl;
 
-        $("#puzzleMapDragCanvas").mousedown(function(e){self.handleMouseDown(e);});
-        $("#puzzleMapDragCanvas").mousemove(function(e){self.handleMouseMove(e);});
-        $("#puzzleMapDragCanvas").mouseup(function(e){self.handleMouseUp(e);});
-        $("#puzzleMapDragCanvas").mouseout(function(e){self.handleMouseOut(e);});
+        // $("#puzzleMapDragCanvas").mousedown(function(e){self.handleMouseDown(e);});
+        // $("#puzzleMapDragCanvas").mousemove(function(e){self.handleMouseMove(e);});
+        // $("#puzzleMapDragCanvas").mouseup(function(e){self.handleMouseUp(e);});
+        // $("#puzzleMapDragCanvas").mouseout(function(e){self.handleMouseOut(e);});
 
-        self.setState({context:context, dragImg:imageObj, canvas:canvas })
+        self.setState({dragImg:imageObj});
     },
 
     prepBottomCanvas: function(){
@@ -83,26 +98,29 @@ var PuzzleMapDnDView = React.createClass({
         // var canvasOffset=$("#puzzleMapDragCanvas").offset();
         // var canMouseX=parseInt(e.clientX-canvasOffset.left);
         // var canMouseY=parseInt(e.clientY-canvasOffset.top);
-        self.props.updateHUDView(true);
+        this.props.updateHUDView(true);
         this.setState({isDragging:true});
     },
 
     handleMouseUp: function(e){
-        // var canvasOffset=$("#puzzleMapDragCanvas").offset();
-        // var canMouseX=parseInt(e.clientX-canvasOffset.left);
-        // var canMouseY=parseInt(e.clientY-canvasOffset.top);
-        this.setState({isDragging:false});
-    },
 
-    handleMouseOut: function(e){
+        var self = this;
+        var canvasWidth = parseInt(self.state.canvas.width);
+        var canvasHeight = parseInt(self.state.canvas.height);
+        var scaleAmount = parseFloat(self.props.puzzlePiecesObj.scaleAmount);
         var canvasOffset=$("#puzzleMapDragCanvas").offset();
         var canMouseX=parseInt(e.clientX-canvasOffset.left);
         var canMouseY=parseInt(e.clientY-canvasOffset.top);
         var imgOffsetX = (canMouseX - (canvasWidth  * scaleAmount)) - (parseInt(self.state.imgBounds.width)/2);
         var imgOffsetY = (canMouseY - (canvasHeight * scaleAmount)) - (parseInt(self.state.imgBounds.height)/2);
         if ((imgOffsetX >= -50 && imgOffsetX <= 50) && (imgOffsetY >= -50 && imgOffsetY <= 50)){
-            this.updateBottomCanvas("labeled");
-        }else this.updateBottomCanvas("hint");
+            self.updateBottomCanvas("labeled");
+        }else self.updateBottomCanvas("hint");
+
+        this.setState({isDragging:false});
+    },
+
+    handleMouseOut: function(e){
     },
 
     handleMouseMove: function(e){
@@ -191,8 +209,10 @@ var PuzzleMapDnDView = React.createClass({
 
         if (mode === "labeled"){
             imageObj.src = self.props.puzzlePiecesObj.labeled.src;
-            self.props.updateHUDView(true);
+            //self.props.updateHUDView(true);
             self.state.dropStatus = "correct";
+            self.props.renderHUD();
+            self.prepDraggableData();
         } else {
             if (self.state.dropStatus !== "hint") {
                 imageObj.src = self.props.puzzlePiecesObj.hint.src;

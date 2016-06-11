@@ -25,7 +25,7 @@ function getPageState(props) {
         totalImages:0,
         scoreObj:{totalPieces:0, correct:0},
         currentIndex:0,
-        puzzlePiecesColl:null
+        puzzlePiecesColl:null,
     };
 
 
@@ -101,8 +101,12 @@ var PuzzleMapView = React.createClass({
     },
 
     onImagesPreloaded: function(){
+
+        var self = this;
+        this.setState({
+                    scoreObj:{totalPieces:self.state.imageData.puzzleMapPieces.length - 1,
+                              correct:self.state.currentIndex}});
         this.preparePuzzlePieces();
-        this.renderHUD();
     },
 
     preparePuzzlePieces: function(){
@@ -132,20 +136,30 @@ var PuzzleMapView = React.createClass({
     },
 
     renderHUD: function(){
-        
-        this.setState({showHUD:true, currentIndex:
-            this.state.currentIndex === 0 ? 0 : this.state.currentIndex++});
+
+        console.log("Render HUD ... ");
+
+        var self = this;
+
+        self.setState({
+            showHUD:true,
+            scoreObj:{currentIndex: self.state.currentIndex += 1, totalPieces:self.state.imageData.puzzleMapPieces.length - 1,
+                      correct:self.state.currentIndex
+        }}, function(){console.log("index... " + self.state.currentIndex);});
+
+
     },
 
     updateHUDView: function(mode){
         this.setState({showHUD:mode});
     },
 
-    updateScore: function(){
-        var currentIndex = this.state.currentIndex;
-        this.setState({scoreObj:{totalPieces:this.state.imageData.puzzleMapPieces.length - 1,
-                                correct:currentIndex === 0 ? 0 : currentIndex + 1}});
-    },
+    // updateScore: function(){
+    //     var currentIndex = this.state.currentIndex;
+    //     this.setState({
+    //                     scoreObj:{totalPieces:this.state.imageData.puzzleMapPieces.length - 1,
+    //                               correct:currentIndex}});
+    // },
 
     onClosePopup: function(){
         this.setState(({popupObj:null,audioObj:null}));
@@ -196,7 +210,6 @@ var PuzzleMapView = React.createClass({
                             scoreObj = {self.state.scoreObj}
                             renderHUD = {self.renderHUD}
                             updateHUDView = {self.updateHUDView}
-                            updateScore = {self.updateScore}
                         />:null}
 
                         {state.showHUD ? <PuzzleMapHUDView
