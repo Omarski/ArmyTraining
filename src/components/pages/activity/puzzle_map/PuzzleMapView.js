@@ -15,7 +15,7 @@ function getPageState(props) {
         sources: [],
         title: "",
         pageType: "",
-        showHUD: true,
+        showHUD: false,
         audioObj:null,
         audioController:"",
         popupObj:null,
@@ -23,9 +23,10 @@ function getPageState(props) {
         loadedImageColl:[],
         loadCounter:0,
         totalImages:0,
-        scoreObj:{totalPieces:0, correct:0},
+        scoreObj:{totalPieces:0, correct:0, currentIndex:0},
         currentIndex:0,
         puzzlePiecesColl:null,
+        phase:"start"
     };
 
 
@@ -44,9 +45,6 @@ var PuzzleMapView = React.createClass({
 
         var pageState = getPageState(this.props);
         return pageState;
-    },
-
-    componentWillMount: function(){
     },
 
     componentDidMount: function() {
@@ -104,7 +102,7 @@ var PuzzleMapView = React.createClass({
 
         var self = this;
         this.setState({
-                    scoreObj:{totalPieces:self.state.imageData.puzzleMapPieces.length - 1,
+                    scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1,
                               correct:self.state.currentIndex}});
         this.preparePuzzlePieces();
     },
@@ -135,31 +133,61 @@ var PuzzleMapView = React.createClass({
         this.setState({puzzlePiecesColl:puzzlePiecesColl});
     },
 
+    showStartHud: function(){
+        return(
+            <div className = "puzzle-map-view-HUD-cont" id="puzzle-map-view-HUD-start">
+                <div className="puzzle-map-view-HUD-text">Click and drag the country pieces to their correct locations on the map.</div>
+                <div className="puzzle-map-view-HUD-buttonCont">
+                    <button className = "btn btn-primary" onClick={
+                    this.updateHudDisplay
+                    }>Start</button>
+                </div>
+
+            </div>
+        );
+    },
+
+    showFinishHud: function(){
+        return(
+            <div className = "puzzle-map-view-HUD-cont" id="puzzle-map-view-HUD-finish">
+                <div className="puzzle-map-view-HUD-text">Map complete!</div>
+                <div className="puzzle-map-view-HUD-buttonCont">
+                    <button className = "btn btn-primary" onClick={
+                    this.updateHudDisplay
+                    }>Try Again</button>
+                </div>
+
+            </div>
+        );
+    },
+
     renderHUD: function(){
 
-        console.log("Render HUD ... ");
-
         var self = this;
-
         self.setState({
             showHUD:true,
             scoreObj:{currentIndex: self.state.currentIndex += 1, totalPieces:self.state.imageData.puzzleMapPieces.length - 1,
                       correct:self.state.currentIndex
-        }}, function(){console.log("index... " + self.state.currentIndex);});
+        }});
+    },
 
+    updateHudDisplay: function(){
 
+        var self = this;
+        switch(self.state.phase){
+            case "start":
+                self.setState({phase:"play", showHUD:true});
+                break;
+        }
     },
 
     updateHUDView: function(mode){
         this.setState({showHUD:mode});
     },
 
-    // updateScore: function(){
-    //     var currentIndex = this.state.currentIndex;
-    //     this.setState({
-    //                     scoreObj:{totalPieces:this.state.imageData.puzzleMapPieces.length - 1,
-    //                               correct:currentIndex}});
-    // },
+    updatePhase: function(mode){
+        this.setState({phase:mode});
+    },
 
     onClosePopup: function(){
         this.setState(({popupObj:null,audioObj:null}));
@@ -204,18 +232,22 @@ var PuzzleMapView = React.createClass({
                 <div id="puzzleMapViewBlock">
 
                     <div className="puzzle-map-view-mapCont" style={backMapStyle}>
-                        {self.state.puzzlePiecesColl ? <PuzzleMapDnDView
-                            imageData = {self.state.imageData}
+                        {self.state.phase ==="play" ? <PuzzleMapDnDView
                             puzzlePiecesObj = {self.state.puzzlePiecesColl[self.state.currentIndex]}
                             scoreObj = {self.state.scoreObj}
                             renderHUD = {self.renderHUD}
                             updateHUDView = {self.updateHUDView}
+                            updatePhase = {self.updatePhase}
                         />:null}
 
                         {state.showHUD ? <PuzzleMapHUDView
                             hudStyle = {null}
                             scoreObj = {self.state.scoreObj}
                         />:null}
+
+                        {state.phase === "start" ? self.showStartHud(): null}
+
+                        {state.phase === "finished" ? self.showFinishHud(): null}
 
                         <canvas width="768" height="504" id="puzzleMapViewBottomCanvas" className = "puzzle-map-view-bottom-canvas">
                         </canvas>

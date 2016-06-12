@@ -27,15 +27,15 @@
 
 .puzzle-map-view-HUD-cont{
 
-  background: #686868;
+  background: #b8b8b8;
   position:absolute;
   display:block;
   width: 283px;
   height:166px;
-  bottom:20px;
-  right:20px;
+  bottom:7px;
+  right:7px;
   border: 2px solid #fff;
-  z-index:2;
+  z-index:3;
 
   .puzzle-map-view-HUD-completed{
 
@@ -43,7 +43,7 @@
     display:block;
     width: 160px;
     height:25px;
-    bottom:10px;
+    bottom:4px;
     left:20px;
   }
 
@@ -53,9 +53,28 @@
     display:block;
     width: 120px;
     height:25px;
-    bottom:10px;
+    bottom:4px;
     right:10px;
   }
+
+  .puzzle-map-view-HUD-text{
+    position: relative;
+    //top:20px;
+    //left:10px;
+    width:100%;
+    text-align: center;
+    //height:100%;
+    padding:15px;
+  }
+
+  .puzzle-map-view-HUD-buttonCont{
+    position:absolute;
+    bottom:20px;
+    left:40%;
+    width:50px;
+    height:35px;
+  }
+
 }
 
 .puzzle-map-view-bottom-canvas{
