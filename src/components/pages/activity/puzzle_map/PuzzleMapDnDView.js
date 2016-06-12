@@ -25,7 +25,9 @@ var PuzzleMapDnDView = React.createClass({
         puzzlePiecesObj: PropTypes.object.isRequired,
         scoreObj: PropTypes.object.isRequired,
         renderHUD: PropTypes.func.isRequired,
-        updateHUDView: PropTypes.func.isRequired
+        updateHUDView: PropTypes.func.isRequired,
+        resetBottomCanvas: PropTypes.bool.isRequired,
+        updatePhase: PropTypes.func.isRequired
     },
 
     componentWillMount: function() {
@@ -84,9 +86,18 @@ var PuzzleMapDnDView = React.createClass({
     },
 
     prepBottomCanvas: function(){
-        var canvas = document.getElementById('puzzleMapViewBottomCanvas');
-        var context = canvas.getContext('2d');
-        this.setState({bottomCanvas:canvas, bottomCanvasContext:context});
+        console.log("Clearing canvas...");
+        var self = this;
+        if (!self.state.bottomCanvas) {
+            var canvas = document.getElementById('puzzleMapViewBottomCanvas');
+            var context = canvas.getContext('2d');
+            self.setState({bottomCanvas:canvas, bottomCanvasContext:context});
+        }else{
+            console.log("Clearing canvas...");
+            var bottomCanvas = self.state.bottomCanvas;
+            self.state.bottomCanvasContext.clearRect(0,0, parseInt(bottomCanvas.width), parseInt(bottomCanvas.height));
+            self.props.updatePhase("play");
+        }
     },
 
     handleMouseDown: function(e){
@@ -199,11 +210,8 @@ var PuzzleMapDnDView = React.createClass({
         if (mode === "labeled"){
             imageObj.src = self.props.puzzlePiecesObj.labeled.src;
             self.state.dropStatus = "correct";
-            console.log("I: " + self.props.scoreObj.currentIndex);
-            console.log("T: " + self.props.scoreObj.totalPieces);
 
             if (parseInt(self.props.scoreObj.currentIndex) < parseInt(self.props.scoreObj.totalPieces) - 1) {
-                console.log("continue...");
                 self.props.renderHUD();
                 self.prepDraggableData();
             }else{
@@ -218,7 +226,18 @@ var PuzzleMapDnDView = React.createClass({
         }
     },
 
+    // resetBottomCanvas: function(){
+    //    // var self = this;
+    //     //var bottomCanvas = self.state.bottomCanvas;
+    //     var canvas = document.getElementById('puzzleMapViewBottomCanvas');
+    //     var context = canvas.getContext('2d');
+    //     context.clearRect(0,0, parseInt(canvas.width), parseInt(canvas.height));
+    //     //self.state.bottomCanvasContext.clearRect(0,0, parseInt(bottomCanvas.width), parseInt(bottomCanvas.height));
+    // },
+
     render: function() {
+
+        {this.props.resetBottomCanvas ? this.prepBottomCanvas():null}
 
         var canvasStyle = {position:'absolute', top:'0', left:'0', zIndex:'20'};
         return (
