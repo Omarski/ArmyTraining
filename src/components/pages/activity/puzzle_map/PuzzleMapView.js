@@ -135,10 +135,23 @@ var PuzzleMapView = React.createClass({
     },
 
     replayGame: function(){
-        console.log("replay..");
+
         var self = this;
-        self.setState({currentIndex:0, scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1, correct:0},
-                       showHUD:true, resetBottomCanvas:true});
+        self.setState({
+                       currentIndex:0,
+                       scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1, correct:0},
+                       phase:"play"
+                       //resetBottomCanvas:true
+        },
+            function(){
+                //self.updatePhase("play");
+                self.updateHUDView(true);
+                setTimeout(function(){
+                    self.setState({resetBottomCanvas:true});
+                },500);
+            }
+        );
+
     },
 
     showStartHud: function(){
@@ -243,7 +256,7 @@ var PuzzleMapView = React.createClass({
                 <div id="puzzleMapViewBlock">
 
                     <div className="puzzle-map-view-mapCont" style={backMapStyle}>
-                        {state.phase ==="play" ? <PuzzleMapDnDView
+                        {state.phase === "play" ? <PuzzleMapDnDView
                             puzzlePiecesObj = {self.state.puzzlePiecesColl[self.state.currentIndex]}
                             scoreObj = {self.state.scoreObj}
                             renderHUD = {self.renderHUD}

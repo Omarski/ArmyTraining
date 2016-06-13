@@ -30,9 +30,6 @@ var PuzzleMapDnDView = React.createClass({
         updatePhase: PropTypes.func.isRequired
     },
 
-    componentWillMount: function() {
-    },
-
     componentDidMount: function(){
         var self = this;
 
@@ -86,18 +83,11 @@ var PuzzleMapDnDView = React.createClass({
     },
 
     prepBottomCanvas: function(){
-        console.log("Clearing canvas...");
+
         var self = this;
-        if (!self.state.bottomCanvas) {
             var canvas = document.getElementById('puzzleMapViewBottomCanvas');
             var context = canvas.getContext('2d');
             self.setState({bottomCanvas:canvas, bottomCanvasContext:context});
-        }else{
-            console.log("Clearing canvas...");
-            var bottomCanvas = self.state.bottomCanvas;
-            self.state.bottomCanvasContext.clearRect(0,0, parseInt(bottomCanvas.width), parseInt(bottomCanvas.height));
-            self.props.updatePhase("play");
-        }
     },
 
     handleMouseDown: function(e){
@@ -132,9 +122,10 @@ var PuzzleMapDnDView = React.createClass({
         var canMouseY=parseInt(e.clientY-canvasOffset.top);
         var imgBounds = self.state.imgBounds;
 
+        var canvasWidth = parseInt(self.state.canvas.width);
+        var canvasHeight = parseInt(self.state.canvas.height);
+
         if (self.state.isDragging){
-            var canvasWidth = parseInt(self.state.canvas.width);
-            var canvasHeight = parseInt(self.state.canvas.height);
 
             self.state.context.clearRect(0,0, canvasWidth, canvasHeight);
             self.state.context.drawImage(self.state.dragImg,
@@ -226,18 +217,14 @@ var PuzzleMapDnDView = React.createClass({
         }
     },
 
-    // resetBottomCanvas: function(){
-    //    // var self = this;
-    //     //var bottomCanvas = self.state.bottomCanvas;
-    //     var canvas = document.getElementById('puzzleMapViewBottomCanvas');
-    //     var context = canvas.getContext('2d');
-    //     context.clearRect(0,0, parseInt(canvas.width), parseInt(canvas.height));
-    //     //self.state.bottomCanvasContext.clearRect(0,0, parseInt(bottomCanvas.width), parseInt(bottomCanvas.height));
-    // },
+    resetBottomCanvas: function(){
+        var self = this;
+        self.state.bottomCanvasContext.clearRect(0,0, parseInt(self.state.bottomCanvas.width), parseInt(self.state.bottomCanvas.height));
+    },
 
     render: function() {
 
-        {this.props.resetBottomCanvas ? this.prepBottomCanvas():null}
+        {this.props.resetBottomCanvas ? this.resetBottomCanvas():null}
 
         var canvasStyle = {position:'absolute', top:'0', left:'0', zIndex:'20'};
         return (
