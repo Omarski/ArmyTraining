@@ -1,6 +1,6 @@
 .main-breadcrumbs {
   position: fixed;
-  top: 44px;
+  top: 40px;
   left: 0px;
   right: 0px;
   padding: 3px;
@@ -20,4 +20,10 @@
 .main-nav-bookmark-add {
   width: 100%;
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 767px){
+  .hide-bread-crumbs-for-tablet {
+    display: none;
+  }
 }

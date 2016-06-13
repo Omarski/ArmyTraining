@@ -276,12 +276,12 @@ var FooterView = React.createClass({
                             <ProgressView />
                         </td>
                         <td>
-                            <button type="button" onClick={this.previous} className="btn btn-default btn-lg btn-link btn-step" aria-label="Left Align">
+                            <button type="button" onClick={this.previous} className="btn btn-default btn-lg btn-link btn-step button-left-mobile-padding" aria-label="Left Align">
                                 <span className="glyphicon glyphicon-circle-arrow-left btn-icon" aria-hidden="true"></span>
                             </button>
                         </td>
                         <td>
-                            <button type="button" onClick={this.next} className="btn btn-default btn-lg btn-link btn-step" aria-label="Left Align">
+                            <button type="button" onClick={this.next} className="btn btn-default btn-lg btn-link btn-step button-right-mobile-padding" aria-label="Left Align">
                                 <span className="glyphicon glyphicon-circle-arrow-right btn-icon" aria-hidden="true"></span>
                             </button>
                         </td>

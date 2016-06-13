@@ -55,6 +55,7 @@ function getPageState(props) {
 var EthnoMapView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
+        console.log("this.props", this.props);
         return pageState;
     },
     onLayersReady: function(x){
@@ -123,7 +124,7 @@ var EthnoMap = React.createClass({
         }
 
     },
-    onRegionRollover: function(canvasElement, x, y) {
+    onRegionRollover: function(canvasElement, x, y, pageX) {
         var self = this;
         if(canvasElement !== null) {
             var canvasId = canvasElement.id;
@@ -150,8 +151,14 @@ var EthnoMap = React.createClass({
         }
 
         var toolTipper = document.getElementById("toolTipperId");
-        toolTipper.style.top = (y - 50) + 'px';
-        toolTipper.style.left = (x - 28) + 'px';
+        var xValue = event.clientX;
+        var yValue = event.clientY;
+
+        var toolTipWidth = ($("#toolTipperId").width() / 2) ;
+        console.log("toolTipWidth", toolTipWidth);
+
+        toolTipper.style.top = (y - 40) + 'px';
+        toolTipper.style.left = (pageX - toolTipWidth - 15) + 'px';
         toolTipper.style.zIndex = self.state.topZindex + 20;
     },
     togglePopoverShow: function (){
@@ -254,8 +261,8 @@ function popoverFunction(mapDataArgument, popoverShowHide, popoverSetter){
 
 function toolTipper(region, x, y){
 
-    var xVal = x - 100;
-    var yVal = y - 100;
+    var xVal = x;
+    var yVal = y;
     var regionName = region;
     var mouseX;
     var mouseY;

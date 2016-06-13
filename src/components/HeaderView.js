@@ -8,6 +8,14 @@ var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
 var DliView = require("../components/widgets/DliView");
 var ReferenceView = require("../components/reference_guide/ReferenceView");
+var Navbar = require("react-bootstrap/lib/Navbar");
+var NavbarCollapse = require("react-bootstrap/lib/NavbarCollapse");
+var Nav = require("react-bootstrap/lib/Nav");
+var NavItem = require("react-bootstrap/lib/NavItem");
+var NavDropdown = require("react-bootstrap/lib/NavDropdown");
+var MenuItem = require("react-bootstrap/lib/MenuItem");
+var PanelGroup = require("react-bootstrap/lib/PanelGroup");
+var Panel = require("react-bootstrap/lib/Panel");
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -25,7 +33,8 @@ function getBookState() {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
-        previousVolume: null
+        previousVolume: null,
+        hideInClass: ({display: "none"})
     };
 }
 
@@ -67,11 +76,32 @@ var HeaderView = React.createClass({
     componentDidMount: function() {
         BookStore.removeChangeListener(this._onChange);
         BookStore.addChangeListener(this._onChange);
+
     },
 
     componentWillUnmount: function() {
         BookStore.removeChangeListener(this._onChange);
         ConfigStore.removeChangeListener((this._onChange));
+    },
+    
+    bookmarkFunction: function(){
+
+            var bm = {
+                unit: PageStore.unit().data.xid,
+                chapter: PageStore.chapter().xid,
+                page: PageStore.page().xid,
+                title: PageStore.page().title
+            };
+
+            NotificationActions.show({
+                title:'Bookmark',
+                body: PageStore.page().title + ' bookmarked!',
+                allowDismiss: true,
+                percent: ""
+            });
+            BookmarkActions.create(bm);
+            this.setState(getPageState());
+
     },
 
     render: function() {
@@ -89,28 +119,110 @@ var HeaderView = React.createClass({
             referenceView = (<ReferenceView />);
         }
 
+        /*
+
+
+         <Navbar inverse>
+         <Navbar.Header>
+         <Navbar.Brand>
+         <a href="#">React-Bootstrap</a>
+         </Navbar.Brand>
+         <Navbar.Toggle />
+         </Navbar.Header>
+         <Navbar.Collapse>
+         <Nav>
+         <NavItem eventKey={1} href="#">Link</NavItem>
+         <NavItem eventKey={2} href="#">Link</NavItem>
+         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+         <MenuItem eventKey={3.1}>Action</MenuItem>
+         <MenuItem eventKey={3.2}>Another action</MenuItem>
+         <MenuItem eventKey={3.3}>Something else here</MenuItem>
+         <MenuItem divider />
+         <MenuItem eventKey={3.3}>Separated link</MenuItem>
+         </NavDropdown>
+         </Nav>
+         <Nav pullRight>
+         <NavItem eventKey={1} href="#">Link Right</NavItem>
+         <NavItem eventKey={2} href="#">Link Right</NavItem>
+         </Nav>
+         </Navbar.Collapse>
+         </Navbar>
+
+
+         <nav className="navbar navbar-default navbar-fixed-top">
+         <div className="container main-nav-container">
+         <img src="images/VCAT_H5_logo.png" />
+         <div className="navbar-header main-nav-bar-header">
+
+         <a className="navbar-brand" href="#">{this.state.title}</a>
+         </div>
+         <div id="navbar" className="navbar main-nav-bar">
+         <div className="nav navbar-nav main-nav-bar-nav">
+         {dliView}
+         {referenceView}
+         <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
+         {muteIcon}
+         </button>
+         <SettingsView />
+         </div>
+         </div>
+         <BreadcrumbsView />
+         </div>
+
+         </nav>
+
+
+
+         <Nav>
+         <NavItem eventKey={1} href="#">Link</NavItem>
+         <NavItem eventKey={2} href="#">Link</NavItem>
+         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+         <MenuItem eventKey={3.1}>Action</MenuItem>
+         <MenuItem eventKey={3.2}>Another action</MenuItem>
+         <MenuItem eventKey={3.3}>Something else here</MenuItem>
+         <MenuItem divider />
+         <MenuItem eventKey={3.3}>Separated link</MenuItem>
+         </NavDropdown>
+         </Nav>
+
+
+         <PanelGroup accordion className="hide-panels">
+         <NavItem eventKey={2} onClick={consoleLog} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
+         <NavItem eventKey={3} onClick={consoleLog} href="#"><Panel className="hide-panels"><SettingsView /><p>Settings</p></Panel></NavItem>
+         </PanelGroup>
+
+
+        */
+
+        var changeNavBarCollapse = function () {
+                if(self.state.hideInClass !== ({visibility: "visible"})) {
+                    self.setState({hideInClass: ({visibility: "visible"})});
+                }
+        }
+
+        var consoleLog = function(){console.log(this.eventKey)};
+
         return (
-            <nav className="navbar navbar-default navbar-fixed-top">
-                <div className="container main-nav-container">
-                    <img src="images/VCAT_H5_logo.png" />
-                    <div className="navbar-header main-nav-bar-header">
-
-                        <a className="navbar-brand" href="#">{this.state.title}</a>
-                    </div>
-                    <div id="navbar" className="navbar main-nav-bar">
-                        <div className="nav navbar-nav main-nav-bar-nav">
-                            {dliView}
-                            {referenceView}
-                            <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
-                                {muteIcon}
-                            </button>
-                            <SettingsView />
-                        </div>
-                    </div>
-                    <BreadcrumbsView />
-                </div>
-
-            </nav>
+            <div>
+                <Navbar className="navbar-fixed-top navbarHeightDesktop">
+                    <Navbar.Header>
+                        <img src="images/VCAT_H5_logo.png" className="pull-left vcat-logo"/>
+                        <Navbar.Brand>
+                                <a className="navbar-brand" href="#">{this.state.title}</a>
+                        </Navbar.Brand>
+                        <Navbar.Toggle onClick={changeNavBarCollapse} />
+                    </Navbar.Header>
+                    <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
+                        <Nav pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
+                            <NavItem eventKey={1} onClick={consoleLog} href="#"><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                            <NavItem eventKey={2} onClick={consoleLog} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
+                            <NavItem eventKey={3} onClick={consoleLog} href="#"><SettingsView /><p>Settings</p></NavItem>
+                            <NavItem eventKey={4} onClick={self.bookmarkFunction} href="#" className="bookmark-nav-item"><p>Bookmark</p></NavItem>
+                        </Nav>
+                    </NavbarCollapse>
+                </Navbar>
+                <BreadcrumbsView />
+            </div>
         );
     },
     /**

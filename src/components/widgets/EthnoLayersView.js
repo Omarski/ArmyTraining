@@ -132,7 +132,7 @@ var EthnoLayersView = React.createClass({
                 if(opacityLevel === "1") {
                     self.state.lastHighlightedRegion = canvasElement;
                     // I pass in pageX and pageY below. I added this because it is faster than setting up another listener in my component; this passes the XY mouse coordinates in context of the page not just the canvas
-                    self.props.onRollover(canvasElement, pixelX, pixelY);
+                    self.props.onRollover(canvasElement, pixelX, pixelY, pageX);
                 }
             }
         }
@@ -148,9 +148,11 @@ var EthnoLayersView = React.createClass({
         var self = this;
 
         if (mode == "mousemove"){
-            var offset = $("#imageLayerView-back-image").offset();
+            var offset = $("#wrapperDiv").offset();
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
+            console.log("offset", offset);
+            console.log("mouseX:", e.pageX, "mouseY", e.pageY);
             //XXXXXXXXXX below we pass the e.pageX and e.pageY so we get the mouse coordinates that I need
             self.detectRegion(e, x, y, e.pageX, e.pageY);
         }

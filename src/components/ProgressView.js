@@ -120,10 +120,10 @@ var ProgressView = React.createClass({
                             <table className="table progress-sub-table">
                                 <tbody>
                                     <tr>
-                                        <td nowrap>
+                                        <td nowrap className="shrink-td-padding-for-mobile">
                                             {LocalizationStore.labelFor("progress", "lblLessons")}
                                         </td>
-                                        <td nowrap width="100%">
+                                        <td nowrap width="100%" className="hide-progress-bars">
                                             <div className="progress">
                                                 <div className="progress-bar progress-bar-unit" style={{width: this.state.unitsPercent + '%'}}>
                                                     <span className="sr-only">{this.state.unitsPercent}% Complete (success)</span>
@@ -133,7 +133,7 @@ var ProgressView = React.createClass({
                                                 </div>
                                             </div>
                                         </td>
-                                        <td nowrap>
+                                        <td nowrap className="shrink-td-padding-for-mobile">
                                             {this.state.currentUnitIndex}/{this.state.totalUnits}
                                         </td>
                                     </tr>
@@ -144,10 +144,10 @@ var ProgressView = React.createClass({
                             <table className="table progress-sub-table">
                                 <tbody>
                                     <tr>
-                                        <td nowrap>
+                                        <td nowrap className="shrink-td-padding-for-mobile">
                                             {LocalizationStore.labelFor("progress", "lblPages")}
                                         </td>
-                                        <td nowrap width="100%">
+                                        <td nowrap width="100%" className="hide-progress-bars">
                                             <div className="progress">
                                                 <div className="progress-bar progress-bar-pages" style={{width: this.state.pagesPercent + '%'}}>
                                                     <span className="sr-only">{this.state.pagesPercent}% Complete (success)</span>
@@ -157,7 +157,7 @@ var ProgressView = React.createClass({
                                                 </div>
                                             </div>
                                         </td>
-                                        <td nowrap>
+                                        <td nowrap className="shrink-td-padding-for-mobile">
                                             {this.state.currentPageIndex}/{this.state.currentUnitTotalPages}
                                         </td>
                                     </tr>

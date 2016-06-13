@@ -73,9 +73,7 @@ var EthnoMapPopover = React.createClass({
             marginLeft: 5,
             marginTop: 5,
             padding: 5,
-            zIndex: 999,
-            top: 0,
-            left: 0
+            zIndex: 999
         };
 
         var checkIfPrevButtonIsDisabled = function(){

@@ -139,8 +139,10 @@ var BreadcrumbsView = React.createClass({
             </OverlayTrigger>
         );
 
+        console.log("BREADCRUMBSVIEW: this.state.pageTitle:", this.state.pageTitle);
+
         return (
-            <div>
+            <div className="hide-bread-crumbs-for-tablet">
                 <ol className="breadcrumb main-breadcrumbs">
                     <li><a href="#">{this.state.unitTitle}</a></li>
                     <li><a href="#" >{this.state.chapterTitle}</a></li>
@@ -148,7 +150,6 @@ var BreadcrumbsView = React.createClass({
                 </ol>
                 {bookmarkBtn}
             </div>
-
         );
     },
     _onChange: function() {
