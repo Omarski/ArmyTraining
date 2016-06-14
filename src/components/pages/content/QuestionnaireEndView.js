@@ -40,19 +40,18 @@ function getPageState(props) {
     for (var unitIndex in units) {
         var unit = units[unitIndex];
         var unitId = unit.id;
-        var data = unit.data;
+        var unitData = unit.data;
 
-        if (data.xid && (plists.indexOf(data.xid) !== -1)) {
+        if (unitData.xid && (plists.indexOf(unitData.xid) !== -1)) {
             // create object and add it
-            selectedUnits.push({id: unitId, title: data.title});
-
+            selectedUnits.push({id: unitId, title: unitData.title});
 
             // gather minutes
-            if (data.playlistInfo !== null) {
-                var playlistInfoLength = data.playlistInfo.length;
+            if (unitData.playlistInfo != null) {
+                var playlistInfoLength = unitData.playlistInfo.length;
 
                 while(playlistInfoLength--) {
-                    var pInfo = data.playlistInfo[playlistInfoLength];
+                    var pInfo = unitData.playlistInfo[playlistInfoLength];
 
                     // find tag
                     var minutes = Utils.findInfo(pInfo, InfoTagConstants.INFO_PROP_MINUTES);
