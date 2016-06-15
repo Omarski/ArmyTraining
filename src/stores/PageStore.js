@@ -344,18 +344,32 @@ function reset() {
 }
 
 function resetQuiz() {
-
-    // get current chapter
     if (_currentChapter) {
+        var pages = _currentChapter.pages;
+        var pagesLen = pages.length;
 
-        // TODO
+        while (pagesLen--) {
+            var page = pages[pagesLen];
 
-        // get quiz pages
+            // skip some page types that are in a quiz
+            if (page.state && page.state.quizpage && page.state.answer) {
+                switch(page.type) {
+                    case PageTypeConstants.QUIZ_END:
+                    case PageTypeConstants.QUIZ_START:
+                    case PageTypeConstants.SECTION_END:
+                        break;  // skip
+                    default:
+                        // delete answer data
+                        delete page.state.answer;
 
-        // for each quiz page remove the answer state object
-
+                        // update timestamp
+                        page.state = assign({}, page.state, {lastUpdated: Date.now()});
+                }
+            }
+        }
     }
 
+    // TODO dispatch quiz reset event?
 }
 
 function saveCurrentPage() {

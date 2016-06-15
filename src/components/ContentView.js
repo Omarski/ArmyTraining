@@ -20,7 +20,7 @@ var MultiColumnPronunciationView = require('../components/pages/activity/MultiCo
 var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceView');
 var OrderingView = require('../components/pages/activity/OrderingView');
 var QuestionnaireView = require('../components/pages/content/QuestionnaireView');
-//var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
+var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
 var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizView = require('../components/pages/activity/QuizView');
 var PronunciationView = require('../components/pages/activity/PronunciationView');
@@ -48,8 +48,7 @@ function getPageState() {
 var ContentView = React.createClass({
 
     getInitialState: function() {
-        var pageState = getPageState();
-        return pageState;
+        return getPageState();
     },
 
     componentWillMount: function() {
@@ -161,6 +160,9 @@ var ContentView = React.createClass({
                     break;
                 case PageTypeConstants.QUESTIONNAIRE:
                     page = <QuestionnaireView page={this.state.page} />;
+                    break;
+                case PageTypeConstants.QUESTIONNAIRE_END:
+                    page = <QuestionnaireEndView page={this.state.page} />;
                     break;
                 case "quiz_page":
                 case PageTypeConstants.QUIZ_END:

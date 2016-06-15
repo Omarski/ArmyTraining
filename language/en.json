@@ -19,6 +19,13 @@
   "loader": {
     "lblLoading": "Loading"
   },
+  "pretest": {
+    "headerTitle": "Country or Mission Lesson",
+    "headerTestOut": "Eligible for Test Out?",
+    "lblTitle": "Question {0}",
+    "lblFailed": "Thank you for taking the test! Unfortunately, your score does not qualify you to test out of any portion of the course. \n\nClick \"Next\" to go to the first lesson in your required Course of Instruction.",
+    "lblPassed": "Congratulations! Your score qualifies you to test out of portions of the course. Review the lessons below for which you can receive credit, then check the \"Accept Credit\" button if you wish to accept credit for those lessons, or the \"Do Not Accept Credit\" button if you don't.\n\nIf you choose not to accept credit for the lessons, you will have to take them as part of your required Course of Instruction (COI), and score at least 80% on the lesson quizzes."
+  },
   "progress": {
     "lblLessons": "Lessons",
     "lblPages": "Pages"
@@ -29,10 +36,17 @@
     "lblVoiceVolume": "Voice Volume"
   },
   "quizEnd": {
-    "headerCorrect": "Correct",
+    "headerResult": "Result",
     "headerQuestion": "Question",
     "headerAnswer": "Answer",
     "lblPassed": "Your score was {0}%. Congratulations! You have successfully completed this section. You may now move on to the next section in your course of instruction.",
     "lblFailed": "Your score was {0}%. You may want to review the section and try this quiz again."
+  },
+  "questionnaireEnd": {
+    "btnConfirm": "Confirm",
+    "btnRestart": "Start Over",
+    "lblConfirm": "Confirm your choice:",
+    "lblTime": "Estimated Training Time: {0}",
+    "lblLessons": "Lessons:"
   }
 }
