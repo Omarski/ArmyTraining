@@ -17,11 +17,17 @@ function create(data) {
     // server-side storage.
     // Using the current timestamp + random number in place of a real id.
     var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+
+    // state with default values
+    var defaultState = {
+        complete: false,
+        text: data.config.text
+    };
+
     _books[id] = {
         id: id,
-        complete: false,
-        text: data.config.text,
-        data: data
+        data: data,
+        state: defaultState
     };
 }
 
@@ -32,7 +38,10 @@ function create(data) {
  *     updated.
  */
 function update(id, updates) {
-    _books[id] = assign({}, _books[id], updates);
+    if (_books[id] && _books[id].state) {
+        _books[id].state = assign({}, _books[id].state, updates);
+    }
+
 }
 
 /**
@@ -59,7 +68,7 @@ function destroy(id) {
  */
 function destroyCompleted() {
     for (var id in _books) {
-        if (_books[id].complete) {
+        if (_books[id].state && _books[id].state.complete === true) {
             destroy(id);
         }
     }
@@ -73,7 +82,7 @@ var BookStore = assign({}, EventEmitter.prototype, {
      */
     areAllComplete: function() {
         for (var id in _books) {
-            if (!_books[id].complete) {
+            if (_books[id].state && !_books[id].state.complete) {
                 return false;
             }
         }
