@@ -13,6 +13,7 @@ module.exports = {
     MULTI_NOTE: "MultiNote",
     MULTIPLE_CHOICE: "MultipleChoice",
     ORDERING: "Ordering",
+    POST_TEST_QUIZ_END: "PostTestQuizEnd",
     PRONUNCIATION: "Pronunciation",
     QUESTIONNAIRE: "Questionnaire",
     QUESTIONNAIRE_END: "QuestionnaireEnd",
@@ -21,6 +22,7 @@ module.exports = {
     RESPONSE_FORMATION: "ResponseFormation",
     SECTION_END: "SectionEnd",
     SORTING: "Sorting",
+    TEST_OUT_QUIZ_END: "TestOutQuizEnd",
     UTTERANCE_FORMATION: "UtteranceFormation",
     VIDEO: "Video"
 };
