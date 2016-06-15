@@ -34,7 +34,7 @@ var ImageCaptionView = React.createClass({
 
         return  (
             <div className="image-caption-container">
-                <img className={this.state.videoType} src={this.state.filePath} alt={this.state.altText}></img>
+                <img className={this.state.videoType} src={this.state.filePath} aria-label={this.state.altText} title={this.state.altText} alt={this.state.altText}></img>
                 {captionDiv}
             </div>
         );

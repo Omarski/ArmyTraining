@@ -72,7 +72,7 @@ var DliView = React.createClass({
 
         return(<span id="dliView">
             <OverlayTrigger trigger='click' rootClose placement='left' id="DliOverlayTrigger" overlay={popOver}>
-                <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
+                <Button title={"DLI Guide"} alt={"DLI Guide"} className="btn btn-default btn-lg btn-link main-nav-bar-button">
                     {dliIcon}
                 </Button>
             </OverlayTrigger>

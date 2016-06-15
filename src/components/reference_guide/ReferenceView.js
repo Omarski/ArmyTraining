@@ -179,7 +179,7 @@ var ReferenceView = React.createClass({
                         </div>
                     </Modal.Body>
                 </Modal>
-                <button onClick={this.openModal} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="reference">
+                <button title={"Reference Guide"} alt={"Reference Guide"} onClick={this.openModal} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="Reference Guide">
                     <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
                 </button>
             </div>

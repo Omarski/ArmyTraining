@@ -11,6 +11,7 @@ function getPageState(props) {
         sources: [],
         image: "",
         prompt: "",
+        imageCaption: "",
         haveListened: false,
         haveAnswered: false,
         isCorrect: false,
@@ -43,6 +44,14 @@ function getPageState(props) {
 
     if(imageZid != ""){
         data.image = "./data/media/" + imageZid + ".jpg";
+        if(props.page.media && props.page.media[0].info && props.page.media[0].info.property){
+            props.page.media[0].info.property.map(function(item){
+                // imagination may not be the final description name
+                if(item.name === "imagination"){
+                    data.imageCaption = item.value;
+                }
+            });
+        }
     }
 
 
@@ -51,13 +60,24 @@ function getPageState(props) {
 
 function listenCheck(self){
     // play the audio prmopt from the click to listen box
-    var zid = self.state.page.question.media[0].zid;
-    playAudio(zid);
-    $("#audio").bind('ended', function(){
-        self.setState({
-            haveListened: true
+    //find the zid of the audio
+    //console.dir(self);
+    var zid = 0;
+    if(self.props && self.props.page){
+        if(self.props.page.media){
+
+        }
+    zid = self.props.page.question.media[0].zid;
+    }
+    //console.log(zid);
+    if(zid && zid !== 0){
+        playAudio(zid);
+        $("#audio").bind('ended', function(){
+            self.setState({
+                haveListened: true
+            });
         });
-    });
+    }
 }
 
 function playAudio(xid){
@@ -167,7 +187,7 @@ var ListeningComprehensionView = React.createClass({
             return (<li key={page.xid + String(index)} className="list-group-item" >
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" className="listening-comp-checkbox" value={ans}>{ans}</input>
+                        <input aria-label={ans} type="checkbox" className="listening-comp-checkbox" value={ans}>{ans}</input>
                     </label>
                 </div>
             </li>);
@@ -212,9 +232,11 @@ var ListeningComprehensionView = React.createClass({
                             <div className={interactionColumn}>
                                 <div className="container-fluid">
                                     <div className="listening-comp-interaction-container">
-                                        <img className="row listening-comp-image" src={state.image}></img>
-                                        <div className="listening-comp-prompt" onClick={function(){listenCheck(self)}}>
-                                            <span className="glyphicon glyphicon-play-circle"></span>
+                                        <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} className="row listening-comp-image" src={state.image}></img>
+                                        <div className="listening-comp-prompt">
+                                            <button title={"Click to Listen"} alt={"Click to Listen"} type="button" onClick={function(){listenCheck(self)}} className="btn btn-default btn-lg btn-link btn-step" aria-label={"Click to Listen"}>
+                                                <span className="glyphicon glyphicon-play-circle btn-icon" aria-hidden="true"></span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
