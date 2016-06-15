@@ -28,6 +28,7 @@ var PageActions = {
         });
     },
     loadNext: function(data) {
+        console.log("data", data);
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_LOAD_NEXT,
             data: data
@@ -35,6 +36,7 @@ var PageActions = {
     }
     ,
     loadPrevious: function(data) {
+        console.log("previous data", data);
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_LOAD_PREVIOUS,
             data: data

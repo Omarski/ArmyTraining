@@ -79,6 +79,7 @@ var MultiNoteView = React.createClass({
                 // for each "note" json object the "related" json object has
                 if (itemNote.media) {
                     // if that note has a "media" json object
+                    console.log("itemNote.media", itemNote.media);
                     pageMediaArray.push(itemNote.media[0].xid); // add it's xid to that page's pageMediaArray
                 }
             });

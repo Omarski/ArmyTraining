@@ -668,7 +668,7 @@ var DDAudioQuizView = React.createClass({
 
             // if we are moving the item to an answer-handle
             if(self.state.needsRender){
-                React.render(
+                ReactDOM.render(
                     <DropComponent />,
                     e.target
                 );

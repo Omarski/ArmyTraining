@@ -1,29 +1,40 @@
-.main-breadcrumbs {
-  position: fixed;
-  top: 40px;
-  left: 0px;
-  right: 0px;
-  padding: 3px;
-  padding-left: 15px;
-}
 
-.main-nav-bookmark {
-  right: 13px;
-  position: absolute;
-  top: 38px;
-  font-size: 20px;
-  &.selected{
-    color: #000;
-  }
-}
-
-.main-nav-bookmark-add {
-  width: 100%;
-  margin-bottom: 10px;
-}
 
 @media screen and (max-width: 767px){
   .hide-bread-crumbs-for-tablet {
+    display: none;
+  }
+  .hide-bread-crumbs-for-browser{
+    display: inline;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .main-breadcrumbs {
+    position: fixed;
+    top: 40px;
+    left: 0px;
+    right: 0px;
+    padding: 3px;
+    padding-left: 15px;
+  }
+
+  .main-nav-bookmark {
+    right: 13px;
+    position: absolute;
+    top: 38px;
+    font-size: 20px;
+    &.selected{
+      color: #000;
+    }
+  }
+
+  .main-nav-bookmark-add {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .hide-bread-crumbs-for-browser {
     display: none;
   }
 }

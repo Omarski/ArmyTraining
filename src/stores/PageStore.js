@@ -171,6 +171,7 @@ function loadNext() {
         _currentChapter = _currentUnit.data.chapter[chapIndex];
         newIndex = 0;
     }
+    console.log("newIndex", newIndex);
     var nextPage = _currentChapter.pages[newIndex];
     load({unit:_currentUnit, chapter:_currentChapter, page:nextPage});
 }
@@ -191,6 +192,7 @@ function loadPrevious() {
         _currentChapter = _currentUnit.data.chapter[chapIndex];
         newIndex = _currentChapter.pages.length - 1;
     }
+    console.log("previous newIndex", newIndex);
     var prevPage = _currentChapter.pages[newIndex];
     load({unit:_currentUnit, chapter:_currentChapter, page:prevPage});
 }

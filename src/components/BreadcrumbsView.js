@@ -105,8 +105,8 @@ var BreadcrumbsView = React.createClass({
         if (bookmarks) {
             items = bookmarks.map(function(item) {
                 return (<ListGroupItem>
-                    <a href="#" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</a>
-                </ListGroupItem>)
+                            <a href="#" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</a>
+                        </ListGroupItem>)
             });
         }
 
@@ -139,16 +139,20 @@ var BreadcrumbsView = React.createClass({
             </OverlayTrigger>
         );
 
-        console.log("BREADCRUMBSVIEW: this.state.pageTitle:", this.state.pageTitle);
-
         return (
-            <div className="hide-bread-crumbs-for-tablet">
-                <ol className="breadcrumb main-breadcrumbs">
-                    <li><a href="#">{this.state.unitTitle}</a></li>
-                    <li><a href="#" >{this.state.chapterTitle}</a></li>
-                    <li><a href="#" className="active">{this.state.pageTitle}</a></li>
-                </ol>
-                {bookmarkBtn}
+            <div>
+                <div className="hide-bread-crumbs-for-tablet">
+                    <ol className="breadcrumb main-breadcrumbs">
+                        <li><a href="#">{this.state.unitTitle}</a></li>
+                        <li><a href="#" >{this.state.chapterTitle}</a></li>
+                        <li><a href="#" className="active">{this.state.pageTitle}</a></li>
+                    </ol>
+                    {bookmarkBtn}
+                </div>
+
+                <div className="hide-bread-crumbs-for-browser">
+                    {bookmarkBtn}
+                </div>
             </div>
         );
     },

@@ -18,6 +18,7 @@
 
 .ethno-visible {
   visibility: visible !important;
+  opacity: 1 !important;
   z-index: 12;
 }
 
@@ -33,6 +34,7 @@
 
 .ethno-not-visible {
   visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .ethno-sidebar-form {

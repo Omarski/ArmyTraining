@@ -91,14 +91,17 @@ var EthnoLayersView = React.createClass({
 
         var self = this;
         var canvasColl = [];
+        var lastActualLabel = "";
 
         //loop through regions
         self.props.imageColl.map(function(image,index){
+            // console.log("imageColl", image);
+            // console.log("lastActualLabel", lastActualLabel);
 
             var regionCanvas =  self.createCanvas({
                 canvasWidth:self.props.areaWidth,
                 canvasHeight:self.props.areaHeight,
-                canvasId:"imageLayer_canvas_" + index,
+                canvasId: "imageLayer_canvas_" + index,
                 canvasStyle:"{z-index:"+index+1+"}",
                 mapSrc: self.state.loadedImageColl[index].src
             });
@@ -114,27 +117,36 @@ var EthnoLayersView = React.createClass({
     },
 
     detectRegion: function(e,pixelX,pixelY, pageX, pageY) {
-        // XXXXXXXXXX pageX and pageY are extra parameters that I pass into onRollover on line 153; This change also is related to the cahnge on line 173 which sets it up
         var self = this;
         var pixelHit = false;
 
-        for (var i = 0; i < self.state.canvasColl.length; i++) {
-
+        for (var i = 0; i < self.state.canvasColl.length; i+=2) {
             var canvasElement = self.state.canvasColl[i];
             var canvas = canvasElement.getContext('2d');
             var pixel = canvas.getImageData(pixelX, pixelY, 1, 1).data;
-            // XXXXXXXXXX  DAVID ---- You have .getAttribute('hidden') can we change it to find the opacity, like below? XXXXXXXXXX
             var opacityLevel = getComputedStyle(canvasElement).getPropertyValue("opacity");
+            var opacityLevelHilight = getComputedStyle(self.state.canvasColl[i + 1]).getPropertyValue("opacity");
+            var hilightZIndex = self.props.topZIndex + 19;
 
             if (pixel[3] !== 0) {
                 pixelHit = true;
-                // XXXXXXXXXX If the opacity is 1 (which is the default--we can change this to !== 0 if you'd like) then it changes the lastHighlightedRegion to the current element. XXXXXXXXXX
                 if(opacityLevel === "1") {
                     self.state.lastHighlightedRegion = canvasElement;
-                    // I pass in pageX and pageY below. I added this because it is faster than setting up another listener in my component; this passes the XY mouse coordinates in context of the page not just the canvas
                     self.props.onRollover(canvasElement, pixelX, pixelY, pageX);
+                    if(opacityLevelHilight === "0" ) {
+                        $("#" + self.state.canvasColl[i + 1].id).removeClass("ethno-not-visible");
+                        $("#" + self.state.canvasColl[i + 1].id).addClass("ethno-visible");
+                    }
+                    $("#" + self.state.canvasColl[i + 1].id).css("zIndex", hilightZIndex);
+                }
+            } else if (pixel[3] === 0 || opacityLevel === "0") {
+                if($("#" + self.state.canvasColl[i + 1].id).hasClass("ethno-visible"))
+                {
+                    $("#" + self.state.canvasColl[i + 1].id).removeClass("ethno-visible");
+                    $("#" + self.state.canvasColl[i + 1].id).addClass("ethno-not-visible");
                 }
             }
+
         }
 
         if (!pixelHit) {
@@ -151,8 +163,8 @@ var EthnoLayersView = React.createClass({
             var offset = $("#wrapperDiv").offset();
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
-            console.log("offset", offset);
-            console.log("mouseX:", e.pageX, "mouseY", e.pageY);
+            // console.log("offset", offset);
+            // console.log("mouseX:", e.pageX, "mouseY", e.pageY);
             //XXXXXXXXXX below we pass the e.pageX and e.pageY so we get the mouse coordinates that I need
             self.detectRegion(e, x, y, e.pageX, e.pageY);
         }

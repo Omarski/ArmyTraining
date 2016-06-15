@@ -202,6 +202,52 @@ button.navbar-toggle:hover {
     margin-right: 25px;
   }
 
+
+  .bookmark-text-li-element {
+    display: inline;
+  }
+
+  .bookmark-text-paragraph-element {
+    display: inline;
+    margin-left: 50px;
+  }
+
+  .breadcrumbs-icon-li-element {
+    display: inline;
+    div {
+      display: inline;
+      width: 28px;
+    }
+    ol {
+      display: none !important;
+    }
+    .hide-bread-crumbs-for-browser {
+      display: none;
+    }
+  }
+
+  .breadcrumbs-view-in-dropdown-nav {
+    width: 28px;
+    height: 31px;
+    margin-right: 0px;
+    display: inline;
+  }
+
+  #breadcrumbsButton {
+    width: 28px;
+    height: 33px;
+    span {
+      width: 26px;
+      height: 31px;
+      margin-top: 5px;
+    }
+  }
+
+  .breadcrumbs-ul-dropdown-nav {
+    padding-left: 0px;
+  }
+
+
   .dli-styling {
     display:none !important;
   }

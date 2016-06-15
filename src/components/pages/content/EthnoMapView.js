@@ -69,7 +69,7 @@ var EthnoMapView = React.createClass({
 
         var backgroundImageURL = "data/media/" + parsedJSON.background;
         var areaWidth = "768";
-        var areaHeight = "504px";
+        var areaHeight = "504";
         var imageColl = parsedJSON.areas;
         var backgroundImage = "";
 
@@ -110,13 +110,23 @@ var EthnoMap = React.createClass({
             backgroundImage: imageData.background,
             onLayersReady: self.onLayersReady,
             onRollover: self.onRegionRollover,
-            onClick: self.onRegionClick
+            onClick: self.onRegionClick,
+            showHilightedRegion: self.showHilightedRegion
         });
     },
     onRegionClick: function(canvasElement) {
         var self = this;
         if(canvasElement !== null) {
-            var canvasId = canvasElement.getAttribute('id').slice(-1);
+
+            var lastTwo = canvasElement.getAttribute('id').slice(-2);
+            var canvasId = "";
+
+            if(lastTwo.charAt(0) === "_"){
+                canvasId = lastTwo.charAt(1);
+            } else if (lastTwo.charAt(0) !== "_"){
+                canvasId = lastTwo;
+            }
+
         }
 
         if(self.state.popoverShow === false) {
@@ -134,7 +144,6 @@ var EthnoMap = React.createClass({
                 var newzIndex = this.state.topZindex + 1;
                 self.setState({topZindex: newzIndex});
                 $("#" + canvasId).css("zIndex", newzIndex);
-                var index = canvasId.slice(-1);
             }
         }
 
@@ -142,7 +151,17 @@ var EthnoMap = React.createClass({
 
         if(canvasElement !== null) {
             $("#toolTipperId").removeClass("ethno-not-visible");
-            var regionNameToolTip = self.props.mapData.areas[canvasElement.id.slice(-1)].label;
+
+            var lastTwo = canvasElement.getAttribute('id').slice(-2);
+            var canvasIdTwo = "";
+
+            if(lastTwo.charAt(0) === "_"){
+                canvasIdTwo = lastTwo.charAt(1);
+            } else if (lastTwo.charAt(0) !== "_"){
+                canvasIdTwo = lastTwo;
+            }
+
+            var regionNameToolTip = self.props.mapData.areas[canvasIdTwo].label;
             self.setState({toolTipText: regionNameToolTip});
         }
 
@@ -155,7 +174,7 @@ var EthnoMap = React.createClass({
         var yValue = event.clientY;
 
         var toolTipWidth = ($("#toolTipperId").width() / 2) ;
-        console.log("toolTipWidth", toolTipWidth);
+        // console.log("toolTipWidth", toolTipWidth);
 
         toolTipper.style.top = (y - 40) + 'px';
         toolTipper.style.left = (pageX - toolTipWidth - 15) + 'px';
@@ -189,7 +208,7 @@ var EthnoMap = React.createClass({
                 {toolTipperInRender}
                 <div id="wrapperDiv"  className = "container ethno-wrapper-div">
                     {popoverInRender}
-                    <EthnoLayersView className="ethno-image-layers-view" areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick} />
+                    <EthnoLayersView className="ethno-image-layers-view" topZIndex = {self.state.topZindex} areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick} />
                     <EthnoToggleDiv id="ethnoToggle" mapData = {mapData} changeLabelState = {this.changeLabelState} whatIsLabelState ={this.whatIsLabelState} canvasColl = {canvasColl}/>
                 </div>
             </div>
@@ -202,10 +221,12 @@ var EthnoToggleDiv = React.createClass({
     getInitialState: function() {
         return {
             topZindex: 10,
-            regionColors: ["blue", "blue", "green", "blue", "green", "pink", "purple", "pink", "red", "yellow" ]
+            regionColors: ["#F49AC0", null, "#5E3A54", null,"#7B7ABC", null,"#2A7169",null, "#8DD883",null, "#2A3761",null, "#742753", null,"#374428", null,"#BF3C28", null,"#E68E4E", null,"#965F27", null,"#61764B", null,"#770026",null, "#B03A3A", null,"#9C9638", null,"#72250E"]
         };
     },
     toggleOnClick: function(e){
+
+        console.log("e", e);
         var self = this;
         var index = e.target.attributes['data-index'].value;
         var targetCanvas = document.getElementById("imageLayer_canvas_" + index);
@@ -221,10 +242,34 @@ var EthnoToggleDiv = React.createClass({
                 $("#imageLayer_canvas_" + index).css("opacity", "1");
                 $("#imageLayer_canvas_" + index).css("zIndex", newzIndex);
                 $("#ethno-toggle-name-" + index).css("color", self.state.regionColors[index]);
+
+
+                console.log("index + 1", index + 1);
+                var numIndex = Number(index);
+
+                console.log("self.props", self.props.mapData.areas.length);
+
+                for(var i = 1; i < self.props.mapData.areas.length; i += 2){
+                    if (i !== numIndex + 1) {
+                        var opacityLevel = $("#imageLayer_canvas_" + i).css("opacity");
+                        if(opacityLevel === "1") {
+                            console.log("INDSIDE FIRST ONE");
+                            $("#imageLayer_canvas_" + i).removeClass("ethno-visible");
+                            $("#imageLayer_canvas_" + i).addClass("ethno-not-visible");
+                        }
+                    } else if (i === numIndex + 1) {
+                        console.log("INSIDE", i);
+                        $("#imageLayer_canvas_" + i).removeClass("ethno-not-visible");
+                        $("#imageLayer_canvas_" + i).addClass("ethno-visible");
+                        $("#imageLayer_canvas_" + i).css("zIndex", self.state.topZindex + 19);
+                    }
+                }
             } else if (opacity === "1" && visibleTrueFalse === true){
                 $("#ethno-toggle-name-" + index).css("color", "black");
                 $("#imageLayer_canvas_" + index).removeClass("ethno-visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "0");
+                $("#imageLayer_canvas_" + (Number(index) + 1)).removeClass("ethno-visible");
+                $("#imageLayer_canvas_" + (Number(index) + 1)).addClass("ethno-not-visible");
             }
         };
         checkOpacity(targetCanvas);
@@ -233,19 +278,36 @@ var EthnoToggleDiv = React.createClass({
         var self = this;
         var mapData = self.props.mapData;
 
+        /*
+        mapData.areas.map(function(region,index){
+         return (
+         <div className="checkbox">
+         <label>
+         <input type="checkbox" data-region = {region.label} data-index={index} onClick = {self.toggleOnClick} />
+         <span id={"ethno-toggle-name-" + index}>{region.label + " "} </span>
+         </label>
+         </div>
+         );
+         })
+         */
+
+        var toggleElements = [];
+        for(var i = 0; i < mapData.areas.length; i = i + 2){
+            var region = mapData.areas[i];
+            toggleElements.push(
+                <div className="checkbox">
+                    <label>
+                        <input type="checkbox" data-region = {region.label} data-index={i} onClick = {self.toggleOnClick} />
+                        <span id={"ethno-toggle-name-" + i}>{region.label + " "} </span>
+                    </label>
+                </div>
+                );
+        }
+
+
         return (
             <form className="well ethno-sidebar-form">
-                { mapData.areas.map(function(region,index){
-                    return (
-                        <div className="checkbox">
-                            <label>
-                                <input type="checkbox" data-region = {region.label} data-index={index} onClick = {self.toggleOnClick} />
-                                <span id={"ethno-toggle-name-" + index}>{region.label + " "} </span>
-                            </label>
-                        </div>
-                    );
-                })
-                }
+                {toggleElements}
             </form>
         );
     }

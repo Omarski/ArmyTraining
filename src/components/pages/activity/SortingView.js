@@ -43,6 +43,7 @@ function getPageState(props) {
                     passedData = uttering.media[0].zid;
                 }else{
                     mediaType = "string";
+                    console.log("utterance", utterance);
                     if(utterance.ezread.text != ""){
                         displayField = "ezread";
                         passedData = utterance.ezread.text;

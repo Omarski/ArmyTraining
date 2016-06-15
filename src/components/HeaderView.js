@@ -200,8 +200,6 @@ var HeaderView = React.createClass({
                 }
         }
 
-        var consoleLog = function(){console.log(this.eventKey)};
-
         return (
             <div>
                 <Navbar className="navbar-fixed-top navbarHeightDesktop">
@@ -214,10 +212,10 @@ var HeaderView = React.createClass({
                     </Navbar.Header>
                     <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
                         <Nav pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
-                            <NavItem eventKey={1} onClick={consoleLog} href="#"><div>{referenceView}<p>ReferenceView</p></div></NavItem>
-                            <NavItem eventKey={2} onClick={consoleLog} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
-                            <NavItem eventKey={3} onClick={consoleLog} href="#"><SettingsView /><p>Settings</p></NavItem>
-                            <NavItem eventKey={4} onClick={self.bookmarkFunction} href="#" className="bookmark-nav-item"><p>Bookmark</p></NavItem>
+                            <NavItem eventKey={1} href="#"><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                            <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
+                            <NavItem eventKey={3} href="#"><SettingsView /><p>Settings</p></NavItem>
+                            <NavItem eventKey={4} onClick={self.bookmarkFunction} href="#" className="bookmark-nav-item"><ul className="breadcrumbs-ul-dropdown-nav"><li className="breadcrumbs-icon-li-element"><BreadcrumbsView className="breadcrumbs-view-in-dropdown-nav"/></li><li className="bookmark-text-li-element"><p className="bookmark-text-paragraph-element">Bookmark</p></li></ul></NavItem>
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>
