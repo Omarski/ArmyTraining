@@ -2,6 +2,7 @@
  * Created by omaramer on 5/9/16.
  */
 var React = require('react');
+var MissionConnectGameView = require('./MissionConnectGameView');
 var AudioPlayer = require('../../../widgets/AudioPlayer');
 var PopupView = require('./../../../widgets/PopupView');
 var PageHeader = require('../../../widgets/PageHeader');
@@ -101,6 +102,7 @@ var MissionConnectView = React.createClass({
 
         var self = this;
         self.setState({mapReady:true});
+        console.log("Images loaded..");
     },
 
     viewUpdate: function(status){
