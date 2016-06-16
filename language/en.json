@@ -19,6 +19,9 @@
   "loader": {
     "lblLoading": "Loading"
   },
+  "posttest": {
+    "lblResults": "Thank you for taking the Post-Test. You have answered {0} out of {1} questions correctly. This score will not affect your course completion."
+  },
   "pretest": {
     "headerTitle": "Country or Mission Lesson",
     "headerTestOut": "Eligible for Test Out?",

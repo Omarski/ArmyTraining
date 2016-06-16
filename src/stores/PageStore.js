@@ -209,7 +209,7 @@ function isValidPrevUnit(unit) {
  */
 function isValidPrevPage(page) {
 
-    var inQuiz = false
+    var inQuiz = false;
     if (_currentPage && _currentPage.state && _currentPage.state.quizpage) {
         inQuiz = true;
     }
@@ -484,6 +484,7 @@ var PageStore = assign({}, EventEmitter.prototype, {
                         case PageTypeConstants.QUIZ_START:
                         case PageTypeConstants.SECTION_END:
                         case PageTypeConstants.TEST_OUT_QUIZ_END:
+                        case PageTypeConstants.POST_TEST_QUIZ_END:
                             break;  // skip
                         default:
                             results.push(page);
