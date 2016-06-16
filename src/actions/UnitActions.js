@@ -25,6 +25,19 @@ var UnitActions = {
     },
 
     /**
+     * Marks chapter in a unit complete
+     * @param unitId
+     * @param chapterId
+     */
+    markUnitChapterComplete: function(unitId, chapterId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_CHAPTER_COMPLETE,
+            id: unitId,
+            chapterId: chapterId
+        });
+    },
+
+    /**
      * Mark unit with given id as required
      * @param (string) unitId - id of unit to mark as required
      */

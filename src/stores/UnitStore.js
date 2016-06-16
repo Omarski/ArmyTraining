@@ -73,6 +73,35 @@ function destroyCompleted() {
     }
 }
 
+/**
+ * Marks a units chapter as complete
+ * @param unitId
+ * @param chapterId
+ */
+function markUnitChapterComplete(unitId, chapterId) {
+    // find unit by id
+    var unit = _units[unitId];
+    if (unit && unit.data && unit.data.chapter) {
+        var chapterLength = unit.data.chapter.length;
+        while(chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+            // check for matching chapter id
+            if (chapter.xid === chapterId) {
+                var state = {};
+                // get state
+                if (chapter.state) {
+                    state = chapter.state;
+                }
+
+                // mark it as complete
+                chapter.state = assign({}, state, {complete: true});
+
+                break;
+            }
+        }
+    }
+}
+
 var UnitStore = assign({}, EventEmitter.prototype, {
     create:function(data) {
         create(data);
@@ -121,7 +150,7 @@ var UnitStore = assign({}, EventEmitter.prototype, {
      * @returns {boolean}
      */
     isRequired: function(id) {
-        if (_units[id] && _units[id].state && _units[id].state.required === true) {
+        if (_units[id] && _units[id].state && (_units[id].state.required === true)) {
             return true;
         }
         return false;
@@ -151,6 +180,10 @@ AppDispatcher.register(function(action) {
     var text;
 
     switch(action.actionType) {
+        case UnitConstants.UNIT_CHAPTER_COMPLETE:
+            markUnitChapterComplete(action.id, action.chapterId);
+            break;
+
         case UnitConstants.UNIT_CREATE:
 
             if (text !== '') {
