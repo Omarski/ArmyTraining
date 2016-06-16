@@ -2,6 +2,7 @@ var React = require('react');
 var CheckIcon = require('../components/widgets/CheckIcon');
 var UnitStore = require('../stores/UnitStore');
 var LoaderStore = require('../stores/LoaderStore');
+var LocalizationStore = require('../stores/LocalizationStore');
 var PageActions = require('../actions/PageActions');
 var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
@@ -268,20 +269,38 @@ var FooterView = React.createClass({
                     <tbody>
                     <tr>
                         <td>
-                            <button title={"Index"} alt={"Table of Contents"} id="lessonsIndexBtn" type="button" className="btn btn-default btn-lg btn-link btn-text-icon" aria-label="Table of contents" onClick={this.toggleTOC}>
-                                <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-download btn-icon" : "glyphicon glyphicon-upload btn-icon"} aria-hidden="true"></span>
+                            <button title={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
+                                    alt={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
+                                    id="lessonsIndexBtn"
+                                    type="button" className="btn btn-default btn-lg btn-link btn-text-icon"
+                                    aria-label={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
+                                    onClick={this.toggleTOC}
+                                >
+                                <span id="lessonsIndexBtnIcon"
+                                      className={this.state.expanded ? "glyphicon glyphicon-download btn-icon" : "glyphicon glyphicon-upload btn-icon"}
+                                      aria-hidden="true">
+                                </span>
                             </button>
                         </td>
                         <td width="100%">
                             <ProgressView />
                         </td>
                         <td>
-                            <button title={"Previous"} alt={"Previous Page"} type="button" onClick={this.previous} className="btn btn-default btn-lg btn-link btn-step" aria-label="Previous Page">
+                            <button title={LocalizationStore.labelFor("footer", "tooltipPrevious")}
+                                    alt={LocalizationStore.labelFor("footer", "tooltipPrevious")}
+                                    type="button" onClick={this.previous}
+                                    className="btn btn-default btn-lg btn-link btn-step"
+                                    aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
                                 <span className="glyphicon glyphicon-circle-arrow-left btn-icon" aria-hidden="true"></span>
                             </button>
                         </td>
                         <td>
-                            <button title={"Next"} alt={"Next Page"} type="button" onClick={this.next} className="btn btn-default btn-lg btn-link btn-step" aria-label="Next Page">
+                            <button title={LocalizationStore.labelFor("footer", "tooltipNext")}
+                                    alt={LocalizationStore.labelFor("footer", "tooltipNext")}
+                                    type="button"
+                                    onClick={this.next}
+                                    className="btn btn-default btn-lg btn-link btn-step"
+                                    aria-label={LocalizationStore.labelFor("footer", "tooltipNext")}>
                                 <span className="glyphicon glyphicon-circle-arrow-right btn-icon" aria-hidden="true"></span>
                             </button>
                         </td>

@@ -5,6 +5,7 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 
 var ReferenceStore = require('../../stores/ReferenceStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 var ReferenceGestureView = require('../../components/reference_guide/ReferenceGestureView');
 var ReferenceMapView = require('../../components/reference_guide/ReferenceMapView');
 var ReferenceDictionaryView = require('../../components/reference_guide/ReferenceDictionaryView');
@@ -179,7 +180,13 @@ var ReferenceView = React.createClass({
                         </div>
                     </Modal.Body>
                 </Modal>
-                <button title={"Reference Guide"} alt={"Reference Guide"} onClick={this.openModal} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="Reference Guide">
+                <button title={LocalizationStore.labelFor("header", "tooltipReference")}
+                        alt={LocalizationStore.labelFor("header", "tooltipReference")}
+                        onClick={this.openModal}
+                        type="button"
+                        className="btn btn-default btn-lg btn-link main-nav-bar-button"
+                        aria-label={LocalizationStore.labelFor("header", "tooltipReference")}
+                    >
                     <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
                 </button>
             </div>

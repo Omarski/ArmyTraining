@@ -2,6 +2,7 @@ var React = require('react');
 var CoachFeedbackView = require('../../widgets/CoachFeedbackView');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageHeader = require('../../widgets/PageHeader');
 
 function getPageState(props) {
@@ -234,7 +235,7 @@ var ListeningComprehensionView = React.createClass({
                                     <div className="listening-comp-interaction-container">
                                         <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} className="row listening-comp-image" src={state.image}></img>
                                         <div className="listening-comp-prompt">
-                                            <button title={"Click to Listen"} alt={"Click to Listen"} type="button" onClick={function(){listenCheck(self)}} className="btn btn-default btn-lg btn-link btn-step" aria-label={"Click to Listen"}>
+                                            <button title={LocalizationStore.labelFor("tools", "btnListen")} alt={LocalizationStore.labelFor("tools", "btnListen")} type="button" onClick={function(){listenCheck(self)}} className="btn btn-default btn-lg btn-link btn-step" aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
                                                 <span className="glyphicon glyphicon-play-circle btn-icon" aria-hidden="true"></span>
                                             </button>
                                         </div>

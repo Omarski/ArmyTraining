@@ -3,15 +3,15 @@
     "tooltipBookmark": "Bookmarks"
   },
   "footer": {
-    "tooltipNext": "Next",
-    "tooltipPrevious": "Previous",
+    "tooltipNext": "Next Page",
+    "tooltipPrevious": "Previous Page",
     "tooltipIndexExpand": "Open Index",
     "tooltipIndexCollapse": "Close Index"
   },
   "header": {
     "tooltipLogo": "Virtual Culture Awareness Trainer",
-    "tooltipDLI": "DLI",
-    "tooltipReference": "Reference",
+    "tooltipDLI": "DLI Guide",
+    "tooltipReference": "Reference Guide",
     "tooltipMute": "Mute Sound",
     "tooltipUnMute": "Turn on Sound",
     "tooltipSettings": "Settings"
@@ -48,5 +48,8 @@
     "lblConfirm": "Confirm your choice:",
     "lblTime": "Estimated Training Time: {0}",
     "lblLessons": "Lessons:"
+  },
+  "tools":{
+    "btnListen": "Click to Listen"
   }
 }

@@ -3,6 +3,7 @@ var BreadcrumbsView = require('../components/BreadcrumbsView');
 var SettingsView = require('../components/widgets/SettingsView');
 var BookStore = require('../stores/BookStore');
 var SettingsStore = require('../stores/SettingsStore');
+var LocalizationStore = require('../stores/LocalizationStore');
 var SettingsActions = require('../actions/SettingsActions');
 var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
@@ -92,7 +93,11 @@ var HeaderView = React.createClass({
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container main-nav-container">
-                    <img src="images/VCAT_H5_logo.png" />
+                    <img src="images/VCAT_H5_logo.png"
+                         title={LocalizationStore.labelFor("header", "tooltipLogo")}
+                         alt={LocalizationStore.labelFor("header", "tooltipLogo")}
+                         aria-label={LocalizationStore.labelFor("header", "tooltipLogo")}
+                        />
                     <div className="navbar-header main-nav-bar-header">
 
                         <a className="navbar-brand" href="#">{this.state.title}</a>
@@ -101,7 +106,12 @@ var HeaderView = React.createClass({
                         <div className="nav navbar-nav main-nav-bar-nav">
                             {dliView}
                             {referenceView}
-                            <button title={"Mute"} alt={"Mute"} onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="Mute">
+                            <button title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
+                                    alt={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
+                                    onClick={this.toggleMute}
+                                    type="button"
+                                    className="btn btn-default btn-lg btn-link main-nav-bar-button"
+                                    aria-label={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}>
                                 {muteIcon}
                             </button>
                             <SettingsView />

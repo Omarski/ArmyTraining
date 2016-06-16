@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var SettingsStore = require('../../stores/SettingsStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
@@ -128,7 +129,10 @@ var SettingsView = React.createClass({
                         </Popover>;
 
         return  <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
-                    <Button title={"Settings"} alt={"Settings"} className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                    <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            alt={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            aria-label={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            className="btn btn-default btn-link btn-lg main-nav-bar-button">
                         <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                     </Button>
                 </OverlayTrigger>
