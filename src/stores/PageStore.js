@@ -172,7 +172,6 @@ function loadNext() {
         _currentChapter = _currentUnit.data.chapter[chapIndex];
         newIndex = 0;
     }
-    console.log("newIndex", newIndex);
     var nextPage = _currentChapter.pages[newIndex];
     load({unit:_currentUnit, chapter:_currentChapter, page:nextPage});
 }

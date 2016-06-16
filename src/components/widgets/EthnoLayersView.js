@@ -95,7 +95,7 @@ var EthnoLayersView = React.createClass({
 
         //loop through regions
         self.props.imageColl.map(function(image,index){
-            // console.log("imageColl", image);
+            console.log("imageColl", image);
             // console.log("lastActualLabel", lastActualLabel);
 
             var regionCanvas =  self.createCanvas({
@@ -107,6 +107,7 @@ var EthnoLayersView = React.createClass({
             });
 
             document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
+
 
             canvasColl.push(regionCanvas);
             // self.props.onLayersReady(regionCanvas);
@@ -163,9 +164,6 @@ var EthnoLayersView = React.createClass({
             var offset = $("#wrapperDiv").offset();
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
-            // console.log("offset", offset);
-            // console.log("mouseX:", e.pageX, "mouseY", e.pageY);
-            //XXXXXXXXXX below we pass the e.pageX and e.pageY so we get the mouse coordinates that I need
             self.detectRegion(e, x, y, e.pageX, e.pageY);
         }
         else if (mode == "click"){

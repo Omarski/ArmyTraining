@@ -278,18 +278,6 @@ var EthnoToggleDiv = React.createClass({
         var self = this;
         var mapData = self.props.mapData;
 
-        /*
-        mapData.areas.map(function(region,index){
-         return (
-         <div className="checkbox">
-         <label>
-         <input type="checkbox" data-region = {region.label} data-index={index} onClick = {self.toggleOnClick} />
-         <span id={"ethno-toggle-name-" + index}>{region.label + " "} </span>
-         </label>
-         </div>
-         );
-         })
-         */
 
         var toggleElements = [];
         for(var i = 0; i < mapData.areas.length; i = i + 2){
@@ -315,7 +303,7 @@ var EthnoToggleDiv = React.createClass({
 
 function popoverFunction(mapDataArgument, popoverShowHide, popoverSetter){
     var mapData = mapDataArgument;
-    var showHide = popoverShowHide
+    var showHide = popoverShowHide;
     var toggleParentPopoverState = popoverSetter;
     return (<EthnoMapPopover mapData={mapData} showHide={showHide} toggleParentPopoverState={toggleParentPopoverState}/>);
 }

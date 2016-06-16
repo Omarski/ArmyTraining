@@ -86,8 +86,6 @@ var SettingsView = React.createClass({
     },
     render: function() {
         
-        //             <Input type='checkbox' label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange} />
-
         var popover =   <Popover id="settingsPopover" title='Settings'>
                             <ListGroup>
                                 <ListGroupItem>

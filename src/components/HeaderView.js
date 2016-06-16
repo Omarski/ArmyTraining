@@ -124,81 +124,6 @@ var HeaderView = React.createClass({
             referenceView = (<ReferenceView ref="foo" />);
         }
 
-        /*
-
-         <Navbar inverse>
-         <Navbar.Header>
-         <Navbar.Brand>
-         <a href="#">React-Bootstrap</a>
-         </Navbar.Brand>
-         <Navbar.Toggle />
-         </Navbar.Header>
-         <Navbar.Collapse>
-         <Nav>
-         <NavItem eventKey={1} href="#">Link</NavItem>
-         <NavItem eventKey={2} href="#">Link</NavItem>
-         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-         <MenuItem eventKey={3.1}>Action</MenuItem>
-         <MenuItem eventKey={3.2}>Another action</MenuItem>
-         <MenuItem eventKey={3.3}>Something else here</MenuItem>
-         <MenuItem divider />
-         <MenuItem eventKey={3.3}>Separated link</MenuItem>
-         </NavDropdown>
-         </Nav>
-         <Nav pullRight>
-         <NavItem eventKey={1} href="#">Link Right</NavItem>
-         <NavItem eventKey={2} href="#">Link Right</NavItem>
-         </Nav>
-         </Navbar.Collapse>
-         </Navbar>
-
-
-         <nav className="navbar navbar-default navbar-fixed-top">
-         <div className="container main-nav-container">
-         <img src="images/VCAT_H5_logo.png" />
-         <div className="navbar-header main-nav-bar-header">
-
-         <a className="navbar-brand" href="#">{this.state.title}</a>
-         </div>
-         <div id="navbar" className="navbar main-nav-bar">
-         <div className="nav navbar-nav main-nav-bar-nav">
-         {dliView}
-         {referenceView}
-         <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
-         {muteIcon}
-         </button>
-         <SettingsView />
-         </div>
-         </div>
-         <BreadcrumbsView />
-         </div>
-
-         </nav>
-
-
-
-         <Nav>
-         <NavItem eventKey={1} href="#">Link</NavItem>
-         <NavItem eventKey={2} href="#">Link</NavItem>
-         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-         <MenuItem eventKey={3.1}>Action</MenuItem>
-         <MenuItem eventKey={3.2}>Another action</MenuItem>
-         <MenuItem eventKey={3.3}>Something else here</MenuItem>
-         <MenuItem divider />
-         <MenuItem eventKey={3.3}>Separated link</MenuItem>
-         </NavDropdown>
-         </Nav>
-
-
-         <PanelGroup accordion className="hide-panels">
-         <NavItem eventKey={2} onClick={consoleLog} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
-         <NavItem eventKey={3} onClick={consoleLog} href="#"><Panel className="hide-panels"><SettingsView /><p>Settings</p></Panel></NavItem>
-         </PanelGroup>
-
-
-        */
-        // console.log("reference", referenceView);
-
         var changeNavBarCollapse = function () {
                 if(self.state.hideInClass !== ({visibility: "visible"})) {
                     self.setState({hideInClass: ({visibility: "visible"})});
@@ -240,27 +165,6 @@ var HeaderView = React.createClass({
         );
     },
 
-    /*
-     <ul className="breadcrumbs-ul-dropdown-nav">
-     <li className="breadcrumbs-icon-li-element">
-     <button
-     title={"Bookmarks"}
-     alt={"Bookmarks"}
-     id="breadcrumbsButton"
-     type="button"
-     className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
-     >
-     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
-     </button>
-     <BookmarksView/>
-
-
-     </li>
-     <li className="bookmark-text-li-element">
-     <p className="bookmark-text-paragraph-element">Bookmark</p>
-     </li>
-     </ul>
-     */
 
     /**
      * Event handler for 'change' events coming from the BookStore
