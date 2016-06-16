@@ -1,6 +1,7 @@
 var React = require('react'),
     jQuery = require('jquery'),
-    BootstrapSlider = require('bootstrap-slider');
+    BootstrapSlider = require('bootstrap-slider'),
+    ReactDOM = require('react-dom');
 
 var Slider = React.createClass({
 
@@ -32,7 +33,7 @@ var Slider = React.createClass({
     componentDidMount: function() {
         var toolTip = this.props.toolTip ? 'show' : 'hide';
         console.log("this", this);
-        var slider = new BootstrapSlider(this.getDOMNode(), {
+        var slider = new BootstrapSlider(ReactDOM.findDOMNode(this), {
             id: this.props.id,
             min: this.props.min,
             max: this.props.max,

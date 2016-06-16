@@ -85,14 +85,14 @@ var SettingsView = React.createClass({
         SettingsStore.removeChangeListener(this._onChange);
     },
     render: function() {
-
+        
         //             <Input type='checkbox' label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange} />
 
         var popover =   <Popover id="settingsPopover" title='Settings'>
                             <ListGroup>
                                 <ListGroupItem>
                                     <form>
-                                        <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange} />
+                                        <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
                                     </form>
                                 </ListGroupItem>
                                 <ListGroupItem>

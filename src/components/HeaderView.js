@@ -76,7 +76,6 @@ var HeaderView = React.createClass({
     componentDidMount: function() {
         BookStore.removeChangeListener(this._onChange);
         BookStore.addChangeListener(this._onChange);
-
     },
 
     componentWillUnmount: function() {
@@ -103,7 +102,10 @@ var HeaderView = React.createClass({
             this.setState(getPageState());
 
     },
-
+    parentOpenModal: function (tester) {
+        console.log("this", tester);
+        tester.setState({showModal: !tester.state.showModal});
+    },
     render: function() {
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
         var self = this;
@@ -116,11 +118,10 @@ var HeaderView = React.createClass({
             dliView = (<DliView />);
         }
         if(ConfigStore.hasReference()){
-            referenceView = (<ReferenceView />);
+            referenceView = (<ReferenceView ref="foo" />);
         }
 
         /*
-
 
          <Navbar inverse>
          <Navbar.Header>
@@ -193,6 +194,7 @@ var HeaderView = React.createClass({
 
 
         */
+        // console.log("reference", referenceView);
 
         var changeNavBarCollapse = function () {
                 if(self.state.hideInClass !== ({visibility: "visible"})) {
@@ -212,10 +214,16 @@ var HeaderView = React.createClass({
                     </Navbar.Header>
                     <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
                         <Nav pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
-                            <NavItem eventKey={1} href="#"><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                            <NavItem eventKey={1} href="#" ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
-                            <NavItem eventKey={3} href="#"><SettingsView /><p>Settings</p></NavItem>
-                            <NavItem eventKey={4} onClick={self.bookmarkFunction} href="#" className="bookmark-nav-item"><ul className="breadcrumbs-ul-dropdown-nav"><li className="breadcrumbs-icon-li-element"><BreadcrumbsView className="breadcrumbs-view-in-dropdown-nav"/></li><li className="bookmark-text-li-element"><p className="bookmark-text-paragraph-element">Bookmark</p></li></ul></NavItem>
+                            <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
+                                <button type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
+                                    {muteIcon}
+                                </button>
+                                <p>Toggle Mute</p>
+                            </NavItem>
+                            <NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
+                            <NavItem eventKey={5} onClick={self.bookmarkFunction} href="#" className="bookmark-nav-item"><ul className="breadcrumbs-ul-dropdown-nav"><li className="breadcrumbs-icon-li-element"><BreadcrumbsView className="breadcrumbs-view-in-dropdown-nav"/></li><li className="bookmark-text-li-element"><p className="bookmark-text-paragraph-element">Bookmark</p></li></ul></NavItem>
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>
