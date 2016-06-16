@@ -3,8 +3,10 @@ var InfoTagConstants = require("../constants/InfoTagConstants");
 var LocalizationStore = require('../stores/LocalizationStore');
 var PageConstants = require('../constants/PageConstants');
 var PageTypeConstants = require('../constants/PageTypeConstants');
+var PageActions = require('../actions/PageActions');
 var PrePostTestConstants = require('../constants/PrePostTestConstants');
-var PrePostTestStore = require('../stores/PrePostTestStore');;
+var PrePostTestStore = require('../stores/PrePostTestStore');
+var UnitActions = require('../actions/UnitActions');
 var UnitStore = require('../stores/UnitStore');
 var Utils = require('../components/widgets/Utils');
 
@@ -57,7 +59,7 @@ var PrePostTestActions = {
                                         page: page,
                                         chapterId: chapter.xid,
                                         chapterTitle: chapter.title,
-                                        unitId: unit.data.xid,
+                                        unitId: unit.id,
                                         unitTitle: unit.data.title
                                     });
                                 }
@@ -99,8 +101,8 @@ var PrePostTestActions = {
                 // add page to either the end or right before the quiz end page if found
                 var insertIndexPre = pretestchapter.pages.length;
                 if (pretestchapter.pages.length > 0) {
-                    var lastPage = pretestchapter.pages[pretestchapter.pages.length - 1];
-                    if (lastPage.type === PageTypeConstants.TEST_OUT_QUIZ_END) {
+                    var lastPagePre = pretestchapter.pages[pretestchapter.pages.length - 1];
+                    if (lastPagePre.type === PageTypeConstants.TEST_OUT_QUIZ_END) {
                         insertIndexPre = -1;
                     }
                 }
@@ -129,8 +131,8 @@ var PrePostTestActions = {
                 // add page to either the end or right before the quiz end page if found
                 var insertIndexPost = posttestchapter.pages.length;
                 if (posttestchapter.pages.length > 0) {
-                    var lastPage = posttestchapter.pages[posttestchapter.pages.length - 1];
-                    if (lastPage.type === PageTypeConstants.POST_TEST_QUIZ_END) {
+                    var lastPagePost = posttestchapter.pages[posttestchapter.pages.length - 1];
+                    if (lastPagePost.type === PageTypeConstants.POST_TEST_QUIZ_END) {
                         insertIndexPost = -1;
                     }
                 }
@@ -154,10 +156,25 @@ var PrePostTestActions = {
         }
     },
 
-    markUnitComplete: function() {
-        AppDispatcher.dispatch({
-            actionType: "nuttin"
-        });
+    markTestOutUnitsComplete: function(unitIdArray) {
+        var length = unitIdArray.length;
+        while(length--) {
+
+            var unitId = unitIdArray[length];
+
+            // get unit chapters
+            var chaptersArray = UnitStore.getChapterIdsInUnit(unitId);
+            var chapterLength = chaptersArray.length;
+
+            // mark chapters as complete
+            while(chapterLength--) {
+                var chapterId = chaptersArray[chapterLength];
+                UnitActions.markUnitChapterComplete(unitId, chapterId)
+            }
+
+            // mark unit as complete
+            UnitActions.markUnitComplete(unitId);
+        }
     }
 
 };
