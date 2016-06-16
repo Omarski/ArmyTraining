@@ -4,20 +4,20 @@ var PageActions = require('../actions/PageActions');
 var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
 var NotificationActions = require('../actions/NotificationActions');
-var BookmarksView = require('../components/BookmarksView');
 var ReactBootstrap = require('react-bootstrap');
-var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-var Button = ReactBootstrap.Button;
-var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var Button = require("react-bootstrap/lib/Button");
+var NavDropdown = require("react-bootstrap/lib/NavDropdown");
+var MenuItem = require("react-bootstrap/lib/MenuItem");
 
-function getPageState() {
+function getPageState(isNav) {
     var page = null;
     var unitTitle = "";
     var chapterTitle = "";
     var pageTitle = "";
     var bookmarked = false;
+
 
     if (PageStore.loadingComplete()) {
         page = PageStore.page();
@@ -35,7 +35,6 @@ function getPageState() {
             BookmarkActions.setCurrent(bm);
         });
 
-
     }
 
     if (BookmarkStore.current() &&
@@ -45,10 +44,8 @@ function getPageState() {
         bookmarked = true;
     }
 
-
-
-
     return {
+        isNav: isNav,
         pageTitle: pageTitle,
         unitTitle: unitTitle,
         chapterTitle: chapterTitle,
@@ -56,7 +53,7 @@ function getPageState() {
     };
 }
 
-var BreadcrumbsView = React.createClass({
+var BookmarksView = React.createClass({
     bookmark: function() {
         var bm = {
             unit: PageStore.unit().data.xid,
@@ -72,17 +69,16 @@ var BreadcrumbsView = React.createClass({
             percent: ""
         });
         BookmarkActions.create(bm);
-        this.setState(getPageState());
+        this.setState(getPageState(this.props.isNav));
 
     },
 
     bookmarkSelected: function(bm) {
-        console.log(bm)
         PageActions.jump(bm);
     },
 
     getInitialState: function() {
-        var pageState = getPageState();
+        var pageState = getPageState(this.props.isNav);
         return pageState;
     },
 
@@ -101,26 +97,16 @@ var BreadcrumbsView = React.createClass({
     render: function() {
 
         var self = this;
-
-
-        var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
-            <ListGroup key="bookmarkbreadcrumbsbutton">
-                <Button
-                    id="breadcrumbsButton"
-                    type="button"
-                    className="btn btn-default btn-block btn-action"
-                    onClick={this.bookmark}
-                >
-                    Bookmark This Page
-                </Button>
-            </ListGroup>
-            <ListGroup>
-                <BookmarksView isNav={false}/>
-            </ListGroup>
-        </Popover>);
-
-        var bookmarkBtn = (
-            <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
+        var bookmarks = BookmarkStore.bookmarks();
+        var items = "";
+        if (bookmarks) {
+            if (this.state.isNav) {
+                var subItems = bookmarks.map(function(item, index) {
+                    return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item">
+                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                    </MenuItem>)
+                });
+                items = (<NavDropdown eventKey="5" title={(
                 <Button
                     title={"Bookmarks"}
                     alt={"Bookmarks"}
@@ -128,31 +114,30 @@ var BreadcrumbsView = React.createClass({
                     type="button"
                     className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
-                    <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                    <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Bookmarks
                 </Button>
-            </OverlayTrigger>
-        );
+                )}>
+                    {subItems}
+                </NavDropdown>);
+            } else {
+                var subItems = bookmarks.map(function(item, index) {
+                    return (<ListGroupItem key={"bookmarkitems" + index}>
+                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                    </ListGroupItem>);
+                });
+                items = (<ListGroup>
+                    {subItems}
+                </ListGroup>);
+            }
+        }
 
-        return (
-            <div>
-                <div className="hide-bread-crumbs-for-tablet">
-                    <ol className="breadcrumb main-breadcrumbs">
-                        <li><a href="#">{this.state.unitTitle}</a></li>
-                        <li><a href="#" >{this.state.chapterTitle}</a></li>
-                        <li><a href="#" className="active">{this.state.pageTitle}</a></li>
-                    </ol>
-                    {bookmarkBtn}
-                </div>
+        return items;
 
-                <div className="hide-bread-crumbs-for-browser">
-                    {bookmarkBtn}
-                </div>
-            </div>
-        );
+
     },
     _onChange: function() {
-        this.setState(getPageState());
+        this.setState(getPageState(this.props.isNav));
     }
 });
 
-module.exports = BreadcrumbsView;
+module.exports = BookmarksView;

@@ -1,68 +1,471 @@
-.navbar {
-  min-height: 0;
-}
-.navbar-default .btn-link {
-   color: #337ab7;
+button.navbar-toggle:hover {
+  background-color: #D2E0E6 !important;
 }
 
-.main-nav-bar {
-  margin-bottom: 0;
-  float: right;
-  padding-top: 7px;
-}
 
-.main-nav-bar-nav {
-  margin-right: 10px;
-}
+@media screen and (min-width: 767px) {
 
-.main-nav-bar-button {
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
+  .bookmark-nav-item {
+    display: none !important;
+  }
 
-.main-nav-bar-header {
-  position: absolute;
-  top: 7px;
-  left: 20px;
-  right: 20px;
-  text-align: center;
-  & a {
+  #collapseNav {
+    li {
+      p {
+        display: none;
+      }
+    }
+  }
+
+  .vcat-logo{
+    margin-top: 4px;
+    max-height: 33px;
+  }
+
+  .navbarHeightDesktop{
+    height: 39px;
+  }
+  /*
+  .navbarButtonsPaddingDesktop {
+    padding-top: 7px !important;
+  }
+  */
+
+  .navbar-fixed-top {
+    .container {
+      height: 35px !important;
+    }
+  }
+
+  .navbar-brand {
+    margin: auto !important;
+  }
+
+  .navbar-header {
+    height: 39px !important;
+  }
+
+  .navbar-header {
+    .navbar-brand {
+      padding-top: 8px;
+      padding-bottom: 0px;
+      height: 35px;
+    }
+  }
+
+  .navbar-fixed-top {
+    border-bottom: 1px solid;
+    border-bottom-color: #337ab7 !important;
+  }
+
+  .ul-containing-navbar-buttons {
+    height: 40px !important;
+    li {
+      height: 40px;
+      a {
+        padding-top: 5px;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-color: #337ab7 !important;
+  }
+
+  .icon-bar {
+    color: #337ab7;
+    border-color: #337ab7;
+    background-color: #337ab7 !important;
+  }
+
+  #collapseNav {
+    background-color: white;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 35px !important;
+  }
+
+
+  .navbar-collapse .collapse .in {
+    background-color: white;
+  }
+
+  .navbar-header {
+    background-color: white;
+    height: 35px !important;
+  }
+
+  .navbar-fixed-top .navbarHeightDesktop .navbar {
+    .container {
+      height: 44px !important;
+    }
+  }
+
+  .navbar {
+    min-height: 0;
+  }
+  .navbar-default .btn-link {
+    color: #337ab7;
+  }
+
+  .main-nav-bar {
+    margin-bottom: 0;
+    float: right;
+    padding-top: 7px;
+  }
+
+  .main-nav-bar-nav {
+    margin-right: 10px;
+  }
+
+  .main-nav-bar-button {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .main-nav-bar-header {
+    position: absolute;
+    top: 7px;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+    & a {
+      width: 100%;
+    }
+  }
+
+  .main-nav-bar-header {
+
+  }
+
+  .main-nav-bar-header .navbar-brand {
+    font-size: 25px;
+    padding: 0;
+    padding-top: 6px;
+  }
+
+  .main-nav-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 0;
+    max-width: none;
     width: 100%;
+    position: relative;
+    img {
+      margin-top: 5px;
+      max-height: 35px;
+    }
+  }
+
+  .navbar {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+  }
+
+  .navbar-default {
+    background-color: #fff;
+    border-color: #fff;
+  }
+
+}
+
+
+/*
+.navbar-fixed-top .navbar .navbar-default{
+  .container {
+    height: 40px !important;
+    .navbar-header {
+      height: 40px !important;
+    }
   }
 }
+*/
 
-.main-nav-bar-header {
-
-}
-
-.main-nav-bar-header .navbar-brand {
-  font-size: 25px;
-  padding: 0;
-  padding-top: 6px;
-}
-
-.main-nav-container {
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 0;
-  max-width: none;
-  width: 100%;
-  position: relative;
-  img {
-    margin-top: 5px;
-    max-height: 35px;
+@media screen and (min-width: 374px) and (max-width: 767px) {
+  .navbar-toggle {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-color: #337ab7 !important;
+    margin-right: 25px;
   }
+
+
+  .bookmark-text-li-element {
+    display: inline;
+  }
+
+  .bookmark-text-paragraph-element {
+    display: inline;
+    margin-left: 50px;
+  }
+
+  .breadcrumbs-icon-li-element {
+    display: inline;
+    div {
+      display: inline;
+      width: 28px;
+    }
+    ol {
+      display: none !important;
+    }
+    .hide-bread-crumbs-for-browser {
+      display: none;
+    }
+  }
+
+  .breadcrumbs-view-in-dropdown-nav {
+    width: 28px;
+    height: 31px;
+    margin-right: 0px;
+    display: inline;
+  }
+
+  #breadcrumbsButton {
+    width: 28px;
+    height: 33px;
+    span {
+      width: 26px;
+      height: 31px;
+      margin-top: 5px;
+    }
+  }
+
+  .breadcrumbs-ul-dropdown-nav {
+    padding-left: 0px;
+  }
+
+
+  .toggle-mute-dropdown-nav-menu {
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-decoration: none !important;
+  }
+
+  .toggle-mute-dropdown-nav-menu:hover {
+    text-decoration: none;
+  }
+
+  .dli-styling {
+    display:none !important;
+  }
+
+  .navbar-default .btn-link {
+    color: #337ab7;
+  }
+
+  .vcat-logo{
+    margin-top: 4px;
+    max-height: 33px;
+    margin-left: 40px;
+  }
+
+  .icon-bar {
+    color: #337ab7;
+    border-color: #337ab7;
+    background-color: #337ab7 !important;
+  }
+
+  .reduce-padding-around-a-element-for-nav-buttons {
+    margin: 0px;
+    background-color: white;
+    li {
+      a {
+        padding-top: 8px !important;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #337ab7;
+      }
+      a:hover {
+        background-color: #D2E0E6 !important;
+      }
+    }
+  }
+
+  .navbarHeightDesktop{
+    height: 39px;
+    .navbar-header {
+      height: 39px;
+    }
+  }
+
+
+  #collapseNav {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  nav{
+    height: 40px !important;
+  }
+
+  .navbar-default{
+    min-height: 40px !important;
+  }
+
+  .navbar-fixed-top {
+    border-bottom: 1px solid;
+    border-bottom-color: #337ab7 !important;
+  }
+
+  .navbar-fixed-top {
+    .container {
+      height: 39px;
+      padding: 0px;
+      background-color: white;
+    }
+  }
+
+  .navbar-brand {
+    padding-top: 8px !important;
+    padding-bottom: 0px !important;
+    height: 40px !important;
+  }
+
+  #collapseNav {
+    ul {
+      li {
+        a {
+          height: 45px !important;
+          button{
+            padding: 0px;
+          }
+          p {
+            display: inline;
+            margin-left: 50px;
+            color: #337ab7;
+          }
+        }
+      }
+    }
+  }
+
 }
 
-.navbar {
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-}
 
-.navbar-default {
-  background-color: #fff;
-  border-color: #fff;
+@media screen and (max-width: 374px) {
+  .vcat-logo {
+    display: none;
+  }
+
+  .dli-styling {
+    display:none !important;
+  }
+
+  .navbar-brand {
+    margin-left: 20px;
+  }
+
+  .navbar-toggle {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-color: #337ab7 !important;
+    margin-right: 25px;
+  }
+
+  .vcat-logo{
+    margin-top: 4px;
+    max-height: 33px;
+    margin-left: 40px;
+  }
+
+  .icon-bar {
+    color: #337ab7;
+    border-color: #337ab7;
+    background-color: #337ab7 !important;
+  }
+
+  .reduce-padding-around-a-element-for-nav-buttons {
+    margin: 0px;
+    background-color: white;
+    li {
+      a {
+        padding-top: 8px !important;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #337ab7;
+      }
+      a:hover {
+        background-color: #D2E0E6 !important;
+      }
+    }
+  }
+
+  .navbarHeightDesktop{
+    height: 39px;
+    .navbar-header {
+      height: 39px;
+    }
+  }
+
+
+  #collapseNav {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  #collapseNav {
+    ul {
+      li {
+        a {
+          height: 45px !important;
+          button{
+            padding: 0px;
+          }
+          p {
+            display: inline;
+            margin-left: 50px;
+            color: #337ab7;
+          }
+        }
+      }
+    }
+  }
+
+  nav{
+    height: 40px !important;
+  }
+
+  .navbar-default{
+    min-height: 40px !important;
+  }
+
+  .navbar-fixed-top {
+    border-bottom: 1px solid;
+    border-bottom-color: #337ab7 !important;
+  }
+
+  .navbar-fixed-top {
+    .container {
+      height: 39px;
+      padding: 0px;
+      background-color: white;
+    }
+  }
+
+  .navbar-default .btn-link {
+    color: #337ab7;
+  }
+
+  .navbar-brand {
+    padding-top: 8px !important;
+    padding-bottom: 0px;
+    height: 40px;
+  }
 }

@@ -218,26 +218,50 @@ var QuestionnaireView = React.createClass({
         choices = state.answers.map(function(item, index){
             // check input type and create an element
             var inputElement = "";
+            var inputId = "answer" + index;
             switch (item.type) {
                 case INPUT_TYPE_RADIO:
-                    if (item.checked)
-                        inputElement = (<input name={item.groupid} type="radio" className="multiple-choice-checkbox" value={item.text} defaultChecked onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
-                    else
-                        inputElement = (<input name={item.groupid} type="radio" className="multiple-choice-checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
+                    if (item.checked) {
+                        inputElement = (<div className="radio">
+                            <label for={inputId}>
+                                <input id={inputId} name={item.groupid} type="radio" defaultChecked onChange={_this.answerChange.bind(_this, item)}/>
+                                {item.text}
+                            </label>
+                        </div>);
+                    }
+                    else {
+                        inputElement = (<div className="radio">
+                            <label for={inputId}>
+                                <input name={item.groupid} type="radio" onChange={_this.answerChange.bind(_this, item)}/>
+                                {item.text}
+                            </label>
+                        </div>);
+                    }
                     break;
                 default:
-                    if (item.checked)
-                        inputElement = (<input type="checkbox" className="multiple-choice-checkbox" value={item.text} defaultChecked onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
-                    else
-                        inputElement = (<input type="checkbox" className="multiple-choice-checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}>{item.text}</input>);
+                    if (item.checked) {
+                        inputElement = (<div className="checkbox">
+                            <label for={inputId}>
+                                <input type="checkbox" defaultChecked onChange={_this.answerChange.bind(_this, item)}/>
+                                {item.text}
+                            </label>
+                        </div>);
+                    }
+                    else {
+                        inputElement = (
+                            <div className="checkbox">
+                                <label for={inputId}>
+                                    <input type="checkbox" onChange={_this.answerChange.bind(_this, item)}/>
+                                    {item.text}
+                                </label>
+                            </div>);
+                    }
             }
 
+
+
             return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
-                <div className="checkbox multiple-choice-checkbox">
-                    <label>
                         {inputElement}
-                    </label>
-                </div>
             </li>);
         });
 
@@ -252,9 +276,11 @@ var QuestionnaireView = React.createClass({
                             </h4>
                         </div>
                         <div className="row">
-                            <ul className="list-group multiple-choice-choices-container">
-                                {choices}
-                            </ul>
+                            <form>
+                                <ul className="list-group multiple-choice-choices-container">
+                                    {choices}
+                                </ul>
+                            </form>
                         </div>
                     </div>
                 </div>

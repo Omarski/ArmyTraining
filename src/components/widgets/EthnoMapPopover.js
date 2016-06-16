@@ -30,7 +30,7 @@ var EthnoMapPopover = React.createClass({
 
         for(var prop in self.props.mapData){
             if(self.props.mapData[prop]){
-                if(prop !== "image") {
+                if(prop !== "image" && prop !== "label") {
                     var propHolder = prop;
                     var propCapitalized = propHolder.charAt(0).toUpperCase() + propHolder.slice(1);
                     popoverPages.push([propCapitalized, self.props.mapData[prop]]);
@@ -73,9 +73,7 @@ var EthnoMapPopover = React.createClass({
             marginLeft: 5,
             marginTop: 5,
             padding: 5,
-            zIndex: 999,
-            top: 0,
-            left: 0
+            zIndex: 999
         };
 
         var checkIfPrevButtonIsDisabled = function(){

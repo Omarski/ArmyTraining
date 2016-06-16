@@ -6,7 +6,7 @@ var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
-var Input = ReactBootstrap.Input;
+var Checkbox = ReactBootstrap.Checkbox;
 var Slider = require('../../components/widgets/Slider');
 
 var BookmarkActions = require('../../actions/BookmarkActions');
@@ -85,11 +85,12 @@ var SettingsView = React.createClass({
         SettingsStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        
         var popover =   <Popover id="settingsPopover" title='Settings'>
                             <ListGroup>
                                 <ListGroupItem>
                                     <form>
-                                        <Input type='checkbox' label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange} />
+                                        <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
                                     </form>
                                 </ListGroupItem>
                                 <ListGroupItem>

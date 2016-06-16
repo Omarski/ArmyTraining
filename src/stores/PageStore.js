@@ -256,6 +256,7 @@ function loadPrevious() {
         }
     }
 
+    var prevPage = _currentChapter.pages[newIndex];
     load({unit:_currentUnit, chapter:_currentChapter, page:prevPage});
 }
 
