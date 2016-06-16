@@ -17,10 +17,17 @@ function create(data) {
     // server-side storage.
     // Using the current timestamp + random number in place of a real id.
     var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+
+    // create state with default values
+    var defaultState = {
+        complete: false,
+        required: false
+    };
+
     _units[id] = {
         id: id,
-        complete: false,
-        data: data
+        data: data,
+        state: defaultState
     };
 }
 
@@ -31,7 +38,9 @@ function create(data) {
  *     updated.
  */
 function update(id, updates) {
-    _units[id] = assign({}, _units[id], updates);
+    if (_units[id] && _units[id].state) {
+        _units[id].state = assign({}, _units[id].state, updates);
+    }
 }
 
 /**
@@ -58,7 +67,7 @@ function destroy(id) {
  */
 function destroyCompleted() {
     for (var id in _units) {
-        if (_units[id].complete) {
+        if (_units[id].state && _units[id].state.complete === true) {
             destroy(id);
         }
     }
@@ -75,7 +84,7 @@ var UnitStore = assign({}, EventEmitter.prototype, {
      */
     areAllComplete: function() {
         for (var id in _units) {
-            if (!_units[id].complete) {
+            if (_units[id].state && !_units[id].state.complete) {
                 return false;
             }
         }
@@ -88,6 +97,18 @@ var UnitStore = assign({}, EventEmitter.prototype, {
      */
     getAll: function() {
         return _units;
+    },
+
+    /**
+     * Checks if the state property required is true
+     * @param id
+     * @returns {boolean}
+     */
+    isRequired: function(id) {
+        if (_units[id] && _units[id].state && _units[id].state.required === true) {
+            return true;
+        }
+        return false;
     },
 
     emitChange: function() {
@@ -120,6 +141,10 @@ AppDispatcher.register(function(action) {
                 create(action.data);
                 UnitStore.emitChange();
             }
+            break;
+
+        case UnitConstants.UNIT_MARK_REQUIRED:
+            update(action.id, {required: true});
             break;
 
         case UnitConstants.UNIT_TOGGLE_COMPLETE_ALL:

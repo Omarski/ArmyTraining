@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var InfoTagConstants = require('../constants/InfoTagConstants');
 var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
+var PageTypeConstants = require('../constants/PageTypeConstants');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
 var BookmarkActions = require('../actions/BookmarkActions');
@@ -176,23 +177,85 @@ function loadNext() {
     load({unit:_currentUnit, chapter:_currentChapter, page:nextPage});
 }
 
+
+/**
+ * Checks current state to see if the requested previous unit is valid to switch
+ * @param unit
+ * @returns {boolean}
+ */
+function isValidPrevUnit(unit) {
+    if (unit.data && unit.data && unit.data.chapter) {
+        // iterate over chapters
+        var chapterLength = unit.data.chapter.length;
+        while (chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+
+            if (chapter.info) {
+                // return false if prologue chapter
+                if (Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Checks current state to see if the requested previous page is valid to show
+ * @param page
+ * @returns {boolean}
+ */
+function isValidPrevPage(page) {
+
+    var inQuiz = false
+    if (_currentPage && _currentPage.state && _currentPage.state.quizpage) {
+        inQuiz = true;
+    }
+
+    // return false if coming from a non quiz page
+    if (page.state && page.state.quizpage && inQuiz === false) {
+        return false;
+    }
+    return true;
+}
+
 function loadPrevious() {
 
     var currentIndex = findCurrentPageIndex();
     var newIndex = currentIndex - 1;
-    if (newIndex === -1) {
-        var chapIndex = findCurrentChapterIndex() - 1;
-        if (chapIndex === - 1) {
-            var unitKey = findCurrentUnitKey();
-            unitKey = findPrevUnitKey(unitKey);
-            if (!unitKey) return;
-            _currentUnit = UnitStore.getAll()[unitKey];
-            chapIndex = _currentUnit.data.chapter.length -1;
+    var validPrevPage = false;
+
+    while (validPrevPage === false) {
+        if (newIndex === -1) {
+            var chapIndex = findCurrentChapterIndex() - 1;
+            if (chapIndex === - 1) {
+                var unitKey = findCurrentUnitKey();
+                unitKey = findPrevUnitKey(unitKey);
+                if (!unitKey) return;
+
+                var prevUnit = UnitStore.getAll()[unitKey];
+                var validPrevUnit = isValidPrevUnit(prevUnit);
+                if (validPrevUnit === false) return;
+
+                _currentUnit = UnitStore.getAll()[unitKey];
+                chapIndex = _currentUnit.data.chapter.length -1;
+            }
+            _currentChapter = _currentUnit.data.chapter[chapIndex];
+            newIndex = _currentChapter.pages.length - 1;
         }
-        _currentChapter = _currentUnit.data.chapter[chapIndex];
-        newIndex = _currentChapter.pages.length - 1;
+        var prevPage = _currentChapter.pages[newIndex];
+
+        // if the previous page is a quiz then skip
+        validPrevPage = isValidPrevPage(prevPage);
+
+        // if not valid get next index
+        if (validPrevPage === false) {
+            newIndex--;
+        }
     }
-    console.log("previous newIndex", newIndex);
+
     var prevPage = _currentChapter.pages[newIndex];
     load({unit:_currentUnit, chapter:_currentChapter, page:prevPage});
 }
@@ -283,18 +346,32 @@ function reset() {
 }
 
 function resetQuiz() {
-
-    // get current chapter
     if (_currentChapter) {
+        var pages = _currentChapter.pages;
+        var pagesLen = pages.length;
 
-        // TODO
+        while (pagesLen--) {
+            var page = pages[pagesLen];
 
-        // get quiz pages
+            // skip some page types that are in a quiz
+            if (page.state && page.state.quizpage && page.state.answer) {
+                switch(page.type) {
+                    case PageTypeConstants.QUIZ_END:
+                    case PageTypeConstants.QUIZ_START:
+                    case PageTypeConstants.SECTION_END:
+                        break;  // skip
+                    default:
+                        // delete answer data
+                        delete page.state.answer;
 
-        // for each quiz page remove the answer state object
-
+                        // update timestamp
+                        page.state = assign({}, page.state, {lastUpdated: Date.now()});
+                }
+            }
+        }
     }
 
+    // TODO dispatch quiz reset event?
 }
 
 function saveCurrentPage() {
@@ -360,12 +437,20 @@ var PageStore = assign({}, EventEmitter.prototype, {
         return false;
     },
 
+    getPageAnswer: function() {
+        if(_currentPage && _currentPage.state && _currentPage.state.answer) {
+            return _currentPage.state.answer;
+        }
+
+        return null;
+    },
+
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
 
     /**
-     * @returns (Array) Returns an ordered list of pages that match
+     * @returns (Array) Returns an ordered list of pages that are valid quiz pages
      */
     getChapterQuizPages: function() {
         var results = [];
@@ -377,8 +462,16 @@ var PageStore = assign({}, EventEmitter.prototype, {
             for (var i = 0; i < pagesLen; i++) {
                 var page = pages[i];
 
+                // skip some page types that are in a quiz
                 if (page.state && page.state.quizpage) {
-                    results.push(page);
+                    switch(page.type) {
+                        case PageTypeConstants.QUIZ_END:
+                        case PageTypeConstants.QUIZ_START:
+                        case PageTypeConstants.SECTION_END:
+                            break;  // skip
+                        default:
+                            results.push(page);
+                    }
                 }
             }
         }

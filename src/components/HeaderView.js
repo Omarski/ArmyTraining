@@ -217,7 +217,7 @@ var HeaderView = React.createClass({
                             <NavItem eventKey={1} href="#" ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
                             <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
-                                <button type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
+                                <button title={"Mute"} alt={"Mute"} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="Mute">
                                     {muteIcon}
                                 </button>
                                 <p>Toggle Mute</p>

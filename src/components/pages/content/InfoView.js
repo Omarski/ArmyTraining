@@ -120,7 +120,10 @@ function getPageState(props) {
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
                         result = <div className={data.videoType} key={index}>
-                            <video id="video" controls autoPlay={SettingsStore.autoPlaySound()} volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                            <video title={props.page.title}
+                                   alt={props.page.title}
+                                   aria-label={props.page.title}
+                                   id="video" controls autoPlay={SettingsStore.autoPlaySound()} volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                             {data.caption}
@@ -129,7 +132,21 @@ function getPageState(props) {
                 }
 
                 if (item.type === "image") {
-                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index} altText={item.title} />);
+                    var altText = "";
+                    if(item.info && item.info.property){
+                        item.info.property.map(function(item){
+                            if(item.name === "mediadisplayblurb"){
+                                altText = item.value;
+                            }
+                        });
+                    }else if(props.page.info && props.page.info.property){
+                        props.page.info.property.map(function(item){
+                            if(item.name === "mediadisplayblurb"){
+                                altText = item.value;
+                            }
+                        });
+                    }
+                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index} altText={altText} />);
                 }
 
 

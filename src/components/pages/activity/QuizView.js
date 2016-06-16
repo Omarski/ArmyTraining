@@ -29,17 +29,16 @@ function getPageState(props) {
     // get all quiz pages for this section
     var quizPages = PageStore.getChapterQuizPages();
     var quizPageCount = 0;
-    var quizPagesIter = 0;
     var quizPagesPassed = 0;
 
     // for each quiz page check if it was complete
-    while(quizPagesIter < quizPages.length) {
+    while(quizPageCount < quizPages.length) {
 
         // get quiz page
-        var quizPage = quizPages[quizPagesIter];
+        var quizPage = quizPages[quizPageCount];
 
-        // increment
-        quizPagesIter++;
+        // increase count
+        quizPageCount++;
 
         // get quizPage answer object
         if (quizPage.state && quizPage.state.answer) {
@@ -47,9 +46,6 @@ function getPageState(props) {
             var answer;
             var passed;
             var question;
-
-            // increase count
-            quizPageCount++;
 
             // get correct answer
             if (quizAnswer.target) {
@@ -164,7 +160,7 @@ var QuizTableHeader = React.createClass({
    render: function() {
        return (
            <tr className="">
-               <th>{LocalizationStore.labelFor("quizEnd", "headerCorrect")}</th>
+               <th>{LocalizationStore.labelFor("quizEnd", "headerResult")}</th>
                <th>{LocalizationStore.labelFor("quizEnd", "headerQuestion")}</th>
                <th>{LocalizationStore.labelFor("quizEnd", "headerAnswer")}</th>
            </tr>

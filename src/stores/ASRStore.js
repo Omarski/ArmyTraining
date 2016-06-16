@@ -57,18 +57,19 @@ var ASRStore = assign({}, EventEmitter.prototype, {
     },
 
     InitializeASR: function() {
-        ASRMessajsTester.sendMessage("urn:ASRMessajsTester:MessajsImpl1,initialize Chinese", "urn:ASRApplet:test", "text/plain; charset=utf-8");
+        console.log("ASR Store initialize");
+        ASRMessajsTester.sendMessage("urn:ASRMessajsTester:MessajsImpl1,initialize English", "urn:ASRApplet:test", "text/plain; charset=utf-8");
         _isInitialized = true;
     },
 
     StartRecording: function() {
         ASRMessajsTester.sendMessage("startrecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        //console.log("Start recording...");
+        console.log("Start recording...");
     },
 
     StopRecording: function() {
         ASRMessajsTester.sendMessage("stoprecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        //console.log("stop recording...");
+        console.log("stop recording...");
     },
 
     RecognizeRecording: function() {

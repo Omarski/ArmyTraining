@@ -60,10 +60,16 @@ var PageActions = {
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_RESET
         });
+    },
+
+    /**
+     * Resets current sections quiz answers
+     */
+    resetQuiz: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.QUIZ_RESET
+        });
     }
-
-
-
 };
 
 module.exports = PageActions;
