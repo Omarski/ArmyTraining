@@ -14,6 +14,17 @@ var UnitActions = {
     },
 
     /**
+     * Mark unit with given id as complete
+     * @param unitId
+     */
+    markUnitComplete: function(unitId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_COMPLETE,
+            id: unitId
+        });
+    },
+
+    /**
      * Mark unit with given id as required
      * @param (string) unitId - id of unit to mark as required
      */
