@@ -101,7 +101,7 @@ var HeaderView = React.createClass({
                         <div className="nav navbar-nav main-nav-bar-nav">
                             {dliView}
                             {referenceView}
-                            <button onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="sound">
+                            <button title={"Mute"} alt={"Mute"} onClick={this.toggleMute} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="Mute">
                                 {muteIcon}
                             </button>
                             <SettingsView />

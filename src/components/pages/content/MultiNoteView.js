@@ -157,7 +157,7 @@ var MultiNoteView = React.createClass({
 
 
             var image = (
-                <ImageCaption videoType="" src={"data/media/"+imageURL} caption={caption} key={index} altText={item.title}/>
+                <ImageCaption videoType="" src={"data/media/"+imageURL} caption={caption} key={index} altText={caption}/>
             );// <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
 
 
@@ -174,7 +174,9 @@ var MultiNoteView = React.createClass({
         var pageChoices = pagesHTML.map(function(item, index){
             var imageURL = item.imageURL;
             var title = item.title;
-            var thumbnail = <li key={self.state.xid + String(index)+"thumbnail"}><img  className="thumbnail multi-note-thumbnail" data={index} onClick={self.handleClick} alt={title}  src={"data/media/"+imageURL}></img></li>;
+            var caption = item.caption;
+            // title will be the individual page titles, and caption is that pages image caption
+            var thumbnail = <li key={self.state.xid + String(index)+"thumbnail"}><img  className="thumbnail multi-note-thumbnail" data={index} onClick={self.handleClick} title={title} alt={title}  src={"data/media/"+imageURL}></img></li>;
             return (thumbnail);
         });
 
