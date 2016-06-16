@@ -10,6 +10,8 @@ var FooterView = require('../components/FooterView');
 var NotificationView = require('../components/widgets/NotificationView');
 var NotificationActions = require('../actions/NotificationActions');
 var ConfigActions = require('../actions/ConfigActions');
+var DragDropContext = require('react-dnd').DragDropContext;
+var HTML5Backend = require('react-dnd-html5-backend');
 var LocalizationStore = require('../stores/LocalizationStore');
 var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
@@ -153,4 +155,4 @@ var MainView = React.createClass({
 
 });
 
-module.exports = MainView;
+module.exports = DragDropContext(HTML5Backend)(MainView);

@@ -2,8 +2,12 @@
  * Created by omaramer on 5/9/16.
  */
 var React = require('react');
+var AudioPlayer = require('../../../widgets/AudioPlayer');
+var PopupView = require('./../../../widgets/PopupView');
 var CultureQuestMapView = require('./CultureQuestMapView');
 var CultureQuestQuizView = require('./CultureQuestQuizView');
+var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
+var CultureQuestPuzzleGameView = require('./CultureQuestPuzzleGameView');
 var PageHeader = require('../../../widgets/PageHeader');
 
 function getPageState(props) {
@@ -14,8 +18,17 @@ function getPageState(props) {
         title: "",
         pageType: "",
         showQuiz: false,
-        showPop: false
-    } ;
+        showPopup: false,
+        showPuzzle: false,
+        showPuzzleGame: false,
+        layersColl:[],
+        lastSelected: null,
+        answersColl:[],
+        audioObj:null,
+        audioController:"",
+        popupObj:null,
+        mediaPath:'data/media/'
+    };
 
 
     if (props && props.page) {
@@ -23,17 +36,6 @@ function getPageState(props) {
         data.pageType = props.page.type;
         data.page = props.page;
         data.imageData = JSON.parse(data.page.info.property[2].value);
-        data.layersColl = [];
-        data.lastSelected = null;
-        data.answersColl = [];
-
-        if (props.page.note) {
-
-        }
-
-        if (props.page.media) {
-
-        }
     }
 
     return data;
@@ -46,22 +48,83 @@ var CultureQuestView = React.createClass({
         return pageState;
     },
 
-    // shouldComponentUpdate: function(nextProps, nextState) {
-    //     //return nextProps.email != this.props.email;
-    // },
-
-    componentWillMount: function() {
-    },
-
-    componentDidMount: function() {
-    },
-
-    componentWillUnmount: function() {
-    },
-
     onLayersReady:function(layersColl){
-        this.setState({layersColl:layersColl});
-        this.prepAnswersColl();
+        var self = this;
+        
+        this.setState({layersColl:layersColl}, function(){
+            self.prepAnswersColl();
+            self.prepIntroPopup();
+            self.markHomeRegion();
+        });
+    },
+
+    prepIntroPopup: function(){
+
+        var self = this;
+
+        var popupObj = {
+            id:"Intro",
+            onClickOutside: self.onClosePopup,
+            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1},
+
+            content: function(){
+                
+                return(
+                    <div className="popup-view-content">
+                        <div className="popup-view-bodyText">
+                            {self.state.imageData.briefText}
+                        </div>
+                        <div className="popup-view-buttonCont">
+                            <button type="button" className="btn btn-default"
+                                    onClick={self.onClosePopup}>Start</button>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+        
+        var debriefAudio = self.state.mediaPath + self.state.imageData.briefAudio;
+        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
+    },
+    
+    prepGoBackPopup: function(){
+
+        var self = this;
+
+        var popupObj = {
+            id:"GoBack",
+            onClickOutside: self.onClosePopup,
+            popupStyle: {height:'20%', width:'60%', top:'40%', left:'20%', background:'#fff', opacity:1},
+
+            content: function(){
+                
+                return(
+                    <div className="popup-view-content">
+                        <div className="popup-view-bodyText">
+                            {self.state.imageData.keepTryingText}
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+
+    },
+
+    onClosePopup: function(){
+        this.setState(({popupObj:null,audioObj:null}));
+    },
+
+    markHomeRegion: function(){
+        for (var i = 0; i < this.state.imageData.regions.length; i++){
+            if (this.state.imageData.regions[i].home === true) {
+                this.state.layersColl[i].setAttribute("state","homeState");
+                return false;
+            }
+        }
     },
 
     prepAnswersColl: function() {
@@ -78,20 +141,46 @@ var CultureQuestView = React.createClass({
 
     showQuizUpdate: function(mode){
 
-        if (mode === "show"){
-            this.setState({showQuiz:true});
-            $("#imageLayerView-back-image").children().addClass("CultureQuestQuizView-killInteraction");
-        }else{
-            this.setState({showQuiz:false});
-            $("#imageLayerView-back-image").children().removeClass("CultureQuestQuizView-killInteraction");
+        var self = this;
+
+        if (mode === "show") {
+            self.setState({showQuiz: true});
+                $("#imageLayerView-back-image").children().addClass("culture-quest-quiz-view-killInteraction");
+
+        } else {
+                self.setState({showQuiz: false});
+                $("#imageLayerView-back-image").children().removeClass("culture-quest-quiz-view-killInteraction");
         }
+    },
+
+    showPuzzleUpdate: function(mode){
+
+        var self = this;
+        if (mode === "show") self.setState({showPuzzle:true});
+        else self.setState({showPuzzle:false});
     },
 
     onRegionClicked: function(canvasElement){
 
-        this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
-        this.setState({'lastSelected': canvasElement});//, showQuiz:true
-        this.showQuizUpdate("show");
+        var self = this;
+        var keepTryingAudio = this.state.mediaPath + this.state.imageData.keepTryingAudio;
+
+        if (canvasElement.getAttribute('state') !== "homeState"){
+            this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
+            this.setState({'lastSelected': canvasElement});
+            this.showQuizUpdate("show");
+        }else{
+            //regions done
+            if (this.getCompletedRegions() >= this.state.imageData.regions.length - 1){
+                this.setState({showPuzzleGame:true});
+                var debriefAudio = self.state.mediaPath + self.state.imageData.debriefAudio;
+                this.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
+            }else{
+                this.prepGoBackPopup();
+                this.playAudio({id:"wrongAnswer", autoPlay:true, sources:[{format:"mp3", url:keepTryingAudio}]});
+            } 
+        }
+        
     },
 
     updateLayersColl:function(layer, changeMode, changesColl){
@@ -152,42 +241,115 @@ var CultureQuestView = React.createClass({
     saveAnswersColl: function(answersColl){
         this.state.answersColl = answersColl;
     },
-    
+
+    getCompletedRegions: function(){
+
+        var completed = 0;
+        for (var i = 0 ; i < this.state.answersColl.length; i++){
+            if (this.state.answersColl[i].completed) completed++;
+        }
+        return completed;
+    },
+
+    playAudio: function(audioObj){
+        var self = this;
+
+        this.setState({audioObj:audioObj}, function(){
+            if (!audioObj.loop) {
+                $("#"+audioObj.id).on("ended", function(){
+                    self.setState({audioObj:null});
+                });
+            }
+        });
+    },
+
+    audioController: function(mode){
+        return mode;
+    },
+
+    displayPopup: function(popupObj){
+
+        this.setState({popupObj:popupObj});
+    },
+
+    setAudioControl: function(mode){
+        this.setState({audioController:mode});
+    },
+
     render: function() {
         var self = this;
         var state = self.state;
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
-
+        var blockStyle = {position:'relative', width:'768px', height:'504px', marginLeft:'auto', marginRight:'auto'};
+        
         return (
-            <div id="CultureQuestViewBlock" onclick={self.onHideQuiz}>
+            <div style={blockStyle}>
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
-                
-                <CultureQuestMapView
-                    imageData = {state.imageData}
-                    layersColl = {state.layersColl}
-                    onLayersReady = {self.onLayersReady}
-                    onRegionClicked = {self.onRegionClicked}
-                    answersColl = {state.answersColl}
-                    lastSelected={state.lastSelected}
-                    updateLayersColl = {self.updateLayersColl}
-                >
-                    
-                </CultureQuestMapView>
 
-                    {self.state.showQuiz? <CultureQuestQuizView
-                    imageData={state.imageData}
-                    layersColl={state.layersColl}
-                    lastSelected={state.lastSelected}
-                    showQuiz = {state.showQuiz}
-                    showQuizUpdate = {self.showQuizUpdate}
-                    answersColl = {state.answersColl}
-                    saveAnswersColl = {self.saveAnswersColl}
+                <div id="CultureQuestViewBlock">
+
+                    {self.state.audioObj ?
+                    <AudioPlayer
+                        id = {self.state.audioObj.id}
+                        sources    = {self.state.audioObj.sources}
+                        autoPlay   = {self.state.audioObj.autoPlay}
+                        controller = {self.state.audioController}
+                    /> : null}
+
+                    {self.state.popupObj ?
+                    <PopupView
+                        id = {self.state.popupObj.id}
+                        popupStyle = {self.state.popupObj.popupStyle}
+                        onClickOutside = {self.state.popupObj.onClickOutside}
+                    >
+                    {self.state.popupObj.content()}
+                    </PopupView>:null}
+
+                    <CultureQuestMapView
+                        imageData = {state.imageData}
+                        layersColl = {state.layersColl}
+                        onLayersReady = {self.onLayersReady}
+                        onRegionClicked = {self.onRegionClicked}
+                        answersColl = {state.answersColl}
+                        lastSelected = {state.lastSelected}
+                        updateLayersColl = {self.updateLayersColl}
+                    >
+
+                    </CultureQuestMapView>
+
+                        {self.state.showQuiz? <CultureQuestQuizView
+                        imageData={state.imageData}
+                        layersColl={state.layersColl}
+                        lastSelected={state.lastSelected}
+                        showQuiz = {state.showQuiz}
+                        showQuizUpdate = {self.showQuizUpdate}
+                        showPuzzleUpdate = {self.showPuzzleUpdate}
+                        answersColl = {state.answersColl}
+                        saveAnswersColl = {self.saveAnswersColl}
+                        playAudio = {self.playAudio}
+                        setAudioControl = {self.setAudioControl}
+                        />:null}
+
+                    {self.state.showPuzzle? <CultureQuestPuzzleAwardView
+                        imageData = {state.imageData}
+                        lastSelected = {state.lastSelected}
+                        answersColl = {state.answersColl}
+                        showQuizUpdate = {self.showQuizUpdate}
+                        showPuzzleUpdate = {self.showPuzzleUpdate}
                     />:null}
-                
-                {self.state.showPop? <CultureQuestPopup />:null}
+
+                    {self.state.showPuzzleGame? <CultureQuestPuzzleGameView
+                    imageData={state.imageData}
+                    displayPopup={this.displayPopup}
+                    onClosePopup={this.onClosePopup}
+                    />:null}
+
+                </div>
             </div>
+
+
         );
     },
     /**

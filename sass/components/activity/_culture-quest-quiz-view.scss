@@ -1,36 +1,33 @@
-@mixin cultureQuestQuizView-trans($transType) {
+@mixin culture-quest-quiz-view-trans($transType) {
   transition: $transType .75s ease-in-out;
   -moz-transition: $transType .75s ease-in-out;
   -webkit-transition: $transType .75s ease-in-out;
 }
 
-.cultureQuestQuizView-quizPop{
+.culture-quest-quiz-view-quizPop{
   z-index: 15;
-  background-color: #000;
+  background-color: #fff;
   display:block;
-  position:relative;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top: -630px;
-  top: 200px;
+  position:absolute;
+  top: 150px;
   left:15px;
   width:700px;
   height:275px;
   opacity:0;
   overflow: hidden;
 
-  .cultureQuestQuizView-timer{
+  .culture-quest-quiz-view-timer{
     position: absolute;
     left:350px;
     top:10px;
   }
 
-  .cultureQuestQuizView-quizCont{
+  .culture-quest-quiz-view-quizCont{
     width:100%;
     height:100%;
 
-    .cultureQuestQuizView-instructorImg{
-      background-color: #fff;
+    .culture-quest-quiz-view-instructorImg{
+      background-color: #000;
       display:block;
       width:200px;
       height:275px;
@@ -38,44 +35,60 @@
       top:0;
       left:0;
     }
-    .cultureQuestQuizView-quizBody{
+    .culture-quest-quiz-view-quizBody{
       background:#fff;
       position: absolute;
       width:470px;
       height:200px;
-      top:35px;
+      top:45px;
       left:210px;
       overflow:auto;
 
-      .cultureQuestQuizView-input-blocks-cont{
+      .culture-quest-quiz-view-input-blocks-cont{
         position: absolute;
-        top:140px;
+        top:115px;
         left:30px;
+
+        .culture-quest-quiz-view-blockGroup {
+          position: relative;
+          margin-right:20px;
+          margin-top:5px;
+          float:left;
+        }
       }
 
-      .cultureQuestQuizView-quizText{
-
+      .culture-quest-quiz-view-questionText{
+        color:#325B75;
+        font-weight:400;
       }
 
     }
   }
 }
 
-.cultureQuestQuizView-fade-out {
+.culture-quest-quiz-view-fade-out {
   opacity: 0;
-  @include cultureQuestQuizView-trans(opacity);
+  @include culture-quest-quiz-view-trans(opacity);
 }
 
-.cultureQuestQuizView-fade-in {
+.culture-quest-quiz-view-fade-in {
   opacity: 1;
-  @include cultureQuestQuizView-trans(opacity);
+  @include culture-quest-quiz-view-trans(opacity);
 }
 
-.CultureQuestQuizView-killInteraction{
+.culture-quest-quiz-view-killInteraction{
   pointer-events:none;
 }
 
-.cultureQuestQuizView-questionText{
+.culture-quest-quiz-view-questionText{
   display:block;
   margin-bottom:5px;
+}
+
+.culture-quest-quiz-view-show{
+  opacity:1;
+}
+
+.culture-quest-quiz-view-hide{
+  opacity:0;
 }

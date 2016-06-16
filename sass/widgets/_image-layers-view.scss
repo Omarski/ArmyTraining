@@ -1,15 +1,15 @@
-@mixin imageLayersView-trans($transType) {
+@mixin image-layers-view-trans($transType) {
   transition: $transType .25s ease-in-out;
   -moz-transition: $transType .25s ease-in-out;
   -webkit-transition: $transType .25s ease-in-out;
 }
 
-.imageLayerView-back-image {
+.image-layers-view-back-image {
   margin-left:auto;
   margin-right:auto;
 }
 
-.imageLayerView-region-canvas {
+.image-layers-view-region-canvas {
   display:block;
   z-index:2;
   pointer-events: auto;
@@ -18,12 +18,12 @@
   opacity:0;
 }
 
-.imageLayerView-fade-out {
+.image-layers-view-fade-out {
   opacity: 0;
-  @include imageLayersView-trans(opacity);
+  @include image-layers-view-trans(opacity);
 }
 
-.imageLayerView-fade-in {
+.image-layers-view-fade-in {
   opacity: 1;
-  @include imageLayersView-trans(opacity);
+  @include image-layers-view-trans(opacity);
 }

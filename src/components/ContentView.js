@@ -18,7 +18,6 @@ var ListeningComprehensionView = require('../components/pages/activity/Listening
 var MatchItemView = require('../components/pages/activity/MatchItemView');
 var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
 var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceView');
-var MiniCoachedConversationView = require('../components/pages/activity/MiniCoachedConversationView');
 var OrderingView = require('../components/pages/activity/OrderingView');
 var QuestionnaireView = require('../components/pages/content/QuestionnaireView');
 var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
@@ -33,6 +32,7 @@ var UtteranceFormationView = require('../components/pages/activity/UtteranceForm
 var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
 var NotificationActions = require('../actions/NotificationActions');
 var CultureQuestView = require('../components/pages/activity/cultureQuest/CultureQuestView');
+var PuzzleMapView = require('../components/pages/activity/puzzle_map/PuzzleMapView');
 
 function getPageState() {
     var page = null;
@@ -200,6 +200,9 @@ var ContentView = React.createClass({
                     break;
                 case PageTypeConstants.CULTURE_QUEST:
                     page= <CultureQuestView page={this.state.page} />;
+                    break;
+                case "PuzzleMap":
+                    page= <PuzzleMapView page={this.state.page} />;
                     break;
                 default:
                     page = <DefaultPageView page={this.state.page} />;

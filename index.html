@@ -11,13 +11,22 @@
         .edgeLoad-EDGE-20743566 { visibility:hidden; }
     </style>
 
+
+
 </head>
 <body>
 
 <div id="mainView"></div>
 
 
+
 <!-- ASR Included scripts -->
+<script type="text/javascript" src="dist/js/ASR/AsrAdapter.js"></script>
+<script type="text/javascript" src="dist/js/ASR/js/messa_config.js"></script>
+<script type="text/javascript" src="dist/js/ASR/js/messa.js"></script>
+<script type="text/javascript" src="dist/js/ASR/js/messajs_tester.js"></script>
+<script type="text/javascript" src="dist/js/ASR/ASRMessajsTester.js"></script>
+
 <!--
 <div id="asr" width="0" height="0" style="position:absolute; top:0; left:0">
     <applet code="org.jdesktop.applet.util.JNLPAppletLauncher" archive="applet-launcher.jar,SpeechInterfaceApplet.jar" height="0" mayscript="yes" scriptable="true" id="ASRApplet" name="ASRApplet">
@@ -31,15 +40,11 @@
         <param name="jnlp_href" value="speechinterface16.jnlp"/>
     </applet>
 </div>
-
+-->
 <div id="messajs_test"></div>
 
-<script type="text/javascript" src="dist/js/ASR/AsrAdapter.js"></script>
-<script type="text/javascript" src="dist/js/ASR/js/messa_config.js"></script>
-<script type="text/javascript" src="dist/js/ASR/js/messa.js"></script>
-<script type="text/javascript" src="dist/js/ASR/js/messajs_tester.js"></script>
-<script type="text/javascript" src="dist/js/ASR/ASRMessajsTester.js"></script>
--->
+
+
 
 <script type="text/javascript" src="dist/js/AGeneric.js"></script>
 
@@ -51,7 +56,6 @@
 <script src="dist/js/store+json2.min.js"></script>
 <script src="dist/js/recorderjs/recorder.js"></script>
 <script type="text/javascript" charset="utf-8" src="dist/js/edge_includes/edge.6.0.0.min.js"></script>
-
 
 <script>
     init();

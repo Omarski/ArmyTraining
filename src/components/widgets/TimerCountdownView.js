@@ -11,8 +11,9 @@ var TimerCountdown = React.createClass({
     getInitialState: function() {
 
         return {
-            timeLeft:null,
+            timeLeft:"",
             interval:null,
+            timer:null
         };
     },
 
@@ -20,61 +21,47 @@ var TimerCountdown = React.createClass({
     },
 
     componentDidMount: function() {
+        this.state.timer = this.props.duration;
         this.renderTime();
-        //this.controlsListeners();
     },
 
     componentWillUnmount: function() {
-        clearInterval(this.state.interval);
-        this.state.interval = null;
+        var self = this;
+        clearInterval(self.state.interval);
+        self.state.interval = null;
     },
 
-    // controlsListeners: function() {
-    //
-    //     var self = this;
-    //
-    //     switch (self.props.timerController){
-    //
-    //         case "pause":
-    //              self.state.pause = true;
-    //              break;
-    //         case "resume": case "play":
-    //             self.state.pause = false;
-    //             break;
-    //         case "stop":
-    //              clearInterval(self.state.interval);
-    //              self.state.interval = null;
-    //              break;
-    //      }
-    // },
+    componentDidUpdate: function(prevProps, prevState){
+        var self = this;
+        if (self.props.timerParentAlerts === "timerReset") {
+            self.state.timer = this.props.duration;
+            self.props.timerStatusReporter("clearParentResetEvent");
+        }
+    },
 
     renderTime: function(){
 
         var self = this;
-        var timer = this.props.duration;
         var minutes, seconds;
 
-        var interval =  setInterval(function () {
+        var interval = setInterval(function () {
 
             if (self.props.timerController !== "pause") {
-                
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
+
+                minutes = parseInt(self.state.timer / 60, 10);
+                seconds = parseInt(self.state.timer % 60, 10);
 
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
                 
                     self.setState({timeLeft:(minutes <= 0) ? seconds : minutes+":"+seconds});
 
-                    if (--timer <= 0) {
-                        timer = 0;
+                    if (--self.state.timer <= 0) {
                         self.props.timerStatusReporter("timeUp");
-                        self.props.updateTimerController("pause");
                     }
 
-                    if (timer === self.props.reportAt.time){self.props.timerStatusReporter(self.props.reportAt.alert)}
+                    if (self.state.timer === self.props.reportAt.time){self.props.timerStatusReporter(self.props.reportAt.alert)}
             }
-
         }, 1000);
 
         self.setState({interval:interval});
@@ -85,7 +72,7 @@ var TimerCountdown = React.createClass({
 
         var self = this;
         return (
-           <div style={this.props.styling}>{(self.props.message) ? self.props.message : self.state.timeLeft}</div>
+           <div style={this.props.styling}>{(self.props.message) ? self.props.message : "Time left " + self.state.timeLeft + " seconds"}</div>
         )
     }
 });

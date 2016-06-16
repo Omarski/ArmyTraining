@@ -130,6 +130,8 @@ var BreadcrumbsView = React.createClass({
         var bookmarkBtn = (
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
+                    title={"Bookmarks"}
+                    alt={"Bookmarks"}
                     id="breadcrumbsButton"
                     type="button"
                     className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
