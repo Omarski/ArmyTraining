@@ -4,6 +4,7 @@ var InfoTagConstants = require('../constants/InfoTagConstants');
 var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
 var PageTypeConstants = require('../constants/PageTypeConstants');
+var PrePostTestStore = require('../stores/PrePostTestStore');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
 var BookmarkActions = require('../actions/BookmarkActions');
@@ -272,13 +273,29 @@ function load(data) {
         saveCurrentPage();
 
         _loaded = false;
-        $.getJSON("data/content/" + data.chapter.xid + "/" + data.page.xid + ".json", function(result) {
+
+        // default path
+        var pageContentPath = "data/content/" + data.chapter.xid + "/" + data.page.xid + ".json";
+
+        // check if page is a copied page, if so get original path
+        if (data.page.preposttest === true) {
+            // update path to load from
+            pageContentPath = PrePostTestStore.getPagePathByPageId(data.page.xid);
+        }
+
+        // load page data
+        $.getJSON(pageContentPath, function(result) {
 
             _currentUnit = data.unit;
             _currentChapter = data.chapter;
             _currentPage = data.page;
 
             _data = result.page;
+
+            // check if page is a copied page if so update title
+            if (data.page.preposttest === true) {
+                _data.title = data.page.title;
+            }
 
             // create and add state property
             var state = {visited: true};
@@ -309,7 +326,7 @@ function markChapterComplete() {
         }
 
         // mark it as complete
-        _currentChapter.state = assign({}, state, {completed: true});
+        _currentChapter.state = assign({}, state, {complete: true});
     }
 }
 
@@ -466,6 +483,7 @@ var PageStore = assign({}, EventEmitter.prototype, {
                         case PageTypeConstants.QUIZ_END:
                         case PageTypeConstants.QUIZ_START:
                         case PageTypeConstants.SECTION_END:
+                        case PageTypeConstants.TEST_OUT_QUIZ_END:
                             break;  // skip
                         default:
                             results.push(page);
