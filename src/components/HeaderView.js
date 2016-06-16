@@ -7,6 +7,7 @@ var SettingsActions = require('../actions/SettingsActions');
 var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
 var DliView = require("../components/widgets/DliView");
+var BookmarksView = require('../components/BookmarksView');
 var ReferenceView = require("../components/reference_guide/ReferenceView");
 var Navbar = require("react-bootstrap/lib/Navbar");
 var NavbarCollapse = require("react-bootstrap/lib/NavbarCollapse");
@@ -16,6 +17,8 @@ var NavDropdown = require("react-bootstrap/lib/NavDropdown");
 var MenuItem = require("react-bootstrap/lib/MenuItem");
 var PanelGroup = require("react-bootstrap/lib/PanelGroup");
 var Panel = require("react-bootstrap/lib/Panel");
+var ListGroup = ReactBootstrap.ListGroup;
+var ListGroupItem = ReactBootstrap.ListGroupItem;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -223,14 +226,42 @@ var HeaderView = React.createClass({
                                 <p>Toggle Mute</p>
                             </NavItem>
                             <NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
-                            <NavItem eventKey={5} onClick={self.bookmarkFunction} href="#" className="bookmark-nav-item"><ul className="breadcrumbs-ul-dropdown-nav"><li className="breadcrumbs-icon-li-element"><BreadcrumbsView className="breadcrumbs-view-in-dropdown-nav"/></li><li className="bookmark-text-li-element"><p className="bookmark-text-paragraph-element">Bookmark</p></li></ul></NavItem>
+                            <BookmarksView isNav={true}/>
+
+
+
+
                         </Nav>
+
                     </NavbarCollapse>
                 </Navbar>
                 <BreadcrumbsView />
             </div>
         );
     },
+
+    /*
+     <ul className="breadcrumbs-ul-dropdown-nav">
+     <li className="breadcrumbs-icon-li-element">
+     <button
+     title={"Bookmarks"}
+     alt={"Bookmarks"}
+     id="breadcrumbsButton"
+     type="button"
+     className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
+     >
+     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+     </button>
+     <BookmarksView/>
+
+
+     </li>
+     <li className="bookmark-text-li-element">
+     <p className="bookmark-text-paragraph-element">Bookmark</p>
+     </li>
+     </ul>
+     */
+
     /**
      * Event handler for 'change' events coming from the BookStore
      */
