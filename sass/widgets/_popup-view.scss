@@ -1,0 +1,34 @@
+.popup-view-background{
+  position: absolute;
+  display:block;
+  width: 770px;
+  height: 505px;
+  top: 32px;
+  left: 0;
+  z-index:20;
+  background:transparent;
+
+  .popup-view-cont{
+    position: absolute;
+
+    .popup-view-content {
+      position:absolute;
+      top:0;
+      left:0;
+
+      .popup-view-bodyText{
+        color:#0a0a0a;
+        padding:15px;
+      }
+
+      .popup-view-buttonCont{
+        position: relative;
+        width:80px;
+        height:30px;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:-20px;
+      }
+    }
+  }
+}
