@@ -100,6 +100,22 @@ var UnitStore = assign({}, EventEmitter.prototype, {
     },
 
     /**
+     * Returns and order list of chapter ids contained in the unit.
+     * @param id - id of unit
+     * @returns {Array} - Returns empty array if no chapter is found.
+     */
+    getChapterIdsInUnit: function(id) {
+        var chapterIds = [];
+        if (_units[id] && _units[id].data && _units[id].data.chapter) {
+            var chapters = _units[id].data.chapter;
+            for (var chapterIndex in chapters) {
+                chapterIds.push(chapters[chapterIndex].xid);
+            }
+        }
+        return chapterIds;
+    },
+
+    /**
      * Checks if the state property required is true
      * @param id
      * @returns {boolean}
