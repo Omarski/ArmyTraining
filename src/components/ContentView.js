@@ -23,10 +23,12 @@ var QuestionnaireView = require('../components/pages/content/QuestionnaireView')
 var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
 var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizView = require('../components/pages/activity/QuizView');
+var PostTestQuizEndView = require('../components/pages/content/PostTestQuizEndView');
 var PronunciationView = require('../components/pages/activity/PronunciationView');
 var ResponseFormationView = require('../components/pages/activity/ResponseFormationView');
 var SectionEndView = require('../components/pages/content/SectionEndView');
 var SortingView = require('../components/pages/activity/SortingView');
+var TestOutQuizEndView = require('../components/pages/content/TestOutQuizEndView');
 var UtteranceFormationView = require('../components/pages/activity/UtteranceFormationView');
 var NetworkActivityView = require('../components/pages/activity/NetworkActivityView');
 var NotificationActions = require('../actions/NotificationActions');
@@ -108,7 +110,7 @@ var ContentView = React.createClass({
 
                         while (propLen--) {
                             if (properties[propLen].name === "network") {
-                                page = <NetworkActivityView page={this.state.page} />
+                                page = <NetworkActivityView page={this.state.page} />;
                                 foundType = true;
                                 break;
                             }
@@ -127,6 +129,9 @@ var ContentView = React.createClass({
                     break;
                 case PageTypeConstants.ORDERING:
                     page = <OrderingView page={this.state.page} />;
+                    break;
+                case PageTypeConstants.POST_TEST_QUIZ_END:
+                    page = <PostTestQuizEndView page={this.state.page} />;
                     break;
                 case PageTypeConstants.PRONUNCIATION:
                     page = <PronunciationView page={this.state.page} />;
@@ -148,7 +153,7 @@ var ContentView = React.createClass({
 
                         while (propLen--) {
                             if (properties[propLen].name === "lessonstart") {
-                                page = <LessonStartView page={this.state.page} />
+                                page = <LessonStartView page={this.state.page} />;
                                 foundType = true;
                                 break;
                             }
@@ -171,6 +176,9 @@ var ContentView = React.createClass({
                     break;
                 case PageTypeConstants.QUIZ_START:
                     page = <QuizStartView page={this.state.page} />;
+                    break;
+                case PageTypeConstants.TEST_OUT_QUIZ_END:
+                    page = <TestOutQuizEndView page={this.state.page} />;
                     break;
                 case PageTypeConstants.INTERACTIVE_TIMELINE:
                     isFullScreen = true;

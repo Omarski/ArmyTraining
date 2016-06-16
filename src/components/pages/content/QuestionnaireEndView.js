@@ -6,6 +6,7 @@ var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageHeader = require('../../widgets/PageHeader');
 var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
+var PrePostTestActions = require('../../../actions/PrePostTestActions');
 var React = require('react');
 var QuestionnaireActions = require('../../../actions/QuestionnaireActions');
 var QuestionnaireStore = require('../../../stores/QuestionnaireStore');
@@ -105,6 +106,9 @@ var QuestionnaireEndView = React.createClass({
             // mark questionnaire as complete
             PageActions.markChapterComplete();
 
+            // build pre and post test lessons
+            PrePostTestActions.build();
+
             // go to next page
             PageActions.loadNext({});
         }
@@ -164,6 +168,6 @@ var QuestionnaireEndView = React.createClass({
             this.setState(getPageState(this.props));
         }
     }
-})
+});
 
 module.exports = QuestionnaireEndView;

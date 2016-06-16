@@ -60,7 +60,7 @@ function getUnitState(expanded) {
 
                 // check if chapter has been marked complete
                 // if just one is not then mark the whole unit as incomplete
-                if (c.state && c.state.completed) {
+                if (c.state && c.state.complete) {
                     chapterCompleted = true;
                 } else {
                     unitCompleted = false
