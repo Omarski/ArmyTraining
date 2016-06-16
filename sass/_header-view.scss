@@ -2,12 +2,23 @@ button.navbar-toggle:hover {
   background-color: #D2E0E6 !important;
 }
 
+.caret {
+  display: none;
+}
+
+
+
 
 @media screen and (min-width: 767px) {
 
   .bookmark-nav-item {
     display: none !important;
   }
+
+  .dropdown {
+    display: none !important;
+  }
+
 
   #collapseNav {
     li {
@@ -202,6 +213,11 @@ button.navbar-toggle:hover {
     margin-right: 25px;
   }
 
+  .dropdown-menu{
+    .dropdown-toggle {
+      padding-left: 25% !important;
+    }
+  }
 
   .bookmark-text-li-element {
     display: inline;

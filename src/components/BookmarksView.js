@@ -55,6 +55,7 @@ function getPageState(isNav) {
 
 var BookmarksView = React.createClass({
     bookmark: function() {
+        console.log("bookmark", bookmark);
         var bm = {
             unit: PageStore.unit().data.xid,
             chapter: PageStore.chapter().xid,
@@ -99,23 +100,32 @@ var BookmarksView = React.createClass({
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
         var items = "";
+        console.log("bookmarks", bookmarks);
         if (bookmarks) {
+            bookmarks.push({"title":"Bookmark Current Page"});
             if (this.state.isNav) {
                 var subItems = bookmarks.map(function(item, index) {
-                    return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item">
-                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
-                    </MenuItem>)
+                    if(index !== bookmarks.length){
+                                return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item">
+                                            <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                                        </MenuItem>);
+                    } else if(index === (bookmarks.length - 1)) {
+                                return(<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item" > <button onClick={self.bookmark} className="btn btn-link">Bookmark Current Page</button></MenuItem>);
+                            }
                 });
                 items = (<NavDropdown eventKey="5" title={(
-                <Button
-                    title={"Bookmarks"}
-                    alt={"Bookmarks"}
-                    id="breadcrumbsButton"
-                    type="button"
-                    className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
-                >
-                    <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Bookmarks
-                </Button>
+                <div>
+                    <Button
+                        title={"Bookmarks"}
+                        alt={"Bookmarks"}
+                        id="breadcrumbsButton"
+                        type="button"
+                        className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
+                    >
+                        <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                    </Button>
+                    <p>Bookmarks</p>
+                </div>
                 )}>
                     {subItems}
                 </NavDropdown>);

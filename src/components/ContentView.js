@@ -22,6 +22,7 @@ var OrderingView = require('../components/pages/activity/OrderingView');
 var QuestionnaireView = require('../components/pages/content/QuestionnaireView');
 var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
 var QuizStartView = require('../components/pages/activity/QuizStartView');
+var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizView = require('../components/pages/activity/QuizView');
 var PostTestQuizEndView = require('../components/pages/content/PostTestQuizEndView');
 var PronunciationView = require('../components/pages/activity/PronunciationView');

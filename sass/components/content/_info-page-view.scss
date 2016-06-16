@@ -24,6 +24,31 @@
   }
 }
 
+@media screen and (max-width: 767px){
+  .image-caption-container {
+    width: 95%;
+  }
+
+  .infoMediaContainer{
+    img {
+      width: 100%;
+    }
+    .caption {
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  .infoNoteContainer {
+    width: 95%;
+    ul {
+      padding-left: 0px;
+    }
+
+  }
+
+}
+
 .infoNoteContainer{
   margin: 0 auto;
   margin-top: 20px;

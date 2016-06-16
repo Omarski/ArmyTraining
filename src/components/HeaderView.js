@@ -151,7 +151,7 @@ var HeaderView = React.createClass({
                                 <p>Toggle Mute</p>
                             </NavItem>
                             <NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
-                            <BookmarksView isNav={true}/>
+                            <BookmarksView className="hide-bookmarksview-for-desktop" isNav={true}/>
 
 
 

@@ -27,3 +27,40 @@
 .multi-note-text {
   font-size: 18px;
 }
+
+@media screen and (max-width: 767px){
+  .col-md-6 {
+    padding-right: 15px;
+  }
+  .multi-note-image {
+    width: 100%;
+    margin-bottom: 20px;
+    .image-caption-container {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto 15px auto;
+      }
+    }
+
+  }
+
+  .multi-note-choices{
+    padding-left: 0px;
+    li {
+      margin-left: auto;
+      margin-right: auto;
+      img {
+        display: inline;
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+      }
+    }
+  }
+
+}
