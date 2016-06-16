@@ -38,6 +38,17 @@ var EthnoMapPopover = React.createClass({
             }
         }
 
+        /*
+        for(var prop in self.props.mapData){
+            if(self.props.mapData[prop]){
+                if(prop !== "image" && prop !== "label") {
+                    var propHolder = prop;
+                    var propCapitalized = propHolder.charAt(0).toUpperCase() + propHolder.slice(1);
+                    popoverPages.push([propCapitalized, self.props.mapData[prop]]);
+                }
+            }
+        }
+*/
         return popoverPages;
     },
     toggle: function() {
