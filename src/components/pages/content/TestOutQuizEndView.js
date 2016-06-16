@@ -18,7 +18,8 @@ function getPageState(props) {
         pageType: "",
         page: "",
         sources: [],
-    }
+        unitsPassed: []
+    };
 
     if (props && props.page) {
         data.title = props.page.title;
@@ -47,7 +48,7 @@ function getPageState(props) {
             testOutUnitsOrder.push(unitId);
         }
 
-        // if only 1 is not passed mark unit as not eligable to test out
+        // if even just 1 is not passed, mark unit as not eligible to test out
         // TODO change so cutoff value can be authored
         if (!page.state || !page.state.answer || page.state.answer.passed !== true) {
             testOutUnits[unitId].passed = false;
@@ -67,6 +68,7 @@ function getPageState(props) {
             if (testOutUnits[id].passed === true) {
                 data.bPassed = true;
                 data.pageFeedback = LocalizationStore.labelFor("pretest", "lblPassed");
+                data.unitsPassed.push(id);
             }
         }
     }
@@ -77,17 +79,13 @@ function getPageState(props) {
 
 function TestOutComplete(state) {
     // if passed and accepted then mark units completed
-    if (state.bPassed && state.bAccepted) {
+    if (state.bPassed && state.bAccepted && state.unitsPassed && (state.unitsPassed.length > 0)) {
 
-        // gather units that are passed
-        console.log(state);
-
-        // mark unit complete
-
-        // mark the chapters in the units as complete
-        PrePostTestActions.markUnitComplete();
+        setTimeout(function() { // TODO <-- dont like this
+            // mark the chapters in the units as complete
+            PrePostTestActions.markTestOutUnitsComplete(state.unitsPassed);
+        });
     }
-    //PrePostTestActions.markUnitComplete();
 }
 
 
@@ -121,7 +119,7 @@ var TestOutQuizEndView = React.createClass({
     },
 
     declinedSelected: function() {
-        this.state.bAccepted = true;
+        this.state.bAccepted = false;
     },
 
     render: function() {
@@ -132,7 +130,7 @@ var TestOutQuizEndView = React.createClass({
 
         // compile feedback
         var passedRow = "";
-        if (passed || 1) {
+        if (passed) {
             passedRow = (
                 <div className="row">
                     <div className="col-lg-4">
@@ -205,11 +203,11 @@ var TestOutRow = React.createClass({
     render: function() {
         var passed = this.props.passed;
         var title = this.props.title;
-        var className = "glyphicon glyphicon-remove-circle quiz-feedback-icon quiz-feedback-icon-incorrect"
+        var className = "glyphicon glyphicon-remove-circle quiz-feedback-icon quiz-feedback-icon-incorrect";
 
         // changed if passed
         if (passed) {
-            className = "glyphicon glyphicon-ok-circle quiz-feedback-icon quiz-feedback-icon-correct"
+            className = "glyphicon glyphicon-ok-circle quiz-feedback-icon quiz-feedback-icon-correct";
         }
 
         return (
