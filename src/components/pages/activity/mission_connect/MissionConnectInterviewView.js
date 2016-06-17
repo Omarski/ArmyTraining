@@ -23,7 +23,7 @@ var MissionConnectInterviewView = React.createClass({
         gameData: PropTypes.object,
         images: PropTypes.array.isRequired,
         viewUpdate: PropTypes.func.isRequired,
-        activeNode: PropTypes.int.isRequired,
+        activeNode: PropTypes.number.isRequired,
         scoreObjColl: PropTypes.array.isRequired
     },
 

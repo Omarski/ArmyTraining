@@ -21,7 +21,7 @@ var MissionConnectGameView = React.createClass({
 
     componentDidMount: function(){
         this.renderPieces();
-        //this.prepScoreObjColl();
+        this.prepScoreObjColl();
     },
 
     renderPieces: function(){
@@ -36,13 +36,15 @@ var MissionConnectGameView = React.createClass({
 
             var iconImg = self.props.images[parseInt(char.nodeNumber)].availableIconImageName;
             var iconStyle = {background:"url (" + iconImg + ") no-repeat 100% 100%"};
-
-            var blockStyle = {top: char.yPos+'px', left: char.xPos+'px'};
+            var ableToInteract = char.startNode ? "auto":"none";
+            var blockStyle = {top: char.yPos+'px', left: char.xPos+'px', pointerEvents:ableToInteract};
             return(
                 <div className = "mission-connect-view-piece-block" style={blockStyle} key={index}>
                     <div className = "mission-connect-view-home" style={houseStyle}></div>
                     <div className = "mission-connect-view-icon" style={iconStyle}
                          id = {"MissionConnectIcon" + char.nodeNumber}
+                         visible = {char.startNode}
+                         active  = {char.startNode}
                          onClick = {this.onIconClick()}></div>
                 </div>
             )
