@@ -190,8 +190,7 @@ var QuestionnaireView = React.createClass({
         var state = this.state;
 
         // iterate over each item and see if it selected
-        $(".multiple-choice-checkbox").each(function () {
-
+        $("#questionnaireForm :input").each(function () {
             if (this.checked) {
                 state.selectedPlaylists[this.value] = state.answerToPlaylistMapping[this.value];
             } else {
@@ -199,7 +198,6 @@ var QuestionnaireView = React.createClass({
                     delete state.selectedPlaylists[this.value];
                 }
             }
-
         });
 
         // submit answer to store
@@ -224,7 +222,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input id={inputId} name={item.groupid} type="radio" defaultChecked onChange={_this.answerChange.bind(_this, item)}/>
+                                <input id={inputId} name={item.groupid} type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
                                 {item.text}
                             </label>
                         </div>);
@@ -232,7 +230,7 @@ var QuestionnaireView = React.createClass({
                     else {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input name={item.groupid} type="radio" onChange={_this.answerChange.bind(_this, item)}/>
+                                <input name={item.groupid} type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
                                 {item.text}
                             </label>
                         </div>);
@@ -242,7 +240,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="checkbox">
                             <label for={inputId}>
-                                <input type="checkbox" defaultChecked onChange={_this.answerChange.bind(_this, item)}/>
+                                <input type="checkbox" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
                                 {item.text}
                             </label>
                         </div>);
@@ -251,7 +249,7 @@ var QuestionnaireView = React.createClass({
                         inputElement = (
                             <div className="checkbox">
                                 <label for={inputId}>
-                                    <input type="checkbox" onChange={_this.answerChange.bind(_this, item)}/>
+                                    <input type="checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
                                     {item.text}
                                 </label>
                             </div>);
@@ -276,7 +274,7 @@ var QuestionnaireView = React.createClass({
                             </h4>
                         </div>
                         <div className="row">
-                            <form>
+                            <form id="questionnaireForm">
                                 <ul className="list-group multiple-choice-choices-container">
                                     {choices}
                                 </ul>
