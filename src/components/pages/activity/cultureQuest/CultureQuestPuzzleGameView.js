@@ -1,6 +1,6 @@
 
 var React = require('react');
-var DnDPuzzleView = require('../../../widgets/DragAndDropPuzzle/DnDPuzzleView');
+var DnDPuzzleView = require('../../../widgets/dragAndDropPuzzle/DnDPuzzleView');
 var VideoPlayer = require('../../../widgets/VideoPlayer');
 var PropTypes = React.PropTypes;
 

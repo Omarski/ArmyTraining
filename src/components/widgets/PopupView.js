@@ -4,7 +4,7 @@ var PropTypes  = React.PropTypes;
 var CultureQuestPopupView = React.createClass({
 
     propTypes: {
-
+        id:PropTypes.string,
         popupStyle: PropTypes.object.isRequired,
         onClickOutside: PropTypes.func
     },
@@ -14,7 +14,8 @@ var CultureQuestPopupView = React.createClass({
         return (
             <div id={"popupContBack"+this.props.id}
                  className="popup-view-background"
-                 onClick={this.props.onClickOutside}>
+                 onClick={this.props.onClickOutside
+                 ? this.props.onClickOutside:null}>
 
                 <div className="popup-view-cont"
                 id={"popupCont"+this.props.id}
