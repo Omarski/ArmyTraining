@@ -98,7 +98,7 @@ var BookmarksView = React.createClass({
 
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
-        var items = "";
+        var items = null;
         if (bookmarks) {
             if (this.state.isNav) {
                 var subItems = bookmarks.map(function(item, index) {
