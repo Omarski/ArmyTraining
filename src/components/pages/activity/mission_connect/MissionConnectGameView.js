@@ -8,7 +8,7 @@ var MissionConnectGameView = React.createClass({
 
         return {
             activeNode:null,
-            activePopMode:null,
+            showInterview:false,
             scoreObjColl:[]
         };
     },
@@ -54,7 +54,7 @@ var MissionConnectGameView = React.createClass({
     prepScoreObjColl: function(){
 
         var scoreObjColl = [];
-        for (var i = 0; i < self.props.gameData.networkGameNodes.length; i++){
+        for (var i = 0; i < self.props.gameData.networkGameNodes.length - 1; i++){ //minus chief
             var scoreObject = {
                 attempts:0,
                 answered: false
@@ -71,10 +71,23 @@ var MissionConnectGameView = React.createClass({
         this.props.viewUpdate(mode)
     },
 
+    updateGameView: function(update){
+
+        switch (update){
+            case "closePop":
+                this.setState({showInterview:false});
+                break;
+        }
+    },
+
+    updateScore: function(update){
+        var self = this;
+        self.state.scoreObjColl[self.state.activeNode].update.key = update.value;
+    },
+
     onIconClick: function(e){
         console.log("Clicked on : " + e.target.id);
-        this.setState({activeNode:parseInt(e.target.id.substring(18))});
-        //popup
+        this.setState({activeNode:parseInt(e.target.id.substring(18)), showInterview:true});
     },
 
     render: function() {
@@ -86,9 +99,12 @@ var MissionConnectGameView = React.createClass({
                 <MissionConnectInterviewView
                     gameData = {self.props.gameData}
                     images = {self.props.loadedImageColl}
-                    viewUpdate = {self.props.viewUpdate}
+                    viewUpdate = {self.viewUpdate}
                     activeNode = {self.state.activeNode}
                     scoreObjColl = {self.state.scoreObjColl}
+                    showInterview = {self.state.showInterview}
+                    updateGameView = {self.updateGameView}
+                    updateScore = {self.updateScore}
                 />
 
                 <div className = "mission-connect-view-pieces-cont" id="missionConnectPiecesCont" >

@@ -24,7 +24,10 @@ var MissionConnectInterviewView = React.createClass({
         images: PropTypes.array.isRequired,
         viewUpdate: PropTypes.func.isRequired,
         activeNode: PropTypes.number.isRequired,
-        scoreObjColl: PropTypes.array.isRequired
+        scoreObjColl: PropTypes.array.isRequired,
+        showInterview: PropTypes.boolean.isRequired,
+        updateGameView: PropTypes.func.isRequired,
+        updateScore: PropTypes.func.isRequired
     },
 
     componentDidMount: function(){
@@ -32,15 +35,24 @@ var MissionConnectInterviewView = React.createClass({
     },
 
     onInteract: function(){
-
+        this.setState({popState:"quiz"});
     },
 
     onSubmit: function(){
 
+        var scoreObj = self.props.scoreObjColl[self.props.activeNode];
+        var correct = $('input[name="missionConnectQuizRadio"]:checked').val();
+        if (correct) {
+            this.props.updateScore({'correct':true});
+        }else{
+            this.props.updateScore({'attempts':scoreObj.attempts + 1});
+        }
+
+        this.setState({popState:"feedback"});
     },
 
     onClosePop: function(){
-
+        this.props.updateGameView("closePop");
     },
 
     renderPopContent: function(){
@@ -147,9 +159,8 @@ var MissionConnectInterviewView = React.createClass({
                questionObj["feedback"].push(answer.feedback);
 
                return(
-                   <input type="radio" name={"answer"+index}
-                          value={"answer"+index}
-                          correcr={answer.correct}
+                   <input type="radio" name={"missionConnectQuizRadio"} //+self.props.activeNode
+                          value={answer.correct}
                           className="mission-connect-view-popIntRadio"
                           key={index}>{answer.choice}</input>
                )
@@ -169,7 +180,7 @@ var MissionConnectInterviewView = React.createClass({
                         minHeight: '315px', background: '#fff', padding:'20px'};
         
         return (<div>
-                    {self.state.popupObj ?
+                    {self.state.showInterview ?
                      <PopupView
                         id = {"missionConnectPop"+self.pop.activeNode}
                         popupStyle = {popStyle}
