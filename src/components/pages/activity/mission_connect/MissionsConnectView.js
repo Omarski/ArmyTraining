@@ -3,7 +3,6 @@
  */
 var React = require('react');
 var MissionConnectGameView = require('./MissionConnectGameView');
-var tempJson = require('./testJson');
 var AudioPlayer = require('../../../widgets/AudioPlayer');
 var PopupView = require('./../../../widgets/PopupView');
 var PageHeader = require('../../../widgets/PageHeader');
@@ -30,8 +29,7 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
-        //data.gameData = JSON.parse(data.page.info.property[1].value);
-        data.gameData = JSON.parse(testJson);
+        data.gameData = JSON.parse(data.page.info.property[1].value);
     }
 
     return data;
@@ -54,42 +52,41 @@ var MissionConnectView = React.createClass({
         var imageColl = [];
         var chars = self.state.gameData.networkGameNodes;
 
-        chars.map(function(chars,index){
+        //save urls
+        chars.map(function(img,index){
 
-            chars.map(function(img,index){
-
-                imageColl.push({
-                    charOrig: self.state.mediaPath + img.nodeImageName,
-                    house: self.state.mediaPath + img.availableImageName,
-                    charIcon: self.state.mediaPath + img.availableIconImageName,
-                    charIconCheck: self.state.mediaPath + img.passedImageName
-                });
+            imageColl.push({
+                charOrig: self.state.mediaPath + img.nodeImageName,
+                house: self.state.mediaPath + img.availableImageName,
+                charIcon: self.state.mediaPath + img.availableIconImageName,
+                charIconCheck: self.state.mediaPath + img.passedImageName
             });
-            
-            self.setState({totalImages:(imageColl.length * 4) + 1}); //plus background img
+        });
 
-            var loadedImageColl = [];
+        var loadedImageColl = [];
 
-            for (var i=0 ; i < imageColl.length; i++){
+        for (var i=0 ; i < imageColl.length; i++){
 
-                var loadedObj = {};
-                
-                for (var key in imageColl[i]){
-                    loadedObj[key] = new Image();
-                    loadedObj[key].src = imageColl[i][key];
-                    loadedObj[key].onload = self.loadCounter;
-                }
+            var loadedObj = {};
 
-                loadedImageColl[parseInt(chars.nodeNumber)] = loadedObj;
+            for (var key in imageColl[i]){
+                loadedObj[key] = new Image();
+                loadedObj[key].src = imageColl[i][key];
+                loadedObj[key].onload = self.loadCounter;
+                loadedObj[key+"Url"] = imageColl[i][key];
+                loadedObj[key+"Width"] = loadedObj[key].width;
+                loadedObj[key+"Height"] = loadedObj[key].height;
             }
 
-            var backgroundMap = new Image();
-            backgroundMap.src = self.state.mediaPath + self.state.gameData.backgroundImageName;
-            backgroundMap.onload = self.loadCounter;
 
-            self.setState({loadedImageColl:loadedImageColl});
-            
-        });
+            loadedImageColl.push(loadedObj);
+        }
+
+        var backgroundMap = new Image();
+        backgroundMap.src = self.state.mediaPath + self.state.gameData.backgroundImageName;
+        backgroundMap.onload = self.loadCounter;
+
+        self.setState({totalImages:(imageColl.length * 4) + 1, loadedImageColl:loadedImageColl}); //plus background img
     },
 
     loadCounter: function(){
@@ -156,7 +153,7 @@ var MissionConnectView = React.createClass({
         var blockStyle = {position:'relative', width:'768px', height:'504px', marginLeft:'auto', marginRight:'auto'};
 
         var mapUrl = self.state.mediaPath + self.state.gameData.backgroundImageName;
-        var backMapStyle = {background:'url('+mapUrl+') no-repeat 100% 100%'};
+        var backMapStyle = {background:'url('+mapUrl+') no-repeat', backgroundSize:'768px 504px'};
 
         return (
             <div style={blockStyle}>
@@ -164,13 +161,14 @@ var MissionConnectView = React.createClass({
 
                 <div id="missionConnectViewBlock">
 
+                    {state.mapReady ? <MissionConnectGameView
+                        gameData = {state.gameData}
+                        images = {state.loadedImageColl}
+                        viewUpdate = {self.viewUpdate}
+                    />:null}
+                    
                     <div className="mission-connect-view-mapCont" style={backMapStyle}>
-                        {state.mapReady ? <MissionConnectGameView
-                            gameData = {state.gameData}
-                            images = {state.loadedImageColl}
-                            viewUpdate = {self.viewUpdate}
-                        />
-                        :null}
+
                     </div>
                 </div>
             </div>

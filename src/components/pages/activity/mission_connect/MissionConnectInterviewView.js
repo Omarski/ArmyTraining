@@ -25,7 +25,7 @@ var MissionConnectInterviewView = React.createClass({
         viewUpdate: PropTypes.func.isRequired,
         activeNode: PropTypes.number.isRequired,
         scoreObjColl: PropTypes.array.isRequired,
-        showInterview: PropTypes.boolean.isRequired,
+        showInterview: PropTypes.bool.isRequired,
         updateGameView: PropTypes.func.isRequired,
         updateScore: PropTypes.func.isRequired
     },
@@ -61,7 +61,7 @@ var MissionConnectInterviewView = React.createClass({
         var gameData = self.props.gameData;
         var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
         var origImg = self.props.images[parseInt(char.nodeNumber)].nodeImageName;
-        var imgStyle = {background:'url('+ origImg + ') no-repeat 100% 100%'}
+        var imgStyle = {background:'url('+ origImg + ') no-repeat 100% 100%'};
 
         var scenarioTempl = function() {
             return(

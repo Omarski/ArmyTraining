@@ -19,7 +19,17 @@ var MissionConnectGameView = React.createClass({
         viewUpdate: PropTypes.func.isRequired
     },
 
+    componentWillMount: function(){
+
+        //find init active node
+        var char = this.props.gameData.networkGameNodes.filter(function (obj) {
+            return obj.startNode === true;
+        })[0];
+        this.setState({activeNode:char.nodeNumber});
+    },
+
     componentDidMount: function(){
+
         this.renderPieces();
         this.prepScoreObjColl();
     },
@@ -29,32 +39,43 @@ var MissionConnectGameView = React.createClass({
         var self = this;
         var chars = self.props.gameData.networkGameNodes;
 
-        chars.map(function(char,index){
-            
-            var houseImg = self.props.images[parseInt(char.nodeNumber)].availableImageName;
-            var houseStyle = {background:"url (" + houseImg + ") no-repeat 100% 100%"};
+        var pieces = chars.map(function(char,index){
+            //for (var key in self.props.images[parseInt(char.nodeNumber) - 1]) console.log(key + " -- " + self.props.images[parseInt(char.nodeNumber) - 1][key]);
 
-            var iconImg = self.props.images[parseInt(char.nodeNumber)].availableIconImageName;
-            var iconStyle = {background:"url (" + iconImg + ") no-repeat 100% 100%"};
+            var houseImg = self.props.images[parseInt(char.nodeNumber) - 1].houseUrl;
+            var houseImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].houseWidth;
+            var houseImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].houseHeight;
+            var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize: houseImgWidth +'px ' + houseImgHeight+'px'};
+
+            var iconImg = self.props.images[parseInt(char.nodeNumber) - 1].charIconUrl;
+            var iconImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].charIconWidth;
+            var iconImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].charIconHeight;
+            var iconStyle = {background:'url(' + iconImg + ') no-repeat', backgroundSize: iconImgWidth +'px ' + iconImgHeight+'px'};
+
             var ableToInteract = char.startNode ? "auto":"none";
             var blockStyle = {top: char.yPos+'px', left: char.xPos+'px', pointerEvents:ableToInteract};
+
             return(
                 <div className = "mission-connect-view-piece-block" style={blockStyle} key={index}>
                     <div className = "mission-connect-view-home" style={houseStyle}></div>
                     <div className = "mission-connect-view-icon" style={iconStyle}
                          id = {"MissionConnectIcon" + char.nodeNumber}
+                         onClick = {self.onIconClick}
                          visible = {char.startNode}
                          active  = {char.startNode}
-                         onClick = {this.onIconClick()}></div>
+                         ></div>
                 </div>
             )
         });
+
+        return pieces;
     },
 
     prepScoreObjColl: function(){
 
         var scoreObjColl = [];
-        for (var i = 0; i < self.props.gameData.networkGameNodes.length - 1; i++){ //minus chief
+
+        for (var i = 0; i < this.props.gameData.networkGameNodes.length - 1; i++){ //minus chief
             var scoreObject = {
                 attempts:0,
                 answered: false
@@ -93,21 +114,13 @@ var MissionConnectGameView = React.createClass({
     render: function() {
 
         var self = this;
-
+        var piecesContStyle = {zIndex:'100'};
         return (<div>
 
-                <MissionConnectInterviewView
-                    gameData = {self.props.gameData}
-                    images = {self.props.loadedImageColl}
-                    viewUpdate = {self.viewUpdate}
-                    activeNode = {self.state.activeNode}
-                    scoreObjColl = {self.state.scoreObjColl}
-                    showInterview = {self.state.showInterview}
-                    updateGameView = {self.updateGameView}
-                    updateScore = {self.updateScore}
-                />
 
-                <div className = "mission-connect-view-pieces-cont" id="missionConnectPiecesCont" >
+
+                <div className = "mission-connect-view-pieces-cont" id="missionConnectPiecesCont" style={piecesContStyle}>
+                    {self.renderPieces()}
                 </div>
             </div>
         )
