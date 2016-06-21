@@ -30,12 +30,11 @@ var MissionConnectGameView = React.createClass({
     },
 
     componentDidMount: function(){
-        console.log("In game...");
         this.renderPieces();
         this.prepScoreObjColl();
 
         //remove
-        this.setState({activeNode:1, showInterview:true});
+        //this.setState({activeNode:1, showInterview:true});
     },
 
     renderPieces: function(){
@@ -47,14 +46,14 @@ var MissionConnectGameView = React.createClass({
             //for (var key in self.props.images[parseInt(char.nodeNumber) - 1]) console.log(key + " -- " + self.props.images[parseInt(char.nodeNumber) - 1][key]);
 
             var houseImg = self.props.images[parseInt(char.nodeNumber) - 1].houseUrl;
-            var houseImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].houseWidth;
-            var houseImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].houseHeight;
-            var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize: houseImgWidth +'px ' + houseImgHeight+'px'};
+            //var houseImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].houseWidth;
+            //var houseImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].houseHeight;
+            var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize:'100% 100%'};
 
             var iconImg = self.props.images[parseInt(char.nodeNumber) - 1].charIconUrl;
-            var iconImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].charIconWidth;
-            var iconImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].charIconHeight;
-            var iconStyle = {background:'url(' + iconImg + ') no-repeat', backgroundSize: iconImgWidth +'px ' + iconImgHeight+'px'};
+            //var iconImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].charIconWidth;
+            //var iconImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].charIconHeight;
+            var iconStyle = {background:'url(' + iconImg + ') no-repeat', backgroundSize: '100% 100%'};
 
             var ableToInteract = char.startNode ? "auto":"none";
             var blockStyle = {top: char.yPos+'px', left: char.xPos+'px', pointerEvents:ableToInteract};
@@ -105,13 +104,18 @@ var MissionConnectGameView = React.createClass({
         }
     },
 
-    updateScore: function(update){
+    updateScore: function(updateColl){
         var self = this;
-        self.state.scoreObjColl[self.state.activeNode][update.key] = update.value;
+        var tempScoreColl = self.state.scoreObjColl;
+        var scoreObj = tempScoreColl[self.state.activeNode - 1];
+        for (var i = 0 ; i < updateColl.length; i++){
+            scoreObj[updateColl[i].property] = updateColl[i].value;
+        }
+        tempScoreColl[self.state.activeNode - 1] = scoreObj;
+        self.setState({scoreObjColl:tempScoreColl});
     },
 
     onIconClick: function(e){
-        console.log("Clicked on : " + e.target.id);
         this.setState({activeNode:parseInt(e.target.id.substring(18)), showInterview:true});
     },
 
