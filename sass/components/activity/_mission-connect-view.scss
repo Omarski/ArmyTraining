@@ -19,7 +19,7 @@
   left:0;
   width: 768px;
   height: 504px;
-  z-index:20;
+  z-index:5;
   overflow: hidden;
 
   .mission-connect-view-piece-block{
@@ -53,13 +53,11 @@
   }
 }
 
-//.mission-connect-view-popCont{
-//  display: block;
-//  width: 515px;
-//  min-height: 315px;
-//  background: #fff;
-//  height:auto;
-//  padding:20px;
+.mission-connect-view-popCont{
+  display: block;
+  background: #fff;
+  height:auto;
+
 
   //scenario - photo
   .mission-connect-view-popSenImgCont {
@@ -69,8 +67,12 @@
 
     .mission-connect-view-popSenImg {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 10px;
+      left:10px;
+      width:164px;
+      height:164px;
+      border: 1px solid #737373;
+      border-radius: 12px;
     }
 
     .mission-connect-view-popSenImgTitle {
@@ -97,6 +99,10 @@
         position: absolute;
         top: 0;
         left: 0;
+        width:92px;
+        height:92px;
+        border: 1px solid #737373;
+        border-radius: 15px;
       }
 
       .mission-connect-view-popIntImgTitle {
@@ -118,27 +124,25 @@
       margin-top:15px;
       width: 100px;
       height: 100px;
-
+      border: 1px solid #737373;
+      border-radius: 15px;
   }
 
    //scenario - text
   .mission-connect-view-popSenTextCont{
-    margin-left:15px;
+    margin-left:10px;
     float: left;
-    width: 300px;
+    width: 290px;
   }
 
    //interview - text
   .mission-connect-view-popIntTextCont{
-    margin-top:70px;
     width: 375px;
   }
 
   //feedback - text
-
   .mission-connect-view-popFeedbackTextQuote{
     float:left;
-    margin-top:70px;
     width: 350px;
     font-style: italic;
     font-weight: bold;
@@ -148,22 +152,21 @@
   .mission-connect-view-popFeedbackTextTitle{
     clear:left;
     margin-top:20px;
-    width: 60px;
     font-weight: bold;
-    font-size:30px;
+    font-size:17px;
   }
 
   .mission-connect-view-popFeedbackText{
-    margin-top:20px;
-    width: 450px;
-    font-weight: bold;
-    font-size:30px;
+    margin-top:5px;
+    width: 470px;
+    font-weight: normal;
+    font-size:14px;
   }
 
    //scenario - buttons
   .mission-connect-view-popSenBtnGrpCont{
     position: absolute;
-    bottom:0;
+    bottom:-20px;
     left:0;
     width:515px;
     height:60px;
@@ -175,14 +178,14 @@
       text-align: center;
 
       .mission-connect-view-popSenBtn{
-        float:left;
+        margin-right:10px;
       }
     }
   }
     //interview - button
     .mission-connect-view-popIntBtnGrpCont {
       position: absolute;
-      bottom: 0;
+      bottom:-20px;
       left: 0;
       width: 515px;
       height: 60px;
@@ -197,14 +200,14 @@
     }
 
     //feedback - button
-    .mission-connect-view-popReactBtnGrpCont {
+    .mission-connect-view-popFeedbackBtnGrpCont {
       position: absolute;
-      bottom: 0;
+      bottom:-20px;
       left: 0;
       width: 515px;
       height: 60px;
 
-      .mission-connect-view-popReactBtnCont {
+      .mission-connect-view-popFeedbackBtnCont {
         position: relative;
         margin-left: auto;
         margin-right: auto;
@@ -219,7 +222,7 @@
     margin:30px 20px 20px 20px;
 
     .mission-connect-view-popIntRadio{
-      display:block;
+      margin-right:10px;
     }
   }
-//}
+}

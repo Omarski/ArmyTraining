@@ -16,6 +16,7 @@ var MissionConnectGameView = React.createClass({
     propTypes: {
         gameData: PropTypes.object,
         images: PropTypes.array.isRequired,
+        mediaPath: PropTypes.string.isRequired,
         viewUpdate: PropTypes.func.isRequired
     },
 
@@ -29,9 +30,12 @@ var MissionConnectGameView = React.createClass({
     },
 
     componentDidMount: function(){
-
+        console.log("In game...");
         this.renderPieces();
         this.prepScoreObjColl();
+
+        //remove
+        this.setState({activeNode:1, showInterview:true});
     },
 
     renderPieces: function(){
@@ -103,7 +107,7 @@ var MissionConnectGameView = React.createClass({
 
     updateScore: function(update){
         var self = this;
-        self.state.scoreObjColl[self.state.activeNode].update.key = update.value;
+        self.state.scoreObjColl[self.state.activeNode][update.key] = update.value;
     },
 
     onIconClick: function(e){
@@ -114,12 +118,21 @@ var MissionConnectGameView = React.createClass({
     render: function() {
 
         var self = this;
-        var piecesContStyle = {zIndex:'100'};
         return (<div>
+            {self.state.showInterview ? <MissionConnectInterviewView
+                    gameData = {self.props.gameData}
+                    images = {self.props.images}
+                    mediaPath = {self.props.mediaPath}
+                    viewUpdate = {self.viewUpdate}
+                    activeNode = {self.state.activeNode}
+                    scoreObjColl = {self.state.scoreObjColl}
+                    showInterview = {self.state.showInterview}
+                    updateGameView = {self.updateGameView}
+                    updateScore = {self.updateScore}
+                    />:null}
 
 
-
-                <div className = "mission-connect-view-pieces-cont" id="missionConnectPiecesCont" style={piecesContStyle}>
+                <div className = "mission-connect-view-pieces-cont" id="missionConnectPiecesCont" >
                     {self.renderPieces()}
                 </div>
             </div>

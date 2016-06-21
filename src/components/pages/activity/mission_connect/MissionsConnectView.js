@@ -101,6 +101,7 @@ var MissionConnectView = React.createClass({
 
         var self = this;
         self.setState({mapReady:true});
+        //self.prepIntroPopup();
         console.log("Images loaded..");
     },
 
@@ -113,15 +114,37 @@ var MissionConnectView = React.createClass({
         var self = this;
     },
 
-    updateHudDisplay: function(){
+    prepIntroPopup: function(){
 
         var self = this;
-        switch(self.state.phase){
-            case "start":
-                self.setState({phase:"play", showHUD:true});
-                break;
-        }
+
+        var popupObj = {
+            id:"Intro",
+            onClickOutside: null,
+            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1, zIndex:'6'},
+
+            content: function(){
+
+                return(
+                    <div className="popup-view-content">
+                        <div className="popup-view-bodyText">
+                            {self.state.gameData.briefingText}
+                        </div>
+                        <div className="popup-view-buttonCont">
+                            <button type="button" className="btn btn-default"
+                                    onClick={self.onClosePopup}>Start</button>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+
+        var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
+        if (debriefAudio) self.playAudio({id:"missionConnectDebrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
+
 
     playAudio: function(audioObj){
         var self = this;
@@ -140,8 +163,11 @@ var MissionConnectView = React.createClass({
     },
 
     displayPopup: function(popupObj){
-
         this.setState({popupObj:popupObj});
+    },
+
+    onClosePopup: function(){
+        this.setState(({popupObj:null, audioObj:null}));
     },
 
     render: function() {
@@ -161,8 +187,18 @@ var MissionConnectView = React.createClass({
 
                 <div id="missionConnectViewBlock">
 
+                    {self.state.popupObj ?
+                        <PopupView
+                            id = {"missionConnectIntro"}
+                            popupStyle = {self.state.popupObj.popupStyle}
+                            onClickOutside = {self.state.popupObj.onClickOutside}
+                        >
+                            {self.state.popupObj.content()}
+                        </PopupView>:null}
+                    
                     {state.mapReady ? <MissionConnectGameView
                         gameData = {state.gameData}
+                        mediaPath = {state.mediaPath}
                         images = {state.loadedImageColl}
                         viewUpdate = {self.viewUpdate}
                     />:null}
