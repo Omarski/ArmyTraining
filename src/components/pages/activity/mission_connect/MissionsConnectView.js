@@ -2,6 +2,8 @@
  * Created by omaramer on 5/9/16.
  */
 var React = require('react');
+var MissionConnectGameView = require('./MissionConnectGameView');
+var tempJson = require('./testJson');
 var AudioPlayer = require('../../../widgets/AudioPlayer');
 var PopupView = require('./../../../widgets/PopupView');
 var PageHeader = require('../../../widgets/PageHeader');
@@ -28,7 +30,8 @@ function getPageState(props) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
-        data.gameData = JSON.parse(data.page.info.property[1].value);
+        //data.gameData = JSON.parse(data.page.info.property[1].value);
+        data.gameData = JSON.parse(testJson);
     }
 
     return data;
@@ -101,6 +104,7 @@ var MissionConnectView = React.createClass({
 
         var self = this;
         self.setState({mapReady:true});
+        console.log("Images loaded..");
     },
 
     viewUpdate: function(status){

@@ -101,6 +101,7 @@ var BookmarksView = React.createClass({
         var bookmarks = BookmarkStore.bookmarks();
         var items = "";
         console.log("bookmarks", bookmarks);
+        var items = null;
         if (bookmarks) {
             bookmarks.push({"title":"Bookmark Current Page"});
             if (this.state.isNav) {
