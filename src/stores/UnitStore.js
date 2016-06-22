@@ -43,7 +43,7 @@ function load(id) {
         // load saved units
         var storedUnits = store.get('units');
         if (storedUnits) {
-            _units[id].state = storedUnits[_units[id].data.xid];    // TODO maybe do an assign instead
+            _units[id].state = assign({}, _units[id].state, storedUnits[_units[id].data.xid]);
         }
     }
 }
