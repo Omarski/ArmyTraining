@@ -43,17 +43,16 @@ function getPageState(props) {
                     passedData = uttering.media[0].zid;
                 }else{
                     mediaType = "string";
-                    console.log("utterance", utterance);
-                    if(utterance.ezread.text != ""){
+                    if(utterance.ezread && utterance.ezread.text != ""){
                         displayField = "ezread";
                         passedData = utterance.ezread.text;
-                    }else if(utterance.translation.text != ""){
+                    }else if(utterance.translation && utterance.translation.text != ""){
                         displayField = "translation";
                         passedData = utterance.translation.text;
-                    }else if(utterance.native.text != ""){
+                    }else if(utterance.native && utterance.native.text != ""){
                         displayField = "native";
                         passedData = utterance.native.text;
-                    }else{
+                    }else if (utterance.phonetic && utterance.phonetic.text != ""){
                         displayField = "phonetic";
                         passedData = utterance.phonetic.text;
                     }
