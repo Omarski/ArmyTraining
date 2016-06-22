@@ -53,6 +53,28 @@
   }
 }
 
+//Progress
+.mission-connect-view-charListCont{
+  position: absolute;
+  width:120px;
+  height:150px;
+  top:403px;
+  right:5px;
+  padding:8px;
+  z-index:2;
+  font-size:15px;
+}
+
+.mission-connect-view-meterCont{
+  position: absolute;
+  width:112px;
+  height:21px;
+  top:65px;
+  right:3px;
+  z-index:2;
+}
+
+//popup quiz
 .mission-connect-view-popCont{
   display: block;
   background: #fff;
@@ -146,7 +168,8 @@
     width: 350px;
     font-style: italic;
     font-weight: bold;
-    font-size:16px;
+    font-size:14px;
+    line-height:16px;
   }
 
   .mission-connect-view-popFeedbackTextTitle{

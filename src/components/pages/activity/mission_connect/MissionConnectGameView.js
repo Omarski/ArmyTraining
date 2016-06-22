@@ -1,6 +1,8 @@
 var React = require('react');
 var PropTypes  = React.PropTypes;
 var MissionConnectInterviewView = require('./MissionConnectInterviewView');
+var MissionConnectProgressView = require('./MissionConnectProgressView');
+
 var MissionConnectGameView = React.createClass({
 
     
@@ -9,7 +11,9 @@ var MissionConnectGameView = React.createClass({
         return {
             activeNode:null,
             showInterview:false,
-            scoreObjColl:[]
+            scoreObjColl:[],
+            charList:[],
+            wrongAttempts:0
         };
     },
 
@@ -32,9 +36,6 @@ var MissionConnectGameView = React.createClass({
     componentDidMount: function(){
         this.renderPieces();
         this.prepScoreObjColl();
-
-        //remove
-        //this.setState({activeNode:1, showInterview:true});
     },
 
     renderPieces: function(){
@@ -43,29 +44,25 @@ var MissionConnectGameView = React.createClass({
         var chars = self.props.gameData.networkGameNodes;
 
         var pieces = chars.map(function(char,index){
-            //for (var key in self.props.images[parseInt(char.nodeNumber) - 1]) console.log(key + " -- " + self.props.images[parseInt(char.nodeNumber) - 1][key]);
 
             var houseImg = self.props.images[parseInt(char.nodeNumber) - 1].houseUrl;
-            //var houseImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].houseWidth;
-            //var houseImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].houseHeight;
             var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize:'100% 100%'};
 
             var iconImg = self.props.images[parseInt(char.nodeNumber) - 1].charIconUrl;
-            //var iconImgWidth = self.props.images[parseInt(char.nodeNumber) - 1].charIconWidth;
-            //var iconImgHeight = self.props.images[parseInt(char.nodeNumber) - 1].charIconHeight;
             var iconStyle = {background:'url(' + iconImg + ') no-repeat', backgroundSize: '100% 100%'};
 
             var ableToInteract = char.startNode ? "auto":"none";
-            var blockStyle = {top: char.yPos+'px', left: char.xPos+'px', pointerEvents:ableToInteract};
+            var visible = char.startNode? "1":"0";
+            if (char.endNode) visible = 0.4;
+            var blockStyle = {top: char.yPos+'px', left: char.xPos+'px',
+                pointerEvents:ableToInteract, opacity:visible};
 
             return(
-                <div className = "mission-connect-view-piece-block" style={blockStyle} key={index}>
+                <div className = "mission-connect-view-piece-block" style={blockStyle} id={"missionConnectViewPieceBlock"+char.nodeNumber} key={index}>
                     <div className = "mission-connect-view-home" style={houseStyle}></div>
                     <div className = "mission-connect-view-icon" style={iconStyle}
                          id = {"MissionConnectIcon" + char.nodeNumber}
                          onClick = {self.onIconClick}
-                         visible = {char.startNode}
-                         active  = {char.startNode}
                          ></div>
                 </div>
             )
@@ -81,6 +78,7 @@ var MissionConnectGameView = React.createClass({
         for (var i = 0; i < this.props.gameData.networkGameNodes.length - 1; i++){ //minus chief
             var scoreObject = {
                 attempts:0,
+                allAttempts:0,
                 answered: false
             };
 
@@ -97,10 +95,14 @@ var MissionConnectGameView = React.createClass({
 
     updateGameView: function(update){
 
-        switch (update){
+        switch (update.task){
             case "closePop":
                 this.setState({showInterview:false});
                 break;
+            case "updateList":
+                var list = this.state.charList;
+                list.push(update.value);
+                this.setState({charList:list});
         }
     },
 
@@ -115,6 +117,11 @@ var MissionConnectGameView = React.createClass({
         self.setState({scoreObjColl:tempScoreColl});
     },
 
+    updateWrongAttempts: function(){
+        var wrongAttempts = this.state.wrongAttempts;
+        this.setState({wrongAttempts:wrongAttempts + 1});
+    },
+
     onIconClick: function(e){
         this.setState({activeNode:parseInt(e.target.id.substring(18)), showInterview:true});
     },
@@ -123,7 +130,14 @@ var MissionConnectGameView = React.createClass({
 
         var self = this;
         return (<div>
-            {self.state.showInterview ? <MissionConnectInterviewView
+
+                <MissionConnectProgressView
+                    mediaPath = {self.props.mediaPath}
+                    charList  = {self.state.charList}
+                    wrongAttempts = {self.state.wrongAttempts}
+                />
+
+                {self.state.showInterview ? <MissionConnectInterviewView
                     gameData = {self.props.gameData}
                     images = {self.props.images}
                     mediaPath = {self.props.mediaPath}
@@ -133,7 +147,8 @@ var MissionConnectGameView = React.createClass({
                     showInterview = {self.state.showInterview}
                     updateGameView = {self.updateGameView}
                     updateScore = {self.updateScore}
-                    />:null}
+                    updateWrongAttempts = {self.updateWrongAttempts}
+                />:null}
 
 
                 <div className = "mission-connect-view-pieces-cont" id="missionConnectPiecesCont" >

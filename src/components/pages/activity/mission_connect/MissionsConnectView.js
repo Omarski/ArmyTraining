@@ -74,19 +74,32 @@ var MissionConnectView = React.createClass({
                 loadedObj[key].src = imageColl[i][key];
                 loadedObj[key].onload = self.loadCounter;
                 loadedObj[key+"Url"] = imageColl[i][key];
-                loadedObj[key+"Width"] = loadedObj[key].width;
-                loadedObj[key+"Height"] = loadedObj[key].height;
+                //loadedObj[key+"Width"] = loadedObj[key].width;
+                //loadedObj[key+"Height"] = loadedObj[key].height;
             }
 
 
             loadedImageColl.push(loadedObj);
         }
 
+        //load bg
         var backgroundMap = new Image();
         backgroundMap.src = self.state.mediaPath + self.state.gameData.backgroundImageName;
         backgroundMap.onload = self.loadCounter;
 
-        self.setState({totalImages:(imageColl.length * 4) + 1, loadedImageColl:loadedImageColl}); //plus background img
+        //load meter
+        var meterColl = ["METER_6-0_01.png","METER_6-1_01.png",
+                        "METER_6-2_01.png","METER_6-3_01.png",
+                        "METER_6-4_01.png","METER_6-5_01.png",
+                        "METER_6-6_01.png"];
+
+        for (var x = 0; x < meterColl.length; x++){
+            var meterPiece = new Image();
+            meterPiece.src = self.state.mediaPath + meterColl[x];
+            meterPiece.onload = self.loadCounter;
+        }
+
+        self.setState({totalImages:(imageColl.length * 4) + 1 + 7, loadedImageColl:loadedImageColl});
     },
 
     loadCounter: function(){
@@ -102,7 +115,6 @@ var MissionConnectView = React.createClass({
         var self = this;
         self.setState({mapReady:true});
         //self.prepIntroPopup();
-        console.log("Images loaded..");
     },
 
     viewUpdate: function(status){

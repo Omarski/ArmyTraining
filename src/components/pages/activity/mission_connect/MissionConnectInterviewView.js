@@ -40,27 +40,54 @@ var MissionConnectInterviewView = React.createClass({
     },
 
     onSubmit: function(){
+
         var self = this;
-        var scoreObj = this.props.scoreObjColl[this.props.activeNode - 1];
+        var scoreObj = self.props.scoreObjColl[self.props.activeNode - 1];
         var correct = $('input[name="missionConnectQuizRadio"]:checked').val();
         var choiceNum = parseInt($('input[name="missionConnectQuizRadio"]:checked').attr('id'));
-        var attempt = scoreObj.attempts < 3 ? scoreObj.attempts + 1 : 3;
+        var attempt = scoreObj.attempts < 2 ? scoreObj.attempts + 1 : 0;
+        var attempts = scoreObj.allAttempts + 1;
+        var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
 
-        if (correct) {
-            this.props.updateScore([{property:'answered', value:true},
+        if (correct === "true") {
+
+            var iconCheckImg = self.props.images[parseInt(self.props.activeNode) - 1].charIconCheckUrl;
+            self.props.updateScore([{property:'answered', value:true},
                                     {property:'attempts', value:attempt},
-                                    {property:'choiceNum', value:choiceNum}
-            ]);
+                                    {property:'allAttempts', value:attempts},
+                                    {property:'choiceNum', value:choiceNum}]);
+            
+            $("#MissionConnectIcon"+self.props.activeNode).css({
+                background: 'url('+iconCheckImg+') no-repeat 100% 100%', pointerEvents:'none'
+            });
+
+            if (char.gameObjective){
+                self.props.updateGameView({task:"updateList", value:char.occupation});
+            }
+
             setTimeout(function(){self.renderFeedback();},250);
+
         }else{
-            this.props.updateScore([{property:'attempts', value:attempt}]);
-            setTimeout(function(){self.self.renderFeedback();},250);
+            self.props.updateScore([{property:'attempts', value:attempt},
+                                    {property:'allAttempts', value:attempts},
+                                    {property:'choiceNum', value:choiceNum}]);
+            setTimeout(function(){self.renderFeedback();},250);
         }
     },
 
     onClosePop: function(){
-        this.props.updateGameView("closePop");
-        this.setState({popState:"scenario"});
+
+        this.props.updateGameView({task:"closePop", value:null});
+
+        var scoreObj = this.props.scoreObjColl[this.props.activeNode - 1];
+        var connectNodes = this.props.gameData.networkGameNodes[this.props.activeNode - 1].connectedNodes;
+
+        if (scoreObj.answered) {
+            for (var i=0; i < connectNodes.length; i++){
+                var node = $("#missionConnectViewPieceBlock"+connectNodes[i]);
+                $(node).animate({'opacity':'1'},500).css({'pointerEvents':'auto'});
+            }
+        }
     },
 
     renderPopContent: function(){
@@ -107,7 +134,7 @@ var MissionConnectInterviewView = React.createClass({
                         <div className = "mission-connect-view-popSenImgTitle"></div>
                     </div>
 
-                    <div className = "mission-connect-view-popSenTextCont">{char.interactionWindowText}</div>
+                    <div className = "mission-connect-view-popSenTextCont" dangerouslySetInnerHTML={{__html:char.interactionWindowText}}></div>
 
                     <div className = "mission-connect-view-popSenBtnGrpCont">
                         <div className = "mission-connect-view-popSenBtnCont">
@@ -132,9 +159,7 @@ var MissionConnectInterviewView = React.createClass({
                         <div className = "mission-connect-view-popIntImgTitle"></div>
                     </div>
 
-                    <div className = "mission-connect-view-popIntTextCont">
-                        {questionObj.question}
-                    </div>
+                    <div className = "mission-connect-view-popIntTextCont" dangerouslySetInnerHTML={{__html:questionObj.question}}></div>
 
                     <div className="mission-connect-view-popQuizCont">
                         {questionObj.answers}
@@ -162,7 +187,14 @@ var MissionConnectInterviewView = React.createClass({
         var imgFeedStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'103px 103px'};
         var questionTemplColl = self.state.questionTemplColl;
         var scoreObj = self.props.scoreObjColl[self.props.activeNode - 1];
-        var questionObj = questionTemplColl[scoreObj.attempts - 1];
+
+        if (scoreObj.attempts === 0){
+            var questionObj = questionTemplColl[0];
+        }else{
+            var questionObj = questionTemplColl[scoreObj.attempts - 1];
+        }
+
+
 
         //console.log("answered")
         var feedback = function(){
@@ -178,9 +210,7 @@ var MissionConnectInterviewView = React.createClass({
                     <div className = "mission-connect-view-popFeedbackTextTitle">
                         {scoreObj.answered ? gameData.feedbackCorrectTitle: gameData.feedbackIncorrectTitle}</div>
 
-                    <div className = "mission-connect-view-popFeedbackText">
-                        {questionObj.feedback[scoreObj.choiceNum]}
-                    </div>
+                    <div className = "mission-connect-view-popFeedbackText" dangerouslySetInnerHTML={{__html:questionObj.feedback[scoreObj.choiceNum]}}></div>
 
                     <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                         <div className = "mission-connect-view-popFeedbackBtnCont">
