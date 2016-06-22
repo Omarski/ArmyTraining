@@ -6,7 +6,9 @@
     "tooltipNext": "Next",
     "tooltipPrevious": "Previous",
     "tooltipIndexExpand": "Open Index",
-    "tooltipIndexCollapse": "Close Index"
+    "tooltipIndexCollapse": "Close Index",
+    "lblRequired": "Required",
+    "lblOptional": "Optional"
   },
   "header": {
     "tooltipLogo": "Virtual Culture Awareness Trainer",

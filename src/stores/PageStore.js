@@ -308,8 +308,8 @@ function load(data) {
             PageActions.complete(result);
         });
     } else {
-        BookmarkActions.destroy(); // if the data directory has changed, it can mess up the bookmark situation.  force remove bookmark and alert user
-        alert("An error has occurred, please reload this browser");
+        //BookmarkActions.destroy(); // if the data directory has changed, it can mess up the bookmark situation.  force remove bookmark and alert user
+        //alert("An error has occurred, please reload this browser");
     }
 }
 

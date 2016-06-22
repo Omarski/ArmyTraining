@@ -26,7 +26,6 @@ function load() {
 
     _loading = true;
     $.getJSON("data/content/toc.json", function(result) {
-
         BookActions.create(result.book);
         var books = BookStore.getAll();
 
