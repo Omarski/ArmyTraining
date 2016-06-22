@@ -90,6 +90,15 @@ var UnitActions = {
         AppDispatcher.dispatch({
             actionType: UnitConstants.UNIT_DESTROY_COMPLETED
         });
+    },
+
+    /**
+     * Resets all unit saved data
+     */
+    reset: function() {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_RESET
+        });
     }
 
 };

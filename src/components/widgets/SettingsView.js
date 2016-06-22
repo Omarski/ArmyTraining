@@ -12,6 +12,7 @@ var Slider = require('../../components/widgets/Slider');
 var BookmarkActions = require('../../actions/BookmarkActions');
 var PageActions = require('../../actions/PageActions');
 var SettingsActions = require('../../actions/SettingsActions');
+var UnitActions = require('../../actions/UnitActions');
 
 function getSettingsState() {
     var settings = store.get('settings') || {};
@@ -67,6 +68,7 @@ var SettingsView = React.createClass({
 
     resetProgress: function() {
         PageActions.reset();
+        UnitActions.reset();
     },
 
     resetSettings: function() {
