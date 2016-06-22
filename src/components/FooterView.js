@@ -6,6 +6,7 @@ var PageActions = require('../actions/PageActions');
 var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
+var LocalizationStore = require('../stores/LocalizationStore');
 
 
 function getUnitState(expanded) {
@@ -16,8 +17,8 @@ function getUnitState(expanded) {
     var currentUnitIndex = 0;
     var currentPageIndex = 0;
 
-
-
+    var requiredUnits = [];
+    var optionalUnits = [];
 
     for (var key in units) {
         totalUnits++;
@@ -26,6 +27,8 @@ function getUnitState(expanded) {
         var unitCompleted = true;
         var completedCount = 0;
         var totalPages = 0;
+
+        console.log("unit title " + unit.data.title);
 
         if (unit.data.chapter) {
             for (var i = 0; i < unit.data.chapter.length; i++) {
@@ -109,23 +112,40 @@ function getUnitState(expanded) {
                 totalUnitsComplete++;
             }
 
-            data.push(
-                {
-                    unitExpandedCls: unitExpandedCls,
-                    expandCollapseIconCls: expandCollapseIconCls,
-                    unitCls: unitCls,
-                    unit: unit,
-                    completed: unitCompleted,
-                    title: unit.data.title,
-                    percent: Math.round((completedCount / totalPages) * 100),
-                    rows: chapters
-                }
-            );
+            if(unit.state.required) {
+                requiredUnits.push(
+                    {
+                        unitExpandedCls: unitExpandedCls,
+                        expandCollapseIconCls: expandCollapseIconCls,
+                        unitCls: unitCls,
+                        unit: unit,
+                        completed: unitCompleted,
+                        title: unit.data.title,
+                        percent: Math.round((completedCount / totalPages) * 100),
+                        rows: chapters
+                    }
+                );
+            } else {
+                optionalUnits.push(
+                    {
+                        unitExpandedCls: unitExpandedCls,
+                        expandCollapseIconCls: expandCollapseIconCls,
+                        unitCls: unitCls,
+                        unit: unit,
+                        completed: unitCompleted,
+                        title: unit.data.title,
+                        percent: Math.round((completedCount / totalPages) * 100),
+                        rows: chapters
+                    }
+                );
+
+            }
         }
     }
 
     return {
-        data: data,
+        requiredUnits: requiredUnits,
+        optionalUnits: optionalUnits,
         currentUnitIndex: currentUnitIndex,
         totalUnits: totalUnits,
         currentPageIndex: currentPageIndex,
@@ -213,53 +233,85 @@ var FooterView = React.createClass({
         window.location.hash = "#" + PageStore.chapter().title + PageStore.page().title;
         this.setState(getUnitState(!this.state.expanded));
     },
-    render: function() {
+
+    /*
+     <table className="panel-title table table-condensed main-footer-accordian-table" onClick={self.panelHeaderClick.bind(self, index)}>
+     <tr className={item.unitCls}>
+     <td>
+     <div className="main-footer-table-icon-col">
+     <CheckIcon checked={item.completed} />
+     </div>
+     </td>
+     <td>
+     <div className="main-footer-table-icon-col">
+     <a role="button" data-toggle="collapse" data-parent={'#accordion' + index} href={'#collapse' + index} aria-expanded="true" aria-controls={'collapse' + index}>
+     <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
+     </a>
+     </div>
+     </td>
+     <td>
+     <h4>{item.title}</h4>
+     </td>
+     <td width="100%">
+     <div className="dots">&nbsp;</div>
+     </td>
+     <td width="55">
+     <h4>{item.completed ? "Complete" : ""}</h4>
+     </td>
+     <td>
+     <div className="main-footer-table-icon-col">
+     <h4>{item.percent}%</h4>
+     </div>
+     </td>
+     </tr>
+     </table>
+
+     <ul className="list-group">
+     <li className="list-group-item" >
+     <span className="badge">14</span>
+
+     </li>
+     </ul>
+
+
+
+     */
+
+    explorerItems: function(items) {
         var self = this;
-        var items = this.state.data.map(function(item, index) {
-            return (
-                <div className="panel-group main-footer-accordian" id={'accordion' + index} role="tablist" aria-multiselectable="true" key={index}>
-                    <div className="panel panel-default">
-                        <div className="panel-heading" role="tab" id={'heading' + index} >
-                            <table className="panel-title table table-condensed main-footer-accordian-table" onClick={self.panelHeaderClick.bind(self, index)}>
-                                <tr className={item.unitCls}>
-                                    <td>
-                                        <div className="main-footer-table-icon-col">
-                                            <CheckIcon checked={item.completed} />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="main-footer-table-icon-col">
-                                            <a role="button" data-toggle="collapse" data-parent={'#accordion' + index} href={'#collapse' + index} aria-expanded="true" aria-controls={'collapse' + index}>
-                                                <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h4>{item.title}</h4>
-                                    </td>
-                                    <td width="100%">
-                                        <div className="dots">&nbsp;</div>
-                                    </td>
-                                    <td width="55">
-                                        <h4>{item.completed ? "Complete" : ""}</h4>
-                                    </td>
-                                    <td>
-                                        <div className="main-footer-table-icon-col">
-                                            <h4>{item.percent}%</h4>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id={'collapse' + index} className={item.unitExpandedCls} role="tabpanel" aria-labelledby={'heading' + index}>
-                            <div className="panel-body main-footer-panel-body">
-                                <TOCDetails data={item.rows} unit={item.unit}/>
+        var html = (<div></div>);
+        if (items) {
+            html = items.map(function(item, index) {
+                return (
+                    <div className="panel-group main-footer-accordian" id={'accordion' + index} role="tablist" aria-multiselectable="true" key={index}>
+                        <div className="panel panel-default">
+                            <div className="panel-heading" role="tab" id={'heading' + index} onClick={self.panelHeaderClick.bind(self, index)}>
+                                <a role="button" data-toggle="collapse" data-parent={'#accordion' + index} href={'#collapse' + index} aria-expanded="true" aria-controls={'collapse' + index}>
+                                    <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
+                                </a>
+                                {item.title}
+                            </div>
+                            <div id={'collapse' + index} className={item.unitExpandedCls} role="tabpanel" aria-labelledby={'heading' + index}>
+                                <div className="panel-body main-footer-panel-body">
+                                    <TOCDetails data={item.rows} unit={item.unit}/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )
-        });
+                )
+            });
+        }
+        return html;
+
+    },
+
+    render: function() {
+        var self = this;
+        if (!this.state.requiredUnits) {
+            return (<div></div>);
+        }
+        var requiredItems = this.explorerItems(this.state.requiredUnits);
+        var optionalItems = this.explorerItems(this.state.optionalUnits);
 
         var footerElements = "";
         if (this.state.contentLoaded) {
@@ -294,7 +346,6 @@ var FooterView = React.createClass({
         return (
             <footer className={this.state.expanded ? "footer main-footer expanded" : "footer main-footer"}>
                 <div className="container-fluid footer-nav">
-
                     <div id="mainFooterPageNav" className="row main-footer-page-nav">
                         <div className={this.state.expanded ? "container-fluid main-footer-page-nav-buttons-expanded" : "container-fluid"}>
                             <div className="row main-footer-page-nav-row">
@@ -303,14 +354,16 @@ var FooterView = React.createClass({
                         </div>
                         <div className={this.state.expanded ? "main-footer-tab-container-expanded" : "main-footer-tab-container"}>
                             <ul className="nav nav-tabs nav-justified main-footer-tab" role="tablist">
-                                {/*    <li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">Home</a></li>
-                                <li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">Profile</a></li>
-                           */} </ul>
+                                <li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblRequired")}</a></li>
+                                <li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblOptional")}</a></li>
+                           </ul>
                             <div className="tab-content main-footer-tab-content">
                                 <div role="tabpanel" className="tab-pane active main-footer-tab-pane" id="mainFooterLessonsTab">
-                                    {items}
+                                    {requiredItems}
                                 </div>
-                                <div role="tabpanel" className="tab-pane main-footer-tab-pane" id="mainFooterCoursesTab">...</div>
+                                <div role="tabpanel" className="tab-pane main-footer-tab-pane" id="mainFooterCoursesTab">
+                                    {optionalItems}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -326,10 +379,10 @@ var TOCDetails = React.createClass({
         var unit = this.props.unit;
         var items = this.props.data.map(function(item, index) {
             return (
-                <div key={index}>
+            <ul key={index} className="list-group main-footer-list-group">
                 <TOCChapterRow item={item} chapter={item} unit={unit}/>
                 <TOCPages data={item.data.pages} chapter={item} unit={unit}/>
-                    </div>
+            </ul>
             );
         });
 
@@ -350,32 +403,19 @@ var TOCChapterRow = React.createClass({
         if (PageStore.chapter() && this.props.item.data.xid === PageStore.chapter().xid) {
             cls += ' main-footer-accordian-table-row-active';
         }
+        /*
+         <span>{this.props.item.completed ? "Complete" : ""}</span>
+         <span>{this.props.item.percent}%</span>
+         */
         return (
-            <table
-                onClick={this.loadPage.bind(this, this.props.item.data.pages[0], this.props.chapter, this.props.unit)}
-                className="panel-title table table-condensed main-footer-accordian-table">
-                <tr className={cls}>
-                    <td>
-                        <div className="main-footer-table-icon-col">
-                            <CheckIcon completed={this.props.item.completed} />
-                        </div>
-                    </td>
-                    <td>
-                        <h4>{this.props.item.title}</h4>
-                    </td>
-                    <td width="100%">
-                        <div className="dots">&nbsp;</div>
-                    </td>
-                    <td width="55">
-                        <h4>{this.props.item.completed ? "Complete" : ""}</h4>
-                    </td>
-                    <td>
-                        <div className="main-footer-table-icon-col">
-                            <h4>{this.props.item.percent}%</h4>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <li className="list-group-item" onClick={this.loadPage.bind(this, this.props.item.data.pages[0], this.props.chapter, this.props.unit)}>
+            <span className="badge">
+                <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </span>
+            <CheckIcon completed={this.props.item.completed} />
+
+            {this.props.item.title}
+        </li>
         );
     }
 });
@@ -431,34 +471,13 @@ var TOCPageRow = React.createClass({
         }
 
         return (
-            <div>
-                <table
-                    onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}
-                    className="panel-title table table-condensed table-hover main-footer-accordian-table main-footer-accordian-table-pages">
-                    <tr className={cls}>
-                        <td>
-                            <div className="main-footer-table-icon-col">
-                                <CheckIcon completed={true} />
-                            </div>
-                        </td>
-                        <td>
-                            <div id={this.props.chapter.title + this.props.item.title}></div>
-                            <h4>{this.props.item.title}</h4>
-                        </td>
-                        <td width="100%">
-                            <div className="dots">&nbsp;</div>
-                        </td>
-                        <td width="55">
-                            <h4></h4>
-                        </td>
-                        <td>
-                            <div className="main-footer-table-icon-col">
-                                <h4>&nbsp;</h4>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+            <li className="list-group-item" onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>
+                <span className="badge">
+                    <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
+                </span>
+                {this.props.item.title}
+            </li>
+
         );
     }
 });
