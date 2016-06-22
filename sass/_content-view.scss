@@ -1,7 +1,7 @@
 
 .main-content {
   position: fixed;
-  top: 71px;
+  top: 66px;
   left: 0px;
   right: 0px;
   bottom: 41px;
@@ -12,4 +12,10 @@
   margin-right: inherit;
   margin-left: inherit;
   width: inherit;
+}
+
+@media screen and (max-width: 767px) {
+  .main-content {
+    top: 40px;
+  }
 }

@@ -7,6 +7,13 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var _units = {};
+var _requiredExists = false;
+
+// default unit state values
+var _defaultState = {
+    complete: false,
+    required: false
+};
 
 /**
  * Create a UNIT item.
@@ -17,12 +24,66 @@ function create(data) {
     // server-side storage.
     // Using the current timestamp + random number in place of a real id.
     var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+
     _units[id] = {
         id: id,
-        complete: false,
         data: data,
-        required: false
+        state: _defaultState
     };
+
+    // load any previous data
+    load(id);
+}
+
+/**
+ * Load state unit data by id
+ * @param id
+ */
+function load(id) {
+    if (_units[id] && _units[id].data && _units[id].data.xid && _units[id].state) {
+        // load saved units
+        var storedUnits = store.get('units');
+        if (storedUnits) {
+            _units[id].state = assign({}, _units[id].state, storedUnits[_units[id].data.xid]);
+            if (_units[id].state.required) {
+                _requiredExists = true;
+            }
+        }
+    }
+}
+
+/**
+ * Save unit state data by id
+ * @param id
+ */
+function save(id) {
+    if (_units[id] && _units[id].data && _units[id].data.xid && _units[id].state) {
+        // load saved units
+        var storedUnits = store.get('units');
+        if (!storedUnits) {
+            storedUnits = {};
+        }
+
+        // update unit data
+        storedUnits[_units[id].data.xid] = _units[id].state;
+
+        // save unit
+        store.set('units', storedUnits);
+    }
+}
+
+/**
+ * Reset all unit state data to default state data
+ */
+function reset() {
+    _requiredExists = false;
+    // remove saved data
+    store.remove('units');
+
+    // iterate over units and reset state
+    for (var id in _units) {
+        _units[id].state = _defaultState;
+    }
 }
 
 /**
@@ -32,7 +93,15 @@ function create(data) {
  *     updated.
  */
 function update(id, updates) {
-    _units[id] = assign({}, _units[id], updates);
+    if (_units[id] && _units[id].state) {
+        _units[id].state = assign({}, _units[id].state, updates);
+
+        if (_units[id].state.required) {
+            _requiredExists = true;
+        }
+        // save unit data
+        save(id);
+    }
 }
 
 /**
@@ -59,13 +128,47 @@ function destroy(id) {
  */
 function destroyCompleted() {
     for (var id in _units) {
-        if (_units[id].complete) {
+        if (_units[id].state && _units[id].state.complete === true) {
             destroy(id);
         }
     }
 }
 
+/**
+ * Marks a units chapter as complete
+ * @param unitId
+ * @param chapterId
+ */
+function markUnitChapterComplete(unitId, chapterId) {
+    // find unit by id
+    var unit = _units[unitId];
+    if (unit && unit.data && unit.data.chapter) {
+        var chapterLength = unit.data.chapter.length;
+        while(chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+            // check for matching chapter id
+            if (chapter.xid === chapterId) {
+                var state = {};
+                // get state
+                if (chapter.state) {
+                    state = chapter.state;
+                }
+
+                // mark it as complete
+                chapter.state = assign({}, state, {complete: true});
+
+                break;
+            }
+        }
+    }
+}
+
 var UnitStore = assign({}, EventEmitter.prototype, {
+
+    requiredExists: function() {
+        return _requiredExists;
+    },
+
     create:function(data) {
         create(data);
     },
@@ -76,7 +179,7 @@ var UnitStore = assign({}, EventEmitter.prototype, {
      */
     areAllComplete: function() {
         for (var id in _units) {
-            if (!_units[id].complete) {
+            if (_units[id].state && !_units[id].state.complete) {
                 return false;
             }
         }
@@ -89,6 +192,34 @@ var UnitStore = assign({}, EventEmitter.prototype, {
      */
     getAll: function() {
         return _units;
+    },
+
+    /**
+     * Returns and order list of chapter ids contained in the unit.
+     * @param id - id of unit
+     * @returns {Array} - Returns empty array if no chapter is found.
+     */
+    getChapterIdsInUnit: function(id) {
+        var chapterIds = [];
+        if (_units[id] && _units[id].data && _units[id].data.chapter) {
+            var chapters = _units[id].data.chapter;
+            for (var chapterIndex in chapters) {
+                chapterIds.push(chapters[chapterIndex].xid);
+            }
+        }
+        return chapterIds;
+    },
+
+    /**
+     * Checks if the state property required is true
+     * @param id
+     * @returns {boolean}
+     */
+    isRequired: function(id) {
+        if (_units[id] && _units[id].state && (_units[id].state.required === true)) {
+            return true;
+        }
+        return false;
     },
 
     emitChange: function() {
@@ -115,6 +246,10 @@ AppDispatcher.register(function(action) {
     var text;
 
     switch(action.actionType) {
+        case UnitConstants.UNIT_CHAPTER_COMPLETE:
+            markUnitChapterComplete(action.id, action.chapterId);
+            break;
+
         case UnitConstants.UNIT_CREATE:
 
             if (text !== '') {
@@ -155,10 +290,15 @@ AppDispatcher.register(function(action) {
             destroyCompleted();
             UnitStore.emitChange();
             break;
+
         case UnitConstants.UNIT_LOAD_COMPLETE:
             UnitStore.emitChange();
             break;
 
+        case UnitConstants.UNIT_RESET:
+            reset();
+            UnitStore.emitChange();
+            break;
 
         default:
         // no op

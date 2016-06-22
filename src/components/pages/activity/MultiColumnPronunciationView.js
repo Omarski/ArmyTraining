@@ -58,7 +58,9 @@ function getPageState(props) {
     var colElementPlayableState = [];
     var isColElementPlaying = [];
     var colElementRecordingState = [];
-    for(var i=0; i<data.page.colTitle.length; i++){
+    for(var i=0; i<data.title.length; i++){
+        // the above line was previously the line below. David changed it on 6.14.16 to fix a bug on Lesson 7/18 Page 14/145 (Practice 4)
+        //for(var i=0; i<data.page.colTitle.length; i++){
         data.cols.push([]);
         isColElementCorrect.push([]);
         colElementPlayableState.push([]);

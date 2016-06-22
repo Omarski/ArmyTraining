@@ -48,10 +48,9 @@ var ReferenceView = React.createClass({
     },
 
     openModal: function(){
+        var self = this;
         this.setState({ showModal: !this.state.showModal });
     },
-
-
     handleSelect: function(eventKey, e) {
         if(typeof(eventKey) === "object"){
             /* eventKey === "object" means you selected a drop-down menu sub-item and the event key
@@ -89,7 +88,6 @@ var ReferenceView = React.createClass({
     componentDidMount: function() {
         ReferenceStore.addChangeListener(this._onReferenceChange);
     },
-
     render: function() {
         var self = this;
         var state = self.state;
@@ -233,5 +231,9 @@ var ReferenceView = React.createClass({
         }
     }
 });
+
+ReferenceView.propTypes = {
+
+}
 
 module.exports = ReferenceView;

@@ -14,6 +14,30 @@ var UnitActions = {
     },
 
     /**
+     * Mark unit with given id as complete
+     * @param unitId
+     */
+    markUnitComplete: function(unitId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_COMPLETE,
+            id: unitId
+        });
+    },
+
+    /**
+     * Marks chapter in a unit complete
+     * @param unitId
+     * @param chapterId
+     */
+    markUnitChapterComplete: function(unitId, chapterId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_CHAPTER_COMPLETE,
+            id: unitId,
+            chapterId: chapterId
+        });
+    },
+
+    /**
      * Mark unit with given id as required
      * @param (string) unitId - id of unit to mark as required
      */
@@ -65,6 +89,15 @@ var UnitActions = {
     destroyCompleted: function() {
         AppDispatcher.dispatch({
             actionType: UnitConstants.UNIT_DESTROY_COMPLETED
+        });
+    },
+
+    /**
+     * Resets all unit saved data
+     */
+    reset: function() {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_RESET
         });
     }
 

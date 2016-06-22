@@ -5,6 +5,7 @@ var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
 var LocalizationStore = require('../stores/LocalizationStore');
 var NotificationActions = require('../actions/NotificationActions');
+var BookmarksView = require('../components/BookmarksView');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
@@ -101,19 +102,10 @@ var BreadcrumbsView = React.createClass({
     render: function() {
 
         var self = this;
-        var bookmarks = BookmarkStore.bookmarks();
-        var items = "";
-        if (bookmarks) {
-            items = bookmarks.map(function(item) {
-                return (<ListGroupItem>
-                    <a href="#" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</a>
-                </ListGroupItem>)
-            });
-        }
 
 
         var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
-            <ListGroup>
+            <ListGroup key="bookmarkbreadcrumbsbutton">
                 <Button
                     id="breadcrumbsButton"
                     type="button"
@@ -124,7 +116,7 @@ var BreadcrumbsView = React.createClass({
                 </Button>
             </ListGroup>
             <ListGroup>
-                {items}
+                <BookmarksView isNav={false}/>
             </ListGroup>
         </Popover>);
 
@@ -145,14 +137,19 @@ var BreadcrumbsView = React.createClass({
 
         return (
             <div>
-                <ol className="breadcrumb main-breadcrumbs">
-                    <li><a href="#">{this.state.unitTitle}</a></li>
-                    <li><a href="#" >{this.state.chapterTitle}</a></li>
-                    <li><a href="#" className="active">{this.state.pageTitle}</a></li>
-                </ol>
-                {bookmarkBtn}
-            </div>
+                <div className="hide-bread-crumbs-for-tablet">
+                    <ol className="breadcrumb main-breadcrumbs">
+                        <li><a href="#">{this.state.unitTitle}</a></li>
+                        <li><a href="#" >{this.state.chapterTitle}</a></li>
+                        <li><a href="#" className="active">{this.state.pageTitle}</a></li>
+                    </ol>
+                    {bookmarkBtn}
+                </div>
 
+                <div className="hide-bread-crumbs-for-browser">
+                    {bookmarkBtn}
+                </div>
+            </div>
         );
     },
     _onChange: function() {

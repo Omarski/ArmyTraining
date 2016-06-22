@@ -5,6 +5,7 @@ var ColorText = require('../../../components/widgets/ColorText');
 var ASRStore = require('../../../stores/ASRStore');
 var ConfigStore = require('../../../stores/ConfigStore');
 var PageHeader = require('../../widgets/PageHeader');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
 
@@ -347,13 +348,31 @@ var PronunciationView = React.createClass({
                             <tr>
                                 <td rowSpan="2" width="25">
                                     <audio id={id}></audio>
-                                    <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        alt={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        type="button" onClick={function(){textClick(id, qcIndex, self)}}
+                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
+                                        <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} ></span>
+                                    </button>
                                 </td>
                                 <td rowSpan="2" width="25">
-                                    <span className={itemRecordingClass + " pronunciation-audio-button"} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                            alt={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                            type="button" onClick={function(){handleRecord(id, qcIndex, self)}}
+                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
+                                        <span className={itemRecordingClass + " pronunciation-audio-button"} ></span>
+                                    </button>
                                 </td>
                                 <td rowSpan="2" width="25">
-                                    <span className={itemRecordedClass + " pronunciation-audio-button"} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                            alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                            type="button" onClick={function(){handlePlaying(id, qcIndex, self)}}
+                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
+                                        <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
+                                    </button>
 
                                     <span className={itemFeedbackClass}></span>
 
