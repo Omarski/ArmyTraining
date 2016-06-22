@@ -7,6 +7,7 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var _units = {};
+var _requiredExists = false;
 
 // default unit state values
 var _defaultState = {
@@ -44,6 +45,9 @@ function load(id) {
         var storedUnits = store.get('units');
         if (storedUnits) {
             _units[id].state = assign({}, _units[id].state, storedUnits[_units[id].data.xid]);
+            if (_units[id].state.required) {
+                _requiredExists = true;
+            }
         }
     }
 }
@@ -72,6 +76,7 @@ function save(id) {
  * Reset all unit state data to default state data
  */
 function reset() {
+    _requiredExists = false;
     // remove saved data
     store.remove('units');
 
@@ -91,6 +96,9 @@ function update(id, updates) {
     if (_units[id] && _units[id].state) {
         _units[id].state = assign({}, _units[id].state, updates);
 
+        if (_units[id].state.required) {
+            _requiredExists = true;
+        }
         // save unit data
         save(id);
     }
@@ -156,6 +164,11 @@ function markUnitChapterComplete(unitId, chapterId) {
 }
 
 var UnitStore = assign({}, EventEmitter.prototype, {
+
+    requiredExists: function() {
+        return _requiredExists;
+    },
+
     create:function(data) {
         create(data);
     },

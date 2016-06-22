@@ -8,7 +8,8 @@
     "tooltipIndexExpand": "Open Index",
     "tooltipIndexCollapse": "Close Index",
     "lblRequired": "Required",
-    "lblOptional": "Optional"
+    "lblOptional": "Optional",
+    "lblExplorer": "Explorer"
   },
   "header": {
     "tooltipLogo": "Virtual Culture Awareness Trainer",
