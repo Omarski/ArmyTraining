@@ -15,7 +15,8 @@ var MissionConnectInterviewView = React.createClass({
             quizTempl:null,
             feedbackTempl:null,
             questionTemplColl:[],
-            popState: "scenario"
+            popState: "scenario",
+            stats:{completed:0, hits:0, misses:0}
         };
     },
 
@@ -63,7 +64,17 @@ var MissionConnectInterviewView = React.createClass({
 
             if (char.gameObjective){
                 self.props.updateGameView({task:"updateList", value:char.occupation});
+                self.state.stats.completed = self.state.stats.completed + 1;
+                if (self.state.stats.completed === self.state.objectiveNodesTotal) {
+                    //final stats - call win pop
+                }
             }
+
+            self.state.stats.hits = self.state.stats.hits + 1;
+            if (self.state.stats.hits === 6) {
+                //final stats - call loss pop
+            }
+
 
             setTimeout(function(){self.renderFeedback();},250);
 
@@ -71,6 +82,11 @@ var MissionConnectInterviewView = React.createClass({
             self.props.updateScore([{property:'attempts', value:attempt},
                                     {property:'allAttempts', value:attempts},
                                     {property:'choiceNum', value:choiceNum}]);
+
+            self.props.updateGameView({task:"updateWrong", value:null});
+
+            self.state.stats.misses = self.state.stats.misses + 1;
+
             setTimeout(function(){self.renderFeedback();},250);
         }
     },
@@ -198,15 +214,14 @@ var MissionConnectInterviewView = React.createClass({
 
         //console.log("answered")
         var feedback = function(){
-
+            var feedbackQuote =  scoreObj.answered ? char.positiveFeedback : char.negativeFeedback;
             return(
                 <div className = "mission-connect-view-popCont">
 
                     <div className = "mission-connect-view-popFeedbackImg" style={imgFeedStyle}></div>
 
-                    <div className = "mission-connect-view-popFeedbackTextQuote">
-                        {scoreObj.answered ? char.positiveFeedback : char.negativeFeedback}
-                    </div>
+                    <div className = "mission-connect-view-popFeedbackTextQuote" dangerouslySetInnerHTML={{__html:feedbackQuote}}></div>
+
                     <div className = "mission-connect-view-popFeedbackTextTitle">
                         {scoreObj.answered ? gameData.feedbackCorrectTitle: gameData.feedbackIncorrectTitle}</div>
 

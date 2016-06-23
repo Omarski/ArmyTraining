@@ -15,9 +15,11 @@ var MissionConnectProgressView = React.createClass({
 
     renderChecklist: function(){
 
+
         var list = this.props.charList.map(function(char,index){
+            console.log("List: >>> "+char);
             return(
-                <div key={index}>{char+"\n\n<br><br>"}</div>
+                <div key={index}>{char}</div>
             )
         });
 
@@ -31,8 +33,8 @@ var MissionConnectProgressView = React.createClass({
         
         return (
             <div>
-                <div className="mission-connect-view-charListCont"
-                     dangerouslySetInnerHTML={{__html:this.renderChecklist()}}>
+                <div className="mission-connect-view-charListCont">
+                    {this.renderChecklist()}
                 </div>
 
                 <div className="mission-connect-view-meterCont" style={meterStyle}>

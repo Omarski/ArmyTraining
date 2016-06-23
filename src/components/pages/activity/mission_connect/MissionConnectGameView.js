@@ -95,14 +95,22 @@ var MissionConnectGameView = React.createClass({
 
     updateGameView: function(update){
 
+        var self = this;
         switch (update.task){
             case "closePop":
                 this.setState({showInterview:false});
                 break;
+
             case "updateList":
-                var list = this.state.charList;
+                var list = self.state.charList;
                 list.push(update.value);
                 this.setState({charList:list});
+                break;
+
+            case "updateWrong":
+                this.setState({wrongAttempts:self.state.wrongAttempts + 1},
+                function(){if (self.state.wrongAttempts === 6) self.viewUpdate("lost")});
+                break;
         }
     },
 

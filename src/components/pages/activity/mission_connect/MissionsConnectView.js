@@ -22,7 +22,7 @@ function getPageState(props) {
         loadCounter:0,
         totalImages:0,
         mapReady:false,
-        scoreObj:{}
+        stats:{completed:0, hits:0, misses:0}
     };
     
     if (props && props.page) {
@@ -74,8 +74,6 @@ var MissionConnectView = React.createClass({
                 loadedObj[key].src = imageColl[i][key];
                 loadedObj[key].onload = self.loadCounter;
                 loadedObj[key+"Url"] = imageColl[i][key];
-                //loadedObj[key+"Width"] = loadedObj[key].width;
-                //loadedObj[key+"Height"] = loadedObj[key].height;
             }
 
 
@@ -117,8 +115,19 @@ var MissionConnectView = React.createClass({
         //self.prepIntroPopup();
     },
 
-    viewUpdate: function(status){
+    viewUpdate: function(update){
 
+        switch (update.task){
+            case "lost":
+                this.prepLeaderPopup("lost");
+                break;
+            case "won":
+                this.prepLeaderPopup("won");
+                break;
+            case "updateStats":
+                this.setState({stats:update.value});
+                break;
+        }
     },
 
     replayGame: function(){
@@ -152,9 +161,91 @@ var MissionConnectView = React.createClass({
         };
 
         self.displayPopup(popupObj);
+    },
 
-        var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
-        if (debriefAudio) self.playAudio({id:"missionConnectDebrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
+
+     prepLeaderPopup: function(mode){
+
+        var self = this;
+        var origImg = self.state.images[self.state.images.length - 1].charOrigUrl;
+        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'164px 164px'};
+        var quote = mode==="won" ? self.state.gameData.congratulationsTitle : self.state.gameData.timeOverTitle;
+        var bodyText = mode==="won" ? self.state.gameData.congratulationsText : self.state.gameData.timeOverText;
+
+         var popupObj = {
+            id:mode+"Pop",
+            onClickOutside: null,
+            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1, zIndex:'6'},
+
+            content: function(){
+
+                return(
+                    <div className = "mission-connect-view-popCont">
+                        <div className = "mission-connect-view-popFeedbackImg" style={imgStyle}></div>
+                        <div className = "mission-connect-view-popFeedbackTextQuote"
+                             dangerouslySetInnerHTML={{__html:quote}}></div>
+                        <div className = "mission-connect-view-popFeedbackText"
+                             dangerouslySetInnerHTML={{__html:bodyText}}></div>
+
+                        <div className = "mission-connect-view-popFeedbackBtnGrpCont">
+                            <div className = "mission-connect-view-popFeedbackBtnCont">
+                                <button type="button" className="btn btn-default"
+                                        onClick={self.prepStatsPopup}>Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+    },
+
+    prepStatsPopup: function(){
+
+        var self = this;
+        var statsText = function(){
+
+            return (<div>
+                        <div>Number of Objectives Complete:   {self.state.stats.completed}</div>
+                        <div>Number of Successful Attempts:   {self.state.stats.hits}</div>
+                        <div>Number of Unsuccessful Attempts: {self.state.stats.misses}</div>
+                    </div>
+            )
+        };
+
+        var popupObj = {
+            id:"stats",
+            onClickOutside: null,
+            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1, zIndex:'6'},
+
+            content: function(){
+
+                return(
+                    <div className = "mission-connect-view-popCont">
+
+                        <div className = "mission-connect-view-popFeedbackStatHead">
+                            Statistics
+                        </div>
+
+                        <div className = "mission-connect-view-popFeedbackText"
+                             dangerouslySetInnerHTML={{__html:statsText()}}></div>
+
+                        <div className = "mission-connect-view-popFeedbackBtnGrpCont">
+                            <div className = "mission-connect-view-popFeedbackBtnCont">
+                                <button type="button" className="btn btn-default"
+                                        onClick={self.onClosePop}>Restart</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+
+        //var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
+        //if (debriefAudio) self.playAudio({id:"missionConnectDebrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
 
 
