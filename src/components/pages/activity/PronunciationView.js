@@ -5,7 +5,7 @@ var ColorText = require('../../../components/widgets/ColorText');
 var ASRStore = require('../../../stores/ASRStore');
 var ConfigStore = require('../../../stores/ConfigStore');
 var PageHeader = require('../../widgets/PageHeader');
-var ASRTest = require('../../widgets/ASR');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
 
@@ -18,21 +18,6 @@ var LI_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
 
 var recorder;
-
-window.onload = function init(){
-    // webkit shim
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    navigator.getUserMedia = navigator.getUserMedia ||
-                             navigator.webkitGetUserMedia ||
-                             navigator.mozGetUserMedia ||
-                             navigator.msGetUserMedia;
-    window.URL = window.URL || window.webkitURL;
-};
-
-function hasGetUserMedia(){
-    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia);
-}
 
 var onFail = function(e){
     console.log('An Error has occured.', e);
@@ -229,14 +214,14 @@ var PronunciationView = React.createClass({
         ASRStore.addChangeListener(this._onMessageRecieved);
         // if browser can use webAudioAPI, use that
         // otherwise use Java Applet as a fallback
-        if(hasGetUserMedia()){
-            // UserMedia allowed
-        }else{
-            // UserMedia not allowed
-            if(!ASRStore.isInitialized()){
-                ASRStore.InitializeASR();
-            }
-        }
+        //if(hasGetUserMedia()){
+        //    // UserMedia allowed
+        //}else{
+        //    // UserMedia not allowed
+        //    if(!ASRStore.isInitialized()){
+        //        ASRStore.InitializeASR();
+        //    }
+        //}
 
     //    if(ConfigStore.isASREnabled()){
     //        if(!ASRStore.isInitialized()){
@@ -270,7 +255,6 @@ var PronunciationView = React.createClass({
         var displayTracker = state.displayTracker;
         var questionCounter = 0;
         var noteCounter = 0;
-        var asrFallback = hasGetUserMedia() ? "" : (<ASRTest />);
 
         // need to check for notes and send those  to top of page
         var vaList = displayTracker.map(function(item, index){
@@ -364,13 +348,31 @@ var PronunciationView = React.createClass({
                             <tr>
                                 <td rowSpan="2" width="25">
                                     <audio id={id}></audio>
-                                    <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        alt={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        type="button" onClick={function(){textClick(id, qcIndex, self)}}
+                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
+                                        <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} ></span>
+                                    </button>
                                 </td>
                                 <td rowSpan="2" width="25">
-                                    <span className={itemRecordingClass + " pronunciation-audio-button"} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                            alt={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                            type="button" onClick={function(){handleRecord(id, qcIndex, self)}}
+                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
+                                        <span className={itemRecordingClass + " pronunciation-audio-button"} ></span>
+                                    </button>
                                 </td>
                                 <td rowSpan="2" width="25">
-                                    <span className={itemRecordedClass + " pronunciation-audio-button"} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                            alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                            type="button" onClick={function(){handlePlaying(id, qcIndex, self)}}
+                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
+                                        <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
+                                    </button>
 
                                     <span className={itemFeedbackClass}></span>
 
@@ -387,7 +389,7 @@ var PronunciationView = React.createClass({
             }else if(item === "note"){
                 note = self.state.notes[noteCounter] || "";
                 noteCounter++;
-                return(<tr><td colSpan="4"><p key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
+                return(<tr><td colSpan="4"><p className="pronunciation-note" key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
             }else{
                 return("");
             }
@@ -397,7 +399,6 @@ var PronunciationView = React.createClass({
         return (
             <div key={"page-" + this.state.page.xid}>
                 <div>
-                    {asrFallback}
                     <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
