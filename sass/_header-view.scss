@@ -7,9 +7,22 @@ button.navbar-toggle:hover {
 }
 
 
+.navbar-fixed-top .navbar-collapse {
+  max-height: none !important;
+}
 
+.dropdown-menu {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 
 @media screen and (min-width: 767px) {
+
+  .reduce-padding-around-a-element-for-nav-buttons{
+    ul {
+      display: none;
+    }
+  }
 
   .bookmark-nav-item {
     display: none !important;
@@ -415,6 +428,17 @@ button.navbar-toggle:hover {
         padding-top: 8px !important;
         padding-bottom: 7px;
         border-bottom: 1px solid #337ab7;
+        ul {
+          li {
+            a{
+              height: 45px;
+              border-bottom: 1px solid #337ab7;
+            }
+          }
+        }
+      }
+      .a-element-for-settings-dropdown {
+        height: 45px !important;
       }
       a:hover {
         background-color: #D2E0E6 !important;
@@ -483,5 +507,15 @@ button.navbar-toggle:hover {
     padding-top: 8px !important;
     padding-bottom: 0px;
     height: 40px;
+  }
+}
+
+.dropdown-menu {
+  li {
+    .large-bookmark-nav-item {
+      height: 60px !important;
+      border-bottom: 1px solid;
+      border-bottom-color: #337ab7 !important;
+    }
   }
 }

@@ -55,7 +55,6 @@ function getPageState(isNav) {
 
 var BookmarksView = React.createClass({
     bookmark: function() {
-        console.log("bookmark", bookmark);
         var bm = {
             unit: PageStore.unit().data.xid,
             chapter: PageStore.chapter().xid,
@@ -70,7 +69,7 @@ var BookmarksView = React.createClass({
             percent: ""
         });
         BookmarkActions.create(bm);
-        this.setState(getPageState(this.props.isNav));
+        this.setState(getPageState());
 
     },
 
@@ -82,7 +81,17 @@ var BookmarksView = React.createClass({
         var pageState = getPageState(this.props.isNav);
         return pageState;
     },
-
+    menuItemClickedThatShouldntCloseDropdown: function(){
+        this._forceOpen = true;
+    },
+    dropdownToggle(newValue){
+        if (this._forceOpen){
+            this.setState({ menuOpen: true });
+            this._forceOpen = false;
+        } else {
+            this.setState({ menuOpen: newValue });
+        }
+    },
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
     },
@@ -100,21 +109,19 @@ var BookmarksView = React.createClass({
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
         var items = "";
-        console.log("bookmarks", bookmarks);
+        console.log("self", self);
         var items = null;
         if (bookmarks) {
-            bookmarks.push({"title":"Bookmark Current Page"});
-            if (this.state.isNav) {
+            if (self.props.isNav)
+                var fakeIndex = 0;
                 var subItems = bookmarks.map(function(item, index) {
-                    if(index !== bookmarks.length){
-                                return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item">
+                    fakeIndex = fakeIndex + 1;
+                                return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item" onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
                                             <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                                         </MenuItem>);
-                    } else if(index === (bookmarks.length - 1)) {
-                                return(<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item" > <button onClick={self.bookmark} className="btn btn-link">Bookmark Current Page</button></MenuItem>);
-                            }
                 });
-                items = (<NavDropdown eventKey="5" title={(
+                subItems.push(<MenuItem key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex}  href="#" className="bookmark-nav-item" onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}> <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button></MenuItem>);
+                items = (<NavDropdown open={self.state.menuOpen} onToggle={val => self.dropdownToggle(val)} eventKey="5" title={(
                 <div>
                     <Button
                         title={"Bookmarks"}
@@ -131,6 +138,7 @@ var BookmarksView = React.createClass({
                     {subItems}
                 </NavDropdown>);
             } else {
+                console.log("this.props.isNav", self.props.isNav);
                 var subItems = bookmarks.map(function(item, index) {
                     return (<ListGroupItem key={"bookmarkitems" + index}>
                         <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
@@ -140,7 +148,8 @@ var BookmarksView = React.createClass({
                     {subItems}
                 </ListGroup>);
             }
-        }
+
+        console.log("subItems", subItems);
 
         return items;
 

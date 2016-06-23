@@ -32,12 +32,56 @@ function getBookState() {
     if (book) {
         title = book.data.config.title;
     }
+
     return {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
         previousVolume: null,
-        hideInClass: ({display: "none"})
+        hideInClass: ({display: "none"}),
+        windowWidth: window.innerWidth
+    };
+}
+
+function getPageState(isNav) {
+    var page = null;
+    var unitTitle = "";
+    var chapterTitle = "";
+    var pageTitle = "";
+    var bookmarked = false;
+
+
+    if (PageStore.loadingComplete()) {
+        page = PageStore.page();
+        unitTitle = PageStore.unit().data.title;
+        chapterTitle = PageStore.chapter().title;
+        pageTitle = PageStore.page().title;
+
+        var bm = {
+            unit: PageStore.unit().data.xid,
+            chapter: PageStore.chapter().xid,
+            page: PageStore.page().xid
+        };
+
+        setTimeout(function() {
+            BookmarkActions.setCurrent(bm);
+        });
+
+    }
+
+    if (BookmarkStore.current() &&
+        BookmarkStore.current().page &&
+        page &&
+        (BookmarkStore.current().page === page.xid)) {
+        bookmarked = true;
+    }
+
+    return {
+        isNav: isNav,
+        pageTitle: pageTitle,
+        unitTitle: unitTitle,
+        chapterTitle: chapterTitle,
+        bookmarked: bookmarked
     };
 }
 
@@ -70,18 +114,22 @@ var HeaderView = React.createClass({
         var bookState = getBookState();
         return bookState;
     },
-
+    handleResize: function (e) {
+      this.setState({windowWidth: window.innerWidth});
+    },
     componentWillMount: function() {
         BookStore.addChangeListener(this._onChange);
         ConfigStore.addChangeListener((this._onChange));
     },
 
     componentDidMount: function() {
+        window.addEventListener('resize', this.handleResize);
         BookStore.removeChangeListener(this._onChange);
         BookStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
+        window.removeEventListener('resize', this.handleResize);
         BookStore.removeChangeListener(this._onChange);
         ConfigStore.removeChangeListener((this._onChange));
     },
@@ -130,6 +178,20 @@ var HeaderView = React.createClass({
                 }
         }
 
+        console.log("this.state.windowWidth", self.state.windowWidth);
+
+        //<NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
+
+        var isNavFunction = function(){
+            if(self.state.windowWidth < 768){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        var isNavCollapsed = isNavFunction();
+
         return (
             <div>
                 <Navbar className="navbar-fixed-top navbarHeightDesktop">
@@ -142,7 +204,7 @@ var HeaderView = React.createClass({
                     </Navbar.Header>
                     <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
                         <Nav pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
-                            <NavItem eventKey={1} href="#" ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                            <NavItem eventKey={1} href="#"><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
                             <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
                                 <button title={"Mute"} alt={"Mute"} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="Mute">
@@ -150,14 +212,9 @@ var HeaderView = React.createClass({
                                 </button>
                                 <p>Toggle Mute</p>
                             </NavItem>
-                            <NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
-                            <BookmarksView className="hide-bookmarksview-for-desktop" isNav={true}/>
-
-
-
-
+                            <SettingsView isNav={isNavCollapsed}/>
+                            <BookmarksView className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} isNav={isNavCollapsed}/>
                         </Nav>
-
                     </NavbarCollapse>
                 </Navbar>
                 <BreadcrumbsView />
