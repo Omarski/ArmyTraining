@@ -32,7 +32,6 @@ var Slider = React.createClass({
 
     componentDidMount: function() {
         var toolTip = this.props.toolTip ? 'show' : 'hide';
-        console.log("this", this);
         var slider = new BootstrapSlider(ReactDOM.findDOMNode(this), {
             id: this.props.id,
             min: this.props.min,

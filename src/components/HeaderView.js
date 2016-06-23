@@ -154,10 +154,6 @@ var HeaderView = React.createClass({
             this.setState(getPageState());
 
     },
-    parentOpenModal: function (tester) {
-        console.log("this", tester);
-        tester.setState({showModal: !tester.state.showModal});
-    },
     render: function() {
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
         var self = this;
@@ -178,8 +174,6 @@ var HeaderView = React.createClass({
                     self.setState({hideInClass: ({visibility: "visible"})});
                 }
         }
-
-        console.log("this.state.windowWidth", self.state.windowWidth);
 
         //<NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
 

@@ -109,7 +109,6 @@ var BookmarksView = React.createClass({
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
         var items = "";
-        console.log("self", self);
         var items = null;
         if (bookmarks) {
             if (self.props.isNav)
@@ -138,7 +137,7 @@ var BookmarksView = React.createClass({
                     {subItems}
                 </NavDropdown>);
             } else {
-                console.log("this.props.isNav", self.props.isNav);
+                console.log("bookmarks", bookmarks);
                 var subItems = bookmarks.map(function(item, index) {
                     return (<ListGroupItem key={"bookmarkitems" + index}>
                         <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
@@ -148,8 +147,6 @@ var BookmarksView = React.createClass({
                     {subItems}
                 </ListGroup>);
             }
-
-        console.log("subItems", subItems);
 
         return items;
 
