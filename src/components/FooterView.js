@@ -179,6 +179,16 @@ var FooterView = React.createClass({
     componentWillMount: function() {
         LoaderStore.addChangeListener(this._onLoadChange);
         PageStore.addChangeListener(this._onPageChange);
+        document.addEventListener("keydown", this.keypress);
+    },
+
+    keypress: function(e){
+        var event = window.event ? window.event : e;
+        if(event.keyCode === 39){ // if right arrow pressed
+            this.next();
+        }else if(event.keyCode === 37){ // if left arrow pressed
+            this.previous();
+        }
     },
 
     componentDidMount: function() {
