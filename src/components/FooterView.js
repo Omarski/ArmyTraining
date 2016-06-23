@@ -8,6 +8,7 @@ var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
 
+var _expanded = {};
 
 function getUnitState(expanded) {
     var units = UnitStore.getAll();
@@ -100,6 +101,7 @@ function getUnitState(expanded) {
                 unitCls = 'main-footer-accordian-table-row-active';
                 unitExpandedCls += ' in';
                 expandCollapseIconCls += ' glyphicon-minus-sign';
+                _expanded[unit.data.xid] = true;
             } else {
                 expandCollapseIconCls += ' glyphicon-plus-sign';
             }
@@ -120,7 +122,7 @@ function getUnitState(expanded) {
                 rows: chapters
             };
 
-            if(unit.state.required) {
+            if(expanded && unit.state.required) {
                 requiredUnits.push(obj);
             } else {
                 optionalUnits.push(obj);
@@ -149,16 +151,22 @@ var FooterView = React.createClass({
     previous: function() {
         PageActions.loadPrevious({});
     },
-    panelHeaderClick: function(index, idStr) {
+    panelHeaderClick: function(item, index, idStr) {
+
+
 
         var btn = $('#heading' + idStr + index).find('.footer-expand-collapse-btn');
         if (btn.hasClass('glyphicon-plus-sign')) {
             btn.removeClass('glyphicon-plus-sign').addClass('glyphicon-minus-sign');
             $('#collapse' + idStr + index).collapse('show');
+            _expanded[item.unit.id] = true;
         } else {
             btn.removeClass('glyphicon-minus-sign').addClass('glyphicon-plus-sign');
             $('#collapse' + idStr + index).collapse('hide');
+            _expanded[item.unit.id] = false;
         }
+
+        this.setState(getUnitState(true));
     },
     _onLoadChange: function() {
         if (this.isMounted()) {
@@ -196,7 +204,6 @@ var FooterView = React.createClass({
     componentDidMount: function() {
         $('.collapse').collapse();
     },
-
 
     componentWillUnmount: function() {
         LoaderStore.removeChangeListener(this._onLoadChange);
@@ -276,12 +283,18 @@ var FooterView = React.createClass({
     explorerItems: function(items, idStr) {
         var self = this;
         var html = (<div></div>);
+
         if (items) {
             html = items.map(function(item, index) {
+                var details = (<div></div>);
+
+                if (_expanded[item.unit.id]) {
+                    details = <TOCDetails data={item.rows} unit={item.unit}/>
+                }
                 return (
                     <div className="panel-group main-footer-accordian" id={'accordion' +idStr + index} role="tablist" aria-multiselectable="true" key={index}>
                         <div className="panel panel-default">
-                            <div className="panel-heading" role="tab" id={'heading' + idStr + index} onClick={self.panelHeaderClick.bind(self, index, idStr)}>
+                            <div className="panel-heading" role="tab" id={'heading' + idStr + index} onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
                                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
                                     <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
                                 </a>
@@ -289,7 +302,7 @@ var FooterView = React.createClass({
                             </div>
                             <div id={'collapse' + idStr + index} className={item.unitExpandedCls} role="tabpanel" aria-labelledby={'heading' + idStr + index}>
                                 <div className="panel-body main-footer-panel-body">
-                                    <TOCDetails data={item.rows} unit={item.unit}/>
+                                    {details}
                                 </div>
                             </div>
                         </div>
