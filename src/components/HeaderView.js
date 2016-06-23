@@ -20,6 +20,8 @@ var PanelGroup = require("react-bootstrap/lib/PanelGroup");
 var Panel = require("react-bootstrap/lib/Panel");
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var ReferenceActions = require("../actions/ReferenceActions");
+
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -39,8 +41,7 @@ function getBookState() {
         muted: SettingsStore.muted(),
         showModal: false,
         previousVolume: null,
-        hideInClass: ({display: "none"}),
-        windowWidth: window.innerWidth
+        hideInClass: ({display: "none"})
     };
 }
 
@@ -115,22 +116,17 @@ var HeaderView = React.createClass({
         var bookState = getBookState();
         return bookState;
     },
-    handleResize: function (e) {
-      this.setState({windowWidth: window.innerWidth});
-    },
     componentWillMount: function() {
         BookStore.addChangeListener(this._onChange);
         ConfigStore.addChangeListener((this._onChange));
     },
 
     componentDidMount: function() {
-        window.addEventListener('resize', this.handleResize);
         BookStore.removeChangeListener(this._onChange);
         BookStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        window.removeEventListener('resize', this.handleResize);
         BookStore.removeChangeListener(this._onChange);
         ConfigStore.removeChangeListener((this._onChange));
     },
@@ -154,6 +150,11 @@ var HeaderView = React.createClass({
             this.setState(getPageState());
 
     },
+    showReferenceView: function(){
+        setTimeout(function () {
+            ReferenceActions.show(true);
+        });
+    },
     render: function() {
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
         var self = this;
@@ -174,18 +175,7 @@ var HeaderView = React.createClass({
                     self.setState({hideInClass: ({visibility: "visible"})});
                 }
         }
-
-        //<NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
-
-        var isNavFunction = function(){
-            if(self.state.windowWidth < 768){
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        var isNavCollapsed = isNavFunction();
+        
 
         return (
             <div>
@@ -199,7 +189,7 @@ var HeaderView = React.createClass({
                     </Navbar.Header>
                     <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
                         <Nav pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
-                            <NavItem eventKey={1} href="#"><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                            <NavItem eventKey={1} href="#" onClick={self.showReferenceView} ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
                             <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
                                 <button title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
@@ -211,8 +201,8 @@ var HeaderView = React.createClass({
                                 </button>
                                 <p>Toggle Mute</p>
                             </NavItem>
-                            <SettingsView isNav={isNavCollapsed}/>
-                            <BookmarksView className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} isNav={isNavCollapsed}/>
+                            <SettingsView isNav={self.props.isNavCollapsed}/>
+                            <BookmarksView className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} />
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>

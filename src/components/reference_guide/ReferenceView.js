@@ -37,8 +37,6 @@ function getSettingsState(props) {
         jsonItems: []
     };
 
-
-
     return data;
 }
 
@@ -186,7 +184,6 @@ var ReferenceView = React.createClass({
                         aria-label={LocalizationStore.labelFor("header", "tooltipReference")}
                     >
                     <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
-                </button>
             </div>
         );
     },
@@ -222,6 +219,7 @@ var ReferenceView = React.createClass({
             });
 
             self.setState({
+                showModal: ReferenceStore.shouldShow(),
                 jsonItems: referenceJson.items,
                 mapSource: mapSource,
                 pdfSources: pdfSources,

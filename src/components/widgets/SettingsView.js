@@ -9,6 +9,7 @@ var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var Checkbox = ReactBootstrap.Checkbox;
 var Slider = require('../../components/widgets/Slider');
+var AppStateStore = require('../../stores/AppStateStore');
 
 var BookmarkActions = require('../../actions/BookmarkActions');
 var PageActions = require('../../actions/PageActions');
@@ -100,15 +101,19 @@ var SettingsView = React.createClass({
     },
 
     componentDidMount: function() {
+        AppStateStore.addChangeListener(this._onAppStateChange);
         SettingsStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
+        AppStateStore.removeChangeListener(this._onAppStateChange);
         SettingsStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        console.log("am i mobile? " + AppStateStore.isMobile());
+
         var self = this;
-        if(self.props.isNav === false){
+        if(AppStateStore.isMobile() === false){
             var popover =   <Popover id="settingsPopover" title='Settings'>
                 <ListGroup>
                     <ListGroupItem>
@@ -205,6 +210,13 @@ var SettingsView = React.createClass({
             );
         }
     },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            console.log("in settings width : " + AppStateStore.getWidth() + " - height : " + AppStateStore.getHeight() + " - isMobile : " + AppStateStore.device());
+        }
+
+    },
+    
     _onChange: function() {
         this.setState(getSettingsState(this.props.isNav));
     }
