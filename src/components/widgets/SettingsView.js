@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var SettingsStore = require('../../stores/SettingsStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
@@ -12,6 +13,7 @@ var Slider = require('../../components/widgets/Slider');
 var BookmarkActions = require('../../actions/BookmarkActions');
 var PageActions = require('../../actions/PageActions');
 var SettingsActions = require('../../actions/SettingsActions');
+var UnitActions = require('../../actions/UnitActions');
 var NavDropdown = require("react-bootstrap/lib/NavDropdown");
 var MenuItem = require("react-bootstrap/lib/MenuItem");
 
@@ -70,6 +72,7 @@ var SettingsView = React.createClass({
 
     resetProgress: function() {
         PageActions.reset();
+        UnitActions.reset();
     },
 
     resetSettings: function() {
@@ -152,7 +155,9 @@ var SettingsView = React.createClass({
                         <li>
                             <a>
                                 <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
-                                    <Button title={"Settings"} alt={"Settings"} className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                                    <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
+                                            alt={LocalizationStore.labelFor("header", "tooltipSettings")}
+                                            aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
                                         <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                                     </Button>
                                 </OverlayTrigger>
@@ -163,7 +168,9 @@ var SettingsView = React.createClass({
             return (
                     <NavDropdown open={this.state.menuOpen} onToggle={val => this.dropdownToggle(val)} eventKey="4"  title={(
                         <div>
-                            <Button title={"Settings"} alt={"Settings"} className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                            <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            alt={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
                                     <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                             </Button>
                             <p>Settings</p>

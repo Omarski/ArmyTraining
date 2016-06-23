@@ -3,15 +3,18 @@
     "tooltipBookmark": "Bookmarks"
   },
   "footer": {
-    "tooltipNext": "Next",
-    "tooltipPrevious": "Previous",
-    "tooltipIndexExpand": "Open Index",
-    "tooltipIndexCollapse": "Close Index"
+    "tooltipNext": "Next Page",
+    "tooltipPrevious": "Previous Page",
+    "tooltipIndexExpand": "Open Explorer",
+    "tooltipIndexCollapse": "Close Explorer",
+    "lblRequired": "Required",
+    "lblOptional": "Optional",
+    "lblExplorer": "Explorer"
   },
   "header": {
     "tooltipLogo": "Virtual Culture Awareness Trainer",
-    "tooltipDLI": "DLI",
-    "tooltipReference": "Reference",
+    "tooltipDLI": "DLI Guide",
+    "tooltipReference": "Reference Guide",
     "tooltipMute": "Mute Sound",
     "tooltipUnMute": "Turn on Sound",
     "tooltipSettings": "Settings"
@@ -53,5 +56,13 @@
     "lblConfirm": "Confirm your choice:",
     "lblTime": "Estimated Training Time: {0}",
     "lblLessons": "Lessons:"
+  },
+  "tools":{
+    "btnListen": "Click to Listen"
+  },
+  "PronunciationPage":{
+    "btnPlay": "Play",
+    "btnRecord": "Record",
+    "btnPlayback": "Listen to Recording"
   }
 }

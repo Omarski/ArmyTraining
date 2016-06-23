@@ -7,6 +7,13 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var _units = {};
+var _requiredExists = false;
+
+// default unit state values
+var _defaultState = {
+    complete: false,
+    required: false
+};
 
 /**
  * Create a UNIT item.
@@ -18,17 +25,65 @@ function create(data) {
     // Using the current timestamp + random number in place of a real id.
     var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
 
-    // create state with default values
-    var defaultState = {
-        complete: false,
-        required: false
-    };
-
     _units[id] = {
         id: id,
         data: data,
-        state: defaultState
+        state: _defaultState
     };
+
+    // load any previous data
+    load(id);
+}
+
+/**
+ * Load state unit data by id
+ * @param id
+ */
+function load(id) {
+    if (_units[id] && _units[id].data && _units[id].data.xid && _units[id].state) {
+        // load saved units
+        var storedUnits = store.get('units');
+        if (storedUnits) {
+            _units[id].state = assign({}, _units[id].state, storedUnits[_units[id].data.xid]);
+            if (_units[id].state.required) {
+                _requiredExists = true;
+            }
+        }
+    }
+}
+
+/**
+ * Save unit state data by id
+ * @param id
+ */
+function save(id) {
+    if (_units[id] && _units[id].data && _units[id].data.xid && _units[id].state) {
+        // load saved units
+        var storedUnits = store.get('units');
+        if (!storedUnits) {
+            storedUnits = {};
+        }
+
+        // update unit data
+        storedUnits[_units[id].data.xid] = _units[id].state;
+
+        // save unit
+        store.set('units', storedUnits);
+    }
+}
+
+/**
+ * Reset all unit state data to default state data
+ */
+function reset() {
+    _requiredExists = false;
+    // remove saved data
+    store.remove('units');
+
+    // iterate over units and reset state
+    for (var id in _units) {
+        _units[id].state = _defaultState;
+    }
 }
 
 /**
@@ -40,6 +95,12 @@ function create(data) {
 function update(id, updates) {
     if (_units[id] && _units[id].state) {
         _units[id].state = assign({}, _units[id].state, updates);
+
+        if (_units[id].state.required) {
+            _requiredExists = true;
+        }
+        // save unit data
+        save(id);
     }
 }
 
@@ -103,6 +164,11 @@ function markUnitChapterComplete(unitId, chapterId) {
 }
 
 var UnitStore = assign({}, EventEmitter.prototype, {
+
+    requiredExists: function() {
+        return _requiredExists;
+    },
+
     create:function(data) {
         create(data);
     },
@@ -224,10 +290,15 @@ AppDispatcher.register(function(action) {
             destroyCompleted();
             UnitStore.emitChange();
             break;
+
         case UnitConstants.UNIT_LOAD_COMPLETE:
             UnitStore.emitChange();
             break;
 
+        case UnitConstants.UNIT_RESET:
+            reset();
+            UnitStore.emitChange();
+            break;
 
         default:
         // no op

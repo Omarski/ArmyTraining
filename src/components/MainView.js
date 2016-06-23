@@ -17,8 +17,11 @@ var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
 var DliActions = require('../actions/DliActions');
 var DliStore = require('../stores/DliStore');
+var ASRActions = require('../actions/ASRActions');
+var ASRStore = require('../stores/ASRStore');
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
+var ASRWidget = require('../components/widgets/ASR');
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -33,7 +36,20 @@ function getBookState() {
     };
 }
 
+window.onload = function init(){
+    // webkit shim
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+};
 
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
 
 var MainView = React.createClass({
 
@@ -53,6 +69,10 @@ var MainView = React.createClass({
         CoachFeedbackActions.load();
     },
 
+    loadASR: function(){
+        ASRActions.load();
+    },
+
     loadData: function() {
         LoaderActions.load();
     },
@@ -70,7 +90,7 @@ var MainView = React.createClass({
         LoaderStore.addChangeListener(this._onChange);
         DliStore.addChangeListener(this._onDliChange);
         ReferenceStore.addChangeListener(this._onReferenceChange);
-
+        ASRStore.addChangeListener(this._onASRChange);
     },
 
     componentDidMount: function() {
@@ -89,12 +109,15 @@ var MainView = React.createClass({
      * @return {object}
      */
     render: function() {
+        var asrFallback = hasGetUserMedia() ? "" : (<ASRWidget />);
+
         return (
             <div>
                 <HeaderView title={this.title} />
                 <ContentView />
                 <FooterView  />
                 <NotificationView />
+                {asrFallback}
             </div>
         );
     },
@@ -138,13 +161,29 @@ var MainView = React.createClass({
         }, 100)
     },
 
+    /**
+     * Event handler for 'change' events coming from the DLIStore
+     */
     _onDliChange: function (){
+        var self = this;
+        setTimeout(function() {
+            self.loadASR();
+        }, 100)
+    },
+
+    /**
+     * Event handler for 'change' events coming from the DLIStore
+     */
+    _onASRChange: function (){
         var self = this;
         setTimeout(function() {
             self.loadReference();
         }, 100)
     },
 
+    /**
+     * Event handler for 'change' events coming from the ReferenceStore
+     */
     _onReferenceChange: function(){
         var self = this;
         setTimeout(function() {

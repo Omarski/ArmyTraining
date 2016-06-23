@@ -3,6 +3,7 @@ var PageStore = require('../stores/PageStore');
 var PageActions = require('../actions/PageActions');
 var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
+var LocalizationStore = require('../stores/LocalizationStore');
 var NotificationActions = require('../actions/NotificationActions');
 var BookmarksView = require('../components/BookmarksView');
 var ReactBootstrap = require('react-bootstrap');
@@ -122,10 +123,11 @@ var BreadcrumbsView = React.createClass({
         var bookmarkBtn = (
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
-                    title={"Bookmarks"}
-                    alt={"Bookmarks"}
+                    title={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
+                    alt={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
                     id="breadcrumbsButton"
                     type="button"
+                    aria-label={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
                     className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
                     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>

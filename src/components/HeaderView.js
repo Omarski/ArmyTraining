@@ -3,6 +3,7 @@ var BreadcrumbsView = require('../components/BreadcrumbsView');
 var SettingsView = require('../components/widgets/SettingsView');
 var BookStore = require('../stores/BookStore');
 var SettingsStore = require('../stores/SettingsStore');
+var LocalizationStore = require('../stores/LocalizationStore');
 var SettingsActions = require('../actions/SettingsActions');
 var ConfigStore = require('../stores/ConfigStore');
 var ReactBootstrap = require('react-bootstrap');
@@ -207,7 +208,11 @@ var HeaderView = React.createClass({
                             <NavItem eventKey={1} href="#"><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
                             <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
-                                <button title={"Mute"} alt={"Mute"} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="Mute">
+                                <button title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
+                                        alt={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
+                                        type="button"
+                                        className="btn btn-default btn-lg btn-link main-nav-bar-button"
+                                        aria-label={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}>
                                     {muteIcon}
                                 </button>
                                 <p>Toggle Mute</p>

@@ -58,6 +58,7 @@ var NotificationView = React.createClass({
                             <h4 className="modal-title">{this.state.title}</h4>
                         </div>
                         <div className="modal-body">
+                            <img src="data/media/AfpakSplash07d3.jpg" height="100%" width="100%"></img>
                             <p>{this.state.body}</p>
                             {progress}
                         </div>
