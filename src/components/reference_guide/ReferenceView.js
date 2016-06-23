@@ -186,7 +186,7 @@ var ReferenceView = React.createClass({
                         </div>
                     </Modal.Body>
                 </Modal>
-                    <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
+                    <span className="glyphicon glyphicon-education btn-icon btn-link" aria-hidden="true"></span>
             </div>
         );
     },
