@@ -1,4 +1,7 @@
 {
+  "app": {
+    "imageSplash": "data/media/AfpakSplash07d3.jpg"
+  },
   "breadcrumbs": {
     "tooltipBookmark": "Bookmarks"
   },

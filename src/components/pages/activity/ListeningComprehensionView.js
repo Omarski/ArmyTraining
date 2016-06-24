@@ -62,7 +62,7 @@ function getPageState(props) {
 function listenCheck(self){
     // play the audio prmopt from the click to listen box
     //find the zid of the audio
-    //console.dir(self);
+    
     var zid = 0;
     if(self.props && self.props.page){
         if(self.props.page.media){
@@ -70,7 +70,7 @@ function listenCheck(self){
         }
     zid = self.props.page.question.media[0].zid;
     }
-    //console.log(zid);
+
     if(zid && zid !== 0){
         playAudio(zid);
         $("#audio").bind('ended', function(){

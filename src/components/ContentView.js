@@ -73,9 +73,6 @@ var ContentView = React.createClass({
         var pageId = (this.state.page) ? this.state.page.xid : "";
         var isFullScreen = false;
         if (this.state.page) {
-            console.log(this.state.page.type);
-            console.log(this.state.page.title);
-            console.log(this.state.page);
             switch (this.state.page.type) {
                 case PageTypeConstants.ACTIVE_DIALOG:
                     page = <ActiveDialogView page={this.state.page} />;

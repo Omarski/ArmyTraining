@@ -72,7 +72,6 @@ var MissionConnectGameView = React.createClass({
     },
 
     onIconClick: function(e){
-        console.log("Clicked on : " + e.target.id);
         this.setState({activeNode:parseInt(e.target.id.substring(18))});
         //popup
     },

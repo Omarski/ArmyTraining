@@ -144,7 +144,8 @@ var HeaderView = React.createClass({
                 title:'Bookmark',
                 body: PageStore.page().title + ' bookmarked!',
                 allowDismiss: true,
-                percent: ""
+                percent: "",
+                image: null
             });
             BookmarkActions.create(bm);
             this.setState(getPageState());

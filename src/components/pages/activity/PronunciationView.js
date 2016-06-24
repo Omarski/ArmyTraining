@@ -28,13 +28,12 @@ var onSuccess = function(s){
     var mediaStreamSource = context.createMediaStreamSource(s);
     recorder = new Recorder(mediaStreamSource);
     recorder.record();
-    //console.log("--- onSuccess ---");
-    //console.dir(recorder);
+
 };
 
 function record(id, index, self){
     if(ASRStore.isInitialized()){
-        //console.log("ASR is Initialized");
+
         var pState = self.state.playableState;
         var oldCA = self.state.clickedAnswer;
         if(oldCA != 0){
@@ -108,7 +107,7 @@ function stop(id, index, self){
 function handleRecord(id, index, self){  // record if not currently recording
     var newRecordingState = self.state.recordingState;
     if (newRecordingState[index]) {
-        //console.log("was currently recording");
+
         stopRecording(id, index, self);
         var newPlayableState = self.state.playableState;
         newPlayableState[index] = true;
@@ -118,7 +117,7 @@ function handleRecord(id, index, self){  // record if not currently recording
             playableState: newPlayableState
         })
     } else {
-       // console.log("start the recording");
+
       //  if(self.state.message != "recordingStarted") {
             record(id, index, self);
             newRecordingState[index] = true;
@@ -432,13 +431,13 @@ var PronunciationView = React.createClass({
             case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
                 break;
             case "initialized":
-                //console.log(newMessage);
+
                 break;
             case "recordingStarted":
-                //console.log(newMessage);
+
                 break;
             case "recordingStopped":
-                //console.log(newMessage);
+                
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;

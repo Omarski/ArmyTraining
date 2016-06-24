@@ -7,7 +7,8 @@ function getNotificationState() {
         body: NotificationStore.body(),
         visibile: NotificationStore.isVisible(),
         allowDismiss: NotificationStore.allowDismiss(),
-        percent: NotificationStore.percent()
+        percent: NotificationStore.percent(),
+        image: NotificationStore.image()
     }
 }
 
@@ -32,7 +33,7 @@ var NotificationView = React.createClass({
         var dismiss = '';
         var close = '';
         var progress = '';
-
+        var image = '';
         var percent = {
           width: this.state.percent + '%'
         };
@@ -50,6 +51,10 @@ var NotificationView = React.createClass({
             dismiss = <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>;
             close = <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>;
         }
+
+        if (this.state.image) {
+            image = (<img src={this.state.image} height="100%" width="100%"></img>)
+        }
         return <div id="notificationView" className="modal fade" data-backdrop="static">
                 <div className="modal-dialog notification-view-dialog" >
                     <div className="modal-content">
@@ -58,7 +63,7 @@ var NotificationView = React.createClass({
                             <h4 className="modal-title">{this.state.title}</h4>
                         </div>
                         <div className="modal-body">
-                            <img src="data/media/AfpakSplash07d3.jpg" height="100%" width="100%"></img>
+                            {image}
                             <p>{this.state.body}</p>
                             {progress}
                         </div>
