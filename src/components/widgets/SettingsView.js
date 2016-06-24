@@ -42,7 +42,7 @@ function getSettingsState(isNav) {
         muted: settings.muted,
         voiceVolume: v,
         max : 1.0,
-        isNav: isNav
+        isNav: AppStateStore.isMobile()
     };
 }
 
@@ -110,10 +110,11 @@ var SettingsView = React.createClass({
         SettingsStore.removeChangeListener(this._onChange);
     },
     render: function() {
-        console.log("am i mobile? " + AppStateStore.isMobile());
-
+        // console.log("am i mobile? " + AppStateStore.isMobile());
         var self = this;
-        if(AppStateStore.isMobile() === false){
+
+
+        if(self.state.isNav === false){
             var popover =   <Popover id="settingsPopover" title='Settings'>
                 <ListGroup>
                     <ListGroupItem>
@@ -211,8 +212,10 @@ var SettingsView = React.createClass({
         }
     },
     _onAppStateChange: function () {
+        var self = this;
         if (AppStateStore.renderChange()) {
-            console.log("in settings width : " + AppStateStore.getWidth() + " - height : " + AppStateStore.getHeight() + " - isMobile : " + AppStateStore.device());
+            //console.log("in settings width : " + AppStateStore.getWidth() + " - height : " + AppStateStore.getHeight() + " - isMobile : " + AppStateStore.device());
+            self.setState({isNav: AppStateStore.isMobile()});
         }
 
     },

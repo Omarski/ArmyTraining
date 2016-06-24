@@ -21,6 +21,7 @@ var Panel = require("react-bootstrap/lib/Panel");
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ReferenceActions = require("../actions/ReferenceActions");
+var AppStateStore = require("../stores/AppStateStore");
 
 
 function getBookState() {
@@ -120,7 +121,6 @@ var HeaderView = React.createClass({
         BookStore.addChangeListener(this._onChange);
         ConfigStore.addChangeListener((this._onChange));
     },
-
     componentDidMount: function() {
         BookStore.removeChangeListener(this._onChange);
         BookStore.addChangeListener(this._onChange);
@@ -175,7 +175,6 @@ var HeaderView = React.createClass({
                     self.setState({hideInClass: ({visibility: "visible"})});
                 }
         }
-        
 
         return (
             <div>
@@ -201,8 +200,8 @@ var HeaderView = React.createClass({
                                 </button>
                                 <p>Toggle Mute</p>
                             </NavItem>
-                            <SettingsView isNav={self.props.isNavCollapsed}/>
-                            <BookmarksView className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} />
+                            <SettingsView isNav={AppStateStore.isMobile()}/>
+                            <BookmarksView isNav={AppStateStore.isMobile()} className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} />
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>

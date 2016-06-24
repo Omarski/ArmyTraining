@@ -72,8 +72,6 @@ var ContentView = React.createClass({
         var page = <div></div>;
         var pageId = (this.state.page) ? this.state.page.xid : "";
         var isFullScreen = false;
-        console.log("ContentView this.props", this.props);
-        
         if (this.state.page) {
             console.log(this.state.page.type);
             console.log(this.state.page.title);

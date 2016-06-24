@@ -69,7 +69,7 @@ var BookmarksView = React.createClass({
             percent: ""
         });
         BookmarkActions.create(bm);
-        this.setState(getPageState());
+        this.setState(getPageState(this.props.isNav));
 
     },
 
@@ -111,16 +111,24 @@ var BookmarksView = React.createClass({
         var items = "";
         var items = null;
         if (bookmarks) {
-            if (self.props.isNav)
+            if (self.props.isNav) {
                 var fakeIndex = 0;
-                var subItems = bookmarks.map(function(item, index) {
+                var subItems = bookmarks.map(function (item, index) {
                     fakeIndex = fakeIndex + 1;
-                                return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index}  href="#" className="bookmark-nav-item" onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
-                                            <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
-                                        </MenuItem>);
+                    return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index} href="#"
+                                      className="bookmark-nav-item"
+                                      onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
+                        <button className="btn btn-link"
+                                onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                    </MenuItem>);
                 });
-                subItems.push(<MenuItem key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex}  href="#" className="bookmark-nav-item" onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}> <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button></MenuItem>);
-                items = (<NavDropdown open={self.state.menuOpen} onToggle={val => self.dropdownToggle(val)} eventKey="5" title={(
+                subItems.push(<MenuItem key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex} href="#"
+                                        className="bookmark-nav-item"
+                                        onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
+                    <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button>
+                </MenuItem>);
+                items = (<NavDropdown open={self.state.menuOpen} onToggle={val => self.dropdownToggle(val)} eventKey="5"
+                                      title={(
                 <div>
                     <Button
                         title={"Bookmarks"}
@@ -137,16 +145,16 @@ var BookmarksView = React.createClass({
                     {subItems}
                 </NavDropdown>);
             } else {
-                console.log("bookmarks", bookmarks);
-                var subItems = bookmarks.map(function(item, index) {
+                var subItems = bookmarks.map(function (item, index) {
                     return (<ListGroupItem key={"bookmarkitems" + index}>
-                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
-                    </ListGroupItem>);
+                                <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                            </ListGroupItem>);
                 });
                 items = (<ListGroup>
                     {subItems}
                 </ListGroup>);
             }
+        }
 
         return items;
 
