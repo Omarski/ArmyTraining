@@ -45,7 +45,7 @@ function load(id) {
         var storedUnits = store.get('units');
         if (storedUnits) {
             _units[id].state = assign({}, _units[id].state, storedUnits[_units[id].data.xid]);
-            if (_units[id].state.required) {
+            if (_units[id].state.required === true) {
                 _requiredExists = true;
             }
         }
