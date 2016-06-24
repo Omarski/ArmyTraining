@@ -452,7 +452,7 @@ var TOCPageRow = React.createClass({
                 <span className="badge">
                     <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </span>
-                {this.props.item.title}
+                <a href="#" onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>{this.props.item.title}</a>
             </li>
 
         );
