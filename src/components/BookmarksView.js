@@ -118,17 +118,17 @@ var BookmarksView = React.createClass({
                     fakeIndex = fakeIndex + 1;
                     return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index} href="#"
                                       className="bookmark-nav-item"
-                                      onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
+                                      onClick={self.menuItemClickedThatShouldntCloseDropdown}>
                         <button className="btn btn-link"
                                 onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                     </MenuItem>);
                 });
                 subItems.push(<MenuItem key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex} href="#"
                                         className="bookmark-nav-item"
-                                        onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
+                                        onClick={self.menuItemClickedThatShouldntCloseDropdown}>
                     <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button>
                 </MenuItem>);
-                items = (<NavDropdown open={self.state.menuOpen} onToggle={val => self.dropdownToggle(val)} eventKey="5"
+                items = (<NavDropdown open={self.state.menuOpen} onToggle={self.bind(val, dropdownToggle)} eventKey="5"
                                       title={(
                 <div>
                     <Button
