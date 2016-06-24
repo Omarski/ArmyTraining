@@ -55,7 +55,6 @@ function getPageState(props) {
 var EthnoMapView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
-        console.log("this.props", this.props);
         return pageState;
     },
     onLayersReady: function(x){
@@ -174,7 +173,7 @@ var EthnoMap = React.createClass({
         var yValue = event.clientY;
 
         var toolTipWidth = ($("#toolTipperId").width() / 2) ;
-        // console.log("toolTipWidth", toolTipWidth);
+        
 
         toolTipper.style.top = (y - 40) + 'px';
         toolTipper.style.left = (pageX - toolTipWidth - 15) + 'px';
@@ -225,8 +224,6 @@ var EthnoToggleDiv = React.createClass({
         };
     },
     toggleOnClick: function(e){
-
-        console.log("e", e);
         var self = this;
         var index = e.target.attributes['data-index'].value;
         var targetCanvas = document.getElementById("imageLayer_canvas_" + index);
@@ -244,10 +241,10 @@ var EthnoToggleDiv = React.createClass({
                 $("#ethno-toggle-name-" + index).css("color", self.state.regionColors[index]);
 
 
-                console.log("index + 1", index + 1);
+
                 var numIndex = Number(index);
 
-                console.log("self.props", self.props.mapData.areas.length);
+
 
                 for(var i = 1; i < self.props.mapData.areas.length; i += 2){
                     if (i !== numIndex + 1) {

@@ -340,17 +340,17 @@ var ResponseFormationView = React.createClass({
             case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
                 break;
             case "initialized":
-                //console.log(newMessage);
+
                 break;
             case "recordingStarted":
-                //console.log(newMessage);
+
                 break;
             case "recordingStopped":
-                //console.log(newMessage);
+
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;
-                //console.log(recordedSpeech);
+                
                 isCorrect = false;
                 var test = "Unidentified Sentence";
                 state.page.answer.map(function(item, index){

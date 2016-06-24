@@ -104,7 +104,7 @@ var MissionConnectView = React.createClass({
 
         var self = this;
         self.setState({mapReady:true});
-        console.log("Images loaded..");
+        
     },
 
     viewUpdate: function(status){

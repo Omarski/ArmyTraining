@@ -95,8 +95,8 @@ var EthnoLayersView = React.createClass({
 
         //loop through regions
         self.props.imageColl.map(function(image,index){
-            console.log("imageColl", image);
-            // console.log("lastActualLabel", lastActualLabel);
+
+            
 
             var regionCanvas =  self.createCanvas({
                 canvasWidth:self.props.areaWidth,

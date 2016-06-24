@@ -78,7 +78,6 @@ var BreadcrumbsView = React.createClass({
     },
 
     bookmarkSelected: function(bm) {
-        console.log(bm)
         PageActions.jump(bm);
     },
 

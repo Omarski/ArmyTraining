@@ -111,7 +111,7 @@ var ASRStore = assign({}, EventEmitter.prototype, {
     RecognizeRecording: function() {
         // recognize will need to swtich the lesson/page being checked
         ASRMessajsTester.sendMessage("recognize " + getGrammarID(), "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        //console.log("recognize recording")
+        
     },
 
     PlayRecording: function(){

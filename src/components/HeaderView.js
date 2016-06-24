@@ -107,7 +107,6 @@ var HeaderView = React.createClass({
 
     },
     parentOpenModal: function (tester) {
-        console.log("this", tester);
         tester.setState({showModal: !tester.state.showModal});
     },
     render: function() {
