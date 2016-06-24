@@ -188,7 +188,12 @@ var FooterView = React.createClass({
             }
         }
 
-        ExplorerActions.show(!this.state.expanded);
+        if (this.state.expanded) {
+            ExplorerActions.hide();
+        } else {
+            ExplorerActions.show();
+        }
+
         window.location.hash = "#" + PageStore.chapter().title + PageStore.page().title;
         this.setState(getUnitState(!this.state.expanded));
     },

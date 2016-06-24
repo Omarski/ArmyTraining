@@ -20,6 +20,9 @@ var PanelGroup = require("react-bootstrap/lib/PanelGroup");
 var Panel = require("react-bootstrap/lib/Panel");
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var ReferenceActions = require("../actions/ReferenceActions");
+var AppStateStore = require("../stores/AppStateStore");
+
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -33,12 +36,55 @@ function getBookState() {
     if (book) {
         title = book.data.config.title;
     }
+
     return {
         title: title,
         muted: SettingsStore.muted(),
         showModal: false,
         previousVolume: null,
         hideInClass: ({display: "none"})
+    };
+}
+
+function getPageState(isNav) {
+    var page = null;
+    var unitTitle = "";
+    var chapterTitle = "";
+    var pageTitle = "";
+    var bookmarked = false;
+
+
+    if (PageStore.loadingComplete()) {
+        page = PageStore.page();
+        unitTitle = PageStore.unit().data.title;
+        chapterTitle = PageStore.chapter().title;
+        pageTitle = PageStore.page().title;
+
+        var bm = {
+            unit: PageStore.unit().data.xid,
+            chapter: PageStore.chapter().xid,
+            page: PageStore.page().xid
+        };
+
+        setTimeout(function() {
+            BookmarkActions.setCurrent(bm);
+        });
+
+    }
+
+    if (BookmarkStore.current() &&
+        BookmarkStore.current().page &&
+        page &&
+        (BookmarkStore.current().page === page.xid)) {
+        bookmarked = true;
+    }
+
+    return {
+        isNav: isNav,
+        pageTitle: pageTitle,
+        unitTitle: unitTitle,
+        chapterTitle: chapterTitle,
+        bookmarked: bookmarked
     };
 }
 
@@ -71,12 +117,10 @@ var HeaderView = React.createClass({
         var bookState = getBookState();
         return bookState;
     },
-
     componentWillMount: function() {
         BookStore.addChangeListener(this._onChange);
         ConfigStore.addChangeListener((this._onChange));
     },
-
     componentDidMount: function() {
         BookStore.removeChangeListener(this._onChange);
         BookStore.addChangeListener(this._onChange);
@@ -100,15 +144,17 @@ var HeaderView = React.createClass({
                 title:'Bookmark',
                 body: PageStore.page().title + ' bookmarked!',
                 allowDismiss: true,
-                percent: ""
+                percent: "",
+                image: null
             });
             BookmarkActions.create(bm);
             this.setState(getPageState());
 
     },
-    parentOpenModal: function (tester) {
-        console.log("this", tester);
-        tester.setState({showModal: !tester.state.showModal});
+    showReferenceView: function(){
+        setTimeout(function () {
+            ReferenceActions.show(true);
+        });
     },
     render: function() {
         var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
@@ -143,7 +189,7 @@ var HeaderView = React.createClass({
                     </Navbar.Header>
                     <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
                         <Nav pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
-                            <NavItem eventKey={1} href="#" ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                            <NavItem eventKey={1} href="#" onClick={self.showReferenceView} ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
                             <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
                                 <button title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
@@ -155,8 +201,8 @@ var HeaderView = React.createClass({
                                 </button>
                                 <p>Toggle Mute</p>
                             </NavItem>
-                            <NavItem eventKey={4} href="#"><SettingsView /><p>Settings</p></NavItem>
-                            <BookmarksView isNav={true}/>
+                            <SettingsView isNav={AppStateStore.isMobile()}/>
+                            <BookmarksView isNav={AppStateStore.isMobile()} className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} />
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>

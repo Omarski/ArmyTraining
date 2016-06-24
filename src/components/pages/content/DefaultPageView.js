@@ -73,10 +73,6 @@ var DefaultPageView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
-
-        console.log("this.state", this.state);
-        console.log("this.props", this.props);
-
         return (
             <div>
                 <div className="container" key={"page-" + this.props.page.xid}>

@@ -61,7 +61,6 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
     },
 
     isASREnabled: function(){
-        console.log("ConfigSTore.isASREnabled");
         return (_needsASR);
     },
 

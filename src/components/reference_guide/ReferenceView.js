@@ -37,8 +37,6 @@ function getSettingsState(props) {
         jsonItems: []
     };
 
-
-
     return data;
 }
 
@@ -159,6 +157,16 @@ var ReferenceView = React.createClass({
                 break;
         }
 
+        /*
+         <button title={LocalizationStore.labelFor("header", "tooltipReference")}
+         alt={LocalizationStore.labelFor("header", "tooltipReference")}
+         onClick={this.openModal}
+         type="button"
+         className="btn btn-default btn-lg btn-link main-nav-bar-button"
+         aria-label={LocalizationStore.labelFor("header", "tooltipReference")}
+         >
+         */
+
         return (
             <div id="referenceView">
 
@@ -178,15 +186,7 @@ var ReferenceView = React.createClass({
                         </div>
                     </Modal.Body>
                 </Modal>
-                <button title={LocalizationStore.labelFor("header", "tooltipReference")}
-                        alt={LocalizationStore.labelFor("header", "tooltipReference")}
-                        onClick={this.openModal}
-                        type="button"
-                        className="btn btn-default btn-lg btn-link main-nav-bar-button"
-                        aria-label={LocalizationStore.labelFor("header", "tooltipReference")}
-                    >
-                    <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
-                </button>
+                    <span className="glyphicon glyphicon-education btn-icon btn-link" aria-hidden="true"></span>
             </div>
         );
     },
@@ -222,6 +222,7 @@ var ReferenceView = React.createClass({
             });
 
             self.setState({
+                showModal: ReferenceStore.shouldShow(),
                 jsonItems: referenceJson.items,
                 mapSource: mapSource,
                 pdfSources: pdfSources,

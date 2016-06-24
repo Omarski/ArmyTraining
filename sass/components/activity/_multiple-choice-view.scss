@@ -49,3 +49,11 @@ input[type=checkbox] {
 .multiple-choice-correct {
   color: green;
 }
+
+@media screen and (max-width: 767px){
+  .list-group {
+    .list-group-item {
+      margin-right: 0px;
+    }
+  }
+}

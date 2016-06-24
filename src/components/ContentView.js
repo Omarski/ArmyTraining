@@ -22,6 +22,7 @@ var OrderingView = require('../components/pages/activity/OrderingView');
 var QuestionnaireView = require('../components/pages/content/QuestionnaireView');
 var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
 var QuizStartView = require('../components/pages/activity/QuizStartView');
+var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizView = require('../components/pages/activity/QuizView');
 var PostTestQuizEndView = require('../components/pages/content/PostTestQuizEndView');
 var PronunciationView = require('../components/pages/activity/PronunciationView');
@@ -61,22 +62,17 @@ var ContentView = React.createClass({
     },
 
     componentDidMount: function() {
-
     },
 
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
     },
-
     render: function() {
-
+        var self = this;
         var page = <div></div>;
         var pageId = (this.state.page) ? this.state.page.xid : "";
         var isFullScreen = false;
         if (this.state.page) {
-            console.log(this.state.page.type);
-            console.log(this.state.page.title);
-            console.log(this.state.page);
             switch (this.state.page.type) {
                 case PageTypeConstants.ACTIVE_DIALOG:
                     page = <ActiveDialogView page={this.state.page} />;

@@ -78,3 +78,24 @@
 .sorting-feedback-text {
   text-align: center;
 }
+
+@media screen and (max-width: 767px){
+  .sorting-columnA {
+    padding-left: 0px;
+  }
+  .sorting-columnB {
+    padding-left: 0px;
+  }
+
+  .container {
+    .row {
+      .sorting-columnA {
+        padding-left: 15px;
+      }
+      .sorting-columnB {
+        padding-left: 15px;
+      }
+    }
+  }
+
+}

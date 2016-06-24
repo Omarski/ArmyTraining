@@ -70,7 +70,8 @@ var BreadcrumbsView = React.createClass({
             title:'Bookmark',
             body: PageStore.page().title + ' bookmarked!',
             allowDismiss: true,
-            percent: ""
+            percent: "",
+            image: null
         });
         BookmarkActions.create(bm);
         this.setState(getPageState());
@@ -78,7 +79,6 @@ var BreadcrumbsView = React.createClass({
     },
 
     bookmarkSelected: function(bm) {
-        console.log(bm)
         PageActions.jump(bm);
     },
 
