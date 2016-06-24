@@ -49,7 +49,6 @@ window.onload = function init(){
 };
 
 function hasGetUserMedia(){
-    console.log("hasGetUserMedia");
     return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
@@ -111,7 +110,7 @@ var ASRStore = assign({}, EventEmitter.prototype, {
     RecognizeRecording: function() {
         // recognize will need to swtich the lesson/page being checked
         ASRMessajsTester.sendMessage("recognize " + getGrammarID(), "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        
+
     },
 
     PlayRecording: function(){
