@@ -88,7 +88,7 @@ var SettingsView = React.createClass({
         this.setState({autoPlaySound: !this.state.autoPlaySound});
         this.setState({autoPlaySound: !this.state.autoPlaySound});
     },
-    dropdownToggle(newValue){
+    dropdownToggle: function(newValue){
         if (this._forceOpen){
             this.setState({ menuOpen: true });
             this._forceOpen = false;
@@ -172,7 +172,7 @@ var SettingsView = React.createClass({
                     );
         } else {
             return (
-                    <NavDropdown open={this.state.menuOpen} onToggle={val => this.dropdownToggle(val)} eventKey="4"  title={(
+                    <NavDropdown open={this.state.menuOpen} onToggle={this.dropdownToggle(val)} eventKey="4"  title={(
                         <div>
                             <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
                             alt={LocalizationStore.labelFor("header", "tooltipSettings")}
@@ -182,12 +182,12 @@ var SettingsView = React.createClass({
                             <p>Settings</p>
                         </div>
                     )}>
-                        <MenuItem key={"SettingsItem_4.1"} eventKey="4.1"  href="#" className="bookmark-nav-item" onClick={() => this.menuItemClickedThatShouldntCloseDropdownAndChangeAutoPlay()}>
+                        <MenuItem key={"SettingsItem_4.1"} eventKey="4.1"  href="#" className="bookmark-nav-item" onClick={this.menuItemClickedThatShouldntCloseDropdownAndChangeAutoPlay}>
                             <form>
                                 <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
                             </form>
                         </MenuItem>
-                        <MenuItem eventKey="4.2" className="large-bookmark-nav-item" onClick={() => this.menuItemClickedThatShouldntCloseDropdown()}>
+                        <MenuItem eventKey="4.2" className="large-bookmark-nav-item" onClick={this.menuItemClickedThatShouldntCloseDropdown}>
                             <h5>Voice Volume</h5>
                             <Slider
                                 min={0.0}
@@ -197,7 +197,7 @@ var SettingsView = React.createClass({
                                 toolTip={false}
                                 onSlide={this.voiceVolumeChange} />
                         </MenuItem>
-                        <MenuItem eventKey="4.3" className="large-bookmark-nav-item" onClick={() => this.menuItemClickedThatShouldntCloseDropdown()}>
+                        <MenuItem eventKey="4.3" className="large-bookmark-nav-item" onClick={this.menuItemClickedThatShouldntCloseDropdown}>
                             <h5>Background Sound Volume</h5>
                             <Slider
                                 min={0.0}
