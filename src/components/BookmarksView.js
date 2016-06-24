@@ -66,7 +66,8 @@ var BookmarksView = React.createClass({
             title:'Bookmark',
             body: PageStore.page().title + ' bookmarked!',
             allowDismiss: true,
-            percent: ""
+            percent: "",
+            image: null
         });
         BookmarkActions.create(bm);
         this.setState(getPageState(this.props.isNav));
@@ -106,7 +107,7 @@ var BookmarksView = React.createClass({
                         <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                     </MenuItem>)
                 });
-                items = (<NavDropdown eventKey="5" title={(
+                items = (<NavDropdown id="bookmarkDropdown" eventKey="5" title={(
                 <Button
                     title={"Bookmarks"}
                     alt={"Bookmarks"}

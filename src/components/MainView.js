@@ -94,7 +94,10 @@ var MainView = React.createClass({
     },
 
     componentDidMount: function() {
-        NotificationActions.show({title:'Please wait', body:'Loading...'});
+        NotificationActions.show({
+            title: 'Please wait',
+            body: 'Loading...'
+        });
         LocalizationActions.load();
     },
 
@@ -137,6 +140,7 @@ var MainView = React.createClass({
     _onLocalizationChange: function() {
         var self = this;
         setTimeout(function() {
+            NotificationActions.updateImage(LocalizationStore.labelFor("app", "imageSplash"));
             self.loadConfiguration();
         }, 100)
     },

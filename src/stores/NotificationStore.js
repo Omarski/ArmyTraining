@@ -8,12 +8,14 @@ var _visible = false;
 var _title = "test title";
 var _body = "test body";
 var _percent = "";
+var _image = null;
 var _allowDismiss = false;
 
 function show(data) {
     _title = data.title;
     _body = data.body;
     _percent = data.percent;
+    _image = data.image;
     if (data.allowDismiss === true) {
         _allowDismiss = true;
     }
@@ -48,6 +50,10 @@ var NotificationStore = assign({}, EventEmitter.prototype, {
 
     percent: function() {
         return _percent;
+    },
+
+    image: function() {
+        return _image;
     },
 
     emitChange: function() {
@@ -94,6 +100,11 @@ AppDispatcher.register(function(action) {
             _percent = action.data;
             NotificationStore.emitChange();
             break;
+        case NotificationConstants.NOTIFICATION_UPDATE_IMAGE:
+            _image = action.data;
+            NotificationStore.emitChange();
+            break;
+
         default:
         // no op
     }

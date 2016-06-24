@@ -17,9 +17,6 @@ var NavItem = require("react-bootstrap/lib/NavItem");
 var NavDropdown = require("react-bootstrap/lib/NavDropdown");
 var MenuItem = require("react-bootstrap/lib/MenuItem");
 var PanelGroup = require("react-bootstrap/lib/PanelGroup");
-var Panel = require("react-bootstrap/lib/Panel");
-var ListGroup = ReactBootstrap.ListGroup;
-var ListGroupItem = ReactBootstrap.ListGroupItem;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -100,7 +97,8 @@ var HeaderView = React.createClass({
                 title:'Bookmark',
                 body: PageStore.page().title + ' bookmarked!',
                 allowDismiss: true,
-                percent: ""
+                percent: "",
+                image: null
             });
             BookmarkActions.create(bm);
             this.setState(getPageState());
