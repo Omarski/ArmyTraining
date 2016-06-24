@@ -5,6 +5,7 @@ var ColorText = require('../../../components/widgets/ColorText');
 var ASRStore = require('../../../stores/ASRStore');
 var ConfigStore = require('../../../stores/ConfigStore');
 var PageHeader = require('../../widgets/PageHeader');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
 
@@ -18,21 +19,6 @@ var LI_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 
 var recorder;
 
-window.onload = function init(){
-    // webkit shim
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    navigator.getUserMedia = navigator.getUserMedia ||
-                             navigator.webkitGetUserMedia ||
-                             navigator.mozGetUserMedia ||
-                             navigator.msGetUserMedia;
-    window.URL = window.URL || window.webkitURL;
-};
-
-function hasGetUserMedia(){
-    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia);
-}
-
 var onFail = function(e){
     console.log('An Error has occured.', e);
 };
@@ -42,18 +28,18 @@ var onSuccess = function(s){
     var mediaStreamSource = context.createMediaStreamSource(s);
     recorder = new Recorder(mediaStreamSource);
     recorder.record();
-    console.log("--- onSuccess ---");
-    console.dir(recorder);
+
 };
 
 function record(id, index, self){
-    if(ASR.isInitialized()){
+    if(ASRStore.isInitialized()){
+
         var pState = self.state.playableState;
         var oldCA = self.state.clickedAnswer;
         if(oldCA != 0){
             pState[oldCA.index] = false;
         }
-        ASR.StartRecording();
+        ASRStore.StartRecording();
         var clickedAnswer = {
             index: index
         };
@@ -69,9 +55,9 @@ function record(id, index, self){
 
 // pass the audio handle to stopRecording
 function stopRecording(id, index, self){
-    if(ASR.isInitialized()){
-        ASR.StopRecording();
-        ASR.RecognizeRecording();
+    if(ASRStore.isInitialized()){
+        ASRStore.StopRecording();
+       // ASRStore.RecognizeRecording();
     }else {
         var audio = document.getElementById(id);
         recorder.stop();
@@ -82,8 +68,8 @@ function stopRecording(id, index, self){
 }
 
 function handlePlaying(id, index, self){
-    if(ASR.isInitialized()){
-        ASR.PlayRecording();
+    if(ASRStore.isInitialized()){
+        ASRStore.PlayRecording();
     }else {
         if (self.state.isPlaying[index]) {
             stop(id, index, self);
@@ -118,9 +104,10 @@ function stop(id, index, self){
     });
 }
 
-function handleRecord(id, index, self){
+function handleRecord(id, index, self){  // record if not currently recording
     var newRecordingState = self.state.recordingState;
     if (newRecordingState[index]) {
+
         stopRecording(id, index, self);
         var newPlayableState = self.state.playableState;
         newPlayableState[index] = true;
@@ -130,13 +117,14 @@ function handleRecord(id, index, self){
             playableState: newPlayableState
         })
     } else {
-       // if(self.state.message != "recordingStarted") {
+
+      //  if(self.state.message != "recordingStarted") {
             record(id, index, self);
             newRecordingState[index] = true;
             self.setState({
                 recordingState: newRecordingState
             });
-       // }
+      //  }
     }
 }
 
@@ -222,19 +210,26 @@ var PronunciationView = React.createClass({
     },
 
     componentDidMount: function() {
-        ASRStore.addChangeListener(this._onChange);
-        //PageStore.addChangeListener(this._onChange);
-        if(hasGetUserMedia()){
-            // UserMedia allowed
-        }else{
-            // UserMedia not allowed
-        }
+        ASRStore.addChangeListener(this._onMessageRecieved);
+        // if browser can use webAudioAPI, use that
+        // otherwise use Java Applet as a fallback
+        //if(hasGetUserMedia()){
+        //    // UserMedia allowed
+        //}else{
+        //    // UserMedia not allowed
+        //    if(!ASRStore.isInitialized()){
+        //        ASRStore.InitializeASR();
+        //    }
+        //}
 
-        if(ConfigStore.isASREnabled()){
-            if(!ASR.isInitialized()){
-                ASR.InitializeASR();
-            }
-        }
+    //    if(ConfigStore.isASREnabled()){
+    //        if(!ASRStore.isInitialized()){
+    //            ASRStore.InitializeASR();
+    //        }
+    //    }
+
+
+
     },
 
     componentWillUnmount: function() {
@@ -259,7 +254,6 @@ var PronunciationView = React.createClass({
         var displayTracker = state.displayTracker;
         var questionCounter = 0;
         var noteCounter = 0;
-
 
         // need to check for notes and send those  to top of page
         var vaList = displayTracker.map(function(item, index){
@@ -333,6 +327,13 @@ var PronunciationView = React.createClass({
                     } else {
                         itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
                     }
+                }else if(ASRStore.isInitialized()){
+                    var isRecording = self.state.recordingState[qcIndex];
+                    if (isRecording) {
+                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
+                    } else {
+                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
+                    }
                 }
 
                 var cls = (index % 2) ? "pronunciation-item-row-odd" : "pronunciation-item-row-even";
@@ -346,13 +347,31 @@ var PronunciationView = React.createClass({
                             <tr>
                                 <td rowSpan="2" width="25">
                                     <audio id={id}></audio>
-                                    <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} onClick={function(){textClick(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        alt={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        type="button" onClick={function(){textClick(id, qcIndex, self)}}
+                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
+                                        <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} ></span>
+                                    </button>
                                 </td>
                                 <td rowSpan="2" width="25">
-                                    <span className={itemRecordingClass + " pronunciation-audio-button"} onClick={function(){handleRecord(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                            alt={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                            type="button" onClick={function(){handleRecord(id, qcIndex, self)}}
+                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
+                                        <span className={itemRecordingClass + " pronunciation-audio-button"} ></span>
+                                    </button>
                                 </td>
                                 <td rowSpan="2" width="25">
-                                    <span className={itemRecordedClass + " pronunciation-audio-button"} onClick={function(){handlePlaying(id, qcIndex, self)}}></span>
+                                    <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                            alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                            type="button" onClick={function(){handlePlaying(id, qcIndex, self)}}
+                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
+                                        <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
+                                    </button>
 
                                     <span className={itemFeedbackClass}></span>
 
@@ -369,7 +388,7 @@ var PronunciationView = React.createClass({
             }else if(item === "note"){
                 note = self.state.notes[noteCounter] || "";
                 noteCounter++;
-                return(<tr><td colSpan="4"><p key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
+                return(<tr><td colSpan="4"><p className="pronunciation-note" key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
             }else{
                 return("");
             }
@@ -377,8 +396,8 @@ var PronunciationView = React.createClass({
         });
 
         return (
-            <div>
-                <div key={"page-" + this.state.page.xid}>
+            <div key={"page-" + this.state.page.xid}>
+                <div>
                     <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
@@ -393,6 +412,12 @@ var PronunciationView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
+        if(this.isMounted()) {
+            this.setState(getPageState(this.props));
+        }
+    },
+
+    _onMessageRecieved: function(){
         var state = this.state;
         var newIsCorrect = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
@@ -406,13 +431,13 @@ var PronunciationView = React.createClass({
             case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
                 break;
             case "initialized":
-                console.log(newMessage);
+
                 break;
             case "recordingStarted":
-                console.log(newMessage);
+
                 break;
             case "recordingStopped":
-                console.log(newMessage);
+                
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;
@@ -428,8 +453,7 @@ var PronunciationView = React.createClass({
         }
 
         if(this.isMounted()) {
-            this.setState(getPageState(this.props));
-            if(ConfigStore.isASREnabled()){
+            if(ASRStore.isInitialized()){
                 this.setState({
                     message: newMessage,
                     recordedSpeech: recordedSpeech,

@@ -1,7 +1,9 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ASRConstants = require('../constants/ASRConstants');
+var ASRActions = require('../actions/ASRActions');
 var PageStore = require('../stores/PageStore');
+var ConfigStore = require('../stores/ConfigStore');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -16,6 +18,39 @@ function create(data) {
 
 function destroy() {
 
+}
+
+function load(){
+    if(!hasGetUserMedia() || ConfigStore.isASREnabled()){
+        console.log("ASRStore.load.need to load ASR");
+        // GetUserMedia not allowed
+        if(!ASRStore.isInitialized()){
+            console.log("ASRStore.load.!isInitialized");
+            ASRStore.InitializeASR();
+        }
+    }else{
+
+    }
+
+    setTimeout(function() {
+        ASRActions.loadComplete();
+    }, 100);
+
+}
+
+window.onload = function init(){
+    // webkit shim
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+};
+
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
 
 var _isInitialized = false;
@@ -57,24 +92,25 @@ var ASRStore = assign({}, EventEmitter.prototype, {
     },
 
     InitializeASR: function() {
-        ASRMessajsTester.sendMessage("urn:ASRMessajsTester:MessajsImpl1,initialize Chinese", "urn:ASRApplet:test", "text/plain; charset=utf-8");
+        console.log("ASR Store initialize");
+        ASRMessajsTester.sendMessage("urn:ASRMessajsTester:MessajsImpl1,initialize English", "urn:ASRApplet:test", "text/plain; charset=utf-8");
         _isInitialized = true;
     },
 
     StartRecording: function() {
         ASRMessajsTester.sendMessage("startrecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        //console.log("Start recording...");
+        console.log("Start recording...");
     },
 
     StopRecording: function() {
         ASRMessajsTester.sendMessage("stoprecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        //console.log("stop recording...");
+        console.log("stop recording...");
     },
 
     RecognizeRecording: function() {
         // recognize will need to swtich the lesson/page being checked
         ASRMessajsTester.sendMessage("recognize " + getGrammarID(), "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        //console.log("recognize recording")
+
     },
 
     PlayRecording: function(){
@@ -91,7 +127,10 @@ var ASRStore = assign({}, EventEmitter.prototype, {
 
     RecievedMessaj: function(msj){
         _message = msj;
-        this.emitChange();
+        setTimeout(function() {
+            this.emitChange();
+        }, 100)
+
     },
 
     emitChange: function() {
@@ -116,6 +155,12 @@ AppDispatcher.register(function(action) {
             break;
         case ASRConstants.ACTIVE_DIALOG_OBJECTIVE_DESTROY:
             destroy();
+            ASRStore.emitChange();
+            break;
+        case ASRConstants.ASR_LOAD:
+            load();
+            break;
+        case ASRConstants.ASR_LOAD_COMPLETE:
             ASRStore.emitChange();
             break;
         default:

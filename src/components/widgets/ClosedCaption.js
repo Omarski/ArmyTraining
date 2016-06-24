@@ -46,7 +46,10 @@ var ClosedCaptionView = React.createClass({
                         </Popover>);
 
         return  (   <OverlayTrigger trigger='click' placement='left' overlay={popover}>
-                        <Button className="btn btn-default btn-link btn-lg closed-caption-button">
+                        <Button title={"Closed Caption"}
+                                alt={"Closed Caption or Transcript"}
+                                aria-label={"Video Transcript"}
+                                className="btn btn-default btn-link btn-lg closed-caption-button">
                             <span className="glyphicon glyphicon-subtitles btn-icon" aria-hidden="true"></span>
                         </Button>
                     </OverlayTrigger>

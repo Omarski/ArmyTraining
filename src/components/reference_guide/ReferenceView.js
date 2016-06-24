@@ -5,6 +5,7 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 
 var ReferenceStore = require('../../stores/ReferenceStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 var ReferenceGestureView = require('../../components/reference_guide/ReferenceGestureView');
 var ReferenceMapView = require('../../components/reference_guide/ReferenceMapView');
 var ReferenceDictionaryView = require('../../components/reference_guide/ReferenceDictionaryView');
@@ -47,10 +48,9 @@ var ReferenceView = React.createClass({
     },
 
     openModal: function(){
+        var self = this;
         this.setState({ showModal: !this.state.showModal });
     },
-
-
     handleSelect: function(eventKey, e) {
         if(typeof(eventKey) === "object"){
             /* eventKey === "object" means you selected a drop-down menu sub-item and the event key
@@ -67,7 +67,7 @@ var ReferenceView = React.createClass({
 
             switch(selectedIndex){
                 case REFERENCE_PDF_VIEW:
-                    this.setState({ selectedIndex: REFERENCE_MAP_VIEW, showModal: false});
+                    this.setState({showModal: false});
                     break;
                 case REFERENCE_DICTIONARY_VIEW:
                     this.setState({selectedIndex: REFERENCE_DICTIONARY_VIEW, dictionarySourceKey: sourceKey });
@@ -88,7 +88,6 @@ var ReferenceView = React.createClass({
     componentDidMount: function() {
         ReferenceStore.addChangeListener(this._onReferenceChange);
     },
-
     render: function() {
         var self = this;
         var state = self.state;
@@ -179,7 +178,13 @@ var ReferenceView = React.createClass({
                         </div>
                     </Modal.Body>
                 </Modal>
-                <button onClick={this.openModal} type="button" className="btn btn-default btn-lg btn-link main-nav-bar-button" aria-label="reference">
+                <button title={LocalizationStore.labelFor("header", "tooltipReference")}
+                        alt={LocalizationStore.labelFor("header", "tooltipReference")}
+                        onClick={this.openModal}
+                        type="button"
+                        className="btn btn-default btn-lg btn-link main-nav-bar-button"
+                        aria-label={LocalizationStore.labelFor("header", "tooltipReference")}
+                    >
                     <span className="glyphicon glyphicon-education btn-icon" aria-hidden="true"></span>
                 </button>
             </div>
@@ -191,7 +196,6 @@ var ReferenceView = React.createClass({
     _onReferenceChange: function(){
         var self = this;
         var referenceJson = ReferenceStore.getData();
-        console.dir(referenceJson);
         if(referenceJson && referenceJson.items){
             var mapSource = null;
             var pdfSources = null;
@@ -227,5 +231,9 @@ var ReferenceView = React.createClass({
         }
     }
 });
+
+ReferenceView.propTypes = {
+
+}
 
 module.exports = ReferenceView;

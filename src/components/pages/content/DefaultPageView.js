@@ -73,10 +73,9 @@ var DefaultPageView = React.createClass({
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
-
         return (
             <div>
-                <div className="container" key={"page-" + this.state.page.xid}>
+                <div className="container" key={"page-" + this.props.page.xid}>
                     <h1>Unknown Page Type {this.state.pageType}</h1>
                     <h3>{this.state.title}</h3>
                     <div>

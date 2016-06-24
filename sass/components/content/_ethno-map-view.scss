@@ -10,12 +10,21 @@
 .ethno-wrapper-div {
   border-bottom-width: 1px;
   display: flex;
+  overflow: hidden;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  position: relative;
 }
 
 .ethno-visible {
   visibility: visible !important;
+  opacity: 1 !important;
   z-index: 12;
 }
+
+.imageLayerView-back-image {
+}
+
 
 .imageLayerView-region-canvas{
   display:block;
@@ -25,10 +34,12 @@
   left:0;
   float: left;
   margin: 0;
+  opacity: 0;
 }
 
 .ethno-not-visible {
   visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .ethno-sidebar-form {
@@ -37,6 +48,7 @@
 
 .well {
   margin-top: 20px;
+  margin-left: 20px;
 }
 
 
@@ -52,8 +64,6 @@
   background-color: #EEE;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid #CCC;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
   padding: 5px;
   z-index: 9999;
 }
@@ -69,8 +79,6 @@
 #ethnoOverlay {
   position: absolute;
   width: 768px;
-  margin-left: 0px;
-  bottom: 0px;
 }
 
 .ethno-overlay-bottom-left {

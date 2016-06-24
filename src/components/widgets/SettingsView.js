@@ -1,17 +1,19 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var SettingsStore = require('../../stores/SettingsStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
-var Input = ReactBootstrap.Input;
+var Checkbox = ReactBootstrap.Checkbox;
 var Slider = require('../../components/widgets/Slider');
 
 var BookmarkActions = require('../../actions/BookmarkActions');
 var PageActions = require('../../actions/PageActions');
 var SettingsActions = require('../../actions/SettingsActions');
+var UnitActions = require('../../actions/UnitActions');
 
 function getSettingsState() {
     var settings = store.get('settings') || {};
@@ -67,6 +69,7 @@ var SettingsView = React.createClass({
 
     resetProgress: function() {
         PageActions.reset();
+        UnitActions.reset();
     },
 
     resetSettings: function() {
@@ -85,11 +88,12 @@ var SettingsView = React.createClass({
         SettingsStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        
         var popover =   <Popover id="settingsPopover" title='Settings'>
                             <ListGroup>
                                 <ListGroupItem>
                                     <form>
-                                        <Input type='checkbox' label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange} />
+                                        <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
                                     </form>
                                 </ListGroupItem>
                                 <ListGroupItem>
@@ -128,7 +132,10 @@ var SettingsView = React.createClass({
                         </Popover>;
 
         return  <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
-                    <Button className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                    <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            alt={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            aria-label={LocalizationStore.labelFor("header", "tooltipSettings")}
+                            className="btn btn-default btn-link btn-lg main-nav-bar-button">
                         <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                     </Button>
                 </OverlayTrigger>

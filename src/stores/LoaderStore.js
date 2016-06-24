@@ -26,7 +26,6 @@ function load() {
 
     _loading = true;
     $.getJSON("data/content/toc.json", function(result) {
-
         BookActions.create(result.book);
         var books = BookStore.getAll();
 
@@ -80,6 +79,8 @@ function loadChapterPages(units, unit, index) {
                 var storedPages = store.get('pages');
 
                 var sections = result.chapter.section;
+                var preposttestpages = result.chapter.preposttest;
+
                 for (var i = 0; i < sections.length; i++) {
 
                     // get section mode
@@ -95,6 +96,11 @@ function loadChapterPages(units, unit, index) {
                         // mark as a quiz page
                         if (sectionMode == "quiz") {
                             page.state = {quizpage: true};
+                        }
+
+                        // mark as a preposttestpage
+                        if (preposttestpages && (preposttestpages.indexOf(page.xid) != -1)) {
+                            page.preposttest = true;
                         }
 
                         // load saved page state

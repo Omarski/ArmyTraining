@@ -3,7 +3,9 @@ var PageStore = require('../stores/PageStore');
 var PageActions = require('../actions/PageActions');
 var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
+var LocalizationStore = require('../stores/LocalizationStore');
 var NotificationActions = require('../actions/NotificationActions');
+var BookmarksView = require('../components/BookmarksView');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
@@ -68,7 +70,8 @@ var BreadcrumbsView = React.createClass({
             title:'Bookmark',
             body: PageStore.page().title + ' bookmarked!',
             allowDismiss: true,
-            percent: ""
+            percent: "",
+            image: null
         });
         BookmarkActions.create(bm);
         this.setState(getPageState());
@@ -76,7 +79,6 @@ var BreadcrumbsView = React.createClass({
     },
 
     bookmarkSelected: function(bm) {
-        console.log(bm)
         PageActions.jump(bm);
     },
 
@@ -100,19 +102,10 @@ var BreadcrumbsView = React.createClass({
     render: function() {
 
         var self = this;
-        var bookmarks = BookmarkStore.bookmarks();
-        var items = "";
-        if (bookmarks) {
-            items = bookmarks.map(function(item) {
-                return (<ListGroupItem>
-                    <a href="#" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</a>
-                </ListGroupItem>)
-            });
-        }
 
 
         var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
-            <ListGroup>
+            <ListGroup key="bookmarkbreadcrumbsbutton">
                 <Button
                     id="breadcrumbsButton"
                     type="button"
@@ -123,15 +116,18 @@ var BreadcrumbsView = React.createClass({
                 </Button>
             </ListGroup>
             <ListGroup>
-                {items}
+                <BookmarksView isNav={false}/>
             </ListGroup>
         </Popover>);
 
         var bookmarkBtn = (
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
+                    title={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
+                    alt={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
                     id="breadcrumbsButton"
                     type="button"
+                    aria-label={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
                     className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
                     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
@@ -141,14 +137,19 @@ var BreadcrumbsView = React.createClass({
 
         return (
             <div>
-                <ol className="breadcrumb main-breadcrumbs">
-                    <li><a href="#">{this.state.unitTitle}</a></li>
-                    <li><a href="#" >{this.state.chapterTitle}</a></li>
-                    <li><a href="#" className="active">{this.state.pageTitle}</a></li>
-                </ol>
-                {bookmarkBtn}
-            </div>
+                <div className="hide-bread-crumbs-for-tablet">
+                    <ol className="breadcrumb main-breadcrumbs">
+                        <li><a href="#">{this.state.unitTitle}</a></li>
+                        <li><a href="#" >{this.state.chapterTitle}</a></li>
+                        <li><a href="#" className="active">{this.state.pageTitle}</a></li>
+                    </ol>
+                    {bookmarkBtn}
+                </div>
 
+                <div className="hide-bread-crumbs-for-browser">
+                    {bookmarkBtn}
+                </div>
+            </div>
         );
     },
     _onChange: function() {

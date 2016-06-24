@@ -20,6 +20,19 @@ var ASRActions = {
         AppDispatcher.dispatch({
             actionType: ASRConstants.ASR_DESTROY
         });
+    },
+
+    loadComplete: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ASRConstants.ASR_LOAD_COMPLETE,
+            data: data
+        });
+    },
+    load: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ASRConstants.ASR_LOAD,
+            data: data
+        });
     }
 
 };

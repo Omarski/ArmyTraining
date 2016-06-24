@@ -113,7 +113,7 @@ var CoachFeedbackView = React.createClass({
             <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div className="multiple-choice-alert-text">
-                    {coachMedia}<h5><span className={feedbackClass}></span>{cannedText}<br>{this.props.text}</br></h5>
+                    {coachMedia}<h5><span className={feedbackClass}></span>{cannedText}<br></br>{this.props.text}</h5>
                 </div>
             </div>
         );

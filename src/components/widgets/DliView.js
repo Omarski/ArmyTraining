@@ -3,6 +3,7 @@
  */
 var React = require('react');
 var ConfigStore = require('../../stores/ConfigStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 var ReactBootstrap = require('react-bootstrap');
 var DliStore = require('../../stores/DliStore');
 
@@ -72,7 +73,10 @@ var DliView = React.createClass({
 
         return(<span id="dliView">
             <OverlayTrigger trigger='click' rootClose placement='left' id="DliOverlayTrigger" overlay={popOver}>
-                <Button className="btn btn-default btn-lg btn-link main-nav-bar-button">
+                <Button title={LocalizationStore.labelFor("header", "tooltipDLI")}
+                        alt={LocalizationStore.labelFor("header", "tooltipDLI")}
+                        aria-label={LocalizationStore.labelFor("header", "tooltipDLI")}
+                        className="btn btn-default btn-lg btn-link main-nav-bar-button">
                     {dliIcon}
                 </Button>
             </OverlayTrigger>

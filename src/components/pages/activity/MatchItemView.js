@@ -25,6 +25,8 @@ function getPageState(props) {
         data.prompt = props.page.prompt.text;
         data.page = props.page;
 
+        //LINE 25 causes an error on Lesson 9/18 Pages 33/167 (cannot read property 'text' of null --> Is this supposed to be props.page.text?
+
         props.page.matchSource.map(function(item, index){
           //  var label = item.nut.uttering.utterance.native.text;
           //  data.answerState.push({label: label, isMoved: false, currentBox: "", correctBox: item.letter});
@@ -94,7 +96,7 @@ var MatchItemView = React.createClass({
     },
 
     onDragging: function(e){
-        e.dataTransfer.setData('text/plain', 'anything');
+        //e.dataTransfer.setData('text/plain', 'anything');
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";

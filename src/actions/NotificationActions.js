@@ -35,6 +35,12 @@ var NotificationActions = {
             actionType: NotificationConstants.NOTIFICATION_UPDATE_PERCENT,
             data: data
         });
+    },
+    updateImage: function(data) {
+        AppDispatcher.dispatch({
+            actionType: NotificationConstants.NOTIFICATION_UPDATE_IMAGE,
+            data: data
+        });
     }
 };
 

@@ -93,7 +93,7 @@ var OrderingView = React.createClass({
     },
 
     onDragging: function(e){
-        e.dataTransfer.setData('text/plain', 'anything');
+        //e.dataTransfer.setData('text/plain', 'anything');
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";
