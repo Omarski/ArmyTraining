@@ -1,0 +1,68 @@
+{
+  "breadcrumbs": {
+    "tooltipBookmark": "סימניות"
+  },
+  "footer": {
+    "tooltipNext": "עמוד הבא",
+    "tooltipPrevious": "עמוד הקודם",
+    "tooltipIndexExpand": "פתיחת קטלוג",
+    "tooltipIndexCollapse": "סגירת קטלוג",
+    "lblRequired": "חובה",
+    "lblOptional": "בחירה",
+    "lblExplorer": "קטלוג שיעורים"
+  },
+  "header": {
+    "tooltipLogo": "לומדה למודעות תרבותית",
+    "tooltipDLI": "מדריך DLI",
+    "tooltipReference": "מדריך נלווה",
+    "tooltipMute": "ללא קול",
+    "tooltipUnMute": "הפעלת קול",
+    "tooltipSettings": "הגדרות"
+  },
+  "loader": {
+    "lblLoading": "טוען"
+  },
+  "posttest": {
+    "lblResults": "התסיימה המבחן הסופי. עניתה על {0} שאלות נכונות מתוך {1}. הציון הזה לא ישפיע על סיום הקורס."
+  },
+  "pretest": {
+    "headerTitle": "שיעור מדינה או שיעור משימה",
+    "headerTestOut": "הרווחת נקודות זכות?",
+    "lblCreditAccept": "קבלת נקודות זכות",
+    "lblCreditDecline": "ויתור על נקודות זכות",
+    "lblTitle": "שאלה {0}",
+    "lblFailed": "סיימת את המבחן! לצערנו, הציון שלך לא מאפשר דילוג על תוכן הקורס.  \n\nללחוץ על \"הבא\" כדי להתקדם לשיעור הראשון בקורס החובה שלך.",
+    "lblPassed": "כל הכבוד! תוצאתך במבחן מאפשר לך לדלג על חלקים מהקודס. יש לעיין ברשימת השיעור ולבחור את השיעורים עבורם יש נקודות זכות וללחוץ \"קבלת נקודות זכות\" או לוותר על נקודות הזכות עם לחיצה על \"ויתור על נקודות זכות\". אם בחרת לוותר על נקודות זכות, שיעורים אלו יופיעו כחלק משיעורי החובה שלך.80% הציון המינימלי לעבור את המבחנים של שיעודים אלו."
+  },
+  "progress": {
+    "lblLessons": "שיעורים",
+    "lblPages": "עמודים"
+  },
+  "settings": {
+    "lblTitle": "הגדרות",
+    "lblAutoPlaySound": "קול אוטומטי",
+    "lblVoiceVolume": "עוצמת הקול"
+  },
+  "quizEnd": {
+    "headerResult": "תוצאה",
+    "headerQuestion": "שאלה",
+    "headerAnswer": "תשובה",
+    "lblPassed": "הציון שלך {0}. כל הכבוד! השלמת בהצלחה פרק. אפשר להקדם הלאה לפרק הבא הקורס לימודים שלך.",
+    "lblFailed": "הציון שלך {0}. כדי לחזור על הפרק ולנסות שוב את הבוחן."
+  },
+  "questionnaireEnd": {
+    "btnConfirm": "אישור",
+    "btnRestart": "התחל מחדש",
+    "lblConfirm": "אשר את בחירתך:",
+    "lblTime": "{0}זמן לימוד משוער:",
+    "lblLessons": "שיעורים:"
+  },
+  "tools": {
+    "btnListen": "ללחוץ כדי להקשיב"
+  },
+  "PronunciationPage": {
+    "btnPlay": "נגן",
+    "btnRecord": "הקלט",
+    "btnPlayback": "הקשב להקלטה"
+  }
+}

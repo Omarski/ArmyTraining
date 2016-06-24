@@ -1,0 +1,68 @@
+{
+  "breadcrumbs": {
+    "tooltipBookmark": "Marcadores"
+  },
+  "footer": {
+    "tooltipNext": "Sigiente Página",
+    "tooltipPrevious": "Anterior Página",
+    "tooltipIndexExpand": "Abrir Explorador",
+    "tooltipIndexCollapse": "Cerar Explorador",
+    "lblRequired": "Requisito",
+    "lblOptional": "Opcional",
+    "lblExplorer": "Explorador"
+  },
+  "header": {
+    "tooltipLogo": "Virtual Entrenador Para Concencia Cultural",
+    "tooltipDLI": "Guía del DLI",
+    "tooltipReference": "Referencia",
+    "tooltipMute": "Apaga Sonido",
+    "tooltipUnMute": "Aprende Sonido",
+    "tooltipSettings": "Ajustes"
+  },
+  "loader": {
+    "lblLoading": "Cargando"
+  },
+  "posttest": {
+    "lblResults": "Gracias para tomando el Examen-Posterior. Respondistes correcto en {0} de {1} de los preguntas. Esta calificacion no afecta la finalización del curso."
+  },
+  "pretest": {
+    "headerTitle": "Lección De País O Misión",
+    "headerTestOut": "¿Elegible Para Saltarse?",
+    "lblCreditAccept": "¿Acepta Credito?",
+    "lblCreditDecline": "Declinar Credito",
+    "lblTitle": "Pregunta {0}",
+    "lblFailed": "Gracias para tomar el examen. Desafortunadamente, tu calificación no te deja saltarse de porciones del curso. \n\nHace clic en \"Sigiente Página\" para regresar al primer lección de tu Curso de Instrucción.",
+    "lblPassed": "¡Felicitaciones! Tu calificación te deja saltarse de porciones del curso. Revisa los lecciónes abajo para cuales puedes recibir credito, entonces hacer clic en el botón \"Acepta Credito,\" or hacer clic en el botón \"Declinar Credito\" si no lo quieres.\n\nSi declinas el credito para el lección, necessitas que tomarlos como parte de tu Curso de Instrucción (CDI),  y conseguir un calificación de al menos 80% en los examens."
+  },
+  "progress": {
+    "lblLessons": "Lecciónes",
+    "lblPages": "Páginas"
+  },
+  "settings": {
+    "lblTitle": "Ajustes",
+    "lblAutoPlaySound": "Automáticamente Juega Sonido",
+    "lblVoiceVolume": "Volumen De Voz"
+  },
+  "quizEnd": {
+    "headerResult": "Resultados",
+    "headerQuestion": "Pregunta",
+    "headerAnswer": "Respuesta",
+    "lblPassed": "Tu calificación es {0}%. ¡Felicitaciones! Has satisfactoriamente completado esta sección. Ahora puedes continuar al sigiente sección de tu Curso de Instrucción.",
+    "lblFailed": "Tu calificación es {0}%. Revista la sección otra vez y toma el examen de nuevo."
+  },
+  "questionnaireEnd": {
+    "btnConfirm": "Confirma",
+    "btnRestart": "Comenza De Nuevo",
+    "lblConfirm": "Confirme Su Selección:",
+    "lblTime": "Tiempo Estimado Para Entrenamiento: {0}",
+    "lblLessons": "Lecciónes:"
+  },
+  "tools": {
+    "btnListen": "Clic Para Escuchar"
+  },
+  "PronunciationPage": {
+    "btnPlay": "Juega",
+    "btnRecord": "Graba",
+    "btnPlayback": "Escuchar Grabación"
+  }
+}
