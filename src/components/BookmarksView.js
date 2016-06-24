@@ -85,7 +85,7 @@ var BookmarksView = React.createClass({
     menuItemClickedThatShouldntCloseDropdown: function(){
         this._forceOpen = true;
     },
-    dropdownToggle(newValue){
+    dropdownToggle: function(newValue) {
         if (this._forceOpen){
             this.setState({ menuOpen: true });
             this._forceOpen = false;
