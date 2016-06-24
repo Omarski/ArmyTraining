@@ -17,7 +17,6 @@ var MissionConnectProgressView = React.createClass({
 
 
         var list = this.props.charList.map(function(char,index){
-            console.log("List: >>> "+char);
             return(
                 <div key={index}>{char}</div>
             )

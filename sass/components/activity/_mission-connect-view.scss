@@ -45,8 +45,8 @@
       display:block;
       width: 100px;
       height: 100px;
-      top: -32px;
-      left: -10px;
+      top: -18px;
+      left: -5px;
       cursor:pointer;
       z-index:2;
     }
@@ -150,7 +150,27 @@
       float:left;
   }
 
-   //scenario - text
+  //leader - photo
+    .mission-connect-view-popLeaderImg {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #737373;
+      border-radius: 15px;
+      float:left;
+      margin-bottom:20px;
+  }
+
+   //intro - text
+  .mission-connect-view-popIntroText{
+    margin-top:5px;
+    margin-bottom:20px;
+    width: 470px;
+    line-height:20px;
+    font-size:14px;
+  }
+
+  //scenario - text
   .mission-connect-view-popSenTextCont{
     margin-left:10px;
     float: left;
@@ -185,6 +205,44 @@
     margin-bottom:20px;
     width: 470px;
     line-height:16px;
+    font-size:14px;
+  }
+
+  //leader - text
+  .mission-connect-view-popLeaderTextQuote{
+    float:left;
+    margin-left:15px;
+    margin-top:40px;
+    width:350px;
+    font-style:italic;
+    font-weight:bold;
+    font-size:22px;
+    line-height:16px;
+  }
+
+  .mission-connect-view-popLeaderText{
+    clear:left;
+    margin-top:5px;
+    margin-bottom:20px;
+    width: 470px;
+    line-height:16px;
+    font-size:14px;
+  }
+
+  //stats - text
+  .mission-connect-view-popStatsHead{
+    width: 350px;
+    font-weight: bold;
+    font-size:20px;
+    margin-bottom:30px;
+  }
+
+  .mission-connect-view-popStatsText{
+    clear:left;
+    margin-top:5px;
+    margin-bottom:20px;
+    width: 470px;
+    line-height:25px;
     font-size:14px;
   }
 

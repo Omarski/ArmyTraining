@@ -15,13 +15,12 @@ var MissionConnectInterviewView = React.createClass({
             quizTempl:null,
             feedbackTempl:null,
             questionTemplColl:[],
-            popState: "scenario",
-            stats:{completed:0, hits:0, misses:0}
+            popState: "scenario"
         };
     },
 
     propTypes: {
-        gameData: PropTypes.object,
+        gameData: PropTypes.object.isRequired,
         mediaPath: PropTypes.string.isRequired,
         images: PropTypes.array.isRequired,
         viewUpdate: PropTypes.func.isRequired,
@@ -29,11 +28,18 @@ var MissionConnectInterviewView = React.createClass({
         scoreObjColl: PropTypes.array.isRequired,
         showInterview: PropTypes.bool.isRequired,
         updateGameView: PropTypes.func.isRequired,
-        updateScore: PropTypes.func.isRequired
+        updateScore: PropTypes.func.isRequired,
+        objectNodesNum: PropTypes.number.isRequired,
+        stats: PropTypes.object.isRequired
     },
 
     componentDidMount: function(){
         this.renderPopContent();
+    },
+
+    viewUpdate: function(update){
+        //propagate up
+        this.props.viewUpdate(update)
     },
 
     onInteract: function(){
@@ -49,6 +55,7 @@ var MissionConnectInterviewView = React.createClass({
         var attempt = scoreObj.attempts < 2 ? scoreObj.attempts + 1 : 0;
         var attempts = scoreObj.allAttempts + 1;
         var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
+        var localStats = self.props.stats;
 
         if (correct === "true") {
 
@@ -63,18 +70,17 @@ var MissionConnectInterviewView = React.createClass({
             });
 
             if (char.gameObjective){
+
                 self.props.updateGameView({task:"updateList", value:char.occupation});
-                self.state.stats.completed = self.state.stats.completed + 1;
-                if (self.state.stats.completed === self.state.objectiveNodesTotal) {
-                    //final stats - call win pop
+                localStats.completed = self.props.stats.completed + 1;
+
+                if (localStats.completed === self.props.objectNodesNum) {
+                    console.log(">>>>>>>>>> Winner");
+                    self.viewUpdate({task:"won", value:null});
                 }
             }
 
-            self.state.stats.hits = self.state.stats.hits + 1;
-            if (self.state.stats.hits === 6) {
-                //final stats - call loss pop
-            }
-
+            localStats.hits = self.props.stats.hits + 1;
 
             setTimeout(function(){self.renderFeedback();},250);
 
@@ -85,10 +91,22 @@ var MissionConnectInterviewView = React.createClass({
 
             self.props.updateGameView({task:"updateWrong", value:null});
 
-            self.state.stats.misses = self.state.stats.misses + 1;
+            localStats.misses = self.props.stats.misses + 1;
+
+            if (localStats.misses === 6) {
+                console.log(">>>>>>>>>> Looser");
+                self.viewUpdate({task:"timeUp", value:null});
+            }
 
             setTimeout(function(){self.renderFeedback();},250);
         }
+
+        self.props.viewUpdate({task:"updateStats", value:localStats});
+
+        console.log("Completed: " + localStats.completed);
+        console.log("Total obj: " + self.props.objectNodesNum);
+        console.log("Hits: " +      localStats.hits);
+        console.log("Misses: " + localStats.misses);
     },
 
     onClosePop: function(){

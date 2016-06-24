@@ -22,7 +22,8 @@ function getPageState(props) {
         loadCounter:0,
         totalImages:0,
         mapReady:false,
-        stats:{completed:0, hits:0, misses:0}
+        stats:{completed:0, hits:0, misses:0},
+        objectNodesNum:0
     };
     
     if (props && props.page) {
@@ -36,10 +37,21 @@ function getPageState(props) {
 }
 
 var MissionConnectView = React.createClass({
+
     getInitialState: function() {
 
         var pageState = getPageState(this.props);
         return pageState;
+    },
+
+    componentWillMount: function(){
+
+        //find objective nodes
+        var nodes = this.state.gameData.networkGameNodes.filter(function (obj) {
+            return obj.gameObjective === true;
+        });
+
+        this.setState({objectNodesNum:nodes.length});
     },
 
     componentDidMount: function() {
@@ -76,7 +88,6 @@ var MissionConnectView = React.createClass({
                 loadedObj[key+"Url"] = imageColl[i][key];
             }
 
-
             loadedImageColl.push(loadedObj);
         }
 
@@ -112,18 +123,23 @@ var MissionConnectView = React.createClass({
 
         var self = this;
         self.setState({mapReady:true});
-        //self.prepIntroPopup();
+        self.prepIntroPopup();
     },
 
     viewUpdate: function(update){
 
         switch (update.task){
-            case "lost":
+
+            case "leaderClicked":
+                if (this.state.stats.completed === this.state.objectNodesNum){
+                    this.prepLeaderPopup("won");
+                }else this.prepLeaderPopup("incomplete");
+                break;
+           
+            case "timeUp":
                 this.prepLeaderPopup("lost");
                 break;
-            case "won":
-                this.prepLeaderPopup("won");
-                break;
+            
             case "updateStats":
                 this.setState({stats:update.value});
                 break;
@@ -133,11 +149,16 @@ var MissionConnectView = React.createClass({
     replayGame: function(){
 
         var self = this;
+        self.onClosePopup();
+        self.setState({stats:{completed:0, hits:0, misses:0}, mapReady:false},
+        function(){self.setState({mapReady:true})});
     },
 
     prepIntroPopup: function(){
 
         var self = this;
+        var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;
+        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'100px 100px', marginRight:'20px'};
 
         var popupObj = {
             id:"Intro",
@@ -147,13 +168,16 @@ var MissionConnectView = React.createClass({
             content: function(){
 
                 return(
-                    <div className="popup-view-content">
-                        <div className="popup-view-bodyText">
-                            {self.state.gameData.briefingText}
+                    <div className="mission-connect-view-popCont">
+                        <div className = "mission-connect-view-popLeaderImg" style={imgStyle}></div>
+                        <div className="mission-connect-view-popIntroText"
+                             dangerouslySetInnerHTML={{__html:self.state.gameData.briefingText}}>
                         </div>
-                        <div className="popup-view-buttonCont">
-                            <button type="button" className="btn btn-default"
-                                    onClick={self.onClosePopup}>Start</button>
+                        <div className = "mission-connect-view-popFeedbackBtnGrpCont">
+                            <div className = "mission-connect-view-popFeedbackBtnCont">
+                                <button type="button" className="btn btn-default"
+                                        onClick={self.onClosePopup}>Start</button>
+                            </div>
                         </div>
                     </div>
                 )
@@ -167,12 +191,13 @@ var MissionConnectView = React.createClass({
      prepLeaderPopup: function(mode){
 
         var self = this;
-        var origImg = self.state.images[self.state.images.length - 1].charOrigUrl;
-        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'164px 164px'};
+        var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;
+        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'100px 100px'};
         var quote = mode==="won" ? self.state.gameData.congratulationsTitle : self.state.gameData.timeOverTitle;
         var bodyText = mode==="won" ? self.state.gameData.congratulationsText : self.state.gameData.timeOverText;
-
+         
          var popupObj = {
+
             id:mode+"Pop",
             onClickOutside: null,
             popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1, zIndex:'6'},
@@ -181,16 +206,17 @@ var MissionConnectView = React.createClass({
 
                 return(
                     <div className = "mission-connect-view-popCont">
-                        <div className = "mission-connect-view-popFeedbackImg" style={imgStyle}></div>
-                        <div className = "mission-connect-view-popFeedbackTextQuote"
+                        <div className = "mission-connect-view-popLeaderImg" style={imgStyle}></div>
+                        <div className = "mission-connect-view-popLeaderTextQuote"
                              dangerouslySetInnerHTML={{__html:quote}}></div>
-                        <div className = "mission-connect-view-popFeedbackText"
+                        <div className = "mission-connect-view-popLeaderText"
                              dangerouslySetInnerHTML={{__html:bodyText}}></div>
 
                         <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                             <div className = "mission-connect-view-popFeedbackBtnCont">
                                 <button type="button" className="btn btn-default"
-                                        onClick={self.prepStatsPopup}>Continue</button>
+                                            onClick={mode === "incomplete" ? self.onClosePopup:
+                                                 self.prepStatsPopup}>Continue</button>
                             </div>
                         </div>
                     </div>
@@ -204,6 +230,7 @@ var MissionConnectView = React.createClass({
     prepStatsPopup: function(){
 
         var self = this;
+
         var statsText = function(){
 
             return (<div>
@@ -224,17 +251,18 @@ var MissionConnectView = React.createClass({
                 return(
                     <div className = "mission-connect-view-popCont">
 
-                        <div className = "mission-connect-view-popFeedbackStatHead">
+                        <div className = "mission-connect-view-popStatsHead">
                             Statistics
                         </div>
 
-                        <div className = "mission-connect-view-popFeedbackText"
-                             dangerouslySetInnerHTML={{__html:statsText()}}></div>
+                        <div className = "mission-connect-view-popStatsText">
+                            {statsText()}
+                        </div>
 
                         <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                             <div className = "mission-connect-view-popFeedbackBtnCont">
                                 <button type="button" className="btn btn-default"
-                                        onClick={self.onClosePop}>Restart</button>
+                                        onClick={self.replayGame}>Restart</button>
                             </div>
                         </div>
                     </div>
@@ -243,9 +271,6 @@ var MissionConnectView = React.createClass({
         };
 
         self.displayPopup(popupObj);
-
-        //var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
-        //if (debriefAudio) self.playAudio({id:"missionConnectDebrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
 
 
@@ -274,6 +299,7 @@ var MissionConnectView = React.createClass({
     },
 
     render: function() {
+
         var self = this;
         var state = self.state;
         var page  = self.state.page;
@@ -284,6 +310,9 @@ var MissionConnectView = React.createClass({
         var mapUrl = self.state.mediaPath + self.state.gameData.backgroundImageName;
         var backMapStyle = {background:'url('+mapUrl+') no-repeat', backgroundSize:'768px 504px'};
 
+        var popStyle = {display: 'block', width: '515px', height:'auto', top:'20%', left:'15%',
+            minHeight: '315px', background: '#fff', padding:'20px'};
+
         return (
             <div style={blockStyle}>
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
@@ -293,7 +322,7 @@ var MissionConnectView = React.createClass({
                     {self.state.popupObj ?
                         <PopupView
                             id = {"missionConnectIntro"}
-                            popupStyle = {self.state.popupObj.popupStyle}
+                            popupStyle = {popStyle}
                             onClickOutside = {self.state.popupObj.onClickOutside}
                         >
                             {self.state.popupObj.content()}
@@ -304,6 +333,8 @@ var MissionConnectView = React.createClass({
                         mediaPath = {state.mediaPath}
                         images = {state.loadedImageColl}
                         viewUpdate = {self.viewUpdate}
+                        stats = {self.state.stats}
+                        objectNodesNum = {self.state.objectNodesNum}
                     />:null}
                     
                     <div className="mission-connect-view-mapCont" style={backMapStyle}>

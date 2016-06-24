@@ -10,6 +10,7 @@ var MissionConnectGameView = React.createClass({
 
         return {
             activeNode:null,
+            endNode:null,
             showInterview:false,
             scoreObjColl:[],
             charList:[],
@@ -21,16 +22,24 @@ var MissionConnectGameView = React.createClass({
         gameData: PropTypes.object,
         images: PropTypes.array.isRequired,
         mediaPath: PropTypes.string.isRequired,
-        viewUpdate: PropTypes.func.isRequired
+        viewUpdate: PropTypes.func.isRequired,
+        stats: PropTypes.object.isRequired,
+        objectNodesNum: PropTypes.number.isRequired
     },
 
     componentWillMount: function(){
 
         //find init active node
-        var char = this.props.gameData.networkGameNodes.filter(function (obj) {
+        var startNode = this.props.gameData.networkGameNodes.filter(function (obj) {
             return obj.startNode === true;
         })[0];
-        this.setState({activeNode:char.nodeNumber});
+
+        //find end node
+        var endNode = this.props.gameData.networkGameNodes.filter(function (obj) {
+            return obj.endNode === true;
+        })[0];
+
+        this.setState({activeNode:startNode.nodeNumber, endNode:endNode.nodeNumber});
     },
 
     componentDidMount: function(){
@@ -53,7 +62,9 @@ var MissionConnectGameView = React.createClass({
 
             var ableToInteract = char.startNode ? "auto":"none";
             var visible = char.startNode? "1":"0";
+
             if (char.endNode) visible = 0.4;
+
             var blockStyle = {top: char.yPos+'px', left: char.xPos+'px',
                 pointerEvents:ableToInteract, opacity:visible};
 
@@ -88,9 +99,9 @@ var MissionConnectGameView = React.createClass({
         this.setState({scoreObjColl:scoreObjColl});
     },
 
-    viewUpdate: function(mode){
+    viewUpdate: function(update){
         //propagate up
-        this.props.viewUpdate(mode)
+        this.props.viewUpdate(update)
     },
 
     updateGameView: function(update){
@@ -131,7 +142,13 @@ var MissionConnectGameView = React.createClass({
     },
 
     onIconClick: function(e){
-        this.setState({activeNode:parseInt(e.target.id.substring(18)), showInterview:true});
+
+        console.log("ID: " + parseInt(e.target.id.substring(18)) + "  ----  End: " + parseInt(this.state.endNode));
+        if (parseInt(e.target.id.substring(18)) === parseInt(this.state.endNode)){
+            this.props.viewUpdate({task:"leaderClicked", value:null});
+        }
+
+        else this.setState({activeNode:parseInt(e.target.id.substring(18)), showInterview:true});
     },
 
     render: function() {
@@ -156,6 +173,8 @@ var MissionConnectGameView = React.createClass({
                     updateGameView = {self.updateGameView}
                     updateScore = {self.updateScore}
                     updateWrongAttempts = {self.updateWrongAttempts}
+                    objectNodesNum = {self.props.objectNodesNum}
+                    stats = {self.props.stats}
                 />:null}
 
 
