@@ -2,6 +2,38 @@
   position: relative;
 }
 
+.ethno-overlay-info-title {
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+}
+
+
+.ethno-overlay-info-text {
+  font-size: 12px;
+  color: white;
+}
+
+.ethno-overlay-ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.ethno-overlay-li {
+  display: inline;
+  text-align: center;
+}
+
+.ethno-overlay-title-text {
+  margin-left: 240px;
+  font-size: 20px;
+  color: white;
+}
+
+.more-less-info {
+  margin-left: 210px;
+}
+
 .ethno-image-layers-view{
   margin-left: 10% !important;
   margin-right: 10% !important;
@@ -61,7 +93,7 @@
 
 .ethno-overlay-main-div {
   position: absolute;
-  background-color: #EEE;
+  background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid #CCC;
   padding: 5px;
@@ -74,6 +106,10 @@
   height: 90px;
   overflow-y: scroll;
   margin-left: 5px;
+}
+
+.ethno-overlay-info::-webkit-scrollbar{
+  background-color: transparent;
 }
 
 #ethnoOverlay {
@@ -89,17 +125,74 @@
   padding-bottom: 15px;
 }
 
+
+.ethno-close-button-for-overlay {
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ethno-close-button-for-overlay:focus {
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ethno-close-button-for-overlay:hover {
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.ethno-close-button-for-overlay:active {
+  border-color: grey !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.ethno-overlay-prev-button {
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .ethno-overlay-next-button {
   float: right;
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .ethno-overlay-prev-button:focus {
-  border-color: #ccc;
-  background-color: #fff;
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-
 .ethno-overlay-next-button:focus {
-  border-color: #ccc;
-  background-color: #fff;
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ethno-overlay-next-button:hover {
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.ethno-overlay-prev-button:hover {
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.ethno-overlay-prev-button:active {
+  border-color: grey !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.ethno-overlay-next-button:active {
+  border-color: grey !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.ethno-overlay-prev-button:disabled {
+  border-color: white !important;
+  background-color: rgba(104, 104, 104, 0.8) !important;
+}
+
+.ethno-overlay-next-button:disabled {
+  border-color: white !important;
+  background-color: rgba(104, 104, 104, 0.8) !important;
 }

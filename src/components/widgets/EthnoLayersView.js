@@ -96,8 +96,6 @@ var EthnoLayersView = React.createClass({
         //loop through regions
         self.props.imageColl.map(function(image,index){
 
-            
-
             var regionCanvas =  self.createCanvas({
                 canvasWidth:self.props.areaWidth,
                 canvasHeight:self.props.areaHeight,

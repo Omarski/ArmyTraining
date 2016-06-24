@@ -21,6 +21,9 @@ var ASRActions = require('../actions/ASRActions');
 var ASRStore = require('../stores/ASRStore');
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
+var AppStateActions = require('../actions/AppStateActions');
+
+
 var ASRWidget = require('../components/widgets/ASR');
 
 function getBookState() {
@@ -77,6 +80,11 @@ var MainView = React.createClass({
         LoaderActions.load();
     },
 
+    handleResize: function (e) {
+        setTimeout(function() {
+            AppStateActions.sizeChange();
+        });
+    },
 
     getInitialState: function() {
         var bookState = getBookState();
@@ -94,6 +102,7 @@ var MainView = React.createClass({
     },
 
     componentDidMount: function() {
+        window.addEventListener('resize', this.handleResize);
         NotificationActions.show({
             title: 'Please wait',
             body: 'Loading...'
@@ -102,6 +111,7 @@ var MainView = React.createClass({
     },
 
     componentWillUnmount: function() {
+        window.removeEventListener('resize', this.handleResize);
         LoaderStore.removeChangeListener(this._onChange);
         ConfigStore.removeChangeListener(this._onConfigChange);
         CoachFeedbackStore.removeChangeListener(this._onCoachFeedbackChange);

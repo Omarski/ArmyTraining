@@ -9,6 +9,8 @@ var PageHeader = require('../../widgets/PageHeader');
 var EthnoLayersView = require("../../widgets/EthnoLayersView");
 var EthnoMapPopover = require("../../widgets/EthnoMapPopover");
 var Utils = require("../../widgets/Utils");
+var AppStateStore = require('../../../stores/AppStateStore');
+var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 
 
 function getPageState(props) {
@@ -59,6 +61,15 @@ var EthnoMapView = React.createClass({
     },
     onLayersReady: function(x){
     },
+
+    componentDidMount: function() {
+        AppStateStore.addChangeListener(this._onAppStateChange);
+    },
+
+    componentWillUnmount: function() {
+        AppStateStore.removeChangeListener(this._onAppStateChange);
+    },
+
     render: function() {
         var self = this;
         var page = self.state.page;
@@ -72,6 +83,12 @@ var EthnoMapView = React.createClass({
         var imageColl = parsedJSON.areas;
         var backgroundImage = "";
 
+
+        if (AppStateStore.isMobile()) {
+            return (<UnsupportedScreenSizeView/>);
+        }
+
+
         return (
             <div>
                 <div className="container" key={"page-" + this.state.page.xid}>
@@ -81,6 +98,13 @@ var EthnoMapView = React.createClass({
             </div>
         );
     },
+
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
+    },
+
     _onChange: function() {
         this.setState(getPageState(this.props));
     }
@@ -115,7 +139,11 @@ var EthnoMap = React.createClass({
     },
     onRegionClick: function(canvasElement) {
         var self = this;
-        if(canvasElement !== null) {
+
+        var visibleOrNot = $(canvasElement).hasClass("ethno-visible");
+        console.log("visisbleOrNot", visibleOrNot);
+
+        if(canvasElement !== null && visibleOrNot) {
 
             var lastTwo = canvasElement.getAttribute('id').slice(-2);
             var canvasId = "";
@@ -126,10 +154,10 @@ var EthnoMap = React.createClass({
                 canvasId = lastTwo;
             }
 
-        }
+            if(self.state.popoverShow === false) {
+                self.setState({popoverIndex: [canvasId], popoverShow: true});
+            }
 
-        if(self.state.popoverShow === false) {
-            self.setState({popoverIndex: [canvasId], popoverShow: true});
         }
 
     },
@@ -302,7 +330,7 @@ function popoverFunction(mapDataArgument, popoverShowHide, popoverSetter){
     var mapData = mapDataArgument;
     var showHide = popoverShowHide;
     var toggleParentPopoverState = popoverSetter;
-    return (<EthnoMapPopover mapData={mapData} showHide={showHide} toggleParentPopoverState={toggleParentPopoverState}/>);
+    return (<EthnoMapPopover className="ethno-map-popover-style-scrollbar"mapData={mapData} showHide={showHide} toggleParentPopoverState={toggleParentPopoverState}/>);
 }
 
 
@@ -315,7 +343,7 @@ function toolTipper(region, x, y){
     var mouseY;
 
     return (<div>
-        <ReactBootstrap.Tooltip id="toolTipperId"  placement="top" className="in">{regionName}</ReactBootstrap.Tooltip>
+        <ReactBootstrap.Tooltip id="toolTipperId"  placement="top" className="in ethno-not-visible">{regionName}</ReactBootstrap.Tooltip>
     </div>);
 }
 
