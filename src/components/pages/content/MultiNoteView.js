@@ -117,8 +117,21 @@ var MultiNoteView = React.createClass({
 
                         var str = item.text;
                         if (hasBullet) {
-                            str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
-                            str = str.replace(new RegExp('- ', 'g'), '<br/><span class="info-view-bullet-item"></span>');
+                            //str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
+                            //str = str.replace(new RegExp('- ', 'g'), '<br/><span class="info-view-bullet-item"></span>');
+                            var arr = str.split('- ');
+                            var len = arr.length;
+                            var result = "";
+                            for ( var i = 1; i < len; i++) {
+                                if(i !== 1){
+                                    result += '<p><span class="info-view-bullet-item"></span>' + arr[i] + '</p>';
+                                }else{
+                                    result += '<p>' + arr[i] + '</p>';
+                                }
+                            }
+                            str = result;
+
+
                         }
 
                         function createNote() {
@@ -183,6 +196,7 @@ var MultiNoteView = React.createClass({
                         alt={title}
                         aria-label={title}>
                     <img  className="thumbnail multi-note-thumbnail"
+                          alt={title}
                           src={"data/media/"+imageURL}
                           aira-hidden="true"></img>
                 </button>
