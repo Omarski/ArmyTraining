@@ -88,7 +88,7 @@ var SettingsView = React.createClass({
         this.setState({autoPlaySound: !this.state.autoPlaySound});
         this.setState({autoPlaySound: !this.state.autoPlaySound});
     },
-    dropdownToggle(newValue){
+    dropdownToggle: function(newValue){
         if (this._forceOpen){
             this.setState({ menuOpen: true });
             this._forceOpen = false;

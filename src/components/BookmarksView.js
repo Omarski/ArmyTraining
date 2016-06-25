@@ -85,7 +85,7 @@ var BookmarksView = React.createClass({
     menuItemClickedThatShouldntCloseDropdown: function(){
         this._forceOpen = true;
     },
-    dropdownToggle(newValue){
+    dropdownToggle: function(newValue){
         if (this._forceOpen){
             this.setState({ menuOpen: true });
             this._forceOpen = false;
@@ -106,7 +106,7 @@ var BookmarksView = React.createClass({
         PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
-
+        // val => self.dropdownToggle(val)
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
         var items = "";
@@ -118,14 +118,14 @@ var BookmarksView = React.createClass({
                     fakeIndex = fakeIndex + 1;
                     return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index} href="#"
                                       className="bookmark-nav-item"
-                                      onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
+                                      onClick={self.menuItemClickedThatShouldntCloseDropdown()}>
                         <button className="btn btn-link"
                                 onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                     </MenuItem>);
                 });
                 subItems.push(<MenuItem key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex} href="#"
                                         className="bookmark-nav-item"
-                                        onClick={() => self.menuItemClickedThatShouldntCloseDropdown()}>
+                                        onClick={self.menuItemClickedThatShouldntCloseDropdown()}>
                     <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button>
                 </MenuItem>);
                 items = (<NavDropdown open={self.state.menuOpen} onToggle={val => self.dropdownToggle(val)} eventKey="5"
