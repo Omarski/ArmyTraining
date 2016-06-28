@@ -4,31 +4,19 @@ var SettingsStore = require('../../../stores/SettingsStore');
 var ColorText = require('../../../components/widgets/ColorText');
 var ASRStore = require('../../../stores/ASRStore');
 var ConfigStore = require('../../../stores/ConfigStore');
+var PageHeader = require('../../widgets/PageHeader');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
 var L2_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var L2_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
 var L2_GLYPHICON_STOP_CLS = "glyphicon-stop";
-var L2_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
+var L2_GLYPHICON_PLAY_CLS = "glyphicon-refresh";
 var L2_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var L2_GLYPHICON_CLS = "l2-glyphicon";
+var L2_GLYPHICON_LISTEN_CLS = "glyphicon-play-circle";
 
 var recorder;
-
-window.onload = function init(){
-    // webkit shim
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    navigator.getUserMedia = navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia ||
-        navigator.msGetUserMedia;
-    window.URL = window.URL || window.webkitURL;
-};
-
-function hasGetUserMedia(){
-    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia);
-}
 
 function getPageState(props) {
     var data;
@@ -94,50 +82,15 @@ function getPageState(props) {
     return data;
 }
 
-function positionDivs(self){
-    $(L2_GLYPHICON_CLS).css("pointer-events", "auto");
-    var columns = document.getElementsByClassName("l2-column");
-    var columnWidth = 575; // potentially dynamic value (more columns, the skinnier they are)
-    Array.prototype.forEach.call(columns, function(item, index) {
-        $(item).css('left', ((columnWidth*index) + (30*index) + 30 + 'px'));
-        var vocalAnswers = item.childNodes;
-        Array.prototype.forEach.call(vocalAnswers, function(columnItem, index){
-            var _item = $(columnItem);
-            if(index == 0){
-                _item.css('border-top', '5px solid #cccccc');
-            }
-            _item.css('border-bottom', '5px solid #cccccc');
-            if(index%2 == 0){
-                _item.css('background', '#ebebeb');
-            }else{
-                _item.css('background', '#ffffff');
-            }
-        });
-    });
-    // 39.5 because math
-    var buffer = 39.5;
-    var icons = document.getElementsByClassName(L2_GLYPHICON_CLS);
-    Array.prototype.forEach.call(icons, function(item, index){
-        var $item = $(item);
-        var answerLine = Math.floor(index/3); //3 because 3 icons per answer item.
-        if(answerLine >= self.state.cols[0].length){answerLine -= self.state.cols[0].length;}
-        $item.css('top', ( ( buffer + (120*answerLine) )+'px'));
-    });
-}
-
 var onFail = function(e){
     console.log('An Error has occured.', e);
-    console.log('navigator.getUserMedia not present');
 };
 
 var onSuccess = function(s){
-    console.log("on success.");
     var context = new AudioContext();
     var mediaStreamSource = context.createMediaStreamSource(s);
     recorder = new Recorder(mediaStreamSource);
     recorder.record();
-    console.log("--- onSuccess ---");
-    console.dir(recorder);
 };
 
 //var id = "" + colNumber + "audio" + index;
@@ -171,7 +124,6 @@ function play(id, colNumber, index, self){
     });
     a.play();
     var newPlayingState = self.state.isPlaying;
-    //TODO: test if isplaying is a double array
     newPlayingState[colNumber][index] = true;
     self.setState({
         isPlaying: newPlayingState
@@ -183,7 +135,6 @@ function stop(id, colNumber, index, self){
     a.pause();
     a.currentTime = 0;
     var newPlayingState = self.state.isPlaying;
-    //TODO: test if isplaying is a double array
     newPlayingState[colNumber][index] = false;
     self.setState({
         isPlaying: newPlayingState
@@ -191,13 +142,13 @@ function stop(id, colNumber, index, self){
 }
 
 function record(id, colNumber, index, self){
-    if(ASR.isInitialized()){
+    if(ASRStore.isInitialized()){
         var pState = self.state.playableState;
         var oldCA = self.state.clickedAnswer;
         if(oldCA != 0){
             pState[oldCA.colNumber][oldCA.index] = false;
         }
-        ASR.StartRecording();
+        ASRStore.StartRecording();
         var clickedAnswer = {
             colNumber: colNumber,
             index: index
@@ -214,9 +165,9 @@ function record(id, colNumber, index, self){
 
 // pass the audio handle to stopRecording
 function stopRecording(id, colNumber, index, self){
-    if(ASR.isInitialized()){
-        ASR.StopRecording();
-        ASR.RecognizeRecording();
+    if(ASRStore.isInitialized()){
+        ASRStore.StopRecording();
+      //  ASR.RecognizeRecording();
     }else {
         var audio = document.getElementById(id);
         recorder.stop();
@@ -227,8 +178,8 @@ function stopRecording(id, colNumber, index, self){
 }
 
 function handlePlaying(id, colNumber, index, self){
-    if(ASR.isInitialized()){
-        ASR.PlayRecording();
+    if(ASRStore.isInitialized()){
+        ASRStore.PlayRecording();
     }else {
         if (self.state.isPlaying[colNumber][index]) {
             stop(id, colNumber, index, self);
@@ -253,6 +204,7 @@ function playAudio(xid){
     if(audio.paused){
         audio.load();
         audio.play();
+        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
     }else{
         audio.pause();
     }
@@ -271,21 +223,21 @@ var MultiColumnPronunciationView = React.createClass({
     componentDidMount: function() {
         ASRStore.addChangeListener(this._onChange);
         //PageStore.addChangeListener(this._onChange);
-        if(hasGetUserMedia()){
-            // UserMedia allowed
-        }else{
-            // UserMedia not allowed
-        }
-        positionDivs(this);
-        if(ConfigStore.isASREnabled()){
-            if(!ASR.isInitialized()){
-                ASR.InitializeASR();
-            }
-        }
+        //if(hasGetUserMedia()){
+        //    // UserMedia allowed
+        //}else{
+        //    // UserMedia not allowed
+        //}
+
+        //if(ConfigStore.isASREnabled()){
+        //    if(!ASRStore.isInitialized()){
+        //        ASRStore.InitializeASR();
+        //    }
+        //}
     },
 
     componentDidUpdate: function(){
-        positionDivs(this);
+
     },
 
     componentWillUnmount: function() {
@@ -352,25 +304,61 @@ var MultiColumnPronunciationView = React.createClass({
                     }
 
                     return (
-                        <div key={page.xid + String(index)} className="l2-vocal-answer">
-                            <audio id={id}></audio>
-                            <div className="l2-note-text">{note}</div>
-                            <span className={itemRecordingClass} onClick={function(){handleRecord(id, colNumber, index, self)}}></span>
-                            <span className={itemRecordedClass} onClick={function(){handlePlaying(id, colNumber, index, self)}}></span>
-
-                            <div className="l2-text-area" id={"text-"+id} onClick={function(){textClick(id, colNumber, index, self)}}>
-                                <div className="l2-native-text">
+                    <table className={"table pronunciation-view-table pronunciation-item-row " + "l2-vocal-answer"}
+                           key={page.xid + String(index)}>
+                        <tbody>
+                        <tr>
+                            <td colSpan="4">
+                                <div>
                                     <ColorText props={nativeText}/>
                                 </div>
-                                <div className="l2-ezread-text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowSpan="2" width="25">
+                                <audio id={id}></audio>
+                                <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        alt={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
+                                        type="button" onClick={function(){textClick(id, colNumber, index, self)}}
+                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
+                                    <span className={"glyphicon pronunciation-audio-button "+ L2_GLYPHICON_LISTEN_CLS} ></span>
+                                </button>
+                            </td>
+                            <td rowSpan="2" width="25">
+                                <button title={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                        alt={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
+                                        type="button" onClick={function(){handleRecord(id, colNumber, index, self)}}
+                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
+                                    <span className={itemRecordingClass + " pronunciation-audio-button"} ></span>
+                                </button>
+                            </td>
+                            <td rowSpan="2" width="25">
+                                <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                        alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
+                                        type="button" onClick={function(){handlePlaying(id, colNumber, index, self)}}
+                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
+                                    <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
+                                </button>
+                                <span className={itemFeedbackClass}></span>
+                            </td>
+                            <td>
+                                <div>
                                     <ColorText props={ezreadText}/>
                                 </div>
-                                <div className="l2-translated-text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4">
+                                <div>
                                     <ColorText props={translatedText}/>
                                 </div>
-                            </div>
-                            <span className={itemFeedbackClass}></span>
-                        </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     );
                 }
             });

@@ -128,7 +128,7 @@ var BookmarksView = React.createClass({
                                         onClick={self.menuItemClickedThatShouldntCloseDropdown}>
                     <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button>
                 </MenuItem>);
-                items = (<NavDropdown open={self.state.menuOpen} onToggle={self.bind(val, dropdownToggle)} eventKey="5"
+                items = (<NavDropdown open={self.state.menuOpen} onToggle={self.bind(val, this.dropdownToggle)} eventKey="5"
                                       title={(
                 <div>
                     <Button
@@ -148,8 +148,8 @@ var BookmarksView = React.createClass({
             } else {
                 var subItems = bookmarks.map(function (item, index) {
                     return (<ListGroupItem key={"bookmarkitems" + index}>
-                                <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
-                            </ListGroupItem>);
+                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                    </ListGroupItem>);
                 });
                 items = (<ListGroup>
                     {subItems}
