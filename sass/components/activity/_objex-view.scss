@@ -1,4 +1,4 @@
-
+//popup
 .objex-view-popCont {
   display: block;
   background: #fff;
@@ -17,6 +17,49 @@
   }
 }
 
+//vav
+.objex-view-navCont{
+  position: absolute;
+  top:505px;
+  left:0;
+  width:768px;
+  height:105px;
+  background:#d0d0d0;
+
+  .objex-view-cellCont{
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 410px;
+
+    .objex-view-cell{
+      margin-right:10px;
+      float: left;
+      display:block;
+      width:73px;
+      height:73px;
+      background:#fff;
+
+      .objex-view-cellImg{
+        position: absolute;
+        top:0;
+        left:0;
+      }
+
+      .objex-view-cellTitle{
+        position:absolute;
+        top:72px;
+        left:0;
+        width:73px;
+        height:16px;
+        text-align: center;
+        font-size:15px;
+      }
+    }
+  }
+}
+
+//buttons
 .objex-view-btnCont{
   position:relative;
   margin-left: auto;
@@ -27,3 +70,4 @@
     margin-right:10px;
   }
 }
+

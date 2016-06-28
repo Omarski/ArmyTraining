@@ -24,7 +24,7 @@ function getPageState(props) {
         showGame:false,
         currentLevel:null,
         levelsColl:[],
-        levelStats:[],
+        levelStats:{hints:6}
     };
     
     if (props && props.page) {
@@ -98,7 +98,11 @@ var ObjexView = React.createClass({
                     fullImgSrc: fullImg.src,
                     iconImgSrc: iconImg.src,
                     spotX: img.spotX,
-                    spotY: img.spotY
+                    spotY: img.spotY,
+                    tooltip: self.getObjexText(img.hog_id,"tooltip"),
+                    abbreviation: self.getObjexText(img.hog_id,"abbreviation"),
+                    title: self.getObjexText(img.hog_id,"title"),
+                    description: self.getObjexText(img.hog_id,"description")
                 };
 
                 loadedObjexColl.push(artifactObj);
@@ -113,6 +117,13 @@ var ObjexView = React.createClass({
         var totalImages = 41; //update when json combined
 
         self.setState({totalImages:totalImages, loadedObjexColl:loadedObjexColl});
+    },
+
+    getObjexText:function(hog_id,key){
+        var self = this;
+        var objexTextColl = self.state.gameData.hidden_objects;
+        var objex = objexTextColl[hog_id];
+        return objex[key];
     },
 
     loadCounter: function(){
@@ -263,6 +274,7 @@ var ObjexView = React.createClass({
                         loadedObjexColl = {state.loadedObjexColl}
                         levelObjexColl = {state["level"+state.currentLevel+"Data"].objects}
                         viewUpdate = {self.viewUpdate}
+                        levelStats = {self.state.levelStats}
                     />:null}
                 </div>
             </div>

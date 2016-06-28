@@ -1,5 +1,7 @@
 var React = require('react');
 var ImageLayersView = require('../../../widgets/ImageLayersView');
+var ObjexNavView = require('./ObjexNavView');
+
 var PropTypes  = React.PropTypes;
 
 var ObjexGameView = React.createClass({
@@ -9,7 +11,8 @@ var ObjexGameView = React.createClass({
 
         return {imageLayersData:{},
                 lastHighlightedRegion:null,
-                layersCanvColl:[]
+                layersCanvColl:[],
+                activeObjexColl:[]
         };
     },
 
@@ -18,7 +21,8 @@ var ObjexGameView = React.createClass({
         loadedObjexColl: PropTypes.object.isRequired,
         levelObjexColl: PropTypes.array.isRequired,
         mediaPath: PropTypes.string.isRequired,
-        viewUpdate: PropTypes.func.isRequired
+        viewUpdate: PropTypes.func.isRequired,
+        levelStats: PropTypes.object.isRequired
     },
 
     componentWillMount: function() {
@@ -33,31 +37,8 @@ var ObjexGameView = React.createClass({
 
         //prep CultureQuestMap data from original JSON
         var self = this;
-        var artifactsColl = [];
 
-        //produce 10 random artifacts
-        var loadedObjexColl = self.props.loadedObjexColl;
-        var randArtifactColl = [];
-
-        while (randArtifactColl.length < 10){
-
-            var randObjexObj = loadedObjexColl[Math.floor(Math.random()*loadedObjexColl.length)];
-
-            for (var r = 0; r < randArtifactColl.length; r++){
-
-                var matchObj = randArtifactColl.filter(function(obj){
-                   return randObjexObj.hog_id === obj.hog_id;
-                });
-
-                if (!matchObj) randArtifactColl.push(randObjexObj);
-            }
-        }
-
-        for (var i = 0; i < randArtifactColl.length; i++){
-            var artifactObj = {};
-            artifactObj["image"] = randArtifactColl[i].fullImgSrc;
-            artifactsColl.push(artifactObj);
-        }
+        var artifactsColl = self.getRandomObjex();
         
         self.setState({imageLayersData:{
 
@@ -69,6 +50,37 @@ var ObjexGameView = React.createClass({
             onRollover: self.onRegionRollover,
             onClick: self.onRegionClicked
         }});
+    },
+
+    getRandomObjex: function(){
+
+        var artifactsColl = [];
+        var loadedObjexColl = self.props.loadedObjexColl;
+        var randArtifactColl = [];
+
+        while (randArtifactColl.length < 10){
+
+            var randObjexObj = loadedObjexColl[Math.floor(Math.random()*loadedObjexColl.length)];
+
+            for (var r = 0; r < randArtifactColl.length; r++){
+
+                var matchObj = randArtifactColl.filter(function(obj){
+                    return randObjexObj.hog_id === obj.hog_id;
+                });
+
+                if (!matchObj) randArtifactColl.push(randObjexObj);
+            }
+        }
+
+        for (var i = 0; i < randArtifactColl.length; i++){
+            var artifactObj = {};
+            artifactObj["image"] = randArtifactColl[i].fullImgSrc;
+            artifactsColl.push(artifactObj);
+        }
+
+        this.setState({activeObjexColl:randArtifactColl});
+
+        return artifactsColl;
     },
 
     onLayersReady: function(canvasColl){
@@ -112,6 +124,12 @@ var ObjexGameView = React.createClass({
                     onClick         = {self.state.imageLayersData.onClick}
                 >
                 </ImageLayersView>
+                <ObjexNavView
+                    gameData = {self.props.gameData}
+                    mediaPath = {self.props.mediaPath}
+                    activeObjexColl = {self.state.activeObjexColl}
+                    updateGameView = {self.updateGameView}
+                />
                </div>
         )
     }
