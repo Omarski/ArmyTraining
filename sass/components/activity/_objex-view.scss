@@ -1,0 +1,29 @@
+
+.objex-view-popCont {
+  display: block;
+  background: #fff;
+  height: auto;
+
+  .objex_view_popLevelIconCont{
+    position: absolute;
+  }
+
+  .objex_view_popLevelIconText{
+    position:absolute;
+    font-weight:bold;
+    font-size:25px;
+    top:70px;
+    left:30px;
+  }
+}
+
+.objex-view-btnCont{
+  position:relative;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  .objex-view-btn{
+    margin-right:10px;
+  }
+}

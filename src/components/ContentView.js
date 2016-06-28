@@ -35,6 +35,7 @@ var NotificationActions = require('../actions/NotificationActions');
 var CultureQuestView = require('../components/pages/activity/cultureQuest/CultureQuestView');
 var PuzzleMapView = require('../components/pages/activity/puzzle_map/PuzzleMapView');
 var MissionConnectView = require('../components/pages/activity/mission_connect/MissionsConnectView');
+var ObjexView = require('../components/pages/activity/objex/ObjexView');
 
 function getPageState() {
     var page = null;
@@ -207,6 +208,9 @@ var ContentView = React.createClass({
                     page= <PuzzleMapView page={this.state.page} />;
                     break;
                 case "MissionConnect":
+                    page= <MissionConnectView page={this.state.page} />;
+                    break;
+                case "Objex":
                     page= <MissionConnectView page={this.state.page} />;
                     break;
                 default:
