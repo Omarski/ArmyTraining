@@ -1,4 +1,5 @@
 var React = require('react');
+var Slider = require('react-slick');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var SettingsStore = require('../../../stores/SettingsStore');
@@ -105,6 +106,13 @@ var MultiNoteView = React.createClass({
         var title = self.state.title;
         var sourceInfo = "";
         var infoPages = self.state.related;
+        var sliderSettings = {
+            dots: true,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll: 4
+        };
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
             var sources = "";
@@ -187,7 +195,7 @@ var MultiNoteView = React.createClass({
             var title = item.title;
             var caption = item.caption;
             // title will be the individual page titles, and caption is that pages image caption
-            var thumbnail = <li key={self.state.xid + String(index)+"thumbnail"}>
+            var thumbnail = (
                 <button data={index}
                         onClick={self.handleClick}
                         title={title}
@@ -198,7 +206,7 @@ var MultiNoteView = React.createClass({
                           src={"data/media/"+imageURL}
                           aira-hidden="true"></img>
                 </button>
-            </li>;
+            );
             return (thumbnail);
         });
 
@@ -250,7 +258,9 @@ var MultiNoteView = React.createClass({
                             {text}
                         </div>
                         <div className="row">
-                            <ul className="multi-note-choices">{pageChoices}</ul>
+                            <Slider {...sliderSettings}>
+                                {pageChoices}
+                            </Slider>
                         </div>
                     </div>
                 </div>
