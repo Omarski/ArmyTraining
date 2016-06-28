@@ -151,8 +151,11 @@ var MainView = React.createClass({
         var self = this;
         setTimeout(function() {
             NotificationActions.updateImage(LocalizationStore.labelFor("app", "imageSplash"));
+
             self.loadConfiguration();
-        }, 100)
+        }, 100);
+
+        console.log("asdf");
     },
 
     /**
