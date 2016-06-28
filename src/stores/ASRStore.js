@@ -127,7 +127,6 @@ var ASRStore = assign({}, EventEmitter.prototype, {
 
     RecievedMessaj: function(msj){
         _message = msj;
-        console.log("this one?", _message);
         setTimeout(function() {
             this.emitChange();
         }, 100)

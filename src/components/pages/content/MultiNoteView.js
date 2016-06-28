@@ -117,8 +117,6 @@ var MultiNoteView = React.createClass({
 
                         var str = item.text;
                         if (hasBullet) {
-                            //str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
-                            //str = str.replace(new RegExp('- ', 'g'), '<br/><span class="info-view-bullet-item"></span>');
                             var arr = str.split('- ');
                             var len = arr.length;
                             var result = "";
