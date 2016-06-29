@@ -84,6 +84,8 @@ var EthnoMapView = React.createClass({
         var imageColl = parsedJSON.areas;
         var backgroundImage = "";
 
+        console.log("parsedJSON", parsedJSON);
+
 
         if (AppStateStore.isMobile()) {
             return (<UnsupportedScreenSizeView/>);
