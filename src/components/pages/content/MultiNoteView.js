@@ -106,7 +106,7 @@ var MultiNoteView = React.createClass({
         var title = self.state.title;
         var sourceInfo = "";
         var infoPages = self.state.related;
-        var sliderSettings = {
+        var sliderSettings = { // settigns for the carousel
             dots: true,
             infinite: false,
             speed: 500,

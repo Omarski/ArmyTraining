@@ -363,7 +363,7 @@ var MultiColumnPronunciationView = React.createClass({
                 }
             });
             return(
-                <div key={page.xid + String(colNumber)} className="l2-column">
+                <div key={page.xid + String(colNumber)} className="col-md-6 l2-column">
                     {vaList}
                 </div>
             );
