@@ -10,6 +10,7 @@ function getPageState(props) {
     var data = {
         media: "",
         note: "",
+        noteAudio: [],
         page: "",
         pageType: "",
         title: ""
@@ -63,8 +64,8 @@ function getPageState(props) {
                     str = result;
                 }
 
+                // if statement to detect media in note, should be true
                 if(item.media && item.media[0]){
-                    // if statement to detect media in note, should be true
                     data.noteAudio.push(item.media[0].xid);
                 }
 
@@ -104,6 +105,26 @@ function getPageState(props) {
     return data;
 }
 
+function playAudio(xid){
+    var audio = document.getElementById('audio');
+    var source = document.getElementById('mp3Source');
+    // construct file-path to audio file
+    source.src = "data/media/" + xid;
+    audio.load();
+    audio.play();
+    audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+}
+
+function playMediaAudio(xidArray){
+    if(xidArray.length > 0){
+        $("#audio").bind('ended', function(){
+            xidArray.shift();
+            playMediaAudio(xidArray);
+        });
+        playAudio(xidArray[0]);
+    }
+}
+
 
 var QuizStartView = React.createClass({
     getInitialState: function() {
@@ -119,6 +140,24 @@ var QuizStartView = React.createClass({
 
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
+    },
+
+    componentDidMount: function() {
+        //play audio recording for info page
+        var self = this;
+        var noteMedia = self.state.noteAudio;
+        var video;
+
+        playMediaAudio(noteMedia);
+        video = document.getElementById("video");
+        if(video){
+            video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            video.onvolumechange=function(){
+                self.updateVolume();
+            };
+        }
+        $('[data-toggle="tooltip"]').tooltip();
+
     },
 
     render: function() {
@@ -144,6 +183,10 @@ var QuizStartView = React.createClass({
                 <div className="infoContainer" key={"page-" + this.state.page.xid}>
                     <div className="infoDataContainer container-fluid">
                         {mediaContainer}
+                        <audio autoPlay id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                            <source id="mp3Source" src="" type="audio/mp3"></source>
+                            Your browser does not support the audio format.
+                        </audio>
                         <div className="infoNoteContainer">
                             <ul>{pageNotes}</ul>
                         </div>
