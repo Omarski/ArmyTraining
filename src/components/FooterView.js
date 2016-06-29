@@ -14,8 +14,8 @@ function getUnitState(expanded) {
     var units = UnitStore.getAll();
     var totalUnits = 0;
     var totalUnitsComplete = 0;
-    var currentUnitIndex = 0;
     var currentPageIndex = 0;
+    var currentUnitTotalPages = 1;
 
     for (var key in units) {
         totalUnits++;
@@ -25,10 +25,22 @@ function getUnitState(expanded) {
         var completedCount = 0;
         var totalPages = 0;
 
+
+
         if (unit.data.chapter) {
             for (var i = 0; i < unit.data.chapter.length; i++) {
                 var bHidden = false;
                 var c = unit.data.chapter[i];
+
+                if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
+                    currentUnitTotalPages += c.pages.length;
+                    for( var j = 0; j < c.pages.length; j++) {
+                        var page = c.pages[j];
+                        if (PageStore.page() && PageStore.page().xid === page.xid) {
+                            currentPageIndex = j + 1;
+                        }
+                    }
+                }
 
                 // look up properties
                 if (c.info && c.info.property) {
@@ -106,9 +118,9 @@ function getUnitState(expanded) {
 
 
     return {
-        currentUnitIndex: currentUnitIndex,
         totalUnits: totalUnits,
         currentPageIndex: currentPageIndex,
+        currentUnitTotalPages: currentUnitTotalPages,
         totalPages: totalPages,
         unitsPercent: Math.round((totalUnitsComplete / totalUnits) * 100),
         expanded: expanded,
@@ -245,6 +257,9 @@ var FooterView = React.createClass({
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
                                 <span className="glyphicon glyphicon-circle-arrow-left btn-icon" aria-hidden="true"></span>
                             </button>
+                        </td>
+                        <td>
+                            {this.state.currentPageIndex}/{this.state.currentUnitTotalPages}
                         </td>
                         <td>
                             <button title={LocalizationStore.labelFor("footer", "tooltipNext")}

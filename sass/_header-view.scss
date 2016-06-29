@@ -6,6 +6,16 @@ button.navbar-toggle:hover {
   display: none;
 }
 
+.navbar-default {
+  .container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+  }
+  .nav>li>a {
+    padding: 5px;
+  }
+}
 
 .navbar-fixed-top .navbar-collapse {
   max-height: none !important;
@@ -149,10 +159,9 @@ button.navbar-toggle:hover {
   }
 
   .main-nav-bar-button {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0;
+    min-width: 40px;
+    max-width: 40px;
   }
 
   .main-nav-bar-header {
@@ -200,19 +209,14 @@ button.navbar-toggle:hover {
     border-color: #fff;
   }
 
-}
-
-
-/*
-.navbar-fixed-top .navbar .navbar-default{
-  .container {
-    height: 40px !important;
-    .navbar-header {
-      height: 40px !important;
+  .navbar-default {
+    .container {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100%;
     }
   }
 }
-*/
 
 @media screen and (min-width: 374px) and (max-width: 767px) {
   .navbar-toggle {
@@ -224,6 +228,10 @@ button.navbar-toggle:hover {
     padding-right: 7px;
     border-color: #337ab7 !important;
     margin-right: 25px;
+  }
+
+  .reference-guide-hide-on-mobile {
+    display: none !important;
   }
 
   .dropdown-menu{

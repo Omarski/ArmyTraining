@@ -9,6 +9,8 @@ var CultureQuestQuizView = require('./CultureQuestQuizView');
 var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
 var CultureQuestPuzzleGameView = require('./CultureQuestPuzzleGameView');
 var PageHeader = require('../../../widgets/PageHeader');
+var AppStateStore = require('../../../../stores/AppStateStore');
+var UnsupportedScreenSizeView = require('../../../../components/UnsupportedScreenSizeView');
 
 function getPageState(props) {
 
@@ -56,6 +58,13 @@ var CultureQuestView = React.createClass({
             self.prepIntroPopup();
             self.markHomeRegion();
         });
+    },
+    componentDidMount: function() {
+        AppStateStore.addChangeListener(this._onAppStateChange);
+    },
+
+    componentWillUnmount: function() {
+        AppStateStore.removeChangeListener(this._onAppStateChange);
     },
 
     prepIntroPopup: function(){
@@ -283,7 +292,11 @@ var CultureQuestView = React.createClass({
         var title = self.state.title;
         var sources = self.state.sources;
         var blockStyle = {position:'relative', width:'768px', height:'504px', marginLeft:'auto', marginRight:'auto'};
-        
+
+        if (AppStateStore.isMobile()) {
+            return (<UnsupportedScreenSizeView/>);
+        }
+
         return (
             <div style={blockStyle}>
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
@@ -352,11 +365,16 @@ var CultureQuestView = React.createClass({
 
         );
     },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
+    },
     /**
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        this.setState(getPageState(this.props));
     }
 });
 
