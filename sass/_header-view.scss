@@ -2,12 +2,43 @@ button.navbar-toggle:hover {
   background-color: #D2E0E6 !important;
 }
 
+.caret {
+  display: none;
+}
+
+.navbar-default {
+  .container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+  }
+}
+
+.navbar-fixed-top .navbar-collapse {
+  max-height: none !important;
+}
+
+.dropdown-menu {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 
 @media screen and (min-width: 767px) {
+
+  .reduce-padding-around-a-element-for-nav-buttons{
+    ul {
+      display: none;
+    }
+  }
 
   .bookmark-nav-item {
     display: none !important;
   }
+
+  .dropdown {
+    display: none !important;
+  }
+
 
   #collapseNav {
     li {
@@ -176,19 +207,14 @@ button.navbar-toggle:hover {
     border-color: #fff;
   }
 
-}
-
-
-/*
-.navbar-fixed-top .navbar .navbar-default{
-  .container {
-    height: 40px !important;
-    .navbar-header {
-      height: 40px !important;
+  .navbar-default {
+    .container {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100%;
     }
   }
 }
-*/
 
 @media screen and (min-width: 374px) and (max-width: 767px) {
   .navbar-toggle {
@@ -202,6 +228,15 @@ button.navbar-toggle:hover {
     margin-right: 25px;
   }
 
+  .reference-guide-hide-on-mobile {
+    display: none !important;
+  }
+
+  .dropdown-menu{
+    .dropdown-toggle {
+      padding-left: 25% !important;
+    }
+  }
 
   .bookmark-text-li-element {
     display: inline;
@@ -399,6 +434,17 @@ button.navbar-toggle:hover {
         padding-top: 8px !important;
         padding-bottom: 7px;
         border-bottom: 1px solid #337ab7;
+        ul {
+          li {
+            a{
+              height: 45px;
+              border-bottom: 1px solid #337ab7;
+            }
+          }
+        }
+      }
+      .a-element-for-settings-dropdown {
+        height: 45px !important;
       }
       a:hover {
         background-color: #D2E0E6 !important;
@@ -467,5 +513,15 @@ button.navbar-toggle:hover {
     padding-top: 8px !important;
     padding-bottom: 0px;
     height: 40px;
+  }
+}
+
+.dropdown-menu {
+  li {
+    .large-bookmark-nav-item {
+      height: 60px !important;
+      border-bottom: 1px solid;
+      border-bottom-color: #337ab7 !important;
+    }
   }
 }

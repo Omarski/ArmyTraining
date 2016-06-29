@@ -12,12 +12,21 @@ var ReferenceActions = {
             data: data
         });
     },
+
     load: function(data) {
         AppDispatcher.dispatch({
             actionType: ReferenceConstants.REFERENCE_LOAD,
             data: data
         });
+    },
+
+    show: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ReferenceConstants.REFERENCE_SHOW,
+            data: data
+        });
     }
+
 
 
 

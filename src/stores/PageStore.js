@@ -280,13 +280,15 @@ function load(data) {
 
         // check if page is a copied page, if so get original path
         if (data.page.preposttest === true) {
-            // update path to load from
-            pageContentPath = PrePostTestStore.getPagePathByPageId(data.page.xid);
+            // if found, update path to load from
+            var newPath = PrePostTestStore.getPagePathByPageId(data.page.xid);
+            if (newPath) {
+                pageContentPath = newPath;
+            }
         }
 
         // load page data
         $.getJSON(pageContentPath, function(result) {
-
             _currentUnit = data.unit;
             _currentChapter = data.chapter;
             _currentPage = data.page;
@@ -332,6 +334,7 @@ function markChapterComplete() {
 }
 
 function jump(data) {
+    console.log("data", data);
     var pageId = data.page;
     var chapterId = data.chapter;
     var unitId = data.unit;

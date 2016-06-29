@@ -69,12 +69,18 @@ var VideoView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+        AppStateStore.addChangeListener(this._onAppStateChange);
     },
 
     componentWillUnmount: function() {
         //PageStore.removeChangeListener(this._onChange);
+        AppStateStore.removeChangeListener(this._onAppStateChange);
     },
     render: function() {
+
+        if (AppStateStore.isMobile()) {
+            return (<UnsupportedScreenSizeView/>);
+        }
 
         return (
             <div>
@@ -91,8 +97,13 @@ var VideoView = React.createClass({
     /**
      * Event handler for 'change' events coming from the BookStore
      */
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
+    },
     _onChange: function() {
-        this.setState(getPageState());
+        this.setState(getPageState(this.props));
     }
 });
 

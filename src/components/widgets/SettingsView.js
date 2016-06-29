@@ -9,13 +9,16 @@ var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var Checkbox = ReactBootstrap.Checkbox;
 var Slider = require('../../components/widgets/Slider');
+var AppStateStore = require('../../stores/AppStateStore');
 
 var BookmarkActions = require('../../actions/BookmarkActions');
 var PageActions = require('../../actions/PageActions');
 var SettingsActions = require('../../actions/SettingsActions');
 var UnitActions = require('../../actions/UnitActions');
+var NavDropdown = require("react-bootstrap/lib/NavDropdown");
+var MenuItem = require("react-bootstrap/lib/MenuItem");
 
-function getSettingsState() {
+function getSettingsState(isNav) {
     var settings = store.get('settings') || {};
 
     var v = 1.0;
@@ -38,7 +41,8 @@ function getSettingsState() {
         backgroundVolume: bv,
         muted: settings.muted,
         voiceVolume: v,
-        max : 1.0
+        max : 1.0,
+        isNav: AppStateStore.isMobile()
     };
 }
 
@@ -75,73 +79,149 @@ var SettingsView = React.createClass({
     resetSettings: function() {
         SettingsActions.destroy();
     },
-
+    menuItemClick: function(){
+        this._forceOpen = true;
+    },
+    menuItemClickAutoPlay: function(){
+        var self = this;
+        this._forceOpen = true;
+        this.setState({autoPlaySound: !this.state.autoPlaySound});
+        this.setState({autoPlaySound: !this.state.autoPlaySound});
+    },
+    dropdownToggle: function(newValue){
+        if (this._forceOpen){
+            this.setState({ menuOpen: true });
+            this._forceOpen = false;
+        } else {
+            this.setState({ menuOpen: newValue });
+        }
+    },
     componentWillMount: function() {
         SettingsStore.addChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
+        AppStateStore.addChangeListener(this._onAppStateChange);
         SettingsStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
+        AppStateStore.removeChangeListener(this._onAppStateChange);
         SettingsStore.removeChangeListener(this._onChange);
     },
     render: function() {
-        
-        var popover =   <Popover id="settingsPopover" title='Settings'>
-                            <ListGroup>
-                                <ListGroupItem>
-                                    <form>
-                                        <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
-                                    </form>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <h5>Voice Volume</h5>
-                                    <Slider
-                                        min={0.0}
-                                        max={this.state.max}
-                                        step={0.1}
-                                        value={this.state.voiceVolume}
-                                        toolTip={false}
-                                        onSlide={this.voiceVolumeChange} />
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <h5>Background Sound Volume</h5>
-                                    <Slider
-                                        min={0.0}
-                                        max={this.state.max}
-                                        step={0.1}
-                                        value={this.state.backgroundVolume}
-                                        toolTip={false}
-                                        onSlide={this.backgroundVolumeChange} />
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <p><i>BUTTONS BELOW ARE FOR DEVELOPERS NOT FOR FINAL PRODUCT</i></p>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <Button bsStyle='warning' onClick={this.clearBookmark}>Clear Bookmark</Button>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <Button bsStyle='danger' onClick={this.resetProgress}>Reset Progress</Button>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <Button bsStyle='info' onClick={this.resetSettings}>Reset Settings</Button>
-                                </ListGroupItem>
-                            </ListGroup>
-                        </Popover>;
+        // console.log("am i mobile? " + AppStateStore.isMobile());
+        var self = this;
 
-        return  <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
-                    <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
+
+        if(self.state.isNav === false){
+            var popover =   <Popover id="settingsPopover" title='Settings'>
+                <ListGroup>
+                    <ListGroupItem>
+                        <form>
+                            <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
+                        </form>
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <h5>Voice Volume</h5>
+                        <Slider
+                            min={0.0}
+                            max={this.state.max}
+                            step={0.1}
+                            value={this.state.voiceVolume}
+                            toolTip={false}
+                            onSlide={this.voiceVolumeChange} />
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <h5>Background Sound Volume</h5>
+                        <Slider
+                            min={0.0}
+                            max={this.state.max}
+                            step={0.1}
+                            value={this.state.backgroundVolume}
+                            toolTip={false}
+                            onSlide={this.backgroundVolumeChange} />
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <p><i>BUTTONS BELOW ARE FOR DEVELOPERS NOT FOR FINAL PRODUCT</i></p>
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <Button bsStyle='warning' onClick={this.clearBookmark}>Clear Bookmark</Button>
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <Button bsStyle='danger' onClick={this.resetProgress}>Reset Progress</Button>
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <Button bsStyle='info' onClick={this.resetSettings}>Reset Settings</Button>
+                    </ListGroupItem>
+                </ListGroup>
+            </Popover>;
+
+            return  (
+                <li>
+                    <a>
+                        <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
+                            <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
+                                    alt={LocalizationStore.labelFor("header", "tooltipSettings")}
+                                    aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                                <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
+                            </Button>
+                        </OverlayTrigger>
+                    </a>
+                </li>
+            );
+        } else {
+            return (
+                    <NavDropdown open={this.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="4"  title={(
+                        <div>
+                            <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
                             alt={LocalizationStore.labelFor("header", "tooltipSettings")}
-                            aria-label={LocalizationStore.labelFor("header", "tooltipSettings")}
-                            className="btn btn-default btn-link btn-lg main-nav-bar-button">
-                        <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
-                    </Button>
-                </OverlayTrigger>
+                            aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                                    <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
+                            </Button>
+                            <p>Settings</p>
+                        </div>
+                    )}>
+                        <MenuItem key={"SettingsItem_4.1"} eventKey="4.1"  href="#" className="bookmark-nav-item" onClick={function(){self.menuItemClickAutoPlay()}}>
+                            <form>
+                                <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
+                            </form>
+                        </MenuItem>
+                        <MenuItem eventKey="4.2" className="large-bookmark-nav-item" onClick={function(){self.menuItemClick()}}>
+                            <h5>Voice Volume</h5>
+                            <Slider
+                                min={0.0}
+                                max={this.state.max}
+                                step={0.1}
+                                value={this.state.voiceVolume}
+                                toolTip={false}
+                                onSlide={this.voiceVolumeChange} />
+                        </MenuItem>
+                        <MenuItem eventKey="4.3" className="large-bookmark-nav-item" onClick={function(){self.menuItemClick()}}>
+                            <h5>Background Sound Volume</h5>
+                            <Slider
+                                min={0.0}
+                                max={this.state.max}
+                                step={0.1}
+                                value={this.state.backgroundVolume}
+                                toolTip={false}
+                                onSlide={this.backgroundVolumeChange} />
+                        </MenuItem>
+                    </NavDropdown>
+            );
+        }
     },
+    _onAppStateChange: function () {
+        var self = this;
+        if (AppStateStore.renderChange()) {
+            //console.log("in settings width : " + AppStateStore.getWidth() + " - height : " + AppStateStore.getHeight() + " - isMobile : " + AppStateStore.device());
+            self.setState({isNav: AppStateStore.isMobile()});
+        }
+
+    },
+
     _onChange: function() {
-        this.setState(getSettingsState());
+        this.setState(getSettingsState(this.props.isNav));
     }
 });
 

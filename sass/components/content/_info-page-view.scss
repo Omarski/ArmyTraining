@@ -11,7 +11,7 @@
 }
 
 .info-view-bullet-item:before {
-  content: "• ";
+  content: "\2022  ";
   color: #000;
 }
 
@@ -22,6 +22,31 @@
     max-height: 300px;
     max-width: 400px;
   }
+}
+
+@media screen and (max-width: 767px){
+  .image-caption-container {
+    width: 95%;
+  }
+
+  .infoMediaContainer{
+    img {
+      width: 100%;
+    }
+    .caption {
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  .infoNoteContainer {
+    width: 95%;
+    ul {
+      padding-left: 0px;
+    }
+
+  }
+
 }
 
 .infoNoteContainer{

@@ -9,7 +9,7 @@ var CHANGE_EVENT = 'change';
 var _loading = false;
 var _loaded = false;
 var _data = 0;
-
+var _show = false;
 /**
  * Create a LOADER item.
  * @param  {string} text The content of the LOADER
@@ -22,9 +22,15 @@ function load() {
     });
 }
 
-
+function show(val) {
+    _show = val;
+}
 
 var ReferenceStore = assign({}, EventEmitter.prototype, {
+
+    shouldShow: function () {
+        return _show;
+    },
 
     loading: function() {
         return _loading;
@@ -68,6 +74,10 @@ AppDispatcher.register(function(action) {
             break;
         case ReferenceConstants.REFERENCE_LOAD:
             load();
+            break;
+        case ReferenceConstants.REFERENCE_SHOW:
+            show(true);
+            ReferenceStore.emitChange();
             break;
 
         default:

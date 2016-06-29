@@ -11,10 +11,12 @@
     "object-assign": "^1.0.0",
     "onchange": "^2.4.0",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dnd": "2.1.4",
-    "react-dnd-html5-backend": "2.0.0"
+    "react-dnd-html5-backend": "2.0.0",
+    "react-dom": "^15.1.0",
+    "react-slick": "^0.12.2",
+    "slick-carousel": "^1.6.0"
   },
   "devDependencies": {
     "browserify": "^6.2.0",
@@ -26,6 +28,7 @@
   },
   "scripts": {
     "start": "watchify -o dist/bundle.js -v -d src/app.js",
+    "fonts": "cp fonts/* dist/fonts/",
     "language": "cp language/en.json dist/en.json",
     "language:watch": "onchange 'language/en.json' -v -- npm run language",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > dist/bundle.min.js --verbose",

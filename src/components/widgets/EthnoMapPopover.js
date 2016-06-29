@@ -12,7 +12,8 @@ var EthnoMapPopover = React.createClass({
             show: true,
             showChanged: false,
             parentShow: this.props.showHide,
-            indexOfOverlayInfo: 0
+            indexOfOverlayInfo: 0,
+            moreInfoLessInfo: "More Info"
         };
     },
     handleResize: function () {
@@ -28,33 +29,54 @@ var EthnoMapPopover = React.createClass({
         var self = this;
         var popoverPages = [];
 
-        for(var prop in self.props.mapData){
-            if(self.props.mapData[prop]){
-                if(prop !== "image" && prop !== "label") {
-                    var propHolder = prop;
-                    var propCapitalized = propHolder.charAt(0).toUpperCase() + propHolder.slice(1);
-                    popoverPages.push([propCapitalized, self.props.mapData[prop]]);
-                }
-            }
-        }
 
-        /*
-        for(var prop in self.props.mapData){
-            if(self.props.mapData[prop]){
-                if(prop !== "image" && prop !== "label") {
-                    var propHolder = prop;
-                    var propCapitalized = propHolder.charAt(0).toUpperCase() + propHolder.slice(1);
-                    popoverPages.push([propCapitalized, self.props.mapData[prop]]);
+
+            if(self.props.mapData["population"]) {
+                popoverPages.push(["Population", self.props.mapData["population"]]);
+            }
+            if(self.props.mapData["location"]){
+                popoverPages.push(["Location", self.props.mapData["location"]]);
+            }
+            if(self.props.mapData["language"]){
+                popoverPages.push(["Language", self.props.mapData["language"]]);
+            }
+            if(self.props.mapData["summary"]){
+                popoverPages.push(["Background", self.props.mapData["summary"]]);
+            }
+            if(self.props.mapData["politics"]){
+                popoverPages.push(["Livelihood", self.props.mapData["politics"]]);
+            }
+            if(self.props.mapData["religion"]){
+                popoverPages.push(["Religion", self.props.mapData["religion"]]);
+            }
+            if(self.props.mapData["politics"]){
+                popoverPages.push(["Livelihood", self.props.mapData["politics"]]);
+            }
+            if(self.props.mapData["society"]){
+                popoverPages.push(["Society", self.props.mapData["society"]]);
+            }
+
+            /*
+            This is a for in loop for if there is no desired order for the sections of popover information
+            if(!popoverPages[0]) {
+                for (var prop in self.props.mapData) {
+                    if (self.props.mapData[prop]) {
+                        if (prop !== "image" && prop !== "label") {
+                            var propHolder = prop;
+                            var propCapitalized = propHolder.charAt(0).toUpperCase() + propHolder.slice(1);
+                            popoverPages.push([propCapitalized, self.props.mapData[prop]]);
+                        }
+                    }
                 }
             }
-        }
-*/
+            */
+
         return popoverPages;
     },
     toggle: function() {
         this.setState({ show: !this.state.show });
     },
-    toggleParentStateAndResetIndexOfOverlayInfo: function(){
+    toggleParentStateAndResetIndexOfOverlayInfoandResetMoreLessInfo: function(){
         var self = this;
         self.props.toggleParentPopoverState();
         self.setState({indexOfOverlayInfo: 0});
@@ -105,23 +127,36 @@ var EthnoMapPopover = React.createClass({
             }
         }
 
-        return (
-            <div>
-                <ReactBootstrap.Overlay show={this.props.showHide} onHide={function(){self.setState({show: false})}} container={this} >
-                    <div id="ethnoOverlay" className="ethno-overlay-main-div">
-                        <div className="ethno-overlay-title">
-                            <strong>{self.props.mapData.label}</strong>
-                            <button className="ethno-close-button-for-overlay btn btn-default" aria-label="Right Align" onClick={this.toggleParentStateAndResetIndexOfOverlayInfo}><span className="glyphicon glyphicon-remove"></span></button>
+            return (
+                <div>
+                    <ReactBootstrap.Overlay show={this.props.showHide} onHide={function(){self.setState({show: false})}}
+                                            container={this}>
+                        <div id="ethnoOverlay" className="ethno-overlay-main-div">
+                            <div className="ethno-overlay-title">
+                                <ul className="ethno-overlay-ul">
+                                    <li className="ethno-overlay-li">
+                                        <strong className="ethno-overlay-title-text">{self.props.mapData.label}</strong>
+                                    </li>
+                                    <li className="ethno-overlay-li">
+                                        <button className="ethno-close-button-for-overlay btn btn-default"
+                                                aria-label="Right Align"
+                                                onClick={this.toggleParentStateAndResetIndexOfOverlayInfoandResetMoreLessInfo}><span
+                                            className="glyphicon glyphicon-remove"></span></button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="ethno-overlay-info">
+                                <p className="ethno-overlay-info-title">{popoverPages[self.state.indexOfOverlayInfo][0]}</p>
+                                <p className="ethno-overlay-info-text">{popoverPages[self.state.indexOfOverlayInfo][1]}</p>
+                            </div>
+                            <EthnoMapButtons disabledPrev={checkIfPrevButtonIsDisabled}
+                                             disabledNext={checkIfNextButtonIsDisabled}
+                                             onNextClick={self.setStateIndexOfOverlayInfoPlusOne}
+                                             onPrevClick={self.setStateIndexOfOverlayInfoMinusOne}/>
                         </div>
-                        <div className="ethno-overlay-info">
-                            <p className="ethno-overlay-info-title">{popoverPages[self.state.indexOfOverlayInfo][0]}</p>
-                            <p className="ethno-overlay-info-text">{popoverPages[self.state.indexOfOverlayInfo][1]}</p>
-                        </div>
-                        <EthnoMapButtons disabledPrev={checkIfPrevButtonIsDisabled} disabledNext={checkIfNextButtonIsDisabled} onNextClick={self.setStateIndexOfOverlayInfoPlusOne} onPrevClick={self.setStateIndexOfOverlayInfoMinusOne} />
-                    </div>
-                </ReactBootstrap.Overlay>
-            </div>
-        );
+                    </ReactBootstrap.Overlay>
+                </div>
+            );
     },
     _onChange: function() {
         this.setState(getSettingsState());
