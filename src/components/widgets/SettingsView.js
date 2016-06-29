@@ -79,10 +79,10 @@ var SettingsView = React.createClass({
     resetSettings: function() {
         SettingsActions.destroy();
     },
-    menuItemClickedThatShouldntCloseDropdown: function(){
+    menuItemClick: function(){
         this._forceOpen = true;
     },
-    menuItemClickedThatShouldntCloseDropdownAndChangeAutoPlay: function(){
+    menuItemClickAutoPlay: function(){
         var self = this;
         this._forceOpen = true;
         this.setState({autoPlaySound: !this.state.autoPlaySound});
@@ -182,12 +182,12 @@ var SettingsView = React.createClass({
                             <p>Settings</p>
                         </div>
                     )}>
-                        <MenuItem key={"SettingsItem_4.1"} eventKey="4.1"  href="#" className="bookmark-nav-item" onClick={function(){self.menuItemClickedThatShouldntCloseDropdownAndChangeAutoPlay()}}>
+                        <MenuItem key={"SettingsItem_4.1"} eventKey="4.1"  href="#" className="bookmark-nav-item" onClick={function(){self.menuItemClickAutoPlay()}}>
                             <form>
                                 <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
                             </form>
                         </MenuItem>
-                        <MenuItem eventKey="4.2" className="large-bookmark-nav-item" onClick={function(){self.menuItemClickedThatShouldntCloseDropdown()}}>
+                        <MenuItem eventKey="4.2" className="large-bookmark-nav-item" onClick={function(){self.menuItemClick()}}>
                             <h5>Voice Volume</h5>
                             <Slider
                                 min={0.0}
@@ -197,7 +197,7 @@ var SettingsView = React.createClass({
                                 toolTip={false}
                                 onSlide={this.voiceVolumeChange} />
                         </MenuItem>
-                        <MenuItem eventKey="4.3" className="large-bookmark-nav-item" onClick={function(){self.menuItemClickedThatShouldntCloseDropdown()}}>
+                        <MenuItem eventKey="4.3" className="large-bookmark-nav-item" onClick={function(){self.menuItemClick()}}>
                             <h5>Background Sound Volume</h5>
                             <Slider
                                 min={0.0}

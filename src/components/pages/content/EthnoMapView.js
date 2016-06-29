@@ -198,8 +198,8 @@ var EthnoMap = React.createClass({
         }
 
         var toolTipper = document.getElementById("toolTipperId");
-        var xValue = event.clientX;
-        var yValue = event.clientY;
+        // var xValue = event.clientX;
+        // var yValue = event.clientY;
 
         var toolTipWidth = ($("#toolTipperId").width() / 2) ;
         

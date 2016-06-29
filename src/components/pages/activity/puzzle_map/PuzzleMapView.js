@@ -7,6 +7,9 @@ var PopupView = require('./../../../widgets/PopupView');
 var PuzzleMapDnDView = require("./PuzzleMapDnDView");
 var PuzzleMapHUDView = require('./PuzzleMapHUDView');
 var PageHeader = require('../../../widgets/PageHeader');
+var AppStateStore = require("../../../../stores/AppStateStore")
+var UnsupportedScreenSizeView = require('../../../../components/UnsupportedScreenSizeView');
+
 
 function getPageState(props) {
 
@@ -50,8 +53,12 @@ var PuzzleMapView = React.createClass({
 
     componentDidMount: function() {
         this.preloadImages();
+        AppStateStore.addChangeListener(this._onAppStateChange);
     },
 
+    componentWillUnmount: function(){
+        AppStateStore.removeChangeListener(this._onAppStateChange);
+    },
     preloadImages: function(){
 
         var self = this;
@@ -249,6 +256,10 @@ var PuzzleMapView = React.createClass({
         var mapUrl = self.state.mediaPath + self.state.imageData.puzzleMapPieces[0].imageFileName;
         var backMapStyle = {background:'url('+mapUrl+') no-repeat 100% 100%'};
 
+        if (AppStateStore.isMobile()) {
+            return (<UnsupportedScreenSizeView/>);
+        }
+
         return (
             <div style={blockStyle}>
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
@@ -280,6 +291,11 @@ var PuzzleMapView = React.createClass({
                 </div>
             </div>
         );
+    },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
     },
     
     _onChange: function() {

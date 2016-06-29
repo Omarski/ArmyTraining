@@ -28,12 +28,12 @@ var PageActions = {
         });
     },
     loadNext: function(data) {
+        console.log("data", data);
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_LOAD_NEXT,
             data: data
         });
-    }
-    ,
+    },
     loadPrevious: function(data) {
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_LOAD_PREVIOUS,
