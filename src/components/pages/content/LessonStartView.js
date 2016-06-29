@@ -5,6 +5,8 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
+var AppStateStore = require('../../../stores/AppStateStore');
+var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 
 
 function getPageState(props) {
@@ -41,6 +43,7 @@ var LessonStartView = React.createClass({
     },
 
     componentDidMount: function() {
+        AppStateStore.addChangeListener(this._onAppStateChange);
         $('[data-toggle="tooltip"]').tooltip();
     },
 
@@ -53,7 +56,7 @@ var LessonStartView = React.createClass({
     },
 
     componentWillUnmount: function() {
-
+        AppStateStore.removeChangeListener(this._onAppStateChange);
     },
     render: function() {
         var self = this;
@@ -67,6 +70,10 @@ var LessonStartView = React.createClass({
             imageHtml = <img className="lesson-start-image" src={"data/media/"+imageXid}></img>;
         }
 
+        if (AppStateStore.isMobile()) {
+            return (<UnsupportedScreenSizeView/>);
+        }
+
 
         return (
             <div>
@@ -75,6 +82,11 @@ var LessonStartView = React.createClass({
                 {imageHtml}
             </div>
         );
+    },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
     },
     /**
      * Event handler for 'change' events coming from the BookStore

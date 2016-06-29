@@ -72,6 +72,7 @@ var EthnoMapView = React.createClass({
 
     render: function() {
         var self = this;
+        console.log("self", self);
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
@@ -197,8 +198,8 @@ var EthnoMap = React.createClass({
         }
 
         var toolTipper = document.getElementById("toolTipperId");
-        var xValue = event.clientX;
-        var yValue = event.clientY;
+        // var xValue = event.clientX;
+        // var yValue = event.clientY;
 
         var toolTipWidth = ($("#toolTipperId").width() / 2) ;
         

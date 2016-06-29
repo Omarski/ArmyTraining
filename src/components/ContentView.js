@@ -3,7 +3,7 @@ var PageStore = require('../stores/PageStore');
 var PageTypeConstants = require('../constants/PageTypeConstants');
 var DefaultPageView = require('../components/pages/content/DefaultPageView');
 var DDAudioQuizView = require('../components/pages/activity/DDAudioQuizView');
-
+var PageActions = require('../actions/PageActions');
 var InfoView = require('../components/pages/content/InfoView');
 var LessonStartView = require('../components/pages/content/LessonStartView');
 var InteractiveTimelineView = require('../components/pages/content/InteractiveTimelineView');
@@ -12,6 +12,7 @@ var MapView = require('../components/pages/content/MapView');
 var MultiNoteView = require('../components/pages/content/MultiNoteView');
 var VideoView = require('../components/pages/content/VideoView');
 var EthnoMapView = require('../components/pages/content/EthnoMapView');
+var Swiper = require('../components/widgets/Swiper');
 
 var ActiveDialogView = require('../components/pages/activity/active_dialog/ActiveDialogView');
 var ListeningComprehensionView = require('../components/pages/activity/ListeningComprehensionView');
@@ -35,7 +36,7 @@ var NetworkActivityView = require('../components/pages/activity/NetworkActivityV
 var NotificationActions = require('../actions/NotificationActions');
 var CultureQuestView = require('../components/pages/activity/cultureQuest/CultureQuestView');
 var PuzzleMapView = require('../components/pages/activity/puzzle_map/PuzzleMapView');
-var MissionConnectView = require('../components/pages/activity/mission_connect/MissionsConnectView');
+var MissionConnectView = require('../components/pages/activity/mission_connect/MissionsConnectView')
 
 function getPageState() {
     var page = null;
@@ -66,6 +67,22 @@ var ContentView = React.createClass({
 
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
+    },
+    next: function() {
+        PageActions.loadNext({});
+    },
+    previous: function() {
+        PageActions.loadPrevious({});
+    },
+    handleLeftSwipe: function(){
+        var self = this;
+        console.log("self.next");
+        self.next();
+    },
+    handleRightSwipe: function () {
+        var self = this;
+        console.log("self.previous");
+        self.previous();
     },
     render: function() {
         var self = this;
@@ -213,16 +230,23 @@ var ContentView = React.createClass({
             }
         }
 
+        //ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);" onTouchStart={onTouchStartFunction} onTouchMove={onTouchMoveFunction} onTouchCancel={onTouchCancelFunction}
+
         var cls = "";
         if (isFullScreen) {
             cls = "absolute-full";
         }
+        var onTouchStartFunction = function(e, swipeDiv){console.log("ONTOUCHSTART!!!!", e); e.preventDefault()/*Set x start pos*/}
+        var onTouchMoveFunction = function (e, swipeDiv){console.log("ONTOUCHMOVE!!!!", e); e.preventDefault(); /* Update x position*/ console.log("e.touches", e.touches)}
+        var onTouchCancelFunction = function(e){console.log("ONTOUCHCANCEL!!!!")}
+        var onTouchEndFunction = function(e){console.log("ONTOUCHEND!!!!!"); /*Update*/}
+
         return (
-            <div className={'container main-content ' + cls}>
+            <Swiper className={'swipe-container container main-content ' + cls} onSwipeLeft={self.handleLeftSwipe} onSwipeRight={self.handleRightSwipe}>
                 <div className={cls} key={"content-" + pageId}>
                     {page}
                 </div>
-            </div>
+            </Swiper>
         );
     },
 

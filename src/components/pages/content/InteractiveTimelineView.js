@@ -2,7 +2,8 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var ReactBootstrap = require('react-bootstrap');
 var PageHeader = require('../../widgets/PageHeader');
-
+var AppStateStore = require('../../../stores/AppStateStore');
+var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 
 function getPageState(props) {
     var title = "";
@@ -62,10 +63,12 @@ var InteractiveTimelineView = React.createClass({
     },
 
     componentDidMount: function() {
+        AppStateStore.addChangeListener(this._onAppStateChange);
         //PageStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
+        AppStateStore.removeChangeListener(this._onAppStateChange);
         PageStore.removeChangeListener(this._onChange);
     },
     handleClick: function(e){
@@ -78,6 +81,11 @@ var InteractiveTimelineView = React.createClass({
         var sources = self.state.sources;
         var image = "";
         var description = "";
+
+        if (AppStateStore.isMobile()) {
+            return (<UnsupportedScreenSizeView/>);
+        }
+
 
         //image in center
         image = getImage(self.state.selectedDate, self.state.timelineJSON.nodes);
@@ -147,6 +155,12 @@ var InteractiveTimelineView = React.createClass({
             </div>
         );
     },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
+    },
+
     /**
      * Event handler for 'change' events coming from the BookStore
      */

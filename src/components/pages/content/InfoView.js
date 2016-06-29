@@ -4,7 +4,8 @@ var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
 var ClosedCaption = require('../../widgets/ClosedCaption');
 var ImageCaption = require('../../widgets/ImageCaption');
-
+var AppStateStore = require('../../../stores/AppStateStore');
+var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 
 var SettingsActions = require('../../../actions/SettingsActions');
 
@@ -199,6 +200,7 @@ var InfoView = React.createClass({
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
+        AppStateStore.addChangeListener(this._onAppStateChange);
         var video = null;
         // play all note media in order (see dnd for example)
         playMediaAudio(noteMedia);
@@ -242,6 +244,7 @@ var InfoView = React.createClass({
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
         SettingsStore.removeChangeListener(this._onChange);
+        AppStateStore.removeChangeListener(this._onAppStateChange);
     },
     render: function() {
         var self = this;
@@ -261,6 +264,9 @@ var InfoView = React.createClass({
             </div>;
         }
 
+        console.log("self", self);
+
+
         var cc = "";
         if (state.transcript !== "") {
             cc = (
@@ -272,6 +278,13 @@ var InfoView = React.createClass({
 
         var mediaContainer = "";
         if (media) {
+
+            if (AppStateStore.isMobile()) {
+                if(self.props.page.media[0].type === "video"){
+                    return (<UnsupportedScreenSizeView/>);
+                }
+            }
+
             mediaContainer = (
                 <div className="infoMediaContainer">
                     {media}
@@ -280,6 +293,11 @@ var InfoView = React.createClass({
         }
 
         if (isFullCoach) {
+
+            if (AppStateStore.isMobile()) {
+                return (<UnsupportedScreenSizeView/>);
+            }
+
             content = (
                 <div className="row">
                     <div className="col-sm-6 col-md-6">
@@ -317,6 +335,12 @@ var InfoView = React.createClass({
             </div>
         );
     },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
+    },
+
     /**
      * Event handler for 'change' events coming from the BookStore
      */
@@ -324,7 +348,6 @@ var InfoView = React.createClass({
         if (this.isMounted()) {
             this.setState(getPageState(this.props));
         }
-
     }
 });
 

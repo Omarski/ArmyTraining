@@ -228,6 +228,10 @@ button.navbar-toggle:hover {
     margin-right: 25px;
   }
 
+  .reference-guide-hide-on-mobile {
+    display: none !important;
+  }
+
   .dropdown-menu{
     .dropdown-toggle {
       padding-left: 25% !important;
