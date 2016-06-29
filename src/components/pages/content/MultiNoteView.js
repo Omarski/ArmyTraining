@@ -107,10 +107,10 @@ var MultiNoteView = React.createClass({
         var sourceInfo = "";
         var infoPages = self.state.related;
         var sliderSettings = { // settigns for the carousel
-            dots: true,
+            dots: false,
             infinite: false,
             speed: 500,
-            slidesToShow: 2,
+            slidesToShow: 3,
             slidesToScroll: 1
         };
         var pagesHTML = infoPages.map(function(item, index){
@@ -196,7 +196,7 @@ var MultiNoteView = React.createClass({
             var caption = item.caption;
             // title will be the individual page titles, and caption is that pages image caption
             var thumbnail = (
-                <button data={index}
+                <button className="btn btn-default" data={index}
                         onClick={self.handleClick}
                         title={title}
                         alt={title}
