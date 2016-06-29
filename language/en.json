@@ -45,7 +45,8 @@
   "settings": {
     "lblTitle": "Settings",
     "lblAutoPlaySound": "Auto Play Sound",
-    "lblVoiceVolume": "Voice Volume"
+    "lblVoiceVolume": "Voice Volume",
+    "lblBackgroundVolume": "Background Sound Volume"
   },
   "quizEnd": {
     "headerResult": "Result",

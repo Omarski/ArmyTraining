@@ -1,5 +1,6 @@
 var React = require('react');
 var CoachFeedbackView = require('../../widgets/CoachFeedbackView');
+var ClosedCaption = require('../../widgets/ClosedCaption');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var LocalizationStore = require('../../../stores/LocalizationStore');
@@ -19,7 +20,7 @@ function getPageState(props) {
         answers: [],
         correctAnswer: "",
         answerFeedback: "No Answer Selected.",
-        questionString: "",
+        transcript: "",
         addClickComplete: false
     };
 
@@ -32,14 +33,15 @@ function getPageState(props) {
         imageZid = props.page.media[0].zid;
         data.prompt = props.page.prompt.text;
         data.answers = props.page.answer;
-        data.questionString = props.page.question.utterance.native.text;
-    }
-
-    props.page.answer.map(function(item){
-        if(item.correct == true){
-            data.correctAnswer = item.nut.uttering.utterance.translation.text;
+        if(props.page.question && props.page.question.utterance && props.page.question.utterance.translation){
+            data.transcript = props.page.question.utterance.translation.text;
         }
-    });
+        props.page.answer.map(function(item){
+            if(item.correct === true){
+                data.correctAnswer = item.nut.uttering.utterance.translation.text;
+            }
+        });
+    }
 
     data.answers = AGeneric().shuffle(data.answers);
 
@@ -57,28 +59,6 @@ function getPageState(props) {
 
 
     return data;
-}
-
-function listenCheck(self){
-    // play the audio prmopt from the click to listen box
-    //find the zid of the audio
-    
-    var zid = 0;
-    if(self.props && self.props.page){
-        if(self.props.page.media){
-
-        }
-    zid = self.props.page.question.media[0].zid;
-    }
-
-    if(zid && zid !== 0){
-        playAudio(zid);
-        $("#audio").bind('ended', function(){
-            self.setState({
-                haveListened: true
-            });
-        });
-    }
 }
 
 function playAudio(xid){
@@ -114,7 +94,7 @@ var ListeningComprehensionView = React.createClass({
     },
 
     componentWillMount: function() {
-        SettingsStore.addChangeListener(this._onChange);
+        SettingsStore.addChangeListener(this._onSettingsChange);
     },
 
     componentDidMount: function() {
@@ -153,8 +133,30 @@ var ListeningComprehensionView = React.createClass({
         }
     },
 
+    listenCheck: function(){
+        // play the audio prmopt from the click to listen box
+        //find the zid of the audio
+        var self = this;
+        var zid = 0;
+        if(self.state && self.state.page){
+            if(self.state.page.media){
+
+            }
+            zid = self.state.page.question.media[0].zid;
+        }
+
+        if(zid && zid !== 0){
+            playAudio(zid);
+            $("#audio").bind('ended', function(){
+                self.setState({
+                    haveListened: true
+                });
+            });
+        }
+    },
+
     componentWillUnmount: function() {
-        SettingsStore.removeChangeListener(this._onChange);
+        SettingsStore.removeChangeListener(this._onSettingsChange);
     },
     render: function() {
         var self = this;
@@ -163,10 +165,19 @@ var ListeningComprehensionView = React.createClass({
         var title = page.title;
         var sources = self.state.sources;
         var feedbackElement = "";
-
+        console.dir(state);
         // if answered added coach feedback
         if(state.haveAnswered) {
             feedbackElement = state.answerFeedback
+        }
+
+        var cc = "";
+        if (state.transcript !== "") { // add transcript of audio for 508 compliance
+            cc = (
+                <div>
+                    <ClosedCaption transcript={state.transcript}/>
+                </div>
+            );
         }
 
         var choices;
@@ -187,8 +198,15 @@ var ListeningComprehensionView = React.createClass({
 
             return (<li key={page.xid + String(index)} className="list-group-item" >
                 <div class="checkbox">
+                    <input title={ans}
+                           alt={ans}
+                           aria-label={ans}
+                           type="radio"
+                           className="listening-comp-checkbox"
+                           value={ans}>
+                    </input>
                     <label>
-                        <input aria-label={ans} type="checkbox" className="listening-comp-checkbox" value={ans}>{ans}</input>
+                        {ans}
                     </label>
                 </div>
             </li>);
@@ -198,6 +216,9 @@ var ListeningComprehensionView = React.createClass({
         var interactionColumn = "col-md-12";
         if(state.haveListened){
             interactionColumn = "col-md-6";
+            console.log(state.prompt);
+            console.dir(choices);
+            console.dir(feedbackElement);
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
@@ -225,6 +246,7 @@ var ListeningComprehensionView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
                     <div className="container">
+                        {cc}
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.
@@ -235,7 +257,12 @@ var ListeningComprehensionView = React.createClass({
                                     <div className="listening-comp-interaction-container">
                                         <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} className="row listening-comp-image" src={state.image}></img>
                                         <div className="listening-comp-prompt">
-                                            <button title={LocalizationStore.labelFor("tools", "btnListen")} alt={LocalizationStore.labelFor("tools", "btnListen")} type="button" onClick={function(){listenCheck(self)}} className="btn btn-default btn-lg btn-link btn-step" aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
+                                            <button title={LocalizationStore.labelFor("tools", "btnListen")}
+                                                    alt={LocalizationStore.labelFor("tools", "btnListen")}
+                                                    type="button"
+                                                    onClick={self.listenCheck}
+                                                    className="btn btn-default btn-lg btn-link btn-step"
+                                                    aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
                                                 <span className="glyphicon glyphicon-play-circle btn-icon" aria-hidden="true"></span>
                                             </button>
                                         </div>
@@ -255,6 +282,11 @@ var ListeningComprehensionView = React.createClass({
      */
     _onChange: function() {
         this.setState(getPageState());
+    },
+    _onSettingsChange: function(){
+        this.setState({
+            updated: true
+        });
     }
 });
 
