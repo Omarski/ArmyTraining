@@ -110,7 +110,7 @@ var MultiNoteView = React.createClass({
             dots: true,
             infinite: false,
             speed: 500,
-            slidesToShow: 4,
+            slidesToShow: 2,
             slidesToScroll: 4
         };
         var pagesHTML = infoPages.map(function(item, index){
@@ -200,7 +200,8 @@ var MultiNoteView = React.createClass({
                         onClick={self.handleClick}
                         title={title}
                         alt={title}
-                        aria-label={title}>
+                        aria-label={title}
+                        key={"multinote-thumb-" + index}>
                     <img  className="thumbnail multi-note-thumbnail"
                           alt={title}
                           src={"data/media/"+imageURL}
@@ -258,7 +259,13 @@ var MultiNoteView = React.createClass({
                             {text}
                         </div>
                         <div className="row">
-                            <Slider {...sliderSettings}>
+                            <Slider
+                                dots={sliderSettings.dots}
+                                infinite={sliderSettings.infinite}
+                                speed={sliderSettings.speed}
+                                slidesToShow={sliderSettings.slidesToShow}
+                                slidesToScroll={sliderSettings.slidesToScroll}
+                            >
                                 {pageChoices}
                             </Slider>
                         </div>
