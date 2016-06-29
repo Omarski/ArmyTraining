@@ -111,7 +111,7 @@ var MultiNoteView = React.createClass({
             infinite: false,
             speed: 500,
             slidesToShow: 2,
-            slidesToScroll: 4
+            slidesToScroll: 1
         };
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
@@ -259,15 +259,18 @@ var MultiNoteView = React.createClass({
                             {text}
                         </div>
                         <div className="row">
-                            <Slider
-                                dots={sliderSettings.dots}
-                                infinite={sliderSettings.infinite}
-                                speed={sliderSettings.speed}
-                                slidesToShow={sliderSettings.slidesToShow}
-                                slidesToScroll={sliderSettings.slidesToScroll}
-                            >
-                                {pageChoices}
-                            </Slider>
+                            <div className="container">
+
+                                <Slider
+                                    dots={sliderSettings.dots}
+                                    infinite={sliderSettings.infinite}
+                                    speed={sliderSettings.speed}
+                                    slidesToShow={sliderSettings.slidesToShow}
+                                    slidesToScroll={sliderSettings.slidesToScroll}
+                                >
+                                    {pageChoices}
+                                </Slider>
+                            </div>
                         </div>
                     </div>
                 </div>
