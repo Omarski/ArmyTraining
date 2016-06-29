@@ -2,7 +2,7 @@
  * Created by omaramer on 5/9/16.
  */
 var React = require('react');
-var MissionConnectGameView = require('./MissionConnectGameView');
+var ObjexGameView = require('./ObjexGameView');
 var AudioPlayer = require('../../../widgets/AudioPlayer');
 var PopupView = require('./../../../widgets/PopupView');
 var PageHeader = require('../../../widgets/PageHeader');
@@ -33,9 +33,9 @@ function getPageState(props) {
         data.page = props.page;
         data.level1 = props.level1;
         data.level2 = props.level2;
-        data.gameData   = JSON.parse(data.page.info.property[1].value);
-        data.level1Data = JSON.parse(data.page.info.property[1].value);
-        data.level2Data = JSON.parse(data.page.info.property[1].value);
+        data.gameData   = JSON.parse(data.page);
+        data.level1Data = JSON.parse(data.page.levels.level1);
+        data.level2Data = JSON.parse(data.page.levels.level2);
     }
 
     return data;
@@ -55,26 +55,6 @@ var ObjexView = React.createClass({
     componentDidMount: function() {
         this.prepObjex();
         this.prepLevels();
-    },
-
-    prepLevels: function(){
-
-        var levelsColl = [];
-        var levelIconPos = [null,[{x:310, y:80}, {x:310, y:240}]];
-
-        for (var i = 0 ; i < 2; i++){ //levels.length
-            var levelObj = {
-                level: i + 1,
-                posX:levelIconPos[1].x, //levels.length - 1
-                posY:levelIconPos[1].y, //levels.length - 1
-                locked: !(i === 0),
-                completed: false
-            };
-
-            levelsColl.push(levelObj);
-        }
-
-        this.setState({levelsColl:levelsColl});
     },
 
     prepObjex: function(){
@@ -107,16 +87,36 @@ var ObjexView = React.createClass({
 
                 loadedObjexColl.push(artifactObj);
             });
+
+            //load bgs
+            var backgroundImg = new Image();
+            backgroundImg.src = self.state.mediaPath + self.state["level"+i+"Data"].backgroundImage.src;
+            backgroundImg.onload = self.loadCounter;
         }
 
-        //load bg
-        var backgroundImg = new Image();
-        backgroundImg.src = self.state.mediaPath + self.state.gameData.backgroundImage.src;
-        backgroundImg.onload = self.loadCounter;
-
-        var totalImages = 41; //update when json combined
+        var totalImages = 42; //update when json combined
 
         self.setState({totalImages:totalImages, loadedObjexColl:loadedObjexColl});
+    },
+
+    prepLevels: function(){
+
+        var levelsColl = [];
+        var levelIconPos = [null,[{x:310, y:80}, {x:310, y:240}]];
+
+        for (var i = 0 ; i < 2; i++){ //levels.length
+            var levelObj = {
+                level: i + 1,
+                posX:levelIconPos[1].x, //levels.length - 1
+                posY:levelIconPos[1].y, //levels.length - 1
+                locked: !(i === 0),
+                completed: false
+            };
+
+            levelsColl.push(levelObj);
+        }
+
+        this.setState({levelsColl:levelsColl});
     },
 
     getObjexText:function(hog_id,key){
@@ -129,6 +129,7 @@ var ObjexView = React.createClass({
     loadCounter: function(){
         var self = this;
         self.state.loadCounter++;
+        console.log("Loaded "+self.state.loadCounter);
         if (self.state.loadCounter == self.state.totalImages){
             this.onObjexReady();
         }
@@ -220,6 +221,14 @@ var ObjexView = React.createClass({
         self.displayPopup(popupObj);
     },
 
+    displayPopup: function(popupObj){
+        this.setState({popupObj:popupObj});
+    },
+
+    onClosePopup: function(){
+        this.setState(({popupObj:null, audioObj:null}));
+    },
+
     playAudio: function(audioObj){
         var self = this;
 
@@ -234,14 +243,6 @@ var ObjexView = React.createClass({
 
     setAudioControl: function(mode){
         this.setState({audioController:mode});
-    },
-
-    displayPopup: function(popupObj){
-        this.setState({popupObj:popupObj});
-    },
-
-    onClosePopup: function(){
-        this.setState(({popupObj:null, audioObj:null}));
     },
 
     render: function() {

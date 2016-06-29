@@ -11,7 +11,8 @@ var ObjexNavCellView = React.createClass({
     },
 
     propTypes: {
-        activeObjex: PropTypes.object.isRequired
+        activeObjex: PropTypes.object.isRequired,
+        onCellOver: PropTypes.func.isRequired
     },
 
     componentWillMount: function() {
@@ -40,7 +41,7 @@ var ObjexNavCellView = React.createClass({
         var img = objex.iconImgSrc;
         var cellImgStyle = {background:'url('+img+') no-repeat 100% 100%'};
 
-        return (<div className="objex-view-cell">
+        return (<div className="objex-view-cell" onMouseOver={self.props.onCellOver(e)}>
                     <div className="objex-view-cellImg" style={cellImgStyle}></div>
                     <div className="objex-view-cellTitle">{objex.abbreviation}</div>
                </div>

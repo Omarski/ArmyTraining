@@ -57,6 +57,31 @@
       }
     }
   }
+
+  .objex-view-navContDesc{
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    font-size:15px;
+    text-align: center;
+    width:165px;
+    height:60px;
+  }
+
+  .objex-view-navCoinCont{
+    position: absolute;
+    right: 15px;
+    top:75px;
+    width:120px;
+    height:27px;
+
+    .objex-view-navCoin{
+      position: absolute;
+      top:0;
+      width:26px;
+      height:26px;
+    }
+  }
 }
 
 //buttons
