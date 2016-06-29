@@ -6,6 +6,13 @@ button.navbar-toggle:hover {
   display: none;
 }
 
+.navbar-default {
+  .container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+  }
+}
 
 .navbar-fixed-top .navbar-collapse {
   max-height: none !important;
@@ -200,19 +207,14 @@ button.navbar-toggle:hover {
     border-color: #fff;
   }
 
-}
-
-
-/*
-.navbar-fixed-top .navbar .navbar-default{
-  .container {
-    height: 40px !important;
-    .navbar-header {
-      height: 40px !important;
+  .navbar-default {
+    .container {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100%;
     }
   }
 }
-*/
 
 @media screen and (min-width: 374px) and (max-width: 767px) {
   .navbar-toggle {

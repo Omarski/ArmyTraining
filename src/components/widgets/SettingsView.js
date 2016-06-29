@@ -158,18 +158,18 @@ var SettingsView = React.createClass({
             </Popover>;
 
             return  (
-                        <li>
-                            <a>
-                                <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
-                                    <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
-                                            alt={LocalizationStore.labelFor("header", "tooltipSettings")}
-                                            aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
-                                        <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
-                                    </Button>
-                                </OverlayTrigger>
-                            </a>
-                        </li>
-                    );
+                <li>
+                    <a>
+                        <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
+                            <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
+                                    alt={LocalizationStore.labelFor("header", "tooltipSettings")}
+                                    aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                                <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
+                            </Button>
+                        </OverlayTrigger>
+                    </a>
+                </li>
+            );
         } else {
             return (
                     <NavDropdown open={this.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="4"  title={(
@@ -219,7 +219,7 @@ var SettingsView = React.createClass({
         }
 
     },
-    
+
     _onChange: function() {
         this.setState(getSettingsState(this.props.isNav));
     }

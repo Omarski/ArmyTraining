@@ -1,12 +1,10 @@
 var React = require('react');
-var BreadcrumbsView = require('../components/BreadcrumbsView');
 var SettingsView = require('../components/widgets/SettingsView');
 var BookStore = require('../stores/BookStore');
 var SettingsStore = require('../stores/SettingsStore');
 var LocalizationStore = require('../stores/LocalizationStore');
 var SettingsActions = require('../actions/SettingsActions');
 var ConfigStore = require('../stores/ConfigStore');
-var ReactBootstrap = require('react-bootstrap');
 var DliView = require("../components/widgets/DliView");
 var BookmarksView = require('../components/BookmarksView');
 var ReferenceView = require("../components/reference_guide/ReferenceView");
@@ -18,8 +16,6 @@ var NavDropdown = require("react-bootstrap/lib/NavDropdown");
 var MenuItem = require("react-bootstrap/lib/MenuItem");
 var PanelGroup = require("react-bootstrap/lib/PanelGroup");
 var Panel = require("react-bootstrap/lib/Panel");
-var ListGroup = ReactBootstrap.ListGroup;
-var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ReferenceActions = require("../actions/ReferenceActions");
 var AppStateStore = require("../stores/AppStateStore");
 
@@ -179,8 +175,8 @@ var HeaderView = React.createClass({
 
         return (
             <div>
-                <Navbar className="navbar-fixed-top navbarHeightDesktop">
-                    <Navbar.Header>
+                <Navbar className="navbar-fixed-top navbarHeightDesktop main-navbar">
+                    <Navbar.Header className="main-navbar-brand">
                         <img src="images/VCAT_H5_logo.png" className="pull-left vcat-logo"/>
                         <Navbar.Brand>
                                 <a className="navbar-brand" href="#">{this.state.title}</a>
@@ -206,7 +202,6 @@ var HeaderView = React.createClass({
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>
-                <BreadcrumbsView />
             </div>
         );
     },

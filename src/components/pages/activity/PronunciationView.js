@@ -8,7 +8,6 @@ var PageHeader = require('../../widgets/PageHeader');
 var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
-
 var LI_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var LI_GLYPHICON_LISTEN_CLS = "glyphicon-play-circle";
 var LI_GLYPHICON_STOP_CLS = "glyphicon-stop";
@@ -33,7 +32,6 @@ var onSuccess = function(s){
 
 function record(id, index, self){
     if(ASRStore.isInitialized()){
-
         var pState = self.state.playableState;
         var oldCA = self.state.clickedAnswer;
         if(oldCA != 0){
@@ -107,7 +105,6 @@ function stop(id, index, self){
 function handleRecord(id, index, self){  // record if not currently recording
     var newRecordingState = self.state.recordingState;
     if (newRecordingState[index]) {
-
         stopRecording(id, index, self);
         var newPlayableState = self.state.playableState;
         newPlayableState[index] = true;
@@ -117,7 +114,6 @@ function handleRecord(id, index, self){  // record if not currently recording
             playableState: newPlayableState
         })
     } else {
-
       //  if(self.state.message != "recordingStarted") {
             record(id, index, self);
             newRecordingState[index] = true;
@@ -180,7 +176,7 @@ function getPageState(props) {
 // Plays Audio filed named with the xid(zid?) given
 function playAudio(xid){
     var audio = document.getElementById('audio');
-    var source = document.getElementById('mp3Source');
+    //var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     audio.src = "data/media/" + xid + ".mp3";
     // play audio, or stop the audio if currently playing

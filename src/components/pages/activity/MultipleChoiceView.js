@@ -122,14 +122,11 @@ var MultipleChoiceView = React.createClass({
         var feedback = state.answerFeedback;
 
         // iterate over each checkbox checking if it was correct
-        $(".multiple-choice-checkbox").each(function () {
-            if (this.value == answer.nut.uttering.utterance.translation.text) {
-                // search for feedback in answer
-                var feedbackText = (answer.feedback && answer.feedback.text) ? answer.feedback.text : "";
-                this.checked = true;
-                feedback = (<CoachFeedbackView text={feedbackText} isCorrect={answer.correct} />);
-            } else {
-                this.checked = false;
+        state.answers.map(function (item, index) {
+            if (answer === (index+1).toString()) {
+                // for the answer you clicked, get it's feedback
+                var feedbackText = (item.feedback && item.feedback.text) ? item.feedback.text : "";
+                feedback = (<CoachFeedbackView text={feedbackText} isCorrect={item.correct} />);
             }
         });
 
@@ -178,18 +175,17 @@ var MultipleChoiceView = React.createClass({
         }
 
         if(state.haveAnswered && !state.isQuizPage) {
-            feedbackElement = state.answerFeedback
+            feedbackElement = state.answerFeedback;
         }
 
         var choices;
-        var _this = this;
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
             // TODO: allow for the text to be any of the text channels
             return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
                             <label>
-                                <input type="checkbox" aria-label={ans} className="multiple-choice-checkbox" value={ans} onClick={_this.answerChange.bind(_this, ans)}></input>
+                                <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox" value={ans} onClick={self.answerChange.bind(self, ans)}></input>
                                 {ans}
                             </label>
                         </div>

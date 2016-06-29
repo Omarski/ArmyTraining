@@ -116,7 +116,7 @@ var ProgressView = React.createClass({
             <table className="table progress-table">
                 <tbody>
                     <tr>
-                        <td nowrap width="50%">
+                        <td nowrap width="100%">
                             <table className="table progress-sub-table">
                                 <tbody>
                                     <tr>
@@ -140,36 +140,69 @@ var ProgressView = React.createClass({
                                 </tbody>
                             </table>
                         </td>
-                        <td nowrap width="50%">
-                            <table className="table progress-sub-table">
-                                <tbody>
-                                    <tr>
-                                        <td nowrap className="shrink-td-padding-for-mobile">
-                                            {LocalizationStore.labelFor("progress", "lblPages")}
-                                        </td>
-                                        <td nowrap width="100%" className="hide-progress-bars">
-                                            <div className="progress">
-                                                <div className="progress-bar progress-bar-pages" style={{width: this.state.pagesPercent + '%'}}>
-                                                    <span className="sr-only">{this.state.pagesPercent}% Complete (success)</span>
-                                                </div>
-                                                <div className="progress-bar progress-bar-unit-complete" style={{width: this.state.currentUnitCompletedPercent + '%'}}>
-                                                    <span className="sr-only">{this.state.currentUnitCompletedPercent}% Complete (success)</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td nowrap className="shrink-td-padding-for-mobile">
-                                            {this.state.currentPageIndex}/{this.state.currentUnitTotalPages}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
                     </tr>
                 </tbody>
             </table>
 
         );
     },
+
+    /*
+     <table className="table progress-table">
+     <tbody>
+     <tr>
+     <td nowrap width="50%">
+     <table className="table progress-sub-table">
+     <tbody>
+     <tr>
+     <td nowrap className="shrink-td-padding-for-mobile">
+     {LocalizationStore.labelFor("progress", "lblLessons")}
+     </td>
+     <td nowrap width="100%" className="hide-progress-bars">
+     <div className="progress">
+     <div className="progress-bar progress-bar-unit" style={{width: this.state.unitsPercent + '%'}}>
+     <span className="sr-only">{this.state.unitsPercent}% Complete (success)</span>
+     </div>
+     <div className="progress-bar progress-bar-total" style={{width: this.state.totalProgressPercent + '%'}}>
+     <span className="sr-only">{this.state.totalProgressPercent}% Complete (success)</span>
+     </div>
+     </div>
+     </td>
+     <td nowrap className="shrink-td-padding-for-mobile">
+     {this.state.currentUnitIndex}/{this.state.totalUnits}
+     </td>
+     </tr>
+     </tbody>
+     </table>
+     </td>
+     <td nowrap width="50%">
+     <table className="table progress-sub-table">
+     <tbody>
+     <tr>
+     <td nowrap className="shrink-td-padding-for-mobile">
+     {LocalizationStore.labelFor("progress", "lblPages")}
+     </td>
+     <td nowrap width="100%" className="hide-progress-bars">
+     <div className="progress">
+     <div className="progress-bar progress-bar-pages" style={{width: this.state.pagesPercent + '%'}}>
+     <span className="sr-only">{this.state.pagesPercent}% Complete (success)</span>
+     </div>
+     <div className="progress-bar progress-bar-unit-complete" style={{width: this.state.currentUnitCompletedPercent + '%'}}>
+     <span className="sr-only">{this.state.currentUnitCompletedPercent}% Complete (success)</span>
+     </div>
+     </div>
+     </td>
+     <td nowrap className="shrink-td-padding-for-mobile">
+     {this.state.currentPageIndex}/{this.state.currentUnitTotalPages}
+     </td>
+     </tr>
+     </tbody>
+     </table>
+     </td>
+     </tr>
+     </tbody>
+     </table>
+     */
     _onChange: function() {
         this.setState(getUnitState());
     }

@@ -148,8 +148,8 @@ var BookmarksView = React.createClass({
             } else {
                 var subItems = bookmarks.map(function (item, index) {
                     return (<ListGroupItem key={"bookmarkitems" + index}>
-                                <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
-                            </ListGroupItem>);
+                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                    </ListGroupItem>);
                 });
                 items = (<ListGroup>
                     {subItems}
