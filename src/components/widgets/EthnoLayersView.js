@@ -180,10 +180,9 @@ var EthnoLayersView = React.createClass({
         var mapStyle = {background:"#000 url("+mapBackground+") no-repeat 100% 100%",
             position:"relative", width:self.state.mapWidth+"px", height:self.state.mapHeight, textAlign:"center"};
 
+        //<div className="ethno-instruction-text"><p>Click on tribal areas on the map to learn about each tribe.</p></div>
         return (
-            <div id="imageLayerView-back-image" className="imageLayerView-back-image" style={mapStyle}>
-
-            </div>
+            <div id="imageLayerView-back-image" className="imageLayerView-back-image" style={mapStyle}> </div>
         );
     }
 });

@@ -84,8 +84,6 @@ var EthnoMapView = React.createClass({
         var imageColl = parsedJSON.areas;
         var backgroundImage = "";
 
-        console.log("parsedJSON", parsedJSON);
-
 
         if (AppStateStore.isMobile()) {
             return (<UnsupportedScreenSizeView/>);
@@ -122,7 +120,8 @@ var EthnoMap = React.createClass({
             topZindex: 10,
             toolTipText: "",
             popoverIndex: 1,
-            popoverShow: false
+            popoverShow: false,
+            popoverQuadrant: 0
         };
     },
     componentWillMount: function() {
@@ -143,10 +142,39 @@ var EthnoMap = React.createClass({
     onRegionClick: function(canvasElement) {
         var self = this;
 
-        var visibleOrNot = $(canvasElement).hasClass("ethno-visible");
-        console.log("visisbleOrNot", visibleOrNot);
+        console.log("canvasElement", canvasElement);
 
+        var visibleOrNot = $(canvasElement).hasClass("ethno-visible");
+        // console.log("visisbleOrNot", visibleOrNot);
+
+        // if you clicked on a region and that region is visible
         if(canvasElement !== null && visibleOrNot) {
+
+            // var findQuandrant = function(x, y){
+            //     var side = "";
+            //     // is the click on the left side or right side?
+            //     if ((768 - x) > 384){
+            //         side = "left";
+            //     } else {
+            //         side = "right";
+            //     }
+            //
+            //     // is the click on the top or the bottom?
+            //     var level = "";
+            //     if((504 - y) > 252){
+            //         level = "top"
+            //     } else {
+            //         level = "bottom"
+            //     }
+            //
+            //     if (side === "left" && level="top"){quadrant = 4;}
+            //
+            // }
+
+
+
+            var quadrant = 0;
+
 
             var lastTwo = canvasElement.getAttribute('id').slice(-2);
             var canvasId = "";
@@ -157,10 +185,35 @@ var EthnoMap = React.createClass({
                 canvasId = lastTwo;
             }
 
+            canvasId = Number(canvasId);
+
+            // console.log("canvasId", canvasId);
+
+
+            //If there is not currently a popover, render popover
             if(self.state.popoverShow === false) {
-                self.setState({popoverIndex: [canvasId], popoverShow: true});
+                self.setState({popoverIndex: canvasId, popoverShow: true, popoverQuadrant: quadrant});
+            }//If there is currently a popover...
+            else if(self.state.popoverShow === true) {
+                // and if that popover is the same as the region that user just clicked on
+                if(self.state.popoverIndex === canvasId){
+                    //remove the popover
+                    self.setState({popoverShow: false});
+                    // if the region clicked is a different region; update the popover to new region
+                } else {
+                    self.setState({popoverShow: true, popoverIndex: canvasId, popoverQuadrant: quadrant });
+                }
             }
 
+            // console.log("popoverIndex", self.state.popoverIndex, "self.state.popoverShow", self.state.popoverShow);
+
+        }
+
+        // console.log("canvasElement:", canvasElement);
+        //if you clicked on a region and that region is not visible
+        if(canvasElement === null){
+            // console.log("INSIDE CANVAS ELEMENT IS NULL!!!:", canvasElement);
+            self.setState({popoverShow: false});
         }
 
     },

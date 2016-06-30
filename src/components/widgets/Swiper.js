@@ -103,7 +103,7 @@ var Swiper = React.createClass({
     },
 
     _updateSwipe: function (direction, touch) {
-        this.setState({direction, touch});
+        this.setState({direction: direction, touch: touch});
     },
 
     _getSwipeLength: function (touch) {

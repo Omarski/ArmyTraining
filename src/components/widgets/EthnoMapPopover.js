@@ -12,8 +12,7 @@ var EthnoMapPopover = React.createClass({
             show: true,
             showChanged: false,
             parentShow: this.props.showHide,
-            indexOfOverlayInfo: 0,
-            moreInfoLessInfo: "More Info"
+            indexOfOverlayInfo: 0
         };
     },
     handleResize: function () {

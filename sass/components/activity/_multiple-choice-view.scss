@@ -7,6 +7,16 @@ input[type=checkbox] {
 .multiple-choice-choices-container {
   margin-top: 10px;
 }
+.multiple-choice-label-remove-padding-left{
+  .multiple-choice-checkbox, .multiple-choice-input-padding-right {
+    margin-right: 10px;
+  }
+}
+
+.multi-choice-header-mobile-margin {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 .multiple-choice-alert {
   background-color: #f7f7f9;
@@ -55,5 +65,17 @@ input[type=checkbox] {
     .list-group-item {
       margin-right: 0px;
     }
+  }
+  .multiple-choice-list-group-item{
+    .multiple-choice-checkbox{
+      label {
+        padding-left: 0px;
+      }
+    }
+  }
+
+  .list-group-item-mobile {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
