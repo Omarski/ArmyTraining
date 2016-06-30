@@ -127,19 +127,19 @@ function animatePins(self){
     var nodes = self.state.json.nodes;
     var pins = document.getElementsByClassName('interactiveMapPin');
     var hasMoved = self.state.hasMoved;
-
+    // i hate this function
     Array.prototype.forEach.call(pins, function(item, index){
-       // setTimeout(function(){
+        setTimeout(function(){
             setTimeout(function(){
                 item.style.display = "inline-block";
-            },(index)*500);
+            },(index)*200);
 
             setTimeout(function(){
                 hasMoved[index] = true;
                 self.setState({
                     hasMoved: hasMoved
                 })
-            },(index)*550);
+            },(index)*250);
             var y = 0;
             for(var i=0;i<nodes.length;i++){
                 if(item.alt == nodes[i].mouseover){
@@ -151,7 +151,7 @@ function animatePins(self){
             self.setState({
                 hasMoved: hasMoved
             });
-       // },(index)*600);
+        },(index)*200);
     });
 }
 

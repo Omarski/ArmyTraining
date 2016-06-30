@@ -1,5 +1,6 @@
 var React = require('react');
 var NotificationStore = require('../../stores/NotificationStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 
 function getNotificationState() {
     return {
@@ -8,7 +9,8 @@ function getNotificationState() {
         visibile: NotificationStore.isVisible(),
         allowDismiss: NotificationStore.allowDismiss(),
         percent: NotificationStore.percent(),
-        image: NotificationStore.image()
+        image: NotificationStore.image(),
+        full: NotificationStore.full()
     }
 }
 
@@ -34,6 +36,7 @@ var NotificationView = React.createClass({
         var close = '';
         var progress = '';
         var image = '';
+        var isFullCls = "";
         var percent = {
           width: this.state.percent + '%'
         };
@@ -48,15 +51,20 @@ var NotificationView = React.createClass({
                         </div>;
         }
         if (this.state.allowDismiss) {
-            dismiss = <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>;
-            close = <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>;
+            dismiss = <button type="button" className="close" data-dismiss="modal" aria-label={LocalizationStore.labelFor("tools", "mdlClose")}><span aria-hidden="true">&times;</span></button>;
+            close = <button type="button" className="btn btn-default" data-dismiss="modal">{LocalizationStore.labelFor("tools", "mdlClose")}</button>;
         }
 
         if (this.state.image) {
-            image = (<img src={this.state.image} height="100%" width="100%"></img>)
+            image = (<img className="splash-image" src={this.state.image}></img>);
         }
+
+        if (this.state.full) {
+            isFullCls = " notification-view-full";
+        }
+
         return <div id="notificationView" className="modal fade" data-backdrop="static">
-                <div className="modal-dialog notification-view-dialog" >
+                <div className={"modal-dialog notification-view-dialog" + isFullCls}>
                     <div className="modal-content">
                         <div className="modal-header">
                             {dismiss}

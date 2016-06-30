@@ -134,7 +134,7 @@ var ProgressView = React.createClass({
                                             </div>
                                         </td>
                                         <td nowrap className="shrink-td-padding-for-mobile">
-                                            {this.state.currentUnitIndex}/{this.state.totalUnits}
+                                            {this.state.totalProgressPercent}%
                                         </td>
                                     </tr>
                                 </tbody>

@@ -9,6 +9,7 @@ var _title = "test title";
 var _body = "test body";
 var _percent = "";
 var _image = null;
+var _full = false;
 var _allowDismiss = false;
 
 function show(data) {
@@ -16,6 +17,7 @@ function show(data) {
     _body = data.body;
     _percent = data.percent;
     _image = data.image;
+    _full = data.full;
     if (data.allowDismiss === true) {
         _allowDismiss = true;
     }
@@ -42,6 +44,10 @@ var NotificationStore = assign({}, EventEmitter.prototype, {
 
     title: function() {
         return _title;
+    },
+
+    full: function() {
+        return _full;
     },
 
     body: function() {

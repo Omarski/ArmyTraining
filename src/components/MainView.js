@@ -105,7 +105,8 @@ var MainView = React.createClass({
         window.addEventListener('resize', this.handleResize);
         NotificationActions.show({
             title: 'Please wait',
-            body: 'Loading...'
+            body: 'Loading...',
+            full: true
         });
         LocalizationActions.load();
     },

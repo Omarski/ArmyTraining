@@ -316,16 +316,12 @@ var ExplorerView = React.createClass({
 
     render: function() {
         var result = (<div></div>);
-        var self = this;
-        var explorerView = (<span></span>);
         var requiredItems = [];
         var optionalItems = [];
 
         if (!this.state.requiredUnits) {
             return (<div></div>);
         }
-
-
 
         if(UnitStore.requiredExists()) {
             requiredItems = this.explorerItems(this.state.requiredUnits, 'required');
