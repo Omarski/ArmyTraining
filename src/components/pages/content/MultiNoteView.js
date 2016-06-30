@@ -106,13 +106,7 @@ var MultiNoteView = React.createClass({
         var title = self.state.title;
         var sourceInfo = "";
         var infoPages = self.state.related;
-        var sliderSettings = { // settigns for the carousel
-            dots: false,
-            infinite: false,
-            speed: 500,
-            slidesToShow: 3,
-            slidesToScroll: 1
-        };
+
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
             var sources = "";
@@ -245,6 +239,17 @@ var MultiNoteView = React.createClass({
                 </div>
             );
         }
+
+        var sliderSettings = { // settigns for the carousel
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            centerMode: false,
+            variableWidth: true
+        };
+
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
@@ -267,6 +272,8 @@ var MultiNoteView = React.createClass({
                                     speed={sliderSettings.speed}
                                     slidesToShow={sliderSettings.slidesToShow}
                                     slidesToScroll={sliderSettings.slidesToScroll}
+                                    centerMode={sliderSettings.centerMode}
+                                    variableWidth={sliderSettings.variableWidth}
                                 >
                                     {pageChoices}
                                 </Slider>
