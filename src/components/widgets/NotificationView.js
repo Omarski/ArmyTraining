@@ -9,7 +9,8 @@ function getNotificationState() {
         visibile: NotificationStore.isVisible(),
         allowDismiss: NotificationStore.allowDismiss(),
         percent: NotificationStore.percent(),
-        image: NotificationStore.image()
+        image: NotificationStore.image(),
+        full: NotificationStore.full()
     }
 }
 
@@ -35,7 +36,7 @@ var NotificationView = React.createClass({
         var close = '';
         var progress = '';
         var image = '';
-        var isSplashCls = "";
+        var isFullCls = "";
         var percent = {
           width: this.state.percent + '%'
         };
@@ -55,12 +56,15 @@ var NotificationView = React.createClass({
         }
 
         if (this.state.image) {
-            image = (<img className="splash-image" src={this.state.image} height="90%" width="90%"></img>);
-            isSplashCls = " big-splash";
+            image = (<img className="splash-image" src={this.state.image}></img>);
+        }
+
+        if (this.state.full) {
+            isFullCls = " notification-view-full";
         }
 
         return <div id="notificationView" className="modal fade" data-backdrop="static">
-                <div className={"modal-dialog notification-view-dialog" + isSplashCls}>
+                <div className={"modal-dialog notification-view-dialog" + isFullCls}>
                     <div className="modal-content">
                         <div className="modal-header">
                             {dismiss}
