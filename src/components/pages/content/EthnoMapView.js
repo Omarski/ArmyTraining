@@ -219,6 +219,10 @@ var EthnoMap = React.createClass({
     },
     onRegionRollover: function(canvasElement, x, y, pageX) {
         var self = this;
+
+        // console.log("canvasElement", canvasElement);
+
+
         if(canvasElement !== null) {
             var canvasId = canvasElement.id;
             var isVisible = $("#" + canvasId).hasClass("ethno-visible");
@@ -334,12 +338,12 @@ var EthnoToggleDiv = React.createClass({
                     if (i !== numIndex + 1) {
                         var opacityLevel = $("#imageLayer_canvas_" + i).css("opacity");
                         if(opacityLevel === "1") {
-                            console.log("INDSIDE FIRST ONE");
+                            // console.log("INDSIDE FIRST ONE");
                             $("#imageLayer_canvas_" + i).removeClass("ethno-visible");
                             $("#imageLayer_canvas_" + i).addClass("ethno-not-visible");
                         }
                     } else if (i === numIndex + 1) {
-                        console.log("INSIDE", i);
+                        // console.log("INSIDE", i);
                         $("#imageLayer_canvas_" + i).removeClass("ethno-not-visible");
                         $("#imageLayer_canvas_" + i).addClass("ethno-visible");
                         $("#imageLayer_canvas_" + i).css("zIndex", self.state.topZindex + 19);
