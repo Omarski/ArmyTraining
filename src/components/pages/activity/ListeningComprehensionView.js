@@ -165,7 +165,6 @@ var ListeningComprehensionView = React.createClass({
         var title = page.title;
         var sources = self.state.sources;
         var feedbackElement = "";
-        console.dir(state);
         // if answered added coach feedback
         if(state.haveAnswered) {
             feedbackElement = state.answerFeedback
@@ -216,9 +215,6 @@ var ListeningComprehensionView = React.createClass({
         var interactionColumn = "col-md-12";
         if(state.haveListened){
             interactionColumn = "col-md-6";
-            console.log(state.prompt);
-            console.dir(choices);
-            console.dir(feedbackElement);
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
