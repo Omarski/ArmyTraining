@@ -20,6 +20,7 @@
  */
 
 var React = require('react');
+var PropTypes  = React.PropTypes;
 
 var ImageLayersView = React.createClass({
 
@@ -37,6 +38,16 @@ var ImageLayersView = React.createClass({
         };
 
         return state;
+    },
+
+    propTypes: {
+        areaWidth: PropTypes.number,
+        areaHeight: PropTypes.number,
+        imageColl: PropTypes.array.isRequired,
+        backgroundImage: PropTypes.string.isRequired,
+        onLayersReady: PropTypes.func.isRequired,
+        onRollover: PropTypes.func.isRequired,
+        onClick: PropTypes.func.isRequired
     },
 
     componentWillMount: function() {
@@ -128,7 +139,7 @@ var ImageLayersView = React.createClass({
         });
 
         self.setState({canvasColl:canvasColl});
-        self.props.onLayersReady(self.state.canvasColl);
+        self.props.onLayersReady(canvasColl);
     },
 
     detectRegion: function(e,pixelX,pixelY) {

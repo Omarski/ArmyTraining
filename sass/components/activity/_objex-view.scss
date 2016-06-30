@@ -4,23 +4,26 @@
   background: #fff;
   height: auto;
 
-  .objex_view_popLevelIconCont{
+  .objex-view-popLevelIconCont{
     position: absolute;
+    width: 162px;
+    height: 82px;
+    cursor:pointer;
   }
 
-  .objex_view_popLevelIconText{
+  .objex-view-popLevelIconText{
     position:absolute;
     font-weight:bold;
     font-size:25px;
-    top:70px;
-    left:30px;
+    top:24px;
+    left:41px;
   }
 }
 
 //vav
 .objex-view-navCont{
   position: absolute;
-  top:505px;
+  top:400px;
   left:0;
   width:768px;
   height:105px;

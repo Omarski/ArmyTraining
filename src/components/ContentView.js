@@ -227,7 +227,7 @@ var ContentView = React.createClass({
                     page= <MissionConnectView page={this.state.page} />;
                     break;
                 case "Objex":
-                    page= <MissionConnectView page={this.state.page} />;
+                    page= <ObjexView page={this.state.page} />;
                     break;
                 default:
                     page = <DefaultPageView page={this.state.page} />;
