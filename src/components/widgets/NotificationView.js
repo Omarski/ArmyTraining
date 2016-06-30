@@ -1,5 +1,6 @@
 var React = require('react');
 var NotificationStore = require('../../stores/NotificationStore');
+var LocalizationStore = require('../../stores/LocalizationStore');
 
 function getNotificationState() {
     return {
@@ -34,6 +35,7 @@ var NotificationView = React.createClass({
         var close = '';
         var progress = '';
         var image = '';
+        var isSplashCls = "";
         var percent = {
           width: this.state.percent + '%'
         };
@@ -48,15 +50,17 @@ var NotificationView = React.createClass({
                         </div>;
         }
         if (this.state.allowDismiss) {
-            dismiss = <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>;
-            close = <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>;
+            dismiss = <button type="button" className="close" data-dismiss="modal" aria-label={LocalizationStore.labelFor("tools", "mdlClose")}><span aria-hidden="true">&times;</span></button>;
+            close = <button type="button" className="btn btn-default" data-dismiss="modal">{LocalizationStore.labelFor("tools", "mdlClose")}</button>;
         }
 
         if (this.state.image) {
-            image = (<img src={this.state.image} height="100%" width="100%"></img>)
+            image = (<img className="splash-image" src={this.state.image} height="90%" width="90%"></img>);
+            isSplashCls = " big-splash";
         }
+
         return <div id="notificationView" className="modal fade" data-backdrop="static">
-                <div className="modal-dialog notification-view-dialog" >
+                <div className={"modal-dialog notification-view-dialog" + isSplashCls}>
                     <div className="modal-content">
                         <div className="modal-header">
                             {dismiss}

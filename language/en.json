@@ -63,7 +63,8 @@
     "lblLessons": "Lessons:"
   },
   "tools":{
-    "btnListen": "Click to Listen"
+    "btnListen": "Click to Listen",
+    "mdlClose": "Close"
   },
   "PronunciationPage":{
     "btnPlay": "Play",
