@@ -184,8 +184,8 @@ var MultipleChoiceView = React.createClass({
             // TODO: allow for the text to be any of the text channels
             return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
-                            <label>
-                                <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox" value={ans} onClick={self.answerChange.bind(self, ans)}></input>
+                            <label className="multiple-choice-label-remove-padding-left">
+                                <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox multiple-choice-input-padding-right" value={ans} onClick={self.answerChange.bind(self, ans)}></input>
                                 {ans}
                             </label>
                         </div>
@@ -199,7 +199,7 @@ var MultipleChoiceView = React.createClass({
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
                     <div className="container">
                         <div className="row">
-                            <h4>
+                            <h4 className="multi-choice-header-mobile-margin">
                                 {state.prompt}
                             </h4>
                         </div>
@@ -207,7 +207,7 @@ var MultipleChoiceView = React.createClass({
                             {mediaContainer}
                         </div>
                         <div className="row">
-                            <ul className="list-group multiple-choice-choices-container">
+                            <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
                                 {choices}
                             </ul>
                         </div>

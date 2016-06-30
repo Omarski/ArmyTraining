@@ -43,6 +43,8 @@ var Swiper = React.createClass({
 
     render: function() {
         var Component = this.props.component || this.props.tagName;
+        var self = this.props;
+        // console.log("INSDIE RENDER OF SWIPER", self);
         return (
             <Component {...this.props} onTouchStart={this.handleTouchStart}
         onTouchEnd={this.handleTouchEnd}

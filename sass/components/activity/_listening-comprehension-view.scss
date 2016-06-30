@@ -38,6 +38,17 @@ input[type=checkbox] {
   text-align: center;
 }
 
+@media screen and (max-width: 450px) {
+  .listening-comp-interaction-container {
+    .listening-comp-image {
+      width: 90%;
+      height: auto;
+    }
+  }
+}
+
+
+
 /*
 
 .LC-container{
