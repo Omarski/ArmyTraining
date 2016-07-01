@@ -114,7 +114,6 @@ var ImageLayersView = React.createClass({
         });
 
         return canv;
-
     },
 
     placeRegions: function(){
@@ -128,7 +127,7 @@ var ImageLayersView = React.createClass({
             var regionCanvas =  self.createCanvas({
                 canvasWidth:self.props.areaWidth,
                 canvasHeight:self.props.areaHeight,
-                canvasId:"imageLayer_canvas_" + index,
+                canvasId:"imageLayer_canvas_" + image.id? image.id:index,
                 canvasStyle:"{z-index:"+index+1+"}",
                 mapSrc: self.state.loadedImageColl[index].src
             });

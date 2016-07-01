@@ -12,7 +12,9 @@ var ObjexGameView = React.createClass({
         return {imageLayersData:{},
                 lastHighlightedRegion:null,
                 layersCanvColl:[],
-                activeObjexColl:[]
+                activeObjexColl:[],
+                activeRoundObjexColl:[],
+                firstRound:true
         };
     },
 
@@ -54,12 +56,12 @@ var ObjexGameView = React.createClass({
 
         var artifactsColl = [];
         var loadedObjexColl = this.props.loadedObjexColl;
-        var randArtifactColl = [];
+        var activeObjexColl = [];
         var randColl = [];
 
         while (randColl.length < 10){
 
-            var rand = Math.floor(Math.random()*loadedObjexColl.length);
+            var rand = Math.floor(Math.random()*this.props.levelData.objects.length);
             if ($.inArray(rand, randColl) === -1) randColl.push(rand);
         }
 
@@ -67,11 +69,12 @@ var ObjexGameView = React.createClass({
         for (var i = 0; i < randColl.length; i++){
             var artifactObj = {};
             artifactObj["image"] = loadedObjexColl[randColl[i]].fullImgUrl;
+            artifactObj["id"] = loadedObjexColl[randColl[i]].hog_id;
             artifactsColl.push(artifactObj);
-            randArtifactColl.push(loadedObjexColl[randColl[i]]);
+            activeObjexColl.push(loadedObjexColl[randColl[i]]);
         }
 
-        this.setState({activeObjexColl:randArtifactColl});
+        this.setState({activeObjexColl:activeObjexColl});
 
         return artifactsColl;
     },
@@ -83,8 +86,24 @@ var ObjexGameView = React.createClass({
 
     onRegionClicked: function(canvasElement){
 
+        var self = this;
         if (canvasElement && !canvasElement.hidden) {
-        }
+            console.log("Clicked on: " + canvasElement.id);
+            var hit = $.grep(self.props.activeRoundObjexColl, function(e) { return e.hog_id === canvasElement.id });
+            if (hit) {
+                $("#"+canvasElement.id).css("opacity","1");
+                self.setState({roundHits:self.state.roundHits + 1},
+                function(){
+                    if (self.state.roundHits === 5) {
+                        self.setState({firstRound:false});
+                    }else if (self.state.roundHits === 10){
+                        console.log("Round finished ...");
+                        self.viewUpdate({task:"showLevelPop",value:null});
+                    }
+                });
+            }
+        
+         }
     },
 
     onRegionRollover: function(canvasElement, pageX, pageY) {
@@ -100,6 +119,9 @@ var ObjexGameView = React.createClass({
 
         var self = this;
         switch (update.task){
+            case "activeRoundObjexColl":
+                self.setState({activeRoundObjexColl:update.value});
+                break;
         }
     },
 
@@ -123,6 +145,7 @@ var ObjexGameView = React.createClass({
                     mediaPath = {self.props.mediaPath}
                     activeObjexColl = {self.state.activeObjexColl}
                     updateGameView = {self.updateGameView}
+                    firstRound = {self.state.firstRound}
                 />
                </div>
         )

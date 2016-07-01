@@ -9,9 +9,9 @@ var ObjexNavView = React.createClass({
     getInitialState: function() {
 
         return {
-            firstRound:true,
             navDisc:"",
-            coinsRemaining:6
+            coinsRemaining:6,
+            activeRoundObjexColl:[]
         };
     },
 
@@ -19,10 +19,16 @@ var ObjexNavView = React.createClass({
         gameData: PropTypes.object,
         activeObjexColl: PropTypes.array.isRequired,
         mediaPath: PropTypes.string.isRequired,
-        updateGameView: PropTypes.func.isRequired
+        updateGameView: PropTypes.func.isRequired,
+        firstRound: PropTypes.bool.isRequired
     },
 
-    componentWillMount: function() {
+    componentWillMount: function(){
+        var self = this;
+        var activeRoundObjexColl = self.props.firstRound ? self.props.activeObjexColl.slice(0,5):
+                                   self.props.activeObjexColl.slice(6,10);
+        self.setState({activeRoundObjexColl:activeRoundObjexColl});
+        self.updateGameView({task:"activeRoundObjexColl", value:activeRoundObjexColl});
     },
 
     componentDidMount: function(){
@@ -31,37 +37,43 @@ var ObjexNavView = React.createClass({
     prepNav: function(){
 
         var self = this;
-        var activeObjexColl = self.state.firstRound ? self.props.activeObjexColl.slice(0,6):
-                              self.props.activeObjexColl.slice(5,10);
+        var activeRoundObjexColl = self.props.firstRound ? self.props.activeObjexColl.slice(0,5):
+                              self.props.activeObjexColl.slice(6,10);
 
-        var navCells = activeObjexColl.map(function(objex,index){
+        var navCells = activeRoundObjexColl.map(function(objex,index){
+
             return (
-            <ObjexNavCellView
-                key={index}
-                activeObjex = {objex}
-                onCellOver = {self.onCellOver}
-            />
+                <ObjexNavCellView
+                    key={index}
+                    activeObjex = {objex}
+                    onCellOver = {self.onCellOver}
+                />
             )
         });
 
+        //self.setState({activeRoundObjexColl:activeRoundObjexColl});
+        //self.updateGameView({task:"activeRoundObjexColl", value:activeRoundObjexColl});
         return navCells;
     },
 
     prepCoins: function(){
         
-        var coinOffset = 15;
-        var coinArt = this.props.gameData.ui_images.hint_icon;
+        var self = this;
+        var offset = 15;
+        var coinColl = [1,2,3,4,5,6];
+        var coinArt = self.props.mediaPath + this.props.gameData.ui_images.hint_icon;
         
-        var coinsRender = this.props.activeObjexColl.map(function(objex,index){
+        var coinsRender = coinColl.map(function(coin,index){
             
-            var coinOffset = {left:index * coinOffset + "px"};
+            var coinOffset = index * offset + "px";
             
             return(
+
                 <ObjexNavCoinView
                     key={index}
+                    id={index}
                     coinArt = {coinArt}
-                    activeObjex = {objex}
-                    onCoinClick = {this.onCoinClick}
+                    onCoinClick = {self.onCoinClick}
                     coinOffset = {coinOffset}
                 />
             )
@@ -71,11 +83,17 @@ var ObjexNavView = React.createClass({
     },
 
     onCellOver: function(e){
-        console.log("Over: "+ e.target.id);
+
+        var hog_id = e.currentTarget.id.substring(13);
+        var objex = $.grep(this.props.activeObjexColl, function(e) { return e.hog_id === hog_id });
+        this.setState({navDisc:objex[0].tooltip});
     },
 
     onCoinClick: function(e){
-        console.log("Coin : "+ e.target.id);
+        $("#"+e.target.id).remove();
+        this.setState({coinsRemaining: this.state.coinsRemaining -1});
+
+        console.log("Coin : "+ e.target.id + " Remaining: "+ this.state.coinsRemaining);
     },
 
     viewUpdate: function(update){
@@ -85,9 +103,7 @@ var ObjexNavView = React.createClass({
 
     updateGameView: function(update){
 
-        var self = this;
-        switch (update.task){
-        }
+       this.props.updateGameView(update);
     },
 
     render: function() {
@@ -96,10 +112,11 @@ var ObjexNavView = React.createClass({
 
         return (<div className="objex-view-navCont">
                     <div className="objex-view-cellCont">
-                        {self.prepNav}
+                        {self.prepNav()}
                     </div>
-                <div className="objex-view-navContDesc" id="objexViewNavContDesc">{self.state.navDisc}</div>
-                <div className="objex-view-navCoinCont" id="objexViewNavCoinCont">{self.prepCoins}</div>
+                <div className="objex-view-navContDesc" id="objexViewNavContDesc"><span>{self.state.navDisc}</span></div>
+                <div className="objex-view-navContHintLabel">Hints</div>
+                <div className="objex-view-navCoinCont" id="objexViewNavCoinCont">{self.prepCoins()}</div>
                </div>
         )
     }

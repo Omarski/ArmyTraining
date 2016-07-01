@@ -23,9 +23,9 @@ function getPageState(props) {
         loadCounter:0,
         totalImages:0,
         showGame:false,
-        currentLevel:null,
+        currentLevel:1,
         levelsColl:[],
-        levelStats:{hints:6}
+        levelStats:{completed:[]}
     };
     
     if (props && props.page) {
@@ -77,9 +77,9 @@ var ObjexView = React.createClass({
         var self = this;
         var loadedObjexColl = [];
 
-        for (var i = 1 ; i < 3; i++){ //self.gameData.levels.length
+       // for (var i = 1 ; i < 3; i++){ //self.gameData.levels.length
 
-            self.state["level"+i+"Data"].objects.map(function(img,index){
+            self.state["level"+self.state.currentLevel+"Data"].objects.map(function(img,index){
 
                 var fullImg = new Image();
                 var iconImg = new Image();
@@ -109,11 +109,11 @@ var ObjexView = React.createClass({
 
             //load bgs
             var backgroundImg = new Image();
-            backgroundImg.src = self.state.mediaPath + self.state["level"+i+"Data"].backgroundImage.src;
+            backgroundImg.src = self.state.mediaPath + self.state["level"+self.state.currentLevel+"Data"].backgroundImage.src;
             backgroundImg.onload = self.loadCounter;
-        }
+        //}
 
-        var totalImages = 82; //update when json combined
+        var totalImages = 41; //update when json combined
 
         self.setState({totalImages:totalImages, loadedObjexColl:loadedObjexColl});
     },
@@ -166,7 +166,11 @@ var ObjexView = React.createClass({
     viewUpdate: function(update){
 
         switch (update.task){
-
+            case "showLevelPop":
+                this.setState({showGame:false}, function(){
+                    this.prepLevels();
+                });
+                break;
         }
     },
 
@@ -177,7 +181,7 @@ var ObjexView = React.createClass({
         this.setState({popupObj:null, currentLevel:level}, function(){
             setTimeout(function(){
                 self.setState({showGame:true})
-            },1000);
+            },100);
         });
     },
 

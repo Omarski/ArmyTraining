@@ -23,7 +23,7 @@
 //vav
 .objex-view-navCont{
   position: absolute;
-  top:400px;
+  top:444px;
   left:0;
   width:768px;
   height:105px;
@@ -33,7 +33,9 @@
     position:relative;
     margin-left: auto;
     margin-right: auto;
-    width: 410px;
+    width: 425px;
+    height: 90px;
+    margin-top: 5px;
 
     .objex-view-cell{
       margin-right:10px;
@@ -44,38 +46,49 @@
       background:#fff;
 
       .objex-view-cellImg{
-        position: absolute;
+        position: relative;
         top:0;
         left:0;
+        width:73px;
+        height:73px;
+        opacity:0;
       }
 
       .objex-view-cellTitle{
-        position:absolute;
-        top:72px;
+        position:relative;
+        top:3px;
         left:0;
         width:73px;
         height:16px;
         text-align: center;
-        font-size:15px;
+        font-size:12px;
+        line-height:12px;
       }
     }
   }
 
   .objex-view-navContDesc{
     position: absolute;
-    top: 70px;
-    left: 20px;
-    font-size:15px;
+    top: 5px;
+    left: 25px;
     text-align: center;
-    width:165px;
-    height:60px;
+    width:117px;
+    height:75px;
+    line-height:75px;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      font-size:13px;
+      line-height:13px;
+    }
   }
 
   .objex-view-navCoinCont{
     position: absolute;
-    right: 15px;
-    top:75px;
-    width:120px;
+    right:10px;
+    top:45px;
+    width:106px;
     height:27px;
 
     .objex-view-navCoin{
@@ -84,6 +97,16 @@
       width:26px;
       height:26px;
     }
+  }
+
+  .objex-view-navContHintLabel{
+    position: absolute;
+    left:600px;
+    top:47px;
+    width:45px;
+    height:20px;
+    text-align:right;
+    font-size:14px;
   }
 }
 
