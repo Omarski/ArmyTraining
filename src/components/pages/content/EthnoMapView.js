@@ -146,9 +146,10 @@ var EthnoMap = React.createClass({
 
         var visibleOrNot = $(canvasElement).hasClass("ethno-visible");
         // console.log("visisbleOrNot", visibleOrNot);
-
+        console.log("visibleOrNot", visibleOrNot);
         // if you clicked on a region and that region is visible
-        if(canvasElement !== null && visibleOrNot) {
+        if(canvasElement !== null) {
+
 
             // var findQuandrant = function(x, y){
             //     var side = "";
@@ -187,6 +188,13 @@ var EthnoMap = React.createClass({
 
             canvasId = Number(canvasId);
 
+            if(!visibleOrNot){
+                console.log("CHANGE TOGGLE DIV!!!!!");
+                $(canvasElement).removeClass("ehtno-not-visible");
+                $(canvasElement).addClass("ethno-visible");
+                console.log("canvasId:", canvasId);
+            }
+
             // console.log("canvasId", canvasId);
 
 
@@ -217,55 +225,57 @@ var EthnoMap = React.createClass({
         }
 
     },
-    onRegionRollover: function(canvasElement, x, y, pageX) {
+    onRegionRollover: function(canvasElement, x, y, pageX, pageY, invisible) {
         var self = this;
 
-        // console.log("canvasElement", canvasElement);
+        // console.log("ETHNOMAPVIEW: onRegionRollover : canvasElement", canvasElement);
 
-
-        if(canvasElement !== null) {
-            var canvasId = canvasElement.id;
-            var isVisible = $("#" + canvasId).hasClass("ethno-visible");
-            if(isVisible === true) {
-                var zIndex = getComputedStyle(canvasElement).getPropertyValue("z-index");
-                var newzIndex = this.state.topZindex + 1;
-                self.setState({topZindex: newzIndex});
-                $("#" + canvasId).css("zIndex", newzIndex);
-            }
-        }
-
-        var toolTipper = document.getElementById("toolTipperId");
-
-        if(canvasElement !== null) {
-            $("#toolTipperId").removeClass("ethno-not-visible");
-
-            var lastTwo = canvasElement.getAttribute('id').slice(-2);
-            var canvasIdTwo = "";
-
-            if(lastTwo.charAt(0) === "_"){
-                canvasIdTwo = lastTwo.charAt(1);
-            } else if (lastTwo.charAt(0) !== "_"){
-                canvasIdTwo = lastTwo;
+        if(invisible === false){
+            if(canvasElement !== null) {
+                var canvasId = canvasElement.id;
+                var isVisible = $("#" + canvasId).hasClass("ethno-visible");
+                if(isVisible === true) {
+                    var zIndex = getComputedStyle(canvasElement).getPropertyValue("z-index");
+                    var newzIndex = this.state.topZindex + 1;
+                    self.setState({topZindex: newzIndex});
+                    $("#" + canvasId).css("zIndex", newzIndex);
+                }
             }
 
-            var regionNameToolTip = self.props.mapData.areas[canvasIdTwo].label;
-            self.setState({toolTipText: regionNameToolTip});
+            var toolTipper = document.getElementById("toolTipperId");
+
+            if(canvasElement !== null) {
+                $("#toolTipperId").removeClass("ethno-not-visible");
+
+                var lastTwo = canvasElement.getAttribute('id').slice(-2);
+                var canvasIdTwo = "";
+
+                if(lastTwo.charAt(0) === "_"){
+                    canvasIdTwo = lastTwo.charAt(1);
+                } else if (lastTwo.charAt(0) !== "_"){
+                    canvasIdTwo = lastTwo;
+                }
+
+                var regionNameToolTip = self.props.mapData.areas[canvasIdTwo].label;
+                self.setState({toolTipText: regionNameToolTip});
+            }
+
+            if(canvasElement === null){
+                $("#toolTipperId").addClass("ethno-not-visible");
+            }
+
+            var toolTipper = document.getElementById("toolTipperId");
+            // var xValue = event.clientX;
+            // var yValue = event.clientY;
+
+            var toolTipWidth = ($("#toolTipperId").width() / 2) ;
+
+
+            toolTipper.style.top = (y - 40) + 'px';
+            toolTipper.style.left = (pageX - toolTipWidth - 15) + 'px';
+            toolTipper.style.zIndex = self.state.topZindex + 20;
         }
 
-        if(canvasElement === null){
-            $("#toolTipperId").addClass("ethno-not-visible");
-        }
-
-        var toolTipper = document.getElementById("toolTipperId");
-        // var xValue = event.clientX;
-        // var yValue = event.clientY;
-
-        var toolTipWidth = ($("#toolTipperId").width() / 2) ;
-        
-
-        toolTipper.style.top = (y - 40) + 'px';
-        toolTipper.style.left = (pageX - toolTipWidth - 15) + 'px';
-        toolTipper.style.zIndex = self.state.topZindex + 20;
     },
     togglePopoverShow: function (){
         var self = this;
