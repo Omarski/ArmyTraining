@@ -44,9 +44,6 @@ var ObjexView = React.createClass({
         return pageState;
     },
 
-    componentWillMount: function(){
-    },
-
     componentDidMount: function(){
 
         var self = this;
@@ -58,14 +55,14 @@ var ObjexView = React.createClass({
                 data.level1Data = level1JSON;
                 $.getJSON(data.gameData.levels.level2).done(function(level2JSON){
                     data.level2Data = level2JSON;
-
+                    console.log("level2: " + level2JSON.objects.length);
                     self.setState({
                         gameData:data.gameData,
                         level1Data:data.level1Data,
                         level2Data:data.level2Data},
                         function(){
                             this.prepObjex();
-                            this.prepLevels();
+                            //this.prepLevelCompletePopup();
                         });
                 });
             });
@@ -124,9 +121,7 @@ var ObjexView = React.createClass({
     },
 
     onObjexReady: function(){
-
-        var self = this;
-        //self.prepIntroPopup();
+        this.prepLevels();
     },
 
     prepLevels: function(){
@@ -179,22 +174,24 @@ var ObjexView = React.createClass({
     prepLevelCompletePopup: function(){
 
         var self = this;
+        var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
 
         var popupObj = {
             id:"LevelOrRoundDone",
             onClickOutside: null,
-            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'#fff', zIndex:'6'},
+            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
 
             content: function(){
 
                 return(
-                    <div className="objex-view-popContDoneLevel">
-                        <div className="objex-view-textComplete">Level complete!</div>
-                        <div className="objex-view-completedButtonCont">
-                            <button type="button" className="btn btn-default" onClick={self.menuToLevels}>Main Menu</button>
-                            <button type="button" className="btn btn-default" onClick={self.onNextLevel}>Next Level</button>
+                        <div className="objex-view-popCont">
+                            <div className="objex-view-textComplete">Level complete!</div>
+                            <div className="objex-view-completedButtonCont">
+                                <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
+                                <button type="button" className="btn btn-default objex-view-btn" onClick={self.onNextLevel}>Next Level</button>
+                            </div>
                         </div>
-                    </div>
+
                 )
             }
         };
@@ -233,7 +230,7 @@ var ObjexView = React.createClass({
             var levelIconStyle = {left:levelObj.posX+'px', top:levelObj.posY+'px', background: 'url('+iconBg+') no-repeat 100% 100%'};
 
             return(
-                <div id={"objexViewLevelIcon"+index+1} key={index}
+                <div id={"objexViewLevelIcon"+parseInt(index+1)} key={index}
                      className="objex-view-popLevelIconCont"
                      style={levelIconStyle}
                      onClick={self.onLevelClick}>
@@ -259,6 +256,18 @@ var ObjexView = React.createClass({
         };
 
         self.displayPopup(popupObj);
+    },
+
+    onLevelClick: function(e){
+
+        var self = this;
+        var level = parseInt(e.currentTarget.id.substring(18));
+
+        this.setState({popupObj:null, currentLevel:level}, function(){
+            setTimeout(function(){
+                self.setState({showGame:true})
+            },100);
+        });
     },
 
     displayPopup: function(popupObj){
@@ -301,18 +310,6 @@ var ObjexView = React.createClass({
                 });
                 break;
         }
-    },
-
-    onLevelClick: function(e){
-
-        var self = this;
-        var level = parseInt(e.currentTarget.id.substring(18));
-        console.log("Clicked on level: " + level);
-        this.setState({popupObj:null, currentLevel:level}, function(){
-            setTimeout(function(){
-                self.setState({showGame:true})
-            },100);
-        });
     },
 
     replayGame: function(){

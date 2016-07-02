@@ -1,6 +1,7 @@
 var React = require('react');
 var ImageLayersView = require('../../../widgets/ImageLayersView');
 var ObjexNavView = require('./ObjexNavView');
+var ObjexInfoPopView = require('./ObjexInfoPopView');
 
 var PropTypes  = React.PropTypes;
 
@@ -14,6 +15,7 @@ var ObjexGameView = React.createClass({
                 layersCanvColl:[],
                 activeObjexColl:[],
                 activeRoundObjexColl:null,
+                activeObjex:null,
                 firstRound:true,
                 roundHits:0,
                 hitColl:[],
@@ -105,26 +107,26 @@ var ObjexGameView = React.createClass({
             var hit = $.grep(self.state.activeRoundObjexColl, function(e) { return e.hog_id === canvasElement.id })[0];
 
             if (hit && self.state.hitColl.indexOf(hit.hog_id) === -1) {
+
                 $("#objexViewCellImg"+canvasElement.id).css("opacity","1");
                 var hitColl = self.state.hitColl;
                 hitColl.push(hit.hog_id);
 
-                self.setState({roundHits:self.state.roundHits + 1, hitColl:hitColl},
+                self.setState({roundHits:self.state.roundHits + 1,
+                               hitColl:hitColl,
+                               activeObjex: hit},
                 function(){
 
-                    if (self.state.roundHits === 5) {
-
-                        self.setState({firstRound:false, showCells:false},function(){self.getRoundObjex()});
-                        $("#objexViewTextHalfway").css("display","block");
-
-                        setTimeout(function(){
-                            $("#objexViewTextHalfway").css("display","none");
-                        },2000);
-                        
-                    }else if (self.state.roundHits === 10){
-                        console.log("Level finished ...");
-                        self.viewUpdate({task:"levelDone",value:null});
-                    }
+                    // if (self.state.roundHits === 5) {
+                    //
+                    //     self.setState({firstRound:false, showCells:false},function(){self.getRoundObjex()});
+                    //     $("#objexViewTextHalfway").css("display","block");
+                    //
+                    //     setTimeout(function(){
+                    //         $("#objexViewTextHalfway").css("display","none");
+                    //     },2000);
+                    //
+                    // }
                 });
             }
          }
@@ -142,6 +144,27 @@ var ObjexGameView = React.createClass({
     updateGameView: function(update){
 
         var self = this;
+        switch (update.task){
+            case "delInfoPop":
+                self.setState({activeObjex:null});
+
+                if (self.state.roundHits === 5) {
+
+                    self.setState({firstRound:false, showCells:false},function(){self.getRoundObjex()});
+                    $("#objexViewTextHalfway").css("display","block");
+
+                    setTimeout(function(){
+                        $("#objexViewTextHalfway").css("display","none");
+                    },2000);
+
+                }else if (self.state.roundHits === 10){
+
+                    setTimeout(function(){
+                        self.viewUpdate({task:"levelDone",value:null});
+                    },1000);
+                }
+                break;
+        }
     },
 
     render: function() {
@@ -149,6 +172,12 @@ var ObjexGameView = React.createClass({
         var self = this;
 
         return (<div>
+
+                {self.state.activeObjex ? <ObjexInfoPopView
+                    activeObjex = {self.state.activeObjex}
+                    mediaPath = {self.props.mediaPath}
+                    updateGameView = {self.updateGameView}
+                />:null}
 
                 <div className="objex-view-textHalfway" id="objexViewTextHalfway">Halfway there!</div>
 

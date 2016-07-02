@@ -17,7 +17,7 @@ var ObjexNavCoinView = React.createClass({
                          backgroundSize:'25px 25px', left:self.props.coinOffset};
 
         return (<div className="objex-view-navCoin" 
-                     id={"objexViewCoin_"+self.props.key}
+                     id={"objexViewCoin_"+self.props.id}
                      style={coinStyle} 
                      onClick={self.props.onCoinClick}></div>
         )

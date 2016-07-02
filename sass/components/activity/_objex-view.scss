@@ -1,9 +1,10 @@
 //popup
 .objex-view-popCont {
   display: block;
-  background: #fff;
-  height: auto;
+  height: 100%;
+  width: 100%;
 
+  //levels pop
   .objex-view-popLevelIconCont{
     position: absolute;
     width: 162px;
@@ -17,6 +18,67 @@
     font-size:25px;
     top:24px;
     left:41px;
+  }
+
+  //level complete pop
+  .objex-view-textComplete{
+    position: absolute;
+    color:#000;
+    z-index:10;
+    top:35%;
+    width:100%;
+    text-align: center;
+    font-size:70px;
+  }
+
+  .objex-view-completedButtonCont{
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    top:300px;
+    width:100px;
+    height:100px;
+
+    .objex-view-btn{
+      margin-top:15px;
+      display:block;
+      width:100px;
+      height:30px;
+    }
+  }
+
+  //info pop
+  .objex-view-infoPopClose{
+    position: absolute;
+    top:-20px;
+    right:-20px;
+    width:42px;
+    height:42px;
+    cursor: pointer;
+  }
+
+  .objex-view-infoPopTitle{
+    display:block;
+    width:275px;
+    height:32px;
+    border-bottom:2px solid #000;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px
+  }
+
+  .objex-view-infoPopImg{
+    top:10px;
+    right:15px;
+    float:right;
+    width:140px;
+    height:140px;
+  }
+
+  .objex-view-infoPopText{
+    font-size:13px;
+    line-height:13px;
   }
 }
 
@@ -110,17 +172,6 @@
   }
 }
 
-//buttons
-.objex-view-btnCont{
-  position:relative;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-
-  .objex-view-btn{
-    margin-right:10px;
-  }
-}
 
 .objex-view-textHalfway{
   display:none;

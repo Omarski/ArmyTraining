@@ -3,42 +3,15 @@ var PropTypes  = React.PropTypes;
 
 var ObjexNavCellView = React.createClass({
 
-    
-    getInitialState: function() {
-
-        return {
-        };
-    },
-
     propTypes: {
         activeObjex: PropTypes.object.isRequired,
         onCellOver: PropTypes.func.isRequired
-    },
-
-    componentWillMount: function() {
-    },
-
-    componentDidMount: function(){
-    },
-    
-    prepNavCell: function(){
-
-        var self = this;
-
-    },
-
-    updateGameView: function(update){
-
-        var self = this;
-        switch (update.task){
-        }
     },
 
     render: function() {
 
         var self = this;
         var objex = self.props.activeObjex;
-        //var cellImgStyle = self.props.imgStyle;
 
         var img = objex.iconImgSrc;
         var cellImgStyle = {background:'url('+img+') no-repeat', backgroundSize:'72px 72px'};

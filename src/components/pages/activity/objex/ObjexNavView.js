@@ -1,6 +1,8 @@
 var React = require('react');
 var ObjexNavCellView = require('./ObjexNavCellView');
 var ObjexNavCoinView = require('./ObjexNavCoinView');
+var ObjexInfoPopView = require('./ObjexInfoPopView');
+
 var PropTypes  = React.PropTypes;
 
 var ObjexNavView = React.createClass({
@@ -34,12 +36,11 @@ var ObjexNavView = React.createClass({
 
         var self = this;
         var navCells = self.props.activeRoundObjexColl.map(function(objex,index){
-            // var img = objex.iconImgSrc;
-            // var cellImgStyle = {background:'url('+img+') no-repeat', backgroundSize:'72px 72px'};
-
+           
             return (
                 <ObjexNavCellView
                     key={index}
+                    id={index}
                     activeObjex = {objex}
                     onCellOver = {self.onCellOver}
                 />
