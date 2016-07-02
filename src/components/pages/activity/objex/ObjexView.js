@@ -77,8 +77,6 @@ var ObjexView = React.createClass({
         var self = this;
         var loadedObjexColl = [];
 
-       // for (var i = 1 ; i < 3; i++){ //self.gameData.levels.length
-
             self.state["level"+self.state.currentLevel+"Data"].objects.map(function(img,index){
 
                 var fullImg = new Image();
@@ -111,7 +109,6 @@ var ObjexView = React.createClass({
             var backgroundImg = new Image();
             backgroundImg.src = self.state.mediaPath + self.state["level"+self.state.currentLevel+"Data"].backgroundImage.src;
             backgroundImg.onload = self.loadCounter;
-        //}
 
         var totalImages = 41; //update when json combined
 
@@ -156,40 +153,6 @@ var ObjexView = React.createClass({
 
     },
 
-    getObjexText:function(hog_id,key){
-        var self = this;
-        var objexTextColl = self.state.gameData.hidden_objects;
-        var objex = objexTextColl[hog_id];
-        return objex[key];
-    },
-
-    viewUpdate: function(update){
-
-        switch (update.task){
-            case "showLevelPop":
-                this.setState({showGame:false}, function(){
-                    this.prepLevels();
-                });
-                break;
-        }
-    },
-
-    onLevelClick: function(e){
-        var self = this;
-        var level = parseInt(e.currentTarget.id.substring(18));
-        console.log("Clicked on level: " + level);
-        this.setState({popupObj:null, currentLevel:level}, function(){
-            setTimeout(function(){
-                self.setState({showGame:true})
-            },100);
-        });
-    },
-
-    replayGame: function(){
-
-        var self = this;
-    },
-
     prepIntroPopup: function(){
 
         var self = this;
@@ -211,6 +174,53 @@ var ObjexView = React.createClass({
         };
 
         self.displayPopup(popupObj);
+    },
+
+    prepLevelCompletePopup: function(){
+
+        var self = this;
+
+        var popupObj = {
+            id:"LevelOrRoundDone",
+            onClickOutside: null,
+            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'#fff', zIndex:'6'},
+
+            content: function(){
+
+                return(
+                    <div className="objex-view-popContDoneLevel">
+                        <div className="objex-view-textComplete">Level complete!</div>
+                        <div className="objex-view-completedButtonCont">
+                            <button type="button" className="btn btn-default" onClick={self.menuToLevels}>Main Menu</button>
+                            <button type="button" className="btn btn-default" onClick={self.onNextLevel}>Next Level</button>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+    },
+
+    menuToLevels: function(){
+
+        var self=this;
+        self.setState({popupObj:null}, function(){
+            setTimeout(function(){
+                self.prepLevelsPopup()},300);
+            });
+    },
+
+    onNextLevel: function(){
+
+        var self=this;
+        self.setState({popupObj:null, currentLevel: self.state.currentLevel +1}, function() {
+            setTimeout(function () {
+                self.setState({showGame:true}, function(){
+                    self.prepObjex();
+                });
+            }, 300);
+        });
     },
 
     prepLevelsPopup: function(){
@@ -273,6 +283,41 @@ var ObjexView = React.createClass({
 
     setAudioControl: function(mode){
         this.setState({audioController:mode});
+    },
+
+    getObjexText:function(hog_id,key){
+        var self = this;
+        var objexTextColl = self.state.gameData.hidden_objects;
+        var objex = objexTextColl[hog_id];
+        return objex[key];
+    },
+
+    viewUpdate: function(update){
+
+        switch (update.task){
+            case "levelDone":
+                this.setState({showGame:false}, function(){
+                    this.prepLevelCompletePopup();
+                });
+                break;
+        }
+    },
+
+    onLevelClick: function(e){
+
+        var self = this;
+        var level = parseInt(e.currentTarget.id.substring(18));
+        console.log("Clicked on level: " + level);
+        this.setState({popupObj:null, currentLevel:level}, function(){
+            setTimeout(function(){
+                self.setState({showGame:true})
+            },100);
+        });
+    },
+
+    replayGame: function(){
+
+        var self = this;
     },
 
     render: function() {

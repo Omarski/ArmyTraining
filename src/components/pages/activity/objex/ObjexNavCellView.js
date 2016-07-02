@@ -38,6 +38,8 @@ var ObjexNavCellView = React.createClass({
 
         var self = this;
         var objex = self.props.activeObjex;
+        //var cellImgStyle = self.props.imgStyle;
+
         var img = objex.iconImgSrc;
         var cellImgStyle = {background:'url('+img+') no-repeat', backgroundSize:'72px 72px'};
 

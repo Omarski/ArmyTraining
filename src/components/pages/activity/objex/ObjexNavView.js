@@ -11,7 +11,7 @@ var ObjexNavView = React.createClass({
         return {
             navDisc:"",
             coinsRemaining:6,
-            activeRoundObjexColl:[]
+            activeRoundObjexColl:[],
         };
     },
 
@@ -20,15 +20,11 @@ var ObjexNavView = React.createClass({
         activeObjexColl: PropTypes.array.isRequired,
         mediaPath: PropTypes.string.isRequired,
         updateGameView: PropTypes.func.isRequired,
-        firstRound: PropTypes.bool.isRequired
+        activeRoundObjexColl: PropTypes.array.isRequired,
+        showCells: PropTypes.bool.isRequired,
     },
 
     componentWillMount: function(){
-        var self = this;
-        var activeRoundObjexColl = self.props.firstRound ? self.props.activeObjexColl.slice(0,5):
-                                   self.props.activeObjexColl.slice(6,10);
-        self.setState({activeRoundObjexColl:activeRoundObjexColl});
-        self.updateGameView({task:"activeRoundObjexColl", value:activeRoundObjexColl});
     },
 
     componentDidMount: function(){
@@ -37,10 +33,9 @@ var ObjexNavView = React.createClass({
     prepNav: function(){
 
         var self = this;
-        var activeRoundObjexColl = self.props.firstRound ? self.props.activeObjexColl.slice(0,5):
-                              self.props.activeObjexColl.slice(6,10);
-
-        var navCells = activeRoundObjexColl.map(function(objex,index){
+        var navCells = self.props.activeRoundObjexColl.map(function(objex,index){
+            // var img = objex.iconImgSrc;
+            // var cellImgStyle = {background:'url('+img+') no-repeat', backgroundSize:'72px 72px'};
 
             return (
                 <ObjexNavCellView
@@ -51,8 +46,6 @@ var ObjexNavView = React.createClass({
             )
         });
 
-        //self.setState({activeRoundObjexColl:activeRoundObjexColl});
-        //self.updateGameView({task:"activeRoundObjexColl", value:activeRoundObjexColl});
         return navCells;
     },
 
@@ -91,9 +84,7 @@ var ObjexNavView = React.createClass({
 
     onCoinClick: function(e){
         $("#"+e.target.id).remove();
-        this.setState({coinsRemaining: this.state.coinsRemaining -1});
-
-        console.log("Coin : "+ e.target.id + " Remaining: "+ this.state.coinsRemaining);
+        this.setState({coinsRemaining: this.state.coinsRemaining - 1});
     },
 
     viewUpdate: function(update){
@@ -111,9 +102,9 @@ var ObjexNavView = React.createClass({
         var self = this;
 
         return (<div className="objex-view-navCont">
-                    <div className="objex-view-cellCont">
+                    {self.props.showCells ? <div className="objex-view-cellCont">
                         {self.prepNav()}
-                    </div>
+                    </div>:null}
                 <div className="objex-view-navContDesc" id="objexViewNavContDesc"><span>{self.state.navDisc}</span></div>
                 <div className="objex-view-navContHintLabel">Hints</div>
                 <div className="objex-view-navCoinCont" id="objexViewNavCoinCont">{self.prepCoins()}</div>

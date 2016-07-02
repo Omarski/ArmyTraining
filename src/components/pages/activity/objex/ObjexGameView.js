@@ -13,8 +13,11 @@ var ObjexGameView = React.createClass({
                 lastHighlightedRegion:null,
                 layersCanvColl:[],
                 activeObjexColl:[],
-                activeRoundObjexColl:[],
-                firstRound:true
+                activeRoundObjexColl:null,
+                firstRound:true,
+                roundHits:0,
+                hitColl:[],
+                showCells:false
         };
     },
 
@@ -65,7 +68,6 @@ var ObjexGameView = React.createClass({
             if ($.inArray(rand, randColl) === -1) randColl.push(rand);
         }
 
-        console.log("randColl: " + randColl.toString());
         for (var i = 0; i < randColl.length; i++){
             var artifactObj = {};
             artifactObj["image"] = loadedObjexColl[randColl[i]].fullImgUrl;
@@ -74,9 +76,19 @@ var ObjexGameView = React.createClass({
             activeObjexColl.push(loadedObjexColl[randColl[i]]);
         }
 
-        this.setState({activeObjexColl:activeObjexColl});
-
+        this.setState({activeObjexColl:activeObjexColl},function(){
+            this.getRoundObjex();
+        });
+        
         return artifactsColl;
+    },
+
+    getRoundObjex: function(){
+
+        var self = this;
+        var activeRoundObjexColl = self.state.firstRound ? self.state.activeObjexColl.slice(0,5):
+            self.state.activeObjexColl.slice(5,11);
+        self.setState({activeRoundObjexColl:activeRoundObjexColl, showCells:true});
     },
 
     onLayersReady: function(canvasColl){
@@ -87,22 +99,34 @@ var ObjexGameView = React.createClass({
     onRegionClicked: function(canvasElement){
 
         var self = this;
+
         if (canvasElement && !canvasElement.hidden) {
-            console.log("Clicked on: " + canvasElement.id);
-            var hit = $.grep(self.props.activeRoundObjexColl, function(e) { return e.hog_id === canvasElement.id });
-            if (hit) {
-                $("#"+canvasElement.id).css("opacity","1");
-                self.setState({roundHits:self.state.roundHits + 1},
+
+            var hit = $.grep(self.state.activeRoundObjexColl, function(e) { return e.hog_id === canvasElement.id })[0];
+
+            if (hit && self.state.hitColl.indexOf(hit.hog_id) === -1) {
+                $("#objexViewCellImg"+canvasElement.id).css("opacity","1");
+                var hitColl = self.state.hitColl;
+                hitColl.push(hit.hog_id);
+
+                self.setState({roundHits:self.state.roundHits + 1, hitColl:hitColl},
                 function(){
+
                     if (self.state.roundHits === 5) {
-                        self.setState({firstRound:false});
+
+                        self.setState({firstRound:false, showCells:false},function(){self.getRoundObjex()});
+                        $("#objexViewTextHalfway").css("display","block");
+
+                        setTimeout(function(){
+                            $("#objexViewTextHalfway").css("display","none");
+                        },2000);
+                        
                     }else if (self.state.roundHits === 10){
-                        console.log("Round finished ...");
-                        self.viewUpdate({task:"showLevelPop",value:null});
+                        console.log("Level finished ...");
+                        self.viewUpdate({task:"levelDone",value:null});
                     }
                 });
             }
-        
          }
     },
 
@@ -118,11 +142,6 @@ var ObjexGameView = React.createClass({
     updateGameView: function(update){
 
         var self = this;
-        switch (update.task){
-            case "activeRoundObjexColl":
-                self.setState({activeRoundObjexColl:update.value});
-                break;
-        }
     },
 
     render: function() {
@@ -130,6 +149,9 @@ var ObjexGameView = React.createClass({
         var self = this;
 
         return (<div>
+
+                <div className="objex-view-textHalfway" id="objexViewTextHalfway">Halfway there!</div>
+
                 {self.state.imageLayersData.imageColl ? <ImageLayersView
                     areaWidth       = {self.state.imageLayersData.areaWidth}
                     areaHeight      = {self.state.imageLayersData.areaHeight}
@@ -140,13 +162,14 @@ var ObjexGameView = React.createClass({
                     onClick         = {self.state.imageLayersData.onClick}
                 >
                 </ImageLayersView>:null}
-                <ObjexNavView
+                {self.state.activeRoundObjexColl ? <ObjexNavView
                     gameData = {self.props.gameData}
+                    showCells = {self.state.showCells}
                     mediaPath = {self.props.mediaPath}
                     activeObjexColl = {self.state.activeObjexColl}
                     updateGameView = {self.updateGameView}
-                    firstRound = {self.state.firstRound}
-                />
+                    activeRoundObjexColl = {self.state.activeRoundObjexColl}
+                />:null}
                </div>
         )
     }
