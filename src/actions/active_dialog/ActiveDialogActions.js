@@ -1,10 +1,20 @@
 var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
+var ActiveDialogStore = require('../../stores/active_dialog/ActiveDialogStore');
 
 var ActiveDialogActions = {
 
     /**
-     * @param  {string} text
+     * Continues processing of dialog action queue
+     */
+    continueDialog: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_CONTINUE_DIALOG
+        });
+    },
+
+    /**
+     * @param  {string} data
      */
     create: function(data) {
         AppDispatcher.dispatch({
@@ -14,7 +24,7 @@ var ActiveDialogActions = {
     },
 
     /**
-     * @param  {string} text
+     * @param  {string} data
      */
     handleInput: function(data) {
         AppDispatcher.dispatch({
@@ -24,7 +34,7 @@ var ActiveDialogActions = {
     },
 
     /**
-     * @param  {string} text
+     * @param  {string} data
      */
     load: function(data) {
         AppDispatcher.dispatch({
@@ -34,7 +44,7 @@ var ActiveDialogActions = {
     },
 
     /**
-     * @param  {string} text
+     * @param  {string} data
      */
     setActiveCOA: function(data) {
         AppDispatcher.dispatch({
@@ -43,6 +53,18 @@ var ActiveDialogActions = {
         });
     },
 
+    /**
+     * Start processing the dialog
+     */
+    startDialog: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_START_DIALOG
+        });
+    },
+
+    /**
+     * @param data
+     */
     hintsShown: function(data) {
         AppDispatcher.dispatch({
             actionType: ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN,
@@ -50,10 +72,8 @@ var ActiveDialogActions = {
         });
     },
 
-
-
     /**
-     * @param  {string} id
+     * Resets the ActiveDialog data
      */
     destroy: function() {
         AppDispatcher.dispatch({
