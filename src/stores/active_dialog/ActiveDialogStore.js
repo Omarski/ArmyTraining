@@ -6,13 +6,21 @@ var PageStore = require('../../stores/PageStore');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
-var _data = {};
 var _info = {};
-var _briefings = "";
 var _metrics = {};
-var DATA, memory, activityState, blockImg, blockId, objectives;
+
+var DATA, memory, activityState, blockImg, blockId;
 var asrMode = false;
 
+// dialog state data
+var _actionQueue = [];
+var _briefings = "";
+var _courseOfActions = [];
+var _currentAction = null;
+var _currentBlocking = null;
+var _currentSpeakerName = null;
+var _currentDialogHistory = null;
+var _objectives;
 
 function makeCOAs( acts, transInd, retId, retInputId ) {
 
@@ -55,6 +63,21 @@ function changeBlockingImage(blockingId) {
     return null;
 }
 
+function changeBlocking(blockingAction) {
+    var blockingId = blockingAction.data;
+
+    // look up blocking by id
+    if (_info.blockings && _info.blockings.hasOwnProperty(blockingId)) {
+        _currentBlocking = _info.blockings[blockingId];
+    }
+}
+
+function changeDialogHistory(outputAction) {
+    var speaker = outputAction.speaker;
+    _currentSpeakerName = getNameByParticipant(speaker);
+    _currentDialogHistory = outputAction.text
+}
+
 function checkVR(VR) { // Check Variable Range
 
     var val = memory[VR.variable];
@@ -66,7 +89,6 @@ function checkVR(VR) { // Check Variable Range
     }
 
     switch(VR.operator) {
-
         case '==': return val === vrRangeValue;
         case '!=': return val !== vrRangeValue;
         case '<' : return val <   vrRangeValue;
@@ -80,7 +102,6 @@ function checkVR(VR) { // Check Variable Range
 }
 
 function checkVRQ(VRQ) {
-
     return VRQ.variableRanges.every(checkVR);
 }
 
@@ -97,7 +118,7 @@ function evalPostfix( str )
 
     str.split(" ").forEach( function( _token )
     {
-        var token = evalVar( _token )
+        var token = evalVar( _token );
 
         switch( token )
         {
@@ -123,40 +144,61 @@ function evalPostfix( str )
             case '>=': stack.push( stack.pop() <= stack.pop() ); break;
             default: stack.push( token ); break;
         }
-    } )
+    } );
 
     return stack[0] === true;
 }
 
 function getCOAs() {
+    // reset
+    _courseOfActions = [];
 
-    var coas = [];
-
-    DATA.transitions.forEach(function (o, i) {
-
-        if (o.startState === activityState && checkVRQ(o)) {
-
-            coas = coas.concat( makeCOAs( o.inputSymbols, i ) );
+    // transitions
+    DATA.transitions.forEach(function (transitionObj, index) {
+        // check if valid transition
+        if (transitionObj.startState === activityState && checkVRQ(transitionObj)) {
+            _courseOfActions = _courseOfActions.concat(makeCOAs(transitionObj.inputSymbols, index));
         }
     });
 
+    // range enabled transitions (RETs)
     Object.keys(DATA.retq).forEach(function (rid) {
-
-        if( memory[ 'RET_' + rid ] )
-        {
+        if( memory[ 'RET_' + rid ] ) {
             var ret = DATA.retq[rid];
-
             Object.keys(ret.inputq).forEach(function (iid) {
-
                 if (ret.inputq[iid].outputq.some(checkVRQ)) {
-
-                    coas = coas.concat( makeCOAs( [iid], -1, rid, iid ) );
+                    _courseOfActions = _courseOfActions.concat( makeCOAs( [iid], -1, rid, iid ) );
                 }
             });
         }
     });
 
-    return coas;
+    // add to action queue HACK
+    if (_courseOfActions.length > 0) {
+        _actionQueue.push({
+            type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COA_SET
+        });
+    } else {
+        _actionQueue.push({
+            type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE
+        });
+    }
+}
+
+function getParticipantByRole(role) {
+    if (DATA && DATA.roles) {
+        if (DATA.roles.hasOwnProperty(role)) {
+            return DATA.roles[role];
+        }
+    }
+    return null;
+}
+
+function getNameByParticipant(participant) {
+    if (DATA && DATA.participants) {
+        return DATA.participants[participant];
+    }
+    return null;
 }
 
 function applyEffect(effect) {
@@ -164,7 +206,6 @@ function applyEffect(effect) {
     var val = effect.operand2; // || val = memory[val]
 
     switch (effect.operator) {
-
         case '=' : memory[effect.operand] = val; break;
         case '+=': memory[effect.operand] += ( 1 * val ); break; // todo clean up
         case '-=': memory[effect.operand] -= ( 1 * val ); break;
@@ -173,113 +214,121 @@ function applyEffect(effect) {
 }
 
 function nextRandom() {
-
     memory.RANDOM = Math.random() * 10;
 }
 
-function handleTransitionInput( trans ) {
+function addOutputMappingActionByAct(actName) {
 
+    // look up output mapping
+    var outputMapping = DATA.outputMappings[actName];
+    if (outputMapping) {
+        // get speaker
+        var speaker = actName.substr(0, actName.indexOf('-'));
+        var animation = outputMapping.anima;
+        var sound = outputMapping.sound;
+        var terp = outputMapping.terp;
+        var text = outputMapping[terp] ? outputMapping[terp] : outputMapping.title;
+
+        // add to action queue
+        _actionQueue.push({
+            type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT,
+            anima: animation,
+            text: text,
+            sound: sound,
+            speaker: speaker
+        });
+    }
+}
+
+function handleTransitionInput(trans) {
+
+    // update current state
     activityState = trans.endState;
 
     // only set if defined
     if (trans.blockImg)
         blockImg = trans.blockImg;
 
-    trans.actions.forEach( function(a)
+    trans.actions.forEach(function(action)
     {
-        if( a.indexOf('GoToBlocking') != -1 )
-        {
-            blockId = 'b' + a.substring( a.lastIndexOf('-') + 1 );
+        if(action.indexOf('GoToBlocking') != -1 ) {
+            blockId = 'b' + action.substring(action.lastIndexOf('-') + 1 );
+        } else {
+            addOutputMappingActionByAct(action);
         }
-    } );
+    });
 
+    // update effects
     trans.effects.forEach(applyEffect);
-
-    return trans.actions;
 }
 
 function handleRetInput(retId, retInputId) {
 
-    return DATA.retq[retId].inputq[retInputId].outputq.filter(checkVRQ).mapFlat(function (output) {
+    var outputQ = DATA.retq[retId].inputq[retInputId].outputq;
+    var filteredOutputQ = outputQ.filter(checkVRQ);
 
+    filteredOutputQ.forEach(function(output) {
+        output.speakerActq.forEach(function(actName) {
+            addOutputMappingActionByAct(actName);
+        });
+
+        // update effects
         output.effects.forEach(applyEffect);
 
-        return output.speakerActq;
     });
 }
 
 function makeResult( transInd, inputq, outputq, retVid ) {
 
-    var coached = []
-
+    // strip out coach output into its own queue
     outputq.forEach( function(output) {
         if( output.substr(0, output.indexOf('-') ) == DATA.roles['Coach'] ||
             output.substr(0, output.indexOf('-') ) == DATA.roles['coach']) {
             coached.push( DATA.outputMappings[output]['L1'] );
         }
     });
-
-    var result = {
-        'inputs': inputq,
-        'outputs': outputq.map( function(output) {
-            return {
-                'speaker': output.substr(0, output.indexOf('-')),
-                'act': output.substr(output.indexOf('-') + 1),
-                'action': DATA.outputMappings[output]
-            };
-        }),
-        /**
-         *  FSM.handleInput requires a coa from this array as the argument
-         */
-        'coas': getCOAs(),
-        'state' : activityState,
-        'memory' : memory,
-        'objectives': objectives,
-        'image': blockImg,
-        'coached': coached,
-        'video': transInd === -1 ? retVid : DATA.transitions[transInd].video
-    };
-
-    //console.dir(result);
-    return result;
 }
 
-function handleInput( coa ) {
+// TODO move to actions
+function handleInput(coa) {
 
+    // update random memory value
     nextRandom();
 
-    if( coa === null )
-    {
-        var garbageInq = DATA.retq['GARBAGE']['inputq'];
+    // get player role
+    var playerRole = getParticipantByRole("player");
 
-        var garbageVids = garbageInq[ Object.keys( garbageInq )[0] ].video;
+    // handle inputs
+    var inputq = coa.realizations;
+    for (var inputRealizationIndex in inputq) {
+        var realization = inputq[inputRealizationIndex];
 
-        return {
-            'outputs': [ {'act':'GARBAGE', 'action':'GARBAGE'} ],
-            'coas': getCOAs(),
-            'state' : activityState,
-            'memory' : memory,
-            'objectives': objectives,
-            'image': blockImg,
-            'coached': [],
-            'video': garbageVids == null ? null :
-                garbageVids[ blockId ] ? garbageVids[ blockId ] :
-                    garbageVids['b0000']
-        };
+        // add to action queue
+        _actionQueue.push({
+            type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT,
+            anima: realization.anima,
+            text: realization.uttText,
+            sound: realization.sound,
+            speaker: playerRole
+        });
     }
 
-    var inputq = coa.realizations;
-
-    var outputq = coa.transitionIndex > -1 ?
-
-        handleTransitionInput( DATA.transitions[coa.transitionIndex] ) :
-
+    // handle outputs
+    if (coa.transitionIndex > -1) {
+        handleTransitionInput(DATA.transitions[coa.transitionIndex])
+    } else {
         handleRetInput( coa.retId, coa.retInputId );
+    }
 
-    objectives.forEach( function( o )
-    {
+
+    // update course of action options
+    getCOAs();
+
+
+    // update objectives
+    _objectives.forEach( function( o ) {
         o.pass = evalPostfix( o.condition );
-    } );
+    });
 
     var retVideo = coa.transitionIndex > -1 ? null : DATA.retq[coa.retId].inputq[coa.retInputId].video;
 
@@ -287,21 +336,24 @@ function handleInput( coa ) {
         retVideo[ blockId ] ? retVideo[ blockId ] :
             retVideo[ 'b0000' ];
 
-    _data = makeResult( coa.transitionIndex, inputq, outputq, retVid );
-
-
 }
 
 function create(fsm) {
+
+    // reset any old data
+    resetDialog();
+
+    // get scenario data
     DATA = fsm.data;
 
+    // parse memory data
     memory = JSON.parse( JSON.stringify( DATA.initialMemory ) ); // deep copy so DATA contents never mutated
 
-    objectives = JSON.parse( JSON.stringify( DATA.objectives ) ); // deep copy so DATA contents never mutated
+    // parse objectives
+    _objectives = JSON.parse( JSON.stringify( DATA.objectives ) ); // deep copy so DATA contents never mutated
+    _objectives.forEach( function( o ) { o.pass = false; } );
 
-
-    objectives.forEach( function( o ) { o.pass = false; } );
-
+    // set initial state
     activityState = 's0';
 
     // set initial blocking image
@@ -315,24 +367,60 @@ function create(fsm) {
         }
     }
 
+    // set info data
+    _info = fsm.info;
+
+    // set briefing data
+    _briefings = DATA.briefings.s0.description;
+
+    // set initial blocking value
     blockId = 'b0000';
 
-    nextRandom();
+    // add initial blocking action
+    _actionQueue.push({
+        type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING,
+        data: "0000"
+    });
 
-    if( DATA.transitions.length > 0 && DATA.transitions[0].inputSymbols[0] === 'automatic' )
-    {
-        _data =  makeResult( 0, [], handleTransitionInput(DATA.transitions[0], 0) );
+    // TODO hack remove me
+    _actionQueue.push({
+        type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING,
+        data: "0001"
+    });
+
+
+    // trigger initial action
+    continueDialog();
+}
+
+
+function continueDialog() {
+    // reset states
+    _currentAction = null;
+
+    // set next action in queue
+    if (_actionQueue.length > 0) {
+        _currentAction = _actionQueue.shift();
+
+        // update internal data based on action
+        switch (_currentAction.type) {
+            case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING:
+                changeBlocking(_currentAction);
+                break;
+            case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT:
+                changeDialogHistory(_currentAction);
+                break;
+            default:
+                // no op
+        }
+    } else {
+        // TODO do something?
     }
-    else
-    {
-        _data = makeResult( -1, [], [], null );
-    }
-    _info = fsm.info;
-    _briefings = DATA.briefings.s0.description;
 }
 
 function destroy() {
     DATA = null;
+    resetDialog();
 }
 
 /*
@@ -356,12 +444,6 @@ function load(args) {
 }
 
 
-function setActiveCOA(coa) {
-    if (coa) {
-        _data['activeCOA'] = coa;
-    }
-
-}
 
 function hintsShown() {
     // Greg here is where you would store the hints shown count
@@ -369,17 +451,41 @@ function hintsShown() {
     var metrics = {
         duration: PageStore.duration(),
         hintsShown: 25,
-        objectives: ActiveDialogStore.activeDialog().objectives,
         inputs: ActiveDialogStore.activeDialog().inputs,
         outputs: ActiveDialogStore.activeDialog().outputs
     }*/
+}
 
+function resetDialog() {
+    _actionQueue = [];
+    _briefings = "";
+    _courseOfActions = [];
+    _currentAction = null;
+    _currentBlocking = null;
+    _currentSpeakerName = null;
+    _currentDialogHistory = null;
+    _objectives = null;
+}
+
+function startDialog() {
+    // attempt automatic input
+    if( DATA.transitions.length > 0 && DATA.transitions[0].inputSymbols[0] === 'automatic' ) {
+        var automaticCOA = {
+            transitionIndex: 0
+        };
+        handleInput(automaticCOA);
+    } else {
+        // update random memory value
+        nextRandom();
+
+        // update course of action options
+        getCOAs();
+    }
 }
 
 var ActiveDialogStore = assign({}, EventEmitter.prototype, {
-
-    activeDialog: function() {
-        return _data;
+    coas: function() {
+        return _courseOfActions;
     },
 
     info: function() {
@@ -390,43 +496,90 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
         return _briefings;
     },
 
-    findInfoSymbolByAnimationName: function(name) {
-        var len = _info.symbols.length;
-        var symbol = null;
-        var found = false;
-        while(len--) {
-            var sym = _info.symbols[len];
-            var aniLen = sym.animations.length;
-            while(aniLen--) {
-                var ani = sym.animations[aniLen];
-                if (ani.animationName === name) {
-                    symbol = sym;
-                    found = true;
-                    break;
+    getCurrentAction: function() {
+        return _currentAction;
+    },
+
+    getCurrentBlocking: function() {
+        return _currentBlocking;
+    },
+
+    getCurrentDialogHistory: function() {
+        return _currentDialogHistory;
+    },
+
+    getCurrentSpeakerName: function() {
+        return _currentSpeakerName;
+    },
+
+
+    getObjectives: function() {
+        return _objectives;
+    },
+
+    findVideoByAnimationNameForSpeaker: function(speakerName, animationName) {
+        if (_currentBlocking !== null && _info !== null) {
+
+            var assetValue = _currentBlocking.assets[speakerName];
+
+            if (assetValue) {
+                switch (typeof assetValue) {
+                    case "string":
+                        if (_info.assets.hasOwnProperty(assetValue)) {
+                            var asset = _info.assets[assetValue];
+                            var source = asset.source;
+                            if (asset.hasOwnProperty("animations") && asset.animations.hasOwnProperty(animationName)) {
+                                var animation = asset.animations[animationName];
+                                var start = animation.start/1000;
+                                var stop = animation.stop/1000;
+                                return {source: source, start: start, stop: stop};
+                            }
+                        }
+                        break;
+                    case "object":
+                        // TODO
+                        break;
+                    default:
+                    //no op
+                }
+            }
+        }
+
+        return null;
+    },
+
+    getCurrentBlockingAssets: function() {
+        if (_currentBlocking !== null && _info !== null) {
+
+            // gather assets in blocking
+            var blockingAssets = [];
+            for (var index in _currentBlocking.assets) {
+                var assetName = _currentBlocking.assets[index];
+
+                // look up in asset and add it
+                if (_info.assets.hasOwnProperty(assetName)) {
+
+                    // gather asset data
+                    var newAssetObject = {
+                        name: assetName,
+                        left: _info.assets[assetName].dimensions[0],
+                        top: _info.assets[assetName].dimensions[1],
+                        source: _info.assets[assetName].source
+                    };
+
+
+                    // TODO update to handle multiple
+                    blockingAssets.push({
+                        name: index,
+                        assets: [
+                            newAssetObject
+                        ]
+                    });
                 }
             }
 
-            if (found) {
-                break;
-            }
+            return blockingAssets;
         }
-
-        return symbol;
-    },
-
-    findInfoAnimationByName: function(symbol, name) {
-        var len = symbol.animations.length;
-        var animation = null;
-
-        while(len--) {
-            var ani = symbol.animations[len];
-            if (ani.animationName === name) {
-                animation = ani;
-                break;
-            }
-        }
-
-        return animation;
     },
 
     emitChange: function() {
@@ -449,6 +602,10 @@ AppDispatcher.register(function(action) {
             create(action.data);
             ActiveDialogStore.emitChange();
             break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_CONTINUE_DIALOG:
+            continueDialog();
+            ActiveDialogStore.emitChange();
+            break;
         case ActiveDialogConstants.ACTIVE_DIALOG_DESTROY:
             destroy();
             ActiveDialogStore.emitChange();
@@ -462,8 +619,10 @@ AppDispatcher.register(function(action) {
             ActiveDialogStore.emitChange();
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_SET_ACTIVE_COA:
-            setActiveCOA(action.data);
             ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_START_DIALOG:
+            startDialog();
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN:
             hintsShown(action.data);
