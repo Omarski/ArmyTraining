@@ -6,14 +6,11 @@ var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
-var ActiveDialogObjectiveStore = require('../../../../stores/active_dialog/ActiveDialogObjectiveStore');
-var ActiveDialogObjectiveActions = require('../../../../actions/active_dialog/ActiveDialogObjectiveActions');
 
 function getCompState() {
-
     var objectives = [];
-    if (ActiveDialogObjectiveStore.data() && ActiveDialogObjectiveStore.data().objectives) {
-        var arr = ActiveDialogObjectiveStore.data().objectives;
+    if (ActiveDialogStore.getObjectives() && (ActiveDialogStore.getObjectives().length > 0)) {
+        var arr = ActiveDialogStore.getObjectives();
         var len = arr.length;
         for (var i = 0; i < len; i++) {
             var obj = arr[i];
@@ -33,17 +30,10 @@ var ActiveDialogObjectives = React.createClass({
     },
 
     componentWillMount: function() {
-        ActiveDialogObjectiveStore.addChangeListener(this._onChange);
-        ActiveDialogStore.addChangeListener(this._onDialogChange);
-    },
-
-    componentDidMount: function() {
-        ActiveDialogObjectiveStore.addChangeListener(this._onChange);
         ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
-        ActiveDialogObjectiveStore.removeChangeListener(this._onChange);
         ActiveDialogStore.removeChangeListener(this._onDialogChange);
     },
 
@@ -86,14 +76,8 @@ var ActiveDialogObjectives = React.createClass({
         );
     },
 
-    _onChange: function() {
-        this.setState(getCompState());
-    },
-
     _onDialogChange: function() {
-        setTimeout(function() {
-            ActiveDialogObjectiveActions.create(ActiveDialogStore.activeDialog().objectives);
-        }, .25);
+        this.setState(getCompState());
     }
 });
 
