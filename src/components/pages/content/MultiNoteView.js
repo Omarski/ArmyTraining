@@ -189,6 +189,9 @@ var MultiNoteView = React.createClass({
             var title = item.title;
             var caption = item.caption;
             // title will be the individual page titles, and caption is that pages image caption
+            var sty = {
+                "background-image": "url(data/media/"+imageURL+")"
+            };
             var thumbnail = (
                 <button className="btn btn-default" data={index}
                         onClick={self.handleClick}
@@ -196,10 +199,10 @@ var MultiNoteView = React.createClass({
                         alt={title}
                         aria-label={title}
                         key={"multinote-thumb-" + index}>
-                    <img  className="thumbnail multi-note-thumbnail"
+                    <div  className="thumbnail multi-note-thumbnail"
                           alt={title}
-                          src={"data/media/"+imageURL}
-                          aira-hidden="true"></img>
+                          style={sty}
+                          aira-hidden="true"></div>
                 </button>
             );
             return (thumbnail);
