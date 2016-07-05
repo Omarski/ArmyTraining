@@ -4,47 +4,38 @@ var Button = ReactBootstrap.Button;
 var Modal = ReactBootstrap.Modal;
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
-var ActiveDialogIntroActions = require('../../../../actions/active_dialog/ActiveDialogIntroActions');
-var ActiveDialogIntroStore = require('../../../../stores/active_dialog/ActiveDialogIntroStore');
 
-var _shownOnce = false;
+var _shownOnce = true;
 function getCompState(show) {
-
     return {
         show: show,
-        intro: ActiveDialogIntroStore.data() || ""
+        intro: ActiveDialogStore.briefings() || ""
     };
 }
 
 var ActiveDialogIntro = React.createClass({
 
     hideModal: function() {
+        _shownOnce = false;
         this.setState(getCompState(false));
+        ActiveDialogActions.startDialog();
+        ActiveDialogActions.continueDialog();
     },
 
     getInitialState: function() {
+        _shownOnce = true;
         return getCompState(false);
     },
 
     componentWillMount: function() {
-        ActiveDialogIntroStore.addChangeListener(this._onChange);
-        ActiveDialogStore.addChangeListener(this._onDialogChange);
-    },
-
-    componentDidMount: function() {
-        ActiveDialogIntroStore.addChangeListener(this._onChange);
         ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
-        ActiveDialogIntroStore.removeChangeListener(this._onChange);
         ActiveDialogStore.removeChangeListener(this._onDialogChange);
     },
 
     render: function() {
-
-
-
         var content= "";
         var steps = "";
         var end = "";
@@ -78,12 +69,10 @@ var ActiveDialogIntro = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <p>
-                        {content}
-                        {steps}
-                        <br/>
-                        {end}
-                    </p>
+                    {content}
+                    {steps}
+                    <br/>
+                    {end}
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -93,20 +82,9 @@ var ActiveDialogIntro = React.createClass({
         );
     },
 
-    _onChange: function() {
-        var show = (this.state.intro && this.state.intro.length !== "");
-        if (!_shownOnce && show) {
-            _shownOnce = true;
-            this.setState(getCompState(show));
-        }
-
-    },
-
     _onDialogChange: function() {
         if (ActiveDialogStore.briefings() !== "") {
-            setTimeout(function() {
-                ActiveDialogIntroActions.create(ActiveDialogStore.briefings());
-            }, .25);
+            this.setState(getCompState(_shownOnce));
         }
     }
 });
