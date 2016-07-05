@@ -133,7 +133,7 @@ var ObjexGameView = React.createClass({
 
         var self = this;
         self.viewUpdate({task:"coinAudio", value:null});
-        
+
         if (!self.state.hintMode) {
             for (var i=0; i <  self.state.activeRoundObjexColl.length; i++){
                 if (self.state.hitColl.indexOf(self.state.activeRoundObjexColl[i].hog_id) === -1){
@@ -230,7 +230,6 @@ var ObjexGameView = React.createClass({
                     mediaPath = {self.props.mediaPath}
                     activeObjexColl = {self.state.activeObjexColl}
                     updateGameView = {self.updateGameView}
-                    viewUpdate = {self.props.viewUpdate}
                     activeRoundObjexColl = {self.state.activeRoundObjexColl}
                     showHint = {self.showHint}
                 />:null}

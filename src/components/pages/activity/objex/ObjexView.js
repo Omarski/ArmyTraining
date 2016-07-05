@@ -14,6 +14,7 @@ function getPageState(props) {
         title: "",
         pageType: "",
         audioObj:null,
+        audioBgObj:null,
         audioController:"",
         popupObj:null,
         mediaPath:'data/media/',
@@ -222,6 +223,7 @@ var ObjexView = React.createClass({
     onNextLevel: function(){
 
         var self=this;
+        self.bgAudio();
         self.viewUpdate({task:"buttonAudio", value:null});
         self.setState({popupObj:null, currentLevel: self.state.currentLevel +1}, function() {
 
@@ -279,6 +281,7 @@ var ObjexView = React.createClass({
 
         this.setState({popupObj:null, currentLevel:level}, function(){
             self.viewUpdate({task:"successAudio", value:null});
+            self.bgAudio();
             setTimeout(function(){
                 self.setState({showGame:true})
             },100);
@@ -305,8 +308,26 @@ var ObjexView = React.createClass({
         });
     },
 
+    playBgAudio: function(audioObj){
+        var self = this;
+
+        this.setState({audioBgObj:audioObj}, function(){
+            if (!audioObj.loop) {
+                $("#"+audioObj.id).on("ended", function(){
+                    self.setState({audioBgObj:null});
+                });
+            }
+        });
+    },
+
     setAudioControl: function(mode){
         this.setState({audioController:mode});
+    },
+
+    bgAudio: function(){
+
+        var bgAudio = this.state.mediaPath + this.state.gameData.sound_files.audio_music;
+        this.playBgAudio({id:"music", autoPlay:true, loop:true, sources:[{format:"mp3", url:bgAudio}]});
     },
 
     getObjexText:function(hog_id,key){
@@ -320,6 +341,7 @@ var ObjexView = React.createClass({
 
         var self = this;
         switch (update.task){
+
             case "levelDone":
                 this.setState({showGame:false}, function(){
                     this.prepLevelCompletePopup();
@@ -369,6 +391,14 @@ var ObjexView = React.createClass({
                             id = {self.state.audioObj.id}
                             sources    = {self.state.audioObj.sources}
                             autoPlay   = {self.state.audioObj.autoPlay}
+                            controller = {self.state.audioController}
+                        /> : null}
+
+                    {self.state.showGame ?
+                        <AudioPlayer
+                            id = {self.state.audioBgObj.id}
+                            sources    = {self.state.audioBgObj.sources}
+                            autoPlay   = {self.state.audioBgObj.autoPlay}
                             controller = {self.state.audioController}
                         /> : null}
 
