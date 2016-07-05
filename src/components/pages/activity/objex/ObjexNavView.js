@@ -12,7 +12,6 @@ var ObjexNavView = React.createClass({
 
         return {
             navDisc:"",
-            //coinsRemaining:6,
             activeRoundObjexColl:[]
         };
     },
@@ -22,6 +21,7 @@ var ObjexNavView = React.createClass({
         activeObjexColl: PropTypes.array.isRequired,
         mediaPath: PropTypes.string.isRequired,
         updateGameView: PropTypes.func.isRequired,
+        viewUpdate: PropTypes.func.isRequired,
         activeRoundObjexColl: PropTypes.array.isRequired,
         showCells: PropTypes.bool.isRequired,
         showHint: PropTypes.func.isRequired
@@ -79,14 +79,14 @@ var ObjexNavView = React.createClass({
     },
 
     onCoinClick: function(e){
+        // this.viewUpdate({task:"coinAudio", value:null});
         $("#"+e.target.id).remove();
         this.props.showHint();
-        //this.setState({coinsRemaining: this.state.coinsRemaining - 1});
     },
 
     viewUpdate: function(update){
         //propagate up
-        this.props.viewUpdate(update)
+        this.props.updateGameView(update)
     },
 
     updateGameView: function(update){

@@ -4,6 +4,16 @@
   height: 100%;
   width: 100%;
 
+  //intro pop
+  .objex-view-textIntro{
+    position:absolute;
+    width:550px;
+    left:118px;
+    top:124px;
+    line-height:24px;
+    font-size:17px;
+  }
+
   //levels pop
   .objex-view-popLevelIconCont{
     position: absolute;
@@ -31,7 +41,7 @@
     font-size:70px;
   }
 
-  .objex-view-completedButtonCont{
+  .objex-view-introButtonCont, .objex-view-completedButtonCont{
     position:relative;
     margin-left: auto;
     margin-right: auto;
@@ -46,6 +56,9 @@
       width:100px;
       height:30px;
     }
+  }
+  .objex-view-introButtonCont{
+    top:350px;
   }
 
   //info pop

@@ -119,6 +119,8 @@ var ObjexGameView = React.createClass({
                 });
 
                 $("#"+hit.hog_id).remove();
+
+                self.viewUpdate({task:"successAudio", value:null});
             }
          }
     },
@@ -130,21 +132,23 @@ var ObjexGameView = React.createClass({
     showHint: function(){
 
         var self = this;
-        for (var i=0; i <  self.state.activeRoundObjexColl.length; i++){
-            if (self.state.hitColl.indexOf(self.state.activeRoundObjexColl[i].hog_id) === -1){
-                console.log("Hint for: " + self.state.activeRoundObjexColl[i].hog_id);
-                var hog_id = self.state.activeRoundObjexColl[i].hog_id;
+        self.viewUpdate({task:"coinAudio", value:null});
+        
+        if (!self.state.hintMode) {
+            for (var i=0; i <  self.state.activeRoundObjexColl.length; i++){
+                if (self.state.hitColl.indexOf(self.state.activeRoundObjexColl[i].hog_id) === -1){
+                    var hog_id = self.state.activeRoundObjexColl[i].hog_id;
 
-                //find hint layer
-                for (var l = 0; l < self.state.layersCanvColl.length; l++){
-                    var layerId = self.state.layersCanvColl[l].id;
-                    if (layerId.indexOf(hog_id) !== -1) {
-                        self.setState({hintMode:true, hintedId:hog_id});
-                        console.log("found hit layer: "+ hog_id);
-                        self.hintEffect($("#"+hog_id));
+                    //find hint layer
+                    for (var l = 0; l < self.state.layersCanvColl.length; l++){
+                        var layerId = self.state.layersCanvColl[l].id;
+                        if (layerId.indexOf(hog_id) !== -1) {
+                            self.setState({hintMode:true, hintedId:hog_id});
+                            self.hintEffect($("#"+hog_id));
+                        }
                     }
+                    break;
                 }
-                break;
             }
         }
     },
@@ -152,7 +156,6 @@ var ObjexGameView = React.createClass({
     hintEffect: function(hintLayer){
 
         var self = this;
-        console.log("$(hintLayer).length " + $(hintLayer).length);
         if ($(hintLayer).length > 0) {
             $(hintLayer).animate({
                 opacity:1,
@@ -220,12 +223,14 @@ var ObjexGameView = React.createClass({
                     onClick         = {self.state.imageLayersData.onClick}
                 >
                 </ImageLayersView>:null}
+
                 {self.state.activeRoundObjexColl ? <ObjexNavView
                     gameData = {self.props.gameData}
                     showCells = {self.state.showCells}
                     mediaPath = {self.props.mediaPath}
                     activeObjexColl = {self.state.activeObjexColl}
                     updateGameView = {self.updateGameView}
+                    viewUpdate = {self.props.viewUpdate}
                     activeRoundObjexColl = {self.state.activeRoundObjexColl}
                     showHint = {self.showHint}
                 />:null}

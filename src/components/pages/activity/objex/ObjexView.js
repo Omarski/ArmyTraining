@@ -1,6 +1,4 @@
-/**
- * Created by omaramer on 5/9/16.
- */
+
 var React = require('react');
 var ObjexGameView = require('./ObjexGameView');
 var AudioPlayer = require('../../../widgets/AudioPlayer');
@@ -55,14 +53,12 @@ var ObjexView = React.createClass({
                 data.level1Data = level1JSON;
                 $.getJSON(data.gameData.levels.level2).done(function(level2JSON){
                     data.level2Data = level2JSON;
-                    console.log("level2: " + level2JSON.objects.length);
                     self.setState({
                         gameData:data.gameData,
                         level1Data:data.level1Data,
                         level2Data:data.level2Data},
                         function(){
                             this.prepObjex();
-                            //this.prepLevelCompletePopup();
                         });
                 });
             });
@@ -121,7 +117,7 @@ var ObjexView = React.createClass({
     },
 
     onObjexReady: function(){
-        this.prepLevels();
+        this.prepIntroPopup();
     },
 
     prepLevels: function(){
@@ -151,24 +147,31 @@ var ObjexView = React.createClass({
     prepIntroPopup: function(){
 
         var self = this;
-        var origImg;
-        var imgStyle;
+        var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
 
         var popupObj = {
             id:"Intro",
             onClickOutside: null,
-            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1, zIndex:'6'},
+            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
 
             content: function(){
 
                 return(
-                    <div className="mission-connect-view-popCont">
+                    <div className="objex-view-popCont">
+                        <div className="objex-view-textIntro">{self.state.gameData.text_assets["text_your_mission_"+self.state.currentLevel]}</div>
+                        <div className="objex-view-introButtonCont">
+                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.closeIntro}>Continue</button>
+                        </div>
                     </div>
+
                 )
             }
         };
 
         self.displayPopup(popupObj);
+
+        var debriefAudio = self.state.mediaPath + self.state.gameData.sound_files.audio_briefing;
+        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
 
     prepLevelCompletePopup: function(){
@@ -199,9 +202,17 @@ var ObjexView = React.createClass({
         self.displayPopup(popupObj);
     },
 
+    closeIntro: function(){
+        this.viewUpdate({task:"buttonAudio", value:null});
+        this.setState({audioObj:null});
+        this.prepLevels();
+    },
+
     menuToLevels: function(){
 
         var self=this;
+        self.viewUpdate({task:"buttonAudio", value:null});
+
         self.setState({popupObj:null}, function(){
             setTimeout(function(){
                 self.prepLevelsPopup()},300);
@@ -211,7 +222,10 @@ var ObjexView = React.createClass({
     onNextLevel: function(){
 
         var self=this;
+        self.viewUpdate({task:"buttonAudio", value:null});
         self.setState({popupObj:null, currentLevel: self.state.currentLevel +1}, function() {
+
+            self.viewUpdate({task:"buttonAudio", value:null});
             setTimeout(function () {
                 self.setState({showGame:true}, function(){
                     self.prepObjex();
@@ -264,6 +278,7 @@ var ObjexView = React.createClass({
         var level = parseInt(e.currentTarget.id.substring(18));
 
         this.setState({popupObj:null, currentLevel:level}, function(){
+            self.viewUpdate({task:"successAudio", value:null});
             setTimeout(function(){
                 self.setState({showGame:true})
             },100);
@@ -303,11 +318,28 @@ var ObjexView = React.createClass({
 
     viewUpdate: function(update){
 
+        var self = this;
         switch (update.task){
             case "levelDone":
                 this.setState({showGame:false}, function(){
                     this.prepLevelCompletePopup();
+                    this.viewUpdate({task:"buttonAudio", value:null});
                 });
+                break;
+
+            case "successAudio":
+                var successAudio = self.state.mediaPath + self.state.gameData.sound_files.audio_success;
+                self.playAudio({id:"success", autoPlay:true, sources:[{format:"mp3", url:successAudio}]});
+                break;
+
+            case "buttonAudio":
+                var levelPopAudio = self.state.mediaPath + self.state.gameData.sound_files.audio_button_click;
+                self.playAudio({id:"success", autoPlay:true, sources:[{format:"mp3", url:levelPopAudio}]});
+                break;
+
+            case "coinAudio":
+                var coinAudio = self.state.mediaPath + self.state.gameData.sound_files.audio_hint;
+                self.playAudio({id:"hint", autoPlay:true, sources:[{format:"mp3", url:coinAudio}]});
                 break;
         }
     },
@@ -331,6 +363,14 @@ var ObjexView = React.createClass({
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
 
                 <div id="missionConnectViewBlock">
+
+                    {self.state.audioObj ?
+                        <AudioPlayer
+                            id = {self.state.audioObj.id}
+                            sources    = {self.state.audioObj.sources}
+                            autoPlay   = {self.state.audioObj.autoPlay}
+                            controller = {self.state.audioController}
+                        /> : null}
 
                     {self.state.popupObj ?
                         <PopupView
