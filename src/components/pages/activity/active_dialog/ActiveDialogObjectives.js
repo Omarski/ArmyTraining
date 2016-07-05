@@ -5,6 +5,7 @@ var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 
 function getCompState() {
@@ -78,6 +79,12 @@ var ActiveDialogObjectives = React.createClass({
 
     _onDialogChange: function() {
         this.setState(getCompState());
+        var currentAction = ActiveDialogStore.getCurrentAction();
+        if (currentAction) {
+            if (currentAction.type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE) {
+                // TODO hide overlay
+            }
+        }
     }
 });
 

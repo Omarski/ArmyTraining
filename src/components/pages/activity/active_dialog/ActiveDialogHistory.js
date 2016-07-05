@@ -71,9 +71,14 @@ var ActiveDialogHistory = React.createClass({
 
     _onDialogChange: function() {
         var currentAction = ActiveDialogStore.getCurrentAction();
-        if (currentAction && currentAction.type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT) {
-            this.setState(getCompState());
+        if (currentAction) {
+            if (currentAction.type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT) {
+                this.setState(getCompState());
+            } else if (currentAction.type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE) {
+                // TODO hide overlay
+            }
         }
+
     }
 });
 
