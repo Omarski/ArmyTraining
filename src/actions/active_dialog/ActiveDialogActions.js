@@ -24,11 +24,30 @@ var ActiveDialogActions = {
     },
 
     /**
+     * Resets the ActiveDialog data
+     */
+    destroy: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_DESTROY
+        });
+    },
+
+    /**
      * @param  {string} data
      */
     handleInput: function(data) {
         AppDispatcher.dispatch({
             actionType: ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT,
+            data: data
+        });
+    },
+
+    /**
+     * @param data
+     */
+    hintsShown: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN,
             data: data
         });
     },
@@ -40,6 +59,24 @@ var ActiveDialogActions = {
         AppDispatcher.dispatch({
             actionType: ActiveDialogConstants.ACTIVE_DIALOG_LOAD,
             data: data
+        });
+    },
+
+    /**
+     * Restart dialog
+     */
+    restart: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_RESTART
+        });
+    },
+
+    /**
+     * Show the remediation panel
+     */
+    showRemediation: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_SHOW_REMEDIATION
         });
     },
 
@@ -60,27 +97,7 @@ var ActiveDialogActions = {
         AppDispatcher.dispatch({
             actionType: ActiveDialogConstants.ACTIVE_DIALOG_START_DIALOG
         });
-    },
-
-    /**
-     * @param data
-     */
-    hintsShown: function(data) {
-        AppDispatcher.dispatch({
-            actionType: ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN,
-            data: data
-        });
-    },
-
-    /**
-     * Resets the ActiveDialog data
-     */
-    destroy: function() {
-        AppDispatcher.dispatch({
-            actionType: ActiveDialogConstants.ACTIVE_DIALOG_DESTROY
-        });
     }
-
 };
 
 module.exports = ActiveDialogActions;
