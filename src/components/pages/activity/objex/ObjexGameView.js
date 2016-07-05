@@ -19,7 +19,9 @@ var ObjexGameView = React.createClass({
                 firstRound:true,
                 roundHits:0,
                 hitColl:[],
-                showCells:false
+                showCells:false,
+                hintMode:false,
+                hintedId:null
         };
     },
 
@@ -30,9 +32,6 @@ var ObjexGameView = React.createClass({
         mediaPath: PropTypes.string.isRequired,
         viewUpdate: PropTypes.func.isRequired,
         levelStats: PropTypes.object.isRequired
-    },
-
-    componentWillMount: function() {
     },
 
     componentDidMount: function(){
@@ -106,7 +105,8 @@ var ObjexGameView = React.createClass({
 
             var hit = $.grep(self.state.activeRoundObjexColl, function(e) { return e.hog_id === canvasElement.id })[0];
 
-            if (hit && self.state.hitColl.indexOf(hit.hog_id) === -1) {
+            if ((hit && self.state.hitColl.indexOf(hit.hog_id) === -1) ||
+                (hit && self.state.hintMode && hit.hog_id === self.state.hintedId)) {
 
                 $("#objexViewCellImg"+canvasElement.id).css("opacity","1");
                 var hitColl = self.state.hitColl;
@@ -114,26 +114,55 @@ var ObjexGameView = React.createClass({
 
                 self.setState({roundHits:self.state.roundHits + 1,
                                hitColl:hitColl,
-                               activeObjex: hit},
-                function(){
-
-                    // if (self.state.roundHits === 5) {
-                    //
-                    //     self.setState({firstRound:false, showCells:false},function(){self.getRoundObjex()});
-                    //     $("#objexViewTextHalfway").css("display","block");
-                    //
-                    //     setTimeout(function(){
-                    //         $("#objexViewTextHalfway").css("display","none");
-                    //     },2000);
-                    //
-                    // }
+                               activeObjex: hit,
+                               hintMode:false
                 });
+
+                $("#"+hit.hog_id).remove();
             }
          }
     },
 
     onRegionRollover: function(canvasElement, pageX, pageY) {
 
+    },
+
+    showHint: function(){
+
+        var self = this;
+        for (var i=0; i <  self.state.activeRoundObjexColl.length; i++){
+            if (self.state.hitColl.indexOf(self.state.activeRoundObjexColl[i].hog_id) === -1){
+                console.log("Hint for: " + self.state.activeRoundObjexColl[i].hog_id);
+                var hog_id = self.state.activeRoundObjexColl[i].hog_id;
+
+                //find hint layer
+                for (var l = 0; l < self.state.layersCanvColl.length; l++){
+                    var layerId = self.state.layersCanvColl[l].id;
+                    if (layerId.indexOf(hog_id) !== -1) {
+                        self.setState({hintMode:true, hintedId:hog_id});
+                        console.log("found hit layer: "+ hog_id);
+                        self.hintEffect($("#"+hog_id));
+                    }
+                }
+                break;
+            }
+        }
+    },
+
+    hintEffect: function(hintLayer){
+
+        var self = this;
+        console.log("$(hintLayer).length " + $(hintLayer).length);
+        if ($(hintLayer).length > 0) {
+            $(hintLayer).animate({
+                opacity:1,
+                webkitFilter: "brightness(3)",
+                filter: "brightness(3)"
+            }, 500, function(){
+                $(hintLayer).css({"opacity":"0", webkitFilter:"brightness(100%)", filter:"brightness(100%)"});
+                if (self.state.hintMode) self.hintEffect(hintLayer);
+            });
+        }else return false;
     },
 
     viewUpdate: function(update){
@@ -198,6 +227,7 @@ var ObjexGameView = React.createClass({
                     activeObjexColl = {self.state.activeObjexColl}
                     updateGameView = {self.updateGameView}
                     activeRoundObjexColl = {self.state.activeRoundObjexColl}
+                    showHint = {self.showHint}
                 />:null}
                </div>
         )

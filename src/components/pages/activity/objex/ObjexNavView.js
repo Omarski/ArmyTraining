@@ -12,8 +12,8 @@ var ObjexNavView = React.createClass({
 
         return {
             navDisc:"",
-            coinsRemaining:6,
-            activeRoundObjexColl:[],
+            //coinsRemaining:6,
+            activeRoundObjexColl:[]
         };
     },
 
@@ -24,12 +24,7 @@ var ObjexNavView = React.createClass({
         updateGameView: PropTypes.func.isRequired,
         activeRoundObjexColl: PropTypes.array.isRequired,
         showCells: PropTypes.bool.isRequired,
-    },
-
-    componentWillMount: function(){
-    },
-
-    componentDidMount: function(){
+        showHint: PropTypes.func.isRequired
     },
     
     prepNav: function(){
@@ -85,7 +80,8 @@ var ObjexNavView = React.createClass({
 
     onCoinClick: function(e){
         $("#"+e.target.id).remove();
-        this.setState({coinsRemaining: this.state.coinsRemaining - 1});
+        this.props.showHint();
+        //this.setState({coinsRemaining: this.state.coinsRemaining - 1});
     },
 
     viewUpdate: function(update){
