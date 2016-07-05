@@ -10,7 +10,9 @@ module.exports = keyMirror({
     ACTIVE_DIALOG_DESTROY: null,
     ACTIVE_DIALOG_LOAD: null,
     ACTIVE_DIALOG_HANDLE_INPUT: null,   // when option is selected
+    ACTIVE_DIALOG_RESTART: null,
     ACTIVE_DIALOG_SET_ACTIVE_COA: null, // when hint is selected
+    ACTIVE_DIALOG_SHOW_REMEDIATION: null,
     ACTIVE_DIALOG_START_DIALOG: null,   // when intro is closed
     ACTIVE_DIALOG_HINTS_SHOWN: null     // when hints are shown to user from button click
 });
