@@ -119,16 +119,10 @@ var MultipleChoiceView = React.createClass({
     answerChange: function(answer) {
         var self = this;
         var state = this.state;
-        var feedback = state.answerFeedback;
 
-        // iterate over each checkbox checking if it was correct
-        state.answers.map(function (item, index) {
-            if (answer === (index+1).toString()) {
-                // for the answer you clicked, get it's feedback
-                var feedbackText = (item.feedback && item.feedback.text) ? item.feedback.text : "";
-                feedback = (<CoachFeedbackView text={feedbackText} isCorrect={item.correct} />);
-            }
-        });
+        // for the answer you clicked, get it's feedback
+        var feedbackText = (answer.feedback && answer.feedback.text) ? answer.feedback.text : "";
+        var feedback = (<CoachFeedbackView text={feedbackText} isCorrect={answer.correct} />);
 
         // update state
         self.setState({
@@ -147,7 +141,7 @@ var MultipleChoiceView = React.createClass({
                     question: state.prompt,
                     target: state.correctAnswer
                 }
-            }
+            };
             // TODO END <-------------- MOVE TO ITS OWN OBJECT---------------------------------------
 
             // submit answer to page
@@ -185,7 +179,7 @@ var MultipleChoiceView = React.createClass({
             return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
                             <label className="multiple-choice-label-remove-padding-left">
-                                <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox multiple-choice-input-padding-right" value={ans} onClick={self.answerChange.bind(self, ans)}></input>
+                                <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox multiple-choice-input-padding-right" value={ans} onClick={self.answerChange.bind(self, item)}></input>
                                 {ans}
                             </label>
                         </div>
