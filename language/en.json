@@ -6,6 +6,18 @@
   "breadcrumbs": {
     "tooltipBookmark": "Bookmarks"
   },
+  "evaluation": {
+    "btnContinue": "Continue",
+    "btnRestart": "Restart Episode",
+    "brnReview": "Review Lessons",
+    "lblContent": "Click the forward and back buttons to review the objectives from this episode.",
+    "lblObjectives": "Objectives",
+    "lblRestart": "I want more practice",
+    "lblReview": "I want to review the information I missed",
+    "lblTitle": "Evaluation",
+    "lblTestPassed": "Excellent work on this episode! You selected the optimal choice on every decision point! You clearly know this mission topic well and are ready to move on in the course!",
+    "lblTestFailed": "I can tell that you are working hard to remember all of the cultural information you've learned so far, but unfortunately, your score does not allow you to move on in the course. Please review the information provided in the After Action Review below. It will help you to remember the cultural points necessary to perform better on your next try. When you feel that you are ready, play the episode again."
+  },
   "footer": {
     "tooltipNext": "Next Page",
     "tooltipPrevious": "Previous Page",
@@ -42,11 +54,10 @@
     "lblLessons": "Lessons",
     "lblPages": "Pages"
   },
-  "settings": {
-    "lblTitle": "Settings",
-    "lblAutoPlaySound": "Auto Play Sound",
-    "lblVoiceVolume": "Voice Volume",
-    "lblBackgroundVolume": "Background Sound Volume"
+  "PronunciationPage":{
+    "btnPlay": "Play",
+    "btnRecord": "Record",
+    "btnPlayback": "Listen to Recording"
   },
   "quizEnd": {
     "headerResult": "Result",
@@ -62,13 +73,14 @@
     "lblTime": "Estimated Training Time: {0}",
     "lblLessons": "Lessons:"
   },
+  "settings": {
+    "lblTitle": "Settings",
+    "lblAutoPlaySound": "Auto Play Sound",
+    "lblVoiceVolume": "Voice Volume",
+    "lblBackgroundVolume": "Background Sound Volume"
+  },
   "tools":{
     "btnListen": "Click to Listen",
     "mdlClose": "Close"
-  },
-  "PronunciationPage":{
-    "btnPlay": "Play",
-    "btnRecord": "Record",
-    "btnPlayback": "Listen to Recording"
   }
 }

@@ -26,7 +26,7 @@ var ActiveDialogHints = React.createClass({
     },
 
     hintAction:function(hint) {
-        ActiveDialogActions.setActiveCOA(hint);
+        //ActiveDialogActions.setActiveCOA(hint);
         this.refs.hintsPopover.hide();
     },
 
@@ -88,7 +88,7 @@ var ActiveDialogHints = React.createClass({
 
     _onDialogChange: function() {
         setTimeout(function() {
-            ActiveDialogHintActions.create(ActiveDialogStore.activeDialog().coas);
+            //ActiveDialogHintActions.create(ActiveDialogStore.activeDialog().coas);
         }, .25);
     }
 });

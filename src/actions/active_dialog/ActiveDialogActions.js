@@ -1,10 +1,20 @@
 var AppDispatcher = require('../../dispatcher/AppDispatcher');
 var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
+var ActiveDialogStore = require('../../stores/active_dialog/ActiveDialogStore');
 
 var ActiveDialogActions = {
 
     /**
-     * @param  {string} text
+     * Continues processing of dialog action queue
+     */
+    continueDialog: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_CONTINUE_DIALOG
+        });
+    },
+
+    /**
+     * @param  {string} data
      */
     create: function(data) {
         AppDispatcher.dispatch({
@@ -14,7 +24,16 @@ var ActiveDialogActions = {
     },
 
     /**
-     * @param  {string} text
+     * Resets the ActiveDialog data
+     */
+    destroy: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_DESTROY
+        });
+    },
+
+    /**
+     * @param  {string} data
      */
     handleInput: function(data) {
         AppDispatcher.dispatch({
@@ -24,7 +43,17 @@ var ActiveDialogActions = {
     },
 
     /**
-     * @param  {string} text
+     * @param data
+     */
+    hintsShown: function(data) {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN,
+            data: data
+        });
+    },
+
+    /**
+     * @param  {string} data
      */
     load: function(data) {
         AppDispatcher.dispatch({
@@ -34,7 +63,25 @@ var ActiveDialogActions = {
     },
 
     /**
-     * @param  {string} text
+     * Restart dialog
+     */
+    restart: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_RESTART
+        });
+    },
+
+    /**
+     * Show the remediation panel
+     */
+    showRemediation: function() {
+        AppDispatcher.dispatch({
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_SHOW_REMEDIATION
+        });
+    },
+
+    /**
+     * @param  {string} data
      */
     setActiveCOA: function(data) {
         AppDispatcher.dispatch({
@@ -43,24 +90,14 @@ var ActiveDialogActions = {
         });
     },
 
-    hintsShown: function(data) {
-        AppDispatcher.dispatch({
-            actionType: ActiveDialogConstants.ACTIVE_DIALOG_HINTS_SHOWN,
-            data: data
-        });
-    },
-
-
-
     /**
-     * @param  {string} id
+     * Start processing the dialog
      */
-    destroy: function() {
+    startDialog: function() {
         AppDispatcher.dispatch({
-            actionType: ActiveDialogConstants.ACTIVE_DIALOG_DESTROY
+            actionType: ActiveDialogConstants.ACTIVE_DIALOG_START_DIALOG
         });
     }
-
 };
 
 module.exports = ActiveDialogActions;
