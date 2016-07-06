@@ -139,12 +139,12 @@ var ActiveDialogEvaluation = React.createClass({
                         <Panel header={LocalizationStore.labelFor("evaluation", "lblObjectives")}>
                             <h4>{LocalizationStore.labelFor("evaluation", "lblRestart")}</h4>
                             <br></br>
-                            <button type="button" className="btn btn-default" aria-label="Next" onRestart={this.restart}>
+                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.restart}>
                                 {LocalizationStore.labelFor("evaluation", "btnRestart")}
                             </button>
                             <h4>{LocalizationStore.labelFor("evaluation", "lblReview")}</h4>
                             <br></br>
-                            <button type="button" className="btn btn-default" aria-label="Next" onRestart={this.review}>
+                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.review}>
                                 {LocalizationStore.labelFor("evaluation", "brnReview")}
                             </button>
                         </Panel>
