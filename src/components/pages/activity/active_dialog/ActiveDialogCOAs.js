@@ -101,7 +101,9 @@ var ActiveDialogCOAs = React.createClass({
         return (
             <Modal
                 id="coasModal"
+                backdrop="static"
                 show={this.state.show}
+                keyboard={false}
                 onHide={this.hideModal}
                 >
                 <Modal.Header>
