@@ -175,11 +175,16 @@ var EthnoLayersView = React.createClass({
             var offset = $("#wrapperDiv").offset();
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
+            // console.log("x", x, "y", y);
             self.detectRegion(e, x, y, e.pageX, e.pageY);
         }
         else if (mode == "click"){
-            console.log("self.state.lastHighlightedRegion", self.state.lastHighlightedRegion);
-            self.props.onClick(self.state.lastHighlightedRegion);
+            // console.log("self.state.lastHighlightedRegion", self.state.lastHighlightedRegion);
+            // console.log("x", x, "y", y);
+            var offset = $("#wrapperDiv").offset();
+            var x = function(){return e.pageX - offset.left}();
+            var y = function(){return e.pageY - offset.top}();
+            self.props.onClick(self.state.lastHighlightedRegion, x, y);
         } else if (mode = "mouseout") {
             if(!$("#toolTipperId").hasClass("ethno-not-visible")) {
                 $("#toolTipperId").addClass("ethno-not-visible");
