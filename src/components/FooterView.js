@@ -9,6 +9,8 @@ var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
 var ExplorerView = require('../components/ExplorerView');
 var ExplorerActions = require('../actions/ExplorerActions');
+var Utils = require('../components/widgets/Utils');
+var InfoTagConstants = require('../constants/InfoTagConstants');
 
 function getUnitState(expanded) {
     var units = UnitStore.getAll();
@@ -128,6 +130,20 @@ function getUnitState(expanded) {
     };
 }
 
+function showExplorerButton() {
+    // get current chapter
+    var currentChapter = PageStore.chapter();
+    if (currentChapter !== null) {
+        // hide if current chapter is marked as one of the following
+        if ((Utils.findInfo(currentChapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) ||
+            (Utils.findInfo(currentChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 var FooterView = React.createClass({
     next: function() {
         PageActions.loadNext({});
@@ -217,7 +233,7 @@ var FooterView = React.createClass({
         var progressView = (<span></span>);
         var explorerView = (<span></span>);
 
-        if(UnitStore.requiredExists()) {
+        if(showExplorerButton()) {
             explorerBtn = (
                 <button title={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
                         alt={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
