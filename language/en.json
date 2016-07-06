@@ -73,6 +73,11 @@
     "lblTime": "Estimated Training Time: {0}",
     "lblLessons": "Lessons:"
   },
+  "remediation": {
+    "btnClose": "Close",
+    "btnNext": "Next",
+    "btnPrevious": "Previous"
+  },
   "settings": {
     "lblTitle": "Settings",
     "lblAutoPlaySound": "Auto Play Sound",
