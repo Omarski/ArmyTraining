@@ -20,6 +20,7 @@
  */
 
 var React = require('react');
+var PropTypes  = React.PropTypes;
 
 var ImageLayersView = React.createClass({
 
@@ -37,6 +38,16 @@ var ImageLayersView = React.createClass({
         };
 
         return state;
+    },
+
+    propTypes: {
+        areaWidth: PropTypes.number,
+        areaHeight: PropTypes.number,
+        imageColl: PropTypes.array.isRequired,
+        backgroundImage: PropTypes.string.isRequired,
+        onLayersReady: PropTypes.func.isRequired,
+        onRollover: PropTypes.func.isRequired,
+        onClick: PropTypes.func.isRequired
     },
 
     componentWillMount: function() {
@@ -103,7 +114,6 @@ var ImageLayersView = React.createClass({
         });
 
         return canv;
-
     },
 
     placeRegions: function(){
@@ -117,7 +127,7 @@ var ImageLayersView = React.createClass({
             var regionCanvas =  self.createCanvas({
                 canvasWidth:self.props.areaWidth,
                 canvasHeight:self.props.areaHeight,
-                canvasId:"imageLayer_canvas_" + index,
+                canvasId:"imageLayer_canvas_" + image.id? image.id:index,
                 canvasStyle:"{z-index:"+index+1+"}",
                 mapSrc: self.state.loadedImageColl[index].src
             });
@@ -128,7 +138,7 @@ var ImageLayersView = React.createClass({
         });
 
         self.setState({canvasColl:canvasColl});
-        self.props.onLayersReady(self.state.canvasColl);
+        self.props.onLayersReady(canvasColl);
     },
 
     detectRegion: function(e,pixelX,pixelY) {
