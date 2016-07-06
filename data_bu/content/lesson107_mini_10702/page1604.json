@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1604",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "iStock; http://www.istockphoto.com/legal/license-agreement"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Kabul, Afghanistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4033907,
+        "xid" : "4033907.mp3",
+        "type" : "audio",
+        "file" : "4033907.mp3"
+      } ]
+    }, {
+      "text" : "- Identify Afghanistan's location in the world and major geographical features. \n- Describe Afghanistan's infrastructure.\n- Recall the demographic composition of Afghanistan.",
+      "media" : [ {
+        "zid" : 4032321,
+        "xid" : "4032321.mp3",
+        "type" : "audio",
+        "file" : "4032321.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463079674098,
+      "xid" : "1463079674098.jpg",
+      "type" : "image",
+      "file" : "1463079674098.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

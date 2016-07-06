@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2109",
+    "type" : "Info",
+    "title" : "Appropriate Dress",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/5050268071/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Service members in a meeting to discuss humanitarian aid"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Dress well to gain the respect and cooperation of your counterparts. It's better to be overdressed than underdressed. Some guidelines are:",
+      "media" : [ {
+        "zid" : 4032548,
+        "xid" : "4032548.mp3",
+        "type" : "audio",
+        "file" : "4032548.mp3"
+      } ]
+    }, {
+      "text" : "- Wear your uniform in military-to-military meetings. \n- For government meetings, wear a suit.\n- In non-business situations, remain business casual with a polo shirt and slacks for men, a conservative blouse and long skirt for women, and appropriate closed-toed shoes.",
+      "media" : [ {
+        "zid" : 4032549,
+        "xid" : "4032549.mp3",
+        "type" : "audio",
+        "file" : "4032549.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462313290567,
+      "xid" : "1462313290567.jpg",
+      "type" : "image",
+      "file" : "1462313290567.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

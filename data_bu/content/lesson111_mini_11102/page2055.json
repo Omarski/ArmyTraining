@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2055",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Sensitive Topics",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/321894/pakistan-humanitarian-aid"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A Pakistani man"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "You may find yourself in more relaxed conversations where your counterpart asks about your personal perspective. Sensitive topics should be judged on a case-by-case basis, but you should be prepared to gracefully change the subject where necessary.",
+      "media" : [ {
+        "zid" : 4032488,
+        "xid" : "4032488.mp3",
+        "type" : "audio",
+        "file" : "4032488.mp3"
+      } ]
+    }, {
+      "text" : "When speaking with Pakistanis, topics to avoid include politics, religious beliefs, and ethnicity. If you are male, never ask or talk about female family members. You should also avoid making jokes about the culture or country of Pakistan.",
+      "media" : [ {
+        "zid" : 4032489,
+        "xid" : "4032489.mp3",
+        "type" : "audio",
+        "file" : "4032489.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1458332992232,
+      "xid" : "1458332992232.jpg",
+      "type" : "image",
+      "file" : "1458332992232.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

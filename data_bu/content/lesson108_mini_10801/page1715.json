@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1715",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/qvFQ5y"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A busy street in Pakistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4033922,
+        "xid" : "4033922.mp3",
+        "type" : "audio",
+        "file" : "4033922.mp3"
+      } ]
+    }, {
+      "text" : "- Identify Pakistan's location in the world and major geographical features. \n- Describe Pakistan's infrastructure.\n- Recall the demographic composition of Pakistan.",
+      "media" : [ {
+        "zid" : 4032159,
+        "xid" : "4032159.mp3",
+        "type" : "audio",
+        "file" : "4032159.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1461014192095,
+      "xid" : "1461014192095.jpg",
+      "type" : "image",
+      "file" : "1461014192095.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

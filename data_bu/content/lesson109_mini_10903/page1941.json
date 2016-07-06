@@ -1,0 +1,42 @@
+{
+  "page" : {
+    "xid" : "page1941",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perspectives: Elders",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "(Note: This transcript has been edited for readability.)<br><br>\"[insert transcription text here]\""
+      }, {
+        "name" : "frame",
+        "value" : "4"
+      } ]
+    },
+    "note" : [ {
+      "text" : "An Afghan national discusses appropriate interactions with Afghan elders.",
+      "media" : [ {
+        "zid" : 1450383134234,
+        "xid" : "1450383134234.mp4",
+        "type" : "video",
+        "file" : "1450383134234.mp4"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

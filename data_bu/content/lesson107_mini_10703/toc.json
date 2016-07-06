@@ -1,0 +1,606 @@
+{
+  "chapter" : {
+    "xid" : "lesson107_mini_10703",
+    "title" : "History",
+    "info" : {
+      "property" : [ {
+        "name" : "fount",
+        "value" : "/guru/lesson127"
+      }, {
+        "name" : "L2",
+        "value" : "en"
+      } ]
+    },
+    "preposttest" : [ "page3926", "page3928" ],
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page1610",
+        "type" : "Info",
+        "title" : "Learning Objectives"
+      }, {
+        "xid" : "page3964",
+        "type" : "Info",
+        "title" : "Early History"
+      }, {
+        "xid" : "page3965",
+        "type" : "Info",
+        "title" : "Anglo-Afghan Wars"
+      }, {
+        "xid" : "page4056",
+        "type" : "MultiNote",
+        "title" : "20th Century Afghanistan"
+      }, {
+        "xid" : "page3760",
+        "type" : "Ordering",
+        "title" : "Practice 1"
+      }, {
+        "xid" : "page3805",
+        "type" : "MultipleChoice",
+        "title" : "Practice 2"
+      }, {
+        "xid" : "page3974",
+        "type" : "Info",
+        "title" : "Rise of the Mujahideen and Civil War"
+      }, {
+        "xid" : "page1618",
+        "type" : "Info",
+        "title" : "Perspectives: Rise of the Mujahideen and Civil War"
+      }, {
+        "xid" : "page4055",
+        "type" : "MultiNote",
+        "title" : "Taliban Rule"
+      }, {
+        "xid" : "page3981",
+        "type" : "Info",
+        "title" : "U.S. Involvement"
+      }, {
+        "xid" : "page4054",
+        "type" : "InteractiveTimeline",
+        "title" : "Interactive Timeline"
+      }, {
+        "xid" : "page3806",
+        "type" : "MultipleChoice",
+        "title" : "Practice 3"
+      }, {
+        "xid" : "page3807",
+        "type" : "MultipleChoice",
+        "title" : "Practice 4"
+      }, {
+        "xid" : "page1606",
+        "type" : "Info",
+        "title" : "Section Checklist"
+      } ]
+    }, {
+      "mode" : "quiz",
+      "pageRef" : [ {
+        "xid" : "page1647",
+        "type" : "QuizStart",
+        "title" : "Quiz"
+      }, {
+        "xid" : "page3926",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 1"
+      }, {
+        "xid" : "page3927",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 2"
+      }, {
+        "xid" : "page3928",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 3"
+      }, {
+        "xid" : "page1627",
+        "type" : "QuizEnd",
+        "title" : "Quiz Results"
+      }, {
+        "xid" : "page1638",
+        "type" : "SectionEnd",
+        "title" : "Section End"
+      } ]
+    } ],
+    "zmedia" : [ {
+      "zid" : 1454439764056,
+      "xid" : "1454439764056.jpg",
+      "type" : "image",
+      "file" : "1454439764056.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1219"
+        } ]
+      }
+    }, {
+      "zid" : 4032356,
+      "xid" : "4032356.mp3",
+      "type" : "audio",
+      "file" : "4032356.mp3"
+    }, {
+      "zid" : 4032367,
+      "xid" : "4032367.mp3",
+      "type" : "audio",
+      "file" : "4032367.mp3"
+    }, {
+      "zid" : 1454444348290,
+      "xid" : "1454444348290.jpg",
+      "type" : "image",
+      "file" : "1454444348290.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1454442298594,
+      "xid" : "1454442298594.jpg",
+      "type" : "image",
+      "file" : "1454442298594.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1893"
+        } ]
+      }
+    }, {
+      "zid" : 4032361,
+      "xid" : "4032361.mp3",
+      "type" : "audio",
+      "file" : "4032361.mp3"
+    }, {
+      "zid" : 1457471787289,
+      "xid" : "1457471787289.jpg",
+      "type" : "image",
+      "file" : "1457471787289.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1465580354794,
+      "xid" : "1465580354794.mp4",
+      "type" : "video",
+      "file" : "1465580354794.mp4",
+      "mime" : "null",
+      "info" : null
+    }, {
+      "zid" : 4032446,
+      "xid" : "4032446.mp3",
+      "type" : "audio",
+      "file" : "4032446.mp3"
+    }, {
+      "zid" : 4032368,
+      "xid" : "4032368.mp3",
+      "type" : "audio",
+      "file" : "4032368.mp3"
+    }, {
+      "zid" : 1454444247527,
+      "xid" : "1454444247527.jpg",
+      "type" : "image",
+      "file" : "1454444247527.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1455920482891,
+      "xid" : "1455920482891.jpg",
+      "type" : "image",
+      "file" : "1455920482891.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1989"
+        } ]
+      }
+    }, {
+      "zid" : 1302045193072,
+      "xid" : "1302045193072.jpg",
+      "type" : "image",
+      "file" : "1302045193072.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1454441842908,
+      "xid" : "1454441842908.jpg",
+      "type" : "image",
+      "file" : "1454441842908.jpg",
+      "mime" : "image/png",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1839"
+        } ]
+      }
+    }, {
+      "zid" : 1454448971873,
+      "xid" : "1454448971873.jpg",
+      "type" : "image",
+      "file" : "1454448971873.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "2014"
+        } ]
+      }
+    }, {
+      "zid" : 1454447777754,
+      "xid" : "1454447777754.jpg",
+      "type" : "image",
+      "file" : "1454447777754.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1457564003255,
+      "xid" : "1457564003255.jpg",
+      "type" : "image",
+      "file" : "1457564003255.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032364,
+      "xid" : "4032364.mp3",
+      "type" : "audio",
+      "file" : "4032364.mp3"
+    }, {
+      "zid" : 1457471229943,
+      "xid" : "1457471229943.jpg",
+      "type" : "image",
+      "file" : "1457471229943.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1454449656317,
+      "xid" : "1454449656317.jpg",
+      "type" : "image",
+      "file" : "1454449656317.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1992"
+        } ]
+      }
+    }, {
+      "zid" : 1457471416827,
+      "xid" : "1457471416827.jpg",
+      "type" : "image",
+      "file" : "1457471416827.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1457472137262,
+      "xid" : "1457472137262.jpg",
+      "type" : "image",
+      "file" : "1457472137262.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1455920354866,
+      "xid" : "1455920354866.jpg",
+      "type" : "image",
+      "file" : "1455920354866.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1454444247527,
+      "xid" : "1454444247527.jpg",
+      "type" : "image",
+      "file" : "1454444247527.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1973"
+        } ]
+      }
+    }, {
+      "zid" : 1457471724447,
+      "xid" : "1457471724447.jpg",
+      "type" : "image",
+      "file" : "1457471724447.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032357,
+      "xid" : "4032357.mp3",
+      "type" : "audio",
+      "file" : "4032357.mp3"
+    }, {
+      "zid" : 1457471997177,
+      "xid" : "1457471997177.jpg",
+      "type" : "image",
+      "file" : "1457471997177.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032362,
+      "xid" : "4032362.mp3",
+      "type" : "audio",
+      "file" : "4032362.mp3"
+    }, {
+      "zid" : 1457471838667,
+      "xid" : "1457471838667.jpg",
+      "type" : "image",
+      "file" : "1457471838667.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032370,
+      "xid" : "4032370.mp3",
+      "type" : "audio",
+      "file" : "4032370.mp3"
+    }, {
+      "zid" : 4032366,
+      "xid" : "4032366.mp3",
+      "type" : "audio",
+      "file" : "4032366.mp3"
+    }, {
+      "zid" : 4033912,
+      "xid" : "4033912.mp3",
+      "type" : "audio",
+      "file" : "4033912.mp3"
+    }, {
+      "zid" : 1454449759987,
+      "xid" : "1454449759987.jpg",
+      "type" : "image",
+      "file" : "1454449759987.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1919"
+        } ]
+      }
+    }, {
+      "zid" : 1389291394690,
+      "xid" : "1389291394690.jpg",
+      "type" : "image",
+      "file" : "1389291394690.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1454449495970,
+      "xid" : "1454449495970.jpg",
+      "type" : "image",
+      "file" : "1454449495970.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "2001"
+        } ]
+      }
+    }, {
+      "zid" : 1451950490014,
+      "xid" : "1451950490014.jpg",
+      "type" : "image",
+      "file" : "1451950490014.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032359,
+      "xid" : "4032359.mp3",
+      "type" : "audio",
+      "file" : "4032359.mp3"
+    }, {
+      "zid" : 1454444348290,
+      "xid" : "1454444348290.jpg",
+      "type" : "image",
+      "file" : "1454444348290.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1923"
+        } ]
+      }
+    }, {
+      "zid" : 4033911,
+      "xid" : "4033911.mp3",
+      "type" : "audio",
+      "file" : "4033911.mp3"
+    }, {
+      "zid" : 4032352,
+      "xid" : "4032352.mp3",
+      "type" : "audio",
+      "file" : "4032352.mp3"
+    }, {
+      "zid" : 1454447777754,
+      "xid" : "1454447777754.jpg",
+      "type" : "image",
+      "file" : "1454447777754.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1994"
+        } ]
+      }
+    }, {
+      "zid" : 4032355,
+      "xid" : "4032355.mp3",
+      "type" : "audio",
+      "file" : "4032355.mp3"
+    }, {
+      "zid" : 1454441132256,
+      "xid" : "1454441132256.jpg",
+      "type" : "image",
+      "file" : "1454441132256.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1405"
+        } ]
+      }
+    }, {
+      "zid" : 4032358,
+      "xid" : "4032358.mp3",
+      "type" : "audio",
+      "file" : "4032358.mp3"
+    }, {
+      "zid" : 1455920354866,
+      "xid" : "1455920354866.jpg",
+      "type" : "image",
+      "file" : "1455920354866.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1979"
+        } ]
+      }
+    }, {
+      "zid" : 1465580354794,
+      "xid" : "1465580354794.mp4",
+      "type" : "video",
+      "file" : "1465580354794.mp4"
+    }, {
+      "zid" : 4032373,
+      "xid" : "4032373.mp3",
+      "type" : "audio",
+      "file" : "4032373.mp3"
+    }, {
+      "zid" : 4032353,
+      "xid" : "4032353.mp3",
+      "type" : "audio",
+      "file" : "4032353.mp3"
+    }, {
+      "zid" : 4032354,
+      "xid" : "4032354.mp3",
+      "type" : "audio",
+      "file" : "4032354.mp3"
+    }, {
+      "zid" : 4032371,
+      "xid" : "4032371.mp3",
+      "type" : "audio",
+      "file" : "4032371.mp3"
+    }, {
+      "zid" : 1454449656317,
+      "xid" : "1454449656317.jpg",
+      "type" : "image",
+      "file" : "1454449656317.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032365,
+      "xid" : "4032365.mp3",
+      "type" : "audio",
+      "file" : "4032365.mp3"
+    }, {
+      "zid" : 1457472057669,
+      "xid" : "1457472057669.jpg",
+      "type" : "image",
+      "file" : "1457472057669.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4033910,
+      "xid" : "4033910.mp3",
+      "type" : "audio",
+      "file" : "4033910.mp3"
+    }, {
+      "zid" : 4032363,
+      "xid" : "4032363.mp3",
+      "type" : "audio",
+      "file" : "4032363.mp3"
+    }, {
+      "zid" : 1457656610636,
+      "xid" : "1457656610636.jpg",
+      "type" : "image",
+      "file" : "1457656610636.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4034557,
+      "xid" : "4034557.mp3",
+      "type" : "audio",
+      "file" : "4034557.mp3"
+    } ]
+  }
+}

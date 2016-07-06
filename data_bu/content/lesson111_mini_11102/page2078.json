@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2078",
+    "type" : "Info",
+    "title" : "Beginning the Engagement",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/7rkTZt"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A service member greeting a Pakistani counterpart"
+      } ]
+    },
+    "note" : [ {
+      "text" : "When beginning a meeting, it's customary to stand when others enter the room. Greet elders or superior officers first, then greet participants in descending order of authority. ",
+      "media" : [ {
+        "zid" : 4034533,
+        "xid" : "4034533.mp3",
+        "type" : "audio",
+        "file" : "4034533.mp3"
+      } ]
+    }, {
+      "text" : "You will remain standing while chatting for several minutes, until your counterpart invites you to sit. Keep both feet on the floor and a straight posture when seated.",
+      "media" : [ {
+        "zid" : 4034534,
+        "xid" : "4034534.mp3",
+        "type" : "audio",
+        "file" : "4034534.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463151380771,
+      "xid" : "1463151380771.jpg",
+      "type" : "image",
+      "file" : "1463151380771.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page1939",
+    "type" : "Info",
+    "title" : "Religious Authority",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/872S35"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A local religious leader leads men in prayer"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Religious leaders will often either make community decisions themselves or have great influence on the proceedings. Remember that where religious perspectives are strong, your counterparts will stress faith in traditional perspectives, and it may be difficult for foreign representatives to gain trust. "
+    }, {
+      "text" : "U.S. service members have reported success working alongside the religious affairs officers of the Afghan military. These officers are educated in Islamic principles and may be able to bridge a gap between military and traditional perspectives."
+    } ],
+    "media" : [ {
+      "zid" : 1463601437770,
+      "xid" : "1463601437770.jpg",
+      "type" : "image",
+      "file" : "1463601437770.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

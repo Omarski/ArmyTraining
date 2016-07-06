@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page2054",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Small Talk",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/308276/pakistan-disaster-recovery"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. and Pakistani service members speaking"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Small talk is necessary when building relationships with your counterparts. It can put them in their comfort zone, help you learn about their perspective, and make the rest of your conversation go more smoothly.",
+      "media" : [ {
+        "zid" : 4032486,
+        "xid" : "4032486.mp3",
+        "type" : "audio",
+        "file" : "4032486.mp3"
+      } ]
+    }, {
+      "text" : "Good topics for small talk with your counterpart include:",
+      "media" : [ {
+        "zid" : 4034529,
+        "xid" : "4034529.mp3",
+        "type" : "audio",
+        "file" : "4034529.mp3"
+      } ]
+    }, {
+      "text" : "- Your counterpart’s health or well-being.\n- Your counterpart’s family, except female relatives.\n- Where your counterpart has traveled abroad.\n- Local history.\n- Cricket, soccer, or other sports.\n- Your favorite parts of Pakistan, such as the food, the scenery, or the people.",
+      "media" : [ {
+        "zid" : 4034530,
+        "xid" : "4034530.mp3",
+        "type" : "audio",
+        "file" : "4034530.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1458332923395,
+      "xid" : "1458332923395.jpg",
+      "type" : "image",
+      "file" : "1458332923395.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

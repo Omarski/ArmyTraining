@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3954",
+    "type" : "Info",
+    "title" : "Population",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghan locals in a rural settlement"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/4435108476/"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "An estimated 32 million people live in Afghanistan as of 2016. At least 80% of Afghans live within 50 kilometers of the ring road. The remainder are farmers in rural settlements or nomads.",
+      "media" : [ {
+        "zid" : 4032340,
+        "xid" : "4032340.mp3",
+        "type" : "audio",
+        "file" : "4032340.mp3"
+      } ]
+    }, {
+      "text" : "Most nomads are Pashtun herders, although several thousand Kyrgyz and Balochi nomads live in the northeastern part of the country.",
+      "media" : [ {
+        "zid" : 4032341,
+        "xid" : "4032341.mp3",
+        "type" : "audio",
+        "file" : "4032341.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1452020918605,
+      "xid" : "1452020918605.jpg",
+      "type" : "image",
+      "file" : "1452020918605.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

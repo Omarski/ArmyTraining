@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1102",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Afghan Military",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/3187801624/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghan National Army donating prayer mats to a mosque"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Though Afghanistan's army may appear disorganized and inexperienced compared to the U.S., it's important to keep the nation's tumultuous history in mind.",
+      "media" : [ {
+        "zid" : 4032539,
+        "xid" : "4032539.mp3",
+        "type" : "audio",
+        "file" : "4032539.mp3"
+      } ]
+    }, {
+      "text" : "The Afghanistan National Army was heavily influenced by the USSR during the 20th century. One lasting effect is the top-heavy Afghan military and its disempowered NCO corps. NCOs may not be briefed on the mission's goals. They won't make decisions without input from superiors, which will slow down planning phases.",
+      "media" : [ {
+        "zid" : 4032540,
+        "xid" : "4032540.mp3",
+        "type" : "audio",
+        "file" : "4032540.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462312778618,
+      "xid" : "1462312778618.jpg",
+      "type" : "image",
+      "file" : "1462312778618.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

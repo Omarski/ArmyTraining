@@ -1,0 +1,280 @@
+{
+  "page" : {
+    "xid" : "page2337",
+    "type" : "ListeningComprehension",
+    "layout" : "",
+    "title" : "Practice 3",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Wakdaar Manelay",
+      "zid" : 1461196074259,
+      "nom" : "Wakdaar_Manelay"
+    },
+    "skills" : null,
+    "media" : [ {
+      "zid" : 1466442393432,
+      "xid" : "1466442393432.jpg",
+      "type" : "image",
+      "file" : "1466442393432.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "prompt" : {
+      "text" : "You're planning a humanitarian aid project with your counterpart after an earthquake. Listen to what he says, and choose the best response."
+    },
+    "question" : {
+      "utterance" : {
+        "stamp" : 1402003672835,
+        "status" : "imported",
+        "provenance" : "",
+        "lang" : "en",
+        "anchor" : "ezread",
+        "lexicon" : false,
+        "incomplete" : false,
+        "ontoid" : "",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "",
+          "text" : "تاسی کولای شی چی ی سیمی هر یو ته په پوره ډول  ډوډی او اوبه ورسوی؟",
+          "group" : ""
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "",
+          "text" : "tasee kewolay shey che de seemey har yao te pe poora dewal dodey aw wooba orasaway?",
+          "group" : ""
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "",
+          "text" : "",
+          "group" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "",
+          "text" : "Can you provide us with enough food and water for everyone in the village?",
+          "group" : ""
+        },
+        "comment" : "",
+        "syntax" : null,
+        "parseTree" : null
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "It’s important to avoid making any promises. Breaking a promise can damage your standing with your counterpart. In most cases, it's good practice to underpromise and overdeliver."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672835,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "No promises, but I’ll see what I can do.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, it’s important to avoid making any promises. Breaking a promise can damage your standing with your counterpart. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672835,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "I can promise enough water, but not food.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, it’s important to avoid making any promises. Breaking a promise can damage your standing with your counterpart. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672835,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Yes, I’m sure that we can provide all that.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, it’s important to avoid making any promises. Breaking a promise can damage your standing with your counterpart. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672835,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "I’m sure we can include blankets along with the food and water.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

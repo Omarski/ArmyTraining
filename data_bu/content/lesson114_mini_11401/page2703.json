@@ -1,0 +1,47 @@
+{
+  "page" : {
+    "xid" : "page2703",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Ethnic Tensions",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistanis in the Punjab region"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/jenny-pics/5352438740/"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Tensions between various ethnic groups are a major cause of instability within Pakistan. Geographic regions and political parties are frequently divided along ethnic lines. Ethnicity is also closely tied to social class and identity.",
+      "media" : [ {
+        "zid" : 4032459,
+        "xid" : "4032459.mp3",
+        "type" : "audio",
+        "file" : "4032459.mp3"
+      } ]
+    }, {
+      "text" : "In general, Pakistanis trust fellow members of their own ethnic group over others. When meeting local Pakistanis, it can be helpful to bring along a cultural adviser from their same region or ethnic group to make the meeting go more smoothly.",
+      "media" : [ {
+        "zid" : 4032460,
+        "xid" : "4032460.mp3",
+        "type" : "audio",
+        "file" : "4032460.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1459278415045,
+      "xid" : "1459278415045.jpg",
+      "type" : "image",
+      "file" : "1459278415045.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page4710",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Combating the Negative Effects",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Speaking with Afghan border police"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "The best way to combat the negative effects of culture shock is to prepare by learning about the culture. When you arrive in country, talk to your peers about what you see and experience. This will help you to process information and develop a better understanding and appreciation of your new environment.",
+      "media" : [ {
+        "zid" : 4011275,
+        "xid" : "4011275.mp3",
+        "type" : "audio",
+        "file" : "4011275.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450729203142,
+      "xid" : "1450729203142.jpg",
+      "type" : "image",
+      "file" : "1450729203142.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

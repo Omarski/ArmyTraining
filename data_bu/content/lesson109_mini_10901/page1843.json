@@ -1,0 +1,36 @@
+{
+  "page" : {
+    "xid" : "page1843",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perceptions of the U.S. Military",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/4bqgT5"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. Army and Air Force personnel and local children stretching before a soccer game"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Foreign intervention in Afghanistan from the 19th century to the present day has led Afghans to regard Westerners with a great deal of suspicion. Some civilian Afghans view the American presence as a threat to their culture and way of living. Others, including some in the Afghan government and military, welcome American support and experience, and work with U.S. officials toward a more stable Afghanistan.\n"
+    }, {
+      "text" : "Don't assume that all Afghans will have the same perspective. Remember, showing legitimate concern for your counterparts' challenges will be the basis of your working relationships. "
+    } ],
+    "media" : [ {
+      "zid" : 1463529776354,
+      "xid" : "1463529776354.jpg",
+      "type" : "image",
+      "file" : "1463529776354.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

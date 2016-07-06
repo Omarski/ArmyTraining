@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3964",
+    "type" : "Info",
+    "title" : "Early History",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "A portrait of Genghis Khan"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumGenghisPortrait.jpg"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Afghanistan’s rich history extends over many centuries. The first Muslim dynasties arose in the mid-7th century C.E. and the region was ruled by small Islamic dynasties until Genghis Khan invaded from the east in 1219. Most of Afghanistan became part of his empire. After his death in 1227, the empire fell apart and was again broken up into principalities.",
+      "media" : [ {
+        "zid" : 4032353,
+        "xid" : "4032353.mp3",
+        "type" : "audio",
+        "file" : "4032353.mp3"
+      } ]
+    }, {
+      "text" : "The famous Turkic ruler Timur, also called Tamerlane, conquered much of the region in the 14th century. After Timur’s death in 1405, his successors, the Timurids, ruled until 1507. The Timurids set up Herat as their capital city and ruled over a time of peace and prosperity.",
+      "media" : [ {
+        "zid" : 4032354,
+        "xid" : "4032354.mp3",
+        "type" : "audio",
+        "file" : "4032354.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1451950490014,
+      "xid" : "1451950490014.jpg",
+      "type" : "image",
+      "file" : "1451950490014.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

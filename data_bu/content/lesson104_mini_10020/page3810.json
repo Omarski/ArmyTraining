@@ -1,0 +1,57 @@
+{
+  "page" : {
+    "xid" : "page3810",
+    "type" : "Info",
+    "title" : "Selecting an Interpreter",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/mmmavocado/4818471930/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Discussing citrus growing with an interpreter, India"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Your interpreter's background may have a bearing on your work. If you are selecting your own interpreter, keep in mind:",
+      "media" : [ {
+        "zid" : 4022087,
+        "xid" : "4022087.mp3",
+        "type" : "audio",
+        "file" : "4022087.mp3"
+      } ]
+    }, {
+      "text" : "- ethnicity and tribe\n- age and gender\n- social status\n- religion",
+      "media" : [ {
+        "zid" : 4022088,
+        "xid" : "4022088.mp3",
+        "type" : "audio",
+        "file" : "4022088.mp3"
+      } ]
+    }, {
+      "text" : "You will also want to consider your interpreter's professional characteristics. In addition to their command of the target language, you will also rely on their English fluency. If your work requires technical or specialized vocabulary, ensuring that your interpreter has that knowledge is very important.",
+      "media" : [ {
+        "zid" : 4022089,
+        "xid" : "4022089.mp3",
+        "type" : "audio",
+        "file" : "4022089.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416959978122,
+      "xid" : "1416959978122.jpg",
+      "type" : "image",
+      "file" : "1416959978122.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

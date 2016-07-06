@@ -1,0 +1,226 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page2120",
+    "type" : "MultiNote",
+    "title" : "Gestures and Body Language",
+    "related" : [ {
+      "xid" : "page2185",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 1",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "Alelo Inc."
+        } ]
+      },
+      "note" : [ {
+        "text" : "In Afghanistan, it's common to greet with a handshake, followed by placing your hand over your heart. In some cases, for instance when greeting older men or women, greeting with just a hand over your heart may be appropriate. In addition, this gesture might be used to express heartfelt gratitude for something.",
+        "media" : [ {
+          "zid" : 4032574,
+          "xid" : "4032574.mp3",
+          "type" : "audio",
+          "file" : "4032574.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1412799754923,
+        "xid" : "1412799754923.mp4",
+        "type" : "video",
+        "file" : "1412799754923.mp4",
+        "mime" : "video/x-flv",
+        "info" : null
+      } ]
+    }, {
+      "xid" : "page2121",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 2",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Villager elder speaking during a meeting"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Be aware of how your own body language might have a different meaning in Afghanistan. Afghan gestures have more sweeping or invitational motions than American gestures. For instance, your counterpart might use all fingers and an open palm to point at something, rather than using their index finger, which might be considered rude.",
+        "media" : [ {
+          "zid" : 4032575,
+          "xid" : "4032575.mp3",
+          "type" : "audio",
+          "file" : "4032575.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462371124440,
+        "xid" : "1462371124440.jpg",
+        "type" : "image",
+        "file" : "1462371124440.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page2122",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 3",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/isafmedia/5184665912/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A U.S. service member gesturing appropriately in Afghanistan"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Beckoning someone with your fingers pointing up and curling toward you may be considered rude. It's more common to beckon with the palm down, the fingers pointing to the ground, and moving the wrist and fingers in a sweeping motion toward you.",
+        "media" : [ {
+          "zid" : 4032576,
+          "xid" : "4032576.mp3",
+          "type" : "audio",
+          "file" : "4032576.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1463677116200,
+        "xid" : "1463677116200.jpg",
+        "type" : "image",
+        "file" : "1463677116200.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page2123",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 4",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "U.S. and Afghan military officials greeting each other"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Avoid giving a \"thumbs up\" or the \"OK\" sign. Older Afghans may see it as profane, or it could signal that someone has zero value.",
+        "media" : [ {
+          "zid" : 4032577,
+          "xid" : "4032577.mp3",
+          "type" : "audio",
+          "file" : "4032577.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462371218269,
+        "xid" : "1462371218269.jpg",
+        "type" : "image",
+        "file" : "1462371218269.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page2124",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 5",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Speaking with local Afghan villagers"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Avoid pointing the soles of your feet at other people, even if your legs are crossed. When seated in a chair, keep a straight posture with your feet on the floor.",
+        "media" : [ {
+          "zid" : 4032578,
+          "xid" : "4032578.mp3",
+          "type" : "audio",
+          "file" : "4032578.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462371271557,
+        "xid" : "1462371271557.jpg",
+        "type" : "image",
+        "file" : "1462371271557.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page2125",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 6",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Children accepting candy from a U.S. service member"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Use your right hand for interaction. In Afghanistan, some people consider the left hand to be unclean. Many don't use their left hand for handshakes, eating, or giving and receiving objects. ",
+        "media" : [ {
+          "zid" : 4032579,
+          "xid" : "4032579.mp3",
+          "type" : "audio",
+          "file" : "4032579.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462371320149,
+        "xid" : "1462371320149.jpg",
+        "type" : "image",
+        "file" : "1462371320149.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

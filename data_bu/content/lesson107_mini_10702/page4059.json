@@ -1,0 +1,115 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page4059",
+    "type" : "MultiNote",
+    "title" : "Travel and Transportation",
+    "related" : [ {
+      "xid" : "page3944",
+      "type" : "Info",
+      "title" : "Travel and Transportation 1",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/sigarhq/14727826873/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A map of Afghanistan's ring road"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Afghanistan’s five major cities are connected by a ring road that encircles the country. Although construction was started in the 1950s, this road remains unfinished in some places. More than 1,300 miles have been rehabilitated by the United States Agency for International Development (USAID) in recent years.",
+        "media" : [ null ]
+      } ],
+      "media" : [ {
+        "zid" : 1457469651029,
+        "xid" : "1457469651029.jpg",
+        "type" : "image",
+        "file" : "1457469651029.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3945",
+      "type" : "Info",
+      "title" : "Travel and Transportation 2",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Road_from_Jalalabad_to_Kabul.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "The Kabul-Jalalabad Highway"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The road between Kabul and Jalalabad is especially dangerous. Fatal accidents are frequent due to reckless driving along its narrow two lanes, which run along a high, steep cliff.",
+        "media" : [ {
+          "zid" : 4032334,
+          "xid" : "4032334.mp3",
+          "type" : "audio",
+          "file" : "4032334.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1451949237149,
+        "xid" : "1451949237149.jpg",
+        "type" : "image",
+        "file" : "1451949237149.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3946",
+      "type" : "Info",
+      "title" : "Travel and Transportation 3",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Afghanistan_-_Tajikistan_Bridge_Completion.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "The Afghanistan-Tajikistan bridge over the Amu Darya river"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The Amu Darya river provides Afghanistan’s only port access. A major freight railway opened in 2011 and connects to Uzbekistan.",
+        "media" : [ {
+          "zid" : 4032335,
+          "xid" : "4032335.mp3",
+          "type" : "audio",
+          "file" : "4032335.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1457469758109,
+        "xid" : "1457469758109.jpg",
+        "type" : "image",
+        "file" : "1457469758109.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

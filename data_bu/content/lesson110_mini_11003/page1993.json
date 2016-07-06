@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page1993",
+    "type" : "Info",
+    "title" : "Feedback and Criticism",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/776017/afghan-national-army-meeting#.VyP1rKMrKV4"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan Major and a U.S. service member speaking privately"
+      } ]
+    },
+    "note" : [ {
+      "text" : "It may be necessary to provide your counterpart with feedback. Never do so in public or in front of subordinates, as you may cause your counterpart to lose face. Once you have a trusted relationship, your counterpart will likely appreciate your feedback.",
+      "media" : [ {
+        "zid" : 4032624,
+        "xid" : "4032624.mp3",
+        "type" : "audio",
+        "file" : "4032624.mp3"
+      } ]
+    }, {
+      "text" : "Always start by telling your counterpart what they are doing well and then work together to develop strategies for improvement in other areas.",
+      "media" : [ {
+        "zid" : 4032625,
+        "xid" : "4032625.mp3",
+        "type" : "audio",
+        "file" : "4032625.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463602066525,
+      "xid" : "1463602066525.jpg",
+      "type" : "image",
+      "file" : "1463602066525.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

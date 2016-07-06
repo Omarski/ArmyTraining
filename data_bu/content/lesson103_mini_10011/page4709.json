@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page4709",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Culture Shock",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "U.S. Army photo by Sgt. Jesse Houk"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Traditional dancers, Japan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Culture shock is a sense of confusion and uncertainty that comes when operating within a different culture. These feelings are often coupled with more difficult emotions, such as anxiety and fear. Everyone experiences culture shock when introduced to a new culture, but the degree to which one experiences it will vary based on personality, personal experiences, and preparation. Culture shock can often leave a negative impact on individuals. This impact often takes the form of disorientation, frustration, and depression.",
+      "media" : [ {
+        "zid" : 4011274,
+        "xid" : "4011274.mp3",
+        "type" : "audio",
+        "file" : "4011274.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1359595688646,
+      "xid" : "1359595688646.jpg",
+      "type" : "image",
+      "file" : "1359595688646.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

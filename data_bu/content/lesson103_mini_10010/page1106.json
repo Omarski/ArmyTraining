@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1106",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Frameworks for Understanding Culture",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/benpaarmann/249109113/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Mother and child in Tajikistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "The four foundational competencies promote shared understanding across cultural backgrounds. Generally, shared understanding occurs when people grow up with the same concepts and values passed on to them, and they end up with similar ways of looking at the world. They use shared frameworks to interpret ideas, behavior, and events. In this section of the lesson, we will explore some common frameworks and terminology used to describe and understand culture. Keep in mind that these frameworks represent spectrums, not absolutes. We will look at:",
+      "media" : [ {
+        "zid" : 4011254,
+        "xid" : "4011254.mp3",
+        "type" : "audio",
+        "file" : "4011254.mp3"
+      } ]
+    }, {
+      "text" : "- Culture-general and culture-specific\n- High-context communication and low-context communication\n- Individualism and collectivism\n- Monochronic and polychronic time orientation",
+      "media" : [ {
+        "zid" : 4011255,
+        "xid" : "4011255.mp3",
+        "type" : "audio",
+        "file" : "4011255.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1414435330514,
+      "xid" : "1414435330514.jpg",
+      "type" : "image",
+      "file" : "1414435330514.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

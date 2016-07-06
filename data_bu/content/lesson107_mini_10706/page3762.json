@@ -1,0 +1,228 @@
+{
+  "page" : {
+    "xid" : "page3762",
+    "type" : "MatchItem",
+    "title" : "Practice 3",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Plov122.jpg; https://www.flickr.com/photos/arndog/1686026758/; https://commons.wikimedia.org/wiki/File:Mantu_in_a_steamer.jpg; https://www.dvidshub.net/image/225442/combat-outpost-munoz"
+      } ]
+    },
+    "skills" : null,
+    "prompt" : {
+      "text" : "Match the pictures of food to the name of the dish."
+    },
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : false,
+      "media" : {
+        "zid" : 1457642154362,
+        "xid" : "1457642154362.jpg",
+        "type" : "image",
+        "file" : "1457642154362.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "qabili palau"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "media" : {
+        "zid" : 1457641983688,
+        "xid" : "1457641983688.jpg",
+        "type" : "image",
+        "file" : "1457641983688.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "bolani"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "media" : {
+        "zid" : 1457642111373,
+        "xid" : "1457642111373.jpg",
+        "type" : "image",
+        "file" : "1457642111373.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "mantwo"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "media" : {
+        "zid" : 1457642063742,
+        "xid" : "1457642063742.jpg",
+        "type" : "image",
+        "file" : "1457642063742.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "chai sabz"
+          } ]
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "qabili palau"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "bolani"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "mantwo"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "chai sabz"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

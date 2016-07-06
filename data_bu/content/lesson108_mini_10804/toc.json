@@ -1,0 +1,299 @@
+{
+  "chapter" : {
+    "xid" : "lesson108_mini_10804",
+    "title" : "Social Structure",
+    "info" : {
+      "property" : [ {
+        "name" : "fount",
+        "value" : "/guru/lesson127"
+      }, {
+        "name" : "L2",
+        "value" : "en"
+      } ]
+    },
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page1723",
+        "type" : "Info",
+        "title" : "Learning Objectives"
+      }, {
+        "xid" : "page4004",
+        "type" : "Info",
+        "title" : "Social Organization"
+      }, {
+        "xid" : "page4005",
+        "type" : "Info",
+        "title" : "Social Class"
+      }, {
+        "xid" : "page4006",
+        "type" : "Info",
+        "title" : "Education"
+      }, {
+        "xid" : "page4007",
+        "type" : "Info",
+        "title" : "Health"
+      }, {
+        "xid" : "page4008",
+        "type" : "Info",
+        "title" : "Gender and Sexuality"
+      }, {
+        "xid" : "page1731",
+        "type" : "Info",
+        "title" : "Perspectives: Gender and Sexuality"
+      }, {
+        "xid" : "page4009",
+        "type" : "Info",
+        "title" : "Marriage"
+      }, {
+        "xid" : "page3814",
+        "type" : "MultipleChoice",
+        "title" : "Practice 1"
+      }, {
+        "xid" : "page3815",
+        "type" : "MultipleChoice",
+        "title" : "Practice 2"
+      }, {
+        "xid" : "page1727",
+        "type" : "Info",
+        "title" : "Section Checklist"
+      } ]
+    }, {
+      "mode" : "quiz",
+      "pageRef" : [ {
+        "xid" : "page1764",
+        "type" : "QuizStart",
+        "title" : "Quiz"
+      }, {
+        "xid" : "page3773",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 1"
+      }, {
+        "xid" : "page3821",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 2"
+      }, {
+        "xid" : "page3812",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 3"
+      }, {
+        "xid" : "page1737",
+        "type" : "QuizEnd",
+        "title" : "Quiz Results"
+      }, {
+        "xid" : "page1755",
+        "type" : "SectionEnd",
+        "title" : "Section End"
+      } ]
+    } ],
+    "zmedia" : [ {
+      "zid" : 4032654,
+      "xid" : "4032654.mp3",
+      "type" : "audio",
+      "file" : "4032654.mp3"
+    }, {
+      "zid" : 1461014133008,
+      "xid" : "1461014133008.jpg",
+      "type" : "image",
+      "file" : "1461014133008.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032277,
+      "xid" : "4032277.mp3",
+      "type" : "audio",
+      "file" : "4032277.mp3"
+    }, {
+      "zid" : 1460568625722,
+      "xid" : "1460568625722.jpg",
+      "type" : "image",
+      "file" : "1460568625722.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1389291394690,
+      "xid" : "1389291394690.jpg",
+      "type" : "image",
+      "file" : "1389291394690.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 4032271,
+      "xid" : "4032271.mp3",
+      "type" : "audio",
+      "file" : "4032271.mp3"
+    }, {
+      "zid" : 1302045193072,
+      "xid" : "1302045193072.jpg",
+      "type" : "image",
+      "file" : "1302045193072.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4032276,
+      "xid" : "4032276.mp3",
+      "type" : "audio",
+      "file" : "4032276.mp3"
+    }, {
+      "zid" : 4032274,
+      "xid" : "4032274.mp3",
+      "type" : "audio",
+      "file" : "4032274.mp3"
+    }, {
+      "zid" : 4032278,
+      "xid" : "4032278.mp3",
+      "type" : "audio",
+      "file" : "4032278.mp3"
+    }, {
+      "zid" : 1460568642786,
+      "xid" : "1460568642786.jpg",
+      "type" : "image",
+      "file" : "1460568642786.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032279,
+      "xid" : "4032279.mp3",
+      "type" : "audio",
+      "file" : "4032279.mp3"
+    }, {
+      "zid" : 1465594787082,
+      "xid" : "1465594787082.mp4",
+      "type" : "video",
+      "file" : "1465594787082.mp4"
+    }, {
+      "zid" : 1460568686308,
+      "xid" : "1460568686308.jpg",
+      "type" : "image",
+      "file" : "1460568686308.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032282,
+      "xid" : "4032282.mp3",
+      "type" : "audio",
+      "file" : "4032282.mp3"
+    }, {
+      "zid" : 4032411,
+      "xid" : "4032411.mp3",
+      "type" : "audio",
+      "file" : "4032411.mp3"
+    }, {
+      "zid" : 1463079414872,
+      "xid" : "1463079414872.jpg",
+      "type" : "image",
+      "file" : "1463079414872.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4034558,
+      "xid" : "4034558.mp3",
+      "type" : "audio",
+      "file" : "4034558.mp3"
+    }, {
+      "zid" : 4032273,
+      "xid" : "4032273.mp3",
+      "type" : "audio",
+      "file" : "4032273.mp3"
+    }, {
+      "zid" : 4032281,
+      "xid" : "4032281.mp3",
+      "type" : "audio",
+      "file" : "4032281.mp3"
+    }, {
+      "zid" : 4032275,
+      "xid" : "4032275.mp3",
+      "type" : "audio",
+      "file" : "4032275.mp3"
+    }, {
+      "zid" : 4032270,
+      "xid" : "4032270.mp3",
+      "type" : "audio",
+      "file" : "4032270.mp3"
+    }, {
+      "zid" : 1465594787082,
+      "xid" : "1465594787082.mp4",
+      "type" : "video",
+      "file" : "1465594787082.mp4",
+      "mime" : "null",
+      "info" : null
+    }, {
+      "zid" : 1460568663039,
+      "xid" : "1460568663039.jpg",
+      "type" : "image",
+      "file" : "1460568663039.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032272,
+      "xid" : "4032272.mp3",
+      "type" : "audio",
+      "file" : "4032272.mp3"
+    }, {
+      "zid" : 1460568578122,
+      "xid" : "1460568578122.jpg",
+      "type" : "image",
+      "file" : "1460568578122.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032656,
+      "xid" : "4032656.mp3",
+      "type" : "audio",
+      "file" : "4032656.mp3"
+    }, {
+      "zid" : 4032631,
+      "xid" : "4032631.mp3",
+      "type" : "audio",
+      "file" : "4032631.mp3"
+    }, {
+      "zid" : 4032280,
+      "xid" : "4032280.mp3",
+      "type" : "audio",
+      "file" : "4032280.mp3"
+    } ]
+  }
+}

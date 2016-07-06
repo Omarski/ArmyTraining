@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page3939",
+    "type" : "Info",
+    "title" : "Major Physical Features",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/butm6D"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Hindu Kush Mountains"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Three major mountain ranges define the geography of Pakistan.",
+      "media" : [ {
+        "zid" : 4032173,
+        "xid" : "4032173.mp3",
+        "type" : "audio",
+        "file" : "4032173.mp3"
+      } ]
+    }, {
+      "text" : "- The Himalayas divide South Asia from China. They reach into northern Pakistan.\n- The Hindu Kush run along the border with Afghanistan. The Khyber Pass, a traditional route between South and Central Asia, runs through these mountains.\n- The Karakoram range is in the northeast, near the disputed Kashmir border. K2, the second-highest peak in the world, is in this range.",
+      "media" : [ {
+        "zid" : 4032174,
+        "xid" : "4032174.mp3",
+        "type" : "audio",
+        "file" : "4032174.mp3"
+      } ]
+    }, {
+      "text" : "Both India and Pakistan depend on water from the Indus River, which flows from north to south for almost all of Pakistan's length.",
+      "media" : [ {
+        "zid" : 4032175,
+        "xid" : "4032175.mp3",
+        "type" : "audio",
+        "file" : "4032175.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460566587139,
+      "xid" : "1460566587139.jpg",
+      "type" : "image",
+      "file" : "1460566587139.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

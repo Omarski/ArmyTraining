@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page4050",
+    "type" : "Info",
+    "title" : "Summary",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan village"
+      }, {
+        "name" : "mediacaption",
+        "value" : "iStock; http://www.istockphoto.com/legal/license-agreement"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Afghanistan’s rich ethnic diversity and hospitable culture are a source of its ongoing resilience in the face of conflict. The country continues to develop and rebuild. Large untapped natural resources may contribute to future prosperity.",
+      "media" : [ {
+        "zid" : 4032438,
+        "xid" : "4032438.mp3",
+        "type" : "audio",
+        "file" : "4032438.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463080040493,
+      "xid" : "1463080040493.jpg",
+      "type" : "image",
+      "file" : "1463080040493.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

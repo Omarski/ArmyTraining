@@ -1,0 +1,13 @@
+{
+  "page" : {
+    "xid" : "page2320",
+    "type" : "QuizEnd",
+    "title" : "Quiz Results",
+    "info" : {
+      "property" : [ {
+        "name" : "quiz",
+        "value" : "end"
+      } ]
+    }
+  }
+}

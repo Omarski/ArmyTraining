@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page1866",
+    "type" : "Info",
+    "title" : "Differences in Scheduling and Time",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/7JYURj"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Villagers in a rural area"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Afghans have a more relaxed sense of time than most Americans. Meetings may not begin or end at the time agreed upon, and your counterparts may arrive 30 minutes to an hour later than planned. This difference in sense of time may be more pronounced with civilians."
+    }, {
+      "text" : "Never leave a meeting before your counterpart has arrived. You will give them the impression that you value your time more than your relationship. Your primary concern is building rapport, not keeping to a schedule.  Not taking the time to build rapport will make your engagements more difficult."
+    } ],
+    "media" : [ {
+      "zid" : 1463600869312,
+      "xid" : "1463600869312.jpg",
+      "type" : "image",
+      "file" : "1463600869312.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

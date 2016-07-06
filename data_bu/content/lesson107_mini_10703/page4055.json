@@ -1,0 +1,194 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page4055",
+    "type" : "MultiNote",
+    "title" : "Taliban Rule",
+    "related" : [ {
+      "xid" : "page3976",
+      "type" : "Info",
+      "title" : "Taliban Rule 1",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Insurgents_Lay_Down_Weapons.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Former Taliban members"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "In 1994, the Taliban began organizing in Kandahar. The word “Taliban” means “students” in Arabic. Many in this group were educated in conservative Islamic schools in southern Afghanistan and Pakistan. The Taliban are predominantly, but not exclusively, Pashtun.",
+        "media" : [ {
+          "zid" : 4032364,
+          "xid" : "4032364.mp3",
+          "type" : "audio",
+          "file" : "4032364.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1457471787289,
+        "xid" : "1457471787289.jpg",
+        "type" : "image",
+        "file" : "1457471787289.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3977",
+      "type" : "Info",
+      "title" : "Taliban Rule 2",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/phickmanfresh/10758122033/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Kabul, Afghanistan"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The Taliban began fighting local warlords for control of the region. They were successful and largely accepted in the Pashtun-dominated south of Afghanistan, but met stronger resistance as they moved north. The Taliban took control of Kabul in 1996.",
+        "media" : [ {
+          "zid" : 4032365,
+          "xid" : "4032365.mp3",
+          "type" : "audio",
+          "file" : "4032365.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1457471838667,
+        "xid" : "1457471838667.jpg",
+        "type" : "image",
+        "file" : "1457471838667.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3978",
+      "type" : "Info",
+      "title" : "Taliban Rule 3",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Taliban-herat-2001_retouched.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Taliban members in Afghanistan"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The added security and governance of Taliban rule was welcomed, especially in many rural areas. However, the Taliban quickly fell out of favor when they began to enforce a strict interpretation of Islamic law.",
+        "media" : [ {
+          "zid" : 4032366,
+          "xid" : "4032366.mp3",
+          "type" : "audio",
+          "file" : "4032366.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1454447777754,
+        "xid" : "1454447777754.jpg",
+        "type" : "image",
+        "file" : "1454447777754.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3979",
+      "type" : "Info",
+      "title" : "Taliban Rule 4",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/ninara/9504181554/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Women wearing burqas"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The Taliban revived traditional punishments, such as stoning and amputation, for crimes. They imposed severe restrictions on women, including forbidding them to work or study outside the home, or to go out in public without a male chaperone, and required them to wear a head-to-foot veil, called a “burqa,” in public.",
+        "media" : [ {
+          "zid" : 4032367,
+          "xid" : "4032367.mp3",
+          "type" : "audio",
+          "file" : "4032367.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1457471997177,
+        "xid" : "1457471997177.jpg",
+        "type" : "image",
+        "file" : "1457471997177.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3980",
+      "type" : "Info",
+      "title" : "Taliban Rule 5",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/magharebia/8246938011/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An al-Qaeda militant"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The Taliban also functioned as a safe haven for Islamic extremists, including al-Qaeda leader Osama bin Laden and others accused of terrorism.",
+        "media" : [ {
+          "zid" : 4032368,
+          "xid" : "4032368.mp3",
+          "type" : "audio",
+          "file" : "4032368.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1457472057669,
+        "xid" : "1457472057669.jpg",
+        "type" : "image",
+        "file" : "1457472057669.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

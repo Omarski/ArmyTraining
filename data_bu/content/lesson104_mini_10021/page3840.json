@@ -1,0 +1,57 @@
+{
+  "page" : {
+    "xid" : "page3840",
+    "type" : "Info",
+    "title" : "Learning the Local Language",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/soldiersmediacenter/503311748/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An interpreter speaking with local children, Afghanistan"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Even if you work with an interpreter, it's still worthwhile to learn some words in the local language.",
+      "media" : [ {
+        "zid" : 4022124,
+        "xid" : "4022124.mp3",
+        "type" : "audio",
+        "file" : "4022124.mp3"
+      } ]
+    }, {
+      "text" : "The smallest effort to use the language will help you gain the respect of local people and show that you are trying to reach out to them. While interpreters may be necessary in order to exchange complex ideas, your ability to use some basic language can help build rapport. A simple \"Hello, how are you?\" or \"Thank you\" can go a long way. ",
+      "media" : [ {
+        "zid" : 4022125,
+        "xid" : "4022125.mp3",
+        "type" : "audio",
+        "file" : "4022125.mp3"
+      } ]
+    }, {
+      "text" : "Ask your interpreter to teach you some basic words and phrases.",
+      "media" : [ {
+        "zid" : 4022126,
+        "xid" : "4022126.mp3",
+        "type" : "audio",
+        "file" : "4022126.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416960517227,
+      "xid" : "1416960517227.jpg",
+      "type" : "image",
+      "file" : "1416960517227.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page1724",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/978iAL"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Royal Mosque in Lahore"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4032631,
+        "xid" : "4032631.mp3",
+        "type" : "audio",
+        "file" : "4032631.mp3"
+      } ]
+    }, {
+      "text" : "- Identify the primary languages spoken.\n- Recognize the major religious beliefs and practices of Pakistan.\n- Recognize some common norms and values.",
+      "media" : [ {
+        "zid" : 4032287,
+        "xid" : "4032287.mp3",
+        "type" : "audio",
+        "file" : "4032287.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460566607753,
+      "xid" : "1460566607753.jpg",
+      "type" : "image",
+      "file" : "1460566607753.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -37,7 +37,7 @@ var CultureQuestQuiz = React.createClass({
     },
 
     componentDidMount: function() {
-        this.getQuestionQuotes;
+        //this.getQuestionQuotes;
         this.renderQuestionText();
     },
 
@@ -47,9 +47,8 @@ var CultureQuestQuiz = React.createClass({
         return false;
     },
 
-    getQuestionQuotes: function(){
-        var questionIntr
-    },
+    // getQuestionQuotes: function(){
+    // },
 
     getSelectedJSON: function(){
 

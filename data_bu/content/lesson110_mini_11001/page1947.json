@@ -1,0 +1,41 @@
+{
+  "page" : {
+    "xid" : "page1947",
+    "type" : "Info",
+    "title" : "Pashtunwali",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/8U83h1"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A meeting with Pashtun tribal leaders"
+      } ]
+    },
+    "note" : [ {
+      "text" : "“Pashtunwali,” the social code of ethnic Pashtuns, dictates life in southern Afghanistan. Pashtuns are very hospitable and welcoming to outsiders and friends, as required by Pashtunwali. Their code also dictates that even enemies requesting sanctuary should receive protection.",
+      "media" : [ {
+        "zid" : 4032546,
+        "xid" : "4032546.mp3",
+        "type" : "audio",
+        "file" : "4032546.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463530237799,
+      "xid" : "1463530237799.jpg",
+      "type" : "image",
+      "file" : "1463530237799.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

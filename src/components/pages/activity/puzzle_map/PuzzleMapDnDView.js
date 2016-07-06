@@ -26,7 +26,6 @@ var PuzzleMapDnDView = React.createClass({
         scoreObj: PropTypes.object.isRequired,
         renderHUD: PropTypes.func.isRequired,
         updateHUDView: PropTypes.func.isRequired,
-        resetBottomCanvas: PropTypes.bool.isRequired,
         updatePhase: PropTypes.func.isRequired
     },
 
@@ -97,6 +96,8 @@ var PuzzleMapDnDView = React.createClass({
 
     handleMouseUp: function(e){
 
+        this.setState({isDragging:false});
+
         var self = this;
         var imgBounds = self.state.imgBounds;
         var canvasOffset=$("#puzzleMapDragCanvas").offset();
@@ -107,8 +108,6 @@ var PuzzleMapDnDView = React.createClass({
         if ((imgOffsetX >= -50 && imgOffsetX <= 50) && (imgOffsetY >= -50 && imgOffsetY <= 50)){
             self.updateBottomCanvas("labeled");
         }else self.updateBottomCanvas("hint");
-
-        this.setState({isDragging:false});
     },
 
     handleMouseOut: function(e){
@@ -217,16 +216,11 @@ var PuzzleMapDnDView = React.createClass({
         }
     },
 
-    resetBottomCanvas: function(){
-        var self = this;
-        self.state.bottomCanvasContext.clearRect(0,0, parseInt(self.state.bottomCanvas.width), parseInt(self.state.bottomCanvas.height));
-    },
-
     render: function() {
 
         {this.props.resetBottomCanvas ? this.resetBottomCanvas():null}
 
-        var canvasStyle = {position:'absolute', top:'0', left:'0', zIndex:'20'};
+        var canvasStyle = {position:'absolute', top:0, left:0, zIndex:'20'};
         return (
             <canvas width="768px" height="504px" id="puzzleMapDragCanvas" style={canvasStyle}>
             </canvas>

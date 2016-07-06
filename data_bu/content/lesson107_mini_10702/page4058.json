@@ -1,0 +1,120 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page4058",
+    "type" : "MultiNote",
+    "title" : "Major Cities",
+    "related" : [ {
+      "xid" : "page3939",
+      "type" : "Info",
+      "title" : "Major Cities 1",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Atlas_Air_flying_off_from_Kabul_Airport_in_2010.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An airplane flying over Kabul, Afghanistan"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Kabul is the capital of Afghanistan and its largest city with about 3.5 million people. The city sits on a high plain surrounded by mountains. It is divided into different areas by the Kabul River, which is dry most of the year.",
+        "media" : [ {
+          "zid" : 4032330,
+          "xid" : "4032330.mp3",
+          "type" : "audio",
+          "file" : "4032330.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462297463452,
+        "xid" : "1462297463452.jpg",
+        "type" : "image",
+        "file" : "1462297463452.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3940",
+      "type" : "Info",
+      "title" : "Major Cities 2",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Bird%27s_eye_view_of_Kandahar,_2009-12.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An aerial view of Kandahar"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Kandahar, in the south of Afghanistan, is the second-largest city and a major trading center. Since 1994 it has been a center for Taliban-affiliated forces and supporters.",
+        "media" : [ {
+          "zid" : 4032331,
+          "xid" : "4032331.mp3",
+          "type" : "audio",
+          "file" : "4032331.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1457469474661,
+        "xid" : "1457469474661.jpg",
+        "type" : "image",
+        "file" : "1457469474661.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3941",
+      "type" : "Info",
+      "title" : "Major Cities 3",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "iStock; http://www.istockphoto.com/legal/license-agreement"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Blue Mosque in Mazar-e Sharif"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Other cities include Jalalabad along the Silk Road in the east, Mazar-e Sharif in the north, and the ancient city of Herat in the west.",
+        "media" : [ {
+          "zid" : 4032332,
+          "xid" : "4032332.mp3",
+          "type" : "audio",
+          "file" : "4032332.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1463079731610,
+        "xid" : "1463079731610.jpg",
+        "type" : "image",
+        "file" : "1463079731610.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

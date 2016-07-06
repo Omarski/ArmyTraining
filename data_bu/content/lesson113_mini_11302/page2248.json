@@ -1,0 +1,136 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page2248",
+    "type" : "MultiNote",
+    "title" : "Appropriate Small Talk",
+    "related" : [ {
+      "xid" : "page2249",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Appropriate Small Talk 1",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Speaking with local leaders"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Small talk can last 15 minutes in most situations, but might last an hour or more. Keep topics to things you know your counterparts can discuss. Good topics include:",
+        "media" : [ {
+          "zid" : 4034384,
+          "xid" : "4034384.mp3",
+          "type" : "audio",
+          "file" : "4034384.mp3"
+        } ]
+      }, {
+        "text" : "- Their interests or hobbies.\n- Soccer.\n- Positive comments on their house, livelihood, or livestock. \n- Their home province, especially if you have positive comments about the area.\n- Compliments about Afghan culture, the landscape, and food.",
+        "media" : [ {
+          "zid" : 4034385,
+          "xid" : "4034385.mp3",
+          "type" : "audio",
+          "file" : "4034385.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462370648262,
+        "xid" : "1462370648262.jpg",
+        "type" : "image",
+        "file" : "1462370648262.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page2250",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Appropriate Small Talk 2",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Afghan villagers"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Even after you've built a relationship, don't ask business-related questions until you've asked about your counterpart's health and their family's well-being.",
+        "media" : [ {
+          "zid" : 4032567,
+          "xid" : "4032567.mp3",
+          "type" : "audio",
+          "file" : "4032567.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462370724811,
+        "xid" : "1462370724811.jpg",
+        "type" : "image",
+        "file" : "1462370724811.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page2251",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Appropriate Small Talk 3",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "U.S. service member and Afghan elder during a meal"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Bringing up inappropriate subjects or discussing business too early could damage your rapport. Topics to avoid include:",
+        "media" : [ {
+          "zid" : 4034386,
+          "xid" : "4034386.mp3",
+          "type" : "audio",
+          "file" : "4034386.mp3"
+        } ]
+      }, {
+        "text" : "- Asking about female family members or family members you don't know personally.\n- Religion.\n- Politics.\n- Women's rights and equality.",
+        "media" : [ {
+          "zid" : 4034387,
+          "xid" : "4034387.mp3",
+          "type" : "audio",
+          "file" : "4034387.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462370788412,
+        "xid" : "1462370788412.jpg",
+        "type" : "image",
+        "file" : "1462370788412.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    } ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "page" : {
+    "xid" : "page2705",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Learning Objectives",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghan elders"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4032631,
+        "xid" : "4032631.mp3",
+        "type" : "audio",
+        "file" : "4032631.mp3"
+      } ]
+    }, {
+      "text" : "- Identify religious and cultural considerations for mission planning.\n- Identify relationship building as a priority for mission success.\n- Recognize appropriate techniques for building rapport.",
+      "media" : [ {
+        "zid" : 4034388,
+        "xid" : "4034388.mp3",
+        "type" : "audio",
+        "file" : "4034388.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462313207640,
+      "xid" : "1462313207640.jpg",
+      "type" : "image",
+      "file" : "1462313207640.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

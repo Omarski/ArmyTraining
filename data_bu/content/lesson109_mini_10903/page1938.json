@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page1938",
+    "type" : "Info",
+    "title" : "Decision Making",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/bxCqH2"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A shura with American and Afghan leaders"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Group deliberation is a key part of Afghan society and issues are discussed at length. In many rural areas, elders and religious leaders resolve disputes and handle issues of justice. "
+    }, {
+      "text" : "Meetings called “jirgas” and “shuras” are common. In jirgas, men gather to resolve disputes. In shuras, community affairs are discussed in the presence of people who will be affected by a decision. When attending meetings anywhere, it's not unusual for several local representatives to be present and for men to come and go from the discussion."
+    } ],
+    "media" : [ {
+      "zid" : 1463601424144,
+      "xid" : "1463601424144.jpg",
+      "type" : "image",
+      "file" : "1463601424144.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

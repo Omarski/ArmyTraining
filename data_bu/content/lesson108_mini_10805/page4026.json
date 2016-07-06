@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page4026",
+    "type" : "Info",
+    "title" : "Dress",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/aJt1AH"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Mannequins wearing shalwar kameez"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Western clothing is becoming increasingly common in cities, but many Pakistanis continue to wear traditional clothes. The best known of these are \"shalwar kameez,\" or loose trousers and a knee-length shirt. Men may cover these with a coat, and women with a long shawl or wrap. In general, women's clothes are more colorful than men's.",
+      "media" : [ {
+        "zid" : 4032308,
+        "xid" : "4032308.mp3",
+        "type" : "audio",
+        "file" : "4032308.mp3"
+      } ]
+    }, {
+      "text" : "The degree to which women cover their faces and bodies varies by community. The headscarf is relatively new to Pakistan and has begun to replace full veils and robes.",
+      "media" : [ {
+        "zid" : 4032309,
+        "xid" : "4032309.mp3",
+        "type" : "audio",
+        "file" : "4032309.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460569739337,
+      "xid" : "1460569739337.jpg",
+      "type" : "image",
+      "file" : "1460569739337.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

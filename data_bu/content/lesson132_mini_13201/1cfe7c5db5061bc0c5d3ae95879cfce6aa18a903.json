@@ -1,0 +1,4123 @@
+{
+  "blockings": {},
+  "briefings": {"s0": {"description": "You are entering a meeting with Dawood Toofaan, a colonel in the Afghan National Army. Your predecessor, John Pearson, introduced you both at a previous engagement, and you've been briefed on the work he and John have done. You will take over John's work. To be successful, you will need to build rapport, discuss your counterpart's challenges, and collaborate on common goals. Your objectives are to:\n"}},
+  "configed": {},
+  "debriefings": {
+    "s11": {},
+    "s12": {}
+  },
+  "initialMemory": {
+    "BALKH": 0,
+    "COLLABORATE": false,
+    "EMPOWER": false,
+    "GREET": 0,
+    "RELIGIOUS": 0,
+    "RET_SMALLTALK": false,
+    "RET__SMALLTALK_ASK_HOPE_WIFE_GOOD": false,
+    "RET__SMALLTALK_ASK_HOW_FAMILY": false,
+    "RET__SMALLTALK_ASK_LOTS_TO_COVER": false,
+    "RET__SMALLTALK_ASK_PLAY_SOCCER": false,
+    "RET__SMALLTALK_ASK_PRAY_FIRST": false,
+    "RET__SMALLTALK_ASK_WHAT_PROVINCE": false,
+    "RET__SMALLTALK_ASK_YOU_PILOT": false,
+    "SEEKINFO": 0,
+    "SKIPSMALLTALK": 0,
+    "SMALLTALK": 0,
+    "TEA": 0
+  },
+  "inputMappings": {
+    "ask_difficult_how_handling_it": [{
+      "L1": "That sounds difficult. How you are handling it?",
+      "L2": "malom mesha ke besyaar moshkel as. che qesem shumaa en ra hal mekuneyn?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033332",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_do_you_think_handle": [{
+      "L1": "Do you think your men can handle the situation?",
+      "L2": "feker mekuneyn afraad shumaa metaanan en wazeyat ra hal konan?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033342",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_hope_wife_good": [{
+      "L1": "I hope your wife is in good health.",
+      "L2": "arezo mikuneym ke khanum shumaa sehatmand basha.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033290",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_how_family": [{
+      "L1": "How is your family?",
+      "L2": "famil shumaa chutoor as?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033286",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_lots_to_cover": [{
+      "L1": "Well, we've got a lot of things to cover today.",
+      "L2": "khoob, emrooz besyaar masayel as ke maa balaysh gap mezanem.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033293",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_men_need_to_deliver_supplies": [{
+      "L1": "Before my team does anything, you need to get your men in there to deliver supplies.",
+      "L2": "pesh azee ke teem e ma kodam kare kona, khodet baayad afraade khoda ba onja bebaree ke tadaarokat ra berasanan.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033359",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_play_soccer": [{
+      "L1": "John mentioned you watch a lot of soccer. My kids and I play soccer back home.",
+      "L2": "John yaad awaree kad ke shumaa besyaar footbal mebeenen. Waqti ke ma khana bodam ba awalaad haim footbal bazee mekadam.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033295",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_pray_first": [{
+      "L1": "Do you want to get your afternoon prayer out of the way before we start?",
+      "L2": "pesh az ee ke shoro kuneym mikhhen ke namaz pesheen taan ra khalas kuneyn?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033299",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_prepared_handle_situation": [{
+      "L1": "How prepared are your men to handle the situation?",
+      "L2": "chutoor afraad e khood ra ba khatere haal en wazeyat aamaada sakhten?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033340",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_talk_about_priorities": [{
+      "L1": "Well, first of all, let's talk about the options and prioritize.",
+      "L2": "khoob, byaayen awaltar az hama, sar rah hai dega wa daraja bande azoo gap bezaneym.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033356",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_what_are_your_plans": [{
+      "L1": "What are your plans moving forward?",
+      "L2": "che raqam pelaane shumaa pesh mera?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033344",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_what_province": [{
+      "L1": "I've enjoyed seeing this country. What province are you from?",
+      "L2": "ma az dedan keshwar sho besyaar lezat bordam. shumaa kood tan az kodam wolaayat hasten?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033298",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "ask_you_pilot": [{
+      "L1": "I just noticed the picture of you with an Mi-17 helicopter. Are you a pilot?",
+      "L2": "ma akse shumaa ra baa halicoptar Mi-17 dedam shumaa peeloot asteen?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033289",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "greet_good_afternoon_saaheb": [{
+      "L1": "Good afternoon, Dawood saayeb.",
+      "L2": "rooz e shumaa ba khayr, Dawood saayeb.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033416,4033416",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "greet_salaam_Colonel": [{
+      "L1": "salaam aaleykum, Colonel Toofaan.",
+      "L2": "salaam aaleykum, dagarwal Toofaan.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033414,4033414",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "greet_salaam_Jaan": [{
+      "L1": "salaam aaleykum, Dawood-jaan.",
+      "L2": "salaam aaleykum, Dawood jaan.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033420,4033420",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_I_dont_drink_tea": [{
+      "L1": "I don't really drink tea, but thanks for the offer.",
+      "L2": "rastesh ma chai namekhoram, magar tashakur ke salaah kadeyn.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033323",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_OK_ill_try_some": [{
+      "L1": "OK, I'll try some.",
+      "L2": "sahee as, ma yakzara megeram.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033373",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_build__repair_immediately": [{
+      "L1": "I understand. We should start building and repairing houses immediately.",
+      "L2": "ma meyfaamam. maa baayad aabaadi  wa tarmem kadan khana haa ra ajel shoro kuneym.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033334",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_delivering_aid_simple": [{
+      "L1": "Delivering aid is pretty simple. I'm sure they'll be fine.",
+      "L2": "rasandane komak besyaar aasaan as. ma yaqeen daram ke ona metanan.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033388",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_handle_before_it_happened": [{
+      "L1": "We would go in immediately with supplies.",
+      "L2": "maa fawran tadaarokaat ra gerfta merem.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033362",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_i_understand_I_should_leave": [{
+      "L1": "I understand. Since we have our plan together, I should leave anyway.",
+      "L2": "ma meyfaamam. aaz waqti ke pelaan moshtarak dashtem, ba har soorat ma baayad borom.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033401",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_improve_drainage": [{
+      "L1": "Perhaps we could improve drainage in the villages next.",
+      "L2": "shaayad maa betaanem ke da qadame badee, sesteme aabraw haa ra da qaryaa ha behtar besaazem.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033337",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_lets_move_forward": [{
+      "L1": "Then let's move forward.",
+      "L2": "pas byayen ke pesh bereem.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033347",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_no_prob_love_to_hear_more": [{
+      "L1": "No problem at all. I'd love to hear more about Balkh.",
+      "L2": "hech moshkele nes. ma doost daram ke rajee ba balkh ziad beshnawam.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033400",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_no_prob_take_your_time": [{
+      "L1": "No problem at all. Should I wait here?",
+      "L2": "hech moshkele nes. ma baayad montazer basham?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033404",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_no_thanks_im_good": [{
+      "L1": "No, thank you. I'm good.",
+      "L2": "ney tashakur. kafee as.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033375",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_organize_training_immediately": [{
+      "L1": "We can organize training, but we'd need to work together on it.",
+      "L2": "maa mitaneym ke tamrenata tanzeem koneem, magar zaroorat darem ke yak jaa balai en masala kaar kuneym.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033382",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_tea_would_be_great": [{
+      "L1": "Tea would be great. Thank you.",
+      "L2": "chai behtar as. tashakur.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033321",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_thanks_delicious": [{
+      "L1": "Thank you. It's delicious.",
+      "L2": "tashakur. besyaar mazadar as.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033371",
+      "terp": "L1",
+      "wrong": false
+    }],
+    "say_training_might_take_awhile": [{
+      "L1": "Training might take a while. My team can work with the villages now.",
+      "L2": "tamrenaat yak modat ra dar bar megera. teem ma hame hale metanan ke da qarya ha kaar konan.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033383",
+      "terp": "L1",
+      "wrong": false
+    }]
+  },
+  "nls": {
+    "ask_difficult_how_handling_it": "ask_difficult_how_handling_it",
+    "ask_do_you_think_handle": "ask_do_you_think_handle",
+    "ask_hope_wife_good": "ask_hope_wife_good",
+    "ask_how_family": "ask_how_family",
+    "ask_lots_to_cover": "ask_lots_to_cover",
+    "ask_men_need_to_deliver_supplies": "ask_men_need_to_deliver_supplies",
+    "ask_play_soccer": "ask_play_soccer",
+    "ask_pray_first": "ask_pray_first",
+    "ask_prepared_handle_situation": "ask_prepared_handle_situation",
+    "ask_talk_about_priorities": "ask_talk_about_priorities",
+    "ask_what_are_your_plans": "ask_what_are_your_plans",
+    "ask_what_province": "ask_what_province",
+    "ask_you_pilot": "ask_you_pilot",
+    "greet_good_afternoon_saaheb": "greet_good_afternoon_saaheb",
+    "greet_salaam_Colonel": "greet_salaam_Colonel",
+    "greet_salaam_Jaan": "greet_salaam_Jaan",
+    "say_I_dont_drink_tea": "say_I_dont_drink_tea",
+    "say_OK_ill_try_some": "say_OK_ill_try_some",
+    "say_build__repair_immediately": "say_build__repair_immediately",
+    "say_delivering_aid_simple": "say_delivering_aid_simple",
+    "say_handle_before_it_happened": "say_handle_before_it_happened",
+    "say_i_understand_I_should_leave": "say_i_understand_I_should_leave",
+    "say_improve_drainage": "say_improve_drainage",
+    "say_lets_move_forward": "say_lets_move_forward",
+    "say_no_prob_love_to_hear_more": "say_no_prob_love_to_hear_more",
+    "say_no_prob_take_your_time": "say_no_prob_take_your_time",
+    "say_no_thanks_im_good": "say_no_thanks_im_good",
+    "say_organize_training_immediately": "say_organize_training_immediately",
+    "say_tea_would_be_great": "say_tea_would_be_great",
+    "say_thanks_delicious": "say_thanks_delicious",
+    "say_training_might_take_awhile": "say_training_might_take_awhile"
+  },
+  "nodesPy": "",
+  "objectives": [
+    {
+      "condition": "GREET 1 ==",
+      "failDescription": "Remember, the appropriate way to greet a military counterpart is to say their rank followed by their last name, as you would in the U.S. The term \u201cjaan\u201d is an endearing and affectionate way to greet women. It is acceptable to greet your counterpart in English, but it\u2019s worthwhile to learn to greet in the local language.",
+      "label": "Employ culturally appropriate greetings.",
+      "oid": "c9c9add100a8d536d3a48cf42ac7d14b68d3c037",
+      "passDescription": "You greeted your counterpart appropriately. When greeting a military counterpart, say their rank followed by their last name, as you would in the U.S. It is acceptable to greet your counterpart in English, but it\u2019s worthwhile to learn to greet in the local language.",
+      "remediationq": [
+        "lesson110:page1973",
+        "lesson110:page2753"
+      ]
+    },
+    {
+      "condition": "SMALLTALK 3 >=",
+      "failDescription": "Remember that when making small talk, you should avoid asking about female family members or discussing religion or politics. Good small talk topics include your counterpart\u2019s interests or home province, sports, and positive comments about Afghan culture. ",
+      "label": "Make culturally appropriate small talk.",
+      "oid": "71d6fd94351ff969fb9711856d6532ad3bc315ae",
+      "passDescription": "You successfully made culturally appropriate small talk. Good small talk topics include your counterpart\u2019s interests or home province, sports, and positive comments about Afghan culture. Avoid asking about female family members or discussing religion and politics.",
+      "remediationq": [
+        "lesson110:page1956",
+        "lesson110:page2758"
+      ]
+    },
+    {
+      "condition": "TEA 2 ==",
+      "failDescription": "Remember that offering hospitality to guests is an important aspect of society in Afghanistan,  and not accepting this gesture is an affront to most people. You should be gracious in accepting offers of tea and food.",
+      "label": "Respond appropriately to offers of hospitality.",
+      "oid": "5051dfc4a780133dda0e9f488f486395afed4f41",
+      "passDescription": "You accepted your counterpart's offers of hospitality. Offering hospitality to guests is an important aspect of society in Afghanistan, and not accepting this gesture is an affront to most people. You should be gracious in accepting offers of tea and food.",
+      "remediationq": [
+        "lesson110:page2000",
+        "lesson110:page2001"
+      ]
+    },
+    {
+      "condition": "COLLABORATE true ==",
+      "failDescription": "Remember that you are there to support the local leader\u2019s efforts. It\u2019s important to gain your counterpart\u2019s perspective in order to successfully discuss options and prioritize.",
+      "label": "Collaborate effectively with your counterpart.",
+      "oid": "998bce2e836574821f0f2e28acae5df68720e735",
+      "passDescription": "You effectively collaborated with your counterpart. Remember that you are there to support the local leader\u2019s efforts. It\u2019s important to gain your counterpart\u2019s perspective in order to successfully discuss options and prioritize.",
+      "remediationq": ["lesson110:page1991"]
+    },
+    {
+      "condition": "SEEKINFO 2 ==",
+      "failDescription": "Remember, when gathering information, always include your Afghan counterparts in the decision-making process and take their input seriously. By including your counterpart in this process, you will learn about their priorities.",
+      "label": "Recognize effective methods for seeking information.",
+      "oid": "7a922d8da114484b17f2ba9d09032c1b3e4d8540",
+      "passDescription": "You effectively gathered information by including your counterpart in the planning process. Always include your Afghan counterparts in the decision-making process and take their input seriously. By including your counterpart in this process, you will learn about their priorities.",
+      "remediationq": [
+        "lesson110:page1987",
+        "lesson110:page1961"
+      ]
+    },
+    {
+      "condition": "EMPOWER true ==",
+      "failDescription": "Remember, it\u2019s important to develop strategies that empower local community and government to take responsibility in times of crisis. By enabling local leaders to provide necessary community services, they are empowered and insurgent efforts to gain footing are reduced.",
+      "label": "Empower the local leader.",
+      "oid": "b47e4d24faf5292ed7e7e82ddc470cdfec0d1e38",
+      "passDescription": "You successfully empowered your counterpart. It\u2019s important to develop strategies that empower local community and government to take responsibility in times of crisis. By enabling local leaders to provide necessary community services, they are empowered and insurgent efforts to gain footing are reduced.",
+      "remediationq": ["lesson110:page1990"]
+    },
+    {
+      "condition": "RELIGIOUS true ==",
+      "failDescription": "Remember, Islam is a fundamental part of life in Afghanistan and observant Muslims pray five times a day. Even when they are on duty, your counterparts may break for prayer. If a counterpart interrupts a meeting to go pray, be respectful and don\u2019t disturb them. Wait for them to return and continue your meeting normally.",
+      "label": "Respect your counterpart\u2019s religious practices.",
+      "oid": "ebb051fb261158b1419b0ebc8e9272db5c30ffda",
+      "passDescription": "You successfully demonstrated respect for religious practices. Islam is a fundamental part of life in Afghanistan and observant Muslims pray five times a day. Even when they are on duty, your counterparts may break for prayer. If a counterpart interrupts a meeting to go pray, be respectful and don\u2019t disturb them. Wait for them to return and continue your meeting normally.",
+      "remediationq": ["lesson110:page1999"]
+    }
+  ],
+  "outputMappings": {
+    "Aziz_Kaamawal-ask_am_i_rushing_L2": {
+      "L1": "Am I rushing? I apologize.",
+      "L2": "ma ajalla mikuneym? mazrat mekhaaham.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034017",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_difficult_how_handling_it_L2": {
+      "L1": "That sounds difficult. How you are handling it?",
+      "L2": "malom mesha ke besyaar moshkel as. che qesem shumaa en ra hal mekuneyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034044",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_do_you_think_handle_L2": {
+      "L1": "Do you think your men can handle the situation?",
+      "L2": "feker mekuneyn afraad shumaa metaanan en wazeyat ra hal konan?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034199",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_hope_wife_good_L2": {
+      "L1": "I hope your wife is in good health.",
+      "L2": "arezo mikuneym ke khanum shumaa sehatmand basha.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033963",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_how_family_L2": {
+      "L1": "How is your family?",
+      "L2": "famil shumaa chutoor as?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033955",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_how_long_married_L2": {
+      "L1": "How long have you been married?",
+      "L2": "cheqadar waqt mesha ke motahel asteyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034012",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_how_much_time_L2": {
+      "L1": "How much time do we have?",
+      "L2": "maa cheqadar waqt darem?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034082",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_know_the_team_L1": {
+      "L1": "You know the team?",
+      "L2": "shumaa baa oo teem ashnaaye daren?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033994",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_lots_to_cover_L2": {
+      "L1": "Well, we've got a lot of things to cover today.",
+      "L2": "khoob, emrooz besyaar masayel as ke maa balaysh gap mezanem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033967",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_men_need_to_deliver_supplies_L2": {
+      "L1": "Before my team does anything, you need to get your men in there to deliver supplies.",
+      "L2": "pesh azee ke teem e ma kodam kare kona, khodet baayad afraade khoda ba onja bebaree ke tadaarokat ra berasanan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034085",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_play_soccer_L2": {
+      "L1": "John mentioned you watch a lot of soccer. My kids and I play soccer back home.",
+      "L2": "John yaad awaree kad ke shumaa besyaar footbal mebeenen. Waqti ke ma khana bodam ba awalaad haim footbal bazee mekadam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033960",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_pray_first_L2": {
+      "L1": "Do you want to get your afternoon prayer out of the way before we start?",
+      "L2": "pesh az ee ke shoro kuneym mikhhen ke namaz pesheen taan ra khalas kuneyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033962",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_prepared_disaster_relief_L2": {
+      "L1": "How prepared are your men to deliver disaster relief?",
+      "L2": "afraad shumaa che raqam amaadagi dar ertebate komak rasaane dar mawqe haadesa ra daran?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034067",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_prepared_handle_situation_L2": {
+      "L1": "How prepared are your men to handle the situation?",
+      "L2": "chutoor afraad e khood ra ba khatere haal en wazeyat aamaada sakhten?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034071",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_something_else_L1": {
+      "L1": "Do you want something cold?",
+      "L2": "shumaa yak cheezey saart mekhoyeyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034128",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_talk_about_priorities_L2": {
+      "L1": "Well, first of all, let's talk about the options and prioritize.",
+      "L2": "khoob, byaayen awaltar az hama, sar rah hai dega wa daraja bande azoo gap bezaneym.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034084",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_what_about_livestock_L1": {
+      "L1": "What about their livestock?",
+      "L2": "masala mawashee shan che mesha?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034101",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_what_are_your_plans_L2": {
+      "L1": "What are your plans moving forward?",
+      "L2": "che raqam pelaane shumaa pesh mera?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034063",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_what_is_it_made_from_L2": {
+      "L1": "What is it made from? The spices are very nice.",
+      "L2": "ee az che dorost shoda? mawaade ke dar dakhel ash as besyaar khosh maza as.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034122",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_what_province_L2": {
+      "L1": "I've enjoyed seeing this country. What province are you from?",
+      "L2": "ma az dedan keshwar sho besyaar lezat bordam. shumaa kood tan az kodam wolaayat hasten?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033958",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_what_villages_need_floods_L2": {
+      "L1": "That's good to know. What do these villages need to deal with the floods?",
+      "L2": "khoob as ke bofamem ke ee qarya ha, bare jelawgeeree az saraazeer shudan ee seelaab ha ba che zaroorat daran?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034094",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_work_John_did_L1": {
+      "L1": "I'm sure you know about the work John and I did?",
+      "L2": "ma motmayen hastam ke da ertebaat e kaar hai ke ma wa John anjaam dadem khabar daareyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034039",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-ask_you_pilot_L2": {
+      "L1": "I just noticed the picture of you with an Mi-17 helicopter. Are you a pilot?",
+      "L2": "ma akse shumaa ra baa halicoptar Mi-17 dedam shumaa peeloot asteen?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033961",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-greet_good_afternoon_saaheb_L2": {
+      "L1": "Good afternoon, Dawood saayeb.",
+      "L2": "rooz e shumaa ba khayr, Dawood saayeb.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033936",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_I_dont_drink_tea_L2": {
+      "L1": "I don't really drink tea, but thanks for the offer.",
+      "L2": "rastesh ma chai namekhoram, magar tashakur ke salaah kadeyn.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034029",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_I_think_will_goodbye_L2": {
+      "L1": "I think we will. Goodbye.",
+      "L2": "ma feker mikonam mitaneym. khudaa hafez.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034193",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_Im_fine_thanks_L2": {
+      "L1": "I'm fine, really. But thank you.",
+      "L2": "ba raasti cheze delam namesha. amaa tashakur.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034036",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_OK_ill_try_some_L2": {
+      "L1": "OK, I'll try some.",
+      "L2": "sahee as, ma yakzara megeram.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034119",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_actually_brother_L1": {
+      "L1": "Oh, that's actually my brother. We look alike, don't we?",
+      "L2": "ho, rastesh ee beradaram as. maa ba yak dega shabahat dareym, hamotor nes?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033999",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_also_have_fruits_L1": {
+      "L1": "I also have some bread and dried fruit for you. Please help yourself.",
+      "L2": "ma yak zara naan wa mewe khoshk baretaan daram. Befarmaayen khodetan begeren.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034021",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_americans_eager_work_L1": {
+      "L1": "It's okay. I've worked with plenty of Americans. Always very eager to get to work.",
+      "L2": "farq nameykona. ma ba besyaar amrekai ha kaar kadem hamesha shawqi en hastan ke kaar ra zood shoro konan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034019",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_apparently_taliban_L1": {
+      "L1": "Apparently some men came into the villages offering food and supplies. We believe they're Taliban.",
+      "L2": "qaraar maloom chaand nafar ba qaraya ha aamada wa peshnehad naan wa dega mawaada ba mardom kada, maa yaqeen darem ke ona taliban hastan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034055",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_are_you_sure_no_balkh_L1": {
+      "L1": "Are you sure? I'll only be a moment and we can continue chatting.",
+      "L2": "shumaa motmayen hasten? ma serf bare yak lahza khahad bodam wa mitaneym ke qesee khoda edama beteem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034179",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_are_you_sure_what_know_balkh_L1": {
+      "L1": "Are you sure? I'd like to hear what you know about Balkh.",
+      "L2": "motmayen asten? ma mekhaham bofamom ke da bare balkh che mefamen?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034177",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_balkh_still_home_L1": {
+      "L1": "Yes. It's still home to me. I take my family to pray at the Blue Mosque during Ramadan. The children love the open space.",
+      "L2": "baley oo hanozam khane ma as. da mah ramazan ma familam ra grefta onja meram ta dar masjed aabe namaaz bekhaneym. Awlaad ha jai dilwaaza doost daran.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033990",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_been_following_L2": {
+      "L1": "I\u2019ve been following them since I got here.",
+      "L2": "ma az waqti ke enja aamadem onaa ra taqeeb mikuneym.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033997",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_briefed_on_work_L2": {
+      "L1": "I was briefed on the work. How's your progress going?",
+      "L2": "da jeryaan kaar yak maloomat mokhtasar daadan. Kaar ha chutoor pesh mera?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034040",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_brother_pilot_L2": {
+      "L1": "Wow. You sure do. So, then your brother's the pilot? Do you ever get to fly with him?",
+      "L2": "hoooo, albata ke shabahat dareen. pas beradar shumaa peelot as?shumaa kodam dafa hamraish parwaaz kadeyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034002",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_build__repair_immediately_L2": {
+      "L1": "I understand. We should start building and repairing houses immediately.",
+      "L2": "ma meyfaamam. maa baayad aabaadi  wa tarmem kadan khana haa ra ajel shoro kuneym.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034046",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_can_do_research_meantime_L2": {
+      "L1": "Sure. I can do some research in the meantime.",
+      "L2": "albata. ma mitaanam ke daren modat yagan tahqeqat khoda konam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034145",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_can_my_men_assist_L1": {
+      "L1": "Alright. Can my men assist your team? I'd like them to understand how to handle this.",
+      "L2": "sahee as. afraad ma mitanan ke ba afraad shumaa hamkaare konan? ma mekhaham ke ona befaaman ke che raqam era hal konan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034147",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_cant_eat_houses_L1": {
+      "L1": "You can't eat houses. We don't need sandbags. Their animals are their survival.",
+      "L2": "shumaa kho khana ha ra khorda nametanen. maa ba khareta hai reg zaroorat nadareym. Haiwanaat shan kole zendagi shan as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034106",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_championship_nepal_L1": {
+      "L1": "I watched them win the championship in Nepal a few years ago!",
+      "L2": "ma chaand saal pesh dedam ke dar Nepal qahraman shudan!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033998",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_could_be_better_believe_succeed_L1": {
+      "L1": "They could be better trained in delivering disaster relief, but I believe they can succeed.",
+      "L2": "behtar meshod ke agar eynha tamrenaate komak rasaney dar mawqe hadesat ra anjaam medadan. Amaa ma baawar daram ke eynha metanan moafaq shawand.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034059",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_delivering_aid_simple_L2": {
+      "L1": "Delivering aid is pretty simple. I'm sure they'll be fine.",
+      "L2": "rasandane komak besyaar aasaan as. ma yaqeen daram ke ona metanan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034143",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_difficult_far_away_L1": {
+      "L1": "I'm sure it's difficult being so far away.",
+      "L2": "ma motmayen hastam besyaar as ke eqadar door baasheyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033973",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_difficult_to_know_L1": {
+      "L1": "It's difficult to know. These villages are so isolated we didn't know they needed help. How would your team handle a situation like this?",
+      "L2": "faamedanesh besyaar moshkel as. hoo qaryaa ha besyaar door aftaada astan, maa name faamedem ke ba komak zaroorat dashtan. Che raqam teem shumaa ne waziat ra hal mekona?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_explained_men_underequipped_L1": {
+      "L1": "I've explained that my men are under-equipped for this kind of mission.",
+      "L2": "ma ba shumaa goftam ke afraad ma bare en amalyaat mojahaz nestan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034111",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_family_last_night_L2": {
+      "L1": "They're good. I spoke to them last night.",
+      "L2": "hame shan khoob astan. ma deshab hamray shan gap zadam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033972",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_family_well_L1": {
+      "L1": "They are very well, thank you. How is yours?",
+      "L2": "hame shan khoob hasan tashakur. az shumaa chutoor hastan?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033969",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_family_well_after_wife_L1": {
+      "L1": "My family is well.",
+      "L2": "familam khoob as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034032",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_from_balkh_L1": {
+      "L1": "Balkh Province. Actually, I'm from the city of Balkh.",
+      "L2": "welaayat balkh. Ma aslan az khod shahre balkh hastam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033981",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_good_afternoon_Frank_L1": {
+      "L1": "Good afternoon, Frank saayeb. Welcome.",
+      "L2": "rooz e shumaa ba khayr, Frank saayeb. khosh aamadeyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033938",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_good_to_see_you_L2": {
+      "L1": "It's good to see you again. I'm glad John was able to introduce us. You remember my interpreter, Aziz.",
+      "L2": "khoob shod ke shumaa ra baz dedam. ma besyaar khosh astum ke jon maara ba ham marefee kad. Tarjoman ma ba yaad dareen, Aziz.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033940",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_goodbye_L1": {
+      "L1": "Goodbye.",
+      "L2": "khudaa aafez.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034196",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_got_a_job_L2": {
+      "L1": "It is, but we've all got a job to do.",
+      "L2": "baley, amaa hame maa yak wazeefa darem ke baayad anjam betem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033976",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_great_fascinating_place_no_tea_offer_L1": {
+      "L1": "Great! It's a fascinating place. I'll be right back.",
+      "L2": "besyaar alee! ee yak jai khoosh aayand as. ma zood pas khahad amadam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034188",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_great_its_fascinating_L1": {
+      "L1": "Great! It's a fascinating place. Please enjoy the tea until I return.",
+      "L2": "besyaar alee. ee yak jai khoosh aayand as. befarmayen chai tan ra bekhoren ta ma pas myayam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034185",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_great_sandbags_L2": {
+      "L1": "Great. You'll need relief supplies like food, clean water, clothing, and sandbags to keep rising water out of buildings.",
+      "L2": "besyaar khoob, shumaa ba mawaad emdadee manande naan, aab, lebaas wa khareta hai reg ke jelawe dakhel shudane aab ba daroon tameer hara begeera zaroorat khahad dashten.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034107",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_great_youll_like_it_L1": {
+      "L1": "Great. I think you'll like it.",
+      "L2": "besyaar khoob. ma feker mikuneym khoshetan khahad amad.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034126",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_handle_before_it_happened_L2": {
+      "L1": "We would go in immediately with supplies.",
+      "L2": "maa fawran tadaarokaat ra gerfta merem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034088",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_happy_have_plan_L1": {
+      "L1": "I'm happy we have a plan to take care of this. Thank you for your assistance.",
+      "L2": "ma khoosh astam ke hale maa yak pelaan darem ta motwaje en masala bashem. tashakur az hamkare tan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034161",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_have_more_tea_L1": {
+      "L1": "Please, have more tea.",
+      "L2": "befarmayeyn dega chai begeren.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034114",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_honored_to_have_you_L1": {
+      "L1": "It's nothing. I'm honored to have you.",
+      "L2": "kodam gape nees. ba maa eftekhar bakhshedeyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034026",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_hope_both_well_L1": {
+      "L1": "Yes, I hope you are both well.",
+      "L2": "baley, omidwar hastam ke har doi shumaa khoob basheyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033954",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_houses_more_important_L2": {
+      "L1": "Houses are more important than animals.",
+      "L2": "khana ha az haiwanaat kada mohem tar astan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034104",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_how_can_prep_soldiers_L1": {
+      "L1": "How do you think we can prepare my soldiers?",
+      "L2": "che feker mekuneyn ke che raqam asaaker khoda amada besazem?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034139",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_i_understand_I_should_leave_L2": {
+      "L1": "I understand. Since we have our plan together, I should leave anyway.",
+      "L2": "ma meyfaamam. aaz waqti ke pelaan moshtarak dashtem, ba har soorat ma baayad borom.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034175",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_if_need_confront_insurgents_L1": {
+      "L1": "If we need to confront the insurgents, inshallah, we'll be successful.",
+      "L2": "aga zaroorat shawa ke baa doshman roo ba rooi shawem, inshallah maa moafaq khaahad shodem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034077",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_if_thats_necessary_conflict_L2": {
+      "L1": "If that's necessary, yes. But I assumed you wanted to avoid conflict.",
+      "L2": "aga besyaar zaroorat baasha baley. Amaa ma kheyaal mekadam ke shumaa mekhasten ke az barkhord jelaw geree kuneyn.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034078",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_if_training_necessary_get_together_L2": {
+      "L1": "If you really think training is necessary, I can probably get something together. ",
+      "L2": "aga shumaa feker mekuneyn ke tamrenaat zarooree as, ma momken betaanam ke moshtarakan baze kaar ha ra anjam betom.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034160",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_if_you_must_L1": {
+      "L1": "Okay then, if you must. Thank you for your time.",
+      "L2": "aga besyaar zaroor as, sahee as. tashakur az waqte shumaa.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034183",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_immediate_action_important_L2": {
+      "L1": "My team will get the job done. I don't want to be responsible for your men if things go bad. ",
+      "L2": "teem ma kaare khoda anjam khahad dad. aga kodam kharaabe shawa ma namekhaham ke baaz masolyat afrad shumaa ra begeyram.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034149",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_improve_drainage_L2": {
+      "L1": "Perhaps we could improve drainage in the villages next.",
+      "L2": "shaayad maa betaanem ke da qadame badee, sesteme aabraw haa ra da qaryaa ha behtar besaazem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034047",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_inshallah_return_before_taliban_L1": {
+      "L1": "Inshallah, we will move in before the Taliban return with more supplies.",
+      "L2": "inshallah pesh az enke taliban hamrai mawaade shan pas byayan maa harakat mikuneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034070",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_inshallah_they_can_handle_it_L1": {
+      "L1": "Inshallah, they can handle it.",
+      "L2": "inshallah eynha metaanan ke halesh konan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034057",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_its_green_tea_L1": {
+      "L1": "It's green tea with saffron and cardamom. I'm glad you like it.",
+      "L2": "ee chai sabz harai zafaraan wa heel as. khoob shod ke khooshetan amad.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034125",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_ive_heard_good_things_L2": {
+      "L1": "Yes, I've heard good things about your team.",
+      "L2": "baley ma dar baare groope shumaa cheez hai khoobe shanedem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034061",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_lets_move_forward_L2": {
+      "L1": "Then let's move forward.",
+      "L2": "pas byayen ke pesh bereem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034075",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_lions_afg_L2": {
+      "L1": "The Lions of Afghanistan, right?",
+      "L2": "sheer hai afghanistan, dorost?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033992",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_looking_forward_working_L2": {
+      "L1": "You're welcome. I'm looking forward to working with you on this.",
+      "L2": "qabel tashakur nes. ma mebenam ke dar ayenda baz ham baa shumaa sar ee mawzoo kaar konam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034167",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_maybe_next_time_L2": {
+      "L1": "Maybe next time. I really should get to my next engagement.",
+      "L2": "shaayad dega dafa. ma waqean bayaad da molaqaat bade khoda berasanam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034180",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_mistake_jaan_respect_L2": {
+      "L1": "Maybe I made a mistake. I thought  jaan  was respectful.",
+      "L2": "shaayad ma eshteybah kada basham. ma feker mekadam jan az ehteram ziad gofta misha.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033949",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_move_on_L1": {
+      "L1": "Let's move on.",
+      "L2": "byaa ke pesh bereym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034152",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_need_moment_to_pray_L1": {
+      "L1": "If you'll excuse me, I need to take a moment to pray.",
+      "L2": "mara beybakhsheyn, ma ba khater namaz khandan ba kame waqt zaroorat daram.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034163",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_no_prob_love_to_hear_more_L2": {
+      "L1": "No problem at all. I'd love to hear more about Balkh.",
+      "L2": "hech moshkele nes. ma doost daram ke rajee ba balkh ziad beshnawam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034165",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_no_prob_take_your_time_L2": {
+      "L1": "No problem at all. Should I wait here?",
+      "L2": "hech moshkele nes. ma baayad montazer basham?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034165",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_no_tea_something_else_L1": {
+      "L1": "No tea? Perhaps you'd like something else then?",
+      "L2": "chai nee? shaaya kodam cheze dega mikhaheyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034034",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_no_thanks_im_good_L2": {
+      "L1": "No, thank you. I'm good.",
+      "L2": "ney tashakur. kafee as.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034120",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_no_time_to_repair_insurgents_L1": {
+      "L1": "There's no time to repair anything until the rain stops. There's now a larger problem. I've just heard of insurgents in the area.",
+      "L2": "taa khalaasee baraan waqte tarmem kadane hech chez nees. Da onja hale moshkelate jedee tar as. Ma da ee waqtha da baaree mawjoodyat dushman da manteqa shenedem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034049",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_not_jaan_L1": {
+      "L1": "Jaan? You shouldn't call grown men jaan.",
+      "L2": "jaan? shumaa baayad ba aadam bozorgsaal jaan nagoyen.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033947",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_not_thirsty_L2": {
+      "L1": "No, I'm just not thirsty.",
+      "L2": "nakhair ney, ma aslan toshna nestam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034131",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_offer_tea_after_declined_L1": {
+      "L1": "Are you sure you won't have tea?",
+      "L2": "motmayen asten ke dega chai namekhoreyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034112",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_organize_training_immediately_L2": {
+      "L1": "We can organize training, but we'd need to work together on it.",
+      "L2": "maa mitaneym ke tamrenata tanzeem koneem, magar zaroorat darem ke yak jaa balai en masala kaar kuneym.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034137",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_peaceful_is_better_L1": {
+      "L1": "I would prefer it. Providing peaceful support is better.",
+      "L2": "ma tarjee metom ke faraham sakhtane poshtebaane solh aamez behtar as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034090",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_perhaps_better_trained_L1": {
+      "L1": "Perhaps they could be better trained.",
+      "L2": "momken eynha metanestan behtar anjam betan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034073",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_perhaps_later_repair_insurgents_L1": {
+      "L1": "Perhaps later. Repair work will have to wait until the rain stops. There's now a larger problem. I've just heard of insurgents in the area.",
+      "L2": "emkaar dara bad tar, amaa tarmem karee ra taa khatme baaraan montazer mikuneym  felan da onja moshkelaat jeedee tar as. Ma da baaree mawjodyate doshman da oo manteqa shaneedem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034056",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_perhaps_misunderstand_L1": {
+      "L1": "No. Perhaps you misunderstand our prayer obligations. I will pray when it's time for me to pray.",
+      "L2": "ney shaayad shumaa sharayeet namaaz maara dorost nafaamedeen ma namaaz khoda baayad da waqtesh bekhanam",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034007",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_ppl_dont_know_balkh_L1": {
+      "L1": "I'm impressed. Most people don't know Balkh.",
+      "L2": "ma tajob mikuneym. Ziadtar mardom balkh ra nameshenasan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033983",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_pray_when_its_time_L1": {
+      "L1": "I will pray when it's time.",
+      "L2": "ma namaaz khoda da waqtesh mekhanam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034200",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_probably_blankets_food_shelters_L1": {
+      "L1": "Probably blankets, food, and cooking fuel. Temporary shelters might be needed. They'll also be concerned for their livestock. Their animals are their survival.",
+      "L2": "ehtemaalan, naan, teel bare eshtoop. shaayad ke ba yak sar panahe moaqatee ham zaroorat dashta bashan. ona ba khater mawashee khod ham tashweesh daran, haiwanaat shan kole zindagi shan as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034096",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_quick_to_work_L1": {
+      "L1": "So quick to get to work?",
+      "L2": "eqadar zood ba kaar shoro kuneym?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034016",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_quite_a_while_L1": {
+      "L1": "Quite a while. But we're here to discuss business.",
+      "L2": "ziad waqt namesha. magar maa inga asadem ke raje ba kaar ha gap bezaneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034033",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_read_history_L2": {
+      "L1": "Well, I read a little history before I came. Do you still visit?",
+      "L2": "khoob, pesh az enke ma enja beyaayeym yak kame tareekh motalea kadam. shumaa hanoozam onja meren?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033984",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_really_L1": {
+      "L1": "Really?",
+      "L2": "ba rastee?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034155",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_saaheb_men_L1": {
+      "L1": "Saayeb is for men.  Jaan is for women and children. Just call me Colonel Toofaan.",
+      "L2": "saayeb ba mard ha gofta meshs. jaan ba zan ha wa atfaal. Khodet metaney mara Dagarwal Toofan sada kuney.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033950",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_sit_have_tea_L1": {
+      "L1": "Please sit and have some tea so we can continue.",
+      "L2": "befarmayeyn besheneyn yak pyala chai ham begereyn bad mitaneym edaama beteym",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034097",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_sons_play_too_L1": {
+      "L1": "My sons and I play, too. We watch every game our national team plays.",
+      "L2": "ma wa pesar haim ham baazee mikuneym, maa hama mosabeqa hai ra ke teem melee bazee mekonan meebaneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033979",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_sorry_colonel_L2": {
+      "L1": "I apologize, Colonel Toofaan. It's good to see you again. I'm glad John was able to introduce us. You remember my interpreter, Aziz.",
+      "L2": "ba mazrat dagarwal saayeb Toofaan, khoob shod ke shumaa ra baz dedam. Ma besyaar khosh hastam ke jon taanest maa ra ba ham marefee kona. Tarjoman ma ba yaad dareen Aziz.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033951",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_speak_to_team_handle_problem_L1": {
+      "L1": "I will speak to my men and inform them of our discussion. Inshallah, we'll be able to handle this problem quickly.",
+      "L2": "ma ba afradam gap khahad zadam wa rajee ba mozaakeraat khod ba shumaa ba onaa maloomat khahd dadam. inshallah maa khahad tanestem ke en moshkel ra ba zoodi hal kuneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034190",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_take_your_time_L2": {
+      "L1": "Take your time.",
+      "L2": "ajala nakuneyn.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034173",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_tea_would_be_great_L2": {
+      "L1": "Tea would be great. Thank you.",
+      "L2": "chai behtar as. tashakur.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034028",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_thank_you_for_hospitality_L2": {
+      "L1": "Thank you for talking with me and for your hospitality. I'll contact you in a few days with some options for moving forward.",
+      "L2": "tashakur az sohbat ha wa mehmaan nawazee hai shumaa. ma chaand rooz bad ba baze rah hai dega bare pesh borde kaar ba shumaa ba tamaas khwaaham shodam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034189",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_thanks_delicious_L2": {
+      "L1": "Thank you. It's delicious.",
+      "L2": "tashakur. besyaar mazadar as.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034117",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_thanks_hospitality_L2": {
+      "L1": "You're very generous. Thank you for your hospitality.",
+      "L2": "shumaa besyaar ba sakhawat hasten. tashakur az mehmaan nawaaze tan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034024",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_thanks_ill_be_back_L1": {
+      "L1": "Thank you.",
+      "L2": "tashakur.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034194",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_that_would_be_fine_L1": {
+      "L1": "That would be fine. I'll be right back.",
+      "L2": "bekhee dorost as. ma zood pas khahad amadam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034171",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_that_would_be_helpful_start_soon_L1": {
+      "L1": "That would be helpful. Let me gather information on what we need. Can we meet again? ",
+      "L2": "ee komak maa khahad kad, basheyn ke ma maloomat konam ke ba che zaroorat darem.  mitaneym ke baaz molaaqaat kuneym?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034144",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_think_thats_a_good_idea_L1": {
+      "L1": "I think that's a good idea.",
+      "L2": "ma feker mikuneym yak nazare khoob as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034099",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_thought_need_pray_1730_L2": {
+      "L1": "Oh. Sorry, I just thought you always needed to pray at 1730.",
+      "L2": "hoo. beybakhsheyn, ma feker mekadam shumaa baayad hamesha saa-at panj o see namaaz bekhaneyn.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034006",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_training_flight_L1": {
+      "L1": "I went up with him once during a training flight. There are a lot of restrictions, but he was able to get me on board.",
+      "L2": "ma yak dafa hamraish da jeryaan parawaz hai tamreney parwaaz kadam. ba wasfe ke besyaar paabandee bod amaa oo tanest ke mara da tayaara balaa kona.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034004",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_training_might_take_awhile_L2": {
+      "L1": "Training might take a while. My team can work with the villages now.",
+      "L2": "tamrenaat yak modat ra dar bar megera. teem ma hame hale metanan ke da qarya ha kaar konan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034150",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_villages_can_dangerous_L1": {
+      "L1": "These villages can be dangerous. I'd like them to be properly trained.",
+      "L2": "oo qarya ha metana khatarnaak basha, ma mekhaham ke onaa ba shakle monazam tamren dada shawand.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034158",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_we_could_train_team_kabul_L1": {
+      "L1": "We could train my team here, though there are better trained units in Kabul.",
+      "L2": "maa metaanestem da henja ba teem khod tamren betem. agar che dar kabul teem hai talem yafta behtar hastan",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034092",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_were_not_US_mil_L1": {
+      "L1": "That's very easy to say, but we aren't the American military. You're underestimating how difficult it is to communicate with these villages.",
+      "L2": "da goftan besyaar saada as, magar maa ordooye amrekayee nestem. era ke ertebaat ba oo qarya ha cheqadar sakht as, shumaa besyaar saada megeren.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034108",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_west_of_mazar_L2": {
+      "L1": "That's west of Mazar-e Sharif, right? I understand Balkh is very nice.",
+      "L2": "ba tarafe gharbe mazare shareef, dorost? ma mefamam balkh besyaar jai khoob as.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033988",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_what_found_out_L2": {
+      "L1": "What have you found out?",
+      "L2": "shumaa che paida kadeyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034052",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_work_went_well_L1": {
+      "L1": "Our work went well. Unfortunately, the rainy season is now here. Villages are flooding and houses are being damaged.",
+      "L2": "kaar maa khoob pesh meraft, baa tasof ke haale dega fasle baaraan as, da qaryaa ha seel amada wa khaana ha sadama dedan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4034042",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_yes_we_do_L1": {
+      "L1": "Yes, we do.",
+      "L2": "baley, wazeefa darem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033977",
+      "terp": "L1",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_your_men_have_worked_village_L2": {
+      "L1": "Your men have already worked in the villages. They\u2019ll know the area.",
+      "L2": "afraad shumaa qablan da qaryaa kaar kadan. onaa mantaqa ra balad hastan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034157",
+      "terp": "L2",
+      "title": ""
+    },
+    "Aziz_Kaamawal-say_your_men_recently_there_L2": {
+      "L1": "Your men were recently in the village. They could have been gathering information.",
+      "L2": "afraad shumaa da ee awakher da qaryaa bodan ona metaanestan maloomat ba dast byaran.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4034109",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-ask_know_the_team_L2": {
+      "L1": "You know the team?",
+      "L2": "shumaa baa oo teem ashnaaye daren?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033548",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-ask_something_else_L2": {
+      "L1": "Do you want something cold?",
+      "L2": "shumaa yak cheezey saart mekhoyeyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033642",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-ask_what_about_livestock_L2": {
+      "L1": "What about their livestock?",
+      "L2": "masala mawashee shan che mesha?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033613",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-ask_work_John_did_L2": {
+      "L1": "I'm sure you know about the work John and I did?",
+      "L2": "ma motmayen hastam ke da ertebaat e kaar hai ke ma wa John anjaam dadem khabar daareyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033578",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_actually_brother_L2": {
+      "L1": "Oh, that's actually my brother. We look alike, don't we?",
+      "L2": "ho, rastesh ee beradaram as. maa ba yak dega shabahat dareym, hamotor nes?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033555",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_also_have_fruits_L2": {
+      "L1": "I also have some bread and dried fruit for you. Please help yourself.",
+      "L2": "ma yak zara naan wa mewe khoshk baretaan daram. Befarmaayen khodetan begeren.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033572",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_americans_eager_work_L2": {
+      "L1": "It's okay. I've worked with plenty of Americans. Always very eager to get to work.",
+      "L2": "farq nameykona. ma ba besyaar amrekai ha kaar kadem hamesha shawqi en hastan ke kaar ra zood shoro konan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033561",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_apparently_taliban_L2": {
+      "L1": "Apparently some men came into the villages offering food and supplies. We believe they're Taliban.",
+      "L2": "qaraar maloom chaand nafar ba qaraya ha aamada wa peshnehad naan wa dega mawaada ba mardom kada, maa yaqeen darem ke ona taliban hastan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033585",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_are_you_sure_no_balkh_L2": {
+      "L1": "Are you sure? I'll only be a moment and we can continue chatting.",
+      "L2": "shumaa motmayen hasten? ma serf bare yak lahza khahad bodam wa mitaneym ke qesee khoda edama beteem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033657",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_are_you_sure_what_know_balkh_L2": {
+      "L1": "Are you sure? I'd like to hear what you know about Balkh.",
+      "L2": "motmayen asten? ma mekhaham bofamom ke da bare balkh che mefamen?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033654",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_balkh_still_home_L2": {
+      "L1": "Yes. It's still home to me. I take my family to pray at the Blue Mosque during Ramadan. The children love the open space.",
+      "L2": "baley oo hanozam khane ma as. da mah ramazan ma familam ra grefta onja meram ta dar masjed aabe namaaz bekhaneym. Awlaad ha jai dilwaaza doost daran.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033547",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_can_my_men_assist_L2": {
+      "L1": "Alright. Can my men assist your team? I'd like them to understand how to handle this.",
+      "L2": "sahee as. afraad ma mitanan ke ba afraad shumaa hamkaare konan? ma mekhaham ke ona befaaman ke che raqam era hal konan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033635",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_cant_eat_houses_L2": {
+      "L1": "You can't eat houses. We don't need sandbags. Their animals are their survival.",
+      "L2": "shumaa kho khana ha ra khorda nametanen. maa ba khareta hai reg zaroorat nadareym. Haiwanaat shan kole zendagi shan as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033614",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_championship_nepal_L2": {
+      "L1": "I watched them win the championship in Nepal a few years ago!",
+      "L2": "ma chaand saal pesh dedam ke dar Nepal qahraman shudan!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033553",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_could_be_better_believe_succeed_L2": {
+      "L1": "They could be better trained in delivering disaster relief, but I believe they can succeed.",
+      "L2": "behtar meshod ke agar eynha tamrenaate komak rasaney dar mawqe hadesat ra anjaam medadan. Amaa ma baawar daram ke eynha metanan moafaq shawand.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033592",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_difficult_far_away_L2": {
+      "L1": "I'm sure it's difficult being so far away.",
+      "L2": "ma motmayen hastam besyaar as ke eqadar door baasheyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033538",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_difficult_to_know_L2": {
+      "L1": "It's difficult to know. These villages are so isolated we didn't know they needed help. How would your team handle a situation like this?",
+      "L2": "faamedanesh besyaar moshkel as. hoo qaryaa ha besyaar door aftaada astan, maa name faamedem ke ba komak zaroorat dashtan. Che raqam teem shumaa ne waziat ra hal mekona?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033604",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_explained_men_underequipped_L2": {
+      "L1": "I've explained that my men are under-equipped for this kind of mission.",
+      "L2": "ma ba shumaa goftam ke afraad ma bare en amalyaat mojahaz nestan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033619",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_family_well_L2": {
+      "L1": "They are very well, thank you. How is yours?",
+      "L2": "hame shan khoob hasan tashakur. az shumaa chutoor hastan?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033536",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_family_well_after_wife_L2": {
+      "L1": "My family is well.",
+      "L2": "familam khoob as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033567",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_from_balkh_L2": {
+      "L1": "Balkh Province. Actually, I'm from the city of Balkh.",
+      "L2": "welaayat balkh. Ma aslan az khod shahre balkh hastam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033542",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_good_afternoon_Frank_L2": {
+      "L1": "Good afternoon, Frank saayeb. Welcome.",
+      "L2": "rooz e shumaa ba khayr, Frank saayeb. khosh aamadeyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033523",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_goodbye_L2": {
+      "L1": "Goodbye.",
+      "L2": "khudaa aafez.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033667",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_great_fascinating_place_no_tea_offer_L2": {
+      "L1": "Great! It's a fascinating place. I'll be right back.",
+      "L2": "besyaar alee! ee yak jai khoosh aayand as. ma zood pas khahad amadam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033649",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_great_its_fascinating_L2": {
+      "L1": "Great! It's a fascinating place. Please enjoy the tea until I return.",
+      "L2": "besyaar alee. ee yak jai khoosh aayand as. befarmayen chai tan ra bekhoren ta ma pas myayam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033651",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_great_youll_like_it_L2": {
+      "L1": "Great. I think you'll like it.",
+      "L2": "besyaar khoob. ma feker mikuneym khoshetan khahad amad.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033627",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_happy_have_plan_L2": {
+      "L1": "I'm happy we have a plan to take care of this. Thank you for your assistance.",
+      "L2": "ma khoosh astam ke hale maa yak pelaan darem ta motwaje en masala bashem. tashakur az hamkare tan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033641",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_have_more_tea_L2": {
+      "L1": "Please, have more tea.",
+      "L2": "befarmayeyn dega chai begeren.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033621",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_honored_to_have_you_L2": {
+      "L1": "It's nothing. I'm honored to have you.",
+      "L2": "kodam gape nees. ba maa eftekhar bakhshedeyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033574",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_hope_both_well_L2": {
+      "L1": "Yes, I hope you are both well.",
+      "L2": "baley, omidwar hastam ke har doi shumaa khoob basheyn.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033529",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_how_can_prep_soldiers_L2": {
+      "L1": "How do you think we can prepare my soldiers?",
+      "L2": "che feker mekuneyn ke che raqam asaaker khoda amada besazem?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033630",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_if_need_confront_insurgents_L2": {
+      "L1": "If we need to confront the insurgents, inshallah, we'll be successful.",
+      "L2": "aga zaroorat shawa ke baa doshman roo ba rooi shawem, inshallah maa moafaq khaahad shodem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033600",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_if_you_must_L2": {
+      "L1": "Okay then, if you must. Thank you for your time.",
+      "L2": "aga besyaar zaroor as, sahee as. tashakur az waqte shumaa.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033659",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_inshallah_return_before_taliban_L2": {
+      "L1": "Inshallah, we will move in before the Taliban return with more supplies.",
+      "L2": "inshallah pesh az enke taliban hamrai mawaade shan pas byayan maa harakat mikuneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033596",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_inshallah_they_can_handle_it_L2": {
+      "L1": "Inshallah, they can handle it.",
+      "L2": "inshallah eynha metaanan ke halesh konan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033589",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_its_green_tea_L2": {
+      "L1": "It's green tea with saffron and cardamom. I'm glad you like it.",
+      "L2": "ee chai sabz harai zafaraan wa heel as. khoob shod ke khooshetan amad.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033625",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_move_on_L2": {
+      "L1": "Let's move on.",
+      "L2": "byaa ke pesh bereym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033628",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_need_moment_to_pray_L2": {
+      "L1": "If you'll excuse me, I need to take a moment to pray.",
+      "L2": "mara beybakhsheyn, ma ba khater namaz khandan ba kame waqt zaroorat daram.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033645",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_no_tea_something_else_L2": {
+      "L1": "No tea? Perhaps you'd like something else then?",
+      "L2": "chai nee? shaaya kodam cheze dega mikhaheyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033576",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_no_time_to_repair_insurgents_L2": {
+      "L1": "There's no time to repair anything until the rain stops. There's now a larger problem. I've just heard of insurgents in the area.",
+      "L2": "taa khalaasee baraan waqte tarmem kadane hech chez nees. Da onja hale moshkelate jedee tar as. Ma da ee waqtha da baaree mawjoodyat dushman da manteqa shenedem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033582",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_not_jaan_L2": {
+      "L1": "Jaan? You shouldn't call grown men jaan.",
+      "L2": "jaan? shumaa baayad ba aadam bozorgsaal jaan nagoyen.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033530",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_offer_tea_after_declined_L2": {
+      "L1": "Are you sure you won't have tea?",
+      "L2": "motmayen asten ke dega chai namekhoreyn?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033622",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_peaceful_is_better_L2": {
+      "L1": "I would prefer it. Providing peaceful support is better.",
+      "L2": "ma tarjee metom ke faraham sakhtane poshtebaane solh aamez behtar as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033601",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_perhaps_better_trained_L2": {
+      "L1": "Perhaps they could be better trained.",
+      "L2": "momken eynha metanestan behtar anjam betan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033597",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_perhaps_later_repair_insurgents_L2": {
+      "L1": "Perhaps later. Repair work will have to wait until the rain stops. There's now a larger problem. I've just heard of insurgents in the area.",
+      "L2": "emkaar dara bad tar, amaa tarmem karee ra taa khatme baaraan montazer mikuneym  felan da onja moshkelaat jeedee tar as. Ma da baaree mawjodyate doshman da oo manteqa shaneedem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033586",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_perhaps_misunderstand_L2": {
+      "L1": "No. Perhaps you misunderstand our prayer obligations. I will pray when it's time for me to pray.",
+      "L2": "ney shaayad shumaa sharayeet namaaz maara dorost nafaamedeen ma namaaz khoda baayad da waqtesh bekhanam",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033566",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_ppl_dont_know_balkh_L2": {
+      "L1": "I'm impressed. Most people don't know Balkh.",
+      "L2": "ma tajob mikuneym. Ziadtar mardom balkh ra nameshenasan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033545",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_pray_when_its_time_L2": {
+      "L1": "I will pray when it's time.",
+      "L2": "ma namaaz khoda da waqtesh mekhanam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033669",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_probably_blankets_food_shelters_L2": {
+      "L1": "Probably blankets, food, and cooking fuel. Temporary shelters might be needed. They'll also be concerned for their livestock. Their animals are their survival.",
+      "L2": "ehtemaalan, naan, teel bare eshtoop. shaayad ke ba yak sar panahe moaqatee ham zaroorat dashta bashan. ona ba khater mawashee khod ham tashweesh daran, haiwanaat shan kole zindagi shan as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033609",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_quick_to_work_L2": {
+      "L1": "So quick to get to work?",
+      "L2": "eqadar zood ba kaar shoro kuneym?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033559",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_quite_a_while_L2": {
+      "L1": "Quite a while. But we're here to discuss business.",
+      "L2": "ziad waqt namesha. magar maa inga asadem ke raje ba kaar ha gap bezaneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033563",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_really_L2": {
+      "L1": "Really?",
+      "L2": "ba rastee?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033637",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_saaheb_men_L2": {
+      "L1": "Saayeb is for men.  Jaan is for women and children. Just call me Colonel Toofaan.",
+      "L2": "saayeb ba mard ha gofta meshs. jaan ba zan ha wa atfaal. Khodet metaney mara Dagarwal Toofan sada kuney.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033532",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_sit_have_tea_L2": {
+      "L1": "Please sit and have some tea so we can continue.",
+      "L2": "befarmayeyn besheneyn yak pyala chai ham begereyn bad mitaneym edaama beteym",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033569",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_sons_play_too_L2": {
+      "L1": "My sons and I play, too. We watch every game our national team plays.",
+      "L2": "ma wa pesar haim ham baazee mikuneym, maa hama mosabeqa hai ra ke teem melee bazee mekonan meebaneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033541",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_speak_to_team_handle_problem_L2": {
+      "L1": "I will speak to my men and inform them of our discussion. Inshallah, we'll be able to handle this problem quickly.",
+      "L2": "ma ba afradam gap khahad zadam wa rajee ba mozaakeraat khod ba shumaa ba onaa maloomat khahd dadam. inshallah maa khahad tanestem ke en moshkel ra ba zoodi hal kuneym.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033661",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_thanks_ill_be_back_L2": {
+      "L1": "Thank you.",
+      "L2": "tashakur.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033652",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_that_would_be_fine_L2": {
+      "L1": "That would be fine. I'll be right back.",
+      "L2": "bekhee dorost as. ma zood pas khahad amadam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033646",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_that_would_be_helpful_start_soon_L2": {
+      "L1": "That would be helpful. Let me gather information on what we need. Can we meet again? ",
+      "L2": "ee komak maa khahad kad, basheyn ke ma maloomat konam ke ba che zaroorat darem.  mitaneym ke baaz molaaqaat kuneym?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033633",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_think_thats_a_good_idea_L2": {
+      "L1": "I think that's a good idea.",
+      "L2": "ma feker mikuneym yak nazare khoob as.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033611",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_training_flight_L2": {
+      "L1": "I went up with him once during a training flight. There are a lot of restrictions, but he was able to get me on board.",
+      "L2": "ma yak dafa hamraish da jeryaan parawaz hai tamreney parwaaz kadam. ba wasfe ke besyaar paabandee bod amaa oo tanest ke mara da tayaara balaa kona.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033558",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_villages_can_dangerous_L2": {
+      "L1": "These villages can be dangerous. I'd like them to be properly trained.",
+      "L2": "oo qarya ha metana khatarnaak basha, ma mekhaham ke onaa ba shakle monazam tamren dada shawand.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033639",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_waaleykum_L2": {
+      "L1": "waaleykum asalaam.",
+      "L2": "waaleykum asalaam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033526",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_we_could_train_team_kabul_L2": {
+      "L1": "We could train my team here, though there are better trained units in Kabul.",
+      "L2": "maa metaanestem da henja ba teem khod tamren betem. agar che dar kabul teem hai talem yafta behtar hastan",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033607",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_were_not_US_mil_L2": {
+      "L1": "That's very easy to say, but we aren't the American military. You're underestimating how difficult it is to communicate with these villages.",
+      "L2": "da goftan besyaar saada as, magar maa ordooye amrekayee nestem. era ke ertebaat ba oo qarya ha cheqadar sakht as, shumaa besyaar saada megeren.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033617",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_work_went_well_L2": {
+      "L1": "Our work went well. Unfortunately, the rainy season is now here. Villages are flooding and houses are being damaged.",
+      "L2": "kaar maa khoob pesh meraft, baa tasof ke haale dega fasle baaraan as, da qaryaa ha seel amada wa khaana ha sadama dedan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033581",
+      "terp": "L2",
+      "title": ""
+    },
+    "Dawood-say_yes_we_do_L2": {
+      "L1": "Yes, we do.",
+      "L2": "baley, wazeefa darem.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4033551",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-ask_am_i_rushing_L1": {
+      "L1": "Am I rushing? I apologize.",
+      "L2": "ma ajalla mikuneym? mazrat mekhaaham.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033317",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-ask_how_long_married_L1": {
+      "L1": "How long have you been married?",
+      "L2": "cheqadar waqt mesha ke motahel asteyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033315",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-ask_how_much_time_L1": {
+      "L1": "How much time do we have?",
+      "L2": "maa cheqadar waqt darem?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033355",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-ask_prepared_disaster_relief_L1": {
+      "L1": "How prepared are your men to deliver disaster relief?",
+      "L2": "afraad shumaa che raqam amaadagi dar ertebate komak rasaane dar mawqe haadesa ra daran?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033350",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-ask_what_is_it_made_from_L1": {
+      "L1": "What is it made from? The spices are very nice.",
+      "L2": "ee az che dorost shoda? mawaade ke dar dakhel ash as besyaar khosh maza as.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033376",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-ask_what_villages_need_floods_L1": {
+      "L1": "That's good to know. What do these villages need to deal with the floods?",
+      "L2": "khoob as ke bofamem ke ee qarya ha, bare jelawgeeree az saraazeer shudan ee seelaab ha ba che zaroorat daran?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033364",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-auto__-1461625784378_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "take a sip of tea."
+    },
+    "Frank_Gill-auto__-1461626376890_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "shake hands with Wakdaar Manelay."
+    },
+    "Frank_Gill-auto__-1461626690079_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "place your hand over your heart."
+    },
+    "Frank_Gill-auto__-1461702809566_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "take a sip of tea."
+    },
+    "Frank_Gill-auto__-1461702914503_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "take a sip of tea."
+    },
+    "Frank_Gill-auto__-1461710182836_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "shake hands with Wakdaar Manelay."
+    },
+    "Frank_Gill-auto__-1461791871763_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "shake hands with Wakdaar Manelay."
+    },
+    "Frank_Gill-auto__-1461791874973_L2": {
+      "addressee": "Wakdaar_Manelay",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "shake hands with Wakdaar Manelay."
+    },
+    "Frank_Gill-say_I_think_will_goodbye_L1": {
+      "L1": "I think we will. Goodbye.",
+      "L2": "ma feker mikonam mitaneym. khudaa hafez.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033411",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_Im_fine_thanks_L1": {
+      "L1": "I'm fine, really. But thank you.",
+      "L2": "ba raasti cheze delam namesha. amaa tashakur.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033326",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_been_following_L1": {
+      "L1": "I\u2019ve been following them since I got here.",
+      "L2": "ma az waqti ke enja aamadem onaa ra taqeeb mikuneym.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033328",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_briefed_on_work_L1": {
+      "L1": "I was briefed on the work. How's your progress going?",
+      "L2": "da jeryaan kaar yak maloomat mokhtasar daadan. Kaar ha chutoor pesh mera?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033331",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_brother_pilot_L1": {
+      "L1": "Wow. You sure do. So, then your brother's the pilot? Do you ever get to fly with him?",
+      "L2": "hoooo, albata ke shabahat dareen. pas beradar shumaa peelot as?shumaa kodam dafa hamraish parwaaz kadeyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033311",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_can_do_research_meantime_L1": {
+      "L1": "Sure. I can do some research in the meantime.",
+      "L2": "albata. ma mitaanam ke daren modat yagan tahqeqat khoda konam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033390",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_family_last_night_L1": {
+      "L1": "They're good. I spoke to them last night.",
+      "L2": "hame shan khoob astan. ma deshab hamray shan gap zadam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033302",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_good_to_see_you_L1": {
+      "L1": "It's good to see you again. I'm glad John was able to introduce us. You remember my interpreter, Aziz.",
+      "L2": "khoob shod ke shumaa ra baz dedam. ma besyaar khosh astum ke jon maara ba ham marefee kad. Tarjoman ma ba yaad dareen, Aziz.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033279",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_got_a_job_L1": {
+      "L1": "It is, but we've all got a job to do.",
+      "L2": "baley, amaa hame maa yak wazeefa darem ke baayad anjam betem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033303",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_great_sandbags_L1": {
+      "L1": "Great. You'll need relief supplies like food, clean water, clothing, and sandbags to keep rising water out of buildings.",
+      "L2": "besyaar khoob, shumaa ba mawaad emdadee manande naan, aab, lebaas wa khareta hai reg ke jelawe dakhel shudane aab ba daroon tameer hara begeera zaroorat khahad dashten.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033386",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_houses_more_important_L1": {
+      "L1": "Houses are more important than animals.",
+      "L2": "khana ha az haiwanaat kada mohem tar astan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033366",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_if_thats_necessary_conflict_L1": {
+      "L1": "If that's necessary, yes. But I assumed you wanted to avoid conflict.",
+      "L2": "aga besyaar zaroorat baasha baley. Amaa ma kheyaal mekadam ke shumaa mekhasten ke az barkhord jelaw geree kuneyn.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033352",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_if_training_necessary_get_together_L1": {
+      "L1": "If you really think training is necessary, I can probably get something together. ",
+      "L2": "aga shumaa feker mekuneyn ke tamrenaat zarooree as, ma momken betaanam ke moshtarakan baze kaar ha ra anjam betom.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033396",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_immediate_action_important_L1": {
+      "L1": "My team will get the job done. I don't want to be responsible for your men if things go bad. ",
+      "L2": "teem ma kaare khoda anjam khahad dad. aga kodam kharaabe shawa ma namekhaham ke baaz masolyat afrad shumaa ra begeyram.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033391",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_ive_heard_good_things_L1": {
+      "L1": "Yes, I've heard good things about your team.",
+      "L2": "baley ma dar baare groope shumaa cheez hai khoobe shanedem.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033349",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_lions_afg_L1": {
+      "L1": "The Lions of Afghanistan, right?",
+      "L2": "sheer hai afghanistan, dorost?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033309",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_looking_forward_working_L1": {
+      "L1": "You're welcome. I'm looking forward to working with you on this.",
+      "L2": "qabel tashakur nes. ma mebenam ke dar ayenda baz ham baa shumaa sar ee mawzoo kaar konam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033397",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_maybe_next_time_L1": {
+      "L1": "Maybe next time. I really should get to my next engagement.",
+      "L2": "shaayad dega dafa. ma waqean bayaad da molaqaat bade khoda berasanam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033407",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_mistake_jaan_respect_L1": {
+      "L1": "Maybe I made a mistake. I thought  jaan  was respectful.",
+      "L2": "shaayad ma eshteybah kada basham. ma feker mekadam jan az ehteram ziad gofta misha.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033281",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_not_thirsty_L1": {
+      "L1": "No, I'm just not thirsty.",
+      "L2": "nakhair ney, ma aslan toshna nestam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033378",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_read_history_L1": {
+      "L1": "Well, I read a little history before I came. Do you still visit?",
+      "L2": "khoob, pesh az enke ma enja beyaayeym yak kame tareekh motalea kadam. shumaa hanoozam onja meren?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033307",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_sorry_colonel_L1": {
+      "L1": "I apologize, Colonel Toofaan. It's good to see you again. I'm glad John was able to introduce us. You remember my interpreter, Aziz.",
+      "L2": "ba mazrat dagarwal saayeb Toofaan, khoob shod ke shumaa ra baz dedam. Ma besyaar khosh hastam ke jon taanest maa ra ba ham marefee kona. Tarjoman ma ba yaad dareen Aziz.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033279",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_take_your_time_L1": {
+      "L1": "Take your time.",
+      "L2": "ajala nakuneyn.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033406",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_thank_you_for_hospitality_L1": {
+      "L1": "Thank you for talking with me and for your hospitality. I'll contact you in a few days with some options for moving forward.",
+      "L2": "tashakur az sohbat ha wa mehmaan nawazee hai shumaa. ma chaand rooz bad ba baze rah hai dega bare pesh borde kaar ba shumaa ba tamaas khwaaham shodam.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033409",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_thanks_hospitality_L1": {
+      "L1": "You're very generous. Thank you for your hospitality.",
+      "L2": "shumaa besyaar ba sakhawat hasten. tashakur az mehmaan nawaaze tan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033329",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_thought_need_pray_1730_L1": {
+      "L1": "Oh. Sorry, I just thought you always needed to pray at 1730.",
+      "L2": "hoo. beybakhsheyn, ma feker mekadam shumaa baayad hamesha saa-at panj o see namaaz bekhaneyn.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033313",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_west_of_mazar_L1": {
+      "L1": "That's west of Mazar-e Sharif, right? I understand Balkh is very nice.",
+      "L2": "ba tarafe gharbe mazare shareef, dorost? ma mefamam balkh besyaar jai khoob as.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033305",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_what_found_out_L1": {
+      "L1": "What have you found out?",
+      "L2": "shumaa che paida kadeyn?",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033339",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_your_men_have_worked_village_L1": {
+      "L1": "Your men have already worked in the villages. They\u2019ll know the area.",
+      "L2": "afraad shumaa qablan da qaryaa kaar kadan. onaa mantaqa ra balad hastan.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033393",
+      "terp": "L1",
+      "title": ""
+    },
+    "Frank_Gill-say_your_men_recently_there_L1": {
+      "L1": "Your men were recently in the village. They could have been gathering information.",
+      "L2": "afraad shumaa da ee awakher da qaryaa bodan ona metaanestan maloomat ba dast byaran.",
+      "addressee": "Dawood",
+      "anima": "",
+      "sound": "4033369",
+      "terp": "L1",
+      "title": ""
+    },
+    "Wakdaar_Manelay-auto__-1461626630773_L2": {
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "releases your hand."
+    },
+    "Wakdaar_Manelay-auto__-1461709565822_L2": {
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "places his hand over his heart."
+    }
+  },
+  "participants": {
+    "Aziz_Kaamawal": "Aziz Kaamawal",
+    "Dawood": "Dawood Toofan",
+    "Frank_Gill": "Frank Gill",
+    "Wakdaar_Manelay": "Wakdaar Manelay"
+  },
+  "retq": {"SMALLTALK": {"inputq": {
+    "ask_hope_wife_good": {
+      "addressee": "Dawood",
+      "outputq": [{
+        "effects": [
+          {
+            "operand": "SKIPSMALLTALK",
+            "operand2": "1",
+            "operator": "+="
+          },
+          {
+            "operand": "RET_SMALLTALK",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET__SMALLTALK_ASK_HOPE_WIFE_GOOD",
+            "operand2": true,
+            "operator": "="
+          }
+        ],
+        "endState": "",
+        "speakerActq": [
+          "Aziz_Kaamawal-ask_hope_wife_good_L2",
+          "Dawood-say_family_well_after_wife_L2",
+          "Aziz_Kaamawal-say_family_well_after_wife_L1",
+          "Frank_Gill-ask_how_long_married_L1",
+          "Aziz_Kaamawal-ask_how_long_married_L2",
+          "Dawood-say_quite_a_while_L2",
+          "Aziz_Kaamawal-say_quite_a_while_L1",
+          "Dawood-say_sit_have_tea_L2",
+          "Aziz_Kaamawal-say_sit_have_tea_L1"
+        ],
+        "variableRanges": [{
+          "operator": "==",
+          "range": [false],
+          "variable": "RET__SMALLTALK_ASK_HOPE_WIFE_GOOD"
+        }]
+      }],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_how_family": {
+      "addressee": "Dawood",
+      "outputq": [
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_SMALLTALK",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_HOW_FAMILY",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_how_family_L2",
+            "Dawood-say_family_well_L2",
+            "Aziz_Kaamawal-say_family_well_L1",
+            "Frank_Gill-say_family_last_night_L1",
+            "Aziz_Kaamawal-say_family_last_night_L2",
+            "Dawood-say_difficult_far_away_L2",
+            "Aziz_Kaamawal-say_difficult_far_away_L1",
+            "Frank_Gill-say_got_a_job_L1",
+            "Aziz_Kaamawal-say_got_a_job_L2",
+            "Dawood-say_yes_we_do_L2",
+            "Aziz_Kaamawal-say_yes_we_do_L1",
+            "Dawood-say_sit_have_tea_L2",
+            "Aziz_Kaamawal-say_sit_have_tea_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "==",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_HOW_FAMILY"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_HOW_FAMILY",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_how_family_L2",
+            "Dawood-say_family_well_L2",
+            "Aziz_Kaamawal-say_family_well_L1",
+            "Frank_Gill-say_family_last_night_L1",
+            "Aziz_Kaamawal-say_family_last_night_L2",
+            "Dawood-say_difficult_far_away_L2",
+            "Aziz_Kaamawal-say_difficult_far_away_L1",
+            "Frank_Gill-say_got_a_job_L1",
+            "Aziz_Kaamawal-say_got_a_job_L2",
+            "Dawood-say_yes_we_do_L2",
+            "Aziz_Kaamawal-say_yes_we_do_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "<",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_HOW_FAMILY"
+            }
+          ]
+        }
+      ],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_lots_to_cover": {
+      "addressee": "Dawood",
+      "outputq": [{
+        "effects": [
+          {
+            "operand": "SKIPSMALLTALK",
+            "operand2": "1",
+            "operator": "+="
+          },
+          {
+            "operand": "RET_SMALLTALK",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET__SMALLTALK_ASK_LOTS_TO_COVER",
+            "operand2": true,
+            "operator": "="
+          }
+        ],
+        "endState": "",
+        "speakerActq": [
+          "Aziz_Kaamawal-ask_lots_to_cover_L2",
+          "Dawood-say_quick_to_work_L2",
+          "Aziz_Kaamawal-say_quick_to_work_L1",
+          "Frank_Gill-ask_am_i_rushing_L1",
+          "Aziz_Kaamawal-ask_am_i_rushing_L2",
+          "Dawood-say_americans_eager_work_L2",
+          "Aziz_Kaamawal-say_americans_eager_work_L1",
+          "Dawood-say_sit_have_tea_L2",
+          "Aziz_Kaamawal-say_sit_have_tea_L1"
+        ],
+        "variableRanges": [{
+          "operator": "==",
+          "range": [false],
+          "variable": "RET__SMALLTALK_ASK_LOTS_TO_COVER"
+        }]
+      }],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_play_soccer": {
+      "addressee": "Dawood",
+      "outputq": [
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_SMALLTALK",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_PLAY_SOCCER",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_play_soccer_L2",
+            "Dawood-say_sons_play_too_L2",
+            "Aziz_Kaamawal-say_sons_play_too_L1",
+            "Frank_Gill-say_lions_afg_L1",
+            "Aziz_Kaamawal-say_lions_afg_L2",
+            "Dawood-ask_know_the_team_L2",
+            "Aziz_Kaamawal-ask_know_the_team_L1",
+            "Frank_Gill-say_been_following_L1",
+            "Aziz_Kaamawal-say_been_following_L2",
+            "Dawood-say_championship_nepal_L2",
+            "Aziz_Kaamawal-say_championship_nepal_L1",
+            "Dawood-say_sit_have_tea_L2",
+            "Aziz_Kaamawal-say_sit_have_tea_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "==",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_PLAY_SOCCER"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_PLAY_SOCCER",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_play_soccer_L2",
+            "Dawood-say_sons_play_too_L2",
+            "Aziz_Kaamawal-say_sons_play_too_L1",
+            "Frank_Gill-say_lions_afg_L1",
+            "Aziz_Kaamawal-say_lions_afg_L2",
+            "Dawood-ask_know_the_team_L2",
+            "Aziz_Kaamawal-ask_know_the_team_L1",
+            "Frank_Gill-say_been_following_L1",
+            "Aziz_Kaamawal-say_been_following_L2",
+            "Dawood-say_championship_nepal_L2",
+            "Aziz_Kaamawal-say_championship_nepal_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "<",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_PLAY_SOCCER"
+            }
+          ]
+        }
+      ],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_pray_first": {
+      "addressee": "Dawood",
+      "outputq": [{
+        "effects": [
+          {
+            "operand": "SMALLTALK",
+            "operand2": "-1",
+            "operator": "+="
+          },
+          {
+            "operand": "RET__SMALLTALK_ASK_PRAY_FIRST",
+            "operand2": true,
+            "operator": "="
+          }
+        ],
+        "endState": "",
+        "speakerActq": [
+          "Aziz_Kaamawal-ask_pray_first_L2",
+          "Dawood-say_perhaps_misunderstand_L2",
+          "Aziz_Kaamawal-say_perhaps_misunderstand_L1",
+          "Frank_Gill-say_thought_need_pray_1730_L1",
+          "Aziz_Kaamawal-say_thought_need_pray_1730_L2",
+          "Dawood-say_pray_when_its_time_L2",
+          "Aziz_Kaamawal-say_pray_when_its_time_L1"
+        ],
+        "variableRanges": [{
+          "operator": "==",
+          "range": [false],
+          "variable": "RET__SMALLTALK_ASK_PRAY_FIRST"
+        }]
+      }],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_what_province": {
+      "addressee": "Dawood",
+      "outputq": [
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "BALKH",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_SMALLTALK",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_WHAT_PROVINCE",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_what_province_L2",
+            "Dawood-say_from_balkh_L2",
+            "Aziz_Kaamawal-say_from_balkh_L1",
+            "Frank_Gill-say_west_of_mazar_L1",
+            "Aziz_Kaamawal-say_west_of_mazar_L2",
+            "Dawood-say_ppl_dont_know_balkh_L2",
+            "Aziz_Kaamawal-say_ppl_dont_know_balkh_L1",
+            "Frank_Gill-say_read_history_L1",
+            "Aziz_Kaamawal-say_read_history_L2",
+            "Dawood-say_balkh_still_home_L2",
+            "Aziz_Kaamawal-say_balkh_still_home_L1",
+            "Dawood-say_sit_have_tea_L2",
+            "Aziz_Kaamawal-say_sit_have_tea_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "==",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_WHAT_PROVINCE"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "BALKH",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_WHAT_PROVINCE",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_what_province_L2",
+            "Dawood-say_from_balkh_L2",
+            "Aziz_Kaamawal-say_from_balkh_L1",
+            "Frank_Gill-say_west_of_mazar_L1",
+            "Aziz_Kaamawal-say_west_of_mazar_L2",
+            "Dawood-say_ppl_dont_know_balkh_L2",
+            "Aziz_Kaamawal-say_ppl_dont_know_balkh_L1",
+            "Frank_Gill-say_read_history_L1",
+            "Aziz_Kaamawal-say_read_history_L2",
+            "Dawood-say_balkh_still_home_L2",
+            "Aziz_Kaamawal-say_balkh_still_home_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "<",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_WHAT_PROVINCE"
+            }
+          ]
+        }
+      ],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_you_pilot": {
+      "addressee": "Dawood",
+      "outputq": [
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_SMALLTALK",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_YOU_PILOT",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_you_pilot_L2",
+            "Dawood-say_actually_brother_L2",
+            "Aziz_Kaamawal-say_actually_brother_L1",
+            "Frank_Gill-say_brother_pilot_L1",
+            "Aziz_Kaamawal-say_brother_pilot_L2",
+            "Dawood-say_training_flight_L2",
+            "Aziz_Kaamawal-say_training_flight_L1",
+            "Dawood-say_sit_have_tea_L2",
+            "Aziz_Kaamawal-say_sit_have_tea_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "==",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_YOU_PILOT"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "operand": "SMALLTALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET__SMALLTALK_ASK_YOU_PILOT",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Aziz_Kaamawal-ask_you_pilot_L2",
+            "Dawood-say_actually_brother_L2",
+            "Aziz_Kaamawal-say_actually_brother_L1",
+            "Frank_Gill-say_brother_pilot_L1",
+            "Aziz_Kaamawal-say_brother_pilot_L2",
+            "Dawood-say_training_flight_L2",
+            "Aziz_Kaamawal-say_training_flight_L1"
+          ],
+          "variableRanges": [
+            {
+              "operator": "<",
+              "range": ["2"],
+              "variable": "SMALLTALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALLTALK_ASK_YOU_PILOT"
+            }
+          ]
+        }
+      ],
+      "reusable": false,
+      "video": {}
+    }
+  }}},
+  "roles": {
+    "interpreter": "Aziz_Kaamawal",
+    "npc": "Dawood",
+    "player": "Frank_Gill"
+  },
+  "states": [],
+  "transitions": [
+    {
+      "actions": [
+        "Frank_Gill-auto__-1461626376890_L2",
+        "Dawood-say_waaleykum_L2",
+        "Frank_Gill-say_good_to_see_you_L1",
+        "Aziz_Kaamawal-say_good_to_see_you_L2",
+        "Dawood-say_hope_both_well_L2",
+        "Aziz_Kaamawal-say_hope_both_well_L1",
+        "Frank_Gill-auto__-1461626690079_L2"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [
+        {
+          "operand": "GREET",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "RET_SMALLTALK",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s1",
+      "inputSymbols": ["greet_salaam_Colonel"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Frank_Gill-auto__-1461791871763_L2",
+        "Aziz_Kaamawal-greet_good_afternoon_saaheb_L2",
+        "Dawood-say_good_afternoon_Frank_L2",
+        "Aziz_Kaamawal-say_good_afternoon_Frank_L1",
+        "Frank_Gill-say_good_to_see_you_L1",
+        "Aziz_Kaamawal-say_good_to_see_you_L2",
+        "Dawood-say_hope_both_well_L2",
+        "Aziz_Kaamawal-say_hope_both_well_L1",
+        "Frank_Gill-auto__-1461626690079_L2"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALLTALK",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s1",
+      "inputSymbols": ["greet_good_afternoon_saaheb"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Frank_Gill-auto__-1461791874973_L2",
+        "Dawood-say_not_jaan_L2",
+        "Wakdaar_Manelay-auto__-1461626630773_L2",
+        "Aziz_Kaamawal-say_not_jaan_L1",
+        "Frank_Gill-say_mistake_jaan_respect_L1",
+        "Aziz_Kaamawal-say_mistake_jaan_respect_L2",
+        "Dawood-say_saaheb_men_L2",
+        "Aziz_Kaamawal-say_saaheb_men_L1",
+        "Frank_Gill-say_sorry_colonel_L1",
+        "Aziz_Kaamawal-say_sorry_colonel_L2",
+        "Dawood-say_hope_both_well_L2",
+        "Aziz_Kaamawal-say_hope_both_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALLTALK",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s2",
+      "inputSymbols": ["greet_salaam_Jaan"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_tea_would_be_great_L2",
+        "Dawood-say_also_have_fruits_L2",
+        "Aziz_Kaamawal-say_also_have_fruits_L1",
+        "Frank_Gill-say_thanks_hospitality_L1",
+        "Aziz_Kaamawal-say_thanks_hospitality_L2",
+        "Dawood-say_honored_to_have_you_L2",
+        "Aziz_Kaamawal-say_honored_to_have_you_L1",
+        "Frank_Gill-auto__-1461625784378_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALLTALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "TEA",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_tea_would_be_great"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_I_dont_drink_tea_L2",
+        "Dawood-say_no_tea_something_else_L2",
+        "Aziz_Kaamawal-say_no_tea_something_else_L1",
+        "Frank_Gill-say_Im_fine_thanks_L1",
+        "Aziz_Kaamawal-say_Im_fine_thanks_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALLTALK",
+        "operand2": false,
+        "operator": "="
+      }],
+      "endState": "s3",
+      "inputSymbols": ["say_I_dont_drink_tea"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_tea_would_be_great_L2",
+        "Dawood-say_also_have_fruits_L2",
+        "Aziz_Kaamawal-say_also_have_fruits_L1",
+        "Frank_Gill-say_thanks_hospitality_L1",
+        "Aziz_Kaamawal-say_thanks_hospitality_L2",
+        "Dawood-say_honored_to_have_you_L2",
+        "Aziz_Kaamawal-say_honored_to_have_you_L1",
+        "Frank_Gill-auto__-1461625784378_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALLTALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "TEA",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_tea_would_be_great"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "SKIPSMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_I_dont_drink_tea_L2",
+        "Dawood-say_no_tea_something_else_L2",
+        "Aziz_Kaamawal-say_no_tea_something_else_L1",
+        "Frank_Gill-say_Im_fine_thanks_L1",
+        "Aziz_Kaamawal-say_Im_fine_thanks_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALLTALK",
+        "operand2": false,
+        "operator": "="
+      }],
+      "endState": "s3",
+      "inputSymbols": ["say_I_dont_drink_tea"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "SKIPSMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_tea_would_be_great_L2",
+        "Dawood-say_also_have_fruits_L2",
+        "Aziz_Kaamawal-say_also_have_fruits_L1",
+        "Frank_Gill-say_thanks_hospitality_L1",
+        "Aziz_Kaamawal-say_thanks_hospitality_L2",
+        "Dawood-say_honored_to_have_you_L2",
+        "Aziz_Kaamawal-say_honored_to_have_you_L1",
+        "Frank_Gill-auto__-1461625784378_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALLTALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "TEA",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_tea_would_be_great"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_I_dont_drink_tea_L2",
+        "Dawood-say_no_tea_something_else_L2",
+        "Aziz_Kaamawal-say_no_tea_something_else_L1",
+        "Frank_Gill-say_Im_fine_thanks_L1",
+        "Aziz_Kaamawal-say_Im_fine_thanks_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALLTALK",
+        "operand2": false,
+        "operator": "="
+      }],
+      "endState": "s3",
+      "inputSymbols": ["say_I_dont_drink_tea"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_tea_would_be_great_L2",
+        "Dawood-say_also_have_fruits_L2",
+        "Aziz_Kaamawal-say_also_have_fruits_L1",
+        "Frank_Gill-say_thanks_hospitality_L1",
+        "Aziz_Kaamawal-say_thanks_hospitality_L2",
+        "Dawood-say_honored_to_have_you_L2",
+        "Aziz_Kaamawal-say_honored_to_have_you_L1",
+        "Frank_Gill-auto__-1461625784378_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALLTALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "TEA",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_tea_would_be_great"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "SKIPSMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_I_dont_drink_tea_L2",
+        "Dawood-say_no_tea_something_else_L2",
+        "Aziz_Kaamawal-say_no_tea_something_else_L1",
+        "Frank_Gill-say_Im_fine_thanks_L1",
+        "Aziz_Kaamawal-say_Im_fine_thanks_L2",
+        "Dawood-ask_work_John_did_L2",
+        "Aziz_Kaamawal-ask_work_John_did_L1",
+        "Frank_Gill-say_briefed_on_work_L1",
+        "Aziz_Kaamawal-say_briefed_on_work_L2",
+        "Dawood-say_work_went_well_L2",
+        "Aziz_Kaamawal-say_work_went_well_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALLTALK",
+        "operand2": false,
+        "operator": "="
+      }],
+      "endState": "s3",
+      "inputSymbols": ["say_I_dont_drink_tea"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "SKIPSMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_improve_drainage_L2",
+        "Dawood-say_perhaps_later_repair_insurgents_L2",
+        "Aziz_Kaamawal-say_perhaps_later_repair_insurgents_L1",
+        "Frank_Gill-say_what_found_out_L1",
+        "Aziz_Kaamawal-say_what_found_out_L2",
+        "Dawood-say_apparently_taliban_L2",
+        "Aziz_Kaamawal-say_apparently_taliban_L1"
+      ],
+      "addressee": "Wakdaar_Manelay",
+      "display": false,
+      "effects": [],
+      "endState": "s4",
+      "inputSymbols": ["say_improve_drainage"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_difficult_how_handling_it_L2",
+        "Dawood-say_no_time_to_repair_insurgents_L2",
+        "Aziz_Kaamawal-say_no_time_to_repair_insurgents_L1",
+        "Frank_Gill-say_what_found_out_L1",
+        "Aziz_Kaamawal-say_what_found_out_L2",
+        "Dawood-say_apparently_taliban_L2",
+        "Aziz_Kaamawal-say_apparently_taliban_L1"
+      ],
+      "addressee": "Wakdaar_Manelay",
+      "display": false,
+      "effects": [{
+        "operand": "SEEKINFO",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s4",
+      "inputSymbols": ["ask_difficult_how_handling_it"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_build__repair_immediately_L2",
+        "Dawood-say_perhaps_later_repair_insurgents_L2",
+        "Aziz_Kaamawal-say_perhaps_later_repair_insurgents_L1",
+        "Frank_Gill-say_what_found_out_L1",
+        "Aziz_Kaamawal-say_what_found_out_L2",
+        "Dawood-say_apparently_taliban_L2",
+        "Aziz_Kaamawal-say_apparently_taliban_L1"
+      ],
+      "addressee": "Wakdaar_Manelay",
+      "display": false,
+      "effects": [],
+      "endState": "s4",
+      "inputSymbols": ["say_build__repair_immediately"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_do_you_think_handle_L2",
+        "Dawood-say_inshallah_they_can_handle_it_L2",
+        "Aziz_Kaamawal-say_inshallah_they_can_handle_it_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s5",
+      "inputSymbols": ["ask_do_you_think_handle"],
+      "onlyOnce": false,
+      "startState": "s4",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_prepared_handle_situation_L2",
+        "Dawood-say_could_be_better_believe_succeed_L2",
+        "Aziz_Kaamawal-say_could_be_better_believe_succeed_L1",
+        "Frank_Gill-say_ive_heard_good_things_L1",
+        "Aziz_Kaamawal-say_ive_heard_good_things_L2",
+        "Dawood-say_inshallah_return_before_taliban_L2",
+        "Aziz_Kaamawal-say_inshallah_return_before_taliban_L1",
+        "Frank_Gill-ask_how_much_time_L1",
+        "Aziz_Kaamawal-ask_how_much_time_L2",
+        "Dawood-say_difficult_to_know_L2",
+        "Aziz_Kaamawal-say_difficult_to_know_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "SEEKINFO",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s6",
+      "inputSymbols": ["ask_prepared_handle_situation"],
+      "onlyOnce": false,
+      "startState": "s4",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_lets_move_forward_L2",
+        "Dawood-say_if_need_confront_insurgents_L2",
+        "Aziz_Kaamawal-say_if_need_confront_insurgents_L1",
+        "Frank_Gill-say_if_thats_necessary_conflict_L1",
+        "Aziz_Kaamawal-say_if_thats_necessary_conflict_L2",
+        "Dawood-say_peaceful_is_better_L2",
+        "Aziz_Kaamawal-say_peaceful_is_better_L1",
+        "Frank_Gill-ask_prepared_disaster_relief_L1",
+        "Aziz_Kaamawal-ask_prepared_disaster_relief_L2",
+        "Dawood-say_perhaps_better_trained_L2",
+        "Aziz_Kaamawal-say_perhaps_better_trained_L1",
+        "Frank_Gill-ask_how_much_time_L1",
+        "Aziz_Kaamawal-ask_how_much_time_L2",
+        "Dawood-say_difficult_to_know_L2",
+        "Aziz_Kaamawal-say_difficult_to_know_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s6",
+      "inputSymbols": ["say_lets_move_forward"],
+      "onlyOnce": false,
+      "startState": "s5",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_what_are_your_plans_L2",
+        "Dawood-say_inshallah_return_before_taliban_L2",
+        "Aziz_Kaamawal-say_inshallah_return_before_taliban_L1",
+        "Frank_Gill-ask_prepared_disaster_relief_L1",
+        "Aziz_Kaamawal-ask_prepared_disaster_relief_L2",
+        "Dawood-say_perhaps_better_trained_L2",
+        "Aziz_Kaamawal-say_perhaps_better_trained_L1",
+        "Frank_Gill-ask_how_much_time_L1",
+        "Aziz_Kaamawal-ask_how_much_time_L2",
+        "Dawood-say_difficult_to_know_L2",
+        "Aziz_Kaamawal-say_difficult_to_know_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "SEEKINFO",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s6",
+      "inputSymbols": ["ask_what_are_your_plans"],
+      "onlyOnce": false,
+      "startState": "s5",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_men_need_to_deliver_supplies_L2",
+        "Dawood-say_think_thats_a_good_idea_L2",
+        "Aziz_Kaamawal-say_think_thats_a_good_idea_L1",
+        "Frank_Gill-say_great_sandbags_L1",
+        "Aziz_Kaamawal-say_great_sandbags_L2",
+        "Dawood-ask_what_about_livestock_L2",
+        "Aziz_Kaamawal-ask_what_about_livestock_L1",
+        "Frank_Gill-say_houses_more_important_L1",
+        "Aziz_Kaamawal-say_houses_more_important_L2",
+        "Dawood-say_cant_eat_houses_L2",
+        "Aziz_Kaamawal-say_cant_eat_houses_L1",
+        "Dawood-say_offer_tea_after_declined_L2",
+        "Aziz_Kaamawal-say_offer_tea_after_declined_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s7",
+      "inputSymbols": ["ask_men_need_to_deliver_supplies"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": [{
+        "operator": "<",
+        "range": ["1"],
+        "variable": "TEA"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_men_need_to_deliver_supplies_L2",
+        "Dawood-say_think_thats_a_good_idea_L2",
+        "Aziz_Kaamawal-say_think_thats_a_good_idea_L1",
+        "Frank_Gill-say_great_sandbags_L1",
+        "Aziz_Kaamawal-say_great_sandbags_L2",
+        "Dawood-ask_what_about_livestock_L2",
+        "Aziz_Kaamawal-ask_what_about_livestock_L1",
+        "Frank_Gill-say_houses_more_important_L1",
+        "Aziz_Kaamawal-say_houses_more_important_L2",
+        "Dawood-say_cant_eat_houses_L2",
+        "Aziz_Kaamawal-say_cant_eat_houses_L1",
+        "Dawood-say_have_more_tea_L2",
+        "Aziz_Kaamawal-say_have_more_tea_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s8",
+      "inputSymbols": ["ask_men_need_to_deliver_supplies"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "TEA"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_handle_before_it_happened_L2",
+        "Dawood-say_were_not_US_mil_L2",
+        "Aziz_Kaamawal-say_were_not_US_mil_L1",
+        "Frank_Gill-say_your_men_recently_there_L1",
+        "Aziz_Kaamawal-say_your_men_recently_there_L2",
+        "Dawood-say_explained_men_underequipped_L2",
+        "Aziz_Kaamawal-say_explained_men_underequipped_L1",
+        "Dawood-say_offer_tea_after_declined_L2",
+        "Aziz_Kaamawal-say_offer_tea_after_declined_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s7",
+      "inputSymbols": ["say_handle_before_it_happened"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": [{
+        "operator": "<",
+        "range": ["1"],
+        "variable": "TEA"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_handle_before_it_happened_L2",
+        "Dawood-say_were_not_US_mil_L2",
+        "Aziz_Kaamawal-say_were_not_US_mil_L1",
+        "Frank_Gill-say_your_men_recently_there_L1",
+        "Aziz_Kaamawal-say_your_men_recently_there_L2",
+        "Dawood-say_explained_men_underequipped_L2",
+        "Aziz_Kaamawal-say_explained_men_underequipped_L1",
+        "Dawood-say_have_more_tea_L2",
+        "Aziz_Kaamawal-say_have_more_tea_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s8",
+      "inputSymbols": ["say_handle_before_it_happened"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "TEA"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_talk_about_priorities_L2",
+        "Dawood-say_we_could_train_team_kabul_L2",
+        "Aziz_Kaamawal-say_we_could_train_team_kabul_L1",
+        "Frank_Gill-ask_what_villages_need_floods_L1",
+        "Aziz_Kaamawal-ask_what_villages_need_floods_L2",
+        "Dawood-say_probably_blankets_food_shelters_L2",
+        "Aziz_Kaamawal-say_probably_blankets_food_shelters_L1",
+        "Dawood-say_offer_tea_after_declined_L2",
+        "Aziz_Kaamawal-say_offer_tea_after_declined_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "COLLABORATE",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s7",
+      "inputSymbols": ["ask_talk_about_priorities"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": [{
+        "operator": "<",
+        "range": ["1"],
+        "variable": "TEA"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-ask_talk_about_priorities_L2",
+        "Dawood-say_we_could_train_team_kabul_L2",
+        "Aziz_Kaamawal-say_we_could_train_team_kabul_L1",
+        "Frank_Gill-ask_what_villages_need_floods_L1",
+        "Aziz_Kaamawal-ask_what_villages_need_floods_L2",
+        "Dawood-say_probably_blankets_food_shelters_L2",
+        "Aziz_Kaamawal-say_probably_blankets_food_shelters_L1",
+        "Dawood-say_have_more_tea_L2",
+        "Aziz_Kaamawal-say_have_more_tea_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "COLLABORATE",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s8",
+      "inputSymbols": ["ask_talk_about_priorities"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "TEA"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_OK_ill_try_some_L2",
+        "Dawood-say_great_youll_like_it_L2",
+        "Aziz_Kaamawal-say_great_youll_like_it_L1",
+        "Frank_Gill-auto__-1461702809566_L2",
+        "Dawood-say_how_can_prep_soldiers_L2",
+        "Aziz_Kaamawal-say_how_can_prep_soldiers_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "TEA",
+        "operand2": "2",
+        "operator": "+="
+      }],
+      "endState": "s9",
+      "inputSymbols": ["say_OK_ill_try_some"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_no_thanks_im_good_L2",
+        "Dawood-ask_something_else_L2",
+        "Aziz_Kaamawal-ask_something_else_L1",
+        "Frank_Gill-say_not_thirsty_L1",
+        "Aziz_Kaamawal-say_not_thirsty_L2",
+        "Dawood-say_move_on_L2",
+        "Aziz_Kaamawal-say_move_on_L1",
+        "Dawood-say_how_can_prep_soldiers_L2",
+        "Aziz_Kaamawal-say_how_can_prep_soldiers_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s9",
+      "inputSymbols": ["say_no_thanks_im_good"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_thanks_delicious_L2",
+        "Frank_Gill-ask_what_is_it_made_from_L1",
+        "Aziz_Kaamawal-ask_what_is_it_made_from_L2",
+        "Dawood-say_its_green_tea_L2",
+        "Aziz_Kaamawal-say_its_green_tea_L1",
+        "Frank_Gill-auto__-1461702914503_L2",
+        "Dawood-say_how_can_prep_soldiers_L2",
+        "Aziz_Kaamawal-say_how_can_prep_soldiers_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "TEA",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s9",
+      "inputSymbols": ["say_thanks_delicious"],
+      "onlyOnce": false,
+      "startState": "s8",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_no_thanks_im_good_L2",
+        "Dawood-ask_something_else_L2",
+        "Aziz_Kaamawal-ask_something_else_L1",
+        "Frank_Gill-say_not_thirsty_L1",
+        "Aziz_Kaamawal-say_not_thirsty_L2",
+        "Dawood-say_move_on_L2",
+        "Aziz_Kaamawal-say_move_on_L1",
+        "Dawood-say_how_can_prep_soldiers_L2",
+        "Aziz_Kaamawal-say_how_can_prep_soldiers_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s9",
+      "inputSymbols": ["say_no_thanks_im_good"],
+      "onlyOnce": false,
+      "startState": "s8",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_delivering_aid_simple_L2",
+        "Dawood-say_really_L2",
+        "Aziz_Kaamawal-say_really_L1",
+        "Frank_Gill-say_your_men_have_worked_village_L1",
+        "Aziz_Kaamawal-say_your_men_have_worked_village_L2",
+        "Dawood-say_villages_can_dangerous_L2",
+        "Aziz_Kaamawal-say_villages_can_dangerous_L1",
+        "Frank_Gill-say_if_training_necessary_get_together_L1",
+        "Aziz_Kaamawal-say_if_training_necessary_get_together_L2",
+        "Dawood-say_happy_have_plan_L2",
+        "Aziz_Kaamawal-say_happy_have_plan_L1",
+        "Frank_Gill-say_looking_forward_working_L1",
+        "Aziz_Kaamawal-say_looking_forward_working_L2",
+        "Dawood-say_need_moment_to_pray_L2",
+        "Aziz_Kaamawal-say_need_moment_to_pray_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s10",
+      "inputSymbols": ["say_delivering_aid_simple"],
+      "onlyOnce": false,
+      "startState": "s9",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_training_might_take_awhile_L2",
+        "Dawood-say_can_my_men_assist_L2",
+        "Aziz_Kaamawal-say_can_my_men_assist_L1",
+        "Frank_Gill-say_immediate_action_important_L1",
+        "Aziz_Kaamawal-say_immediate_action_important_L2",
+        "Dawood-say_happy_have_plan_L2",
+        "Aziz_Kaamawal-say_happy_have_plan_L1",
+        "Frank_Gill-say_looking_forward_working_L1",
+        "Aziz_Kaamawal-say_looking_forward_working_L2",
+        "Dawood-say_need_moment_to_pray_L2",
+        "Aziz_Kaamawal-say_need_moment_to_pray_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s10",
+      "inputSymbols": ["say_training_might_take_awhile"],
+      "onlyOnce": false,
+      "startState": "s9",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_organize_training_immediately_L2",
+        "Dawood-say_that_would_be_helpful_start_soon_L2",
+        "Aziz_Kaamawal-say_that_would_be_helpful_start_soon_L1",
+        "Frank_Gill-say_can_do_research_meantime_L1",
+        "Aziz_Kaamawal-say_can_do_research_meantime_L2",
+        "Dawood-say_happy_have_plan_L2",
+        "Aziz_Kaamawal-say_happy_have_plan_L1",
+        "Frank_Gill-say_looking_forward_working_L1",
+        "Aziz_Kaamawal-say_looking_forward_working_L2",
+        "Dawood-say_need_moment_to_pray_L2",
+        "Aziz_Kaamawal-say_need_moment_to_pray_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "EMPOWER",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s10",
+      "inputSymbols": ["say_organize_training_immediately"],
+      "onlyOnce": false,
+      "startState": "s9",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_i_understand_I_should_leave_L2",
+        "Dawood-say_are_you_sure_what_know_balkh_L2",
+        "Aziz_Kaamawal-say_are_you_sure_what_know_balkh_L1",
+        "Frank_Gill-say_maybe_next_time_L1",
+        "Aziz_Kaamawal-say_maybe_next_time_L2",
+        "Dawood-say_if_you_must_L2",
+        "Aziz_Kaamawal-say_if_you_must_L1",
+        "Frank_Gill-auto__-1461710182836_L2",
+        "Frank_Gill-say_thank_you_for_hospitality_L1",
+        "Aziz_Kaamawal-say_thank_you_for_hospitality_L2",
+        "Dawood-say_speak_to_team_handle_problem_L2",
+        "Aziz_Kaamawal-say_speak_to_team_handle_problem_L1",
+        "Frank_Gill-say_I_think_will_goodbye_L1",
+        "Aziz_Kaamawal-say_I_think_will_goodbye_L2",
+        "Dawood-say_goodbye_L2",
+        "Aziz_Kaamawal-say_goodbye_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s11",
+      "inputSymbols": ["say_i_understand_I_should_leave"],
+      "onlyOnce": false,
+      "startState": "s10",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "BALKH"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_i_understand_I_should_leave_L2",
+        "Dawood-say_are_you_sure_no_balkh_L2",
+        "Aziz_Kaamawal-say_are_you_sure_no_balkh_L1",
+        "Frank_Gill-say_maybe_next_time_L1",
+        "Aziz_Kaamawal-say_maybe_next_time_L2",
+        "Dawood-say_if_you_must_L2",
+        "Aziz_Kaamawal-say_if_you_must_L1",
+        "Frank_Gill-auto__-1461710182836_L2",
+        "Frank_Gill-say_thank_you_for_hospitality_L1",
+        "Aziz_Kaamawal-say_thank_you_for_hospitality_L2",
+        "Dawood-say_speak_to_team_handle_problem_L2",
+        "Aziz_Kaamawal-say_speak_to_team_handle_problem_L1",
+        "Frank_Gill-say_I_think_will_goodbye_L1",
+        "Aziz_Kaamawal-say_I_think_will_goodbye_L2",
+        "Dawood-say_goodbye_L2",
+        "Aziz_Kaamawal-say_goodbye_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [],
+      "endState": "s11",
+      "inputSymbols": ["say_i_understand_I_should_leave"],
+      "onlyOnce": false,
+      "startState": "s10",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["0"],
+        "variable": "BALKH"
+      }]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_no_prob_love_to_hear_more_L2",
+        "Dawood-say_great_its_fascinating_L2",
+        "Aziz_Kaamawal-say_great_its_fascinating_L1",
+        "Frank_Gill-say_take_your_time_L1",
+        "Aziz_Kaamawal-say_take_your_time_L2",
+        "Wakdaar_Manelay-auto__-1461709565822_L2",
+        "Dawood-say_thanks_ill_be_back_L2",
+        "Aziz_Kaamawal-say_thanks_ill_be_back_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RELIGIOUS",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s12",
+      "inputSymbols": ["say_no_prob_love_to_hear_more"],
+      "onlyOnce": false,
+      "startState": "s10",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "BALKH"
+        },
+        {
+          "operator": ">=",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_no_prob_love_to_hear_more_L2",
+        "Dawood-say_great_fascinating_place_no_tea_offer_L2",
+        "Aziz_Kaamawal-say_great_fascinating_place_no_tea_offer_L1",
+        "Frank_Gill-say_take_your_time_L1",
+        "Aziz_Kaamawal-say_take_your_time_L2",
+        "Wakdaar_Manelay-auto__-1461709565822_L2",
+        "Dawood-say_thanks_ill_be_back_L2",
+        "Aziz_Kaamawal-say_thanks_ill_be_back_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RELIGIOUS",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s12",
+      "inputSymbols": ["say_no_prob_love_to_hear_more"],
+      "onlyOnce": false,
+      "startState": "s10",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "BALKH"
+        },
+        {
+          "operator": "==",
+          "range": ["0"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Aziz_Kaamawal-say_no_prob_take_your_time_L2",
+        "Dawood-say_that_would_be_fine_L2",
+        "Aziz_Kaamawal-say_that_would_be_fine_L1",
+        "Frank_Gill-say_take_your_time_L1",
+        "Aziz_Kaamawal-say_take_your_time_L2",
+        "Wakdaar_Manelay-auto__-1461709565822_L2",
+        "Dawood-say_thanks_ill_be_back_L2",
+        "Aziz_Kaamawal-say_thanks_ill_be_back_L1"
+      ],
+      "addressee": "Dawood",
+      "display": false,
+      "effects": [{
+        "operand": "RELIGIOUS",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s12",
+      "inputSymbols": ["say_no_prob_take_your_time"],
+      "onlyOnce": false,
+      "startState": "s10",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["0"],
+        "variable": "BALKH"
+      }]
+    }
+  ],
+  "version": "2014022801"
+}

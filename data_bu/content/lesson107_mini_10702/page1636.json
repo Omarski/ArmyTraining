@@ -1,0 +1,20 @@
+{
+  "page" : {
+    "xid" : "page1636",
+    "type" : "SectionEnd",
+    "layout" : "",
+    "title" : "Section End",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "section",
+        "value" : "end"
+      } ]
+    },
+    "skills" : null,
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

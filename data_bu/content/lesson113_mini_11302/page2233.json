@@ -1,0 +1,41 @@
+{
+  "page" : {
+    "xid" : "page2233",
+    "type" : "Info",
+    "title" : "Names",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghan national police recruits"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Show respect for your counterparts by learning to correctly say their names. Pashto has sounds that aren't present in English and may be difficult to pronounce. Practice saying your counterparts’ names with your interpreter before your meetings.",
+      "media" : [ {
+        "zid" : 4032554,
+        "xid" : "4032554.mp3",
+        "type" : "audio",
+        "file" : "4032554.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462313462423,
+      "xid" : "1462313462423.jpg",
+      "type" : "image",
+      "file" : "1462313462423.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

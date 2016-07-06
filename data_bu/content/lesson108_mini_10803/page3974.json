@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page3974",
+    "type" : "Info",
+    "title" : "Government",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Aiwan-e-Sadr_in_Islamabad.jpg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "The Presidental house in Islamabad, Pakistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Pakistan is a federal republic.",
+      "media" : [ {
+        "zid" : 4032226,
+        "xid" : "4032226.mp3",
+        "type" : "audio",
+        "file" : "4032226.mp3"
+      } ]
+    }, {
+      "text" : "It has amended its constitution many times since independence. Each new constitution justifies the current configuration of power. Sometimes the prime minister is more important than the president and sometimes it's the other way around.",
+      "media" : [ {
+        "zid" : 4032227,
+        "xid" : "4032227.mp3",
+        "type" : "audio",
+        "file" : "4032227.mp3"
+      } ]
+    }, {
+      "text" : "The 2013 election marked the first transfer from one democratically elected government to the next.",
+      "media" : [ {
+        "zid" : 4032228,
+        "xid" : "4032228.mp3",
+        "type" : "audio",
+        "file" : "4032228.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460568218432,
+      "xid" : "1460568218432.jpg",
+      "type" : "image",
+      "file" : "1460568218432.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

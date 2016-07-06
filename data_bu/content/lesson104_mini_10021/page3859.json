@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page3859",
+    "type" : "Info",
+    "title" : "Signs of Misinterpretation",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/223465/sailors-and-army-civil-affairs-cjtf-hoa-visit-djiboutian-village#.VFwE3fnF-VM"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Giving a report with the help of an interpreter, Djibouti"
+      } ]
+    },
+    "note" : [ {
+      "text" : "There are several common causes of misinterpretation. An interpreter may not have sufficient language skills, but they may also suffer from a lack of professional training, or they may have a hidden agenda. The following behaviors may indicate misinterpretation:",
+      "media" : [ {
+        "zid" : 4022148,
+        "xid" : "4022148.mp3",
+        "type" : "audio",
+        "file" : "4022148.mp3"
+      } ]
+    }, {
+      "text" : "- Large differences in sentence length between the two languages.\n- Confusing reactions from your audience.\n- Speech and nonverbal behavior that don't seem to match.\n- Inconsistent use of terminology.\n- Your interpreter's body language indicating discomfort.",
+      "media" : [ {
+        "zid" : 4022149,
+        "xid" : "4022149.mp3",
+        "type" : "audio",
+        "file" : "4022149.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416951226600,
+      "xid" : "1416951226600.jpg",
+      "type" : "image",
+      "file" : "1416951226600.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

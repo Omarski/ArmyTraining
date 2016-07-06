@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page4014",
+    "type" : "Info",
+    "title" : "Social Organization",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/4843302169/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A U.S. service member posing with Afghan tribal elders"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Afghanistan is a tribal society with wealth concentrated and distributed via tribal leaders and heads of families.",
+      "media" : [ {
+        "zid" : 4032397,
+        "xid" : "4032397.mp3",
+        "type" : "audio",
+        "file" : "4032397.mp3"
+      } ]
+    }, {
+      "text" : "Both ethnic identity and relationships with extended family are extremely important in everyday life. Authority in an Afghan family lies with the most senior male family member, who is responsible for all major decisions that will affect his family. Elders are consulted on all matters of importance and are relied upon to make major decisions for their communities.",
+      "media" : [ {
+        "zid" : 4032398,
+        "xid" : "4032398.mp3",
+        "type" : "audio",
+        "file" : "4032398.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1457477906504,
+      "xid" : "1457477906504.jpg",
+      "type" : "image",
+      "file" : "1457477906504.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

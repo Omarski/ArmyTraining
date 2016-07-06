@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page3874",
+    "type" : "Info",
+    "title" : "Classified Information",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/4084900055/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Speaking with locals through an interpreter, Afghanistan"
+      } ]
+    },
+    "note" : [ {
+      "text" : "If you are going into a situation where there are security concerns, ensure that your interpreter has the appropriate clearances.",
+      "media" : [ {
+        "zid" : 4022142,
+        "xid" : "4022142.mp3",
+        "type" : "audio",
+        "file" : "4022142.mp3"
+      } ]
+    }, {
+      "text" : "Do not discuss classified information in front of an interpreter who does not have a clearance.",
+      "media" : [ {
+        "zid" : 4022143,
+        "xid" : "4022143.mp3",
+        "type" : "audio",
+        "file" : "4022143.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416960835549,
+      "xid" : "1416960835549.jpg",
+      "type" : "image",
+      "file" : "1416960835549.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "page" : {
+    "xid" : "page2118",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 2",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Wakdaar Manelay",
+      "zid" : 1461196074259,
+      "nom" : "Wakdaar_Manelay"
+    },
+    "media" : [ {
+      "zid" : 1466443029237,
+      "xid" : "1466443029237.jpg",
+      "type" : "image",
+      "file" : "1466443029237.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "You're in the middle of an important security meeting with your counterpart. Listen to what he says and choose the best response."
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "en",
+        "anchor" : "ezread",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : "ووبخی، خو اوس زما د مانځه وخت دیږ"
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : "wobakhay, kho oss zema de manza wakht dey."
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "Excuse me, but it's time for me to pray. "
+        }
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Religious responsibilities can take precedence over official ones. It's important to respect this practice."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "No problem, take your time."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, religious responsibilities can take precedence over official ones. It's inappropriate to hold up your counterpart in this situation."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "I understand, I'll finish up quickly so you can pray."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, religious responsibilities can take precedence over official ones. It's important to be patient. Your counterpart will return after prayer."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "No problem. How long do you think you'll be gone?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, religious responsibilities can take precedence over official ones. It's inappropriate to hold up your counterpart in this situation."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Can we finish up here before you go?"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

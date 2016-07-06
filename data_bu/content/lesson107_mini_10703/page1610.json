@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1610",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://pixabay.com/en/man-portrait-afghanistan-60644/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghan men"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4033910,
+        "xid" : "4033910.mp3",
+        "type" : "audio",
+        "file" : "4033910.mp3"
+      } ]
+    }, {
+      "text" : "- Recall key events in Afghanistan's history.",
+      "media" : [ {
+        "zid" : 4032352,
+        "xid" : "4032352.mp3",
+        "type" : "audio",
+        "file" : "4032352.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1457564003255,
+      "xid" : "1457564003255.jpg",
+      "type" : "image",
+      "file" : "1457564003255.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

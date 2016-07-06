@@ -1,0 +1,76 @@
+{
+  "page" : {
+    "xid" : "page2110",
+    "type" : "MultipleChoice",
+    "title" : "Practice 2",
+    "info" : null,
+    "prompt" : {
+      "text" : "From an Afghan perspective, being the oldest man in a community is associated with:"
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, the oldest man in the community may not be the wealthiest."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "wealth"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Never make decisions that affect a community without the input of its elders. Age and experience are similar to a kind of social \"rank\" and Afghan elders are community leaders."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "wisdom and authority"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, Afghan elders are significant members of the community."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "insignificance"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, the oldest man in the community may not be the most religious."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "religious devotion"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

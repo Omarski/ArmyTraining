@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2715",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Learning Objectives",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://secure.istockphoto.com/photo/darulaman-palace-kabul-gm533227321-56183544"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Darulaman Palace, Kabul"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this section, you will learn to:\n",
+      "media" : [ {
+        "zid" : 4032533,
+        "xid" : "4032533.mp3",
+        "type" : "audio",
+        "file" : "4032533.mp3"
+      } ]
+    }, {
+      "text" : "- Recognize the effects of leadership and governance structures on your mission.\n- Identify relationship building as a priority for mission success.",
+      "media" : [ {
+        "zid" : 4032534,
+        "xid" : "4032534.mp3",
+        "type" : "audio",
+        "file" : "4032534.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463683963492,
+      "xid" : "1463683963492.jpg",
+      "type" : "image",
+      "file" : "1463683963492.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

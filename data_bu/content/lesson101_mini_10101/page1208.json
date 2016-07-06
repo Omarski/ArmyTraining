@@ -1,0 +1,27 @@
+{
+  "page" : {
+    "xid" : "page1208",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Lesson Explorer",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "Upon completing a lesson in VCAT, you will be taken to the next lesson in your Customized Course of Instruction. You may complete the lessons in any order by clicking the Lessons button and selecting them from the Lesson Explorer. You must complete all required lessons in your Customized Course of Instruction to graduate.",
+      "media" : [ null ]
+    } ],
+    "media" : [ {
+      "zid" : 1340736395326,
+      "xid" : "1340736395326.jpg",
+      "type" : "image",
+      "file" : "1340736395326.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

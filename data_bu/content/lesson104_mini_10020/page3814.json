@@ -1,0 +1,161 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page3814",
+    "type" : "MultiNote",
+    "title" : "Building Rapport",
+    "related" : [ {
+      "xid" : "page3815",
+      "type" : "Info",
+      "title" : "Building Rapport [1]",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/pacificairforces/7371996276/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Sharing a meal with an interpreter, Vietnam"
+        } ]
+      },
+      "note" : [ {
+        "text" : "As discussed earlier, understanding your interpreter's background is a major part of the preparation needed before working together on assignments. Building a good relationship with your interpreter requires developing personal rapport by getting to know one another. This creates a solid foundation for communication.",
+        "media" : [ {
+          "zid" : 4022090,
+          "xid" : "4022090.mp3",
+          "type" : "audio",
+          "file" : "4022090.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1416960042089,
+        "xid" : "1416960042089.jpg",
+        "type" : "image",
+        "file" : "1416960042089.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3816",
+      "type" : "Info",
+      "title" : "Building Rapport [2]",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "http://www.dvidshub.net/image/58431/operation-nauroz-jhala#.VFrc4PnF-VM"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "U.S. Marine and interpreter drinking tea, Afghanistan"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Build rapport with your interpreter as you would with anyone else, by discussing topics such as family, sports, or food. Show interest in their home life, career, education, and aspirations.",
+        "media" : [ {
+          "zid" : 4022091,
+          "xid" : "4022091.mp3",
+          "type" : "audio",
+          "file" : "4022091.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1416948451609,
+        "xid" : "1416948451609.jpg",
+        "type" : "image",
+        "file" : "1416948451609.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3817",
+      "type" : "Info",
+      "title" : "Building Rapport [3]",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "http://www.dvidshub.net/image/511501/giroa-helps-locals-building-dam#.VGUmD_TF9m0"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An interpreter handing out gifts, Afghanistan"
+        } ]
+      },
+      "note" : [ {
+        "text" : "If you're working with a local interpreter, consider giving them a small gift that represents your country to show your appreciation. Making your interpreter part of your team will help motivate them and earn their loyalty.",
+        "media" : [ {
+          "zid" : 4022092,
+          "xid" : "4022092.mp3",
+          "type" : "audio",
+          "file" : "4022092.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1416948521050,
+        "xid" : "1416948521050.jpg",
+        "type" : "image",
+        "file" : "1416948521050.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3818",
+      "type" : "Info",
+      "title" : "Building Rapport [4]",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/isafmedia/5838385104/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Presenting an art exchange with an interpreter, Afghanistan"
+        } ]
+      },
+      "note" : [ {
+        "text" : "You are also building a professional relationship. Before working with your interpreter, make sure you are comfortable enough with each other to ask questions freely. It's also important to verify which languages and dialects they speak.",
+        "media" : [ {
+          "zid" : 4022093,
+          "xid" : "4022093.mp3",
+          "type" : "audio",
+          "file" : "4022093.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1416960181735,
+        "xid" : "1416960181735.jpg",
+        "type" : "image",
+        "file" : "1416960181735.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

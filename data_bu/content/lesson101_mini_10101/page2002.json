@@ -1,0 +1,21 @@
+{
+  "page" : {
+    "xid" : "page2002",
+    "type" : "Info",
+    "title" : "Welcome to VCAT AFPAK",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "Welcome to VCAT AFPAK! I'm Erica, your virtual coach and guide to the VCAT course. \n\nIn this course, you'll gain cultural awareness and learn language necessary for successfully conducting missions in Afghanistan and Pakistan. In addition, you'll also learn general facts about the cultures and regions featured in this course.\n\nOn the next page, you'll complete the Pre-Deployment Questionnaire to choose which missions you'll train for prior to your deployment. Good luck on your journey through VCAT AFPAK!"
+    } ],
+    "media" : [ {
+      "zid" : 1459889480065,
+      "xid" : "1459889480065.mp4",
+      "type" : "video",
+      "file" : "1459889480065.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ]
+  }
+}

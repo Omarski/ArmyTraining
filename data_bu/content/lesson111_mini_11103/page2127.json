@@ -1,0 +1,76 @@
+{
+  "page" : {
+    "xid" : "page2127",
+    "type" : "MultipleChoice",
+    "title" : "Practice 2",
+    "info" : null,
+    "prompt" : {
+      "text" : "When you sit down for a meal with Pakistanis, you should:"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "If you are offered multiple servings, you should accept as much as you can eat. Your hosts will take pride in giving you as much food as possible."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Accept as much as you can eat."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, you should not help yourself to food because your host will likely put food on your plate."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Help yourself to food."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, you should not start eating until the oldest person in the room has begun to eat."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Be the first to start eating."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, you should finish all of the food on your plate by the end of the meal."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Leave some food on your plate."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

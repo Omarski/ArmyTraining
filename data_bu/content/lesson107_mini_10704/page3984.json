@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3984",
+    "type" : "Info",
+    "title" : "Government",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Afghan_parliament_in_2006.jpg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A National Assembly meeting in 2006"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Officially called the Islamic Republic of Afghanistan, the country has been a constitutional republic since the fall of the Taliban in 2001. The most recent constitution provides for one directly elected president and two vice presidents. Ashraf Ghani succeeded Hamid Karzai as president in 2014.",
+      "media" : [ {
+        "zid" : 4032377,
+        "xid" : "4032377.mp3",
+        "type" : "audio",
+        "file" : "4032377.mp3"
+      } ]
+    }, {
+      "text" : "The national assembly consists of a directly elected lower house and an upper house. The constitution requires that each province elect two women to serve in the lower house, meaning that 25% of this house is female.",
+      "media" : [ {
+        "zid" : 4032378,
+        "xid" : "4032378.mp3",
+        "type" : "audio",
+        "file" : "4032378.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1457476624365,
+      "xid" : "1457476624365.jpg",
+      "type" : "image",
+      "file" : "1457476624365.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

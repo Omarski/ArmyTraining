@@ -1,0 +1,53 @@
+{
+  "page" : {
+    "xid" : "page4724",
+    "type" : "QuizStart",
+    "title" : "Next Steps",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "quiz",
+        "value" : "start"
+      }, {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Speaking with an Afghan local"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "This concludes our introduction to culture.",
+      "media" : [ {
+        "zid" : 4011287,
+        "xid" : "4011287.mp3",
+        "type" : "audio",
+        "file" : "4011287.mp3",
+        "info" : null
+      } ]
+    }, {
+      "text" : "Because culture is so complex and involves so many things, you'll find many different examples discussed throughout this course. If you have time, you might want to return to this lesson and read it again later with new examples in mind.",
+      "media" : [ {
+        "zid" : 4011288,
+        "xid" : "4011288.mp3",
+        "type" : "audio",
+        "file" : "4011288.mp3",
+        "info" : null
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450729255886,
+      "xid" : "1450729255886.jpg",
+      "type" : "image",
+      "file" : "1450729255886.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

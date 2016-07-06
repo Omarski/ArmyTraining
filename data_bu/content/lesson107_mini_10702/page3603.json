@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3603",
+    "type" : "Info",
+    "title" : "Location in the World",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Map showing the location of Afghanistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Afghanistan is a landlocked nation in the southern part of Central Asia. It shares a border with Pakistan to the south and east, Iran to the west, and Uzbekistan, Tajikistan, and Turkmenistan to the north. Its eastern tip borders China.",
+      "media" : [ {
+        "zid" : 4032323,
+        "xid" : "4032323.mp3",
+        "type" : "audio",
+        "file" : "4032323.mp3"
+      } ]
+    }, {
+      "text" : "The Afghan landscape is arid and mountainous. It can be divided into three distinct regions: the northern plains, the central highlands, and the southwestern plateau.",
+      "media" : [ {
+        "zid" : 4032324,
+        "xid" : "4032324.mp3",
+        "type" : "audio",
+        "file" : "4032324.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460655371351,
+      "xid" : "1460655371351.jpg",
+      "type" : "image",
+      "file" : "1460655371351.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

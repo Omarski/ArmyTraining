@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page3858",
+    "type" : "Info",
+    "title" : "Evaluating Your Interpreter",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/870061/casualty-care-and-lifesaver-operations-course-comoros#.VFwNwfnF-VM"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Demonstrating CPR with an interpreter, Comoros"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Because you rely on interpreters for specialized knowledge, it's both difficult and important to verify their work. However, there are several proven methods for evaluating local interpreters.",
+      "media" : [ {
+        "zid" : 4022146,
+        "xid" : "4022146.mp3",
+        "type" : "audio",
+        "file" : "4022146.mp3"
+      } ]
+    }, {
+      "text" : "Another interpreter can observe and verify the interpreter's work. A second way of evaluating interpreters is to observe them working with another member of your team, to see their skills and methods from another vantage point. Finally, if possible, record a conversation and have it checked by a speaker of the language.",
+      "media" : [ {
+        "zid" : 4022147,
+        "xid" : "4022147.mp3",
+        "type" : "audio",
+        "file" : "4022147.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416951170932,
+      "xid" : "1416951170932.jpg",
+      "type" : "image",
+      "file" : "1416951170932.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

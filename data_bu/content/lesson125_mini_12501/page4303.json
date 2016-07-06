@@ -1,0 +1,19 @@
+{
+  "page" : {
+    "xid" : "page4303",
+    "type" : "Objex",
+    "layout" : "",
+    "title" : "Objex",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "objex",
+        "value" : "./data/content/objex/AFPAKObjex.json"
+      } ]
+    },
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

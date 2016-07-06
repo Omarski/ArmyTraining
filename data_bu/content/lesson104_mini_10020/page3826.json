@@ -1,0 +1,57 @@
+{
+  "page" : {
+    "xid" : "page3826",
+    "type" : "Info",
+    "title" : "Radios and Interpreters",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/883639/radio#.VFvsuPnF-VM"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Speaking on radios, Afghanistan"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Interpreters and radios are both means of communication that require you to:",
+      "media" : [ {
+        "zid" : 4022106,
+        "xid" : "4022106.mp3",
+        "type" : "audio",
+        "file" : "4022106.mp3"
+      } ]
+    }, {
+      "text" : "- Collect your thoughts before speaking.\n- Speak in clear, concise sentences.\n- Wait for your counterpart to finish speaking before you respond.\n- Confirm that your message was received.\n- Plan on extra time to communicate.",
+      "media" : [ {
+        "zid" : 4022107,
+        "xid" : "4022107.mp3",
+        "type" : "audio",
+        "file" : "4022107.mp3"
+      } ]
+    }, {
+      "text" : "In both cases, if you and your counterpart talk at the same time, neither of you will hear the other's message. It's important to speak in short and simple statements, and be patient while your counterpart responds.",
+      "media" : [ {
+        "zid" : 4022108,
+        "xid" : "4022108.mp3",
+        "type" : "audio",
+        "file" : "4022108.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416949105909,
+      "xid" : "1416949105909.jpg",
+      "type" : "image",
+      "file" : "1416949105909.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

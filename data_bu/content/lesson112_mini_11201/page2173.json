@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page2173",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Why It Matters",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "In Afghanistan, natural disasters such as earthquakes, floods, droughts, and avalanches occur regularly. Ongoing conflict has led to a large number of displaced people as well. If you are conducting an HA mission, you may be addressing the basic needs of the population after a disaster or training Afghan service members to do so. ",
+      "media" : [ {
+        "zid" : 4034372,
+        "xid" : "4034372.mp3",
+        "type" : "audio",
+        "file" : "4034372.mp3"
+      } ]
+    }, {
+      "text" : "Learning about the region will greatly increase your understanding of the specific humanitarian situation and contribute to the success of your mission. ",
+      "media" : [ {
+        "zid" : 4034373,
+        "xid" : "4034373.mp3",
+        "type" : "audio",
+        "file" : "4034373.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1340736395326,
+      "xid" : "1340736395326.jpg",
+      "type" : "image",
+      "file" : "1340736395326.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

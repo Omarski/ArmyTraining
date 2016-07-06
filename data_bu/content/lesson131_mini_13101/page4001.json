@@ -1,0 +1,24 @@
+{
+  "page" : {
+    "xid" : "page4001",
+    "type" : "Info",
+    "title" : "Introduction to Providing Humanitarian Assistance (Pashto) - Scenario",
+    "info" : {
+      "property" : [ {
+        "name" : "lessonstart",
+        "value" : ""
+      }, {
+        "name" : "platforms",
+        "value" : "!NOT, vmob"
+      } ]
+    },
+    "media" : [ {
+      "zid" : 1460397555868,
+      "xid" : "1460397555868.jpg",
+      "type" : "image",
+      "file" : "1460397555868.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ]
+  }
+}

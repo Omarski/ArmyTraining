@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2338",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Rank",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/321055/pakistan-disaster-relief"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. service members meeting with Pakistani service members"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In the Pakistan military, rank is very important. Decisions are made by very high-ranking officers. Service members may not be able to make decisions that stray from their superiors’ official positions.",
+      "media" : [ {
+        "zid" : 4032510,
+        "xid" : "4032510.mp3",
+        "type" : "audio",
+        "file" : "4032510.mp3"
+      } ]
+    }, {
+      "text" : "When meeting with Pakistani counterparts, match your rank to theirs as closely as possible. It may be perceived as an insult to have a lower-ranking U.S. service member meet with a higher-ranking Pakistani. If matching rank isn't possible, behave respectfully to show that you recognize your counterpart’s rank.",
+      "media" : [ {
+        "zid" : 4032511,
+        "xid" : "4032511.mp3",
+        "type" : "audio",
+        "file" : "4032511.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460389592057,
+      "xid" : "1460389592057.jpg",
+      "type" : "image",
+      "file" : "1460389592057.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

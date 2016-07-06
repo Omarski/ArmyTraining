@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page6612",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "A Common Starting Point",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/whobee/3085517606/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Bedouin guide, Jordan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "While there are varying needs and missions, it's critical to have a common starting point for learning about culture. That common starting point usually involves four basic questions:",
+      "media" : [ {
+        "zid" : 4011241,
+        "xid" : "4011241.mp3",
+        "type" : "audio",
+        "file" : "4011241.mp3"
+      } ]
+    }, {
+      "text" : "- \"What is culture?\" \n- \"Who am I?\"\n- \"What makes them who they are?\"\n- \"What's going on around me?\"",
+      "media" : [ {
+        "zid" : 4011242,
+        "xid" : "4011242.mp3",
+        "type" : "audio",
+        "file" : "4011242.mp3"
+      } ]
+    }, {
+      "text" : "The questions align with four basic competencies of culture study. Let's take a look at each of these competencies individually.",
+      "media" : [ {
+        "zid" : 4011243,
+        "xid" : "4011243.mp3",
+        "type" : "audio",
+        "file" : "4011243.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1441307127868,
+      "xid" : "1441307127868.jpg",
+      "type" : "image",
+      "file" : "1441307127868.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

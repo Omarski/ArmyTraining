@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2316",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Speaking Urdu",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://pixabay.com/en/pakistan-border-signage-sign-71671/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An English and Urdu sign marking Pakistan's border"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Most educated Pakistanis and military personnel speak English fluently.",
+      "media" : [ {
+        "zid" : 4032479,
+        "xid" : "4032479.mp3",
+        "type" : "audio",
+        "file" : "4032479.mp3"
+      } ]
+    }, {
+      "text" : "Nevertheless, greeting Urdu speakers in Urdu will go a long way toward building relationships. Don't let concerns about perfect pronunciation prevent you from trying to speak Urdu. Your counterparts will understand that you are learning and will appreciate your efforts.",
+      "media" : [ {
+        "zid" : 4032480,
+        "xid" : "4032480.mp3",
+        "type" : "audio",
+        "file" : "4032480.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1459280535815,
+      "xid" : "1459280535815.jpg",
+      "type" : "image",
+      "file" : "1459280535815.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

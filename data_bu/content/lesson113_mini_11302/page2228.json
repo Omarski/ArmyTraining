@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2228",
+    "type" : "Info",
+    "title" : "Introductions",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. service member speaking with an Afghan border police officer"
+      } ]
+    },
+    "note" : [ {
+      "text" : "You can build trust with a new counterpart from the ground up, but it's always a good idea to be introduced through a mutual acquaintance. Not only can your acquaintance make ice-breaking conversations easier, they can vouch for your integrity and establish you as a professional and expert on the team.",
+      "media" : [ {
+        "zid" : 4032550,
+        "xid" : "4032550.mp3",
+        "type" : "audio",
+        "file" : "4032550.mp3"
+      } ]
+    }, {
+      "text" : "Likewise, outgoing service members should always introduce new U.S. team members to local counterparts with praise, even if their relationship is new. ",
+      "media" : [ {
+        "zid" : 4032551,
+        "xid" : "4032551.mp3",
+        "type" : "audio",
+        "file" : "4032551.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462313334320,
+      "xid" : "1462313334320.jpg",
+      "type" : "image",
+      "file" : "1462313334320.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

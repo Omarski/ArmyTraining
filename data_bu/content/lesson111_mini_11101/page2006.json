@@ -1,0 +1,123 @@
+{
+  "page" : {
+    "xid" : "page2006",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 7",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Tariq Osmani",
+      "zid" : 1462830371130,
+      "nom" : "Tariq_Osmani"
+    },
+    "media" : [ {
+      "zid" : 1466444588397,
+      "xid" : "1466444588397.jpg",
+      "type" : "image",
+      "file" : "1466444588397.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "Listen to your counterpart and choose the best response."
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "en",
+        "anchor" : "ezread",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : "آپ کا کیا حال ہے؟"
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "aap ka kia haal hai?"
+        }
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "\"I'm fine, thank you\" is the best response."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "main theek hoon, shukiah."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That's the question you were asked."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "aap ka kia haal hai?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That means, \"Hello.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "asalaam 'aleykum."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That means, \"Hello.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "wa 'aleykum asalaam."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

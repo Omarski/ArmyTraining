@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "name": "Gestures",
+      "type": "gesture",
+      "assets": [
+        {
+          "name": "Hand-Over-Heart",
+          "type": "video",
+          "path": "data/reference/gestures/AfgHeart.mp4",
+          "description": "To convey respect when greeting someone, place the palm of your right hand over your heart."
+        },
+        {
+          "name": "Handshake with Hand-Over-Heart",
+          "type": "video",
+          "path": "data/reference/gestures/AfgShake.mp4",
+          "description": "To greet someone of the same sex who's near you, shake their hand lightly, then place the palm of your right hand over your heart.",
+          "producerGender":"any",
+          "receiverGender":"any",
+          "producerAge":"any",
+          "receiverAge":"any",
+          "distance":"any"
+        }
+
+      ]
+    },
+    {
+      "name": "Map",
+      "type": "image",
+      "assets": [
+        {
+          "name": "",
+          "type": "image",
+          "path": "data/reference/map/AFPAK_Overview_02.jpg"
+        }
+      ]
+    },
+    {
+      "name": "PDF Takeaways",
+      "type": "pdfList",
+      "assets": [
+        {
+          "name": "Aghanistan - Dari - Humanitarian Assistance",
+          "type": "pdf",
+          "path": "data/reference/pdf/Aghanistan - Dari - Humanitarian Assistance.pdf"
+        },
+		{
+          "name": "Aghanistan - Dari - Leader Engagements",
+          "type": "pdf",
+          "path": "data/reference/pdf/Aghanistan - Dari - Leader Engagements.pdf"
+        },
+		{
+          "name": "Aghanistan - Pashto - Humanitarian Assistance",
+          "type": "pdf",
+          "path": "data/reference/pdf/Aghanistan - Pashto - Humanitarian Assistance.pdf"
+        },
+		{
+          "name": "Aghanistan - Pashto - Leader Engagements",
+          "type": "pdf",
+          "path": "data/reference/pdf/Aghanistan - Pashto - Leader Engagements.pdf"
+        },
+        {
+          "name": "Pakistan - Humanitarian Assistance",
+          "type": "pdf",
+          "path": "data/reference/pdf/Pakistan - Humanitarian Assistance.pdf"
+        },
+        {
+          "name": "Pakistan - Leader Engagements",
+          "type": "pdf",
+          "path": "data/reference/pdf/Pakistan - Leader Engagements.pdf"
+        },
+        {
+          "name": "Introduction to Aghanistan",
+          "type": "pdf",
+          "path": "data/reference/pdf/VCAT_AFPAK_Introduction_to_AFG.pdf"
+        },
+        {
+          "name": "Introduction to Pakistan",
+          "type": "pdf",
+          "path": "data/reference/pdf/VCAT_AFPAK_Introduction_to_PAK.pdf"
+        },
+        {
+          "name": "Working with Interpreters",
+          "type": "pdf",
+          "path": "data/reference/pdf/WWI 3 PDF Takeaway.pdf"
+        }
+      ]
+    },
+    {
+      "name": "dictionaries",
+      "type": "dictionary",
+      "assets": [
+        {
+          "name": "ar",
+          "type": "dictionary",
+          "path": "data/reference/dictionaries/Dictionary-ar.json"
+        },
+        {
+          "name": "ar-MA",
+          "type": "dictionary",
+          "path": "data/reference/dictionaries/Dictionary-ar-MA.json"
+        },
+        {
+          "name": "fr",
+          "type": "dictionary",
+          "path": "data/reference/dictionaries/Dictionary-fr.json"
+        }
+      ]
+    }
+
+  ]
+}

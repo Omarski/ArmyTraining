@@ -30,7 +30,8 @@ function getPageState(props) {
         currentIndex:0,
         puzzlePiecesColl:null,
         phase:"start",
-        resetBottomCanvas: false
+        resetBottomCanvas: false,
+        showBottomCanvas: true
     };
 
 
@@ -147,14 +148,17 @@ var PuzzleMapView = React.createClass({
         self.setState({
                        currentIndex:0,
                        scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1, correct:0},
-                       phase:"play"
-                       //resetBottomCanvas:true
+                       //phase:"play",
+                        showBottomCanvas:false
+
+
         },
             function(){
                 //self.updatePhase("play");
                 self.updateHUDView(true);
                 setTimeout(function(){
-                    self.setState({resetBottomCanvas:true});
+                    //self.setState({resetBottomCanvas:true});
+                    self.setState({showBottomCanvas:true, phase:"play"});
                 },500);
             }
         );
@@ -273,7 +277,6 @@ var PuzzleMapView = React.createClass({
                             renderHUD = {self.renderHUD}
                             updateHUDView = {self.updateHUDView}
                             updatePhase = {self.updatePhase}
-                            resetBottomCanvas = {self.state.resetBottomCanvas}
                         />:null}
 
                         {state.showHUD ? <PuzzleMapHUDView
@@ -285,8 +288,8 @@ var PuzzleMapView = React.createClass({
 
                         {state.phase === "finished" ? self.showFinishHud(): null}
 
-                        <canvas width="768" height="504" id="puzzleMapViewBottomCanvas" className = "puzzle-map-view-bottom-canvas">
-                        </canvas>
+                        {state.showBottomCanvas? <canvas width="768" height="504" id="puzzleMapViewBottomCanvas" className = "puzzle-map-view-bottom-canvas">
+                        </canvas>:null}
                     </div>
                 </div>
             </div>

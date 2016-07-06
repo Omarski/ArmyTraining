@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page3961",
+    "type" : "Info",
+    "title" : "Urbanization",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/wnQotj"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Teenagers in Lahore, Pakistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Around 40% of Pakistan's population lives in cities.",
+      "media" : [ {
+        "zid" : 4032200,
+        "xid" : "4032200.mp3",
+        "type" : "audio",
+        "file" : "4032200.mp3"
+      } ]
+    }, {
+      "text" : "Since the country's independence in 1947, cities have grown tremendously. However, much of this growth has happened without planning or oversight. As a result, large areas of cities lack many basic services. On average, services are still better in cities than rural areas.",
+      "media" : [ {
+        "zid" : 4032201,
+        "xid" : "4032201.mp3",
+        "type" : "audio",
+        "file" : "4032201.mp3"
+      } ]
+    }, {
+      "text" : "Each major city is ethnically diverse. All the same, city residents remain closely tied to their ethnolinguistic groups’ home regions.",
+      "media" : [ {
+        "zid" : 4032202,
+        "xid" : "4032202.mp3",
+        "type" : "audio",
+        "file" : "4032202.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460567905191,
+      "xid" : "1460567905191.jpg",
+      "type" : "image",
+      "file" : "1460567905191.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

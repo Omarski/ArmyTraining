@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page2347",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Interpreters",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "A U.S. service member speaking with an interpreter"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/548128/tf-blue-geronimo-detains-suspected-insurgents-during-three-day-mission"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "You probably won’t be using an interpreter if you are working with English-speaking counterparts. However, if you do have an interpreter, it can be a good idea to use them as a cultural adviser.",
+      "media" : [ {
+        "zid" : 4032521,
+        "xid" : "4032521.mp3",
+        "type" : "audio",
+        "file" : "4032521.mp3"
+      } ]
+    }, {
+      "text" : "Try to choose an interpreter who is older, particularly for civilian interactions. A young interpreter may not be willing to speak to your counterparts in a direct manner. To build rapport more easily, it can also be helpful to use an interpreter who is from the region where you are interacting with locals.",
+      "media" : [ {
+        "zid" : 4032522,
+        "xid" : "4032522.mp3",
+        "type" : "audio",
+        "file" : "4032522.mp3"
+      } ]
+    }, {
+      "text" : "You can find more information in the Working with Interpreters lesson.",
+      "media" : [ {
+        "zid" : 4032523,
+        "xid" : "4032523.mp3",
+        "type" : "audio",
+        "file" : "4032523.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1458333181805,
+      "xid" : "1458333181805.jpg",
+      "type" : "image",
+      "file" : "1458333181805.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

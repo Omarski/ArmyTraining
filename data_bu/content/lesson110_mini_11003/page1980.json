@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page1980",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://secure.istockphoto.com/photo/marine-walking-to-helicopters-gm153772908-15403252"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Service member approaching helicopters"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4032595,
+        "xid" : "4032595.mp3",
+        "type" : "audio",
+        "file" : "4032595.mp3"
+      } ]
+    }, {
+      "text" : "- Identify authority figures and leadership.\n- Identify strategies for working with decision makers.\n- Support your counterparts in taking the lead.\n",
+      "media" : [ {
+        "zid" : 4032596,
+        "xid" : "4032596.mp3",
+        "type" : "audio",
+        "file" : "4032596.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463683920678,
+      "xid" : "1463683920678.jpg",
+      "type" : "image",
+      "file" : "1463683920678.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}
