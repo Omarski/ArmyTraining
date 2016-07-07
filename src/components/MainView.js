@@ -22,6 +22,7 @@ var ASRStore = require('../stores/ASRStore');
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
 var AppStateActions = require('../actions/AppStateActions');
+var SettingsStore = require('../stores/SettingsStore');
 
 
 var ASRWidget = require('../components/widgets/ASR');
@@ -35,7 +36,8 @@ function getBookState() {
     }
 
     return {
-        title: title
+        title: title,
+        volume: SettingsStore.voiceVolume()
     };
 }
 
@@ -127,6 +129,10 @@ var MainView = React.createClass({
 
         return (
             <div>
+                <audio id="mainViewAudio" volume={this.state.volume}>
+                    <source id="mainViewMp3Source" src="" type="audio/mp3"></source>
+                    Your browser does not support the audio format.
+                </audio>
                 <HeaderView title={this.title} />
                 <ContentView />
                 <FooterView  />

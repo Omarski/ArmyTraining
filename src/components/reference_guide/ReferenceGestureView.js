@@ -28,7 +28,9 @@ var ReferenceGestureView = React.createClass({
         var self = this;
         return (
             <div id="referenceGestureView">
-                <FilterableTable dictionary={self.state.gestureSources} hasVideo={true} hasHeaders={false} />
+                <FilterableTable dictionary={self.state.gestureSources}
+                                 hasVideo={true}
+                                 hasHeaders={false} />
             </div>
         );
     },
