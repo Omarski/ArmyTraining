@@ -1,13 +1,8 @@
-/**
- * Created by omaramer on 5/13/16.
- */
 
 var React = require('react');
 var ImageLayersView = require('../../../widgets/ImageLayersView');
 
 var CultureQuestMap = React.createClass({
-
-    // props:  imageData, onLayersReady, onRegionClicked
     
     getInitialState: function() {
 
