@@ -15,14 +15,13 @@ function getPageState(props) {
         draggedItemLetter: "",
         draggedItemTarget: "",
         draggedItemData: "",
-        isGraded: false,
         numMoved: 0
     };
 
     if (props && props.page) {
         data.title = props.page.title;
         data.pageType = props.page.type;
-        data.prompt = props.page.prompt.text;
+        data.prompt = props.page.prompt ? props.page.prompt.text : "";
         data.page = props.page;
 
         //LINE 25 causes an error on Lesson 9/18 Pages 33/167 (cannot read property 'text' of null --> Is this supposed to be props.page.text?
@@ -290,7 +289,6 @@ var MatchItemView = React.createClass({
         var incorrect = "glyphicon MI-feedback MI-incorrect glyphicon-remove-circle";
         var answerContainers;
 
-        var isGraded = state.isGraded;
         var numMoved = state.numMoved;
 
         if(numMoved === numQuestions){
