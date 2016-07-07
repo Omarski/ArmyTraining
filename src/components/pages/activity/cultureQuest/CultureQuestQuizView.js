@@ -16,9 +16,9 @@ var CultureQuestQuiz = React.createClass({
         return {
             mediaPath:'data/media/',
             timerController:"play",
-            timerDuration:30,
+            timerDuration:59,
             timerMessage:"",
-            timerReportAt:{time:20, alert:"hintTime"},
+            timerReportAt:{time:30, alert:"hintTime"},
             timerParentAlerts:null,
             questionDisplayObj:{},
             correctAnswer:"",
@@ -94,7 +94,7 @@ var CultureQuestQuiz = React.createClass({
     renderBlocks: function(){
 
         var self = this;
-
+        var blockCounter = 0;
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
         var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
 
@@ -107,8 +107,9 @@ var CultureQuestQuiz = React.createClass({
         for (var i = 0 ; i < answerBlocksArray.length; i++) {
 
             var blocks = answerBlocksArray[i].split('').map(function (letter, index) {
+                blockCounter += 1;
                 return (
-                    <CultureQuestInputBlocksView id={"culture-quest-quiz-view-inputBlock"+index} key={index}/>
+                    <CultureQuestInputBlocksView id={"culture-quest-quiz-view-inputBlock"+parseInt(blockCounter - 1)} key={index}/>
                 )
             });
 
@@ -192,7 +193,7 @@ var CultureQuestQuiz = React.createClass({
         });
 
         //correct
-        if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase()) {
+        if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase().replace(" ","")) {
 
             answerObj["question"+ answerObj.onQuestion].answered = true;
 
@@ -204,8 +205,9 @@ var CultureQuestQuiz = React.createClass({
             //Question 1 correct
             }else{
                 answerObj.question1.answered = true;
-                answerObj.onQuestion = 2;
-                this.resetQuestion();
+                //answerObj.onQuestion = 2;
+                self.awardPuzzlePiece();
+                //this.resetQuestion();
             }
         //incorrect
         }else{
