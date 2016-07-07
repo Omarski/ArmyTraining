@@ -123,19 +123,13 @@ var MainView = React.createClass({
 
             var ie8Text = (
                 <div>
-                    <div>Internet Explorer 8 and earlier versions are not supported.<br></br>
-                        <div>Click <a href = "https://www.microsoft.com/en-us/download/internet-explorer.aspx" target = "_blank">here</a> to download
-                            the latest version.</div>
-                        </div>
+                   Your browser version is unsupported for this course. Please upgrade your browser.
                 </div>
             );
 
             var ie9to11Text = (
                 <div>
-                    <div>For your version of explorer, make sure Java is enabled on your machine for full
-                        languages support.<br></br>
-                        <div>Click <a href = "https://java.com/en/download/help/enable_panel.xml" target = "_blank">here</a> for instructions.</div>
-                        </div>
+                    To access all the features of this course, you must have Java enabled on your computer. Please install and/or upgrade Java and allow it to run when prompted.
                 </div>
             );
 
