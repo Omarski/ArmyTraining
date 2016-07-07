@@ -32,13 +32,13 @@ button.navbar-toggle:hover {
     ul {
       display: none;
     }
+    .dropdown {
+      display: none !important;
+    }
+
   }
 
   .bookmark-nav-item {
-    display: none !important;
-  }
-
-  .dropdown {
     display: none !important;
   }
 
