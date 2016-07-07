@@ -402,7 +402,7 @@ var EthnoToggleDiv = React.createClass({
         for(var i = 0; i < mapData.areas.length; i = i + 2){
             var region = mapData.areas[i];
             toggleElements.push(
-                <div className="checkbox">
+                <div key={"checkboxDiv" + i} className="checkbox">
                     <label>
                         <input type="checkbox" id={"ethno-checkbox-" + i} data-region = {region.label} data-index={i} onClick = {self.toggleOnClick} />
                         <span id={"ethno-toggle-name-" + i}>{region.label + " "} </span>
