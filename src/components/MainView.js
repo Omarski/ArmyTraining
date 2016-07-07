@@ -22,8 +22,7 @@ var ASRStore = require('../stores/ASRStore');
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
 var AppStateActions = require('../actions/AppStateActions');
-
-
+var PopupView = require('../components/widgets/PopupView');
 var ASRWidget = require('../components/widgets/ASR');
 
 function getBookState() {
@@ -88,6 +87,8 @@ var MainView = React.createClass({
 
     getInitialState: function() {
         var bookState = getBookState();
+        bookState.browserPopObj = null;
+        bookState.explorerVer = -1;
         return bookState;
     },
 
@@ -103,11 +104,7 @@ var MainView = React.createClass({
 
     componentDidMount: function() {
         window.addEventListener('resize', this.handleResize);
-        NotificationActions.show({
-            title: 'Please wait',
-            body: 'Loading...'
-        });
-        LocalizationActions.load();
+        this.prepIEPopup();
     },
 
     componentWillUnmount: function() {
@@ -118,6 +115,91 @@ var MainView = React.createClass({
         LocalizationStore.removeChangeListener(this._onLocalizationChange);
     },
 
+    prepIEPopup: function(){
+
+        var self = this;
+        var ver = this.getInternetExplorerVersion();
+        if (ver >= 0 && ver <= 11){
+
+            var ie8Text = (
+                <div>
+                    <div>Internet Explorer 8 and earlier versions are not supported.<br></br>
+                        <div>Click <a href = "https://www.microsoft.com/en-us/download/internet-explorer.aspx" target = "_blank">here</a> to download
+                            the latest version.</div>
+                        </div>
+                </div>
+            );
+
+            var ie9to11Text = (
+                <div>
+                    <div>For your version of explorer, make sure Java is enabled on your machine for full
+                        languages support.<br></br>
+                        <div>Click <a href = "https://java.com/en/download/help/enable_panel.xml" target = "_blank">here</a> for instructions.</div>
+                        </div>
+                </div>
+            );
+
+
+            var popupObj = {
+                id:"IEWarning",
+                onClickOutside: null,
+                popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff'},
+
+                content: function(){
+
+                    return(
+                        <div className="popup-view-content">
+                            <div className="popup-view-bodyText">
+                                {ver <= 8 ? ie8Text: ie9to11Text}
+                            </div>
+                            <div className="popup-view-buttonCont" style={{marginTop:'20px'}}>
+                                <button type="button" className="btn btn-default"
+                                        onClick={self.onCloseIEPopup}>Close</button>
+                            </div>
+                        </div>
+                    )
+                }
+            };
+            self.setState({browserPopObj:popupObj});
+        }else self.loadProject();
+
+    },
+
+    getInternetExplorerVersion: function(){
+
+        // Returns the version of Internet Explorer or a -1
+        // (indicating the use of another browser).
+        {
+            var rv = -1; // Return value assumes failure.
+            if (navigator.appName == 'Microsoft Internet Explorer') {
+                var ua = navigator.userAgent;
+                var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+                if (re.exec(ua) != null)
+                    rv = parseFloat(RegExp.$1);
+            }
+            this.setState({explorerVer: Math.floor(rv)});
+            return Math.floor(rv);
+        }
+    },
+
+    onCloseIEPopup: function(){
+        this.setState({browserPopObj:null});
+        if (this.state.explorerVer <= 8){
+            return false;
+        }else{
+            this.loadProject();
+        }
+    },
+
+    loadProject: function(){
+        NotificationActions.show({
+            title: 'Please wait',
+            body: 'Loading...'
+        });
+        LocalizationActions.load();
+    },
+
+
     /**
      * @return {object}
      */
@@ -126,6 +208,14 @@ var MainView = React.createClass({
 
         return (
             <div>
+                {this.state.browserPopObj ?
+                <PopupView
+                    id = {this.state.browserPopObj.id}
+                    popupStyle = {this.state.browserPopObj.popupStyle}
+                    onClickOutside = {this.state.browserPopObj.onClickOutside}
+                >{this.state.browserPopObj.content()}
+                </PopupView>:null}
+
                 <HeaderView title={this.title} />
                 <ContentView />
                 <FooterView  />
