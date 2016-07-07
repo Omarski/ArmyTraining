@@ -1,0 +1,199 @@
+//popup
+.objex-view-popCont {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  //intro pop
+  .objex-view-textIntro{
+    position:absolute;
+    width:550px;
+    left:118px;
+    top:124px;
+    line-height:24px;
+    font-size:17px;
+  }
+
+  //levels pop
+  .objex-view-popLevelIconCont{
+    position: absolute;
+    width: 162px;
+    height: 82px;
+    cursor:pointer;
+  }
+
+  .objex-view-popLevelIconText{
+    position:absolute;
+    font-weight:bold;
+    font-size:25px;
+    top:24px;
+    left:41px;
+  }
+
+  //level complete pop
+  .objex-view-textComplete{
+    position: absolute;
+    color:#000;
+    z-index:10;
+    top:35%;
+    width:100%;
+    text-align: center;
+    font-size:70px;
+  }
+
+  .objex-view-introButtonCont, .objex-view-completedButtonCont{
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    top:300px;
+    width:100px;
+    height:100px;
+
+    .objex-view-btn{
+      margin-top:15px;
+      display:block;
+      width:100px;
+      height:30px;
+    }
+  }
+  .objex-view-introButtonCont{
+    top:350px;
+  }
+
+  //info pop
+  .objex-view-infoPopClose{
+    position: absolute;
+    top:-20px;
+    right:-20px;
+    width:42px;
+    height:42px;
+    cursor: pointer;
+  }
+
+  .objex-view-infoPopTitle{
+    display:block;
+    width:275px;
+    height:32px;
+    border-bottom:2px solid #000;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px
+  }
+
+  .objex-view-infoPopImg{
+    top:10px;
+    right:15px;
+    float:right;
+    width:140px;
+    height:140px;
+  }
+
+  .objex-view-infoPopText{
+    font-size:13px;
+    line-height:13px;
+  }
+}
+
+//vav
+.objex-view-navCont{
+  position: absolute;
+  top:444px;
+  left:0;
+  width:768px;
+  height:105px;
+  background:#d0d0d0;
+
+  .objex-view-cellCont{
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 425px;
+    height: 90px;
+    margin-top: 5px;
+
+    .objex-view-cell{
+      margin-right:10px;
+      float: left;
+      display:block;
+      width:73px;
+      height:73px;
+      background:#fff;
+
+      .objex-view-cellImg{
+        position: relative;
+        top:0;
+        left:0;
+        width:73px;
+        height:73px;
+        opacity:0;
+      }
+
+      .objex-view-cellTitle{
+        position:relative;
+        top:3px;
+        left:0;
+        width:73px;
+        height:16px;
+        text-align: center;
+        font-size:12px;
+        line-height:12px;
+      }
+    }
+  }
+
+  .objex-view-navContDesc{
+    position: absolute;
+    top: 5px;
+    left: 25px;
+    text-align: center;
+    width:117px;
+    height:75px;
+    line-height:75px;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      font-size:13px;
+      line-height:13px;
+    }
+  }
+
+  .objex-view-navCoinCont{
+    position: absolute;
+    right:10px;
+    top:45px;
+    width:106px;
+    height:27px;
+
+    .objex-view-navCoin{
+      position: absolute;
+      top:0;
+      width:26px;
+      height:26px;
+    }
+  }
+
+  .objex-view-navContHintLabel{
+    position: absolute;
+    left:600px;
+    top:47px;
+    width:45px;
+    height:20px;
+    text-align:right;
+    font-size:14px;
+  }
+}
+
+
+.objex-view-textHalfway{
+  display:none;
+  position: absolute;
+  color:#fff;
+  z-index:10;
+  top:35%;
+  width:100%;
+  text-align: center;
+  font-size:70px;
+}
+

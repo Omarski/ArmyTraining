@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogConstants');
 var ActiveDialogActions = require('../../actions/active_dialog/ActiveDialogActions');
 var PageStore = require('../../stores/PageStore');
+var RemediationActions = require('../../actions/RemediationActions');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -467,6 +468,32 @@ function resetDialog() {
     _objectives = null;
 }
 
+// TODO this probably shouldnt be in here but instead in ActiveDialogActions
+// TODO this along with other methods
+function showRemediation() {
+
+    // gather objectives
+    if (_objectives) {
+
+        var gatheredRemedationPages = [];
+
+        _objectives.forEach( function(objective) {
+            if (objective.pass !== true) {
+                if (objective.remediationq) {
+                    gatheredRemedationPages = gatheredRemedationPages.concat(objective.remediationq)
+                }
+            }
+        });
+
+        // if remediation pages found trigger remediation
+        if (gatheredRemedationPages.length > 0) {
+            setTimeout(function() {
+                RemediationActions.create(gatheredRemedationPages);
+            }, 0.1);
+        }
+    }
+}
+
 function startDialog() {
     // attempt automatic input
     if( DATA.transitions.length > 0 && DATA.transitions[0].inputSymbols[0] === 'automatic' ) {
@@ -617,6 +644,9 @@ AppDispatcher.register(function(action) {
         case ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT:
             handleInput(action.data);
             ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_SHOW_REMEDIATION:
+            showRemediation();
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_SET_ACTIVE_COA:
             ActiveDialogStore.emitChange();

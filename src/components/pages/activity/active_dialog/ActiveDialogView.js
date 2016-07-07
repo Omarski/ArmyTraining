@@ -15,6 +15,7 @@ var ActiveDialogHistory = require('../../../../components/pages/activity/active_
 var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives');
 var ActiveDialogIntro = require('../../../../components/pages/activity/active_dialog/ActiveDialogIntro');
 var ActiveDialogEvaluation = require('../../../../components/pages/activity/active_dialog/ActiveDialogEvaluation');
+var RemediationView = require('../../../RemediationView');
 
 
 var _bAnimationPlaying = false;
@@ -271,6 +272,7 @@ var ActiveDialogView = React.createClass({
                         <ActiveDialogIntro />
                         <ActiveDialogEvaluation />
                         <ActiveDialogAudio />
+                        <RemediationView />
                     </div>
                 </div>
             );

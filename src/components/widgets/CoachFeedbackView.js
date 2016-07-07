@@ -42,6 +42,10 @@ var CoachFeedbackView = React.createClass({
         return getCoachFeedbackState(this.props);
     },
 
+    handleClose: function() {
+        this.setState({coachVisible: false});
+    },
+
     componentDidMount: function() {
         playCoachFeedback();
     },
@@ -58,13 +62,21 @@ var CoachFeedbackView = React.createClass({
         //SettingsStore.removeChangeListener(this._onChange);
     },
 
-    render: function() {
+    componentWillReceiveProps: function() {
+        this.setState({coachVisible: true});
+    },
 
+    render: function() {
         var cannedText = "";
         var coachMedia = "";
         var feedbackMap = {};
         var feedbackClass = "glyphicon MC-glyphicon MC-feedback";
         var mediaDir = "data/media/"; // TODO <-------------should be a global setting----------------------------------
+
+        // skip if hidden
+        if (this.state.coachVisible === false) {
+            return null;
+        }
 
         // get feedback object based on correctness
         if (this.props.isCorrect) {
@@ -111,13 +123,13 @@ var CoachFeedbackView = React.createClass({
 
         return (
             <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" className="close" aria-label="Close" onClick={this.handleClose}><span aria-hidden="true">&times;</span></button>
                 <div className="multiple-choice-alert-text">
                     {coachMedia}<h5><span className={feedbackClass}></span>{cannedText}<br></br>{this.props.text}</h5>
                 </div>
             </div>
         );
-    },
+    }
 });
 
 module.exports = CoachFeedbackView;

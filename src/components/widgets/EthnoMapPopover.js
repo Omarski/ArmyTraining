@@ -12,7 +12,8 @@ var EthnoMapPopover = React.createClass({
             show: true,
             showChanged: false,
             parentShow: this.props.showHide,
-            indexOfOverlayInfo: 0
+            indexOfOverlayInfo: 0,
+            popoverQuadrant: this.props.quadrant
         };
     },
     handleResize: function () {
@@ -23,6 +24,9 @@ var EthnoMapPopover = React.createClass({
         var self = this;
         window.addEventListener("resize", self.handleResize);
         self.handleResize();
+    },
+    componentWillMount: function(){
+
     },
     popoverPagesFunction: function(){
         var self = this;
@@ -96,17 +100,35 @@ var EthnoMapPopover = React.createClass({
     render: function() {
         var self = this;
 
-        var style = {
-            position: 'absolute',
-            backgroundColor: '#EEE',
-            boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
-            border: '1px solid #CCC',
-            borderRadius: 3,
-            marginLeft: 5,
-            marginTop: 5,
-            padding: 5,
-            zIndex: 999
-        };
+        // var style = {
+        //     position: 'absolute',
+        //     backgroundColor: '#EEE',
+        //     boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
+        //     border: '1px solid #CCC',
+        //     borderRadius: 3,
+        //     marginLeft: 5,
+        //     marginTop: 5,
+        //     padding: 5,
+        //     zIndex: 999
+        // };
+
+        console.log("quadrant", self.props.quadrant);
+
+        var style = {};
+
+        if(self.props.quadrant === 1){
+            style = {marginTop: 0, marginLeft: 0};
+        } else if (self.props.quadrant === 2){
+            style = {marginTop: 0 , marginLeft: 384};
+        } else if (self.props.quadrant === 3){
+            style = {marginTop: 315, marginLeft: 0};
+        } else if (self.props.quadrant === 4){
+            style = {marginTop: 315, marginLeft: 384};
+        } else {
+            console.log("ERROR!!!");
+        }
+
+        console.log("style", style);
 
         var checkIfPrevButtonIsDisabled = function(){
             if(self.state.indexOfOverlayInfo === 0){
@@ -128,9 +150,8 @@ var EthnoMapPopover = React.createClass({
 
             return (
                 <div>
-                    <ReactBootstrap.Overlay show={this.props.showHide} onHide={function(){self.setState({show: false})}}
-                                            container={this}>
-                        <div id="ethnoOverlay" className="ethno-overlay-main-div">
+                    <ReactBootstrap.Overlay show={this.props.showHide} onHide={function(){self.setState({show: false})}} container={this}>
+                        <div id="ethnoOverlay" className="ethno-overlay-main-div" style={style}>
                             <div className="ethno-overlay-title">
                                 <ul className="ethno-overlay-ul">
                                     <li className="ethno-overlay-li">

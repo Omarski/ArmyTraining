@@ -129,9 +129,23 @@ var EthnoLayersView = React.createClass({
 
             if (pixel[3] !== 0) {
                 pixelHit = true;
+                //If the region is visible
                 if(opacityLevel === "1") {
                     self.state.lastHighlightedRegion = canvasElement;
-                    self.props.onRollover(canvasElement, pixelX, pixelY, pageX);
+                    self.props.onRollover(canvasElement, pixelX, pixelY, pageX, false);
+                    if(opacityLevelHilight === "0" ) {
+                        $("#" + self.state.canvasColl[i + 1].id).removeClass("ethno-not-visible");
+                        $("#" + self.state.canvasColl[i + 1].id).addClass("ethno-visible");
+                    }
+                    $("#" + self.state.canvasColl[i + 1].id).css("zIndex", hilightZIndex);
+                }
+                //If the region is invisible
+                if(opacityLevel === "0"){
+                    console.log("inside opacity level");
+                    self.state.lastHighlightedRegion = canvasElement;
+                    self.props.onRollover(canvasElement, pixelX, pixelY, pageX, false);
+                    // $("#" + self.state.canvasColl[i].id).removeClass("ethno-not-visible");
+                    // $("#" + self.state.canvasColl[i].id).addClass("ethno-visible");
                     if(opacityLevelHilight === "0" ) {
                         $("#" + self.state.canvasColl[i + 1].id).removeClass("ethno-not-visible");
                         $("#" + self.state.canvasColl[i + 1].id).addClass("ethno-visible");
@@ -139,8 +153,7 @@ var EthnoLayersView = React.createClass({
                     $("#" + self.state.canvasColl[i + 1].id).css("zIndex", hilightZIndex);
                 }
             } else if (pixel[3] === 0 || opacityLevel === "0") {
-                if($("#" + self.state.canvasColl[i + 1].id).hasClass("ethno-visible"))
-                {
+                if($("#" + self.state.canvasColl[i + 1].id).hasClass("ethno-visible")) {
                     $("#" + self.state.canvasColl[i + 1].id).removeClass("ethno-visible");
                     $("#" + self.state.canvasColl[i + 1].id).addClass("ethno-not-visible");
                 }
@@ -162,10 +175,16 @@ var EthnoLayersView = React.createClass({
             var offset = $("#wrapperDiv").offset();
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
+            // console.log("x", x, "y", y);
             self.detectRegion(e, x, y, e.pageX, e.pageY);
         }
         else if (mode == "click"){
-            self.props.onClick(self.state.lastHighlightedRegion);
+            // console.log("self.state.lastHighlightedRegion", self.state.lastHighlightedRegion);
+            // console.log("x", x, "y", y);
+            var offset = $("#wrapperDiv").offset();
+            var x = function(){return e.pageX - offset.left}();
+            var y = function(){return e.pageY - offset.top}();
+            self.props.onClick(self.state.lastHighlightedRegion, x, y);
         } else if (mode = "mouseout") {
             if(!$("#toolTipperId").hasClass("ethno-not-visible")) {
                 $("#toolTipperId").addClass("ethno-not-visible");
