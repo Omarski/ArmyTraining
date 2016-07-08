@@ -17,6 +17,9 @@ var TimerCountdown = React.createClass({
         };
     },
 
+    componentWillMount: function() {
+    },
+
     componentDidMount: function() {
         this.state.timer = this.props.duration;
         this.renderTime();
@@ -68,10 +71,9 @@ var TimerCountdown = React.createClass({
     render: function() {
 
         var self = this;
-        return (<div>
-                    {self.state.timeLeft !== "" ? <div style={this.props.styling}>{(self.props.message) ? self.props.message : "Time left " + self.state.timeLeft + " seconds"}</div>:null}
-               </div>
-            )
+        return (
+           <div style={this.props.styling}>{(self.props.message) ? self.props.message : "Time left " + self.state.timeLeft + " seconds"}</div>
+        )
     }
 });
 
