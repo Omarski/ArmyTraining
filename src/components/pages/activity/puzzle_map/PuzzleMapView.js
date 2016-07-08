@@ -31,7 +31,8 @@ function getPageState(props) {
         puzzlePiecesColl:null,
         phase:"start",
         resetBottomCanvas: false,
-        showBottomCanvas: true
+        showBottomCanvas: true,
+        correctAttempts:0
     };
 
 
@@ -148,16 +149,14 @@ var PuzzleMapView = React.createClass({
         self.setState({
                        currentIndex:0,
                        scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1, correct:0},
-                       //phase:"play",
-                        showBottomCanvas:false
+                       showBottomCanvas:false,
+                       correctAttempts:0
 
 
         },
             function(){
-                //self.updatePhase("play");
                 self.updateHUDView(true);
                 setTimeout(function(){
-                    //self.setState({resetBottomCanvas:true});
                     self.setState({showBottomCanvas:true, phase:"play"});
                 },500);
             }
@@ -185,7 +184,7 @@ var PuzzleMapView = React.createClass({
         return(
             <div className = "puzzle-map-view-HUD-cont" id="puzzle-map-view-HUD-finish">
                 <div className="puzzle-map-view-HUD-text">Map complete!<br/>
-                    {self.state.scoreObj.currentIndex + 1}/{self.state.scoreObj.totalPieces}&nbsp; correct</div>
+                    {self.state.correctAttempts}/{self.state.scoreObj.totalPieces}&nbsp; correct</div>
                 <div className="puzzle-map-view-HUD-buttonCont">
                     <button className = "btn btn-primary" onClick={
                     this.replayGame
@@ -222,6 +221,10 @@ var PuzzleMapView = React.createClass({
 
     updatePhase: function(mode){
         this.setState({phase:mode});
+    },
+
+    updateAttempts: function(){
+        this.setState({correctAttempts:this.state.correctAttempts + 1});
     },
 
     onClosePopup: function(){
@@ -277,11 +280,13 @@ var PuzzleMapView = React.createClass({
                             renderHUD = {self.renderHUD}
                             updateHUDView = {self.updateHUDView}
                             updatePhase = {self.updatePhase}
+                            updateAttempts = {self.updateAttempts}
                         />:null}
 
                         {state.showHUD ? <PuzzleMapHUDView
                             hudStyle = {null}
                             scoreObj = {self.state.scoreObj}
+                            correctAttempts = {self.state.correctAttempts}
                         />:null}
 
                         {state.phase === "start" ? self.showStartHud(): null}

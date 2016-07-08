@@ -15,7 +15,7 @@ var PuzzleMapDnDView = React.createClass({
             imgBounds:{},
             bottomCanvas:null,
             bottomCanvasContext:null,
-            dropStatus:"",
+            dropStatus:"correct",
             originalPointer:{left:0, top:0}
         }
     },
@@ -26,7 +26,8 @@ var PuzzleMapDnDView = React.createClass({
         scoreObj: PropTypes.object.isRequired,
         renderHUD: PropTypes.func.isRequired,
         updateHUDView: PropTypes.func.isRequired,
-        updatePhase: PropTypes.func.isRequired
+        updatePhase: PropTypes.func.isRequired,
+        updateAttempts: PropTypes.func.isRequired
     },
 
     componentDidMount: function(){
@@ -199,11 +200,13 @@ var PuzzleMapDnDView = React.createClass({
 
         if (mode === "labeled"){
             imageObj.src = self.props.puzzlePiecesObj.labeled.src;
-            self.state.dropStatus = "correct";
+            if (self.state.dropStatus !== "hint") self.props.updateAttempts();
+            self.setState({dropStatus:"correct"});
 
             if (parseInt(self.props.scoreObj.currentIndex) < parseInt(self.props.scoreObj.totalPieces) - 1) {
                 self.props.renderHUD();
                 self.prepDraggableData();
+
             }else{
                 self.props.updatePhase("finished");
             }
@@ -211,7 +214,7 @@ var PuzzleMapDnDView = React.createClass({
         } else {
             if (self.state.dropStatus !== "hint") {
                 imageObj.src = self.props.puzzlePiecesObj.hint.src;
-                self.state.dropStatus = "hint";
+                self.setState({dropStatus:"hint"});
             }
         }
     },
