@@ -173,7 +173,16 @@
   height: 100%;
   padding-top: 0;
   top: 0;
+  .footer-page-state {
+    display: none;
+  }
+  .btn-close {
+    display: block;
+  }
+}
 
+.btn-close {
+  display: none;
 }
 
 .content-well {

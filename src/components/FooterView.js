@@ -242,7 +242,7 @@ var FooterView = React.createClass({
                         className="btn btn-default btn-lg btn-link btn-text-icon"
                         aria-label={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
                         onClick={this.toggleTOC}>
-                    <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-download btn-icon" : "glyphicon glyphicon-upload btn-icon"} aria-hidden="true"></span>{LocalizationStore.labelFor("footer", "lblExplorer")}
+                    <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon" : "glyphicon glyphicon-circle-arrow-up btn-icon"} aria-hidden="true"></span><span className="explorer-link">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
                 </button>
             );
             progressView = (
@@ -273,10 +273,10 @@ var FooterView = React.createClass({
                                     type="button" onClick={this.previous}
                                     className="btn btn-default btn-lg btn-link btn-step"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
-                                <span className="glyphicon glyphicon-circle-arrow-left btn-icon" aria-hidden="true"></span>
+                                <span className="glyphicon glyphicon-chevron-left btn-icon" aria-hidden="true"></span>
                             </button>
                         </td>
-                        <td>
+                        <td className="footer-page-state">
                             {this.state.currentPageIndex}/{this.state.currentUnitTotalPages}
                         </td>
                         <td>
@@ -286,8 +286,18 @@ var FooterView = React.createClass({
                                     onClick={this.next}
                                     className="btn btn-default btn-lg btn-link btn-step"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipNext")}>
-                                <span className="glyphicon glyphicon-circle-arrow-right btn-icon" aria-hidden="true"></span>
+                                <span className="glyphicon glyphicon-chevron-right btn-icon" aria-hidden="true"></span>
                             </button>
+
+                            <button title={LocalizationStore.labelFor("footer", "tooltipClose")}
+                                    alt={LocalizationStore.labelFor("footer", "tooltipClose")}
+                                    type="button"
+                                    onClick={this.toggleTOC}
+                                    className="btn btn-default btn-lg btn-link btn-close"
+                                    aria-label={LocalizationStore.labelFor("footer", "tooltipClose")}>
+                                    <span className="glyphicon glyphicon-remove btn-icon" aria-hidden="true"></span>
+                            </button>
+
                         </td>
                     </tr>
                     </tbody>
