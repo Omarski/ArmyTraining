@@ -277,13 +277,25 @@ var ExplorerView = React.createClass({
                     });
                 }
 
+                var cls = '';
+                if (index !== 0 && index !== items.length -1 ) {
+                    cls = ' footer-view-middle-items';
+                } else if (index === 0) {
+                    cls = ' footer-view-first-item';
+                } else {
+                    cls = ' footer-view-last-item';
+                }
                 return (
                     <div id={'accordion' +idStr + index} role="tablist" aria-multiselectable="true" key={index}>
-                        <li id={'heading' + idStr + index} className="list-group-item main-footer-section main-footer-row" onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
+                        <li id={'heading' + idStr + index} className={"list-group-item main-footer-section main-footer-row" + cls} onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
                             <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
                                 <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
                             </a>
                             {item.title}
+
+                            <span className="badge">
+                                <span className="glyphicon glyphicon-adjust" aria-hidden="true"></span>
+                             </span>
                         </li>
                         {sitems}
                     </div>
@@ -344,6 +356,21 @@ var TOCChapterRow = React.createClass({
         var idStr = this.props.idstr;
         var index = this.props.index;
         var self = this;
+        var icon = '';
+        var cls = '';
+        if (this.props.item.completed) {
+            cls += ' current';
+            icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
+        } else if (!this.props.item.completed) {
+            icon = (<span className="glyphicon glyphicon-remove fail" aria-hidden="true"></span>);
+            cls += ' visited';
+        } else if (this.props.item.visited) {
+            icon = (<span className="glyphicon glyphicon-adjust visited" aria-hidden="true"></span>);
+            cls += ' visited';
+        } else {
+            cls += ' not-seen';
+        }
+
         return (
             <li className="list-group-item main-footer-chapter-row main-footer-row" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
@@ -351,7 +378,7 @@ var TOCChapterRow = React.createClass({
                 </a>
                 {this.props.item.title}
                 <span className="badge">
-                 <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                 <span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>
                  </span>
             </li>
         );
@@ -399,19 +426,23 @@ var TOCPageRow = React.createClass({
 
     },
     render: function() {
-        var cls = 'main-footer-page-row';
+        var cls = '';
+        var icon = '';
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
-            cls += ' main-footer-page-row-active';
+            cls += ' current';
+            icon = (<span className="glyphicon glyphicon-star current" aria-hidden="true"></span>);
+        } else if (this.props.item.state && this.props.item.state.visited) {
+            icon = (<span className="glyphicon glyphicon-adjust visited" aria-hidden="true"></span>);
+            cls += ' visited';
         } else {
-            if (this.props.item.state && this.props.item.state.visited) {
-                cls += ' main-footer-page-row-visited';
-            }
+            cls += ' not-seen';
+            icon = (<span className="glyphicon glyphicon-off not-seen" aria-hidden="true"></span>);
         }
 
         return (
-            <li className="list-group-item main-footer-page-row main-footer-row" onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>
+            <li className={"list-group-item main-footer-page-row main-footer-row" + cls} onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>
                 <span className="badge">
-                    <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    {icon}
                 </span>
                 <a href="#" onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>{this.props.item.title}</a>
             </li>
