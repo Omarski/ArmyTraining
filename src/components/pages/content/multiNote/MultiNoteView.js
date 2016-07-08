@@ -1,9 +1,9 @@
 var React = require('react');
 var Slider = require('react-slick');
-var PageStore = require('../../../stores/PageStore');
-var PageHeader = require('../../widgets/PageHeader');
-var SettingsStore = require('../../../stores/SettingsStore');
-var ImageCaption = require('../../widgets/ImageCaption');
+var PageStore = require('../../../../stores/PageStore');
+var PageHeader = require('../../../widgets/PageHeader');
+var SettingsStore = require('../../../../stores/SettingsStore');
+var ImageCaption = require('../../../widgets/ImageCaption');
 
 function getPageState(props) {
     var data = {
@@ -190,7 +190,7 @@ var MultiNoteView = React.createClass({
             var caption = item.caption;
             // title will be the individual page titles, and caption is that pages image caption
             var sty = {
-                "background-image": "url(data/media/"+imageURL+")"
+                "backgroundImage": "url(data/media/"+imageURL+")"
             };
             var thumbnail = (
                 <button className="btn btn-default" data={index}
@@ -286,13 +286,8 @@ var MultiNoteView = React.createClass({
                 </div>
             </div>
         );
-    },
-    /**
-     * Event handler for 'change' events coming from the BookStore
-     */
-    _onChange: function() {
-        //this.setState(getPageState());
     }
+
 });
 
 module.exports = MultiNoteView;

@@ -1,12 +1,12 @@
 .footer {
   position: fixed;
-  bottom: 0px;
+  bottom: 5px;
 
   /* Set the fixed height of the footer here */
 
   background-color: #fff;
-  left: 0px;
-  right: 0px;
+  left: 5px;
+  right: 5px;
   z-index: 9999;
 }
 
@@ -24,22 +24,31 @@
 
 .main-footer-chapter-row {
   font-style: italic;
+  padding-left: 45px;
+}
+
+.main-footer-section {
+  background-color: $explorer-section-bg-color;
+}
+
+.main-footer-row {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 
 .main-footer-chapter-row:first-child, .main-footer-page-row:first-child {
-  font-style: italic;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
 
 .main-footer-chapter-row:last-child, .main-footer-page-row:last-child {
-  font-style: italic;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
 .main-footer-page-row {
-  padding-left: 25px;
+  padding-left: 90px;
 }
 .main-footer {
   height: 40px;
@@ -49,6 +58,8 @@
 
 .main-footer-page-nav {
   height: 100%;
+  overflow: hidden;
+  border: 1px solid $border-color !important;
 
 }
 

@@ -5,9 +5,6 @@ var BookmarkConstants = require('../constants/BookmarkConstants');
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
-
-console.log("store.get", store.get);
-
 function setCurrent(data) {
     var bm = store.get('bookmark');
     var obj = {};

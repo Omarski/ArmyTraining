@@ -10,6 +10,7 @@ var ProgressView = require('../components/ProgressView');
 var ExplorerStore = require('../stores/ExplorerStore');
 
 var _expanded = {};
+var _expandedChapters = {};
 
 function getUnitState(expanded) {
     var units = UnitStore.getAll();
@@ -78,11 +79,19 @@ function getUnitState(expanded) {
                     }
                 }
 
+
+                var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
+                expandCollapseIconCls += ' glyphicon-plus-sign';
+                var ex = (_expandedChapters[c.xid]) ? _expandedChapters[c.xid] : false;
+                console.log(_expandedChapters[c.xid])
                 chapters.push({
+                    expandCollapseIconCls: expandCollapseIconCls,
+                    expanded: ex,
                     completed: chapterCompleted,
                     title: c.title,
                     percent: Math.round((tcpCompleted / tcpTotal) * 100),
-                    data: c
+                    data: c,
+                    id: c.xid
                 });
 
 
@@ -145,9 +154,6 @@ function getUnitState(expanded) {
 
 var ExplorerView = React.createClass({
     panelHeaderClick: function(item, index, idStr) {
-
-
-
         var btn = $('#heading' + idStr + index).find('.footer-expand-collapse-btn');
         if (btn.hasClass('glyphicon-plus-sign')) {
             btn.removeClass('glyphicon-plus-sign').addClass('glyphicon-minus-sign');
@@ -161,6 +167,18 @@ var ExplorerView = React.createClass({
 
         this.setState(getUnitState(true));
     },
+
+    chapterHeaderClick: function(item, index, idStr) {
+        item.expanded = true;
+        if (_expandedChapters[item.id]) {
+            _expandedChapters[item.id] = !_expandedChapters[item.id];
+        } else {
+            _expandedChapters[item.id] = true;
+        }
+
+        this.setState(getUnitState(true));
+    },
+
     _onLoadChange: function() {
         if (this.isMounted()) {
             this.setState(getUnitState(false));
@@ -237,75 +255,37 @@ var ExplorerView = React.createClass({
         this.setState(getUnitState(!this.state.expanded));
     },
 
-    /*
-     <table className="panel-title table table-condensed main-footer-accordian-table" onClick={self.panelHeaderClick.bind(self, index)}>
-     <tr className={item.unitCls}>
-     <td>
-     <div className="main-footer-table-icon-col">
-     <CheckIcon checked={item.completed} />
-     </div>
-     </td>
-     <td>
-     <div className="main-footer-table-icon-col">
-     <a role="button" data-toggle="collapse" data-parent={'#accordion' + index} href={'#collapse' + index} aria-expanded="true" aria-controls={'collapse' + index}>
-     <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
-     </a>
-     </div>
-     </td>
-     <td>
-     <h4>{item.title}</h4>
-     </td>
-     <td width="100%">
-     <div className="dots">&nbsp;</div>
-     </td>
-     <td width="55">
-     <h4>{item.completed ? "Complete" : ""}</h4>
-     </td>
-     <td>
-     <div className="main-footer-table-icon-col">
-     <h4>{item.percent}%</h4>
-     </div>
-     </td>
-     </tr>
-     </table>
-
-     <ul className="list-group">
-     <li className="list-group-item" >
-     <span className="badge">14</span>
-
-     </li>
-     </ul>
-
-
-
-     */
-
     explorerItems: function(items, idStr) {
         var self = this;
         var html = (<div></div>);
 
         if (items) {
             html = items.map(function(item, index) {
-                var details = (<div></div>);
-
+                var sitems = "";
                 if (_expanded[item.unit.id]) {
-                    details = <TOCDetails data={item.rows} unit={item.unit}/>
+                    sitems = item.rows.map(function(sitem, index) {
+                        var pages = "";
+                        if (sitem.expanded) {
+                            pages = (<TOCPages data={sitem.data.pages} chapter={sitem} unit={item.unit} idstr={idStr}/>);
+                        }
+                        return (
+                            <div key={'explorer-chapter-rows-' + index}>
+                                <TOCChapterRow item={sitem} chapter={sitem} unit={item.unit} idstr={idStr} expandHandler={self.chapterHeaderClick}/>
+                                {pages}
+                            </div>
+                        );
+                    });
                 }
+
                 return (
-                    <div className="panel-group main-footer-accordian" id={'accordion' +idStr + index} role="tablist" aria-multiselectable="true" key={index}>
-                        <div className="panel panel-default">
-                            <div className="panel-heading" role="tab" id={'heading' + idStr + index} onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
-                                <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
-                                    <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
-                                </a>
-                                {item.title}
-                            </div>
-                            <div id={'collapse' + idStr + index} className={item.unitExpandedCls} role="tabpanel" aria-labelledby={'heading' + idStr + index}>
-                                <div className="panel-body main-footer-panel-body">
-                                    {details}
-                                </div>
-                            </div>
-                        </div>
+                    <div id={'accordion' +idStr + index} role="tablist" aria-multiselectable="true" key={index}>
+                        <li id={'heading' + idStr + index} className="list-group-item main-footer-section main-footer-row" onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
+                            <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
+                                <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
+                            </a>
+                            {item.title}
+                        </li>
+                        {sitems}
                     </div>
                 )
             });
@@ -334,10 +314,14 @@ var ExplorerView = React.createClass({
                     </ul>
                     <div className="tab-content main-footer-tab-content">
                         <div role="tabpanel" className="tab-pane active main-footer-tab-pane" id="mainFooterLessonsTab">
+                            <ul className="list-group">
                             {requiredItems}
+                            </ul>
                         </div>
                         <div role="tabpanel" className="tab-pane main-footer-tab-pane" id="mainFooterCoursesTab">
+                            <ul className="list-group">
                             {optionalItems}
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -347,47 +331,28 @@ var ExplorerView = React.createClass({
     }
 });
 
-var TOCDetails = React.createClass({
-
-    render: function() {
-        var unit = this.props.unit;
-        var items = this.props.data.map(function(item, index) {
-            return (
-                <ul key={index} className="list-group main-footer-list-group">
-                    <TOCChapterRow item={item} chapter={item} unit={unit}/>
-                    <TOCPages data={item.data.pages} chapter={item} unit={unit}/>
-                </ul>
-            );
-        });
-
-        return (
-            <div>{items}</div>
-        );
-
-    }
-});
-
 var TOCChapterRow = React.createClass({
+    chapterHeaderClick: function(item, index, idStr) {
+        this.props.expandHandler(item, index, idStr);
+    },
+
     loadPage: function(item, chapter, unit) {
         PageActions.jump({page:item.xid, chapter:chapter.data.xid, unit:unit.id});
 
     },
     render: function() {
-        var cls = '';
-        if (PageStore.chapter() && this.props.item.data.xid === PageStore.chapter().xid) {
-            cls += ' main-footer-accordian-table-row-active';
-        }
-        /*
-         <span>{this.props.item.completed ? "Complete" : ""}</span>
-         <span>{this.props.item.percent}%</span>
-         <span className="badge">
-         <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-         </span>
-         <CheckIcon completed={this.props.item.completed} />
-         */
+        var idStr = this.props.idstr;
+        var index = this.props.index;
+        var self = this;
         return (
-            <li className="list-group-item main-footer-chapter-row" onClick={this.loadPage.bind(this, this.props.item.data.pages[0], this.props.chapter, this.props.unit)}>
+            <li className="list-group-item main-footer-chapter-row main-footer-row" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
+                <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
+                    <span className={this.props.item.expandCollapseIconCls} aria-hidden="true"></span>
+                </a>
                 {this.props.item.title}
+                <span className="badge">
+                 <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                 </span>
             </li>
         );
     }
@@ -444,7 +409,7 @@ var TOCPageRow = React.createClass({
         }
 
         return (
-            <li className="list-group-item main-footer-page-row" onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>
+            <li className="list-group-item main-footer-page-row main-footer-row" onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>
                 <span className="badge">
                     <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </span>

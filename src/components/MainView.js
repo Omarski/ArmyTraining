@@ -155,8 +155,6 @@ var MainView = React.createClass({
 
             self.loadConfiguration();
         }, 100);
-
-        console.log("asdf");
     },
 
     /**
