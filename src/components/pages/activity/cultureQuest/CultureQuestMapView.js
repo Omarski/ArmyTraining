@@ -53,8 +53,6 @@ var CultureQuestMap = React.createClass({
             var state = self.state;
 
             if (canvasElement && !canvasElement.hidden) {
-
-                $("[id^='imageLayer_canvas_']").css("cursor","pointer");
                 switch(canvasElement.state){
 
                     case "idle": case "last":
@@ -79,7 +77,6 @@ var CultureQuestMap = React.createClass({
                     state.lastHighlightedRegion.classList.remove("image-layers-view-fade-in");
                     state.lastHighlightedRegion.classList.add("image-layers-view-fade-out");
                     state.lastHighlightedRegion = null;
-                    $("[id^='imageLayer_canvas_']").css("cursor","auto");
                 }
             }
     },

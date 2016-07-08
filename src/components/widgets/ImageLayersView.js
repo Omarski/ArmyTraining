@@ -124,14 +124,14 @@ var ImageLayersView = React.createClass({
         //loop through regions
         self.props.imageColl.map(function(image,index){
 
-            var id = (image.id) ? image.id : index;
             var regionCanvas =  self.createCanvas({
                 canvasWidth:self.props.areaWidth,
                 canvasHeight:self.props.areaHeight,
-                canvasId:"imageLayer_canvas_" + id,
+                canvasId:"imageLayer_canvas_" + image.id? image.id:index,
                 canvasStyle:"{z-index:"+index+1+"}",
                 mapSrc: self.state.loadedImageColl[index].src
             });
+
             document.getElementById("image-layers-view-back-image").appendChild(regionCanvas);
 
             canvasColl.push(regionCanvas);
