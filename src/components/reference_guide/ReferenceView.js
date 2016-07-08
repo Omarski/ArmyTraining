@@ -82,7 +82,7 @@ var ReferenceView = React.createClass({
                 this.setState({selectedIndex: selectedIndex, dictionarySourceKey: sourceKey, dictionaryLanguage: languageName });
                 break;
             case REFERENCE_PDF_VIEW:
-                this.setState({showModal: false});
+                // TODO: show pdf page, this.setState({ selectedIndex: REFERENCE_PDF_VIEW });
                 break;
             default:
                 // no op, more reference page types may come later
@@ -95,7 +95,7 @@ var ReferenceView = React.createClass({
     },
 
     componentDidMount: function() {
-        ReferenceStore.addChangeListener(this._onReferenceChange);
+        ReferenceStore.addUpdateListener(this._onReferenceChange);
     },
     render: function() {
         var self = this;

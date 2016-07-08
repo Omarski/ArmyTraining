@@ -26,7 +26,7 @@ function getInitialState(props, self) {
                         var translatedText = "";
                         item.Utterance.AleloText.map(function(textItem){
                             if(textItem.hasOwnProperty("type")){
-                                if(textItem.type === "native"){
+                                if(textItem.type === "native" || textItem.type === "ezread"){
                                     nativeText = textItem.text;
                                 }else if(textItem.type === "translation"){
                                     translatedText = textItem.text;
