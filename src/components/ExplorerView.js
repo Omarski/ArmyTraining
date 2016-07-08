@@ -83,7 +83,7 @@ function getUnitState(expanded) {
                 var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
                 expandCollapseIconCls += ' glyphicon-plus-sign';
                 var ex = (_expandedChapters[c.xid]) ? _expandedChapters[c.xid] : false;
-                console.log(_expandedChapters[c.xid])
+
                 chapters.push({
                     expandCollapseIconCls: expandCollapseIconCls,
                     expanded: ex,
