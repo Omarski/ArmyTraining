@@ -1,5 +1,0 @@
-<gestures>
-  <gesture name="Come Here" description="To beckon someone, Northern Africans will wave all fingers, held together, towards the body with the palm facing down." file="Come_Here" region="Northern Africa" producerGender="any" receiverGender="any" producerAge="any" receiverAge="any" distance="any" /> 
-  <gesture name="Pointing" description="To point to objects, Northern Africans point with the index finger tucked under the middle finger. They do not point at people in this manner." file="Crossed" region="Northern Africa" producerGender="any" receiverGender="any" producerAge="any" receiverAge="any" distance="any" /> 
-  <gesture name="Hand Over Heart" description="To indicate respect and sincerity, Northern Africans will place their right hand over their heart. This gesture is used in greetings, when showing gratitude, and when making refusals." file="HandOverHeart" region="Northern Africa" producerGender="any" receiverGender="any" producerAge="any" receiverAge="any" distance="any" /> 
-</gestures>
