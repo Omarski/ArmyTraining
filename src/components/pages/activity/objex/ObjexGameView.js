@@ -31,7 +31,8 @@ var ObjexGameView = React.createClass({
         loadedObjexColl: PropTypes.array.isRequired,
         mediaPath: PropTypes.string.isRequired,
         viewUpdate: PropTypes.func.isRequired,
-        levelStats: PropTypes.object.isRequired
+        levelStats: PropTypes.object.isRequired,
+        advancedLevel: PropTypes.bool.isRequired
     },
 
     componentDidMount: function(){
@@ -70,13 +71,17 @@ var ObjexGameView = React.createClass({
         }
 
         for (var i = 0; i < randColl.length; i++){
-            var artifactObj = {};
-            artifactObj["image"] = loadedObjexColl[randColl[i]].fullImgUrl;
-            artifactObj["id"] = loadedObjexColl[randColl[i]].hog_id;
-            artifactsColl.push(artifactObj);
             activeObjexColl.push(loadedObjexColl[randColl[i]]);
         }
 
+        this.props.levelData.objects.map(function(objex,index){
+            console.log("object " + index);
+            var artifactObj = {};
+            artifactObj["image"] = loadedObjexColl[index].fullImgUrl;
+            artifactObj["id"] = loadedObjexColl[index].hog_id;
+            artifactsColl.push(artifactObj);
+        });
+           
         this.setState({activeObjexColl:activeObjexColl},function(){
             this.getRoundObjex();
         });

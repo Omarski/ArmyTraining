@@ -24,7 +24,8 @@ function getPageState(props) {
         showGame:false,
         currentLevel:1,
         levelsColl:[],
-        levelStats:{completed:[]}
+        levelStats:{basic:[], advanced:[]},
+        advancedLevel:false
     };
     
     if (props && props.page) {
@@ -128,11 +129,15 @@ var ObjexView = React.createClass({
         var levelIconPos = [null,[{x:310, y:130}, {x:310, y:285}]];
 
         for (var i = 0 ; i < 2; i++){ //levels.length
+
+            var mode = (self.state.advancedLevel) ? "advanced":"basic";
+            console.log("Mode: " + self.state.levelStats["basic"].length);
             var levelObj = {
                 level: i + 1,
                 posX:levelIconPos[1][i].x, //levels.length - 1
                 posY:levelIconPos[1][i].y, //levels.length - 1
-                locked: !(i === 0),
+                locked: (!(i === 0) || self.state.levelStats["basic"].indexOf(i) === -1),
+                //locked: (!(i === 0) || self.state.levelStats[mode].indexOf(i) === -1),
                 completed: false
             };
 
@@ -241,15 +246,22 @@ var ObjexView = React.createClass({
         var self = this;
         var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
         var iconBg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_background;
+
+        var lockImg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_lock_icon;
+        var lockStyle = {background: 'url('+lockImg+') no-repeat 100% 100%'};
+
+        var mode = (self.state.advancedLevel) ? "advanced":"normal";
+
         var levelIcons = self.state.levelsColl.map(function(levelObj,index){
 
             var levelIconStyle = {left:levelObj.posX+'px', top:levelObj.posY+'px', background: 'url('+iconBg+') no-repeat 100% 100%'};
-
+            var locked = self.state.levelStats[mode].indexOf(index) === -1;
             return(
                 <div id={"objexViewLevelIcon"+parseInt(index+1)} key={index}
                      className="objex-view-popLevelIconCont"
                      style={levelIconStyle}
                      onClick={self.onLevelClick}>
+                    {locked ? <div className="objex-view-popLevelIconLock" style={lockStyle}></div>:null}
                     <div className="objex-view-popLevelIconText">{"Level "+levelObj.level}</div>
                 </div>
             )
@@ -349,6 +361,10 @@ var ObjexView = React.createClass({
                 });
                 break;
 
+            case "advancedLevel":
+                this.setState({advancedLevel:true});
+                break;
+
             case "successAudio":
                 var successAudio = self.state.mediaPath + self.state.gameData.sound_files.audio_success;
                 self.playAudio({id:"success", autoPlay:true, sources:[{format:"mp3", url:successAudio}]});
@@ -418,6 +434,7 @@ var ObjexView = React.createClass({
                         loadedObjexColl = {state.loadedObjexColl}
                         viewUpdate = {self.viewUpdate}
                         levelStats = {self.state.levelStats}
+                        advancedLevel = {self.state.advancedLevel}
                     />:null}
                 </div>
             </div>
