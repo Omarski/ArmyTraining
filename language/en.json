@@ -78,6 +78,13 @@
     "btnNext": "Next",
     "btnPrevious": "Previous"
   },
+  "reference":{
+    "refTitle": "Reference",
+    "refPdfTitle": "PDF Takeaways",
+    "refWordsTitle": "Words \u0026 Phrases",
+    "refMapTitle": "Map",
+    "refGestureTitle": "Gestures"
+  },
   "settings": {
     "lblTitle": "Settings",
     "lblAutoPlaySound": "Auto Play Sound",

@@ -54,9 +54,11 @@ var DictionaryRow = React.createClass({
         var path = "";
         var nw = "50%";
         var dw = "50%";
+        var needsHand = ""
 
         if(this.props.handleClick){
             hc = this.props.handleClick;
+            needsHand = "hand-me"
         }
         if(this.props.path){
             path = this.props.path;
@@ -68,7 +70,7 @@ var DictionaryRow = React.createClass({
             dw = this.props.height;
         }
         return (
-            <tr onClick={hc}>
+            <tr className={needsHand} onClick={hc}>
                 <td data-source={path} width={nw}>{name}</td>
                 <td data-source={path} width={dw}>{desc}</td>
             </tr>
