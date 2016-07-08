@@ -5,6 +5,9 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var SettingsStore = require('../../stores/SettingsStore');
 
+var SORTED_ARROW_CLS = "glyphicon glyphicon-triangle-bottom";
+var REVERSE_SORTED_ARROW_CLS = "glyphicon glyphicon-triangle-top";
+
 var SearchBar = React.createClass({
     handleChange: function(event){
         var self = this;
@@ -83,16 +86,23 @@ var DictionaryTable = React.createClass({
         var data = {
             sortPreference: "translation",
             sortOrder: "forward",
-            sortReverse: false
+            sortReverse: false,
+            language: "none"
         };
+
+        if(this.props && this.props.language){
+            data.language = this.props.language;
+        }
+
         return (data);
     },
     handleClick: function(e){
        // (e.target) returns <th>native</th> or <th>translated</th>
-        var target = e.target.innerHTML;
+        var state = this.state;
+        var target = e.target.innerText;
         var reverse = this.state.sortReverse;
         // which column was clicked
-        if(target === "Native"){
+        if(target === state.language){
             // if we were already sorting by this, reverse it
             if(this.state.sortPreference === "native"){
                 reverse = !reverse;
@@ -101,7 +111,7 @@ var DictionaryTable = React.createClass({
                 sortPreference: "native",
                 sortReverse: reverse
             });
-        }else if(target === "Translation"){
+        }else if(target === "English"){
             // if we were already sorting by this, reverse it
             if(this.state.sortPreference === "translation"){
                 reverse = !reverse;
@@ -118,6 +128,7 @@ var DictionaryTable = React.createClass({
         var state = self.state;
         var headers = "";
         var hc = "";
+        var language = state.language;
         if(this.props.handleClick){
             hc = this.props.handleClick;
         }
@@ -183,11 +194,12 @@ var DictionaryTable = React.createClass({
                 return (val);
             });
         }
-
+        var translateSortGlyph = state.sortPreference === "translation" ? (state.sortReverse ? REVERSE_SORTED_ARROW_CLS : SORTED_ARROW_CLS) : "";
+        var nativeSortGlyph = state.sortPreference === "native" ? (state.sortReverse ? REVERSE_SORTED_ARROW_CLS : SORTED_ARROW_CLS) : "";
         if(this.props.hasHeaders === true){
             headers = (<tr>
-                <th className="filterable-table-header" onClick={this.handleClick} width="50%">Translation</th>
-                <th className="filterable-table-header" onClick={this.handleClick} width="50%">Native</th>
+                <th className="filterable-table-header" onClick={this.handleClick} width="50%">English<span className={translateSortGlyph}></span></th>
+                <th className="filterable-table-header" onClick={this.handleClick} width="50%">{state.language}<span className={nativeSortGlyph}></span></th>
             </tr>);
         }
         return (
@@ -206,7 +218,9 @@ var FilterableTable = React.createClass({
             filterText: "",
             hasVideo: false,
             hasHeaders: false,
-            initialSource: ""
+            initialSource: "",
+            hasSearch: false,
+            language: "none"
         };
 
         if(this.props && this.props.dictionary) {
@@ -221,6 +235,12 @@ var FilterableTable = React.createClass({
             }
             if(this.props.hasHeaders){
                 data.hasHeaders = this.props.hasHeaders;
+            }
+            if(this.props.hasSearch){
+                data.hasSearch = this.props.hasSearch;
+            }
+            if(this.props.language){
+                data.language = this.props.language;
             }
         }
 
@@ -246,6 +266,7 @@ var FilterableTable = React.createClass({
     render: function() {
         var player = "";
         var t = "";
+        var search = "";
 
         if(this.state.hasVideo === true){
             player = (<div className="video-wrapper">
@@ -259,12 +280,19 @@ var FilterableTable = React.createClass({
             t = (<DictionaryTable filterText={this.state.filterText}
                                   dictionary={this.props.dictionary}
                                   hasHeaders={this.state.hasHeaders}
+                                  language={this.state.language}
                                   handleClick={this.handleClick}
                 />);
         }else{
             t = (<DictionaryTable filterText={this.state.filterText}
                                   dictionary={this.props.dictionary}
+                                  language={this.state.language}
                                   hasHeaders={this.state.hasHeaders}
+                />);
+        }
+        if(this.state.hasSearch){
+            search = (<SearchBar filterText={this.state.filterText}
+                                onUserInput={this.handleUserInput}
                 />);
         }
 
@@ -273,9 +301,7 @@ var FilterableTable = React.createClass({
         return (
             <div>
                 {player}
-                <SearchBar filterText={this.state.filterText}
-                           onUserInput={this.handleUserInput}
-                    />
+                {search}
                 {t}
             </div>
         );

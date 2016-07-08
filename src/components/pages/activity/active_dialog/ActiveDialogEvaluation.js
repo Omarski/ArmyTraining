@@ -1,66 +1,60 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
+var Carousel = ReactBootstrap.Carousel;
+var CarouselItem = ReactBootstrap.CarouselItem;
 var Button = ReactBootstrap.Button;
 var Modal = ReactBootstrap.Modal;
-var ActiveDialogHintStore = require('../../../../stores/active_dialog/ActiveDialogHintStore');
-var ActiveDialogObjectiveStore = require('../../../../stores/active_dialog/ActiveDialogObjectiveStore');
-var ActiveDialogEvaluationActions = require('../../../../actions/active_dialog/ActiveDialogEvaluationActions');
-var ActiveDialogEvaluationStore = require('../../../../stores/active_dialog/ActiveDialogEvaluationStore');
+var Panel = ReactBootstrap.Panel;
+var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
+var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
+var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var PageActions = require('../../../../actions/PageActions');
+var LocalizationStore = require("../../../../stores/LocalizationStore");
 
-var _shownOnce = false;
-var _current = null;
-var _currentIndex = 0;
-var _startCourse = false;
 function getCompState(show) {
 
+    var feedback = "";
+    var dialogPassed = false;
+    var scorePercent = 0;
+    var objectivesPassed = 0;
+
+    var objectives = ActiveDialogStore.getObjectives();
+
+    if (objectives && objectives.length > 0) {
+        // calculate score
+        var objectivesCount = objectives.length;
+        var objectivesLength = objectives.length;
+
+        if (objectivesLength > 0) {
+            while(objectivesLength--) {
+                var objective = objectives[objectivesLength];
+                if (objective.pass == true) {
+                    objectivesPassed++;
+                }
+            }
+
+            scorePercent = Math.round((objectivesPassed / objectivesCount) * 100);
+        }
+    }
+
+    // TODO make thresholds configurable
+    // get feedback based of score
+    if (scorePercent === 100) {
+        feedback = LocalizationStore.labelFor("evaluation", "lblTestPassed");
+        dialogPassed = true;
+    } else {
+        feedback = LocalizationStore.labelFor("evaluation", "lblTestFailed");
+    }
+
     return {
-        show: show,
-        startCourse: _startCourse,
-        current: _current,
-        evaluation: ActiveDialogEvaluationStore.data() || ""
+        dialogPassed: dialogPassed,
+        feedback: feedback,
+        objectives: objectives,
+        show: show
     };
 }
 
 var ActiveDialogEvaluation = React.createClass({
-    next: function() {
-        var objectives = ActiveDialogObjectiveStore.data().objectives;
-
-        if (_current) {
-            if (_currentIndex < objectives.length - 1) {
-                _currentIndex++;
-            } else {
-                _startCourse = true;
-            }
-        }
-        _current = objectives[_currentIndex];
-
-
-        if (_current.passDescription === "" && _current.failDescription === ""  && !_startCourse) {
-            this.next();
-            return;
-        }
-
-        this.setState(getCompState(this.state.show));
-    },
-
-    previous: function() {
-        var objectives = ActiveDialogObjectiveStore.data().objectives;
-        if (_current) {
-            if (_currentIndex != 0) {
-                _currentIndex--;
-            }
-        }
-        _current = objectives[_currentIndex];
-
-        if (_current.passDescription === "" && _current.failDescription === "" && _current != 0) {
-            this.previous();
-            return;
-        }
-
-        this.setState(getCompState(this.state.show));
-    },
-
     start: function() {
         PageActions.loadNext({});
     },
@@ -69,60 +63,94 @@ var ActiveDialogEvaluation = React.createClass({
         this.setState(getCompState(false));
     },
 
+    restart: function() {
+        ActiveDialogActions.restart();
+    },
+
+    review: function() {
+        ActiveDialogActions.showRemediation();
+    },
+
     getInitialState: function() {
-        return getCompState(false);
+        var compState = getCompState(false);
+
+        // mark chapter complete if passed
+        if (compState.dialogPassed) {
+            setTimeout(function() {
+                PageActions.markChapterComplete();
+            }, 0.1);
+        }
+
+        return compState;
     },
 
     componentWillMount: function() {
-        ActiveDialogEvaluationStore.addChangeListener(this._onChange);
-        ActiveDialogHintStore.addChangeListener(this._onDialogChange);
-    },
-
-    componentDidMount: function() {
-        ActiveDialogEvaluationStore.addChangeListener(this._onChange);
-        ActiveDialogHintStore.addChangeListener(this._onDialogChange);
+        ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
-        ActiveDialogEvaluationStore.removeChangeListener(this._onChange);
-        ActiveDialogHintStore.removeChangeListener(this._onDialogChange);
+        ActiveDialogStore.removeChangeListener(this._onDialogChange);
     },
 
     render: function() {
-        var content = "Click the forward and back buttons to review the objectives from this episode.";
-        var title = "Objectives";
 
-        if (this.state.current) {
-            title = this.state.current.label;
-            if (this.state.current.pass) {
-                content = this.state.current.passDescription;
+        var carouselItems = "";
+        if (this.state.objectives) {
+            carouselItems = this.state.objectives.map(function(item, index) {
+                var objectiveFeedback = "";
+                if (item.pass) {
+                    objectiveFeedback = item.passDescription;
+                } else {
+                    objectiveFeedback = item.failDescription;
+                }
+
+                return (
+                    <CarouselItem key={index}>
+                        <Panel header={item.label}>
+                            {objectiveFeedback}
+                        </Panel>
+                    </CarouselItem>
+                );
+            });
+
+            // create and insert into the front
+            carouselItems.unshift(
+                <CarouselItem key="carouselStart">
+                    <Panel header={LocalizationStore.labelFor("evaluation", "lblObjectives")}>
+                        {LocalizationStore.labelFor("evaluation", "lblContent")}
+                    </Panel>
+                </CarouselItem>
+            );
+
+            // create and add to the end
+            if (this.state.dialogPassed === true) {
+                carouselItems.push(
+                    <CarouselItem key="carouselEnd">
+                        <Panel header={LocalizationStore.labelFor("evaluation", "lblObjectives")}>
+                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.start}>
+                                {LocalizationStore.labelFor("evaluation", "btnContinue")}
+                            </button>
+                        </Panel>
+                    </CarouselItem>
+                );
             } else {
-                content = this.state.current.failDescription;
+                carouselItems.push(
+                    <CarouselItem key="carouselEnd">
+                        <Panel header={LocalizationStore.labelFor("evaluation", "lblObjectives")}>
+                            <h4>{LocalizationStore.labelFor("evaluation", "lblRestart")}</h4>
+                            <br></br>
+                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.restart}>
+                                {LocalizationStore.labelFor("evaluation", "btnRestart")}
+                            </button>
+                            <h4>{LocalizationStore.labelFor("evaluation", "lblReview")}</h4>
+                            <br></br>
+                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.review}>
+                                {LocalizationStore.labelFor("evaluation", "brnReview")}
+                            </button>
+                        </Panel>
+                    </CarouselItem>
+                );
             }
-        }
-
-        if (this.state.startCourse) {
-            content = ( <div>
-                        <p>
-                            <h4>I want to start my course</h4>
-                        </p>
-                        <button type="button" className="btn btn-default" aria-label="Next" onClick={this.start}>
-                            Continue
-                        </button>
-                        </div>);
-        }
-
-        var nextButton = "";
-        var previousButton = "";
-
-        if (!_startCourse) {
-            previousButton = <button type="button" className="btn btn-default" aria-label="Previous" onClick={this.previous}>
-                                <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            </button>;
-
-            nextButton =  <button type="button" className="btn btn-default" aria-label="Next" onClick={this.next}>
-                            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        </button>;
         }
 
         return (
@@ -132,61 +160,24 @@ var ActiveDialogEvaluation = React.createClass({
                 onHide={this.hideModal}
                 >
                 <Modal.Header>
-                    <Modal.Title>Evaluation</Modal.Title>
+                    <Modal.Title>{LocalizationStore.labelFor("evaluation", "lblTitle")}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <p>
-                        Great job! You are well on your way to mastering conversations in Chinese.  Zhang was really imporessed by your language skills. Don't worry if you made a few mistakes. Learning a new language is not easy.  The only way you can get better is to keep trying!
-                    </p>
-                    <ul>
-                        <li>You scored: </li>
-                        <li>Total play time was: </li>
-                        <li>Total number of hints viewed: </li>
-                        <li>Total number of hints used: </li>
-                    </ul>
+                    {this.state.feedback}
                     <div className="panel panel-default">
-                        <div className="panel-heading">
-                            <h3 className="panel-title">{title}</h3>
-                        </div>
-                        <div className="panel-body">
-                            <table className="table">
-                                <tr>
-                                    <td width="25" valign="middle">
-                                        {previousButton}
-                                    </td>
-                                    <td>
-                                        <p>
-                                        {content}
-                                        </p>
-                                    </td>
-                                    <td width="25" valign="middle">
-                                        {nextButton}
-                                    </td>
-                                </tr>
-                            </table>
-
-                        </div>
+                        <Carousel interval={0} wrap={false}>
+                            {carouselItems}
+                        </Carousel>
                     </div>
                 </Modal.Body>
             </Modal>
         );
     },
 
-    _onChange: function() {
-        var show = (this.state.evaluation && this.state.evaluation.length !== "");
-        if (!_shownOnce && show) {
-            _shownOnce = true;
-            this.setState(getCompState(show));
-        }
-
-    },
-
     _onDialogChange: function() {
-        if (ActiveDialogHintStore.initialized() && ActiveDialogHintStore.data().length === 0) {
-            setTimeout(function() {
-                ActiveDialogEvaluationActions.create({});
-            }, .25);
+        if (ActiveDialogStore.getCurrentAction() && ActiveDialogStore.getCurrentAction().type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE) {
+            this.setState(getCompState(true));
         }
     }
 });

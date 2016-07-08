@@ -13,7 +13,7 @@ var EthnoMapPopover = React.createClass({
             showChanged: false,
             parentShow: this.props.showHide,
             indexOfOverlayInfo: 0,
-            moreInfoLessInfo: "More Info"
+            popoverQuadrant: this.props.quadrant
         };
     },
     handleResize: function () {
@@ -24,6 +24,9 @@ var EthnoMapPopover = React.createClass({
         var self = this;
         window.addEventListener("resize", self.handleResize);
         self.handleResize();
+    },
+    componentWillMount: function(){
+
     },
     popoverPagesFunction: function(){
         var self = this;
@@ -42,9 +45,6 @@ var EthnoMapPopover = React.createClass({
             }
             if(self.props.mapData["summary"]){
                 popoverPages.push(["Background", self.props.mapData["summary"]]);
-            }
-            if(self.props.mapData["politics"]){
-                popoverPages.push(["Livelihood", self.props.mapData["politics"]]);
             }
             if(self.props.mapData["religion"]){
                 popoverPages.push(["Religion", self.props.mapData["religion"]]);
@@ -97,17 +97,35 @@ var EthnoMapPopover = React.createClass({
     render: function() {
         var self = this;
 
-        var style = {
-            position: 'absolute',
-            backgroundColor: '#EEE',
-            boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
-            border: '1px solid #CCC',
-            borderRadius: 3,
-            marginLeft: 5,
-            marginTop: 5,
-            padding: 5,
-            zIndex: 999
-        };
+        // var style = {
+        //     position: 'absolute',
+        //     backgroundColor: '#EEE',
+        //     boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
+        //     border: '1px solid #CCC',
+        //     borderRadius: 3,
+        //     marginLeft: 5,
+        //     marginTop: 5,
+        //     padding: 5,
+        //     zIndex: 999
+        // };
+
+        //console.log("quadrant", self.props.quadrant);
+
+        var style = {};
+
+        if(self.props.quadrant === 1){
+            style = {marginTop: 5, marginLeft: 5};
+        } else if (self.props.quadrant === 2){
+            style = {marginTop: 5 , marginLeft: 379};
+        } else if (self.props.quadrant === 3){
+            style = {marginTop: 319, marginLeft: 5};
+        } else if (self.props.quadrant === 4){
+            style = {marginTop: 319, marginLeft: 379};
+        } else {
+            //console.log("ERROR!!!");
+        }
+
+        //console.log("style", style);
 
         var checkIfPrevButtonIsDisabled = function(){
             if(self.state.indexOfOverlayInfo === 0){
@@ -129,9 +147,8 @@ var EthnoMapPopover = React.createClass({
 
             return (
                 <div>
-                    <ReactBootstrap.Overlay show={this.props.showHide} onHide={function(){self.setState({show: false})}}
-                                            container={this}>
-                        <div id="ethnoOverlay" className="ethno-overlay-main-div">
+                    <ReactBootstrap.Overlay show={this.props.showHide} onHide={function(){self.setState({show: false})}} container={this}>
+                        <div id="ethnoOverlay" className="ethno-overlay-main-div" style={style}>
                             <div className="ethno-overlay-title">
                                 <ul className="ethno-overlay-ul">
                                     <li className="ethno-overlay-li">
@@ -168,7 +185,7 @@ var EthnoMapButtons = React.createClass({
 
     render: function(){
         return(
-            <div>
+            <div className="ethno-overlay-button-container">
                 <button disabled={this.props.disabledPrev()} onClick={this.props.onPrevClick} className="btn btn-default ethno-overlay-prev-button"><span className="glyphicon glyphicon-chevron-left"></span></button>
                 <button disabled={this.props.disabledNext()} onClick={this.props.onNextClick} className="btn btn-default ethno-overlay-next-button"><span className="glyphicon glyphicon-chevron-right"></span></button>
             </div>

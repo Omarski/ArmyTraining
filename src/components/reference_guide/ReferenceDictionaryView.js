@@ -9,11 +9,15 @@ var FilterableTable = require('../widgets/FilterableTable');
 function getInitialState(props, self) {
     var data = {
         source: null,
-        list: []
+        list: [],
+        language: "none"
     };
 
     if(props && props.source){
         data.source = props.source;
+        if(props.language){
+            data.language = props.language;
+        }
         $.getJSON(data.source, function(file) {
             if(file.Dictionary && file.Dictionary.Uttering){
                 file.Dictionary.Uttering.map(function(item){
@@ -22,7 +26,7 @@ function getInitialState(props, self) {
                         var translatedText = "";
                         item.Utterance.AleloText.map(function(textItem){
                             if(textItem.hasOwnProperty("type")){
-                                if(textItem.type === "native"){
+                                if(textItem.type === "native" || textItem.type === "ezread"){
                                     nativeText = textItem.text;
                                 }else if(textItem.type === "translation"){
                                     translatedText = textItem.text;
@@ -50,11 +54,15 @@ var ReferenceDictionaryView = React.createClass({
 
     render: function() {
         var self = this;
+        var state = self.state;
         var source = self.state.list;
-
         return (
             <div id="referenceDictionaryView">
-                <FilterableTable dictionary={source} hasVideo={false} hasHeaders={true} />
+                <FilterableTable dictionary={source}
+                                 hasVideo={false}
+                                 hasSearch={true}
+                                 language={state.language}
+                                 hasHeaders={true} />
             </div>
         );
     },

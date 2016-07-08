@@ -23,6 +23,10 @@ var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
 var AppStateActions = require('../actions/AppStateActions');
 var PopupView = require('../components/widgets/PopupView');
+var SettingsStore = require('../stores/SettingsStore');
+
+
+
 var ASRWidget = require('../components/widgets/ASR');
 
 function getBookState() {
@@ -34,7 +38,8 @@ function getBookState() {
     }
 
     return {
-        title: title
+        title: title,
+        volume: SettingsStore.voiceVolume()
     };
 }
 
@@ -105,6 +110,12 @@ var MainView = React.createClass({
     componentDidMount: function() {
         window.addEventListener('resize', this.handleResize);
         this.prepIEPopup();
+        NotificationActions.show({
+            title: 'Please wait',
+            body: 'Loading...',
+            full: true
+        });
+        LocalizationActions.load();
     },
 
     componentWillUnmount: function() {
@@ -210,6 +221,10 @@ var MainView = React.createClass({
                 >{this.state.browserPopObj.content()}
                 </PopupView>:null}
 
+                <audio id="mainViewAudio" volume={this.state.volume}>
+                    <source id="mainViewMp3Source" src="" type="audio/mp3"></source>
+                    Your browser does not support the audio format.
+                </audio>
                 <HeaderView title={this.title} />
                 <ContentView />
                 <FooterView  />
@@ -238,8 +253,6 @@ var MainView = React.createClass({
 
             self.loadConfiguration();
         }, 100);
-
-        console.log("asdf");
     },
 
     /**

@@ -176,15 +176,15 @@ var HeaderView = React.createClass({
         return (
             <div>
                 <Navbar className="navbar-fixed-top navbarHeightDesktop main-navbar">
-                    <Navbar.Header className="main-navbar-brand">
+                    <Navbar.Header id="navbarHeader" className="main-navbar-brand">
                         <img src="images/VCAT_H5_logo.png" className="pull-left vcat-logo"/>
                         <Navbar.Brand>
                                 <a className="navbar-brand" href="#">{this.state.title}</a>
                         </Navbar.Brand>
                         <Navbar.Toggle onClick={changeNavBarCollapse} />
                     </Navbar.Header>
-                    <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
-                        <Nav pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
+                    <NavbarCollapse id="navbarCollapseId" style={self.state.hideInClass} id="collapseNav">
+                        <Nav id="navId" pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
                             <NavItem className="reference-guide-hide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView} ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
                             <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
@@ -198,7 +198,7 @@ var HeaderView = React.createClass({
                                 <p>Toggle Mute</p>
                             </NavItem>
                             <SettingsView isNav={AppStateStore.isMobile()}/>
-                            <BookmarksView isNav={AppStateStore.isMobile()} className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} />
+                            <BookmarksView id="bookmarksViewId" isNav={AppStateStore.isMobile()} className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} />
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>

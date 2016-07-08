@@ -1,9 +1,9 @@
 var React = require('react');
 var Slider = require('react-slick');
-var PageStore = require('../../../stores/PageStore');
-var PageHeader = require('../../widgets/PageHeader');
-var SettingsStore = require('../../../stores/SettingsStore');
-var ImageCaption = require('../../widgets/ImageCaption');
+var PageStore = require('../../../../stores/PageStore');
+var PageHeader = require('../../../widgets/PageHeader');
+var SettingsStore = require('../../../../stores/SettingsStore');
+var ImageCaption = require('../../../widgets/ImageCaption');
 
 function getPageState(props) {
     var data = {
@@ -53,7 +53,7 @@ function playAudio(xid){
     audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
 }
 
-var MultiNoteView = React.createClass({
+var MultiNoteContentView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
         return pageState;
@@ -106,13 +106,7 @@ var MultiNoteView = React.createClass({
         var title = self.state.title;
         var sourceInfo = "";
         var infoPages = self.state.related;
-        var sliderSettings = { // settigns for the carousel
-            dots: true,
-            infinite: false,
-            speed: 500,
-            slidesToShow: 2,
-            slidesToScroll: 1
-        };
+
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
             var sources = "";
@@ -145,7 +139,7 @@ var MultiNoteView = React.createClass({
                         }
 
                         return (<li key={page.xid + String(index) + "li"}>
-                                    <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()} className="multi-note-text"></p>
+                            <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()} className="multi-note-text"></p>
                         </li>);
                     });
                 }
@@ -173,12 +167,9 @@ var MultiNoteView = React.createClass({
                 }
             }
 
-
-
             var image = (
                 <ImageCaption videoType="" src={"data/media/"+imageURL} caption={caption} key={index} altText={caption}/>
-            );// <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
-
+            );
 
             return({
                 imageURL: imageURL,
@@ -196,7 +187,7 @@ var MultiNoteView = React.createClass({
             var caption = item.caption;
             // title will be the individual page titles, and caption is that pages image caption
             var thumbnail = (
-                <button data={index}
+                <button className="btn btn-default" data={index}
                         onClick={self.handleClick}
                         title={title}
                         alt={title}
@@ -245,6 +236,7 @@ var MultiNoteView = React.createClass({
                 </div>
             );
         }
+
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
@@ -258,31 +250,12 @@ var MultiNoteView = React.createClass({
                             {noteImage}
                             {text}
                         </div>
-                        <div className="row">
-                            <div className="container">
-
-                                <Slider
-                                    dots={sliderSettings.dots}
-                                    infinite={sliderSettings.infinite}
-                                    speed={sliderSettings.speed}
-                                    slidesToShow={sliderSettings.slidesToShow}
-                                    slidesToScroll={sliderSettings.slidesToScroll}
-                                >
-                                    {pageChoices}
-                                </Slider>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         );
-    },
-    /**
-     * Event handler for 'change' events coming from the BookStore
-     */
-    _onChange: function() {
-        //this.setState(getPageState());
     }
+
 });
 
-module.exports = MultiNoteView;
+module.exports = MultiNoteContentView;

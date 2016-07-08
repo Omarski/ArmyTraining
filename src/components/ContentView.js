@@ -9,7 +9,7 @@ var LessonStartView = require('../components/pages/content/LessonStartView');
 var InteractiveTimelineView = require('../components/pages/content/InteractiveTimelineView');
 var IntroductionPageView = require('../components/pages/content/IntroductionPageView');
 var MapView = require('../components/pages/content/MapView');
-var MultiNoteView = require('../components/pages/content/MultiNoteView');
+var MultiNoteView = require('../components/pages/content/multiNote/MultiNoteView');
 var VideoView = require('../components/pages/content/VideoView');
 var EthnoMapView = require('../components/pages/content/EthnoMapView');
 var Swiper = require('../components/widgets/Swiper');
@@ -246,11 +246,13 @@ var ContentView = React.createClass({
         var onTouchEndFunction = function(e){console.log("ONTOUCHEND!!!!!"); /*Update*/}
 
         return (
-            <Swiper className={'swipe-container container main-content ' + cls} onSwipeLeft={self.handleLeftSwipe} onSwipeRight={self.handleRightSwipe}>
-                <div className={cls} key={"content-" + pageId}>
-                    {page}
-                </div>
-            </Swiper>
+            <div className="main-content-container">
+                <Swiper className={'swipe-container container main-content ' + cls} onSwipeLeft={self.handleLeftSwipe} onSwipeRight={self.handleRightSwipe}>
+                    <div className={cls} key={"content-" + pageId}>
+                        {page}
+                    </div>
+                </Swiper>
+            </div>
         );
     },
 

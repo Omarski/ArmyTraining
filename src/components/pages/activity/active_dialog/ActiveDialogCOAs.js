@@ -5,95 +5,66 @@ var Button = ReactBootstrap.Button;
 var Modal = ReactBootstrap.Modal;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
+var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
-var ActiveDialogCOAActions = require('../../../../actions/active_dialog/ActiveDialogCOAActions');
-var ActiveDialogCOAStore = require('../../../../stores/active_dialog/ActiveDialogCOAStore');
-var ActiveDialogHistoryActions = require('../../../../actions/active_dialog/ActiveDialogHistoryActions');
+
 
 function getCompState(show) {
+    var data = [];
+    var temp = [];
+
+    // get coas
+    var coas = ActiveDialogStore.coas();
+
+    var coasLen = coas.length;
+
+    // make sure there is data to be shown
+    if (coas && coas.length > 0) {
+        // pull out realizations
+        for (var i = 0; i < coasLen; i++) {
+            var coa = coas[i];
+            var realizations = coa.realizations;
+            var realizationsLen = realizations.length;
+            for (var j = 0; j < realizationsLen; j++) {
+                var r = realizations[j];
+                if (!isDuplicate(temp, r)) {
+                    data.push({coa: coa, realization: r});
+                    temp.push(r);
+                }
+            }
+        }
+    } else {
+        show = false;
+    }
+
     return {
         show: show,
-        coas: ActiveDialogCOAStore.data() || []
+        coas: data
     };
 }
 
-var _actionSound = "";
+
+function isDuplicate(temp, realization) {
+    var len = temp.length;
+    while (len--) {
+        var r = temp[len];
+        if (realization.uttText === r.uttText) {
+            return true;
+        }
+    }
+    return false;
+}
 
 var ActiveDialogCOAs = React.createClass({
 
-    play: function(compName, symbolName, childName, animKey, start, end) {
-        var sym = AdobeEdge.getComposition(compName).getStage().getSymbol(symbolName);
-        var symChild = sym.$(childName)[0];
-        var pos = sym.getLabelPosition(start)/1000;
-        var pause = sym.getLabelPosition(end)/1000;
-
-        symChild.currentTime = pos;
-
-        symChild.addEventListener("timeupdate", function() {
-            if(symChild.currentTime >= pause) {
-                symChild.pause();
-                symChild.removeEventListener("timeupdate");
-            }
-        });
-
-        symChild.play();
-    },
-
-    coaAction: function (coa, realization) {
+    coaAction: function (coa) {
         this.hideModal();
-        var animationName = realization.anima;
-        var symbol = ActiveDialogStore.findInfoSymbolByAnimationName(animationName);
-        var ani = ActiveDialogStore.findInfoAnimationByName(symbol, animationName);
-        this.play(ActiveDialogStore.info().composition, symbol.symbolName, symbol.videoName, ani.animationName, ani.start, ani.stop);
+
         ActiveDialogActions.handleInput(coa);
-
-        var outputs = ActiveDialogStore.activeDialog().outputs;
-        var speaker = "";
-        var sounds = [];
-        if (outputs) {
-            var len = outputs.length;
-            for (var i = 0; i < len; i++) {
-                var o = outputs[i];
-                var action = o.action;
-                speaker = o.speaker;
-                sounds.push(action.sound);
-                var animation = action.anima;
-                var oSymbol = ActiveDialogStore.findInfoSymbolByAnimationName(animation);
-                var oAni = ActiveDialogStore.findInfoAnimationByName(oSymbol, animation);
-                this.play(ActiveDialogStore.info().composition, oSymbol.symbolName, oSymbol.videoName, oAni.animationName, oAni.start, oAni.stop);
-            }
-        }
-
-        ActiveDialogHistoryActions.create({coa: coa, realization:realization, speaker: speaker});
-        this.playSounds(sounds);
+        ActiveDialogActions.continueDialog();
     },
 
-    playSounds: function(sounds) {
-        if (sounds.length) {
-            var self = this;
-            var sound = sounds.shift();
-
-            if (_actionSound !== sound) {
-                _actionSound = sound;
-
-                var player = document.getElementById('activeDialogAudioPlayer');
-                player.setAttribute('src', 'data/media/' + sound + '.mp3');
-
-                player.addEventListener('loadeddata', function(ev) {
-                    this.removeEventListener('loadeddata');
-                    this.play();
-                });
-
-                player.addEventListener('ended', function(ev) {
-                    this.removeEventListener('ended');
-                    self.playSounds(sounds);
-                });
-
-                player.load();
-            }
-        }
-    },
 
     hideModal: function() {
         this.setState(getCompState(false));
@@ -104,22 +75,14 @@ var ActiveDialogCOAs = React.createClass({
     },
 
     componentWillMount: function() {
-        ActiveDialogCOAStore.addChangeListener(this._onChange);
-        ActiveDialogStore.addChangeListener(this._onDialogChange);
-    },
-
-    componentDidMount: function() {
-        ActiveDialogCOAStore.addChangeListener(this._onChange);
         ActiveDialogStore.addChangeListener(this._onDialogChange);
     },
 
     componentWillUnmount: function() {
-        ActiveDialogCOAStore.removeChangeListener(this._onChange);
         ActiveDialogStore.removeChangeListener(this._onDialogChange);
     },
 
     render: function() {
-
         var _self = this;
 
         var coasList = <ListGroupItem />;
@@ -128,7 +91,7 @@ var ActiveDialogCOAs = React.createClass({
             coasList = this.state.coas.map(function(item, index) {
                 var name = item.realization.anima;
                 return  <ListGroupItem key={index}>
-                    <a className="" href="#" data-animation-name={name} onClick={_self.coaAction.bind(_self, item.coa, item.realization)}>
+                    <a className="" href="#" data-animation-name={name} onClick={_self.coaAction.bind(_self, item.coa)}>
                         {item.realization.uttText}
                     </a>
                 </ListGroupItem>
@@ -138,7 +101,9 @@ var ActiveDialogCOAs = React.createClass({
         return (
             <Modal
                 id="coasModal"
+                backdrop="static"
                 show={this.state.show}
+                keyboard={false}
                 onHide={this.hideModal}
                 >
                 <Modal.Header>
@@ -150,29 +115,19 @@ var ActiveDialogCOAs = React.createClass({
                         {coasList}
                     </ListGroup>
                 </Modal.Body>
-
-                <Modal.Footer>
-                    <Button onClick={this.hideModal}>Close</Button>
-                </Modal.Footer>
-
             </Modal>
         );
     },
 
-    _onChange: function() {
-        var show = (this.state.coas && this.state.coas.length > 0);
-        this.setState(getCompState(show));
-    },
-
     _onDialogChange: function() {
-        if (ActiveDialogStore.activeDialog() && ActiveDialogStore.activeDialog().activeCOA) {
+        if (ActiveDialogStore.getCurrentAction() && ActiveDialogStore.getCurrentAction().type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COA_SET) {
+            this.setState(getCompState(true));
             setTimeout(function() {
-                ActiveDialogCOAActions.create(ActiveDialogStore.activeDialog().activeCOA);
+                ActiveDialogActions.continueDialog();
             }, .25);
         }
     }
 });
-
 
 
 module.exports = ActiveDialogCOAs;

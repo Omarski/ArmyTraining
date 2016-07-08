@@ -9,6 +9,8 @@ var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
 var ExplorerView = require('../components/ExplorerView');
 var ExplorerActions = require('../actions/ExplorerActions');
+var Utils = require('../components/widgets/Utils');
+var InfoTagConstants = require('../constants/InfoTagConstants');
 
 function getUnitState(expanded) {
     var units = UnitStore.getAll();
@@ -128,6 +130,20 @@ function getUnitState(expanded) {
     };
 }
 
+function showExplorerButton() {
+    // get current chapter
+    var currentChapter = PageStore.chapter();
+    if (currentChapter !== null) {
+        // hide if current chapter is marked as one of the following
+        if ((Utils.findInfo(currentChapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) ||
+            (Utils.findInfo(currentChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 var FooterView = React.createClass({
     next: function() {
         PageActions.loadNext({});
@@ -161,15 +177,18 @@ var FooterView = React.createClass({
         var event = window.event ? window.event : e;
         if(event.keyCode === 39){ // if right arrow pressed
             //TODO: check if next() is allowed
+            event.preventDefault();
             this.next();
         }else if(event.keyCode === 37){ // if left arrow pressed
             //TODO: check if previous() is allowed
+            event.preventDefault();
             this.previous();
         }
     },
 
     componentDidMount: function() {
         $('.collapse').collapse();
+
     },
 
     componentWillUnmount: function() {
@@ -215,16 +234,16 @@ var FooterView = React.createClass({
         var progressView = (<span></span>);
         var explorerView = (<span></span>);
 
-        if(UnitStore.requiredExists()) {
+        if(showExplorerButton()) {
             explorerBtn = (
                 <button title={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
                         alt={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
                         id="lessonsIndexBtn"
                         type="button"
-                        className="btn btn-default btn-lg btn-link btn-text-icon"
+                        className="btn btn-default btn-lg btn-link btn-text-icon btn-clk"
                         aria-label={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
                         onClick={this.toggleTOC}>
-                    <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-download btn-icon" : "glyphicon glyphicon-upload btn-icon"} aria-hidden="true"></span>{LocalizationStore.labelFor("footer", "lblExplorer")}
+                    <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon" : "glyphicon glyphicon-circle-arrow-up btn-icon"} aria-hidden="true"></span><span className="explorer-link">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
                 </button>
             );
             progressView = (
@@ -253,12 +272,12 @@ var FooterView = React.createClass({
                             <button title={LocalizationStore.labelFor("footer", "tooltipPrevious")}
                                     alt={LocalizationStore.labelFor("footer", "tooltipPrevious")}
                                     type="button" onClick={this.previous}
-                                    className="btn btn-default btn-lg btn-link btn-step"
+                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
-                                <span className="glyphicon glyphicon-circle-arrow-left btn-icon" aria-hidden="true"></span>
+                                <span className="glyphicon glyphicon-chevron-left btn-icon" aria-hidden="true"></span>
                             </button>
                         </td>
-                        <td>
+                        <td className="footer-page-state">
                             {this.state.currentPageIndex}/{this.state.currentUnitTotalPages}
                         </td>
                         <td>
@@ -266,10 +285,20 @@ var FooterView = React.createClass({
                                     alt={LocalizationStore.labelFor("footer", "tooltipNext")}
                                     type="button"
                                     onClick={this.next}
-                                    className="btn btn-default btn-lg btn-link btn-step"
+                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipNext")}>
-                                <span className="glyphicon glyphicon-circle-arrow-right btn-icon" aria-hidden="true"></span>
+                                <span className="glyphicon glyphicon-chevron-right btn-icon" aria-hidden="true"></span>
                             </button>
+
+                            <button title={LocalizationStore.labelFor("footer", "tooltipClose")}
+                                    alt={LocalizationStore.labelFor("footer", "tooltipClose")}
+                                    type="button"
+                                    onClick={this.toggleTOC}
+                                    className="btn btn-default btn-lg btn-link btn-close"
+                                    aria-label={LocalizationStore.labelFor("footer", "tooltipClose")}>
+                                    <span className="glyphicon glyphicon-remove btn-icon" aria-hidden="true"></span>
+                            </button>
+
                         </td>
                     </tr>
                     </tbody>

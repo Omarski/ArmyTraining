@@ -264,7 +264,7 @@ var InfoView = React.createClass({
             </div>;
         }
 
-        console.log("self", self);
+        //console.log("self", self);
 
 
         var cc = "";

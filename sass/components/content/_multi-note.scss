@@ -3,7 +3,12 @@
   height: 100px;
   cursor: pointer;
   pointer-events: none;
-  object-fit: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 @media screen and (max-width: 767px) {
   .multi-note-image {

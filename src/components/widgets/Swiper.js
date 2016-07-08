@@ -43,13 +43,15 @@ var Swiper = React.createClass({
 
     render: function() {
         var Component = this.props.component || this.props.tagName;
+        var self = this.props;
+
+        // console.log("this.props", this.props);
+
+        // console.log("INSDIE RENDER OF SWIPER", self);
         return (
-            <Component {...this.props} onTouchStart={this.handleTouchStart}
-        onTouchEnd={this.handleTouchEnd}
-        onTouchCancel={this.handleTouchEnd}
-        onTouchMove={this.handleTouchMove}>
-        {this.props.children}
-        </Component>
+            <Component className="swipe-container container main-content"  tagName="div" minSwipeLength="75" moveThreshold="10" onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchCancel={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
+                {this.props.children}
+            </Component>
         );
     },
 
@@ -103,7 +105,7 @@ var Swiper = React.createClass({
     },
 
     _updateSwipe: function (direction, touch) {
-        this.setState({direction, touch});
+        this.setState({direction: direction, touch: touch});
     },
 
     _getSwipeLength: function (touch) {

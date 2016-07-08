@@ -119,11 +119,11 @@ var SettingsView = React.createClass({
                 <ListGroup>
                     <ListGroupItem>
                         <form>
-                            <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
+                            <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>{LocalizationStore.labelFor("settings", "lblAutoPlaySound")}</Checkbox>
                         </form>
                     </ListGroupItem>
                     <ListGroupItem>
-                        <h5>Voice Volume</h5>
+                        <h5>{LocalizationStore.labelFor("settings", "lblVoiceVolume")}</h5>
                         <Slider
                             min={0.0}
                             max={this.state.max}
@@ -133,7 +133,7 @@ var SettingsView = React.createClass({
                             onSlide={this.voiceVolumeChange} />
                     </ListGroupItem>
                     <ListGroupItem>
-                        <h5>Background Sound Volume</h5>
+                        <h5>{LocalizationStore.labelFor("settings", "lblBackgroundVolume")}</h5>
                         <Slider
                             min={0.0}
                             max={this.state.max}
@@ -172,23 +172,23 @@ var SettingsView = React.createClass({
             );
         } else {
             return (
-                    <NavDropdown open={this.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="4"  title={(
+                    <NavDropdown id = "settingsViewDropdown" open={this.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="4"  title={(
                         <div>
                             <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
                             alt={LocalizationStore.labelFor("header", "tooltipSettings")}
                             aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
                                     <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                             </Button>
-                            <p>Settings</p>
+                            <p>{LocalizationStore.labelFor("settings", "lblTitle")}</p>
                         </div>
                     )}>
                         <MenuItem key={"SettingsItem_4.1"} eventKey="4.1"  href="#" className="bookmark-nav-item" onClick={function(){self.menuItemClickAutoPlay()}}>
                             <form>
-                                <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>Toggle AutoPlay</Checkbox>
+                                <Checkbox label='Auto Play Sound' checked={this.state.autoPlaySound} onChange={this.autoPlaySoundChange}>{LocalizationStore.labelFor("settings", "lblAutoPlaySound")}</Checkbox>
                             </form>
                         </MenuItem>
                         <MenuItem eventKey="4.2" className="large-bookmark-nav-item" onClick={function(){self.menuItemClick()}}>
-                            <h5>Voice Volume</h5>
+                            <h5>{LocalizationStore.labelFor("settings", "lblVoiceVolume")}</h5>
                             <Slider
                                 min={0.0}
                                 max={this.state.max}
@@ -198,7 +198,7 @@ var SettingsView = React.createClass({
                                 onSlide={this.voiceVolumeChange} />
                         </MenuItem>
                         <MenuItem eventKey="4.3" className="large-bookmark-nav-item" onClick={function(){self.menuItemClick()}}>
-                            <h5>Background Sound Volume</h5>
+                            <h5>{LocalizationStore.labelFor("settings", "lblBackgroundVolume")}</h5>
                             <Slider
                                 min={0.0}
                                 max={this.state.max}
