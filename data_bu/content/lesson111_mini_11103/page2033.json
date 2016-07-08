@@ -1,0 +1,89 @@
+{
+  "page" : {
+    "xid" : "page2033",
+    "type" : "MultipleChoice",
+    "title" : "Practice 16",
+    "info" : {
+      "property" : [ {
+        "name" : "noshuffle",
+        "value" : ""
+      } ]
+    },
+    "media" : [ {
+      "zid" : 1460760190416,
+      "xid" : "1460760190416.jpg",
+      "type" : "image",
+      "file" : "1460760190416.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "prompt" : {
+      "text" : "What time is it?"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "That is 2:15."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "2:15"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That would be ۳:۴۵."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "3:45"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Try again! That would be ۶:۳۰."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "6:30"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That would be ۷:۰۵."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "7:05"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

@@ -1,0 +1,388 @@
+{
+  "page" : {
+    "xid" : "page2343",
+    "type" : "MatchItem",
+    "title" : "Practice 6",
+    "info" : null,
+    "prompt" : {
+      "text" : "Match each Pashto phrase to its English translation."
+    },
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : true,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "inshallah"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : ""
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "type" : "audio"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : true,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "staase pe ejaaza"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : ""
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "type" : "audio"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : true,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "khodaay pe amaan"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : ""
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "type" : "audio"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "E",
+      "record" : true,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "ke khodaay ghokhta"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : ""
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "type" : "audio"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : true,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "hila kawem"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : ""
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "type" : "audio"
+          } ]
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "God willing. (Arabic)"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "With your permission."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Goodbye."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Please."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "E",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "God willing. (Pashto)"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

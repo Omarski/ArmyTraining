@@ -1,0 +1,535 @@
+{
+  "chapter" : {
+    "xid" : "lesson109_mini_10903",
+    "title" : "Working with Counterparts",
+    "info" : {
+      "property" : [ {
+        "name" : "fount",
+        "value" : "/guru/lesson137"
+      }, {
+        "name" : "L2",
+        "value" : "en"
+      }, {
+        "name" : "sharedLibraryRevision",
+        "value" : "95223"
+      } ]
+    },
+    "preposttest" : [ "page1973" ],
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page1936",
+        "type" : "Info",
+        "title" : "Learning Objectives"
+      }, {
+        "xid" : "page1937",
+        "type" : "Info",
+        "title" : "Balance of Power"
+      }, {
+        "xid" : "page1938",
+        "type" : "Info",
+        "title" : "Decision Making"
+      }, {
+        "xid" : "page1939",
+        "type" : "Info",
+        "title" : "Religious Authority"
+      }, {
+        "xid" : "page1940",
+        "type" : "Info",
+        "title" : "Elders"
+      }, {
+        "xid" : "page1941",
+        "type" : "Info",
+        "title" : "Perspectives: Elders"
+      }, {
+        "xid" : "page1942",
+        "type" : "Info",
+        "title" : "Age and Rank"
+      }, {
+        "xid" : "page1943",
+        "type" : "Info",
+        "title" : "Working with Afghan Women"
+      }, {
+        "xid" : "page1944",
+        "type" : "MultipleChoice",
+        "title" : "Practice 1"
+      }, {
+        "xid" : "page1945",
+        "type" : "MultipleChoice",
+        "title" : "Practice 2"
+      }, {
+        "xid" : "page1946",
+        "type" : "MultipleChoice",
+        "title" : "Practice 3"
+      }, {
+        "xid" : "page1947",
+        "type" : "Pronunciation",
+        "title" : "I'm glad to meet you"
+      }, {
+        "xid" : "page1948",
+        "type" : "Pronunciation",
+        "title" : "Please sit"
+      }, {
+        "xid" : "page1949",
+        "type" : "Pronunciation",
+        "title" : "Have some tea"
+      }, {
+        "xid" : "page1950",
+        "type" : "Ordering",
+        "title" : "Practice 4"
+      }, {
+        "xid" : "page1951",
+        "type" : "ListeningComprehension",
+        "title" : "Practice 5"
+      }, {
+        "xid" : "page1952",
+        "type" : "MatchItem",
+        "title" : "Practice 6"
+      }, {
+        "xid" : "page1953",
+        "type" : "Info",
+        "title" : "Preparing for Conversation"
+      }, {
+        "xid" : "page1954",
+        "type" : "Info",
+        "title" : "Identifying Leaders"
+      }, {
+        "xid" : "page1955",
+        "type" : "Info",
+        "title" : "Corruption"
+      }, {
+        "xid" : "page1956",
+        "type" : "Info",
+        "title" : "Perspectives: Corruption"
+      }, {
+        "xid" : "page1957",
+        "type" : "Info",
+        "title" : "Local Ownership and Sustainability "
+      }, {
+        "xid" : "page1958",
+        "type" : "Info",
+        "title" : "Supporting Leaders"
+      }, {
+        "xid" : "page1959",
+        "type" : "Info",
+        "title" : "Managing Expectations"
+      }, {
+        "xid" : "page1960",
+        "type" : "Info",
+        "title" : "Feedback and Criticism"
+      }, {
+        "xid" : "page1961",
+        "type" : "Info",
+        "title" : "Relationship Maintenance"
+      }, {
+        "xid" : "page1962",
+        "type" : "ListeningComprehension",
+        "title" : "Practice 7"
+      }, {
+        "xid" : "page1963",
+        "type" : "MultipleChoice",
+        "title" : "Practice 8"
+      }, {
+        "xid" : "page1964",
+        "type" : "MultipleChoice",
+        "title" : "Practice 9"
+      }, {
+        "xid" : "page1965",
+        "type" : "Pronunciation",
+        "title" : "God willing"
+      }, {
+        "xid" : "page1966",
+        "type" : "Pronunciation",
+        "title" : "I hope we'll meet again"
+      }, {
+        "xid" : "page1967",
+        "type" : "Pronunciation",
+        "title" : "Goodbye"
+      }, {
+        "xid" : "page1968",
+        "type" : "ListeningComprehension",
+        "title" : "Practice 10"
+      }, {
+        "xid" : "page1969",
+        "type" : "MatchItem",
+        "title" : "Practice 11"
+      }, {
+        "xid" : "page1970",
+        "type" : "MultipleChoice",
+        "title" : "Practice 12"
+      }, {
+        "xid" : "page1971",
+        "type" : "Info",
+        "title" : "Section Checklist"
+      } ]
+    }, {
+      "mode" : "quiz",
+      "pageRef" : [ {
+        "xid" : "page2021",
+        "type" : "QuizStart",
+        "title" : "Quiz"
+      }, {
+        "xid" : "page1973",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 1"
+      }, {
+        "xid" : "page1974",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 2"
+      }, {
+        "xid" : "page1975",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 3"
+      }, {
+        "xid" : "page1976",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 4"
+      }, {
+        "xid" : "page1978",
+        "type" : "QuizEnd",
+        "title" : "Quiz Results"
+      }, {
+        "xid" : "page1979",
+        "type" : "SectionEnd",
+        "title" : "Section End"
+      } ]
+    } ],
+    "zmedia" : [ {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4"
+    }, {
+      "zid" : 1463602020518,
+      "xid" : "1463602020518.jpg",
+      "type" : "image",
+      "file" : "1463602020518.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463601507109,
+      "xid" : "1463601507109.jpg",
+      "type" : "image",
+      "file" : "1463601507109.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4"
+    }, {
+      "zid" : 1465499324925,
+      "xid" : "1465499324925.jpg",
+      "type" : "image",
+      "file" : "1465499324925.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1465252668815,
+      "xid" : "1465252668815.jpg",
+      "type" : "image",
+      "file" : "1465252668815.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 4033683,
+      "xid" : "4033683.mp3",
+      "type" : "audio",
+      "file" : "4033683.mp3"
+    }, {
+      "zid" : 1289250766959,
+      "xid" : "1289250766959.jpg",
+      "type" : "image",
+      "file" : "1289250766959.jpg",
+      "mime" : "image/png",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463601424144,
+      "xid" : "1463601424144.jpg",
+      "type" : "image",
+      "file" : "1463601424144.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463602066525,
+      "xid" : "1463602066525.jpg",
+      "type" : "image",
+      "file" : "1463602066525.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1466441594455,
+      "xid" : "1466441594455.jpg",
+      "type" : "image",
+      "file" : "1466441594455.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "Render: Dawood speaking"
+        } ]
+      }
+    }, {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1463601470426,
+      "xid" : "1463601470426.jpg",
+      "type" : "image",
+      "file" : "1463601470426.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463601923556,
+      "xid" : "1463601923556.jpg",
+      "type" : "image",
+      "file" : "1463601923556.jpg",
+      "mime" : "image/png",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1466441805192,
+      "xid" : "1466441805192.jpg",
+      "type" : "image",
+      "file" : "1466441805192.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "Render: Dawood speaking"
+        } ]
+      }
+    }, {
+      "zid" : 1466441594455,
+      "xid" : "1466441594455.jpg",
+      "type" : "image",
+      "file" : "1466441594455.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "Render: Dawood speaking"
+        } ]
+      }
+    }, {
+      "zid" : 1463601957189,
+      "xid" : "1463601957189.jpg",
+      "type" : "image",
+      "file" : "1463601957189.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463683920678,
+      "xid" : "1463683920678.jpg",
+      "type" : "image",
+      "file" : "1463683920678.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 4033678,
+      "xid" : "4033678.mp3",
+      "type" : "audio",
+      "file" : "4033678.mp3"
+    }, {
+      "zid" : 1466442096181,
+      "xid" : "1466442096181.jpg",
+      "type" : "image",
+      "file" : "1466442096181.jpg",
+      "mime" : "image/jpeg"
+    }, {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1463601411457,
+      "xid" : "1463601411457.jpg",
+      "type" : "image",
+      "file" : "1463601411457.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1389291394690,
+      "xid" : "1389291394690.jpg",
+      "type" : "image",
+      "file" : "1389291394690.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463602001889,
+      "xid" : "1463602001889.jpg",
+      "type" : "image",
+      "file" : "1463602001889.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463601437770,
+      "xid" : "1463601437770.jpg",
+      "type" : "image",
+      "file" : "1463601437770.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1463601449096,
+      "xid" : "1463601449096.jpg",
+      "type" : "image",
+      "file" : "1463601449096.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 4034409,
+      "xid" : "4034409.mp3",
+      "type" : "audio",
+      "file" : "4034409.mp3"
+    }, {
+      "zid" : 1463602223971,
+      "xid" : "1463602223971.jpg",
+      "type" : "image",
+      "file" : "1463602223971.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

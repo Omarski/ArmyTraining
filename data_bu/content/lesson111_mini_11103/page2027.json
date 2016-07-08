@@ -1,0 +1,189 @@
+{
+  "page" : {
+    "xid" : "page2027",
+    "type" : "MatchItem",
+    "title" : "Practice 11",
+    "info" : null,
+    "prompt" : {
+      "text" : "Match these English words or phrases to their Urdu translation."
+    },
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "yes"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "no"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "I understand"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "I don't understand"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "jee haan"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "jee nahin"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "jee aa gayi"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "sumajh nahin aayi"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    } ]
+  }
+}

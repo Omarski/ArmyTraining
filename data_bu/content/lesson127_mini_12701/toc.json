@@ -1,0 +1,32 @@
+{
+  "chapter" : {
+    "xid" : "lesson127_mini_12701",
+    "title" : "Providing Humanitarian Assistance (Urdu) - Scenario",
+    "info" : {
+      "property" : [ {
+        "name" : "sharedLibraryRevision",
+        "value" : "95223"
+      } ]
+    },
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page3602",
+        "type" : "Info",
+        "title" : "Providing Humanitarian Assistance"
+      }, {
+        "xid" : "page3603",
+        "type" : "Info",
+        "title" : "Introduction"
+      }, {
+        "xid" : "page3604",
+        "type" : "Info",
+        "title" : "Scenario Interface"
+      }, {
+        "xid" : "page3601",
+        "type" : "ActiveDialog",
+        "title" : "Humanitarian Assistance Scenario"
+      } ]
+    } ]
+  }
+}

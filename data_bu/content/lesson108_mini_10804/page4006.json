@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page4006",
+    "type" : "Info",
+    "title" : "Education",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/8Cc47a"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistani girl studying"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "About half of Pakistani adults are able to read and write, and men are much more likely than women to be literate. Education was not compulsory even at the primary level until 2010. Many children remain unschooled.",
+      "media" : [ {
+        "zid" : 4032276,
+        "xid" : "4032276.mp3",
+        "type" : "audio",
+        "file" : "4032276.mp3"
+      } ]
+    }, {
+      "text" : "Private schools are elite, expensive, and typically teach in English. English is highly valued, but it's also prestigious to attain the status of \"hafez,\" or someone who has memorized the whole Quran.",
+      "media" : [ {
+        "zid" : 4032277,
+        "xid" : "4032277.mp3",
+        "type" : "audio",
+        "file" : "4032277.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460568625722,
+      "xid" : "1460568625722.jpg",
+      "type" : "image",
+      "file" : "1460568625722.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

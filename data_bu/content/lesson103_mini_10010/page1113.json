@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page1113",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Collectivism",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "A Chinese New Year's Parade"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/global-jet/2256294558/in/photostream/"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In societies that lean toward collectivism, more focus is put on the group. In fact, one's identity is, in large part, a function of one's membership and role within the group. In collectivist societies, the survival, success, and well-being of the group is the main priority, as it ensures the well-being of the individuals included in the group. Because of this, group members are closely tied and harmony, consideration of others, and interdependence are highly valued. Many societies in Africa, Asia, and the Middle East lean more toward collectivism.",
+      "media" : [ {
+        "zid" : 4011263,
+        "xid" : "4011263.mp3",
+        "type" : "audio",
+        "file" : "4011263.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1397089217347,
+      "xid" : "1397089217347.jpg",
+      "type" : "image",
+      "file" : "1397089217347.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

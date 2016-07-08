@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page4022",
+    "type" : "Info",
+    "title" : "Food",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/aG129p"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistan's national dish, \"biryani\""
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Pakistani food is similar to Indian food, although meat is much more widely eaten in Pakistan. Curry dishes are common, and most other dishes are heavily spiced. Yogurt is a common ingredient. If you want your food without any spice, ask for \"no chilies\" rather than \"mild.\"",
+      "media" : [ {
+        "zid" : 4032301,
+        "xid" : "4032301.mp3",
+        "type" : "audio",
+        "file" : "4032301.mp3"
+      } ]
+    }, {
+      "text" : "Bread is a staple, especially unleavened \"chapati\" and slightly-leavened \"naan.\" In fact, most of the local diet consists of bread, rice, vegetables, lentils, and meat.",
+      "media" : [ {
+        "zid" : 4032302,
+        "xid" : "4032302.mp3",
+        "type" : "audio",
+        "file" : "4032302.mp3"
+      } ]
+    }, {
+      "text" : "Hot, sweet, milky tea is probably the most common drink. Alcohol, meanwhile, is quite uncommon because Islam forbids it.",
+      "media" : [ {
+        "zid" : 4032303,
+        "xid" : "4032303.mp3",
+        "type" : "audio",
+        "file" : "4032303.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460569672669,
+      "xid" : "1460569672669.jpg",
+      "type" : "image",
+      "file" : "1460569672669.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

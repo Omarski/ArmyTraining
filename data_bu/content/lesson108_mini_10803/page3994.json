@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page3994",
+    "type" : "Info",
+    "title" : "Economy",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.public-domain-image.com/free-images/people/male-men/balochistan-farmers-on-agriculture-fields-in-pakistan/attachment/balochistan-farmers-on-agriculture-fields-in-pakistan"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Farmer in Pakistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Pakistan is a relatively poor country, with GDP per capita below $5,000.",
+      "media" : [ {
+        "zid" : 4032261,
+        "xid" : "4032261.mp3",
+        "type" : "audio",
+        "file" : "4032261.mp3"
+      } ]
+    }, {
+      "text" : "The country has considerable natural resources, particularly natural gas and minerals. However, the economy remains primarily agricultural. More than 40% of the labor force works in agriculture, which accounts for one-quarter of GDP. Pakistan's chief export is textiles.",
+      "media" : [ {
+        "zid" : 4032262,
+        "xid" : "4032262.mp3",
+        "type" : "audio",
+        "file" : "4032262.mp3"
+      } ]
+    }, {
+      "text" : "Pakistan's currency is known as the rupee, the value of which depreciated more than 40% between 2007 and 2015. In December 2015, one U.S. dollar was worth around 105 rupees.",
+      "media" : [ {
+        "zid" : 4032263,
+        "xid" : "4032263.mp3",
+        "type" : "audio",
+        "file" : "4032263.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460568496592,
+      "xid" : "1460568496592.jpg",
+      "type" : "image",
+      "file" : "1460568496592.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

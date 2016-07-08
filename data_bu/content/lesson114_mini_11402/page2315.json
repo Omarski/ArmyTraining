@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page2315",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Talking to Elders",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/jenny-pics/5311280901/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An elderly man in Pakistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In Pakistan, elders are highly respected and are often seen as authority figures. It’s important to show the same kind of respect to Pakistani elders as you would show to someone in a high-ranking position.",
+      "media" : [ {
+        "zid" : 4032476,
+        "xid" : "4032476.mp3",
+        "type" : "audio",
+        "file" : "4032476.mp3"
+      } ]
+    }, {
+      "text" : "When speaking to an older person or to someone in a higher-ranking position, don't address them by their first name. Doing so may be taken as disrespectful. Try to avoid prolonged eye contact and use a more respectful style of speaking than you might with someone your own age.",
+      "media" : [ {
+        "zid" : 4032477,
+        "xid" : "4032477.mp3",
+        "type" : "audio",
+        "file" : "4032477.mp3"
+      } ]
+    }, {
+      "text" : "In meetings, if possible, greet senior counterparts before you greet younger counterparts.",
+      "media" : [ {
+        "zid" : 4032478,
+        "xid" : "4032478.mp3",
+        "type" : "audio",
+        "file" : "4032478.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1459280081850,
+      "xid" : "1459280081850.jpg",
+      "type" : "image",
+      "file" : "1459280081850.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

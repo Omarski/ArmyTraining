@@ -1,0 +1,76 @@
+{
+  "page" : {
+    "xid" : "page2121",
+    "type" : "MultipleChoice",
+    "title" : "Quiz 3",
+    "info" : null,
+    "prompt" : {
+      "text" : "What is the best way to ensure the sustainability of local projects?"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Bring leaders into the planning phase, and have them take the lead."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Have your team members do the work, so it's done correctly."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Design the project from start to finish, and coach locals where they have trouble."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Always have your team complete the work, while locals oversee the project."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "page" : {
+    "xid" : "page1860",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Names",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/8c7fkK"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Service members greeting an Afghan man"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Show respect for your counterparts by learning to correctly say their names. Dari has sounds that aren't present in English and may be difficult to pronounce. Practice saying your counterparts’ names with your interpreter before your meetings."
+    }, {
+      "text" : ""
+    } ],
+    "media" : [ {
+      "zid" : 1463530294113,
+      "xid" : "1463530294113.jpg",
+      "type" : "image",
+      "file" : "1463530294113.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

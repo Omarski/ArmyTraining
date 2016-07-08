@@ -1,0 +1,235 @@
+{
+  "page" : {
+    "xid" : "page2355",
+    "type" : "MultipleChoice",
+    "layout" : "",
+    "title" : "Quiz 3",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "minilessonID",
+        "value" : "11404"
+      }, {
+        "name" : "pretestout",
+        "value" : ""
+      } ]
+    },
+    "skills" : null,
+    "prompt" : {
+      "text" : "Your counterpart has asked you for something you know isn’t feasible. The best way to respond is:"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673153,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Tell them you’ll make an effort.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673153,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Assure them you’ll get it done.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673153,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Reject their request right away.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673153,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Ignore the request completely.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

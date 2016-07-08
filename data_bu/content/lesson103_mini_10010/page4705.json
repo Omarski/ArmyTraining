@@ -1,0 +1,189 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page4705",
+    "type" : "MultiNote",
+    "title" : "Foundational Competencies",
+    "related" : [ {
+      "xid" : "page4701",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Foundational Competencies 1",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediadisplayblurb",
+          "value" : "Men in Afghanistan"
+        }, {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/c6hJy7"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The first question, \"What is culture?\" is related to the competency of acquiring and applying culture-general knowledge.",
+        "media" : [ {
+          "zid" : 4011244,
+          "xid" : "4011244.mp3",
+          "type" : "audio",
+          "file" : "4011244.mp3"
+        } ]
+      }, {
+        "text" : "Culture learning through acquiring and applying culture-general knowledge involves the ability to learn and employ culture-general concepts and knowledge, including the notion of worldview and universal behavioral domains. It also involves having an understanding of the components of culture and using them to make sense of situations and environments.",
+        "media" : [ {
+          "zid" : 4011245,
+          "xid" : "4011245.mp3",
+          "type" : "audio",
+          "file" : "4011245.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462299971367,
+        "xid" : "1462299971367.jpg",
+        "type" : "image",
+        "file" : "1462299971367.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4702",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Foundational Competencies 2",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/EmT1f7"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Members of the Afghanistan National Police"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The second question, \"Who am I?\" is related to the competency of demonstrating cultural self-awareness.",
+        "media" : [ {
+          "zid" : 4011246,
+          "xid" : "4011246.mp3",
+          "type" : "audio",
+          "file" : "4011246.mp3"
+        } ]
+      }, {
+        "text" : "Culture learning through self-awareness involves an awareness of one's own worldview and an understanding of the beliefs, values, cultural perceptions, assumptions, and biases that shape it. It also involves recognizing how worldview influences behavior, as well as perceptions of others' behavior.",
+        "media" : [ {
+          "zid" : 4011247,
+          "xid" : "4011247.mp3",
+          "type" : "audio",
+          "file" : "4011247.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462300160484,
+        "xid" : "1462300160484.jpg",
+        "type" : "image",
+        "file" : "1462300160484.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4703",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Foundational Competencies 3",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/AC6jQB"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Two men in Pakistan"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The third question, \"What makes them who they are?\" is related to the competency of cultural perspective-taking.",
+        "media" : [ {
+          "zid" : 4011248,
+          "xid" : "4011248.mp3",
+          "type" : "audio",
+          "file" : "4011248.mp3"
+        } ]
+      }, {
+        "text" : "Culture learning through perspective-taking involves the ability to detect, analyze, and consider the point of view of others. It also involves recognizing how others will interpret and react to one's actions and demonstrating an understanding of others' needs and expectations.",
+        "media" : [ {
+          "zid" : 4011249,
+          "xid" : "4011249.mp3",
+          "type" : "audio",
+          "file" : "4011249.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462300245232,
+        "xid" : "1462300245232.jpg",
+        "type" : "image",
+        "file" : "1462300245232.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4704",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Foundational Competencies 4",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/c68G7m"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A street in Kabul, Afghanistan"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The fourth question, \"What's going on around me?\" is related to the competency of learning through observation. ",
+        "media" : [ {
+          "zid" : 4011250,
+          "xid" : "4011250.mp3",
+          "type" : "audio",
+          "file" : "4011250.mp3"
+        } ]
+      }, {
+        "text" : "Culture learning through observation involves the ability to gather and interpret information about people, surroundings, and other cultural cues. It also involves recognizing and retaining cultural information and behavior that is observed.",
+        "media" : [ {
+          "zid" : 4011251,
+          "xid" : "4011251.mp3",
+          "type" : "audio",
+          "file" : "4011251.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462300304341,
+        "xid" : "1462300304341.jpg",
+        "type" : "image",
+        "file" : "1462300304341.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    } ]
+  }
+}

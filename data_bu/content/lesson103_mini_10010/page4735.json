@@ -1,0 +1,360 @@
+{
+  "page" : {
+    "xid" : "page4735",
+    "type" : "MatchItem",
+    "layout" : "",
+    "title" : "Practice 2",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "prompt" : {
+      "text" : "Match the four basic questions about examining culture with their topics."
+    },
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "What is culture?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Who am I?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "What makes them who they are?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "What's going on around me?"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196278,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "The ability to learn culture-general concepts.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196278,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "The self-awareness of one's worldview.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196278,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "The ability to consider the point of view of others.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196278,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "The ability to interpret cultural cues.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

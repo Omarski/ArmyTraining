@@ -1,0 +1,411 @@
+{
+  "page" : {
+    "xid" : "page6604",
+    "type" : "Sorting",
+    "layout" : "",
+    "title" : "Practice 5",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "sort",
+        "value" : ""
+      } ]
+    },
+    "skills" : null,
+    "prompt" : {
+      "text" : "Sort the concerns that are culture-general from the ones that are culture-specific."
+    },
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "high-context communication"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "individualism"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "collectivism"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "polychronic time orientation"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "kissing during greetings"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "whiskey consumption practices"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "foods eaten with a pastry fork"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "green tea ceremony"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196278,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Culture-General",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196278,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Culture-Specific",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

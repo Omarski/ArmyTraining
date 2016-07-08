@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page6611",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "More on Culture",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.flickr.com/photos/31223088@N08/10100963683"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Bread vendors, Uzbekistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Culture is learned throughout life and is patterned, meaning that people who share a culture live and think in ways forming definite, repeating patterns. This does not mean, however, that culture is stagnant. Culture changes through interactions between people and groups. Culture is also internalized in the sense that it is habitual, taken for granted, and perceived as \"natural\" by people within the society.",
+      "media" : [ {
+        "zid" : 4013074,
+        "xid" : "4013074.mp3",
+        "type" : "audio",
+        "file" : "4013074.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1414435254922,
+      "xid" : "1414435254922.jpg",
+      "type" : "image",
+      "file" : "1414435254922.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

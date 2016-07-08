@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3974",
+    "type" : "Info",
+    "title" : "Rise of the Mujahideen and Civil War",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:AfghanGuerillainUS1986d.JPEG"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A Mujahid fighter in 1986"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Throughout the 1980s, thousands of young men, including many Arab foreigners, volunteered to become fighters to establish a religious regime in Afghanistan. Osama bin Laden, a wealthy Saudi, was among them.",
+      "media" : [ {
+        "zid" : 4032362,
+        "xid" : "4032362.mp3",
+        "type" : "audio",
+        "file" : "4032362.mp3"
+      } ]
+    }, {
+      "text" : "These fighters, called the “mujahideen,” worked to overthrow secular Soviet influences. In 1989, the Soviets withdrew from Afghanistan and in 1992 the Afghan government collapsed, leaving control of the country in the hands of rogue fighters, war lords, and disorganized militias.",
+      "media" : [ {
+        "zid" : 4032363,
+        "xid" : "4032363.mp3",
+        "type" : "audio",
+        "file" : "4032363.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1457471724447,
+      "xid" : "1457471724447.jpg",
+      "type" : "image",
+      "file" : "1457471724447.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

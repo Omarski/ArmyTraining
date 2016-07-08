@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page3828",
+    "type" : "Info",
+    "title" : "First Person",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/367754/soldier-bridges-language-gap-thailand#.VHTvWIvF-VN"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. soldier interpreting instructions, Thailand"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Speak directly to your audience, not to your interpreter. Always address your counterpart as if the interpreter weren't there. This means using the words \"I\" and \"you\" rather than saying things like, \"Tell them....\"",
+      "media" : [ {
+        "zid" : 4022111,
+        "xid" : "4022111.mp3",
+        "type" : "audio",
+        "file" : "4022111.mp3"
+      } ]
+    }, {
+      "text" : "When on assignment, professional interpreters will refer to themselves, and expect others to refer to them, as \"the interpreter\" rather than by name. This will highlight the fact that interpreters play a special role in the conversation rather than speaking for themselves.",
+      "media" : [ {
+        "zid" : 4022112,
+        "xid" : "4022112.mp3",
+        "type" : "audio",
+        "file" : "4022112.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416949191945,
+      "xid" : "1416949191945.jpg",
+      "type" : "image",
+      "file" : "1416949191945.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

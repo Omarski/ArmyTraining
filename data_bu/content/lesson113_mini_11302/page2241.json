@@ -1,0 +1,77 @@
+{
+  "page" : {
+    "xid" : "page2241",
+    "type" : "Pronunciation",
+    "title" : "Hello",
+    "info" : null,
+    "nut" : [ {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "سلام علیکم"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "\\2salaam\\0 \\3aaleykum\\0."
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "Hello. (lit.: \\2Peace\\0 \\3be upon you\\0.)\r\n"
+          }
+        },
+        "info" : null
+      }
+    }, {
+      "note" : {
+        "text" : "Note that the order of the \"salaam\" and \"'aleykum\" switches in the response."
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "وعلیکم اسلام\n"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "wa\\3aleykum\\0 a\\2salaam\\0."
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "Hello to you, too. (lit.: And \\3upon you, be\\0 \\2peace\\0.)"
+          }
+        },
+        "info" : null
+      }
+    } ]
+  }
+}

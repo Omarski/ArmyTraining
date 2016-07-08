@@ -1,0 +1,169 @@
+{
+  "page" : {
+    "xid" : "page1312",
+    "type" : "MultipleChoice",
+    "title" : "Quiz 1",
+    "info" : {
+      "property" : [ {
+        "name" : "minilessonID",
+        "value" : "10020"
+      } ]
+    },
+    "prompt" : {
+      "text" : "What type of interpretation is described by the following situation?\n\nSomeone is giving a speech, and the interpreter is speaking at the same time."
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "simultaneous interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "consecutive interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "escort interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "communicative interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

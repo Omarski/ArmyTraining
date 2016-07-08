@@ -1,0 +1,81 @@
+{
+  "page" : {
+    "xid" : "page2209",
+    "type" : "Pronunciation",
+    "title" : "God willing",
+    "info" : null,
+    "nut" : [ {
+      "note" : {
+        "text" : "\"inshallah\" is an Arabic term used throughout the Muslim world when talking about the future. It means \"God willing,\" as in, \"It will happen in the future, only if God allows it.\""
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "ان شاء الله"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "inshallah."
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "God willing."
+          }
+        },
+        "info" : null
+      }
+    }, {
+      "note" : {
+        "text" : "While the Arabic term is commonly used in Afghanistan, there is also a Dari phrase meaning the same thing:"
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "اگه خواست خدا بود"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "aga khwast khuda basha."
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "God willing."
+          }
+        },
+        "info" : null
+      }
+    } ]
+  }
+}

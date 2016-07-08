@@ -1,0 +1,238 @@
+{
+  "page" : {
+    "xid" : "page3802",
+    "type" : "MultipleChoice",
+    "title" : "Practice 3",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "prompt" : {
+      "text" : "Which of the following is the most common form of transportation for long-distance travel?\n"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "For long-distance travel, buses and trucks are common. These are often colorfully decorated with some of the country's most interesting public art.\n"
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "buses and trucks",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, trains are not the most common form of transportation for long-distance travel in Pakistan."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "trains",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, motorcycles are not the most common form of transportation for long-distance travel in Pakistan."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "motorcycles",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, airplanes are not the most common form of transportation for long-distance travel in Pakistan."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "airplanes",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    } ]
+  }
+}

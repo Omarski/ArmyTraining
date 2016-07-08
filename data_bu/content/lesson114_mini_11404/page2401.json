@@ -1,0 +1,42 @@
+{
+  "page" : {
+    "xid" : "page2401",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perspectives: Taking Leave",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "(Note: This transcript has been edited for readability.)<br><br>\"So, once the food is done, and everything is said and done, the conversation has kind of died down, then at the moment when the guest feels like they would want to leave, the proper way to do that would be to say to the host, 'Thank you so much.' You start thanking them, or express your gratitude for everything. You definitely compliment the food, the presentation and the quality of the food. And then you take your leave by asking for permission to leave. So, traditionally, in Urdu, the phrase that’s used literally translates to, 'May I ask your permission to leave?' So somewhere in that ballpark where you want to get that expression out, where you’re basically asking the host for their permission to leave, and doing it while being very polite and thanking them for the evening or for the meals.\""
+      }, {
+        "name" : "frame",
+        "value" : ""
+      } ]
+    },
+    "note" : [ {
+      "text" : "A Pakistani national talks about taking leave at the end of a meal.",
+      "media" : [ {
+        "zid" : 1450383134234,
+        "xid" : "1450383134234.mp4",
+        "type" : "video",
+        "file" : "1450383134234.mp4"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

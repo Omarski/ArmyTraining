@@ -1,0 +1,42 @@
+{
+  "page" : {
+    "xid" : "page2397",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perspectives: Eye Contact",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "(Note: This transcript has been edited for readability.)<br><br>\"There's a culture of staring. That's not just a culture of staring at foreigners, but there's definitely a culture of men staring at women. And, just in general, people don’t have the same—it’s just culturally very different from the United States, where if you’re staring at somebody, that’s incredibly rude. And those filters aren’t there like we have them here. Generally, for me, as a woman, if I see men staring at me, I pretend that they don’t exist, and I just ignore it. I think that if you were a foreign male and there were women staring at you, definitely do not engage with them, because you’re a foreigner; you’re not related to them. But if there are men staring at you, it’s completely okay to engage with them. And oftentimes, they’re just very curious. They love it if you engage with them and start a conversation. They’re just shy or nervous, and they stare instead of just coming up to you and talking to you.\""
+      }, {
+        "name" : "frame",
+        "value" : ""
+      } ]
+    },
+    "note" : [ {
+      "text" : "A Pakistani national discusses staring norms in Pakistan.",
+      "media" : [ {
+        "zid" : 1450383134234,
+        "xid" : "1450383134234.mp4",
+        "type" : "video",
+        "file" : "1450383134234.mp4"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

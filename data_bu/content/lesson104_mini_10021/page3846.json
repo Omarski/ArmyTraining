@@ -1,0 +1,93 @@
+{
+  "page" : {
+    "xid" : "page3846",
+    "type" : "MultipleChoice",
+    "title" : "Practice 1",
+    "info" : {
+      "property" : [ {
+        "name" : "noshuffle",
+        "value" : ""
+      } ]
+    },
+    "prompt" : {
+      "text" : "True or false? There's no reason to learn the local language if you have an interpreter."
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, even a few words can help to build rapport."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "true"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Even a few words can help to build rapport."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "false"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

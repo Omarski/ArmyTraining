@@ -1,0 +1,378 @@
+{
+  "page" : {
+    "xid" : "page3832",
+    "type" : "Sorting",
+    "title" : "Practice 6",
+    "info" : {
+      "property" : [ {
+        "name" : "sort",
+        "value" : ""
+      } ]
+    },
+    "prompt" : {
+      "text" : "Sort the \"do\" statements from the \"don't\" statements."
+    },
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Make eye contact with your audience."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Confirm that your message was received."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Have your interpreter carry a notebook."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Plan on extra time to communicate."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Have your interpreter stand in front of you."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Make eye contact with your interpreter."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Express multiple ideas without pausing."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Encourage your interpreter to mediate."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Do"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Don't"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

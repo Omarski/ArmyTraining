@@ -1,0 +1,123 @@
+{
+  "page" : {
+    "xid" : "page2021",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 5",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Tariq Osmani",
+      "zid" : 1462830371130,
+      "nom" : "Tariq_Osmani"
+    },
+    "media" : [ {
+      "zid" : 1466444588397,
+      "xid" : "1466444588397.jpg",
+      "type" : "image",
+      "file" : "1466444588397.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "What did he say?"
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "en",
+        "anchor" : "ezread",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : "براے مہربانی"
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "bur-aaye mehurbaani"
+        }
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "He said, \"please.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Please."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "\"Excuse me\" would be \"muaaf kijiyay.\"\n"
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Excuse me."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "\"I'm sorry\" would be \"muaafi chahti hoon.\"\n"
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "I'm sorry."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "\"Happy to meet you\" would be \"aap say mil kur khushi hooi.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Happy to meet you."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

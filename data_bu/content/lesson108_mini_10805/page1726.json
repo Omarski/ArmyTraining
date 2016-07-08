@@ -1,0 +1,235 @@
+{
+  "page" : {
+    "xid" : "page1726",
+    "type" : "Pronunciation",
+    "title" : "Commonly Used Phrases 2",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "nut" : [ {
+      "uttering" : {
+        "utterance" : {
+          "status" : "imported",
+          "provenance" : "",
+          "lang" : "en",
+          "anchor" : "native",
+          "lexicon" : false,
+          "incomplete" : false,
+          "ontoid" : "",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "",
+            "text" : "kiRpaa",
+            "group" : ""
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "",
+            "text" : "please",
+            "group" : ""
+          },
+          "parseTree" : null
+        },
+        "info" : {
+          "property" : [ {
+            "name" : "asrsetting",
+            "value" : "easy"
+          }, {
+            "name" : "displayedchannel",
+            "value" : "EZ-Read"
+          } ]
+        },
+        "media" : [ {
+          "zid" : 4032240,
+          "xid" : "4032240.mp3",
+          "type" : "audio",
+          "file" : "4032240.mp3"
+        } ]
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "status" : "imported",
+          "provenance" : "",
+          "lang" : "en",
+          "anchor" : "native",
+          "lexicon" : false,
+          "incomplete" : false,
+          "ontoid" : "",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "",
+            "text" : "danvaad",
+            "group" : ""
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "",
+            "text" : "thank you",
+            "group" : ""
+          },
+          "parseTree" : null
+        },
+        "info" : {
+          "property" : [ {
+            "name" : "asrsetting",
+            "value" : "easy"
+          }, {
+            "name" : "displayedchannel",
+            "value" : "EZ-Read"
+          } ]
+        },
+        "media" : [ {
+          "zid" : 4032241,
+          "xid" : "4032241.mp3",
+          "type" : "audio",
+          "file" : "4032241.mp3"
+        } ]
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "status" : "imported",
+          "provenance" : "",
+          "lang" : "en",
+          "anchor" : "native",
+          "lexicon" : false,
+          "incomplete" : false,
+          "ontoid" : "",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "",
+            "text" : "tusee kevey ho?",
+            "group" : ""
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "",
+            "text" : "How are you?",
+            "group" : ""
+          },
+          "parseTree" : null
+        },
+        "info" : {
+          "property" : [ {
+            "name" : "asrsetting",
+            "value" : "easy"
+          }, {
+            "name" : "displayedchannel",
+            "value" : "EZ-Read"
+          } ]
+        },
+        "media" : [ {
+          "zid" : 4032242,
+          "xid" : "4032242.mp3",
+          "type" : "audio",
+          "file" : "4032242.mp3"
+        } ]
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "status" : "imported",
+          "provenance" : "",
+          "lang" : "en",
+          "anchor" : "native",
+          "lexicon" : false,
+          "incomplete" : false,
+          "ontoid" : "",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "",
+            "text" : "ma teek haa danvaad atey tusee?",
+            "group" : ""
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "",
+            "text" : "I'm fine, thanks, and you?",
+            "group" : ""
+          },
+          "parseTree" : null
+        },
+        "info" : {
+          "property" : [ {
+            "name" : "asrsetting",
+            "value" : "easy"
+          }, {
+            "name" : "displayedchannel",
+            "value" : "EZ-Read"
+          } ]
+        },
+        "media" : [ {
+          "zid" : 4032243,
+          "xid" : "4032243.mp3",
+          "type" : "audio",
+          "file" : "4032243.mp3"
+        } ]
+      }
+    } ]
+  }
+}

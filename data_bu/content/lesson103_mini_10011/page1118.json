@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page1118",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Service-Oriented Approaches to Culture",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "U.S. Navy photo by Senior Chief Mass Communication Specialist Spike Call"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Brazilian military with U.S. Army and Navy"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Now that we've proposed ways to consider culture, it's important to note that each of the services has its own approach to culture education and training. These approaches generally cover the same important concepts and are aligned scientifically. They just address the material in different ways that make sense for specific service requirements.",
+      "media" : [ {
+        "zid" : 4028565,
+        "xid" : "4028565.mp3",
+        "type" : "audio",
+        "file" : "4028565.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1395357597455,
+      "xid" : "1395357597455.jpg",
+      "type" : "image",
+      "file" : "1395357597455.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

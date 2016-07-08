@@ -1,0 +1,232 @@
+{
+  "page" : {
+    "xid" : "page1973",
+    "type" : "MultipleChoice",
+    "layout" : "",
+    "title" : "Quiz 1",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "pretestout",
+        "value" : ""
+      } ]
+    },
+    "skills" : null,
+    "prompt" : {
+      "text" : "Especially in tribal, or rural areas, community authority figures typically include:"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673127,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Elected officials, religious leaders, and elders.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673127,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Elders, elected officials, and young men.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673127,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Elders, accomplished women, and religious leaders.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673127,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "U.S. service members, elders, and religious leaders.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

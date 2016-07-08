@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2286",
+    "type" : "Info",
+    "title" : "Forms of Address",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Meeting with local Afghans"
+      } ]
+    },
+    "note" : [ {
+      "text" : "When greeting civilian men, you can say their last name, followed by the term \"saaheb,\" to show respect. Military counterparts of both genders, local or foreign, will be referred to by rank, then last name, as they would be in the U.S.",
+      "media" : [ {
+        "zid" : 4032585,
+        "xid" : "4032585.mp3",
+        "type" : "audio",
+        "file" : "4032585.mp3"
+      } ]
+    }, {
+      "text" : "Once a relationship is built, local civilian women might refer to U.S. servicewomen by their first name, followed by the term “jaan.” For instance, \"Lisa\" would be \"Lisa-jaan.\" This term is affectionate and similar to \"dear.\" ",
+      "media" : [ {
+        "zid" : 4034391,
+        "xid" : "4034391.mp3",
+        "type" : "audio",
+        "file" : "4034391.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462372136110,
+      "xid" : "1462372136110.jpg",
+      "type" : "image",
+      "file" : "1462372136110.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page1121",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Culture and Your Mission",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "Men on horseback in Tajikistan"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/73542590@N00/6525041207/"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Now that you have learned about the four foundational competencies and other various frameworks of culture, we will now discuss issues that you may face when interacting with a different culture. We will also go over how these issues can affect successful cultural interactions. ",
+      "media" : [ {
+        "zid" : 4011273,
+        "xid" : "4011273.mp3",
+        "type" : "audio",
+        "file" : "4011273.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1414435425760,
+      "xid" : "1414435425760.jpg",
+      "type" : "image",
+      "file" : "1414435425760.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

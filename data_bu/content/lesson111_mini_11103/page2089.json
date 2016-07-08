@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2089",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. and Pakistani military officials at a closing ceremony"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4034526,
+        "xid" : "4034526.mp3",
+        "type" : "audio",
+        "file" : "4034526.mp3"
+      } ]
+    }, {
+      "text" : "- Identify effects of partner nation's military structure on your mission.\n- Identify strategies for managing your counterparts' expectations.\n- Respond appropriately to offers of hospitality.\n- Recognize methods for taking leave.\n",
+      "media" : [ {
+        "zid" : 4034545,
+        "xid" : "4034545.mp3",
+        "type" : "audio",
+        "file" : "4034545.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463156961806,
+      "xid" : "1463156961806.jpg",
+      "type" : "image",
+      "file" : "1463156961806.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

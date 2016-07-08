@@ -1,0 +1,32 @@
+{
+  "page" : {
+    "xid" : "page3804",
+    "type" : "Info",
+    "title" : "Scenario Interface",
+    "info" : {
+      "property" : [ {
+        "name" : "platforms",
+        "value" : "!NOT, vmob"
+      } ]
+    },
+    "note" : [ {
+      "text" : "During the scenario, the Objectives Menu keeps track of your progress. Click on the Objectives Bar to review your objectives. Click the CC button to view closed captions of the episode. You can pause and resume the episode by clicking the Play/Pause button."
+    } ],
+    "media" : [ {
+      "zid" : 1412720206861,
+      "xid" : "1412720206861.jpg",
+      "type" : "image",
+      "file" : "1412720206861.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

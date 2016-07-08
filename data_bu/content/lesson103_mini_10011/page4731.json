@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page4731",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Video: The Army's Role in Culture Training",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "\"I serve as the director of the TRADOC Culture Center, and the TRADOC Culture Center is a really unique organization. We're just 10 years old, but we do a lot of things inside of training and doctrine commands, we institutionalize culture curriculum across all the centers of excellence. And then, maybe more importantly, we go out to the schoolhouses throughout training and doctrine command. And we teach trainers effective ways to conduct culture training, mainly centered on situational training exercises, and practical exercises, and activities. Very active and meaningful ways for soldiers to learn about culture as opposed to death by the PowerPoint lecture.<br><br>\"So the Army came up with a definition of culture that was relatively short and user-friendly, maybe a page in length and most agreed that, 'Yeah, that made sense.' But at the TRADOC Culture Center, we knew that even that was probably too much for soldiers, especially our younger soldiers who were new to culture. So we wanted to come up with a useful framework, and that's where we drove toward values, beliefs, behaviors, and norms. And VBBN, we found to be a very practical kind of model. Values, those things that are important to people. Beliefs, those things that people believe are true. Behavior is the way the people act. Norms, those things that people find to be tolerable or intolerable. When we start breaking that down for soldiers, the little lights come on in their eyes like, 'Oh, now I know what you mean by culture.' And when we start introducing them to the VBBN framework, it all begins with VBBN as applied to American culture, or maybe a region within America. VBBN as applied to the U.S. Army and our culture in the military. And then we begin to project VBBN into the operational environment.\""
+      }, {
+        "name" : "platforms",
+        "value" : "!NOT, vmob"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this video, the Director of the Army's Culture Center explains how the U.S. Army teaches culture to service members."
+    } ],
+    "media" : [ {
+      "zid" : 1400621363371,
+      "xid" : "1400621363371.mp4",
+      "type" : "video",
+      "file" : "1400621363371.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

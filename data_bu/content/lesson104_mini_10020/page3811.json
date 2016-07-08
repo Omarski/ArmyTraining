@@ -1,0 +1,213 @@
+{
+  "page" : {
+    "xid" : "page3811",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 1",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Melissa the interpreter",
+      "zid" : 1449524600715,
+      "nom" : "Melissa"
+    },
+    "media" : [ {
+      "zid" : 1418773998887,
+      "xid" : "1418773998887.jpg",
+      "type" : "image",
+      "file" : "1418773998887.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "Melissa's work best illustrates which of the following?"
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "ar-gu",
+        "anchor" : "native",
+        "native" : {
+          "lang" : "ar-gu",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "ezread" : {
+          "lang" : "ar-gu",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "phonetic" : {
+          "lang" : "ar-gu",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "Hi, I'm Melissa, your interpreter. As we discussed, I'll be traveling with you, and my primary role will be to interpret informal, two-way conversation."
+        }
+      },
+      "info" : null,
+      "media" : [ {
+        "zid" : 4024967,
+        "xid" : "4024967.mp3",
+        "type" : "audio",
+        "file" : "4024967.mp3"
+      } ]
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, simultaneous interpretation is when information is interpreted at the same time it is spoken."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "simultaneous interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, Melissa's work is a subset of consecutive interpretation. Can you be more specific?"
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "consecutive interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "The defining trait of escort interpretation is its two-way nature."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "escort interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "This is not a type of interpretation."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "communicative interpretation"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

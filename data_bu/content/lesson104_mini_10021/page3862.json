@@ -1,0 +1,164 @@
+{
+  "page" : {
+    "xid" : "page3862",
+    "type" : "MultipleChoice",
+    "title" : "Practice 4",
+    "info" : null,
+    "prompt" : {
+      "text" : "Which of the following is most likely to be a sign of misinterpretation?"
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "If your audience's responses make sense in context, your conversation is probably being interpreted well."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "You get logical responses from your audience."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "If your interpreter's translations are significantly longer or shorter than the sentences spoken, there may be a problem. (This may also indicate that the interpreter is explaining concepts that don't translate easily.)"
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "You notice differences in sentence length."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, matching speech and nonverbal behavior are typically a cue that your conversation is being interpreted well."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Speech and nonverbal behavior seem to match and make sense for the situation."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, encouraging your interpreter to ask questions will prevent misinterpretation."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "ar-gu",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "ar-gu",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "ar-gu",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "ar-gu",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "The interpreter doesn't understand and asks you questions."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

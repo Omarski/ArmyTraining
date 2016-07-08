@@ -1,0 +1,119 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page2234",
+    "type" : "MultiNote",
+    "title" : "Building Rapport",
+    "related" : [ {
+      "xid" : "page2235",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 1",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "U.S. service member and an Afghan border police officer"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Afghans value relationships and are generally very warm and welcoming. As you carry out your mission, don't confuse cordial politeness for trust. Making acquaintances may be easy, but truly making friends will take time.",
+        "media" : [ {
+          "zid" : 4032555,
+          "xid" : "4032555.mp3",
+          "type" : "audio",
+          "file" : "4032555.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462313520801,
+        "xid" : "1462313520801.jpg",
+        "type" : "image",
+        "file" : "1462313520801.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page2236",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 2",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "U.S. service member listening to an Afghan counterpart"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Polite small talk is a necessary part of your engagement with Afghans. Your counterparts will want to get to know you before entering a conversation where they may need to share information. Even spending an entire first meeting chatting is a success, as each positive meeting is an opportunity for re-engagement.",
+        "media" : [ {
+          "zid" : 4032556,
+          "xid" : "4032556.mp3",
+          "type" : "audio",
+          "file" : "4032556.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462314286023,
+        "xid" : "1462314286023.jpg",
+        "type" : "image",
+        "file" : "1462314286023.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page2237",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 3",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Speaking with Afghan border police"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Some Afghans speak English, though they may not wish you to know it. To avoid embarrassment or conflict, always assume your counterparts understand English. ",
+        "media" : [ {
+          "zid" : 4032558,
+          "xid" : "4032558.mp3",
+          "type" : "audio",
+          "file" : "4032558.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1462314363445,
+        "xid" : "1462314363445.jpg",
+        "type" : "image",
+        "file" : "1462314363445.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    } ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page1998",
+    "type" : "Info",
+    "title" : "Holidays",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/cFubwG"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Local officials holding a meal to break fast during Ramadan"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Schedules should take into account local religious observances, such as Ramadan and Eid al-Fitr. During the month of Ramadan, your counterparts may be fasting. Avoid eating, drinking, or smoking in public during daylight. If you need to schedule meetings during Ramadan, keep in mind that productivity might be lower, as people will be tired and hungry.",
+      "media" : [ {
+        "zid" : 4032634,
+        "xid" : "4032634.mp3",
+        "type" : "audio",
+        "file" : "4032634.mp3"
+      } ]
+    }, {
+      "text" : "During Eid al-Fitr, which follows Ramadan, your counterparts may return to their home provinces to be with family. Be sure that proposed meetings do not coincide with these dates.",
+      "media" : [ {
+        "zid" : 4032635,
+        "xid" : "4032635.mp3",
+        "type" : "audio",
+        "file" : "4032635.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463602258944,
+      "xid" : "1463602258944.jpg",
+      "type" : "image",
+      "file" : "1463602258944.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

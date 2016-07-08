@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page6653",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Individualism and Collectivism",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo Inc."
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "The terms \"individualism\" and \"collectivism\" look at how individuals in a society see themselves and how they fit into the society as a whole. ",
+      "media" : [ {
+        "zid" : 4011261,
+        "xid" : "4011261.mp3",
+        "type" : "audio",
+        "file" : "4011261.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460663803113,
+      "xid" : "1460663803113.jpg",
+      "type" : "image",
+      "file" : "1460663803113.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

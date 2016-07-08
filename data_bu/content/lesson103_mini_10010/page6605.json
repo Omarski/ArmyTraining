@@ -1,0 +1,223 @@
+{
+  "page" : {
+    "xid" : "page6605",
+    "type" : "MultipleChoice",
+    "layout" : "",
+    "title" : "Practice 3",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "prompt" : {
+      "text" : "Perspective-taking will help you:"
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember that perspective-taking refers to being able to see situations, actions, and motivations from someone else's perspective."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196265,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Assess the value of another culture.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember that perspective-taking refers to being able to see situations, actions, and motivations from someone else's perspective."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196265,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Define another person's world using your values.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember that perspective-taking refers to being able to see situations, actions, and motivations from someone else's perspective."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196265,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Teach American customs in every country.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Perspective-taking refers to being able to see situations, actions, and motivations from someone else's perspective."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1393877196265,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Build understanding and reduce frustration and miscommunication.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

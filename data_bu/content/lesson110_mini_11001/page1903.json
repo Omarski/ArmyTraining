@@ -1,0 +1,105 @@
+{
+  "page" : {
+    "xid" : "page1903",
+    "type" : "Pronunciation",
+    "title" : "How are you?",
+    "info" : null,
+    "nut" : [ {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "تاسی"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "taase"
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "you"
+          }
+        },
+        "info" : null
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "څنګه یی"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "tsenga yey"
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "how are"
+          }
+        },
+        "info" : null
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : " تاسی څنګه یی"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "\\2taase \\3tsenga yey\\0?"
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "\\3How are \\2you\\0?"
+          }
+        },
+        "info" : null
+      }
+    } ]
+  }
+}

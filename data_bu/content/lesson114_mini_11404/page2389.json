@@ -1,0 +1,175 @@
+{
+  "page" : {
+    "xid" : "page2389",
+    "type" : "MatchItem",
+    "title" : "Practice 13",
+    "info" : null,
+    "prompt" : null,
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : false,
+      "media" : {
+        "zid" : 1460759039780,
+        "xid" : "1460759039780.jpg",
+        "type" : "image",
+        "file" : "1460759039780.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "six"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "media" : {
+        "zid" : 1460758424182,
+        "xid" : "1460758424182.jpg",
+        "type" : "image",
+        "file" : "1460758424182.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "eight"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "media" : {
+        "zid" : 1460758989556,
+        "xid" : "1460758989556.jpg",
+        "type" : "image",
+        "file" : "1460758989556.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "one"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "media" : {
+        "zid" : 1460759144827,
+        "xid" : "1460759144827.jpg",
+        "type" : "image",
+        "file" : "1460759144827.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "three"
+          } ]
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "6"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "8"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "1"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "3"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    } ]
+  }
+}

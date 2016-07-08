@@ -1,0 +1,447 @@
+{
+  "page" : {
+    "xid" : "page2371",
+    "type" : "MultiColumnPronunciation",
+    "layout" : "",
+    "title" : "Numbers",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "row" : [ {
+      "nut" : [ {
+        "note" : {
+          "text" : "In Afghanistan, numbers are written differently than they are in the U.S. You’ll see these numbers in addresses, phone numbers, and price tags."
+        }
+      } ]
+    }, {
+      "nut" : [ {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672298,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "0 - sifar"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۰"
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029901,
+            "xid" : "4029901.mp3",
+            "type" : "audio",
+            "file" : "4029901.mp3"
+          } ]
+        }
+      }, {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672298,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "5 - pendze"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۵"
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029904,
+            "xid" : "4029904.mp3",
+            "type" : "audio",
+            "file" : "4029904.mp3"
+          } ]
+        }
+      } ]
+    }, {
+      "nut" : [ {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672298,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "1 - yaw"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۱"
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029906,
+            "xid" : "4029906.mp3",
+            "type" : "audio",
+            "file" : "4029906.mp3"
+          } ]
+        }
+      }, {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672298,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "6 - shpeg"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۶"
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029909,
+            "xid" : "4029909.mp3",
+            "type" : "audio",
+            "file" : "4029909.mp3"
+          } ]
+        }
+      } ]
+    }, {
+      "nut" : [ {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "2 - dwa"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۲"
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029912,
+            "xid" : "4029912.mp3",
+            "type" : "audio",
+            "file" : "4029912.mp3"
+          } ]
+        }
+      }, {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "7 - owe"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۷"
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029914,
+            "xid" : "4029914.mp3",
+            "type" : "audio",
+            "file" : "4029914.mp3"
+          } ]
+        }
+      } ]
+    }, {
+      "nut" : [ {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "3 - drey"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۳"
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029915,
+            "xid" : "4029915.mp3",
+            "type" : "audio",
+            "file" : "4029915.mp3"
+          } ]
+        }
+      }, {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "8 - ate"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۸"
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029917,
+            "xid" : "4029917.mp3",
+            "type" : "audio",
+            "file" : "4029917.mp3"
+          } ]
+        }
+      } ]
+    }, {
+      "nut" : [ {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "4 - tsalor"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۴"
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029919,
+            "xid" : "4029919.mp3",
+            "type" : "audio",
+            "file" : "4029919.mp3"
+          } ]
+        }
+      }, {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : "9 - nahe"
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "۹"
+            }
+          },
+          "info" : null,
+          "media" : [ {
+            "zid" : 4029922,
+            "xid" : "4029922.mp3",
+            "type" : "audio",
+            "file" : "4029922.mp3"
+          } ]
+        }
+      } ]
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

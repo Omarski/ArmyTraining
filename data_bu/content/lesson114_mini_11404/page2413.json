@@ -1,0 +1,32 @@
+{
+  "page" : {
+    "xid" : "page2413",
+    "type" : "QuizStart",
+    "title" : "Quiz",
+    "info" : {
+      "property" : [ {
+        "name" : "quiz",
+        "value" : "start"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Welcome to the section quiz! \nYou will now answer three questions based on the section you've just completed. \nClick \"NEXT\" to begin."
+    } ],
+    "media" : [ {
+      "zid" : 1389291394690,
+      "xid" : "1389291394690.jpg",
+      "type" : "image",
+      "file" : "1389291394690.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2715",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Learning Objectives",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/afgmatters/4284338323/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Children with newspapers in Ghor province, Afghanistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4033919,
+        "xid" : "4033919.mp3",
+        "type" : "audio",
+        "file" : "4033919.mp3"
+      } ]
+    }, {
+      "text" : "- Recall key social, political, and historical factors that may affect your mission.",
+      "media" : [ {
+        "zid" : 4034381,
+        "xid" : "4034381.mp3",
+        "type" : "audio",
+        "file" : "4034381.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1465501920478,
+      "xid" : "1465501920478.jpg",
+      "type" : "image",
+      "file" : "1465501920478.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

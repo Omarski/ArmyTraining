@@ -1,0 +1,88 @@
+{
+  "page" : {
+    "xid" : "page1963",
+    "type" : "MultipleChoice",
+    "title" : "Practice 8",
+    "info" : null,
+    "prompt" : {
+      "text" : "You've recently assisted local forces on a relief mission in a small community. You made good connections with the village leaders, and they have agreed to oversee the work to be done. What is the best course of action at this point?"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Personal visits are appreciated and show you're not simply there to complete projects and leave. Show genuine concern, spend some time chatting before any business is discussed."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Return to the area to visit with the leaders and ask if you can assist further."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, avoid making visits seem like you're \"checking up\" on your counterparts. Show genuine concern, spend some time chatting, and inquire about anything you can assist with."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Return to the area to visit with the leaders and make sure the work is getting done."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember to visit your counterparts regularly, even if you're not working on an active project. Personal visits are appreciated and show you're not simply there to complete projects and leave."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Allow the local leaders to be in full charge. Don't return to the area."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember to visit your counterparts regularly, even if you're not working on an active project. Personal visits are appreciated and show you're not simply there to complete projects and leave."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Ask an Afghan service member to visit the village, to see if there have been any problems."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

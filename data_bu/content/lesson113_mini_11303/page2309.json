@@ -1,0 +1,105 @@
+{
+  "page" : {
+    "xid" : "page2309",
+    "type" : "Pronunciation",
+    "title" : "Please sit",
+    "info" : null,
+    "nut" : [ {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "هیله کوم"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "hila kawem"
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "please"
+          }
+        },
+        "info" : null
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "هیله کوم کښنی"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "\\2hila kawem\\0, kesheyney."
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "Please, sit. (Northern Pashto)"
+          }
+        },
+        "info" : null
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "هیله کوم کینی"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "\\2hila kawem\\0, keney."
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "Please, sit. (Southern Pashto)"
+          }
+        },
+        "info" : null
+      }
+    } ]
+  }
+}

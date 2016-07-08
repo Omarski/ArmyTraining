@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2156",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/afgmatters/4197770551/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An extended family in Chagcharan, Afghanistan"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4032631,
+        "xid" : "4032631.mp3",
+        "type" : "audio",
+        "file" : "4032631.mp3"
+      } ]
+    }, {
+      "text" : "- Recognize religious factors that influence routine and scheduling.\n- Respond appropriately to offers of hospitality.",
+      "media" : [ {
+        "zid" : 4034411,
+        "xid" : "4034411.mp3",
+        "type" : "audio",
+        "file" : "4034411.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462373353681,
+      "xid" : "1462373353681.jpg",
+      "type" : "image",
+      "file" : "1462373353681.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

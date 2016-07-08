@@ -1,0 +1,19 @@
+{
+  "page" : {
+    "xid" : "page1322",
+    "type" : "QuizEnd",
+    "layout" : "",
+    "title" : "Quiz Results",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "quiz",
+        "value" : "end"
+      } ]
+    },
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

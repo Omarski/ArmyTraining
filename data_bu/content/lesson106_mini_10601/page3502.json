@@ -1,0 +1,20 @@
+{
+  "page" : {
+    "xid" : "page3502",
+    "type" : "PostTestQuizEnd",
+    "layout" : "",
+    "title" : "Post-Test Score",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "quiz",
+        "value" : "posttestquizend"
+      } ]
+    },
+    "skills" : null,
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

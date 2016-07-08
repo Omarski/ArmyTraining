@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2753",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Differences in Scheduling and Time",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/cdcglobal/16828388026/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistanis walking to a meeting near Islamabad"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In general, U.S. service members have found their Pakistani counterparts to be punctual and meetings to be precisely coordinated. Expect meetings with military counterparts to begin on schedule.",
+      "media" : [ {
+        "zid" : 4032463,
+        "xid" : "4032463.mp3",
+        "type" : "audio",
+        "file" : "4032463.mp3"
+      } ]
+    }, {
+      "text" : "However, civilians may have an idea of time that is more relaxed, and meetings can begin or end much later than agreed upon. If a counterpart arrives late, don't call attention to it. Just proceed as if they had been on time. Never leave a meeting before your counterpart has arrived. Doing so may suggest that you do not value your relationship with your counterpart.",
+      "media" : [ {
+        "zid" : 4032464,
+        "xid" : "4032464.mp3",
+        "type" : "audio",
+        "file" : "4032464.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1459278557013,
+      "xid" : "1459278557013.jpg",
+      "type" : "image",
+      "file" : "1459278557013.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

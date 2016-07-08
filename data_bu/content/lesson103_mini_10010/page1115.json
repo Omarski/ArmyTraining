@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page1115",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Monochronic Time Orientation",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.flickr.com/photos/dandeluca/3141386589/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "New York rush hour"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Another way that distinguishes a culture is how it views time. Some cultures view time as linear and sequential. This is called \"monochronic\" time. In monochronic societies, time is seen as a commodity that can be spent or saved. Because of this, punctuality, promptness, and respect for schedules are highly valued. In addition, people from monochronic societies tend to address one issue at a time. The U.S. generally leans toward a monochronic time orientation.",
+      "media" : [ {
+        "zid" : 4011264,
+        "xid" : "4011264.mp3",
+        "type" : "audio",
+        "file" : "4011264.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1395357253388,
+      "xid" : "1395357253388.jpg",
+      "type" : "image",
+      "file" : "1395357253388.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

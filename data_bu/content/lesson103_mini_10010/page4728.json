@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page4728",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Video: Perspective-Taking",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "\"Perspective really is, kind of, everything how you see something. There are some places in the world that I went and saw their gender relations, and it really upset me. Women were being treated unfairly, and how my chivalry came out and my back got up. You know, women are treated unfairly here in the United States, too. It happens, you can't say it doesn't. And the more I dug into it; I realized that there were a lot of women that really appreciated having defined roles. It gave them security. What I saw, that in my opinion was oppressive, they enjoyed and found security in that. It really forced me to reevaluate the way I saw gender roles, the way I perceived things. Not everybody wants to be liberated. Some are very comfortable and take great security in where they're at.\""
+      }, {
+        "name" : "platforms",
+        "value" : "!NOT, vmob"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this video, a subject matter expert from the Army's Culture Center shares an experience about perspective-taking."
+    } ],
+    "media" : [ {
+      "zid" : 1400621551579,
+      "xid" : "1400621551579.mp4",
+      "type" : "video",
+      "file" : "1400621551579.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

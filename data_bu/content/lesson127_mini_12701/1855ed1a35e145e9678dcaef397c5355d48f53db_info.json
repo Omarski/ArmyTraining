@@ -1,0 +1,79 @@
+{
+    "blockings": {
+        "0000": {
+            "assets": {
+                "background": "BGvid"
+            }
+        },
+        "0001": {
+            "assets": {
+                "background": "BGvid",
+                "Frank_Gill": "Soraya_Crop4",
+                "Tariq_Osmani": "Zhang_Crop"
+            }
+        }
+    },
+    "assets": {
+        "BGvid": {
+            "source": "BGvid.mp4",
+            "type": "video",
+            "dimensions": ["0", "0", "1240", "814"],
+            "animations": {
+            }
+        },
+        "Zhang_Crop": {
+            "source": "Zhang_Crop.mp4",
+            "type": "video",
+            "dimensions": ["718", "250", "230", "532"],
+            "animations": {
+                "Default": {
+                    "start": 3733,
+                    "stop": 7733
+                },
+                "Zhang_Yes": {
+                    "start": 0,
+                    "stop": 1067
+                },
+                "Zhang_No": {
+                    "start": 1067,
+                    "stop": 3733
+                },
+                "Zhang_Idle": {
+                    "start": 3733,
+                    "stop": 7733
+                },
+                "Zhang_Beat": {
+                    "start": 7733,
+                    "stop": 10733
+                }
+            }
+        },
+        "Soraya_Crop4": {
+            "source": "Soraya_Crop4.mp4",
+            "type": "video",
+            "dimensions": ["469", "235", "208", "540"],
+            "animations": {
+                "Default": {
+                    "start": 1667,
+                    "stop": 4333
+                },
+                "Soraya_No": {
+                    "start": 0,
+                    "stop": 1667
+                },
+                "Soraya_Idle": {
+                    "start": 1667,
+                    "stop": "Soraya3"
+                },
+                "Soraya_Nod": {
+                    "start": 4333,
+                    "stop": 5833
+                },
+                "Soraya_Yes": {
+                    "start": 5833,
+                    "stop": 7333
+                }
+            }
+        }
+    }
+}

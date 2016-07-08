@@ -1,0 +1,280 @@
+{
+  "page" : {
+    "xid" : "page2711",
+    "type" : "ListeningComprehension",
+    "layout" : "",
+    "title" : "Practice 2",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Dawood Toofan",
+      "zid" : 1461600192170,
+      "nom" : "Dawood"
+    },
+    "skills" : null,
+    "media" : [ {
+      "zid" : 1466441805192,
+      "xid" : "1466441805192.jpg",
+      "type" : "image",
+      "file" : "1466441805192.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "prompt" : {
+      "text" : "You're planning a humanitarian aid project with your counterpart. Listen to what he says and choose the best response."
+    },
+    "question" : {
+      "utterance" : {
+        "stamp" : 1402003672863,
+        "status" : "imported",
+        "provenance" : "",
+        "lang" : "en",
+        "anchor" : "ezread",
+        "lexicon" : false,
+        "incomplete" : false,
+        "ontoid" : "",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "",
+          "text" : "مه فکر میکنم که افراد شما باید این مواد ره به دسترس مردم قریه قرار بتن.",
+          "group" : ""
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "",
+          "text" : "ma feker mikonam ke afraad shoma bayad en mawad ra ba dastras mardom qarya qaraar betan.",
+          "group" : ""
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "",
+          "text" : "",
+          "group" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "",
+          "text" : "I think your team should hand out the supplies to the village locals.",
+          "group" : ""
+        },
+        "comment" : "",
+        "syntax" : null,
+        "parseTree" : null
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "To gain local support, encourage your Afghan counterparts to take the lead in projects, even if they conduct the mission differently than how Americans would conduct it. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672863,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Actually, it would be best if you took the lead on distribution.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, to gain local support, encourage your Afghan counterparts to take the lead in projects, even if they conduct the mission differently than how Americans would conduct it."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672863,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Sure, my team can get it done faster and more efficiently.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, to gain local support, encourage your Afghan counterparts to take the lead in projects, even if they conduct the mission differently than how Americans would conduct it."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672863,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "We can finish the project, but your men should watch to see how it’s done.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, to gain local support, encourage your Afghan counterparts to take the lead in projects, even if they conduct the mission differently than how Americans would conduct it."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672863,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "We can finish most of it, and your team can finish with the rest.",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

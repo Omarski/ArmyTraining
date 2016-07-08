@@ -1,0 +1,227 @@
+{
+  "page" : {
+    "xid" : "page2738",
+    "type" : "MultipleChoice",
+    "layout" : "",
+    "title" : "Practice 3",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "prompt" : {
+      "text" : "Which of the following might be a common greeting between people of the same gender, who have developed a friendship?"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "record" : true,
+      "feedback" : {
+        "text" : "As friendships develop, hand holding and hugging are common in greetings between people of the same gender. Resist any urge to pull away."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672601,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "hugging",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : "Actually, this is not necessarily common. As friendships develop, hand holding and hugging are common between the same gender. Resist any urge to pull away."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672601,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "backslapping",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : "Actually, this is not necessarily common. As friendships develop, hand holding and hugging are common between the same gender. Resist any urge to pull away."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672601,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "kissing on the cheek",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "record" : true,
+      "feedback" : {
+        "text" : "Actually, this is not necessarily common. As friendships develop, hand holding and hugging are common between the same gender. Resist any urge to pull away."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003672601,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "high fiving",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

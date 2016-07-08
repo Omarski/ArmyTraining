@@ -1,0 +1,36 @@
+{
+  "page" : {
+    "xid" : "page1901",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Building Trust",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/dGHJp6"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan elder and a U.S. service member in a village"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Eventually your relationships will become more candid and relaxed, and you'll be able to discuss mission-related topics. Even at this point, never skip small talk at the beginning of a meeting."
+    }, {
+      "text" : "Many Afghan leaders have experience working with Americans and are aware of U.S. priorities. Your counterparts will likely understand if there are issues you can't discuss, but it's important to be as honest as possible. Remember that your mission is to learn about common goals and to work toward them."
+    } ],
+    "media" : [ {
+      "zid" : 1463601057647,
+      "xid" : "1463601057647.jpg",
+      "type" : "image",
+      "file" : "1463601057647.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

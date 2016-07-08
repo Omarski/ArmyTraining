@@ -1,0 +1,44 @@
+{
+  "page" : {
+    "xid" : "page1102",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/15704/interpreters-bridge-language-barrier-coalition-forces#.Vdyo49NVhBc"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A U.S. service member and interpreter at a meeting with sheikhs, Iraq"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to communicate using an interpreter. Specifically, you will learn to:",
+      "media" : [ null ]
+    }, {
+      "text" : "- Recognize strategies for building rapport with counterparts while using an interpreter.\n- List techniques for managing a multi-person interpreted conversation.\n- Recognize limitations of interpreters and common mistakes they commit.\n- Identify strategies for evaluating an interpreter.",
+      "media" : [ {
+        "zid" : 4033713,
+        "xid" : "4033713.mp3",
+        "type" : "audio",
+        "file" : "4033713.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1440524791866,
+      "xid" : "1440524791866.jpg",
+      "type" : "image",
+      "file" : "1440524791866.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

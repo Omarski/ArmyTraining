@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2326",
+    "type" : "Info",
+    "title" : "Religious Authority",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan elder"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In some areas, local religious leaders have great influence on decision making. Securing their support can help you gain the support of the local population.",
+      "media" : [ {
+        "zid" : 4034400,
+        "xid" : "4034400.mp3",
+        "type" : "audio",
+        "file" : "4034400.mp3"
+      } ]
+    }, {
+      "text" : "U.S. service members have reported success working alongside the religious affairs officers of the Afghan military. These officers are educated in Islamic principles and may be able to bridge a gap between military and traditional perspectives.",
+      "media" : [ {
+        "zid" : 4032602,
+        "xid" : "4032602.mp3",
+        "type" : "audio",
+        "file" : "4032602.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462372875678,
+      "xid" : "1462372875678.jpg",
+      "type" : "image",
+      "file" : "1462372875678.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

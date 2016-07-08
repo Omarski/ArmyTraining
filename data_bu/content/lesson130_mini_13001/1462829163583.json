@@ -1,0 +1,4375 @@
+{
+  "blockings": {},
+  "briefings": {"s0": {"description": "You are meeting Pakistan Army Captain Tariq Osmani at an officer's club. You have previously been introduced to him at an official meeting, and this interaction comes a day before a formal engagement with Pakistani representatives. You were speaking with a group when you and Osmani began a conversation. Your objectives are to:\n"}},
+  "configed": {},
+  "debriefings": {
+    "s6": {},
+    "s8": {}
+  },
+  "initialMemory": {
+    "CONFLICT": 0,
+    "CRICKET": 0,
+    "CRICKETENDING": 0,
+    "GREET": 0,
+    "HOSPITALITY": 0,
+    "RAPPORT": 0,
+    "RELIGION": 0,
+    "RET_CONFLICT": false,
+    "RET_CRICKETINDIA": false,
+    "RET_ENGLISH": false,
+    "RET_FAMILY": false,
+    "RET_TRAVEL": false,
+    "RET__CONFLICT_RAPPORT_HEARD_ABOUT_CONFLICTS": false,
+    "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING": false,
+    "RET__CRICKETINDIA_RAPPORT_FAVORITE_CRICKET": false,
+    "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR": false,
+    "RET__ENGLISH_RAPPORT_ENGLISH_GOOD": false,
+    "RET__FAMILY_RAPPORT_HOW_FAMILY": false,
+    "RET__FAMILY_RAPPORT_HOW_OLD_SONS": false,
+    "RET__FAMILY_RAPPORT_MUST_MISS_WIFE": false,
+    "RET__RSTATE_0_": false,
+    "RET__RSTATE_1_": false,
+    "RET__RSTATE_2_": false,
+    "RET__TRAVEL_RAPPORT_IF_CAN_GET_THRU_TRAFFIC": false,
+    "RET__TRAVEL_RAPPORT_WHERE_TRAVELLING": false,
+    "RET__TRAVEL_RAPPORT_YES_MORE_THAN_ISLAMABAD": false,
+    "SENSITIVE": 0,
+    "SMALLTALK": 0,
+    "TEA": 0
+  },
+  "inputMappings": {
+    "greet_assalam_shake": [{
+      "L1": "asalaamo 'aleykum, Captain Osmani.",
+      "L2": "asalaamo 'aleykum, Captain Osmani.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032889",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "greet_good_afternoon": [{
+      "L1": "Good afternoon, Captain Osmani.",
+      "L2": "Good afternoon, Captain Osmani.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032896",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "greet_hello_tariq": [{
+      "L1": "Hello Tariq.",
+      "L2": "Hello Tariq.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032891",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "greet_salaam_hug": [{
+      "L1": "asalaamo 'aleykum, Captain Osmani.",
+      "L2": "asalaamo 'aleykum, Captain Osmani.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032889",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "hosp2_OK_try_some": [{
+      "L1": "Okay, I'll try some.",
+      "L2": "Okay, I'll try some.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033029",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "hosp2_thanks_im_good": [{
+      "L1": "I shouldn't. It will keep me up tonight.",
+      "L2": "I shouldn't. It will keep me up tonight.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033010",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "hosp2_thanks_its_good": [{
+      "L1": "Thank you. It's very good.",
+      "L2": "Thank you. It's very good.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033005",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_cricket_boring": [{
+      "L1": "No, it's too boring for me. One game takes all day, right?",
+      "L2": "No, it's too boring for me. One game takes all day, right?",
+      "anima": "",
+      "mode": "",
+      "sound": "4032974",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_english_good": [{
+      "L1": "Your English is pretty good. I'm impressed!",
+      "L2": "Your English is pretty good. I'm impressed!",
+      "anima": "",
+      "mode": "",
+      "sound": "4032924",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_favorite_cricket": [{
+      "L1": "What's your favorite cricket team?",
+      "L2": "What's your favorite cricket team?",
+      "anima": "",
+      "mode": "",
+      "sound": "4032973",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_heard_about_conflicts": [{
+      "L1": "I heard about conflicts on the Indian border. What's going on?",
+      "L2": "I heard about conflicts on the Indian border. What's going on?",
+      "anima": "",
+      "mode": "",
+      "sound": "4032926",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_how_family": [{
+      "L1": "How is your family?",
+      "L2": "How is your family?",
+      "anima": "",
+      "mode": "",
+      "sound": "4032936",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_how_old_sons": [{
+      "L1": "How old are your sons?",
+      "L2": "How old are your sons?",
+      "anima": "",
+      "mode": "",
+      "sound": "4032944",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_if_can_get_thru_traffic": [{
+      "L1": "Yes, if you can get through all the traffic!",
+      "L2": "Yes, if you can get through all the traffic!",
+      "anima": "",
+      "mode": "",
+      "sound": "4032928",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_must_miss_wife": [{
+      "L1": "You must miss your wife too when you're away.",
+      "L2": "You must miss your wife too when you're away.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032946",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_not_really_popular": [{
+      "L1": "Not really, it's not popular in America.",
+      "L2": "Not really, it's not popular in America.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032979",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_where_travelling": [{
+      "L1": "Where have you been travelling?",
+      "L2": "Where have you been travelling?",
+      "anima": "",
+      "mode": "",
+      "sound": "4032969",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "rapport_yes_more_than_islamabad": [{
+      "L1": "Yes, much more than Islamabad!",
+      "L2": "Yes, much more than Islamabad!",
+      "anima": "",
+      "mode": "",
+      "sound": "4032929",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "religion_I_should_take_leave": [{
+      "L1": "No problem. I should take leave and get some work done.",
+      "L2": "No problem. I should take leave and get some work done.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033018",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "religion_no_problem_take_time": [{
+      "L1": "No problem at all. Take your time.",
+      "L2": "No problem at all. Take your time.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033014",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_dont_drink_tea": [{
+      "L1": "No thanks. I don't drink tea in the afternoon.",
+      "L2": "No thanks. I don't drink tea in the afternoon.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032920",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_india_not_that_bad": [{
+      "L1": "India's not that bad. They're doing a lot of things right.",
+      "L2": "India's not that bad. They're doing a lot of things right.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032992",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_pak_get_over_india": [{
+      "L1": "Pakistan needs to get over the India conflict. It's in the past.",
+      "L2": "Pakistan needs to get over the India conflict. It's in the past.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032989",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_tea_great": [{
+      "L1": "Tea would be great. Thank you.",
+      "L2": "Tea would be great. Thank you.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032918",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "sensitive_pak_strengths": [{
+      "L1": "Well, Pakistan has a lot of strengths.",
+      "L2": "Well, Pakistan has a lot of strengths.",
+      "anima": "",
+      "mode": "",
+      "sound": "4032986",
+      "terp": "L2",
+      "wrong": false
+    }]
+  },
+  "nls": {
+    "greet_assalam_shake": "greet_assalam_shake",
+    "greet_good_afternoon": "greet_good_afternoon",
+    "greet_hello_tariq": "greet_hello_tariq",
+    "greet_salaam_hug": "greet_salaam_hug",
+    "hosp2_OK_try_some": "hosp2_OK_try_some",
+    "hosp2_thanks_im_good": "hosp2_thanks_im_good",
+    "hosp2_thanks_its_good": "hosp2_thanks_its_good",
+    "rapport_cricket_boring": "rapport_cricket_boring",
+    "rapport_english_good": "rapport_english_good",
+    "rapport_favorite_cricket": "rapport_favorite_cricket",
+    "rapport_heard_about_conflicts": "rapport_heard_about_conflicts",
+    "rapport_how_family": "rapport_how_family",
+    "rapport_how_old_sons": "rapport_how_old_sons",
+    "rapport_if_can_get_thru_traffic": "rapport_if_can_get_thru_traffic",
+    "rapport_must_miss_wife": "rapport_must_miss_wife",
+    "rapport_not_really_popular": "rapport_not_really_popular",
+    "rapport_where_travelling": "rapport_where_travelling",
+    "rapport_yes_more_than_islamabad": "rapport_yes_more_than_islamabad",
+    "religion_I_should_take_leave": "religion_I_should_take_leave",
+    "religion_no_problem_take_time": "religion_no_problem_take_time",
+    "say_dont_drink_tea": "say_dont_drink_tea",
+    "say_india_not_that_bad": "say_india_not_that_bad",
+    "say_pak_get_over_india": "say_pak_get_over_india",
+    "say_tea_great": "say_tea_great",
+    "sensitive_pak_strengths": "sensitive_pak_strengths"
+  },
+  "nodesPy": "",
+  "objectives": [
+    {
+      "condition": "GREET 1 ==",
+      "failDescription": "Remember, when greeting a military counterpart, especially those older than you, don't refer to them by their first name. It is acceptable to greet your counterpart in English, but it\u2019s worthwhile to learn to greet in the local language. Hugging is common between people of the same gender, but only after friendships are formed. ",
+      "label": "Greet appropriately.",
+      "oid": "6a7488063697fb546b99c0c68e406a1740fc991d",
+      "passDescription": "You greeted your counterpart appropriately. When greeting a military counterpart, especially those older than you, don't refer to them by their first name. It is acceptable to greet your counterpart in English, but it\u2019s worthwhile to learn to greet in the local language. Hugging is common between people of the same gender, but only after friendships are formed.",
+      "remediationq": [
+        "lesson111:page2052",
+        "lesson111:page2050"
+      ]
+    },
+    {
+      "condition": "HOSPITALITY 2 ==",
+      "failDescription": "Remember that offering hospitality to guests is an important aspect of society in Pakistan,  and not accepting this gesture is an affront to most people. You should be gracious in accepting offers of tea and food. ",
+      "label": "Respond appropriately to offers of hospitality.",
+      "oid": "00caf17a91ad06cec19726a95c9d743f8b767fe2",
+      "passDescription": "You accepted your counterpart's offers of hospitality. Offering hospitality to guests is an important aspect of society in Pakistan, and not accepting this gesture is an affront to most people. Be gracious in accepting offers of tea and food. ",
+      "remediationq": [
+        "lesson111:page2073",
+        "lesson111:page2068"
+      ]
+    },
+    {
+      "condition": "RAPPORT 3 ==",
+      "failDescription": "Remember that when making small talk, you should avoid asking about female family members or discussing religion or politics. Good small talk topics include common interests, recent travel experience, and positive comments.  ",
+      "label": "Build rapport with appropriate small talk.",
+      "oid": "8a780972b28e799b9feff794f8e5596e7397c850",
+      "passDescription": "You successfully made culturally appropriate small talk. Good small talk topics include common interests, recent travel experience, and positive comments . Avoid asking about female family members or discussing religion and politics. ",
+      "remediationq": ["lesson111:page2054"]
+    },
+    {
+      "condition": "SENSITIVE 1 ==",
+      "failDescription": "Remember that topics like ethnicity, national politics, and religion are especially sensitive in Pakistan. Avoid discussions about tensions with neighboring countries. Once you gain a trusted relationships, you may be able to cautiously discuss some sensitive topics. ",
+      "label": "Navigate sensitive topics appropriately.",
+      "oid": "6c9369ba647ed656999d8248d3213152c7015f14",
+      "passDescription": "You successfully navigated a sensitive conversation. In Pakistan, it's best to avoid topics like ethnicity, national politics, religion, and tensions with neighboring countries. Once you gain a trusted relationships, you may be able to cautiously discuss some sensitive topics.",
+      "remediationq": ["lesson111:page2055"]
+    },
+    {
+      "condition": "RELIGION 1 ==",
+      "failDescription": "Remember, Islam is a fundamental part of life in Pakistan and observant Muslims pray five times a day. If a counterpart interrupts a meeting to go pray, be respectful and don\u2019t disturb them. Wait for them to return and continue your meeting as normal. ",
+      "label": "Respect your counterpart\u2019s religious practices.",
+      "oid": "4057c77243d9db4f7a254d8c88e6271fb0ec6783",
+      "passDescription": "You successfully demonstrated respect for religious practices. Islam is a fundamental part of life in Pakistan and observant Muslims pray five times a day. If a counterpart interrupts a meeting to go pray, be respectful and don\u2019t disturb them. Wait for them to return and continue your meeting as normal. ",
+      "remediationq": [
+        "lesson111:page2062",
+        "lesson111:page2064"
+      ]
+    }
+  ],
+  "outputMappings": {
+    "Frank_Gill-ask_big_game_recently_L2": {
+      "L1": "Wasn't there a big cricket game recently? I saw something on the news.",
+      "L2": "Wasn't there a big cricket game recently? I saw something on the news.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032982",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-ask_india_doing_well_L2": {
+      "L1": "I read India was doing pretty well, is that right?",
+      "L2": "I read India was doing pretty well, is that right?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032985",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-ask_wife_tough_care_boys_L2": {
+      "L1": "Is it tough for your wife to care for two boys?",
+      "L2": "Is it tough for your wife to care for two boys?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032965",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-auto__-1463174222530_L2": {
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "Shakes hands with Tariq Osmani."
+    },
+    "Frank_Gill-say_Im_fine_really_L2": {
+      "L1": "I'm fine, really. But thank you.",
+      "L2": "I'm fine, really. But thank you.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032922",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_Im_from_LA_L2": {
+      "L1": "That's great! I'm from LA! How did you like it?",
+      "L2": "That's great! I'm from LA! How did you like it?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032953",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_Im_sorry_how_are_you_L2": {
+      "L1": "Oh, I'm sorry. How are you, Captain Osmani?",
+      "L2": "Oh, I'm sorry. How are you, Captain Osmani?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032910",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_OK_L2": {
+      "L1": "Okay.",
+      "L2": "Okay.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033002",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_been_briefed_tensions_L2": {
+      "L1": "I've been briefed on some of the tensions. Hopefully the problems will subside.",
+      "L2": "I've been briefed on some of the tensions. Hopefully the problems will subside.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032994",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_didnt_know_that_L2": {
+      "L1": "Oh, I didn't know that.",
+      "L2": "Oh, I didn't know that.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032963",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_get_back_talk_about_cricket_L2": {
+      "L1": "When you get back, maybe you can teach me a bit about cricket so I can keep up with conversation!",
+      "L2": "When you get back, maybe you can teach me a bit about cricket so I can keep up with conversation!",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033020",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_good_but_miss_them_L2": {
+      "L1": "They're good. I miss them, but I talk to them every few days.",
+      "L2": "They're good. I miss them, but I talk to them every few days.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032959",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_good_work_through_region_L2": {
+      "L1": "We're trying to do good work throughout the region.",
+      "L2": "We're trying to do good work throughout the region.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032996",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_how_are_you_L2": {
+      "L1": "How are you?",
+      "L2": "How are you?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032908",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_i_like_soccer_L2": {
+      "L1": "I think you're right. Football is big of course, but I like soccer too.",
+      "L2": "I think you're right. Football is big of course, but I like soccer too.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032981",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_im_doing_well_L2": {
+      "L1": "I'm doing well, thank you. How are you?",
+      "L2": "I'm doing well, thank you. How are you?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032900",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_india_provide_aid_in_countries_L2": {
+      "L1": "Sure, but they're also offering humanitarian aid in some of those places.",
+      "L2": "Sure, but they're also offering humanitarian aid in some of those places.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033000",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_maybe_you_can_teach_me_L2": {
+      "L1": "Maybe you can teach me a bit about the game so I can keep up with conversation! Besides, I don't think I've met everyone.",
+      "L2": "Maybe you can teach me a bit about the game so I can keep up with conversation! Besides, I don't think I've met everyone.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033023",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_me_too_bye_L2": {
+      "L1": "Me too. Goodbye.",
+      "L2": "Me too. Goodbye.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033027",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_must_good_family_L2": {
+      "L1": "You must come from a very good family.",
+      "L2": "You must come from a very good family.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032948",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_never_heard_test_cricket_L2": {
+      "L1": "I've never heard of Test Cricket.",
+      "L2": "I've never heard of Test Cricket.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032976",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_not_thirsty_L2": {
+      "L1": "It's OK. I'm not really thirsty anyway.",
+      "L2": "It's OK. I'm not really thirsty anyway.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033031",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_really_do_have_work_L2": {
+      "L1": "I really do have a lot of work to do, but thanks for your hospitality. I enjoyed chatting with you.",
+      "L2": "I really do have a lot of work to do, but thanks for your hospitality. I enjoyed chatting with you.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033026",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_reasons_generations_old_L2": {
+      "L1": "Right, but the reasons for the conflict are generations old. There's got to be a way to get past it.",
+      "L2": "Right, but the reasons for the conflict are generations old. There's got to be a way to get past it.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033007",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_right_not_out_much_L2": {
+      "L1": "You're right. I haven't been out much.",
+      "L2": "You're right. I haven't been out much.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032956",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_sometimes_US_hug_L2": {
+      "L1": "Well, sometimes Americans hug friends.",
+      "L2": "Well, sometimes Americans hug friends.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032916",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_sounds_tense_situation_L2": {
+      "L1": "It sounds like a pretty tense situation.",
+      "L2": "It sounds like a pretty tense situation.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032950",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_start_sports_young_L2": {
+      "L1": "You're starting them into sports young!",
+      "L2": "You're starting them into sports young!",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032960",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_sure_thats_fine_L2": {
+      "L1": "Sure, that's fine.",
+      "L2": "Sure, that's fine.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032902",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_talk_something_else_L2": {
+      "L1": "Yes\u2026.well, maybe we should just talk about something else.",
+      "L2": "Yes\u2026.well, maybe we should just talk about something else.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032999",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_that_would_be_great_L2": {
+      "L1": "That would be great! I don't think I've met everyone yet.",
+      "L2": "That would be great! I don't think I've met everyone yet.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033022",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_very_wise_L2": {
+      "L1": "That's very wise.",
+      "L2": "That's very wise.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032967",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_well_not_really_L2": {
+      "L1": "Well, no not really. I haven't had the time.",
+      "L2": "Well, no not really. I haven't had the time.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032954",
+      "terp": "L2",
+      "title": ""
+    },
+    "Frank_Gill-say_yes_studying_language_L2": {
+      "L1": "Yes, I've been studying the language a little.",
+      "L2": "Yes, I've been studying the language a little.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032915",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-ask_are_you_sure_keep_chatting_L2": {
+      "L1": "Are you sure? It would be great to continue chatting.",
+      "L2": "Are you sure? It would be great to continue chatting.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032788",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-ask_have_you_explored_city_L2": {
+      "L1": "Do you think so? Have you explored the city?",
+      "L2": "Do you think so? Have you explored the city?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032706",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-ask_send_something_else_L2": {
+      "L1": "I can send for something else, if you prefer?",
+      "L2": "I can send for something else, if you prefer?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032769",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-ask_sure_no_tea_L2": {
+      "L1": "Are you sure you won't have tea?",
+      "L2": "Are you sure you won't have tea?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032764",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-ask_would_you_like_tea_L2": {
+      "L1": "Would you like some tea?",
+      "L2": "Would you like some tea?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032798",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-hosp_sit_have_tea_L2": {
+      "L1": "Please sit, so we can continue talking.",
+      "L2": "Please sit, so we can continue talking.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032689",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_I_dont_mind_L2": {
+      "L1": "I don't mind, but I should tell you that some men here won't appreciate such informality.",
+      "L2": "I don't mind, but I should tell you that some men here won't appreciate such informality.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032677",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_I_know_what_mean_L2": {
+      "L1": "I know what you mean. I miss my sons when I travel too.",
+      "L2": "I know what you mean. I miss my sons when I travel too.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032716",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_US_like_fast_sports_L2": {
+      "L1": "I didn't think so. It seems that Americans like faster sports.",
+      "L2": "I didn't think so. It seems that Americans like faster sports.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032739",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_alright_L2": {
+      "L1": "Alright.",
+      "L2": "Alright.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032771",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_been_visiting_fam_LA_L2": {
+      "L1": "I was visiting my nephews in Los Angeles.",
+      "L2": "I was visiting my nephews in Los Angeles.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032703",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_brb_L2": {
+      "L1": "I'll be right back",
+      "L2": "I'll be right back",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032777",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_bye_L2": {
+      "L1": "Goodbye.",
+      "L2": "Goodbye.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032793",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_definitely_india_undermine_L2": {
+      "L1": "Definitely. I'm sure you know about what India is doing to undermine our country.",
+      "L2": "Definitely. I'm sure you know about what India is doing to undermine our country.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032746",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_didnt_have_choice_L2": {
+      "L1": "I didn't have a choice! I came home to them playing in the street with a bat they made from a piece of wood.",
+      "L2": "I didn't have a choice! I came home to them playing in the street with a bat they made from a piece of wood.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032721",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_english_since_child_L2": {
+      "L1": "Impressed? I've been speaking English since I was a child.",
+      "L2": "Impressed? I've been speaking English since I was a child.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032697",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_enjoy_brb_L2": {
+      "L1": "Please enjoy the tea. I'll be right back.",
+      "L2": "Please enjoy the tea. I'll be right back.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032775",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_fam_doing_well_L2": {
+      "L1": "They're doing well, thank you. How is yours?",
+      "L2": "They're doing well, thank you. How is yours?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032714",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_feel_different_intentions_return_group_L2": {
+      "L1": "I think we feel differently about their intentions. Let's return to the rest of the gathering.",
+      "L2": "I think we feel differently about their intentions. Let's return to the rest of the gathering.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032759",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_glad_you_like_L2": {
+      "L1": "I'm glad you like it.",
+      "L2": "I'm glad you like it.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032766",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_good_afternoon_how_are_you_L2": {
+      "L1": "Good afternoon. How are you today?",
+      "L2": "Good afternoon. How are you today?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032671",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_great_you_like_it_L2": {
+      "L1": "Great. I think you'll like it.",
+      "L2": "Great. I think you'll like it.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032768",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_happy_maintain_position_L2": {
+      "L1": "I'm happy you're here to help us maintain our position.",
+      "L2": "I'm happy you're here to help us maintain our position.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032796",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_happy_to_have_you_L2": {
+      "L1": "It's nothing. We're happy to have you.",
+      "L2": "It's nothing. We're happy to have you.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032692",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_have_more_tea_L2": {
+      "L1": "Please, have more tea.",
+      "L2": "Please, have more tea.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032762",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_havent_driven_Islamabad_L2": {
+      "L1": "You haven't driven much in Islamabad! Traffic in Los Angeles is much better!",
+      "L2": "You haven't driven much in Islamabad! Traffic in Los Angeles is much better!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032710",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_i_miss_them_all_L2": {
+      "L1": "I miss them all.",
+      "L2": "I miss them all.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032724",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_im_jetlagged_L2": {
+      "L1": "I'm a little jetlagged, but I'm good.",
+      "L2": "I'm a little jetlagged, but I'm good.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032680",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_india_had_disagreement_L2": {
+      "L1": "We had a disagreement with India in the south. We're handling it.",
+      "L2": "We had a disagreement with India in the south. We're handling it.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032700",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_introduce_you_excuse_me_L2": {
+      "L1": "I'll introduce you. Excuse me for just a moment.",
+      "L2": "I'll introduce you. Excuse me for just a moment.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032782",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_islamabad_united_L2": {
+      "L1": "Islamabad United, of course! How could I like anyone else! Do you follow cricket?",
+      "L2": "Islamabad United, of course! How could I like anyone else! Do you follow cricket?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032732",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_it_may_not_be_hollywood_L2": {
+      "L1": "It may not be Hollywood, but it's a nice city.",
+      "L2": "It may not be Hollywood, but it's a nice city.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032708",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_jetlagged_didnt_know_US_greet_L2": {
+      "L1": "I'm a little jetlagged, but I'm good. I've never known an American to greet this way.",
+      "L2": "I'm a little jetlagged, but I'm good. I've never known an American to greet this way.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032681",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_like_to_find_out_match_L2": {
+      "L1": "When I get return, let's sit with the rest of the group. I'd like to find out what they thought of yesterday's cricket match!",
+      "L2": "When I get return, let's sit with the rest of the group. I'd like to find out what they thought of yesterday's cricket match!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032783",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_most_pak_english_L2": {
+      "L1": "Yes, of course I do. But most Pakistanis speak a little English.",
+      "L2": "Yes, of course I do. But most Pakistanis speak a little English.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032698",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_moving_confidently_L2": {
+      "L1": "We're moving forward confidently, but there are no shortcuts to peace.",
+      "L2": "We're moving forward confidently, but there are no shortcuts to peace.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032728",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_muslims_die_indian_soldiers_L2": {
+      "L1": "How can you say this? Many Muslims have died at the hands of Indian soldiers.",
+      "L2": "How can you say this? Many Muslims have died at the hands of Indian soldiers.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032754",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_my_sons_good_boys_L2": {
+      "L1": "My sons are good boys and play cricket most of the day. They don't cause trouble.",
+      "L2": "My sons are good boys and play cricket most of the day. They don't cause trouble.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032727",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_nice_city_tough_get_around_L2": {
+      "L1": "It's a nice city, but it can be tough to get around.",
+      "L2": "It's a nice city, but it can be tough to get around.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032713",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_no_tea_L2": {
+      "L1": "Perhaps you'd like something else then?",
+      "L2": "Perhaps you'd like something else then?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032695",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_not_your_taste_L2": {
+      "L1": "It sounds like it wouldn't be to your taste.",
+      "L2": "It sounds like it wouldn't be to your taste.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032736",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_pak_protect_territories_L2": {
+      "L1": "India is very confident, but Pakistan will protect its territories.",
+      "L2": "India is very confident, but Pakistan will protect its territories.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032731",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_past_conflict_every_month_L2": {
+      "L1": "In the past? They're on our border right now. There's conflict every month!",
+      "L2": "In the past? They're on our border right now. There's conflict every month!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032751",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_probably_match_India_L2": {
+      "L1": "You probably mean the match with India.",
+      "L2": "You probably mean the match with India.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032743",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_should_I_call_you_frank_L2": {
+      "L1": "Hello...Frank. Should I call you Frank?",
+      "L2": "Hello...Frank. Should I call you Frank?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032675",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_sons_5_7_L2": {
+      "L1": "They're five and seven. They're going to be great cricketers.",
+      "L2": "They're five and seven. They're going to be great cricketers.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032719",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_sounds_great_join_group_L2": {
+      "L1": "Sounds great! We can sit with the rest of the group. Those guys can talk all night about cricket.",
+      "L2": "Sounds great! We can sit with the rest of the group. Those guys can talk all night about cricket.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032779",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_talk_later_return_group_L2": {
+      "L1": "Perhaps we can continue to talk later. Let's return to the gathering.",
+      "L2": "Perhaps we can continue to talk later. Let's return to the gathering.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032755",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_thats_great_meant_US_shake_L2": {
+      "L1": "That's great, but I meant that Americans I know shake hands.",
+      "L2": "That's great, but I meant that Americans I know shake hands.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032683",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_thats_only_test_cricket_L2": {
+      "L1": "That's only Test Cricket. It's not for a man without patience.",
+      "L2": "That's only Test Cricket. It's not for a man without patience.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032734",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_they_provoke_us_L2": {
+      "L1": "Not that bad? They provoke us, and seek influence in the countries surrounding us.",
+      "L2": "Not that bad? They provoke us, and seek influence in the countries surrounding us.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032758",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_those_guys_talk_all_night_L2": {
+      "L1": "I'll introduce you. Those guys can talk all night about cricket. Excuse me for just a moment.",
+      "L2": "I'll introduce you. Those guys can talk all night about cricket. Excuse me for just a moment.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032785",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_time_to_pray_L2": {
+      "L1": "Excuse me, but I didn't realize the time. I need to take a moment to pray. I'll only be a few minutes.",
+      "L2": "Excuse me, but I didn't realize the time. I need to take a moment to pray. I'll only be a few minutes.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4032774",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_uh_hello_waaleykum_L2": {
+      "L1": "Uh, hello. wa \u2018aleykum asalaam.",
+      "L2": "Uh, hello. wa \u2018aleykum asalaam.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032685",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_usually_only_after_know_eachother_L2": {
+      "L1": "So do we, but usually only after we've known each other a long time. Don't worry about it.",
+      "L2": "So do we, but usually only after we've known each other a long time. Don't worry about it.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032687",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_very_different_from_Islamabad_L2": {
+      "L1": "It's very different from Islamabad. There's so much to see in LA.",
+      "L2": "It's very different from Islamabad. There's so much to see in LA.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032705",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_waaleykum_L2": {
+      "L1": "wa \u2018aleykum asalaam! How are you today?",
+      "L2": "wa \u2018aleykum asalaam! How are you today?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032673",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_we_agree_soccer_L2": {
+      "L1": "That we can agree on! You won't meet a Pakistani who doesn't like soccer.",
+      "L2": "That we can agree on! You won't meet a Pakistani who doesn't like soccer.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032740",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_we_are_better_team_L2": {
+      "L1": "We are the better team. It's important that India doesn't get too confident. They think their country is better than ours.",
+      "L2": "We are the better team. It's important that India doesn't get too confident. They think their country is better than ours.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032744",
+      "terp": "L2",
+      "title": ""
+    },
+    "Tariq_Osmani-say_youre_welcome_L2": {
+      "L1": "You're welcome. I'm looking forward to working with you tomorrow.",
+      "L2": "You're welcome. I'm looking forward to working with you tomorrow.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032791",
+      "terp": "L2",
+      "title": ""
+    }
+  },
+  "participants": {
+    "Frank_Gill": "Frank Gill",
+    "Tariq_Osmani": "Tariq Osmani"
+  },
+  "retq": {
+    "CONFLICT": {"inputq": {"rapport_heard_about_conflicts": {
+      "addressee": "Tariq_Osmani",
+      "outputq": [{
+        "effects": [
+          {
+            "operand": "CONFLICT",
+            "operand2": "1",
+            "operator": "+="
+          },
+          {
+            "operand": "RET_CONFLICT",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET_ENGLISH",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET_FAMILY",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET_TRAVEL",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET_CRICKETINDIA",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET__CONFLICT_RAPPORT_HEARD_ABOUT_CONFLICTS",
+            "operand2": true,
+            "operator": "="
+          }
+        ],
+        "endState": "",
+        "speakerActq": [
+          "Tariq_Osmani-say_india_had_disagreement_L2",
+          "Frank_Gill-say_sounds_tense_situation_L2",
+          "Tariq_Osmani-say_moving_confidently_L2",
+          "Frank_Gill-say_very_wise_L2",
+          "Tariq_Osmani-say_pak_protect_territories_L2"
+        ],
+        "variableRanges": [{
+          "operator": "==",
+          "range": [false],
+          "variable": "RET__CONFLICT_RAPPORT_HEARD_ABOUT_CONFLICTS"
+        }]
+      }],
+      "reusable": false,
+      "video": {}
+    }}},
+    "CRICKETINDIA": {"inputq": {
+      "rapport_cricket_boring": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_thats_only_test_cricket_L2",
+              "Frank_Gill-say_never_heard_test_cricket_L2",
+              "Tariq_Osmani-say_not_your_taste_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["1"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_thats_only_test_cricket_L2",
+              "Frank_Gill-say_never_heard_test_cricket_L2",
+              "Tariq_Osmani-say_not_your_taste_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["1"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_thats_only_test_cricket_L2",
+              "Frank_Gill-say_never_heard_test_cricket_L2",
+              "Tariq_Osmani-say_not_your_taste_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["0"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_thats_only_test_cricket_L2",
+              "Frank_Gill-say_never_heard_test_cricket_L2",
+              "Tariq_Osmani-say_not_your_taste_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["0"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_CRICKET_BORING"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          }
+        ],
+        "reusable": false,
+        "video": {}
+      },
+      "rapport_favorite_cricket": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [{
+          "effects": [
+            {
+              "operand": "CRICKETENDING",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_CONFLICT",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET_ENGLISH",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__CRICKETINDIA_RAPPORT_FAVORITE_CRICKET",
+              "operand2": true,
+              "operator": "="
+            },
+            {
+              "operand": "RET__RSTATE_2_",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": ["Tariq_Osmani-say_islamabad_united_L2"],
+          "variableRanges": [
+            {
+              "operator": ">=",
+              "range": ["2"],
+              "variable": "CRICKET"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__CRICKETINDIA_RAPPORT_FAVORITE_CRICKET"
+            }
+          ]
+        }],
+        "reusable": false,
+        "video": {}
+      },
+      "rapport_not_really_popular": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_US_like_fast_sports_L2",
+              "Frank_Gill-say_i_like_soccer_L2",
+              "Tariq_Osmani-say_we_agree_soccer_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["1"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_US_like_fast_sports_L2",
+              "Frank_Gill-say_i_like_soccer_L2",
+              "Tariq_Osmani-say_we_agree_soccer_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["1"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_US_like_fast_sports_L2",
+              "Frank_Gill-say_i_like_soccer_L2",
+              "Tariq_Osmani-say_we_agree_soccer_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["0"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_2_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_US_like_fast_sports_L2",
+              "Frank_Gill-say_i_like_soccer_L2",
+              "Tariq_Osmani-say_we_agree_soccer_L2",
+              "Frank_Gill-ask_big_game_recently_L2",
+              "Tariq_Osmani-say_probably_match_India_L2",
+              "Frank_Gill-ask_india_doing_well_L2",
+              "Tariq_Osmani-say_we_are_better_team_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["0"],
+                "variable": "TEA"
+              },
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__CRICKETINDIA_RAPPORT_NOT_REALLY_POPULAR"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_2_"
+              }
+            ]
+          }
+        ],
+        "reusable": false,
+        "video": {}
+      }
+    }},
+    "ENGLISH": {"inputq": {"rapport_english_good": {
+      "addressee": "Tariq_Osmani",
+      "outputq": [{
+        "effects": [
+          {
+            "operand": "RET_ENGLISH",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET__ENGLISH_RAPPORT_ENGLISH_GOOD",
+            "operand2": true,
+            "operator": "="
+          }
+        ],
+        "endState": "",
+        "speakerActq": [
+          "Tariq_Osmani-say_english_since_child_L2",
+          "Frank_Gill-say_must_good_family_L2",
+          "Tariq_Osmani-say_most_pak_english_L2",
+          "Frank_Gill-say_didnt_know_that_L2"
+        ],
+        "variableRanges": [{
+          "operator": "==",
+          "range": [false],
+          "variable": "RET__ENGLISH_RAPPORT_ENGLISH_GOOD"
+        }]
+      }],
+      "reusable": false,
+      "video": {}
+    }}},
+    "FAMILY": {"inputq": {
+      "rapport_how_family": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [{
+          "effects": [
+            {
+              "operand": "RET_TRAVEL",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET_CONFLICT",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET_ENGLISH",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__FAMILY_RAPPORT_HOW_FAMILY",
+              "operand2": true,
+              "operator": "="
+            },
+            {
+              "operand": "RET__RSTATE_1_",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_fam_doing_well_L2",
+            "Frank_Gill-say_good_but_miss_them_L2",
+            "Tariq_Osmani-say_I_know_what_mean_L2"
+          ],
+          "variableRanges": [{
+            "operator": "==",
+            "range": [false],
+            "variable": "RET__FAMILY_RAPPORT_HOW_FAMILY"
+          }]
+        }],
+        "reusable": false,
+        "video": {}
+      },
+      "rapport_how_old_sons": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_TRAVEL",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_FAMILY",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__FAMILY_RAPPORT_HOW_OLD_SONS",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_1_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_sons_5_7_L2",
+              "Frank_Gill-say_start_sports_young_L2",
+              "Tariq_Osmani-say_didnt_have_choice_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__FAMILY_RAPPORT_HOW_OLD_SONS"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_1_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_FAMILY",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__FAMILY_RAPPORT_HOW_OLD_SONS",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_1_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_sons_5_7_L2",
+              "Frank_Gill-say_start_sports_young_L2",
+              "Tariq_Osmani-say_didnt_have_choice_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__FAMILY_RAPPORT_HOW_OLD_SONS"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_1_"
+              }
+            ]
+          }
+        ],
+        "reusable": false,
+        "video": {}
+      },
+      "rapport_must_miss_wife": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [
+          {
+            "effects": [
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_TRAVEL",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_FAMILY",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__FAMILY_RAPPORT_MUST_MISS_WIFE",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_1_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_i_miss_them_all_L2",
+              "Frank_Gill-ask_wife_tough_care_boys_L2",
+              "Tariq_Osmani-say_my_sons_good_boys_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__FAMILY_RAPPORT_MUST_MISS_WIFE"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_1_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_FAMILY",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__FAMILY_RAPPORT_MUST_MISS_WIFE",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_1_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_i_miss_them_all_L2",
+              "Frank_Gill-ask_wife_tough_care_boys_L2",
+              "Tariq_Osmani-say_my_sons_good_boys_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__FAMILY_RAPPORT_MUST_MISS_WIFE"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_1_"
+              }
+            ]
+          }
+        ],
+        "reusable": false,
+        "video": {}
+      }
+    }},
+    "TRAVEL": {"inputq": {
+      "rapport_if_can_get_thru_traffic": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_FAMILY",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_TRAVEL",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__TRAVEL_RAPPORT_IF_CAN_GET_THRU_TRAFFIC",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_0_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_havent_driven_Islamabad_L2",
+              "Frank_Gill-say_right_not_out_much_L2",
+              "Tariq_Osmani-say_nice_city_tough_get_around_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__TRAVEL_RAPPORT_IF_CAN_GET_THRU_TRAFFIC"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_0_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RAPPORT",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_TRAVEL",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__TRAVEL_RAPPORT_IF_CAN_GET_THRU_TRAFFIC",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_0_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-say_havent_driven_Islamabad_L2",
+              "Frank_Gill-say_right_not_out_much_L2",
+              "Tariq_Osmani-say_nice_city_tough_get_around_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__TRAVEL_RAPPORT_IF_CAN_GET_THRU_TRAFFIC"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_0_"
+              }
+            ]
+          }
+        ],
+        "reusable": false,
+        "video": {}
+      },
+      "rapport_where_travelling": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [{
+          "effects": [
+            {
+              "operand": "RET_FAMILY",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET_CONFLICT",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET_ENGLISH",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__TRAVEL_RAPPORT_WHERE_TRAVELLING",
+              "operand2": true,
+              "operator": "="
+            },
+            {
+              "operand": "RET__RSTATE_0_",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_been_visiting_fam_LA_L2",
+            "Frank_Gill-say_Im_from_LA_L2",
+            "Tariq_Osmani-say_very_different_from_Islamabad_L2"
+          ],
+          "variableRanges": [{
+            "operator": "==",
+            "range": [false],
+            "variable": "RET__TRAVEL_RAPPORT_WHERE_TRAVELLING"
+          }]
+        }],
+        "reusable": false,
+        "video": {}
+      },
+      "rapport_yes_more_than_islamabad": {
+        "addressee": "Tariq_Osmani",
+        "outputq": [
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_FAMILY",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CRICKETINDIA",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET_TRAVEL",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__TRAVEL_RAPPORT_YES_MORE_THAN_ISLAMABAD",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_0_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-ask_have_you_explored_city_L2",
+              "Frank_Gill-say_well_not_really_L2",
+              "Tariq_Osmani-say_it_may_not_be_hollywood_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "<",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__TRAVEL_RAPPORT_YES_MORE_THAN_ISLAMABAD"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_0_"
+              }
+            ]
+          },
+          {
+            "effects": [
+              {
+                "operand": "SMALLTALK",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "CRICKET",
+                "operand2": "1",
+                "operator": "+="
+              },
+              {
+                "operand": "RET_CONFLICT",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_ENGLISH",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET_TRAVEL",
+                "operand2": false,
+                "operator": "="
+              },
+              {
+                "operand": "RET__TRAVEL_RAPPORT_YES_MORE_THAN_ISLAMABAD",
+                "operand2": true,
+                "operator": "="
+              },
+              {
+                "operand": "RET__RSTATE_0_",
+                "operand2": false,
+                "operator": "="
+              }
+            ],
+            "endState": "",
+            "speakerActq": [
+              "Tariq_Osmani-ask_have_you_explored_city_L2",
+              "Frank_Gill-say_well_not_really_L2",
+              "Tariq_Osmani-say_it_may_not_be_hollywood_L2"
+            ],
+            "variableRanges": [
+              {
+                "operator": "==",
+                "range": ["2"],
+                "variable": "SMALLTALK"
+              },
+              {
+                "operator": "==",
+                "range": [false],
+                "variable": "RET__TRAVEL_RAPPORT_YES_MORE_THAN_ISLAMABAD"
+              },
+              {
+                "operator": "==",
+                "range": [true],
+                "variable": "RET__RSTATE_0_"
+              }
+            ]
+          }
+        ],
+        "reusable": false,
+        "video": {}
+      }
+    }}
+  },
+  "roles": {
+    "npc": "Tariq_Osmani",
+    "player": "Frank_Gill"
+  },
+  "states": [],
+  "transitions": [
+    {
+      "actions": [
+        "Tariq_Osmani-say_uh_hello_waaleykum_L2",
+        "Frank_Gill-say_how_are_you_L2",
+        "Tariq_Osmani-say_jetlagged_didnt_know_US_greet_L2",
+        "Frank_Gill-say_yes_studying_language_L2",
+        "Tariq_Osmani-say_thats_great_meant_US_shake_L2",
+        "Frank_Gill-say_sometimes_US_hug_L2",
+        "Tariq_Osmani-say_usually_only_after_know_eachother_L2",
+        "Tariq_Osmani-hosp_sit_have_tea_L2",
+        "Tariq_Osmani-ask_would_you_like_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s1",
+      "inputSymbols": ["greet_salaam_hug"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_good_afternoon_how_are_you_L2",
+        "Frank_Gill-say_im_doing_well_L2",
+        "Tariq_Osmani-say_im_jetlagged_L2",
+        "Tariq_Osmani-hosp_sit_have_tea_L2",
+        "Tariq_Osmani-ask_would_you_like_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s1",
+      "inputSymbols": ["greet_good_afternoon"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_should_I_call_you_frank_L2",
+        "Frank_Gill-say_sure_thats_fine_L2",
+        "Tariq_Osmani-say_I_dont_mind_L2",
+        "Frank_Gill-say_Im_sorry_how_are_you_L2",
+        "Tariq_Osmani-say_im_jetlagged_L2",
+        "Tariq_Osmani-hosp_sit_have_tea_L2",
+        "Tariq_Osmani-ask_would_you_like_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s1",
+      "inputSymbols": ["greet_hello_tariq"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_waaleykum_L2",
+        "Frank_Gill-say_im_doing_well_L2",
+        "Tariq_Osmani-say_im_jetlagged_L2",
+        "Tariq_Osmani-hosp_sit_have_tea_L2",
+        "Tariq_Osmani-ask_would_you_like_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "GREET",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s1",
+      "inputSymbols": ["greet_assalam_shake"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": ["Tariq_Osmani-say_happy_to_have_you_L2"],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "TEA",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "HOSPITALITY",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_FAMILY",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s2",
+      "inputSymbols": ["say_tea_great"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_no_tea_L2",
+        "Frank_Gill-say_Im_fine_really_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_FAMILY",
+          "operand2": true,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_dont_drink_tea"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_they_provoke_us_L2",
+        "Frank_Gill-say_india_provide_aid_in_countries_L2",
+        "Tariq_Osmani-say_feel_different_intentions_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_india_not_that_bad"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_past_conflict_every_month_L2",
+        "Frank_Gill-say_reasons_generations_old_L2",
+        "Tariq_Osmani-say_muslims_die_indian_soldiers_L2",
+        "Frank_Gill-say_talk_something_else_L2",
+        "Tariq_Osmani-say_talk_later_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_pak_get_over_india"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_they_provoke_us_L2",
+        "Frank_Gill-say_india_provide_aid_in_countries_L2",
+        "Tariq_Osmani-say_feel_different_intentions_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_india_not_that_bad"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "CONFLICT"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_past_conflict_every_month_L2",
+        "Frank_Gill-say_reasons_generations_old_L2",
+        "Tariq_Osmani-say_muslims_die_indian_soldiers_L2",
+        "Frank_Gill-say_talk_something_else_L2",
+        "Tariq_Osmani-say_talk_later_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_pak_get_over_india"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "CONFLICT"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["3"],
+          "variable": "SMALLTALK"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_they_provoke_us_L2",
+        "Frank_Gill-say_india_provide_aid_in_countries_L2",
+        "Tariq_Osmani-say_feel_different_intentions_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_india_not_that_bad"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_past_conflict_every_month_L2",
+        "Frank_Gill-say_reasons_generations_old_L2",
+        "Tariq_Osmani-say_muslims_die_indian_soldiers_L2",
+        "Frank_Gill-say_talk_something_else_L2",
+        "Tariq_Osmani-say_talk_later_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_pak_get_over_india"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["3"],
+        "variable": "SMALLTALK"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-say_have_more_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_definitely_india_undermine_L2",
+        "Frank_Gill-say_been_briefed_tensions_L2",
+        "Tariq_Osmani-say_happy_maintain_position_L2",
+        "Frank_Gill-say_good_work_through_region_L2",
+        "Tariq_Osmani-ask_sure_no_tea_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s5",
+      "inputSymbols": ["sensitive_pak_strengths"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CONFLICT"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "<",
+          "range": ["1"],
+          "variable": "TEA"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_they_provoke_us_L2",
+        "Frank_Gill-say_india_provide_aid_in_countries_L2",
+        "Tariq_Osmani-say_feel_different_intentions_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_india_not_that_bad"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "CONFLICT"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_past_conflict_every_month_L2",
+        "Frank_Gill-say_reasons_generations_old_L2",
+        "Tariq_Osmani-say_muslims_die_indian_soldiers_L2",
+        "Frank_Gill-say_talk_something_else_L2",
+        "Tariq_Osmani-say_talk_later_return_group_L2",
+        "Frank_Gill-say_OK_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_FAMILY",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_TRAVEL",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CRICKETINDIA",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_ENGLISH",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "RET_CONFLICT",
+          "operand2": false,
+          "operator": "="
+        }
+      ],
+      "endState": "s6",
+      "inputSymbols": ["say_pak_get_over_india"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "CONFLICT"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_glad_you_like_L2",
+        "Tariq_Osmani-say_time_to_pray_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "HOSPITALITY",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "TEA",
+          "operand2": "1",
+          "operator": "+="
+        }
+      ],
+      "endState": "s7",
+      "inputSymbols": ["hosp2_thanks_its_good"],
+      "onlyOnce": false,
+      "startState": "s4",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-ask_send_something_else_L2",
+        "Frank_Gill-say_not_thirsty_L2",
+        "Tariq_Osmani-say_alright_L2",
+        "Tariq_Osmani-say_time_to_pray_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s7",
+      "inputSymbols": ["hosp2_thanks_im_good"],
+      "onlyOnce": false,
+      "startState": "s4",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_great_you_like_it_L2",
+        "Tariq_Osmani-say_time_to_pray_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "HOSPITALITY",
+          "operand2": "2",
+          "operator": "+="
+        },
+        {
+          "operand": "TEA",
+          "operand2": "2",
+          "operator": "+="
+        }
+      ],
+      "endState": "s7",
+      "inputSymbols": ["hosp2_OK_try_some"],
+      "onlyOnce": false,
+      "startState": "s5",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-ask_send_something_else_L2",
+        "Frank_Gill-say_not_thirsty_L2",
+        "Tariq_Osmani-say_alright_L2",
+        "Tariq_Osmani-say_time_to_pray_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s7",
+      "inputSymbols": ["hosp2_thanks_im_good"],
+      "onlyOnce": false,
+      "startState": "s5",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_enjoy_brb_L2",
+        "Frank_Gill-say_get_back_talk_about_cricket_L2",
+        "Tariq_Osmani-say_sounds_great_join_group_L2",
+        "Frank_Gill-say_that_would_be_great_L2",
+        "Tariq_Osmani-say_introduce_you_excuse_me_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RELIGION",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s8",
+      "inputSymbols": ["religion_no_problem_take_time"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["2"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CRICKETENDING"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_enjoy_brb_L2",
+        "Tariq_Osmani-say_like_to_find_out_match_L2",
+        "Frank_Gill-say_maybe_you_can_teach_me_L2",
+        "Tariq_Osmani-say_those_guys_talk_all_night_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RELIGION",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s8",
+      "inputSymbols": ["religion_no_problem_take_time"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": [
+        {
+          "operator": "==",
+          "range": ["2"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["0"],
+          "variable": "CRICKETENDING"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_brb_L2",
+        "Frank_Gill-say_get_back_talk_about_cricket_L2",
+        "Tariq_Osmani-say_sounds_great_join_group_L2",
+        "Frank_Gill-say_that_would_be_great_L2",
+        "Tariq_Osmani-say_introduce_you_excuse_me_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RELIGION",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s8",
+      "inputSymbols": ["religion_no_problem_take_time"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": [
+        {
+          "operator": "<=",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["1"],
+          "variable": "CRICKETENDING"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_brb_L2",
+        "Tariq_Osmani-say_like_to_find_out_match_L2",
+        "Frank_Gill-say_maybe_you_can_teach_me_L2",
+        "Tariq_Osmani-say_those_guys_talk_all_night_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RELIGION",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s8",
+      "inputSymbols": ["religion_no_problem_take_time"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": [
+        {
+          "operator": "<=",
+          "range": ["1"],
+          "variable": "TEA"
+        },
+        {
+          "operator": "==",
+          "range": ["0"],
+          "variable": "CRICKETENDING"
+        }
+      ]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-ask_are_you_sure_keep_chatting_L2",
+        "Frank_Gill-say_really_do_have_work_L2",
+        "Tariq_Osmani-say_youre_welcome_L2",
+        "Frank_Gill-auto__-1463174222530_L2",
+        "Frank_Gill-say_me_too_bye_L2",
+        "Tariq_Osmani-say_bye_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s8",
+      "inputSymbols": ["religion_I_should_take_leave"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": []
+    }
+  ],
+  "version": "2014022801"
+}

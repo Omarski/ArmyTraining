@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page1117",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Polychronic Time Orientation",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://commons.wikimedia.org/wiki/File:Street_cafe_in_Manama_souq,_Bahrain.jpg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Unhurried cafe customers, Bahrain"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "By contrast, some cultures see time as more fluid and involving simultaneous occurrences with many different people and things. Time isn't seen as a commodity to be spent and saved. This is called \"polychronic\" time. Societies with this outlook are less concerned about rigid schedules, punctuality, and promptness. Fluid schedules with flexible start and end points are more the norm. In addition, people from polychronic societies often discuss multiple issues at a time and communicate in a cyclical fashion.",
+      "media" : [ {
+        "zid" : 4011265,
+        "xid" : "4011265.mp3",
+        "type" : "audio",
+        "file" : "4011265.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416279557321,
+      "xid" : "1416279557321.jpg",
+      "type" : "image",
+      "file" : "1416279557321.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

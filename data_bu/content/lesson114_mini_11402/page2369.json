@@ -1,0 +1,88 @@
+{
+  "page" : {
+    "xid" : "page2369",
+    "type" : "MultipleChoice",
+    "title" : "Practice 9",
+    "info" : null,
+    "prompt" : {
+      "text" : "Tell your counterpart, \"Yes, sir.\""
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That’s how you say, \"no, sir.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "wrong jee nahin, sahib."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "That's how you say, \"yes, sir.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "jee haan, sahib."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Careful of the word order."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "haan jee, sahib."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Careful of the word order."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "nahin jee, sahib."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

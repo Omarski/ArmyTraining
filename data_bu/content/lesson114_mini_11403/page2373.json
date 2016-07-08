@@ -1,0 +1,131 @@
+{
+  "page" : {
+    "xid" : "page2373",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 5",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Tariq Osmani",
+      "zid" : 1462830371130,
+      "nom" : "Tariq_Osmani"
+    },
+    "media" : [ {
+      "zid" : 1466444721541,
+      "xid" : "1466444721541.jpg",
+      "type" : "image",
+      "file" : "1466444721541.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "What did he say?"
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "en",
+        "anchor" : "ezread",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : "آپ کا کیا نام ہے؟"
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "aap ka kia naam hai?"
+        }
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "He asked your name."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "What is your name?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That would be, \"meraa naam Frank hai.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "My name is Frank."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That would be, \"jee haan, sahib.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Yes, sir."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That would be, \"asalaamo 'aleykum.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Hello."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page1706",
+    "type" : "MultiNote",
+    "title" : "Major Political Figures",
+    "related" : [ {
+      "xid" : "page3976",
+      "type" : "Info",
+      "title" : "Major Political Figures 1",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Pervez_Musharraf_2004_(square).jpg; https://commons.wikimedia.org/wiki/File:Nawaz_Sharif_March_2014.jpg; https://commons.wikimedia.org/wiki/File:Benazir_bhutto_1988_cropped.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Benazir Bhutto, Nawaz Sharif, and Pervez Musharraf"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Political parties in Pakistan tend to be tied to individuals more than to ideologies, and the government as a whole has more to do with strong leaders than institutions.",
+        "media" : [ {
+          "zid" : 4032231,
+          "xid" : "4032231.mp3",
+          "type" : "audio",
+          "file" : "4032231.mp3"
+        } ]
+      }, {
+        "text" : "As a result, the same parties and politicians have returned to power time and again.",
+        "media" : [ {
+          "zid" : 4032232,
+          "xid" : "4032232.mp3",
+          "type" : "audio",
+          "file" : "4032232.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1461021951880,
+        "xid" : "1461021951880.jpg",
+        "type" : "image",
+        "file" : "1461021951880.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3977",
+      "type" : "Info",
+      "title" : "Major Political Figures 2",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Zulfikar_Ali_Bhutto.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Zulfikar Ali Bhutto"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Zulfikar Ali Bhutto formed the Pakistan People's Party (PPP) in 1968. He formed a government in the 1970s. He was removed from power in a military coup in 1977, and executed in 1979.",
+        "media" : [ {
+          "zid" : 4032233,
+          "xid" : "4032233.mp3",
+          "type" : "audio",
+          "file" : "4032233.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1461020837976,
+        "xid" : "1461020837976.jpg",
+        "type" : "image",
+        "file" : "1461020837976.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3978",
+      "type" : "Info",
+      "title" : "Major Political Figures 3",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Benazir_bhutto_1988.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Benazir Bhutto"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Bhutto's daughter, Benazir, was prime minister from 1988 to 1990 and 1993 to 1996. She was assassinated in 2007 while running for Parliament, and her husband Asif Ali Zardari took over the party. He became president in 2008. Both Zardari and Benazir Bhutto have been accused of corruption.",
+        "media" : [ {
+          "zid" : 4032234,
+          "xid" : "4032234.mp3",
+          "type" : "audio",
+          "file" : "4032234.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1460568263675,
+        "xid" : "1460568263675.jpg",
+        "type" : "image",
+        "file" : "1460568263675.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3979",
+      "type" : "Info",
+      "title" : "Major Political Figures 4",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:PrimeMinisterNawazSharif.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Nawaz Sharif"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "When the army removed Benazir Bhutto in 1990, Nawaz Sharif was elected prime minister. He served from 1990 to 1993 and 1997 to 1999. Sharif became prime minister once more in 2013.",
+        "media" : [ {
+          "zid" : 4032235,
+          "xid" : "4032235.mp3",
+          "type" : "audio",
+          "file" : "4032235.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1460568389691,
+        "xid" : "1460568389691.jpg",
+        "type" : "image",
+        "file" : "1460568389691.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page3980",
+      "type" : "Info",
+      "title" : "Major Political Figures 5",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://commons.wikimedia.org/wiki/File:Flickr_-_World_Economic_Forum_-_Pervez_Musharraf_-_World_Economic_Forum_Annual_Meeting_2004.jpg"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Pervez Musharraf"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "In 1998, Sharif replaced the head of the army with Pervez Musharraf, who he thought would not be political.",
+        "media" : [ {
+          "zid" : 4032244,
+          "xid" : "4032244.mp3",
+          "type" : "audio",
+          "file" : "4032244.mp3"
+        } ]
+      }, {
+        "text" : "In 1999, Musharraf took over in a bloodless coup. He resigned his army post in 2007 to become a civilian president. He left office in 2008.",
+        "media" : [ {
+          "zid" : 4032245,
+          "xid" : "4032245.mp3",
+          "type" : "audio",
+          "file" : "4032245.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1460578678770,
+        "xid" : "1460578678770.jpg",
+        "type" : "image",
+        "file" : "1460578678770.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : ""
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

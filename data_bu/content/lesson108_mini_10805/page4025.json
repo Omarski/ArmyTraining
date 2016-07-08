@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page4025",
+    "type" : "Info",
+    "title" : "Honor and Shame",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Punjabi_old_woman.JPG"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A Pakistani woman"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "All Pakistanis consider family honor to be very important. Insulting someone in public is seen as violating their honor.",
+      "media" : [ {
+        "zid" : 4032306,
+        "xid" : "4032306.mp3",
+        "type" : "audio",
+        "file" : "4032306.mp3"
+      } ]
+    }, {
+      "text" : "Women are a main source of a family's honor, and if they behave poorly it brings shame on their family. One of the reasons that women's mobility is limited is to prevent this from happening. All sex outside of marriage is seen as especially shameful, and is illegal.",
+      "media" : [ {
+        "zid" : 4032307,
+        "xid" : "4032307.mp3",
+        "type" : "audio",
+        "file" : "4032307.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460569721745,
+      "xid" : "1460569721745.jpg",
+      "type" : "image",
+      "file" : "1460569721745.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

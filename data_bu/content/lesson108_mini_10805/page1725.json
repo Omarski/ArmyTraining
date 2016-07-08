@@ -1,0 +1,222 @@
+{
+  "page" : {
+    "xid" : "page1725",
+    "type" : "Pronunciation",
+    "title" : "Commonly Used Phrases 1",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "nut" : [ {
+      "note" : {
+        "text" : "Using just a few words of the local language goes a long way towards building rapport. It shows your counterpart that you care about their culture and are putting effort into your relationship with them. This lesson will teach you a few essential words and phrases in Punjabi.",
+        "media" : [ null ]
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "status" : "imported",
+          "provenance" : "",
+          "lang" : "en",
+          "anchor" : "native",
+          "lexicon" : false,
+          "incomplete" : false,
+          "ontoid" : "",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "",
+            "text" : "namaskaar",
+            "group" : ""
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "",
+            "text" : "hello",
+            "group" : ""
+          },
+          "parseTree" : null
+        },
+        "info" : {
+          "property" : [ {
+            "name" : "asrsetting",
+            "value" : "easy"
+          }, {
+            "name" : "displayedchannel",
+            "value" : "EZ-Read"
+          } ]
+        },
+        "media" : [ {
+          "zid" : 4032236,
+          "xid" : "4032236.mp3",
+          "type" : "audio",
+          "file" : "4032236.mp3"
+        } ]
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "status" : "imported",
+          "provenance" : "",
+          "lang" : "en",
+          "anchor" : "native",
+          "lexicon" : false,
+          "incomplete" : false,
+          "ontoid" : "",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "",
+            "text" : "aal veedaa",
+            "group" : ""
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "",
+            "text" : "goodbye",
+            "group" : ""
+          },
+          "parseTree" : null
+        },
+        "info" : {
+          "property" : [ {
+            "name" : "asrsetting",
+            "value" : "easy"
+          }, {
+            "name" : "displayedchannel",
+            "value" : "EZ-Read"
+          } ]
+        },
+        "media" : [ {
+          "zid" : 4032237,
+          "xid" : "4032237.mp3",
+          "type" : "audio",
+          "file" : "4032237.mp3"
+        } ]
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "status" : "imported",
+          "provenance" : "",
+          "lang" : "en",
+          "anchor" : "native",
+          "lexicon" : false,
+          "incomplete" : false,
+          "ontoid" : "",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "",
+            "text" : "haa",
+            "group" : ""
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "",
+            "text" : "",
+            "group" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "",
+            "text" : "yes",
+            "group" : ""
+          },
+          "parseTree" : null
+        },
+        "info" : {
+          "property" : [ {
+            "name" : "asrsetting",
+            "value" : "easy"
+          }, {
+            "name" : "displayedchannel",
+            "value" : "EZ-Read"
+          } ]
+        },
+        "media" : [ {
+          "zid" : 4032238,
+          "xid" : "4032238.mp3",
+          "type" : "audio",
+          "file" : "4032238.mp3"
+        } ]
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "native",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "naa"
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "no"
+          }
+        },
+        "info" : null,
+        "media" : [ {
+          "zid" : 4032239,
+          "xid" : "4032239.mp3",
+          "type" : "audio",
+          "file" : "4032239.mp3"
+        } ]
+      }
+    } ]
+  }
+}

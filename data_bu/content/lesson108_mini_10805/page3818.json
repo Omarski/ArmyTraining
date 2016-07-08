@@ -1,0 +1,238 @@
+{
+  "page" : {
+    "xid" : "page3818",
+    "type" : "MultipleChoice",
+    "title" : "Practice 3",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "prompt" : {
+      "text" : "The majority of Pakistanis are:"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "At least three-quarters of Pakistani Muslims are Sunni."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Sunni Muslims",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, Shia Muslims are a minority in Pakistan."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Shia Muslims",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, Ahmedis are a minority in Pakistan."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Ahmedis",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, this is not correct."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Hindus",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    } ]
+  }
+}

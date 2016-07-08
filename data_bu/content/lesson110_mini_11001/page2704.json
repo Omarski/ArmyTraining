@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2704",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Introductions",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/KBWMu"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Service members meeting with village elders"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "You can build trust with a new counterpart from the ground up, but it's always a good idea to be introduced through a mutual acquaintance. Not only can your acquaintance make ice-breaking conversations easier, they can vouch for your integrity and establish you as a professional and expert on the team.\n",
+      "media" : [ {
+        "zid" : 4032550,
+        "xid" : "4032550.mp3",
+        "type" : "audio",
+        "file" : "4032550.mp3"
+      } ]
+    }, {
+      "text" : "Likewise, outgoing service members should always introduce new U.S. team members to local counterparts with praise, even if their relationship is new.",
+      "media" : [ {
+        "zid" : 4032551,
+        "xid" : "4032551.mp3",
+        "type" : "audio",
+        "file" : "4032551.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463530268521,
+      "xid" : "1463530268521.jpg",
+      "type" : "image",
+      "file" : "1463530268521.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

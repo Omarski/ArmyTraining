@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page3603",
+    "type" : "Info",
+    "title" : "Location in the World",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo Inc."
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Map showing the location of Pakistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Because of its strategic location in South Asia linking western Asia and India, Pakistan has long been a trade center. However, this has also made it historically subject to conquest.",
+      "media" : [ {
+        "zid" : 4032162,
+        "xid" : "4032162.mp3",
+        "type" : "audio",
+        "file" : "4032162.mp3"
+      } ]
+    }, {
+      "text" : "Pakistan is bordered by the Arabian Sea to the south, Iran to the west, Afghanistan to the northwest, China to the northeast, and India to the east.",
+      "media" : [ {
+        "zid" : 4032163,
+        "xid" : "4032163.mp3",
+        "type" : "audio",
+        "file" : "4032163.mp3"
+      } ]
+    }, {
+      "text" : "The country has an area of about 307,000 square miles, which makes it roughly twice the size of California.",
+      "media" : [ {
+        "zid" : 4032164,
+        "xid" : "4032164.mp3",
+        "type" : "audio",
+        "file" : "4032164.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460655429356,
+      "xid" : "1460655429356.jpg",
+      "type" : "image",
+      "file" : "1460655429356.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

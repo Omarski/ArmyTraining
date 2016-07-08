@@ -1,0 +1,36 @@
+{
+  "page" : {
+    "xid" : "page1883",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Learning Objectives",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://secure.istockphoto.com/photo/portrait-of-a-happy-afghan-gm478130489-35878372"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan man"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this section, you will learn to:"
+    }, {
+      "text" : "- Effectively use greetings and small talk to build rapport.\n- Identify appropriate gestures and body language.\n- Identify cultural differences in conversational style.\n"
+    } ],
+    "media" : [ {
+      "zid" : 1463683941094,
+      "xid" : "1463683941094.jpg",
+      "type" : "image",
+      "file" : "1463683941094.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

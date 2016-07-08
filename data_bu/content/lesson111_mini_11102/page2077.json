@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2077",
+    "type" : "Info",
+    "title" : "Preparing for Conversation",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. and Pakistani officers at a meeting"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Your counterparts' priorities may not entirely align with yours. Be prepared with an understanding of any issues currently affecting their region, and be prepared to change the subject to positive topics in case of unexpected conversational roadblocks.",
+      "media" : [ {
+        "zid" : 4034531,
+        "xid" : "4034531.mp3",
+        "type" : "audio",
+        "file" : "4034531.mp3"
+      } ]
+    }, {
+      "text" : "You may need to clarify information weeks after meetings, so be sure to take notes during engagements. However, never take out your notepad during small talk or before business topics are discussed. Review past engagement notes before each meeting.",
+      "media" : [ {
+        "zid" : 4034532,
+        "xid" : "4034532.mp3",
+        "type" : "audio",
+        "file" : "4034532.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463152647008,
+      "xid" : "1463152647008.jpg",
+      "type" : "image",
+      "file" : "1463152647008.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

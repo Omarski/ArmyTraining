@@ -1,0 +1,43 @@
+{
+  "page" : {
+    "xid" : "page2001",
+    "type" : "Info",
+    "title" : "Leader Engagements in Pakistan",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.istockphoto.com/photo/foreign-leaders-arrive-in-washington-for-nuclear-security-summit-gm98394056-19017427?st=34f195a"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Awaiting the arrival of Pakistani leaders."
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Pakistan’s military has jurisdiction over most areas of U.S. concern in the country, likely making your engagements military to military. Excluding disasters, interactions between the U.S. and Pakistan are arranged years in advance. Equipment exchanges, budgets, and team roles will be understood on both sides prior to the engagement.",
+      "media" : [ {
+        "zid" : 4034516,
+        "xid" : "4034516.mp3",
+        "type" : "audio",
+        "file" : "4034516.mp3"
+      } ]
+    }, {
+      "text" : "Since leader engagements are not about engaging when a crisis arises, but building a strong relationship with counterparts over time, your mission will involve building rapport, solidifying ties, and discussing the progress of current collaborations.",
+      "media" : [ {
+        "zid" : 4034517,
+        "xid" : "4034517.mp3",
+        "type" : "audio",
+        "file" : "4034517.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1464385508864,
+      "xid" : "1464385508864.jpg",
+      "type" : "image",
+      "file" : "1464385508864.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ]
+  }
+}

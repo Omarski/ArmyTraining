@@ -1,0 +1,240 @@
+{
+  "page" : {
+    "xid" : "page3932",
+    "type" : "MultipleChoice",
+    "title" : "Quiz 1",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "minilessonID",
+        "value" : "10705"
+      } ]
+    },
+    "skills" : null,
+    "prompt" : {
+      "text" : "What is purdah?"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "gender segregation",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "arranged marriage",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "respect for elders",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Islamic education",
+              "group" : ""
+            },
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "asrsetting",
+              "value" : "easy"
+            }, {
+              "name" : "displayedchannel",
+              "value" : "EZ-Read"
+            } ]
+          }
+        }
+      }
+    } ]
+  }
+}

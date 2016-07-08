@@ -1,0 +1,43 @@
+{
+  "page" : {
+    "xid" : "page3995",
+    "type" : "Info",
+    "title" : "Economic Development and Standard of Living",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/1402256/cash-money"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghanis and U.S. dollars"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Afghanistan’s economic growth radically expanded in the 20th century, largely due to Soviet support. The economy has suffered since the fall of the Taliban, though a fresh wave of aid has poured into the country. As of 2015, Afghanistan ranked 171st out of 188 countries listed on the United Nations Human Development Index, which takes into account standards of living, life expectancy, and education.",
+      "media" : [ {
+        "zid" : 4032386,
+        "xid" : "4032386.mp3",
+        "type" : "audio",
+        "file" : "4032386.mp3"
+      } ]
+    }, {
+      "text" : "The currency of Afghanistan is called the afghani. As of January 2016, one U.S. dollar is worth about 68 afghanis, meaning an afghani is worth about a penny and a half.",
+      "media" : [ null ]
+    } ],
+    "media" : [ {
+      "zid" : 1452024100450,
+      "xid" : "1452024100450.jpg",
+      "type" : "image",
+      "file" : "1452024100450.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

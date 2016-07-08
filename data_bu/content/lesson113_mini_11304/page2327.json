@@ -1,0 +1,41 @@
+{
+  "page" : {
+    "xid" : "page2327",
+    "type" : "Info",
+    "title" : "Political Concerns",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/7637926208/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Civil Affairs officer inspecting a classroom"
+      } ]
+    },
+    "note" : [ {
+      "text" : "While it is important to follow the guidance of local leaders and experts, some local authorities may encourage projects that will bring themselves power or prestige, such as the construction of a new building. However, providing basic needs, like clean water, may be more urgent. You should address essential needs first. ",
+      "media" : [ {
+        "zid" : 4034401,
+        "xid" : "4034401.mp3",
+        "type" : "audio",
+        "file" : "4034401.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462372923628,
+      "xid" : "1462372923628.jpg",
+      "type" : "image",
+      "file" : "1462372923628.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

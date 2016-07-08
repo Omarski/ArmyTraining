@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2292",
+    "type" : "Info",
+    "title" : "Greeting the Opposite Gender",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. soldier greeting a young Afghan girl"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Men and women should keep a respectful distance and not hold prolonged eye contact. Some Afghan men won't know how to greet American women, but women can initiate handshakes by extending their hand. Don't be offended if men don't shake your hand. They may place their hand over their heart instead. ",
+      "media" : [ {
+        "zid" : 4034392,
+        "xid" : "4034392.mp3",
+        "type" : "audio",
+        "file" : "4034392.mp3"
+      } ]
+    }, {
+      "text" : "American men should wait for an Afghan woman to extend her hand for a greeting. Instead of a handshake, lightly hold a woman's fingers and avoid grasping palms. If she doesn't extend her hand, you can greet with a hand over the heart and slight bow of the head.",
+      "media" : [ {
+        "zid" : 4032591,
+        "xid" : "4032591.mp3",
+        "type" : "audio",
+        "file" : "4032591.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462372356799,
+      "xid" : "1462372356799.jpg",
+      "type" : "image",
+      "file" : "1462372356799.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

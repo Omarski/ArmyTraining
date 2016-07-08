@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3947",
+    "type" : "Info",
+    "title" : "Infrastructure",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "iStock; http://www.istockphoto.com/legal/license-agreement"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Rural home in Afghanistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Although Afghanistan’s infrastructure has drastically improved since 2002, remote areas are still underdeveloped.",
+      "media" : [ {
+        "zid" : 4032336,
+        "xid" : "4032336.mp3",
+        "type" : "audio",
+        "file" : "4032336.mp3"
+      } ]
+    }, {
+      "text" : "As of 2014, about 40% of rural Afghans have access to safe drinking water, while just over 70% of urban households do. Only 28% of the population has reliable access to electricity. According to U.N. data, only about 6% of Afghans have access to the Internet.",
+      "media" : [ {
+        "zid" : 4032337,
+        "xid" : "4032337.mp3",
+        "type" : "audio",
+        "file" : "4032337.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463079783805,
+      "xid" : "1463079783805.jpg",
+      "type" : "image",
+      "file" : "1463079783805.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

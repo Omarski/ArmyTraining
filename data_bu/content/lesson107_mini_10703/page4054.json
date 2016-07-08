@@ -1,0 +1,182 @@
+{
+  "page" : {
+    "xid" : "page4054",
+    "type" : "InteractiveTimeline",
+    "title" : "Interactive Timeline",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "contentRef",
+        "value" : "AfghanistanAFPAKTimeline.json"
+      }, {
+        "name" : "platforms",
+        "value" : "!NOT, vmob"
+      }, {
+        "name" : "builtTimeline",
+        "value" : "{\"nodes\":[{\"title\":\"Invasion by Genghis Khan\",\"file\":\"1454439764056\",\"year\":\"1219\",\"desc\":\"Genghis Khan conquers Afghanistan, ending six centuries of rule by small Islamic dynasties. He brings Afghanistan into his empire and rules until his death in 1227.\",\"attribution\":null},{\"title\":\"Timurid Rule\",\"file\":\"1454441132256\",\"year\":\"1405\",\"desc\":\"Timur, who conquered Afghanistan in the 14th century, dies. His successors, the Timurids, continue to rule the region until 1507. Their rule marks a time of peace and prosperity.\",\"attribution\":null},{\"title\":\"Anglo-Afghan Wars\",\"file\":\"1454441842908\",\"year\":\"1839\",\"desc\":\"A series of three wars between Afghanistan and the British begins. The British seek to ward off Russian influence and fight Persian rule in Afghanistan.\",\"attribution\":null},{\"title\":\"Durand Line\",\"file\":\"1454442298594\",\"year\":\"1893\",\"desc\":\"The Durand line is drawn during the Anglo-Afghan Wars to separate Afghanistan from British-ruled India. When Pakistan is established decades later, the line will mark the border between Pakistan and Afghanistan.\",\"attribution\":null},{\"title\":\"Afghan Victory\",\"file\":\"1454449759987\",\"year\":\"1919\",\"desc\":\"Afghanistan claims victory after a third Anglo-Afghan War. Its friendship with the newly established Soviet Union is formally recognized.\",\"attribution\":null},{\"title\":\"Monarchy\",\"file\":\"1454444348290\",\"year\":\"1923\",\"desc\":\"Afghanistan is ruled as a monarchy until 1973. Mohammad Zahir Shah, the last king of Afghanistan, rules under stable conditions for 40 years. After a drought and famine in the 1970s, Zahir Shah is deposed in a coup and goes into exile.\",\"attribution\":null},{\"title\":\"Daud Khan\",\"file\":\"1454444247527\",\"year\":\"1973\",\"desc\":\"Mohammad Daud Khan, the king's brother-in-law, declares Afghanistan a republic and assumes the presidency. He attempts reforms and tries to scale back Soviet influence. He is assasinated in 1978, leading to further instability and unrest.\",\"attribution\":null},{\"title\":\"Soviet Invasion\",\"file\":\"1455920354866\",\"year\":\"1979\",\"desc\":\"Soviet troops invade Afghanistan. Their invasion is followed by the Soviet-Afghan War, in which around a million people die and millions more are left as refugees. The war lasts until 1989.\",\"attribution\":null},{\"title\":\"Soviet Withdrawal\",\"file\":\"1455920482891\",\"year\":\"1989\",\"desc\":\"Throughout the 1980s, the mujahideen, comprised of Afghan men and Arab foreigners, fight to establish a religious regime in Afghanistan and overthrow secular Soviet influences. In 1989, the Soviets withdraw from Afghanistan. \",\"attribution\":null},{\"title\":\"Collapse of the Government\",\"file\":\"1454449656317\",\"year\":\"1992\",\"desc\":\"The Afghan government collapses, leaving control of the country in the hands of rogue fighters, war lords, and disorganized militias.\",\"attribution\":null},{\"title\":\"Rise of the Taliban\",\"file\":\"1454447777754\",\"year\":\"1994\",\"desc\":\"The Taliban begin organizing in Kandahar. They fight local warlords and take control of Kabul in 1996. They enforce a strict interpretation of Islamic law, use stoning and amputation as punshiments, impose severe restrictions on women, and function as a safe haven for Islamic extremists.\",\"attribution\":null},{\"title\":\"U.S. Involvement\",\"file\":\"1454449495970\",\"year\":\"2001\",\"desc\":\"Following the 9/11 attacks, U.S. forces invade Afghanistan. The Taliban government is toppled, and a new constitution is ratified in 2004. Many Afghans leave the country due to instability.\",\"attribution\":\"-\"},{\"title\":\"U.S. Mission Completion\",\"file\":\"1454448971873\",\"year\":\"2014\",\"desc\":\"After years of conducting counterinsurgency activity in Afghanistan, the U.S. formally completes its mission.\",\"attribution\":null}]}"
+      } ]
+    },
+    "skills" : null,
+    "media" : [ {
+      "type" : "flash",
+      "file" : "Timeline.swf",
+      "info" : null
+    }, {
+      "zid" : 1454439764056,
+      "xid" : "1454439764056.jpg",
+      "type" : "image",
+      "file" : "1454439764056.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1219"
+        } ]
+      }
+    }, {
+      "zid" : 1454441132256,
+      "xid" : "1454441132256.jpg",
+      "type" : "image",
+      "file" : "1454441132256.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1405"
+        } ]
+      }
+    }, {
+      "zid" : 1454441842908,
+      "xid" : "1454441842908.jpg",
+      "type" : "image",
+      "file" : "1454441842908.jpg",
+      "mime" : "image/png",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1839"
+        } ]
+      }
+    }, {
+      "zid" : 1454442298594,
+      "xid" : "1454442298594.jpg",
+      "type" : "image",
+      "file" : "1454442298594.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1893"
+        } ]
+      }
+    }, {
+      "zid" : 1454449759987,
+      "xid" : "1454449759987.jpg",
+      "type" : "image",
+      "file" : "1454449759987.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1919"
+        } ]
+      }
+    }, {
+      "zid" : 1454444348290,
+      "xid" : "1454444348290.jpg",
+      "type" : "image",
+      "file" : "1454444348290.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1923"
+        } ]
+      }
+    }, {
+      "zid" : 1454444247527,
+      "xid" : "1454444247527.jpg",
+      "type" : "image",
+      "file" : "1454444247527.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1973"
+        } ]
+      }
+    }, {
+      "zid" : 1455920354866,
+      "xid" : "1455920354866.jpg",
+      "type" : "image",
+      "file" : "1455920354866.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1979"
+        } ]
+      }
+    }, {
+      "zid" : 1455920482891,
+      "xid" : "1455920482891.jpg",
+      "type" : "image",
+      "file" : "1455920482891.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1989"
+        } ]
+      }
+    }, {
+      "zid" : 1454449656317,
+      "xid" : "1454449656317.jpg",
+      "type" : "image",
+      "file" : "1454449656317.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1992"
+        } ]
+      }
+    }, {
+      "zid" : 1454447777754,
+      "xid" : "1454447777754.jpg",
+      "type" : "image",
+      "file" : "1454447777754.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "1994"
+        } ]
+      }
+    }, {
+      "zid" : 1454449495970,
+      "xid" : "1454449495970.jpg",
+      "type" : "image",
+      "file" : "1454449495970.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "2001"
+        } ]
+      }
+    }, {
+      "zid" : 1454448971873,
+      "xid" : "1454448971873.jpg",
+      "type" : "image",
+      "file" : "1454448971873.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "2014"
+        } ]
+      }
+    } ]
+  }
+}

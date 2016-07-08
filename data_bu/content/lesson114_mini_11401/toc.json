@@ -1,0 +1,332 @@
+{
+  "chapter" : {
+    "xid" : "lesson114_mini_11401",
+    "title" : "Preparing For Your Mission",
+    "info" : {
+      "property" : [ {
+        "name" : "fount",
+        "value" : "/afpak1/lesson111"
+      }, {
+        "name" : "L2",
+        "value" : "en"
+      } ]
+    },
+    "preposttest" : [ "page2743" ],
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page2301",
+        "type" : "Info",
+        "title" : "Providing Humanitarian Assistance"
+      }, {
+        "xid" : "page2715",
+        "type" : "Info",
+        "title" : "Learning Objectives"
+      }, {
+        "xid" : "page2810",
+        "type" : "Info",
+        "title" : "Why It Matters"
+      }, {
+        "xid" : "page2346",
+        "type" : "Info",
+        "title" : "Overview of Humanitarian Need"
+      }, {
+        "xid" : "page1101",
+        "type" : "Info",
+        "title" : "Relations with Afghanistan"
+      }, {
+        "xid" : "page1102",
+        "type" : "Info",
+        "title" : "Terrorist Groups"
+      }, {
+        "xid" : "page2808",
+        "type" : "Info",
+        "title" : "Working with the Pakistan Military"
+      }, {
+        "xid" : "page2396",
+        "type" : "Info",
+        "title" : "Perspectives: Working with the Pakistan Military"
+      }, {
+        "xid" : "page2755",
+        "type" : "MultipleChoice",
+        "title" : "Practice 1"
+      }, {
+        "xid" : "page2733",
+        "type" : "MultipleChoice",
+        "title" : "Practice 2"
+      }, {
+        "xid" : "page2313",
+        "type" : "Info",
+        "title" : "Perceptions of the U.S."
+      }, {
+        "xid" : "page2703",
+        "type" : "Info",
+        "title" : "Ethnic Tensions"
+      }, {
+        "xid" : "page2704",
+        "type" : "Info",
+        "title" : "Appropriate Dress"
+      }, {
+        "xid" : "page2753",
+        "type" : "Info",
+        "title" : "Differences in Scheduling and Time"
+      }, {
+        "xid" : "page2735",
+        "type" : "MultipleChoice",
+        "title" : "Practice 3"
+      }, {
+        "xid" : "page2713",
+        "type" : "Sorting",
+        "title" : "Practice 4"
+      }, {
+        "xid" : "page2348",
+        "type" : "Info",
+        "title" : "Section Checklist"
+      } ]
+    }, {
+      "mode" : "quiz",
+      "pageRef" : [ {
+        "xid" : "page2410",
+        "type" : "QuizStart",
+        "title" : "Quiz"
+      }, {
+        "xid" : "page2743",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 1"
+      }, {
+        "xid" : "page2744",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 2"
+      }, {
+        "xid" : "page2745",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 3"
+      }, {
+        "xid" : "page2393",
+        "type" : "QuizEnd",
+        "title" : "Quiz Results"
+      }, {
+        "xid" : "page2403",
+        "type" : "SectionEnd",
+        "title" : "Section End"
+      } ]
+    } ],
+    "zmedia" : [ {
+      "zid" : 4032463,
+      "xid" : "4032463.mp3",
+      "type" : "audio",
+      "file" : "4032463.mp3"
+    }, {
+      "zid" : 4032454,
+      "xid" : "4032454.mp3",
+      "type" : "audio",
+      "file" : "4032454.mp3"
+    }, {
+      "zid" : 4033923,
+      "xid" : "4033923.mp3",
+      "type" : "audio",
+      "file" : "4033923.mp3"
+    }, {
+      "zid" : 4032461,
+      "xid" : "4032461.mp3",
+      "type" : "audio",
+      "file" : "4032461.mp3"
+    }, {
+      "zid" : 4032451,
+      "xid" : "4032451.mp3",
+      "type" : "audio",
+      "file" : "4032451.mp3"
+    }, {
+      "zid" : 1458331958311,
+      "xid" : "1458331958311.jpg",
+      "type" : "image",
+      "file" : "1458331958311.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4"
+    }, {
+      "zid" : 1460397555868,
+      "xid" : "1460397555868.jpg",
+      "type" : "image",
+      "file" : "1460397555868.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4032464,
+      "xid" : "4032464.mp3",
+      "type" : "audio",
+      "file" : "4032464.mp3"
+    }, {
+      "zid" : 1459278557013,
+      "xid" : "1459278557013.jpg",
+      "type" : "image",
+      "file" : "1459278557013.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1458331215816,
+      "xid" : "1458331215816.jpg",
+      "type" : "image",
+      "file" : "1458331215816.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1459278415045,
+      "xid" : "1459278415045.jpg",
+      "type" : "image",
+      "file" : "1459278415045.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1292532786158,
+      "xid" : "1292532786158.jpg",
+      "type" : "image",
+      "file" : "1292532786158.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1458331712631,
+      "xid" : "1458331712631.jpg",
+      "type" : "image",
+      "file" : "1458331712631.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4032452,
+      "xid" : "4032452.mp3",
+      "type" : "audio",
+      "file" : "4032452.mp3"
+    }, {
+      "zid" : 1458331651904,
+      "xid" : "1458331651904.jpg",
+      "type" : "image",
+      "file" : "1458331651904.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4032457,
+      "xid" : "4032457.mp3",
+      "type" : "audio",
+      "file" : "4032457.mp3"
+    }, {
+      "zid" : 4032449,
+      "xid" : "4032449.mp3",
+      "type" : "audio",
+      "file" : "4032449.mp3"
+    }, {
+      "zid" : 4032456,
+      "xid" : "4032456.mp3",
+      "type" : "audio",
+      "file" : "4032456.mp3"
+    }, {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 4034526,
+      "xid" : "4034526.mp3",
+      "type" : "audio",
+      "file" : "4034526.mp3"
+    }, {
+      "zid" : 1458331884284,
+      "xid" : "1458331884284.jpg",
+      "type" : "image",
+      "file" : "1458331884284.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4032465,
+      "xid" : "4032465.mp3",
+      "type" : "audio",
+      "file" : "4032465.mp3"
+    }, {
+      "zid" : 4032453,
+      "xid" : "4032453.mp3",
+      "type" : "audio",
+      "file" : "4032453.mp3"
+    }, {
+      "zid" : 4032462,
+      "xid" : "4032462.mp3",
+      "type" : "audio",
+      "file" : "4032462.mp3"
+    }, {
+      "zid" : 4032450,
+      "xid" : "4032450.mp3",
+      "type" : "audio",
+      "file" : "4032450.mp3"
+    }, {
+      "zid" : 1389291394690,
+      "xid" : "1389291394690.jpg",
+      "type" : "image",
+      "file" : "1389291394690.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1458331503384,
+      "xid" : "1458331503384.jpg",
+      "type" : "image",
+      "file" : "1458331503384.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4032455,
+      "xid" : "4032455.mp3",
+      "type" : "audio",
+      "file" : "4032455.mp3"
+    }, {
+      "zid" : 4032458,
+      "xid" : "4032458.mp3",
+      "type" : "audio",
+      "file" : "4032458.mp3"
+    }, {
+      "zid" : 4032448,
+      "xid" : "4032448.mp3",
+      "type" : "audio",
+      "file" : "4032448.mp3"
+    }, {
+      "zid" : 4032460,
+      "xid" : "4032460.mp3",
+      "type" : "audio",
+      "file" : "4032460.mp3"
+    }, {
+      "zid" : 4032459,
+      "xid" : "4032459.mp3",
+      "type" : "audio",
+      "file" : "4032459.mp3"
+    }, {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 4033924,
+      "xid" : "4033924.mp3",
+      "type" : "audio",
+      "file" : "4033924.mp3"
+    }, {
+      "zid" : 1463161267179,
+      "xid" : "1463161267179.jpg",
+      "type" : "image",
+      "file" : "1463161267179.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ]
+  }
+}

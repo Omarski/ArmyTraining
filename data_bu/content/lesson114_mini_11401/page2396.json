@@ -1,0 +1,43 @@
+{
+  "page" : {
+    "xid" : "page2396",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perspectives: Working with the Pakistan Military",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "(Note: This transcript has been edited for readability.)<br><br>\"Pakistan does a lot of Civil Affairs work. They do a lot of UN work. They were my experts because the whole exercise scenario had surrounded if Tajikistan was going to deploy into an African type of environment and work for the United Nations. So the Pakistanis have actually done that, and the people that I had on my team had deployed to Africa and had worked in that type of environment. So the best way I can describe it? It’s like working with us. During the planning process for the exercise, one of the Pakistani lieutenant colonels led one of the subgroups and briefed. So again, it’s like working…if a Pakistani officer were sitting here, it would be perfect English, well trained, and well educated. It would be like you were talking with somebody from the States.\""
+      }, {
+        "name" : "frame",
+        "value" : ""
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "An Army colonel discusses working with the Pakistan Military.",
+      "media" : [ {
+        "zid" : 1450383134234,
+        "xid" : "1450383134234.mp4",
+        "type" : "video",
+        "file" : "1450383134234.mp4"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}
