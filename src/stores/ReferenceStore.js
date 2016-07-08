@@ -6,6 +6,7 @@ var assign = require('object-assign');
 
 
 var CHANGE_EVENT = 'change';
+var UPDATE_EVENT = 'update';
 var _loading = false;
 var _loaded = false;
 var _data = 0;
@@ -48,6 +49,10 @@ var ReferenceStore = assign({}, EventEmitter.prototype, {
         this.emit(CHANGE_EVENT);
     },
 
+    emitUpdate: function(){
+        this.emit(UPDATE_EVENT);
+    },
+
     /**
      * @param {function} callback
      */
@@ -55,11 +60,19 @@ var ReferenceStore = assign({}, EventEmitter.prototype, {
         this.on(CHANGE_EVENT, callback);
     },
 
+    addUpdateListener: function(callback){
+        this.on(UPDATE_EVENT, callback);
+    },
+
     /**
      * @param {function} callback
      */
     removeChangeListener: function(callback) {
         this.removeListener(CHANGE_EVENT, callback);
+    },
+
+    removeUpdateListener: function(callback){
+        this.removeListener(UPDATE_EVENT, callback);
     }
 });
 
@@ -77,7 +90,7 @@ AppDispatcher.register(function(action) {
             break;
         case ReferenceConstants.REFERENCE_SHOW:
             show(true);
-            ReferenceStore.emitChange();
+            ReferenceStore.emitUpdate();
             break;
 
         default:

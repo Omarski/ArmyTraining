@@ -247,7 +247,7 @@ var MultiNoteView = React.createClass({
             dots: false,
             infinite: false,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow: 6,
             slidesToScroll: 1,
             centerMode: false,
             variableWidth: true
