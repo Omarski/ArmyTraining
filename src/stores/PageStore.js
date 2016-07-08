@@ -334,7 +334,6 @@ function markChapterComplete() {
 }
 
 function jump(data) {
-    console.log("data", data);
     var pageId = data.page;
     var chapterId = data.chapter;
     var unitId = data.unit;

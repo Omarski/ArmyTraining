@@ -1,4 +1,18 @@
 
+.nav-tabs.nav-justified>li>a {
+  color: $label-color;;
+}
+
+.btn, .btn-default, .btn-link {
+  color: $nav-button-color;
+}
+
+.list-group-item {
+  a {
+    color: $nav-button-color;
+  }
+}
+
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus, .btn:active {
   background-color: transparent;
   border-color: transparent;
@@ -6,7 +20,6 @@
 }
 
 .btn-action {
-  background-color: #337ab7;
   color: #fff;
 }
 

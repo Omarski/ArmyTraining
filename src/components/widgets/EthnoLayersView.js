@@ -141,7 +141,7 @@ var EthnoLayersView = React.createClass({
                 }
                 //If the region is invisible
                 if(opacityLevel === "0"){
-                    console.log("inside opacity level");
+                    //console.log("inside opacity level");
                     self.state.lastHighlightedRegion = canvasElement;
                     self.props.onRollover(canvasElement, pixelX, pixelY, pageX, false);
                     // $("#" + self.state.canvasColl[i].id).removeClass("ethno-not-visible");
@@ -196,12 +196,12 @@ var EthnoLayersView = React.createClass({
 
         var self = this;
         var mapBackground = self.state.mediaPath + self.props.backgroundImage;
-        var mapStyle = {background:"#000 url("+mapBackground+") no-repeat 100% 100%",
+        var mapStyle = {background:"transparent url("+mapBackground+") no-repeat 100% 100%",
             position:"relative", width:self.state.mapWidth+"px", height:self.state.mapHeight, textAlign:"center"};
 
         //<div className="ethno-instruction-text"><p>Click on tribal areas on the map to learn about each tribe.</p></div>
         return (
-            <div id="imageLayerView-back-image" className="imageLayerView-back-image" style={mapStyle}> </div>
+                <div id="imageLayerView-back-image" className="imageLayerView-back-image" style={mapStyle}></div>
         );
     }
 });

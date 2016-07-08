@@ -86,6 +86,7 @@ var BookmarksView = React.createClass({
         this._forceOpen = true;
     },
     dropdownToggle: function (newValue) {
+        newValue.stopPropagation();
         if (this._forceOpen){
             this.setState({ menuOpen: true });
             this._forceOpen = false;
@@ -109,28 +110,27 @@ var BookmarksView = React.createClass({
 
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
-        var items = "";
         var items = null;
         if (bookmarks) {
             if (self.props.isNav) {
                 var fakeIndex = 0;
                 var subItems = bookmarks.map(function (item, index) {
                     fakeIndex = fakeIndex + 1;
-                    return (<MenuItem key={"bookmarkitems" + index} eventKey={6 + index} href="#"
+                    return (<MenuItem id={"bookmarkitems" + index} key={"bookmarkitems" + index} eventKey={6 + index} href="#"
                                       className="bookmark-nav-item"
                                       onClick={function(){self.menuItemClickedThatShouldntCloseDropdown()}}>
                         <button className="btn btn-link"
                                 onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                     </MenuItem>);
                 });
-                subItems.push(<MenuItem key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex} href="#"
+                subItems.push(<MenuItem id={"bookmarkitems" + fakeIndex} key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex} href="#"
                                         className="bookmark-nav-item"
                                         onClick={function(){self.menuItemClickedThatShouldntCloseDropdown()}}>
                     <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button>
                 </MenuItem>);
-                items = (<NavDropdown open={self.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="5"
+                items = (<NavDropdown id={this.props.id} open={self.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="5"
                                       title={(
-                <div>
+                <div id="BookmarkDropdownDiv">
                     <Button
                         title={"Bookmarks"}
                         alt={"Bookmarks"}
@@ -151,7 +151,7 @@ var BookmarksView = React.createClass({
                         <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                     </ListGroupItem>);
                 });
-                items = (<ListGroup>
+                items = (<ListGroup id="listGroupItems">
                     {subItems}
                 </ListGroup>);
             }

@@ -2,14 +2,33 @@
   position: relative;
 }
 
+/*
+.ethno-fake-checkbox {
+  height: 12px;
+  width: 12px;
+  border-radius: 2px;
+  border: 1px solid black;
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  margin-top: 4px;
+}
+*/
+
+.ethno-instruction-text {
+  max-width: 135px;
+  font-size: 10px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #e3e3e3;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 .ethno-overlay-info-title {
   font-size: 15px;
   color: white;
   font-weight: bold;
-}
-
-.ethno-instruction-text {
-  margin-bottom: 0;
 }
 
 .ethno-overlay-info-text {
@@ -57,6 +76,8 @@
 }
 
 .imageLayerView-back-image {
+  height: 100%;
+  width: 100%;
 }
 
 
@@ -81,7 +102,7 @@
 }
 
 .well {
-  margin-top: 20px;
+  margin-top: 0px;
   margin-left: 20px;
 }
 
@@ -108,6 +129,7 @@
   height: 90px;
   overflow-y: scroll;
   margin-left: 5px;
+  padding-top: 10px;
 }
 
 .ethno-overlay-info::-webkit-scrollbar{
@@ -124,77 +146,91 @@
 
 .ethno-overlay-title {
   text-align: center;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
 }
 
 
 .ethno-close-button-for-overlay {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  background-color: transparent;
 }
 
 .ethno-close-button-for-overlay:focus {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  /*border-color: grey;*/
+  background-color: transparent;}
 
 .ethno-close-button-for-overlay:hover {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.3);
-}
+  /*border-color: grey;*/
+  background-color: transparent;}
 
 .ethno-close-button-for-overlay:active {
-  border-color: grey !important;
-  background-color: rgba(0, 0, 0, 0.9) !important;
+  /*border-color: grey !important;*/
+  background-color: transparent;}
+
+.ethno-close-button-for-overlay {
+  .glyphicon {
+    color: white;
+  }
+}
+
+.ethno-overlay-button-container {
+  float: right;
+  .glyphicon {
+    color: white;
+  }
 }
 
 .ethno-overlay-prev-button {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  /*border-color: grey;*/
+  border: none;
+  background-color: transparent;}
 
 .ethno-overlay-next-button {
-  float: right;
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  border: none;
+  background-color: transparent;}
 
 .ethno-overlay-prev-button:focus {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  /*border-color: grey;*/
+  background-color: transparent;}
 
 .ethno-overlay-next-button:focus {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  /*border-color: grey;*/
+  background-color: transparent;}
 
 .ethno-overlay-next-button:hover {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.3);
-}
+  /*border-color: grey;*/
+  background-color: transparent;}
 
 .ethno-overlay-prev-button:hover {
-  border-color: grey;
-  background-color: rgba(0, 0, 0, 0.3);
-}
+  /*border-color: grey;*/
+  background-color: transparent;}
 
 .ethno-overlay-prev-button:active {
-  border-color: grey !important;
-  background-color: rgba(0, 0, 0, 0.9) !important;
-}
+  /*border-color: grey !important;*/
+  background-color: transparent;}
 
 .ethno-overlay-next-button:active {
-  border-color: grey !important;
-  background-color: rgba(0, 0, 0, 0.9) !important;
-}
+  background-color: transparent;}
 
 .ethno-overlay-prev-button:disabled {
-  border-color: white !important;
-  background-color: rgba(104, 104, 104, 0.8) !important;
+  background-color: transparent;
+  .glyphicon{
+    opacity: 25%;
+  }
+}
+
+.ethno-overlay-prev-button:disabled:hover {
+  background-color: transparent;
+  .glyphicon{
+    opacity: 25%;
+  }
 }
 
 .ethno-overlay-next-button:disabled {
-  border-color: white !important;
-  background-color: rgba(104, 104, 104, 0.8) !important;
+  background-color: transparent;
+}
+
+.ethno-overlay-next-button:disabled:hover {
+  background-color: transparent;
 }
