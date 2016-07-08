@@ -46,9 +46,6 @@ var EthnoMapPopover = React.createClass({
             if(self.props.mapData["summary"]){
                 popoverPages.push(["Background", self.props.mapData["summary"]]);
             }
-            if(self.props.mapData["politics"]){
-                popoverPages.push(["Livelihood", self.props.mapData["politics"]]);
-            }
             if(self.props.mapData["religion"]){
                 popoverPages.push(["Religion", self.props.mapData["religion"]]);
             }
@@ -112,23 +109,23 @@ var EthnoMapPopover = React.createClass({
         //     zIndex: 999
         // };
 
-        console.log("quadrant", self.props.quadrant);
+        //console.log("quadrant", self.props.quadrant);
 
         var style = {};
 
         if(self.props.quadrant === 1){
-            style = {marginTop: 0, marginLeft: 0};
+            style = {marginTop: 5, marginLeft: 5};
         } else if (self.props.quadrant === 2){
-            style = {marginTop: 0 , marginLeft: 384};
+            style = {marginTop: 5 , marginLeft: 379};
         } else if (self.props.quadrant === 3){
-            style = {marginTop: 315, marginLeft: 0};
+            style = {marginTop: 319, marginLeft: 5};
         } else if (self.props.quadrant === 4){
-            style = {marginTop: 315, marginLeft: 384};
+            style = {marginTop: 319, marginLeft: 379};
         } else {
-            console.log("ERROR!!!");
+            //console.log("ERROR!!!");
         }
 
-        console.log("style", style);
+        //console.log("style", style);
 
         var checkIfPrevButtonIsDisabled = function(){
             if(self.state.indexOfOverlayInfo === 0){
@@ -188,7 +185,7 @@ var EthnoMapButtons = React.createClass({
 
     render: function(){
         return(
-            <div>
+            <div className="ethno-overlay-button-container">
                 <button disabled={this.props.disabledPrev()} onClick={this.props.onPrevClick} className="btn btn-default ethno-overlay-prev-button"><span className="glyphicon glyphicon-chevron-left"></span></button>
                 <button disabled={this.props.disabledNext()} onClick={this.props.onNextClick} className="btn btn-default ethno-overlay-next-button"><span className="glyphicon glyphicon-chevron-right"></span></button>
             </div>

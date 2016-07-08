@@ -172,7 +172,7 @@ var SettingsView = React.createClass({
             );
         } else {
             return (
-                    <NavDropdown open={this.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="4"  title={(
+                    <NavDropdown id = "settingsViewDropdown" open={this.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="4"  title={(
                         <div>
                             <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
                             alt={LocalizationStore.labelFor("header", "tooltipSettings")}
