@@ -3,8 +3,12 @@
   color: $label-color;;
 }
 
-.btn, .btn-default, .btn-link {
+.btn, .btn-default, .btn-link, .btn-icon, .btn-text-icon, .explorer-link {
   color: $nav-button-color;
+  text-decoration: none;
+  &:hover, &:focus {
+    text-decoration: none;
+  }
 }
 
 .list-group-item {
