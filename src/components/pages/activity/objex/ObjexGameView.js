@@ -75,7 +75,6 @@ var ObjexGameView = React.createClass({
         }
 
         this.props.levelData.objects.map(function(objex,index){
-            console.log("object " + index);
             var artifactObj = {};
             artifactObj["image"] = loadedObjexColl[index].fullImgUrl;
             artifactObj["id"] = loadedObjexColl[index].hog_id;
