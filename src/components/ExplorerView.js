@@ -287,7 +287,7 @@ var ExplorerView = React.createClass({
                 }
                 return (
                     <div id={'accordion' +idStr + index} role="tablist" aria-multiselectable="true" key={index}>
-                        <li id={'heading' + idStr + index} className={"list-group-item main-footer-section main-footer-row" + cls} onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
+                        <li id={'heading' + idStr + index} className={"list-group-item main-footer-section main-footer-row btn-clk" + cls} onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
                             <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
                                 <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
                             </a>
@@ -372,7 +372,7 @@ var TOCChapterRow = React.createClass({
         }
 
         return (
-            <li className="list-group-item main-footer-chapter-row main-footer-row" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
+            <li className="list-group-item main-footer-chapter-row main-footer-row btn-clk" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
                     <span className={this.props.item.expandCollapseIconCls} aria-hidden="true"></span>
                 </a>
