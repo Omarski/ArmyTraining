@@ -11,6 +11,7 @@ var EthnoMapPopover = require("../../widgets/EthnoMapPopover");
 var Utils = require("../../widgets/Utils");
 var AppStateStore = require('../../../stores/AppStateStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
+var NotificationActions = require('../../../actions/NotificationActions');
 
 
 function getPageState(props) {
@@ -39,15 +40,15 @@ function getPageState(props) {
         // Because the prebuild sends the data in a random order, the below line may not work
         // data.imageData = JSON.parse(props.page.info.property[2].value);
         // this uses a Util function to get the correct data if the name "builtEthnoMap" exists
-        data.imageData = JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap"));
+        // data.imageData = JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap"));
 
 
+        // if(props.page.EthnoData){
+        //     data.json = props.page.EthnoData;
+        // } else {}
 
-        if(props.page.EthnoData){
-            data.json = props.page.EthnoData;
-        } else {
-            data.json = JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap"));
-        }
+        data.json = JSON.parse(Utils.findInfo(props.page.info, "builtEthnoMap"));
+
     }
 
     return data;
@@ -61,11 +62,24 @@ var EthnoMapView = React.createClass({
     },
     onLayersReady: function(x){
     },
-
-    componentDidMount: function() {
-        AppStateStore.addChangeListener(this._onAppStateChange);
+    componentWillMount: function(){
+        var self = this;
+        console.log("componenet will mount ethnomapview");
+        setTimeout(
+            function(){NotificationActions.show({
+                title: 'Please wait',
+                body: 'Loading...',
+                full: false
+            })}
+        );
     },
+    componentDidMount: function() {
+        var self = this
+        console.log("EthnoMap view component did mount");
+        setTimeout(function(){NotificationActions.hide()});
+        AppStateStore.addChangeListener(this._onAppStateChange);
 
+    },
     componentWillUnmount: function() {
         AppStateStore.removeChangeListener(this._onAppStateChange);
     },
@@ -73,10 +87,14 @@ var EthnoMapView = React.createClass({
     render: function() {
         var self = this;
         //console.log("self", self);
+        console.log("...");
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
-        var parsedJSON = JSON.parse(Utils.findInfo(self.props.page.info, "builtEthnoMap"));
+
+
+        // var parsedJSON = JSON.parse(Utils.findInfo(self.props.page.info, "builtEthnoMap"));
+        var parsedJSON = self.state.json;
 
         var backgroundImageURL = "data/media/" + parsedJSON.background;
         var areaWidth = "768";
@@ -275,7 +293,7 @@ var EthnoMap = React.createClass({
             // var xValue = event.clientX;
             // var yValue = event.clientY;
 
-            var toolTipWidth = ($("#toolTipperId").width() / 2) ;
+            var toolTipWidth = ($("#toolTipperId").width() / 2);
 
 
             toolTipper.style.top = (y - 40) + 'px';
@@ -309,6 +327,8 @@ var EthnoMap = React.createClass({
         var popoverShowHide = self.state.popoverShow;
         var toggleParentPopoverState = self.togglePopoverShow;
 
+        console.log("ethnomap render");
+
         return (
             <div className="ethno-map-container">
                 {toolTipperInRender}
@@ -319,6 +339,18 @@ var EthnoMap = React.createClass({
                 </div>
             </div>
         );
+
+        // var style = {
+        //     height: 50,
+        //     width: 50,
+        //     backgroundColor: 'black'
+        // };
+        //
+        // return (
+        //     <div style ={style}>
+        //         <Spinner />
+        //     </div>
+        // );
     }
 });
 
@@ -326,11 +358,13 @@ var EthnoMap = React.createClass({
 var EthnoToggleDiv = React.createClass({
     getInitialState: function() {
         return {
-            regionColors: ["#F49AC0", null, "#5E3A54", null,"#7B7ABC", null,"#2A7169",null, "#8DD883",null, "#2A3761",null, "#742753", null,"#374428", null,"#BF3C28", null,"#E68E4E", null,"#965F27", null,"#61764B", null,"#770026",null, "#B03A3A", null,"#9C9638", null,"#72250E"]
+            regionColors: ["#F49AC0", null, "#5E3A54", null,"#7B7ABC", null,"#2A7169",null, "#8DD883",null, "#2A3761",null, "#742753", null,"#374428", null,"#BF3C28", null,"#E68E4E", null,"#965F27", null,"#61764B", null,"#770026",null, "#B03A3A", null,"#9C9638", null,"#72250E"],
+            checkboxColors: ["transparent", null, "transparent", null,"#transparent", null,"#transparent",null, "#transparent",null, "#transparent",null, "#transparent", null,"#transparent", null,"#transparent", null,"transparent", null,"transparent", null,"transparent", null,"transparent",null, "transparent", null,"transparent", null,"transparent"]
         };
     },
     toggleOnClick: function(e){
         var self = this;
+
         var index = e.target.attributes['data-index'].value;
         var targetCanvas = document.getElementById("imageLayer_canvas_" + index);
        // console.log("self.props.topZindex", self.props.topZIndex);
@@ -350,6 +384,7 @@ var EthnoToggleDiv = React.createClass({
                 $("#imageLayer_canvas_" + index).css("opacity", "1");
                 $("#imageLayer_canvas_" + index).css("zIndex", newzIndex);
                 $("#ethno-toggle-name-" + index).css("color", self.state.regionColors[index]);
+                $("#ethno-checkbox-"+index).css("backgroundColor", self.state.regionColors[index]);
 
                 if(self.props.popoverShow){self.props.toggleParentPopoverState()}
 
@@ -377,6 +412,7 @@ var EthnoToggleDiv = React.createClass({
                 }
             } else if (opacity === "1" && visibleTrueFalse === true){
                 $("#ethno-toggle-name-" + index).css("color", "black");
+                $("#ethno-checkbox-"+index).css("backgroundColor", "transparent");
                 $("#imageLayer_canvas_" + index).removeClass("ethno-visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "0");
                 $("#imageLayer_canvas_" + (Number(index) + 1)).removeClass("ethno-visible");
@@ -392,20 +428,28 @@ var EthnoToggleDiv = React.createClass({
     render: function () {
         var self = this;
         var mapData = self.props.mapData;
-        var fakeCheckboxColor = {backgroundColor: "blue"};
 
-        //                        <input type="checkbox" id={"ethno-checkbox-" + i} data-region = {region.label} data-index={i} onClick = {self.toggleOnClick} />
-
+        //<input type="checkbox" id={"ethno-checkbox-" + i} data-region = {region.label} data-index={i} onClick = {self.toggleOnClick} />
         //<div className="ethno-fake-checkbox" style={fakeCheckboxColor}></div>
 
         var toggleElements = [];
         for(var i = 0; i < mapData.areas.length; i = i + 2){
             var region = mapData.areas[i];
+            //if this region is showing --> change the fakeCheckboxColor
+
+            console.log($("#imageLayer_canvas_" + i).hasClass("ethno-visible"));
+
+            if($("#imageLayer_canvas_" + i).hasClass("ethno-visible")){
+                var fakeCheckboxColor = {backgroundColor: self.state.regionColors[i]};
+            } else if (!$("#imageLayer_canvas_" + i).hasClass("ethno-visible")) {
+                var fakeCheckboxColor = {backgroundColor: "transparent"};
+            }
+
             toggleElements.push(
                 <div key={"checkboxDiv" + i} className="checkbox">
-                    <label>
-                        <input type="checkbox" id={"ethno-checkbox-" + i} data-region = {region.label} data-index={i} onClick = {self.toggleOnClick} />
-                        <span id={"ethno-toggle-name-" + i}>{region.label + " "} </span>
+                    <label onClick = {self.toggleOnClick}>
+                        <div id={"ethno-checkbox-" + i} data-region = {region.label} data-index={i} className="ethno-fake-checkbox" style={fakeCheckboxColor} ></div>
+                        <div className="ethno-region-name-span" id={"ethno-toggle-name-" + i} data-index={i}>{region.label + " "} </div>
                     </label>
                 </div>
                 );
@@ -425,7 +469,7 @@ function popoverFunction(mapDataArgument, popoverShowHide, popoverSetter, quadra
     var mapData = mapDataArgument;
     var showHide = popoverShowHide;
     var toggleParentPopoverState = popoverSetter;
-    return (<EthnoMapPopover className="ethno-map-popover-style-scrollbar"mapData={mapData} showHide={showHide} quadrant={quadrant} toggleParentPopoverState={toggleParentPopoverState}/>);
+    return (<EthnoMapPopover className="ethno-map-popover-style-scrollbar" mapData={mapData} showHide={showHide} quadrant={quadrant} toggleParentPopoverState={toggleParentPopoverState}/>);
 }
 
 
