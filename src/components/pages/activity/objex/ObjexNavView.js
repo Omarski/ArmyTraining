@@ -2,6 +2,7 @@ var React = require('react');
 var ObjexNavCellView = require('./ObjexNavCellView');
 var ObjexNavCoinView = require('./ObjexNavCoinView');
 var ObjexInfoPopView = require('./ObjexInfoPopView');
+var TimerCountdownView = require('../../../widgets/TimerCountdownView');
 
 var PropTypes  = React.PropTypes;
 
@@ -21,9 +22,11 @@ var ObjexNavView = React.createClass({
         activeObjexColl: PropTypes.array.isRequired,
         mediaPath: PropTypes.string.isRequired,
         updateGameView: PropTypes.func.isRequired,
+        viewUpdate: PropTypes.func.isRequired,
         activeRoundObjexColl: PropTypes.array.isRequired,
         showCells: PropTypes.bool.isRequired,
-        showHint: PropTypes.func.isRequired
+        showHint: PropTypes.func.isRequired,
+        advancedLevel: PropTypes.bool.isRequired
     },
     
     prepNav: function(){
@@ -84,7 +87,7 @@ var ObjexNavView = React.createClass({
 
     viewUpdate: function(update){
         //propagate up
-        this.props.updateGameView(update)
+        this.props.viewUpdate(update)
     },
 
     updateGameView: function(update){
@@ -92,14 +95,35 @@ var ObjexNavView = React.createClass({
        this.props.updateGameView(update);
     },
 
+    timerReporter: function(mode){
+
+        (mode === "timeUp") ? this.viewUpdate({task:"timeUp",value:null}):null;
+    },
+
     render: function() {
 
         var self = this;
+        var timerStyle = {fontSize:'15px',color:'#000',textAlign:'center'};
 
         return (<div className="objex-view-navCont">
                     {self.props.showCells ? <div className="objex-view-cellCont">
                         {self.prepNav()}
                     </div>:null}
+
+                {self.props.advancedLevel ?
+                <div className="objex-view-timer" id="objexViewTimer">
+                    <TimerCountdownView
+                        styling                 = {timerStyle}
+                        duration                = {120}
+                        timerParentAlerts       = {null}
+                        timerController         = {null}
+                        updateTimerController   = {null}
+                        message                 = {"Time left "}
+                        reportAt                = {null}
+                        timerStatusReporter     = {self.timerReporter}
+                    />
+                </div>:null}
+
                 <div className="objex-view-navContDesc" id="objexViewNavContDesc"><span>{self.state.navDisc}</span></div>
                 <div className="objex-view-navContHintLabel">Hints</div>
                 <div className="objex-view-navCoinCont" id="objexViewNavCoinCont">{self.prepCoins()}</div>

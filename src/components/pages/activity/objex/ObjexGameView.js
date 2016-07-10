@@ -234,8 +234,10 @@ var ObjexGameView = React.createClass({
                     mediaPath = {self.props.mediaPath}
                     activeObjexColl = {self.state.activeObjexColl}
                     updateGameView = {self.updateGameView}
+                    viewUpdate = {self.viewUpdate}
                     activeRoundObjexColl = {self.state.activeRoundObjexColl}
                     showHint = {self.showHint}
+                    advancedLevel = {self.props.advancedLevel}
                 />:null}
                </div>
         )

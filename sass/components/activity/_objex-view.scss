@@ -42,8 +42,8 @@
     position: absolute;
     width: 193px;
     height: 40px;
-    bottom: 30px;
-    right: 30px;
+    bottom: 75px;
+    right: 70px;
   }
 
   //level complete pop
@@ -81,6 +81,10 @@
     top:60px;
   }
 
+  .objex-view-completedButtonCont{
+    top:-70px;
+  }
+
   //basic, game done, out of time pop
   .objex-view-textAdvanced{
     text-align: center;
@@ -96,22 +100,22 @@
   .objex-view-textGameDone{
     text-align: center;
     font-size: 25px;
-    line-height: 13px;
+    line-height: 37px;
     width:450px;
     height:auto;
     margin-left:auto;
     margin-right:auto;
-    margin-top:50px;
+    margin-top:180px;
   }
 
   .objex-view-textTimeUp{
     text-align: center;
-    font-size: 35px;
+    font-size: 52px;
     width:450px;
     height:auto;
     margin-left:auto;
     margin-right:auto;
-    margin-top:100px;
+    margin-top:155px;
   }
 
   //info pop
@@ -236,8 +240,14 @@
     text-align:right;
     font-size:14px;
   }
-}
 
+  //timer
+  .objex-view-timer{
+    position: absolute;
+    right:20px;
+    top:10px;
+  }
+}
 
 .objex-view-textHalfway{
   display:none;

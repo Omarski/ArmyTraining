@@ -192,8 +192,9 @@ var ObjexView = React.createClass({
 
         var levelIcons = self.state.levelsColl.map(function(levelObj,index){
 
-            var levelIconStyle = {left:levelObj.posX+'px', top:levelObj.posY+'px', background: 'url('+iconBg+') no-repeat 100% 100%'};
             var locked = self.state.levelsColl[index].locked;
+            var levelIconStyle = {left:levelObj.posX+'px', top:levelObj.posY+'px',
+                background: 'url('+iconBg+') no-repeat 100% 100%', pointerEvents:locked ? 'none':'auto'};
             return(
                 <div id={"objexViewLevelIcon"+parseInt(index+1)} key={index}
                      className="objex-view-popLevelIconCont"
@@ -438,6 +439,15 @@ var ObjexView = React.createClass({
 
                     self.viewUpdate({task:"buttonAudio", value:null});
                 });
+                break;
+
+            case "timeUp":
+                this.setState({showGame:false},function(){
+                    self.prepTimeUpPopup();
+                });
+
+                var timeUpAudio = self.state.mediaPath + self.state.gameData.sound_files.audio_button_click;
+                self.playAudio({id:"success", autoPlay:true, sources:[{format:"mp3", url:timeUpAudio}]});
                 break;
 
             case "advancedLevel":
