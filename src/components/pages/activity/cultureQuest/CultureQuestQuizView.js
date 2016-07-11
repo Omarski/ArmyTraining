@@ -139,7 +139,11 @@ var CultureQuestQuiz = React.createClass({
         self.state.inputBlocksTotal = $("[id^='culture-quest-quiz-view-inputBlock']").length - 1;
 
         //backspace
-        $("[id^='culture-quest-quiz-view-inputBlock']").
+        $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
+            if(e.keyCode === 8 || e.keyCode === 46)
+                alert('backspace trapped')
+        });
+
         $("#culture-quest-quiz-view-inputBlock0").focus();
         $("[id^='culture-quest-quiz-view-inputBlock']").on('input', function(){
             self.state.atInputBlock = $(this).attr('id').substring(34);
