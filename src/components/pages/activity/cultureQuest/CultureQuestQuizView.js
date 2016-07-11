@@ -137,6 +137,9 @@ var CultureQuestQuiz = React.createClass({
     setInputTabbing: function(){
         var self = this;
         self.state.inputBlocksTotal = $("[id^='culture-quest-quiz-view-inputBlock']").length - 1;
+
+        //backspace
+        $("[id^='culture-quest-quiz-view-inputBlock']").
         $("#culture-quest-quiz-view-inputBlock0").focus();
         $("[id^='culture-quest-quiz-view-inputBlock']").on('input', function(){
             self.state.atInputBlock = $(this).attr('id').substring(34);
