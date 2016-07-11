@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2808",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Working with the Pakistan Military",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/345756/pakistan-flood-humanitarian-aid"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A U.S. service member sitting among Pakistan army officers"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Though Pakistan is officially a democracy, its military is the country’s most powerful institution. It generally has the resources and reach to be able to provide humanitarian aid.",
+      "media" : [ {
+        "zid" : 4032455,
+        "xid" : "4032455.mp3",
+        "type" : "audio",
+        "file" : "4032455.mp3"
+      } ]
+    }, {
+      "text" : "HA missions in Pakistan usually involve working with the Pakistan military and providing equipment or logistical support as needed. U.S. service members have reported that working with Pakistanis is similar to working with Americans. The Pakistan military is very organized, professional, and technologically advanced. Its service members have a lot of experience working with Americans.",
+      "media" : [ {
+        "zid" : 4032456,
+        "xid" : "4032456.mp3",
+        "type" : "audio",
+        "file" : "4032456.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1458331884284,
+      "xid" : "1458331884284.jpg",
+      "type" : "image",
+      "file" : "1458331884284.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

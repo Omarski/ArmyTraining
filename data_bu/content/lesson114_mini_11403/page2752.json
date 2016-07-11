@@ -1,0 +1,270 @@
+{
+  "page" : {
+    "xid" : "page2752",
+    "type" : "ListeningComprehension",
+    "layout" : "",
+    "title" : "Quiz 1",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "minilessonID",
+        "value" : "11403"
+      } ]
+    },
+    "interlocutor" : {
+      "name" : "Tariq Osmani",
+      "zid" : 1461104216129,
+      "nom" : "Tariq_Osmani"
+    },
+    "skills" : null,
+    "media" : [ {
+      "zid" : 1466444588397,
+      "xid" : "1466444588397.jpg",
+      "type" : "image",
+      "file" : "1466444588397.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : "Render: Tariq speaking"
+        } ]
+      }
+    } ],
+    "prompt" : {
+      "text" : "It's a hot day in Pakistan. Today, you've already met with several counterparts and shared tea with them. This is your final meeting. Listen to what your counterpart says and choose the best response."
+    },
+    "question" : {
+      "utterance" : {
+        "stamp" : 1402003673178,
+        "status" : "imported",
+        "provenance" : "",
+        "lang" : "en",
+        "anchor" : "ezread",
+        "lexicon" : false,
+        "incomplete" : false,
+        "ontoid" : "",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "Thanks for meeting with me. Please, have some tea."
+        },
+        "comment" : "",
+        "syntax" : null,
+        "parseTree" : null
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673178,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "I would love some tea, thank you."
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673178,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "No, thank you, I had some in a previous meeting."
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673178,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "No, thank you, it’s too hot today for tea."
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1402003673178,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "en",
+            "anchor" : "ezread",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "I actually brought water with me, but I appreciate the offer."
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : null
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

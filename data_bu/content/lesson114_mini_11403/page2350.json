@@ -1,0 +1,47 @@
+{
+  "page" : {
+    "xid" : "page2350",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Section Checklist",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "note" : [ {
+      "text" : "In this section, you learned to:",
+      "media" : [ {
+        "zid" : 4033928,
+        "xid" : "4033928.mp3",
+        "type" : "audio",
+        "file" : "4033928.mp3"
+      } ]
+    }, {
+      "text" : "- Identify religious and cultural considerations for mission planning.\n- Respond appropriately to offers of hospitality.",
+      "media" : [ {
+        "zid" : 4032508,
+        "xid" : "4032508.mp3",
+        "type" : "audio",
+        "file" : "4032508.mp3"
+      } ]
+    }, {
+      "text" : "If you feel comfortable with your knowledge of this material, begin the quiz on the next page. If not, review the section further.",
+      "media" : [ {
+        "zid" : 4033929,
+        "xid" : "4033929.mp3",
+        "type" : "audio",
+        "file" : "4033929.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1292532786158,
+      "xid" : "1292532786158.jpg",
+      "type" : "image",
+      "file" : "1292532786158.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

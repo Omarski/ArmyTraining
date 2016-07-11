@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page3825",
+    "type" : "Info",
+    "title" : "Communicating Effectively",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistani interpreter speaking with female service members"
+      } ]
+    },
+    "note" : [ {
+      "text" : "No matter how professional and skilled your interpreter is, working with an interpreter always increases the potential for misunderstanding. Your interpreter inevitably acts as a filter between you and your audience. ",
+      "media" : [ {
+        "zid" : 4022104,
+        "xid" : "4022104.mp3",
+        "type" : "audio",
+        "file" : "4022104.mp3"
+      } ]
+    }, {
+      "text" : "There are some useful parallels between how you should speak using a radio and how you should speak when working with an interpreter. Both interpreters and radios increase your communication possibilities, but they also introduce the possibility of distortion.",
+      "media" : [ {
+        "zid" : 4022105,
+        "xid" : "4022105.mp3",
+        "type" : "audio",
+        "file" : "4022105.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450726325391,
+      "xid" : "1450726325391.jpg",
+      "type" : "image",
+      "file" : "1450726325391.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

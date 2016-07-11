@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2344",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Giving Feedback",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/173302/humanitarian-relief-pakistan"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A U.S. service member speaking with Pakistani counterparts"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "If you need to give feedback to your counterparts, pull them aside and talk privately and politely. Pakistanis usually prefer to receive criticism discreetly and being criticized in public is often perceived as shameful.",
+      "media" : [ {
+        "zid" : 4032526,
+        "xid" : "4032526.mp3",
+        "type" : "audio",
+        "file" : "4032526.mp3"
+      } ]
+    }, {
+      "text" : "To give someone feedback, do not immediately state that they did something wrong. Instead, start with a compliment about the way they did something. Then, work together to find places for improvement. Never imply that you’re questioning your counterpart’s competence or knowledge.",
+      "media" : [ {
+        "zid" : 4032527,
+        "xid" : "4032527.mp3",
+        "type" : "audio",
+        "file" : "4032527.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460389998640,
+      "xid" : "1460389998640.jpg",
+      "type" : "image",
+      "file" : "1460389998640.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "page" : {
+    "xid" : "page2094",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perspectives: Speaking Urdu",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "(Note: This transcript has been edited for readability.)<br><br>\"Most official Pakistanis speak English. Particularly as a military officer, I was dealing primarily with the military. By the time they’ve reached field grade and gone to their staff college, staff college is conducted in English. And if they don’t speak English, they won’t be promoted. So, they will use their English. They’re proud of their English.\""
+      }, {
+        "name" : "frame",
+        "value" : ""
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "An Army colonel talks about the use of English in Pakistan.",
+      "media" : [ {
+        "zid" : 1450383134234,
+        "xid" : "1450383134234.mp4",
+        "type" : "video",
+        "file" : "1450383134234.mp4"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

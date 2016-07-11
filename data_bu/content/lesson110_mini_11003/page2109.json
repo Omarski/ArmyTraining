@@ -1,0 +1,76 @@
+{
+  "page" : {
+    "xid" : "page2109",
+    "type" : "MultipleChoice",
+    "title" : "Practice 3",
+    "info" : null,
+    "prompt" : {
+      "text" : "You're on a team investigating the needs of local women. What is the best course of action for working with the community?"
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, men and women are separated in most situations. You should respect the separation of gender and not attempt access without consent."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Set up one-on-one meeting between male teammates and local women."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Because men and women are generally segregated in Afghanistan, U.S. servicewomen will likely be the only ones to interact with civilian women. This separation should be respected and men should not attempt access without consent."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Have servicewomen speak with local women and servicemen speak with local men."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, local men may have a limited perspective of the needs of women and likely won't speak to foreigners about their wives."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Have servicewomen speak to local men about the needs of their wives."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, men and women are segregated in most situations. It's important to respect the separation of gender."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Set up a community meeting where both men and women are invited."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

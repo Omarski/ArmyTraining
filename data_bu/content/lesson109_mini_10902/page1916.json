@@ -1,0 +1,105 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page1916",
+    "type" : "MultiNote",
+    "title" : "Greeting the Same Gender",
+    "related" : [ {
+      "xid" : "page1917",
+      "type" : "Info",
+      "title" : "Greeting the Same Gender 1",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.dvidshub.net/image/433238/prt-zabul-visit-local-village-arghandab#.VyPqNqMrKV4"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A service member chatting with an elder with hands clasped"
+        } ]
+      },
+      "note" : [ {
+        "text" : "When greeting someone of the same gender, either engage in a handshake or greet with your hand over your heart. Shake hands with a looser grip than you would in the U.S. Be prepared for your counterpart to hold your hand longer than you're used to, perhaps for the entire course of small talk. "
+      } ],
+      "media" : [ {
+        "zid" : 1463601226380,
+        "xid" : "1463601226380.jpg",
+        "type" : "image",
+        "file" : "1463601226380.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1918",
+      "type" : "Info",
+      "title" : "Greeting the Same Gender 2",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.dvidshub.net/image/268996/isaf-units-realign-eastern-afghanistans-kunar-province#.VyPqKaMrKV4"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A service member and Afghan elder sitting hand-in-hand"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Physical contact is a sign of friendship between people of the same gender. Once you've built a trusted relationship, your counterpart might hug you, or even kiss you on the cheek as a greeting. If they hold your hand or arm, or lead you to another location hand-in-hand, don't pull away as you may send a message that you are not comfortable with them. "
+      } ],
+      "media" : [ {
+        "zid" : 1463601348307,
+        "xid" : "1463601348307.jpg",
+        "type" : "image",
+        "file" : "1463601348307.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1919",
+      "type" : "Info",
+      "title" : "Greeting the Same Gender 3",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://www.flickr.com/photos/isafmedia/5003052367/in/photolist-DPWnp-a5JLj9-7Mguhd-ar89v8-7MgubE-7Mgu6Y-8wQ4SC-7NvTwQ-7NvTyj-7NvTvm-8C6Xaz-84h2ZW-9UH652-9piJ8L-7JcBGi-7NrUQT-8wQ5Ns-7JcBJx-7p6DHL-7oak5t-bK1PFT-8EDNa4-7PKubj-9pijkW-ayxigM-7A6Moc-6bjHjM-7uzEkc-62cd6u-bK1PM6-7JXuZY-6gmK6G-9eWDMK-627yTe-6gmHNU-99DwXn"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An Afghan interpreter greeting an elder"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Although you should avoid prolonged eye contact or staring, direct eye contact shows respect among colleagues of the same age and gender. With elders you should use indirect or brief eye contact."
+      } ],
+      "media" : [ {
+        "zid" : 1463601367948,
+        "xid" : "1463601367948.jpg",
+        "type" : "image",
+        "file" : "1463601367948.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

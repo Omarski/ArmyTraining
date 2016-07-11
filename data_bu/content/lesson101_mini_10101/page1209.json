@@ -1,0 +1,30 @@
+{
+  "page" : {
+    "xid" : "page1209",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Using the Record Button",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "The language instruction pages in this VCAT feature a voice recording and playback tool.\nFor best results, you should use a headset with a microphone for this feature."
+    }, {
+      "text" : "To use the record and playback tool:\n1. Click the play button to hear a recording of the word or phrase. Then, click the red circle to begin recording. Speak clearly into the microphone to record your voice.\n2. To end your recording, click the white square.\n3. Click on the cyclical arrows to play your recording and compare it to the recording you heard in the first step."
+    }, {
+      "text" : "Repeat steps as many times as you wish to continue your practice.\nYou can always click the Help button on the toolbar to find these instructions again."
+    } ],
+    "media" : [ {
+      "zid" : 1333574159526,
+      "xid" : "1333574159526.jpg",
+      "type" : "image",
+      "file" : "1333574159526.jpg",
+      "mime" : "image/png",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

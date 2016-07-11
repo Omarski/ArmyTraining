@@ -1,0 +1,44 @@
+{
+  "page" : {
+    "xid" : "page1101",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/55911/global-fleet-station#.VFwPDPnF-VM"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. Navy interpreter working with Dominican students, Dominican Republic"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to communicate using an interpreter. Specifically, you will learn to:",
+      "media" : [ null ]
+    }, {
+      "text" : "- Recognize different types of interpretation.\n- Identify the three categories of interpreters used by the military.\n- List factors that may be relevant in interpreter selection.\n- Recognize strategies for building rapport with your interpreter.\n- Prepare for an interpreted conversation with your interpreter.\n- Identify the four key concepts for communicating effectively while using an interpreter.",
+      "media" : [ {
+        "zid" : 4033712,
+        "xid" : "4033712.mp3",
+        "type" : "audio",
+        "file" : "4033712.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416947959571,
+      "xid" : "1416947959571.jpg",
+      "type" : "image",
+      "file" : "1416947959571.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "page" : {
+    "xid" : "page3835",
+    "type" : "Info",
+    "title" : "Beginning the Conversation",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/972246/vice-mayor-oh#.VFvPwvnF-VM"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. Army brigadier general speaking with vice mayor of Pyeongtaek, South Korea through his interpreter"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Begin the conversation by introducing yourself and your interpreter. Other participants in the conversation may not be familiar with interpreters and their procedures. Even if they are, a reminder can be useful.",
+      "media" : [ {
+        "zid" : 4022120,
+        "xid" : "4022120.mp3",
+        "type" : "audio",
+        "file" : "4022120.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416949345283,
+      "xid" : "1416949345283.jpg",
+      "type" : "image",
+      "file" : "1416949345283.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

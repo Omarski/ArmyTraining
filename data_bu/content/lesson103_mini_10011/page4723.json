@@ -1,0 +1,231 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page4723",
+    "type" : "MultiNote",
+    "title" : "Elements of Building Rapport",
+    "related" : [ {
+      "xid" : "page4715",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 1",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "http://www.flickr.com/photos/usaghumphreys/13237194715/"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Rugby on a U.S. Army base, South Korea"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "It's important to have a positive, friendly attitude at the beginning of a relationship. Demonstrating positive interest and attention will help to begin the rapport-building process. As the relationship builds and trust develops, it may become acceptable to show some frustration, disappointment, criticism, or negativity.",
+        "media" : [ {
+          "zid" : 4011281,
+          "xid" : "4011281.mp3",
+          "type" : "audio",
+          "file" : "4011281.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1395359833573,
+        "xid" : "1395359833573.jpg",
+        "type" : "image",
+        "file" : "1395359833573.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4716",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 2",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "U.S. Coast Guard photo by Petty Officer 2nd Class Nick Ameen"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A planning meeting, the Bahamas"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Coordination refers to two parties working together to accomplish a shared goal. Coordination is not expected at the beginning of a relationship. It grows over time as parties observe and listen to each other. Understanding will increase and the relationship will develop a degree of predictability. Eventually, the parties will present a coordinated effort to accomplish shared goals together.",
+        "media" : [ {
+          "zid" : 4011282,
+          "xid" : "4011282.mp3",
+          "type" : "audio",
+          "file" : "4011282.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1391823905415,
+        "xid" : "1391823905415.jpg",
+        "type" : "image",
+        "file" : "1391823905415.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4717",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 3",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "U.S. Army photo by Spc. Jennifer Grier"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Learning about each other, Peru"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "When building rapport, it's important to pay attention to your counterpart. At the beginning of a relationship, attention can be shown through taking an honest interest in your counterpart. In addition, plan on taking part in a lot of small talk, as this also shows attention and interest.",
+        "media" : [ {
+          "zid" : 4011283,
+          "xid" : "4011283.mp3",
+          "type" : "audio",
+          "file" : "4011283.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1391827811852,
+        "xid" : "1391827811852.jpg",
+        "type" : "image",
+        "file" : "1391827811852.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4718",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 4",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "U.S. Army photo by Bob McElroy"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Meeting a Korean-American daughter, South Korea"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Developing and maintaining understanding is important in the rapport-building process. Understanding is gained through seeking knowledge about the culture and language of the people you are interacting with. Learning about the culture and attempting to speak the language shows your counterpart that you are interested in them. It can also help you to better understand your counterpart's point of view and recognize your own biases, assumptions, and values.",
+        "media" : [ {
+          "zid" : 4011284,
+          "xid" : "4011284.mp3",
+          "type" : "audio",
+          "file" : "4011284.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1395363137210,
+        "xid" : "1395363137210.jpg",
+        "type" : "image",
+        "file" : "1395363137210.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4719",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 5",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediadisplayblurb",
+          "value" : "Collaborating, Singapore"
+        }, {
+          "name" : "mediacaption",
+          "value" : "U.S. Army photo by Spc. Anita VanderMolen"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "Mutual respect is crucial to the rapport-building process. You must respect your counterparts and recognize their accomplishments and status. In addition, you must behave in a way that encourages your counterpart to respect you in return.",
+        "media" : [ {
+          "zid" : 4011285,
+          "xid" : "4011285.mp3",
+          "type" : "audio",
+          "file" : "4011285.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1359595785906,
+        "xid" : "1359595785906.jpg",
+        "type" : "image",
+        "file" : "1359595785906.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    }, {
+      "xid" : "page4720",
+      "type" : "Info",
+      "layout" : "",
+      "title" : "Building Rapport 6",
+      "hint" : "",
+      "comment" : "",
+      "info" : {
+        "property" : [ {
+          "name" : "mediadisplayblurb",
+          "value" : "Two SMEs greeting, Jamaica"
+        }, {
+          "name" : "mediacaption",
+          "value" : "U.S. Army photo by Staff Sgt. Mitchell Miller"
+        } ]
+      },
+      "skills" : null,
+      "note" : [ {
+        "text" : "The ultimate goal of building rapport is establishing trust. Trust is built on understanding and mutual respect. You can also gain trust through demonstrating reliability and meeting expectations.",
+        "media" : [ {
+          "zid" : 4011286,
+          "xid" : "4011286.mp3",
+          "type" : "audio",
+          "file" : "4011286.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1391823844112,
+        "xid" : "1391823844112.jpg",
+        "type" : "image",
+        "file" : "1391823844112.jpg",
+        "mime" : "image/jpeg",
+        "info" : null
+      } ],
+      "calligraphy" : {
+        "nom" : ""
+      }
+    } ]
+  }
+}

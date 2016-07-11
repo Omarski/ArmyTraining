@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page1980",
+    "type" : "Info",
+    "title" : "Learning Objectives",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://secure.istockphoto.com/photo/hands-with-prayer-beads-gm179216873-25265543"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A man holding prayer beads"
+      } ]
+    },
+    "note" : [ {
+      "text" : "In this section, you will learn to:"
+    }, {
+      "text" : "- Respond appropriately to offers of hospitality.\n- Recognize the role of religion in daily life."
+    } ],
+    "media" : [ {
+      "zid" : 1463683759819,
+      "xid" : "1463683759819.jpg",
+      "type" : "image",
+      "file" : "1463683759819.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

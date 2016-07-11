@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page2111",
+    "type" : "Info",
+    "title" : "Speaking Dari",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/afgmatters/4272788412/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghans in Mazar-e Sharif"
+      } ]
+    },
+    "note" : [ {
+      "text" : "If you don't speak Dari fluently, you may need a local interpreter in order to communicate. Even if you use an interpreter, or if your counterpart speaks English, it's worthwhile for you to use the basic Dari phrases you've learned, especially for greetings. It will go a long way toward building relationships."
+    }, {
+      "text" : "Don't let your concerns about perfect pronunciation prevent you from trying to speak the language. Your counterparts will understand that you are learning and will appreciate your efforts."
+    } ],
+    "media" : [ {
+      "zid" : 1462313384008,
+      "xid" : "1462313384008.jpg",
+      "type" : "image",
+      "file" : "1462313384008.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

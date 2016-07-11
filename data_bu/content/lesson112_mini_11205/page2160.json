@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2160",
+    "type" : "Info",
+    "title" : "Hospitality",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. service member accepting tea from a village elder"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Hospitality is a tradition and an essential aspect of Afghan culture. For many, it is a matter of family pride and integrity to offer guests the best they have. You should accept your host's hospitality whenever possible.",
+      "media" : [ {
+        "zid" : 4032638,
+        "xid" : "4032638.mp3",
+        "type" : "audio",
+        "file" : "4032638.mp3"
+      } ]
+    }, {
+      "text" : "In villages, if your counterparts know you're arriving, they may provide a meal. If your visit is unexpected, they will provide tea and snacks.",
+      "media" : [ {
+        "zid" : 4032639,
+        "xid" : "4032639.mp3",
+        "type" : "audio",
+        "file" : "4032639.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462373568611,
+      "xid" : "1462373568611.jpg",
+      "type" : "image",
+      "file" : "1462373568611.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

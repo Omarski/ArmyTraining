@@ -1,0 +1,20 @@
+{
+  "page" : {
+    "xid" : "page3405",
+    "type" : "TestOutQuizEnd",
+    "layout" : "",
+    "title" : "Test Out Results",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "quiz",
+        "value" : "pretestoutquizend"
+      } ]
+    },
+    "skills" : null,
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

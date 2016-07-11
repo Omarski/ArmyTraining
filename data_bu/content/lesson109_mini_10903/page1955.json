@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page1955",
+    "type" : "Info",
+    "title" : "Corruption",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/ac2GXR"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan officer looking over refurbished humvee parts"
+      } ]
+    },
+    "note" : [ {
+      "text" : "U.S. service members have reported cases of leaders charging unexpected administrational fees at the completion of a project, and of leaders misallocating U.S. provided resources. While an American may perceive these leaders to be corrupt, an Afghan may see it as simply doing business."
+    }, {
+      "text" : "Keep your end goal in mind. Resist applying American ideals to every engagement and ensure the project reaches completion, rather than reaches completion to your standards. Discuss the situation with your superiors if you have reservations."
+    } ],
+    "media" : [ {
+      "zid" : 1463601923556,
+      "xid" : "1463601923556.jpg",
+      "type" : "image",
+      "file" : "1463601923556.jpg",
+      "mime" : "image/png",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,491 @@
+{
+  "chapter" : {
+    "xid" : "lesson103_mini_10011",
+    "title" : "Cultural Frameworks and Rapport Building",
+    "info" : {
+      "property" : [ {
+        "name" : "fount",
+        "value" : "/lev1/lesson101"
+      }, {
+        "name" : "L2",
+        "value" : "fr"
+      } ]
+    },
+    "preposttest" : [ "page1208", "page1210" ],
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page1002",
+        "type" : "Info",
+        "title" : "Learning Objectives"
+      }, {
+        "xid" : "page1118",
+        "type" : "Info",
+        "title" : "Service-Oriented Approaches to Culture"
+      }, {
+        "xid" : "page1119",
+        "type" : "Info",
+        "title" : "Army and Navy"
+      }, {
+        "xid" : "page4731",
+        "type" : "Info",
+        "title" : "Video: The Army's Role in Culture Training"
+      }, {
+        "xid" : "page4730",
+        "type" : "Info",
+        "title" : "Video: The Navy's Cultural Framework"
+      }, {
+        "xid" : "page1120",
+        "type" : "Info",
+        "title" : "Marine Corps"
+      }, {
+        "xid" : "page1116",
+        "type" : "Info",
+        "title" : "Air Force"
+      }, {
+        "xid" : "page4732",
+        "type" : "Info",
+        "title" : "Video: The Air Force's Cultural Framework"
+      }, {
+        "xid" : "page1121",
+        "type" : "Info",
+        "title" : "Culture and Your Mission"
+      }, {
+        "xid" : "page4709",
+        "type" : "Info",
+        "title" : "Culture Shock"
+      }, {
+        "xid" : "page4710",
+        "type" : "Info",
+        "title" : "Combating the Negative Effects"
+      }, {
+        "xid" : "page4711",
+        "type" : "Info",
+        "title" : "Stereotypes, Prejudice, and Biases"
+      }, {
+        "xid" : "page4713",
+        "type" : "Info",
+        "title" : "Ethnocentrism"
+      }, {
+        "xid" : "page4733",
+        "type" : "Info",
+        "title" : "Video: Ethnocentrism"
+      }, {
+        "xid" : "page6601",
+        "type" : "MatchItem",
+        "title" : "Practice 1"
+      }, {
+        "xid" : "page6608",
+        "type" : "MultipleChoice",
+        "title" : "Practice 2"
+      }, {
+        "xid" : "page4739",
+        "type" : "MultipleChoice",
+        "title" : "Practice 3"
+      }, {
+        "xid" : "page4714",
+        "type" : "Info",
+        "title" : "Building Rapport"
+      }, {
+        "xid" : "page4734",
+        "type" : "Info",
+        "title" : "Video: Building Rapport"
+      }, {
+        "xid" : "page4723",
+        "type" : "MultiNote",
+        "title" : "Elements of Building Rapport"
+      }, {
+        "xid" : "page4722",
+        "type" : "Sorting",
+        "title" : "Practice 4"
+      }, {
+        "xid" : "page4721",
+        "type" : "MultipleChoice",
+        "title" : "Practice 5"
+      }, {
+        "xid" : "page4724",
+        "type" : "QuizStart",
+        "title" : "Next Steps"
+      }, {
+        "xid" : "page1004",
+        "type" : "Info",
+        "title" : "Section Checklist"
+      } ]
+    }, {
+      "mode" : "quiz",
+      "pageRef" : [ {
+        "xid" : "page1218",
+        "type" : "QuizStart",
+        "title" : "Quiz"
+      }, {
+        "xid" : "page1207",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 1"
+      }, {
+        "xid" : "page1208",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 2"
+      }, {
+        "xid" : "page1209",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 3"
+      }, {
+        "xid" : "page1210",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 4"
+      }, {
+        "xid" : "page1212",
+        "type" : "QuizEnd",
+        "title" : "Quiz Results"
+      }, {
+        "xid" : "page1216",
+        "type" : "SectionEnd",
+        "title" : "Section End"
+      } ]
+    } ],
+    "zmedia" : [ {
+      "zid" : 1395359833573,
+      "xid" : "1395359833573.jpg",
+      "type" : "image",
+      "file" : "1395359833573.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1450728803866,
+      "xid" : "1450728803866.jpg",
+      "type" : "image",
+      "file" : "1450728803866.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1395363137210,
+      "xid" : "1395363137210.jpg",
+      "type" : "image",
+      "file" : "1395363137210.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4011280,
+      "xid" : "4011280.mp3",
+      "type" : "audio",
+      "file" : "4011280.mp3"
+    }, {
+      "zid" : 4032532,
+      "xid" : "4032532.mp3",
+      "type" : "audio",
+      "file" : "4032532.mp3"
+    }, {
+      "zid" : 1389291394690,
+      "xid" : "1389291394690.jpg",
+      "type" : "image",
+      "file" : "1389291394690.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 4011304,
+      "xid" : "4011304.mp3",
+      "type" : "audio",
+      "file" : "4011304.mp3"
+    }, {
+      "zid" : 4011278,
+      "xid" : "4011278.mp3",
+      "type" : "audio",
+      "file" : "4011278.mp3"
+    }, {
+      "zid" : 1391827811852,
+      "xid" : "1391827811852.jpg",
+      "type" : "image",
+      "file" : "1391827811852.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4011267,
+      "xid" : "4011267.mp3",
+      "type" : "audio",
+      "file" : "4011267.mp3"
+    }, {
+      "zid" : 1368230013537,
+      "xid" : "1368230013537.jpg",
+      "type" : "image",
+      "file" : "1368230013537.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4033904,
+      "xid" : "4033904.mp3",
+      "type" : "audio",
+      "file" : "4033904.mp3"
+    }, {
+      "zid" : 4028565,
+      "xid" : "4028565.mp3",
+      "type" : "audio",
+      "file" : "4028565.mp3"
+    }, {
+      "zid" : 4011284,
+      "xid" : "4011284.mp3",
+      "type" : "audio",
+      "file" : "4011284.mp3"
+    }, {
+      "zid" : 1395357597455,
+      "xid" : "1395357597455.jpg",
+      "type" : "image",
+      "file" : "1395357597455.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1400621502247,
+      "xid" : "1400621502247.mp4",
+      "type" : "video",
+      "file" : "1400621502247.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1450729203142,
+      "xid" : "1450729203142.jpg",
+      "type" : "image",
+      "file" : "1450729203142.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1391823844112,
+      "xid" : "1391823844112.jpg",
+      "type" : "image",
+      "file" : "1391823844112.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4033906,
+      "xid" : "4033906.mp3",
+      "type" : "audio",
+      "file" : "4033906.mp3"
+    }, {
+      "zid" : 1402695965821,
+      "xid" : "1402695965821.jpg",
+      "type" : "image",
+      "file" : "1402695965821.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4011285,
+      "xid" : "4011285.mp3",
+      "type" : "audio",
+      "file" : "4011285.mp3"
+    }, {
+      "zid" : 1401496751277,
+      "xid" : "1401496751277.jpg",
+      "type" : "image",
+      "file" : "1401496751277.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1391823905415,
+      "xid" : "1391823905415.jpg",
+      "type" : "image",
+      "file" : "1391823905415.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4011287,
+      "xid" : "4011287.mp3",
+      "type" : "audio",
+      "file" : "4011287.mp3",
+      "info" : null
+    }, {
+      "zid" : 4011282,
+      "xid" : "4011282.mp3",
+      "type" : "audio",
+      "file" : "4011282.mp3"
+    }, {
+      "zid" : 4011281,
+      "xid" : "4011281.mp3",
+      "type" : "audio",
+      "file" : "4011281.mp3"
+    }, {
+      "zid" : 1359595785906,
+      "xid" : "1359595785906.jpg",
+      "type" : "image",
+      "file" : "1359595785906.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4011274,
+      "xid" : "4011274.mp3",
+      "type" : "audio",
+      "file" : "4011274.mp3"
+    }, {
+      "zid" : 1450729255886,
+      "xid" : "1450729255886.jpg",
+      "type" : "image",
+      "file" : "1450729255886.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1359595688646,
+      "xid" : "1359595688646.jpg",
+      "type" : "image",
+      "file" : "1359595688646.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4028567,
+      "xid" : "4028567.mp3",
+      "type" : "audio",
+      "file" : "4028567.mp3"
+    }, {
+      "zid" : 1400621438876,
+      "xid" : "1400621438876.mp4",
+      "type" : "video",
+      "file" : "1400621438876.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1414435425760,
+      "xid" : "1414435425760.jpg",
+      "type" : "image",
+      "file" : "1414435425760.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1366845649073,
+      "xid" : "1366845649073.jpg",
+      "type" : "image",
+      "file" : "1366845649073.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4032532,
+      "xid" : "4032532.mp3",
+      "type" : "audio",
+      "file" : "4032532.mp3"
+    }, {
+      "zid" : 4011288,
+      "xid" : "4011288.mp3",
+      "type" : "audio",
+      "file" : "4011288.mp3",
+      "info" : null
+    }, {
+      "zid" : 4011275,
+      "xid" : "4011275.mp3",
+      "type" : "audio",
+      "file" : "4011275.mp3"
+    }, {
+      "zid" : 1400621630584,
+      "xid" : "1400621630584.mp4",
+      "type" : "video",
+      "file" : "1400621630584.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1400621872091,
+      "xid" : "1400621872091.mp4",
+      "type" : "video",
+      "file" : "1400621872091.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 4033905,
+      "xid" : "4033905.mp3",
+      "type" : "audio",
+      "file" : "4033905.mp3"
+    }, {
+      "zid" : 4011273,
+      "xid" : "4011273.mp3",
+      "type" : "audio",
+      "file" : "4011273.mp3"
+    }, {
+      "zid" : 1400621363371,
+      "xid" : "1400621363371.mp4",
+      "type" : "video",
+      "file" : "1400621363371.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 4011286,
+      "xid" : "4011286.mp3",
+      "type" : "audio",
+      "file" : "4011286.mp3"
+    }, {
+      "zid" : 1395357839064,
+      "xid" : "1395357839064.jpg",
+      "type" : "image",
+      "file" : "1395357839064.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4011271,
+      "xid" : "4011271.mp3",
+      "type" : "audio",
+      "file" : "4011271.mp3"
+    }, {
+      "zid" : 4011303,
+      "xid" : "4011303.mp3",
+      "type" : "audio",
+      "file" : "4011303.mp3"
+    }, {
+      "zid" : 1395358968450,
+      "xid" : "1395358968450.jpg",
+      "type" : "image",
+      "file" : "1395358968450.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4011272,
+      "xid" : "4011272.mp3",
+      "type" : "audio",
+      "file" : "4011272.mp3"
+    }, {
+      "zid" : 4028566,
+      "xid" : "4028566.mp3",
+      "type" : "audio",
+      "file" : "4028566.mp3"
+    }, {
+      "zid" : 4011283,
+      "xid" : "4011283.mp3",
+      "type" : "audio",
+      "file" : "4011283.mp3"
+    }, {
+      "zid" : 1292532786158,
+      "xid" : "1292532786158.jpg",
+      "type" : "image",
+      "file" : "1292532786158.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 4011277,
+      "xid" : "4011277.mp3",
+      "type" : "audio",
+      "file" : "4011277.mp3"
+    }, {
+      "zid" : 4028568,
+      "xid" : "4028568.mp3",
+      "type" : "audio",
+      "file" : "4028568.mp3"
+    }, {
+      "zid" : 4011268,
+      "xid" : "4011268.mp3",
+      "type" : "audio",
+      "file" : "4011268.mp3"
+    } ]
+  }
+}

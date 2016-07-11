@@ -1,0 +1,41 @@
+{
+  "page" : {
+    "xid" : "page1923",
+    "type" : "Pronunciation",
+    "title" : "Goodbye",
+    "info" : null,
+    "nut" : [ {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "خدای په امان"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "\\1khodaay \\0pe amaan."
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "Goodbye. (lit.: \\1God\\0 protect you.)"
+          }
+        },
+        "info" : null
+      }
+    } ]
+  }
+}

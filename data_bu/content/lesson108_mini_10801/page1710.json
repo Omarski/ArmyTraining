@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page1710",
+    "type" : "Info",
+    "title" : "Muhajirs",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/8WbZJZ"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Men sitting under a banner with Urdu text"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "While \"Muhajir\" is an Arabic word meaning \"immigrant\" and is used to refer to Urdu-speaking Pakistanis, it is considered a derogatory term by some. The term \"Urdu Speaker\" can be used to avoid causing offense.",
+      "media" : [ {
+        "zid" : 4032199,
+        "xid" : "4032199.mp3",
+        "type" : "audio",
+        "file" : "4032199.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1461018247415,
+      "xid" : "1461018247415.jpg",
+      "type" : "image",
+      "file" : "1461018247415.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

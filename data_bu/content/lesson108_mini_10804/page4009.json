@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page4009",
+    "type" : "Info",
+    "title" : "Marriage",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/6ATA25"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistani wedding"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Most marriages are arranged. Marriage typically represents an alliance between families, not individuals. More than half of marriages in Pakistan are between first or second cousins. Married couples typically live with the husband's family.",
+      "media" : [ {
+        "zid" : 4032282,
+        "xid" : "4032282.mp3",
+        "type" : "audio",
+        "file" : "4032282.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460568686308,
+      "xid" : "1460568686308.jpg",
+      "type" : "image",
+      "file" : "1460568686308.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

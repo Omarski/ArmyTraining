@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2000",
+    "type" : "Info",
+    "title" : "Hospitality",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/9M2w18"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An American contractor sitting with an Afghan man after a meal"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Hospitality is a tradition and an essential aspect of Afghan culture. For many, it is a matter of family pride and integrity to offer guests the best they have. You should accept your host's hospitality whenever possible.",
+      "media" : [ {
+        "zid" : 4032638,
+        "xid" : "4032638.mp3",
+        "type" : "audio",
+        "file" : "4032638.mp3"
+      } ]
+    }, {
+      "text" : "In villages, if your counterparts know you're arriving, they may provide a meal. If your visit is unexpected, they will provide tea and snacks.",
+      "media" : [ {
+        "zid" : 4032639,
+        "xid" : "4032639.mp3",
+        "type" : "audio",
+        "file" : "4032639.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463602306862,
+      "xid" : "1463602306862.jpg",
+      "type" : "image",
+      "file" : "1463602306862.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

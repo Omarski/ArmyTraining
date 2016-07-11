@@ -1,0 +1,96 @@
+{
+  "page" : {
+    "xid" : "page1905",
+    "type" : "MultipleChoice",
+    "title" : "Practice 4",
+    "info" : null,
+    "media" : [ {
+      "zid" : 1340736395326,
+      "xid" : "1340736395326.jpg",
+      "type" : "image",
+      "file" : "1340736395326.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "prompt" : {
+      "text" : "You're working with your counterpart to develop a timelines for a training session. Which of the following would be the best way to approach starting the session next Wednesday?\n"
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, this is not the best method. Your counterpart might answer specific questions by saying \"Inshallah\", which may mean they can't be sure."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Can your men begin training next Wednesday?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, this is not the best method. Always take the opportunity to collaborate with your counterparts by getting their input."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "We'll begin the training next Wednesday."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : true,
+      "feedback" : {
+        "text" : "This is the best method. You may get more information by asking an open-ended questions, which allows you to discuss details further. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "When can your men begin training?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Actually, this is not the best method. Remember that your counterparts sense of time may be different, but it's important to be honest during your collaborations."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "Should we start next Tuesday because things always run late here?"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

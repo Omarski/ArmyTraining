@@ -1,0 +1,57 @@
+{
+  "page" : {
+    "xid" : "page3819",
+    "type" : "Info",
+    "title" : "Conflicts of Interest",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/306134/cjtf-hoa-civil-affairs-assists-with-malaria-outbreak#.VFwOJvnF-VM"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Coordinating aid efforts with the help of an interpreter, Ethiopia"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Keep in mind that using an interpreter may increase the potential for conflicts of interest.",
+      "media" : [ {
+        "zid" : 4022094,
+        "xid" : "4022094.mp3",
+        "type" : "audio",
+        "file" : "4022094.mp3"
+      } ]
+    }, {
+      "text" : "Interpreters may try to mediate or advocate. Adversarial conversation may cause interpreters to lose their neutrality. Further, an interpreter's presence may discourage others from disclosing certain information. This might lead to a biased or incomplete view of issues.",
+      "media" : [ {
+        "zid" : 4022095,
+        "xid" : "4022095.mp3",
+        "type" : "audio",
+        "file" : "4022095.mp3"
+      } ]
+    }, {
+      "text" : "Be sure your interpreter understands that it's part of the job to be—and appear—impartial. Interpreters should avoid expressing their personal views and political opinions while working.",
+      "media" : [ {
+        "zid" : 4022096,
+        "xid" : "4022096.mp3",
+        "type" : "audio",
+        "file" : "4022096.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416948590910,
+      "xid" : "1416948590910.jpg",
+      "type" : "image",
+      "file" : "1416948590910.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

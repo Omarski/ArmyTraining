@@ -1,0 +1,27 @@
+{
+  "page" : {
+    "xid" : "page3876",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Introduction to Working With Interpreters",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "lessonstart",
+        "value" : ""
+      } ]
+    },
+    "media" : [ {
+      "zid" : 1460397555868,
+      "xid" : "1460397555868.jpg",
+      "type" : "image",
+      "file" : "1460397555868.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

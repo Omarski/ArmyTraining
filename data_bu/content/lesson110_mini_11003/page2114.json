@@ -1,0 +1,123 @@
+{
+  "page" : {
+    "xid" : "page2114",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 7",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Wakdaar Manelay",
+      "zid" : 1461196074259,
+      "nom" : "Wakdaar_Manelay"
+    },
+    "media" : [ {
+      "zid" : 1466442802230,
+      "xid" : "1466442802230.jpg",
+      "type" : "image",
+      "file" : "1466442802230.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "You are working with a local leader to equip a local unit for an upcoming security mission. Listen to what he says and choose the best response."
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "en",
+        "anchor" : "ezread",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : "تاسی کولای شی د دی په اړوند چی زماافراد څه شیانو ته به اړټیا ولری، یو لست جوړ کړی؟"
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : "tasee kewoRay shey, de day pe  alwand che zmaa afraad tse shayano ta be aRtyaa wolarey, yao lest jool keRay?"
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "Can you create a list of what my men will need?"
+        }
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Work with local leaders, get their perspective. Whenever possible, put your counterparts in the lead. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Why don't you outline what you need, and I'll give you input."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember to get the perspective of local leaders. Whenever possible, put them in the lead. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Sure. I know exactly what your men will need."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember to collaborate with your counterparts. Get their perspective, but always support them by working together."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "It would be better if you made the list yourself."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember to collaborate with your counterparts. Get their perspective, but always support them by working together."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "anchor" : "ezread",
+            "translation" : {
+              "kind" : "standard",
+              "text" : "I would, but I really don't know what they need."
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

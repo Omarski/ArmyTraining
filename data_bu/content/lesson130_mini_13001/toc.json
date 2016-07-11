@@ -1,0 +1,32 @@
+{
+  "chapter" : {
+    "xid" : "lesson130_mini_13001",
+    "title" : "Participating in Leader Engagements (Pakistan) - Scenario",
+    "info" : {
+      "property" : [ {
+        "name" : "sharedLibraryRevision",
+        "value" : "95223"
+      } ]
+    },
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page3902",
+        "type" : "Info",
+        "title" : "Participating in Leader Engagements"
+      }, {
+        "xid" : "page3903",
+        "type" : "Info",
+        "title" : "Introduction"
+      }, {
+        "xid" : "page3904",
+        "type" : "Info",
+        "title" : "Scenario Interface"
+      }, {
+        "xid" : "page3901",
+        "type" : "ActiveDialog",
+        "title" : "Leader Engagements - Urdu"
+      } ]
+    } ]
+  }
+}

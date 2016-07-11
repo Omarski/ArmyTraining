@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3965",
+    "type" : "Info",
+    "title" : "Anglo-Afghan Wars",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Battle_of_Ali_Masjid_-_19_members_of_the_Yorkshire_Infantry.jpg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "British soldiers during the Second Anglo-Afghan War"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In the 1830s, 1870s, and in 1919, the British and Afghans fought a series of three wars. The British sought to end Russian influence in Afghanistan and to protect India.",
+      "media" : [ {
+        "zid" : 4032355,
+        "xid" : "4032355.mp3",
+        "type" : "audio",
+        "file" : "4032355.mp3"
+      } ]
+    }, {
+      "text" : "The third Anglo-Afghan War in 1919 ended with an Afghan victory. Following that war, Afghanistan began a friendship with the newly established Soviet Union.",
+      "media" : [ {
+        "zid" : 4032356,
+        "xid" : "4032356.mp3",
+        "type" : "audio",
+        "file" : "4032356.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1457471229943,
+      "xid" : "1457471229943.jpg",
+      "type" : "image",
+      "file" : "1457471229943.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

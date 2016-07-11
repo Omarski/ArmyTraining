@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2305",
+    "type" : "Info",
+    "title" : "Working with Afghan Women",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/soldiersmediacenter/6308936950/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. Army service member examining an Afghan woman"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Women are becoming more involved in the Afghan government. U.S. service members have attended military meetings where female Afghan officers were present. These women participated in the proceedings, though only after a long period of listening.",
+      "media" : [ {
+        "zid" : 4032610,
+        "xid" : "4032610.mp3",
+        "type" : "audio",
+        "file" : "4032610.mp3"
+      } ]
+    }, {
+      "text" : "Outside the government, U.S. servicewomen will likely be the only ones to interact with civilian women. People of different genders are sometimes segregated in public places, including hospitals and community buildings. This separation should be respected and men should not attempt access without consent.",
+      "media" : [ {
+        "zid" : 4032611,
+        "xid" : "4032611.mp3",
+        "type" : "audio",
+        "file" : "4032611.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462372650098,
+      "xid" : "1462372650098.jpg",
+      "type" : "image",
+      "file" : "1462372650098.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

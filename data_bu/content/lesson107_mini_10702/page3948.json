@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3948",
+    "type" : "Info",
+    "title" : "Housing",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Traditional_housing_compounds_(4359809701).jpg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A qalla in Herat"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Traditional Afghan homes, called “qallas,” are large walled compounds made of mud brick where an entire extended family resides. Typically there is a single entrance to the compound, but separate areas where men and women live.",
+      "media" : [ {
+        "zid" : 4032338,
+        "xid" : "4032338.mp3",
+        "type" : "audio",
+        "file" : "4032338.mp3"
+      } ]
+    }, {
+      "text" : "Multi-story concrete apartment buildings are common in urban areas. These smaller living spaces have had an impact on traditional Afghan life since they don’t allow space for large extended families to live together, or for men and women to have separate living spaces.",
+      "media" : [ {
+        "zid" : 4032339,
+        "xid" : "4032339.mp3",
+        "type" : "audio",
+        "file" : "4032339.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1451950268830,
+      "xid" : "1451950268830.jpg",
+      "type" : "image",
+      "file" : "1451950268830.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

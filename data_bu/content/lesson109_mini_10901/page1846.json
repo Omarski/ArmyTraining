@@ -1,0 +1,137 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page1846",
+    "type" : "MultiNote",
+    "title" : "Village Subcultures",
+    "related" : [ {
+      "xid" : "page1847",
+      "type" : "Info",
+      "title" : "Village Subcultures 1",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/7Hn3E7"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Village elders sitting in discussion"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Tribal affiliation is more important than Afghan national identity. As such, there isn't just one, but many \"Afghanistans.\" Rural areas can be very remote, cut off for months during winter, and have their own cultural norms, political ideals, religious perspectives.\n"
+      } ],
+      "media" : [ {
+        "zid" : 1463529829550,
+        "xid" : "1463529829550.jpg",
+        "type" : "image",
+        "file" : "1463529829550.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1848",
+      "type" : "Info",
+      "title" : "Village Subcultures 2",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/7vqFtD"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Children in Qoutsa-suf-la village"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Though different villages have similar daily challenges, the people may not be concerned about life beyond their own mountain range. These divides make cooperation between groups and organizations difficult when disasters or political issues arise. Additionally, the national government is under-equipped to provide support to villages in times of need."
+      } ],
+      "media" : [ {
+        "zid" : 1463529861726,
+        "xid" : "1463529861726.jpg",
+        "type" : "image",
+        "file" : "1463529861726.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1849",
+      "type" : "Info",
+      "title" : "Village Subcultures 3",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/aCYgcB"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A service member chatting with an older man about his village"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Develop strategies for citizens and officials to cooperate on common goals and always strive for local solutions to local problems. Establish support between villages so that one can assist the other in times of crisis. By enabling the government to provide necessary community services, elected officials are empowered and insurgent efforts to gain footing are reduced."
+      } ],
+      "media" : [ {
+        "zid" : 1463529872253,
+        "xid" : "1463529872253.jpg",
+        "type" : "image",
+        "file" : "1463529872253.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1850",
+      "type" : "Info",
+      "title" : "Village Subcultures 4",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/a5JLj9"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A service member and interpreter (center) meeting a villager during a patrol"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Village authority can be in the hands of political leaders, religious leaders, or a combination of both. Don't assume each village is like the next. As you carry out your mission, account for varying perspectives and motives, and take the time to understand the local structure. "
+      } ],
+      "media" : [ {
+        "zid" : 1463530224042,
+        "xid" : "1463530224042.jpg",
+        "type" : "image",
+        "file" : "1463530224042.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2357",
+    "type" : "Info",
+    "title" : "Prayer",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Prayer time in Afghanistan"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Observant Muslims pray five times a day at prescribed times. Even when on duty, your counterpart will likely break for prayer. Prayer can take place anywhere, not only in a mosque. ",
+      "media" : [ {
+        "zid" : 4032636,
+        "xid" : "4032636.mp3",
+        "type" : "audio",
+        "file" : "4032636.mp3"
+      } ]
+    }, {
+      "text" : "When possible, meetings should be planned to allow for prayer times. If counterparts interrupt a meeting to pray, be respectful and don’t disturb them.",
+      "media" : [ {
+        "zid" : 4032637,
+        "xid" : "4032637.mp3",
+        "type" : "audio",
+        "file" : "4032637.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1462373508531,
+      "xid" : "1462373508531.jpg",
+      "type" : "image",
+      "file" : "1462373508531.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

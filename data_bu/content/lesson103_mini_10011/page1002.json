@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1002",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Learning Objectives",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistani father and daughter"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/jenny-pics/5352438740/"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this section, you will learn to:",
+      "media" : [ {
+        "zid" : 4033904,
+        "xid" : "4033904.mp3",
+        "type" : "audio",
+        "file" : "4033904.mp3"
+      } ]
+    }, {
+      "text" : "- Recognize the culture frameworks used by the different branches of service.\n- Define culture shock.\n- Recognize the importance of building rapport in cross-cultural interactions.\n- Identify the dangers of ethnocentrism.",
+      "media" : [ {
+        "zid" : 4032532,
+        "xid" : "4032532.mp3",
+        "type" : "audio",
+        "file" : "4032532.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450728803866,
+      "xid" : "1450728803866.jpg",
+      "type" : "image",
+      "file" : "1450728803866.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

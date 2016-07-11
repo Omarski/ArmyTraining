@@ -1,0 +1,26 @@
+{
+  "page" : {
+    "xid" : "page2202",
+    "type" : "Info",
+    "title" : "Providing Humanitarian Assistance",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "lessonstart",
+        "value" : ""
+      }, {
+        "name" : "platforms",
+        "value" : "!NOT, vmob"
+      } ]
+    },
+    "skills" : null,
+    "media" : [ {
+      "zid" : 1460397555868,
+      "xid" : "1460397555868.jpg",
+      "type" : "image",
+      "file" : "1460397555868.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ]
+  }
+}

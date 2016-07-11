@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page1986",
+    "type" : "Info",
+    "title" : "Working with Afghan Women",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/505181/afghan-general-provincial-officials-meet-discuss-womens-roles-afghanistans-development-governance#.VyPwNaMrKV4"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A high ranking Afghan servicewoman"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Women are becoming more involved in the Afghan government. U.S. service members have attended military meetings where female Afghan officers were present. These women participated in the proceedings, though only after a long period of listening.",
+      "media" : [ {
+        "zid" : 4032610,
+        "xid" : "4032610.mp3",
+        "type" : "audio",
+        "file" : "4032610.mp3"
+      } ]
+    }, {
+      "text" : "Outside the government, U.S. servicewomen will likely be the only ones to interact with civilian women. People of different genders are sometimes segregated in public places, including hospitals and community buildings. This separation should be respected and men should not attempt access without consent.",
+      "media" : [ {
+        "zid" : 4032611,
+        "xid" : "4032611.mp3",
+        "type" : "audio",
+        "file" : "4032611.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463601507109,
+      "xid" : "1463601507109.jpg",
+      "type" : "image",
+      "file" : "1463601507109.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

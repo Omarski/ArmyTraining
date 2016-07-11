@@ -1,0 +1,57 @@
+{
+  "page" : {
+    "xid" : "page3821",
+    "type" : "Info",
+    "title" : "Briefing the Interpreter",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "DVIDS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. service member working with an interpreter"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Before an event or meeting, brief the interpreter on:",
+      "media" : [ {
+        "zid" : 4022099,
+        "xid" : "4022099.mp3",
+        "type" : "audio",
+        "file" : "4022099.mp3"
+      } ]
+    }, {
+      "text" : "- The points to be covered.\n- Key concepts, words, and phrases, especially technical vocabulary.\n- The name, position, and status of your audience members.\n- Any written documents or visual aids that will be used.\n- The physical layout of the place where you will be working.",
+      "media" : [ {
+        "zid" : 4022100,
+        "xid" : "4022100.mp3",
+        "type" : "audio",
+        "file" : "4022100.mp3"
+      } ]
+    }, {
+      "text" : "Ask local interpreters to brief you on culture, customs, and current events.",
+      "media" : [ {
+        "zid" : 4022101,
+        "xid" : "4022101.mp3",
+        "type" : "audio",
+        "file" : "4022101.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450726399910,
+      "xid" : "1450726399910.jpg",
+      "type" : "image",
+      "file" : "1450726399910.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

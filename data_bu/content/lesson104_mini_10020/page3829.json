@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page3829",
+    "type" : "Info",
+    "title" : "Eye Contact",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "http://www.dvidshub.net/image/975108/rok-us-combined-counterfire-exercise#.VFvPyPnF-VM"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Speaking with an interpreter, South Korea"
+      } ]
+    },
+    "note" : [ {
+      "text" : "When a person is listening to an interpreter speak a language they both understand, it's natural to want to make eye contact. However, eye contact between you and your counterpart will help you build rapport and communicate better. ",
+      "media" : [ {
+        "zid" : 4022113,
+        "xid" : "4022113.mp3",
+        "type" : "audio",
+        "file" : "4022113.mp3"
+      } ]
+    }, {
+      "text" : "It is often helpful to have your interpreter look in a neutral direction so you can continue to build direct rapport with your counterpart. In order to help minimize your interpreter's eye contact with your counterpart, you can have the interpreter carry a notepad or dictionary which they can focus on. A notebook is especially helpful since they can jot down observations or questions to share with you later.",
+      "media" : [ {
+        "zid" : 4022114,
+        "xid" : "4022114.mp3",
+        "type" : "audio",
+        "file" : "4022114.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1416949262414,
+      "xid" : "1416949262414.jpg",
+      "type" : "image",
+      "file" : "1416949262414.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

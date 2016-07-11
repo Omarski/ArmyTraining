@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page2001",
+    "type" : "Info",
+    "title" : "Tea",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/24nJpK"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A U.S. service member drinking tea with Afghan police officers"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Tea will be offered at every meeting and social occasion as an offer of friendship. You should accept tea whenever it is offered. Not doing so might offend your host. As you finish each cup, your host will move to refill it. It's polite to drink at least two to three cups during conversation.",
+      "media" : [ {
+        "zid" : 4032640,
+        "xid" : "4032640.mp3",
+        "type" : "audio",
+        "file" : "4032640.mp3"
+      } ]
+    }, {
+      "text" : "If you can't drink tea for health or religious reasons, you can explain the situation or ask for something else to drink.",
+      "media" : [ {
+        "zid" : 4032641,
+        "xid" : "4032641.mp3",
+        "type" : "audio",
+        "file" : "4032641.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463602320789,
+      "xid" : "1463602320789.jpg",
+      "type" : "image",
+      "file" : "1463602320789.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

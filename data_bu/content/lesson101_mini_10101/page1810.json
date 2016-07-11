@@ -1,0 +1,31 @@
+{
+  "page" : {
+    "xid" : "page1810",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Prologue",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "cutscene",
+        "value" : "true"
+      }, {
+        "name" : "videoTranscript",
+        "value" : "<b>Captain:</b> Hi folks, this is your pilot speaking. We’ve begun our initial descent. I hope you’ve had a pleasant flight. If this is your first time to the area, I hope you all had an opportunity to do a bit of research. If not, you’ve still got time to take a look at some of our in-flight language and culture material. After flying this route for many years, I can tell you that knowing just a bit about the people, their beliefs, and their values will make your stay here much better. Whether you’re here for pleasure, study, or business, having an understanding of the culture and language will help facilitate interactions and prepare you for unexpected challenges. We’ll be landing shortly, so make sure your seatbelts are fastened.<br><br><b>[Engine sounds.]</b><br><br><b>Frank Gill:</b> Thanks so much for helping with our bags. You know, while we head over to the hotel, I was wondering if you could give me a few pointers about the local culture. I want to make the best decisions while I’m here and make sure not to offend anyone.<br><br><b>Bus Driver:</b> It's really very simple. If you want to have a positive experience with the people here, you've already taken the most important step by showing an interest in their culture, and trying to figure out how the locals see things. Keep in mind: their beliefs and behaviors may not be what you’re used to, so don’t be surprised if you encounter things that are a little different. And, it'll go a long way if you can learn some of the language.<br><br><b>Frank Gill:</b> That makes a lot of sense. Thanks!<br><br><b>[Engine sounds and hotel lobby music in background.]</b><br><br><b>Frank Gill:</b> Hello, I’m Frank Gill. I just arrived.<br><br><b>Attaché:</b> Welcome, Frank. It’s great to finally have you here. Come. Have a seat.<br><br><b>Attaché:</b> How was your trip?<br><br><b>Frank Gill:</b> It was a pretty long flight, but the ride from the airport was great. The driver was really helpful. The people seem very nice here.<br><br><b>Attaché:</b> Yeah, I remember that flight. I’m glad you enjoyed the bus ride. The people here are very easy to work with and your interactions with the local population will continue to improve over time. Just remember to be observant and expect surprises.<br><br><b>Frank Gill:</b> I’m looking forward to spending time here, and I'm sure that I’m going to ask a lot of questions. I’ve done some reading, but I know that I have a lot more to learn. Fortunately, I’m a pretty fast learner so it shouldn’t be a problem picking up new things.<br><br><b>Attaché:</b> Fantastic! Have you had the opportunity to practice using some of the local language? Knowing a few key phrases will help you out here more than you might think.<br><br><b>Frank Gill:</b> I took a couple of the language courses on the JKO website; they were really helpful. I’m sure living and working here will help my proficiency, too.<br><br><b>Attaché:</b> You’re right about that. And in most cases, if someone knows that you’re trying to use the language they'll help you. But don’t be too concerned. I’m sure you’ll get better with time. And if you get stuck, there's often an interpreter available to help you.<br><br><b>Frank Gill:</b> Thank you. I can’t wait to get started!"
+      } ]
+    },
+    "skills" : null,
+    "media" : [ {
+      "zid" : 1460740663365,
+      "xid" : "1460740663365.mp4",
+      "type" : "video",
+      "file" : "1460740663365.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

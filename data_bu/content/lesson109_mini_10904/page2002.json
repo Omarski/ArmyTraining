@@ -1,0 +1,131 @@
+{
+  "page" : {
+    "xid" : "page2002",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 3",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Dawood Toofan",
+      "zid" : 1461600192170,
+      "nom" : "Dawood"
+    },
+    "media" : [ {
+      "zid" : 1466441805192,
+      "xid" : "1466441805192.jpg",
+      "type" : "image",
+      "file" : "1466441805192.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "You are meeting with a new counterpart. Listen to what he says and choose the best response."
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "en",
+        "anchor" : "ezread",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : "شما میخواهین چای بخورین؟"
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : "shoma mikhayen chai bekhoren?"
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "Would you like some tea?"
+        }
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "Tea will be offered at every meeting and social occasion as an offer of friendship. It's polite to drink at least 2 to 3 cups during conversation."
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "“I would love some tea, thank you.”"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, tea is offered as a sign of friendship. Turning down the tea might offend your host. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "“No, thank you, I had some in a previous meeting.”"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, tea is generally served hot in Afghanistan. Because it is offered as a sign of friendship, turning down the tea might offend your host. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "“Is it hot tea? I'd prefer some iced tea, if possible.”"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "Remember, tea is offered as a sign of friendship. Turning down the tea might offend your host. "
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "“I actually brought water with me, but I appreciate the offer.”"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

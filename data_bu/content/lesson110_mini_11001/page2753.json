@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2753",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Speaking Pashto",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/7uETMb"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A service member meets with Badgha villagers prior to a shura with village elders"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "If you don't speak Pashto fluently, you may need a local interpreter in order to communicate. Even if you use an interpreter, or if your counterpart speaks English, it's worthwhile for you to use the basic Pashto phrases you've learned, especially for greetings. It will go a long way toward building relationships.\n",
+      "media" : [ {
+        "zid" : 4032552,
+        "xid" : "4032552.mp3",
+        "type" : "audio",
+        "file" : "4032552.mp3"
+      } ]
+    }, {
+      "text" : "Don't let your concerns about perfect pronunciation prevent you from trying to speak the language. Your counterparts will understand that you are learning and will appreciate your efforts.\n",
+      "media" : [ {
+        "zid" : 4032553,
+        "xid" : "4032553.mp3",
+        "type" : "audio",
+        "file" : "4032553.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463530278578,
+      "xid" : "1463530278578.jpg",
+      "type" : "image",
+      "file" : "1463530278578.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "page" : {
+    "xid" : "page2168",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Section Checklist",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "note" : [ {
+      "text" : "In this section, you learned to:",
+      "media" : [ null ]
+    }, {
+      "text" : "- Recall key social, political, and historical factors that may affect your mission.",
+      "media" : [ null ]
+    }, {
+      "text" : "If you feel comfortable with your knowledge of this material, begin the quiz on the next page. If not, review the section further.",
+      "media" : [ null ]
+    } ],
+    "media" : [ {
+      "zid" : 1302045193072,
+      "xid" : "1302045193072.jpg",
+      "type" : "image",
+      "file" : "1302045193072.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

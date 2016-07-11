@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page1001",
+    "type" : "Info",
+    "title" : "Section 508 Compatibility",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : ""
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Typing on a keyboard"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Section 508 of the Rehabilitation Act of 1973 requires that electronic and information technology used by Federal agencies be accessible to people with disabilities."
+    }, {
+      "text" : "In accordance with Section 508, the required materials in this course have been designed to be accessible to users with disabilities through Assistive Technology (AT) software and plain text output options. All noncompliant components of this course are not required for course completion."
+    } ],
+    "media" : [ {
+      "zid" : 1465926302580,
+      "xid" : "1465926302580.jpg",
+      "type" : "image",
+      "file" : "1465926302580.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1102",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Terrorist Groups",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/jordibernabeu/16042467911/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A journalist documenting the aftermath of a terrorist attack"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Terrorist groups operating in Pakistan have been responsible for suicide bombings, kidnappings, and armed assaults against guarded facilities. Certain terrorist groups have conducted disaster relief within local populations in order to increase support for the groups among those affected.",
+      "media" : [ {
+        "zid" : 4032453,
+        "xid" : "4032453.mp3",
+        "type" : "audio",
+        "file" : "4032453.mp3"
+      } ]
+    }, {
+      "text" : "Suppressing these groups is not a priority for Pakistan. Instead, the government is primarily concerned with establishing a strong defense against India and other neighboring countries.",
+      "media" : [ {
+        "zid" : 4032454,
+        "xid" : "4032454.mp3",
+        "type" : "audio",
+        "file" : "4032454.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1458331712631,
+      "xid" : "1458331712631.jpg",
+      "type" : "image",
+      "file" : "1458331712631.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

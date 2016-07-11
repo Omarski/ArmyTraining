@@ -1,0 +1,49 @@
+{
+  "page" : {
+    "xid" : "page1994",
+    "type" : "Info",
+    "title" : "Relationship Maintenance",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/7vfE7o"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A U.S. service member meeting with a village leader during a humanitarian assistance mission"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Leader engagements are not about engaging when a crisis arises, but building a strong relationship over time. Visit your counterparts regularly, even if you're not working on an active project. Personal visits are appreciated and show you're not simply there to complete projects and leave.\n",
+      "media" : [ {
+        "zid" : 4032626,
+        "xid" : "4032626.mp3",
+        "type" : "audio",
+        "file" : "4032626.mp3"
+      } ]
+    }, {
+      "text" : "Avoid making visits seem like you're \"checking up\" on your counterparts. Show genuine concern, spend some time chatting, and inquire about anything you can assist with.",
+      "media" : [ {
+        "zid" : 4032627,
+        "xid" : "4032627.mp3",
+        "type" : "audio",
+        "file" : "4032627.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1463602223971,
+      "xid" : "1463602223971.jpg",
+      "type" : "image",
+      "file" : "1463602223971.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

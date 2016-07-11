@@ -1,0 +1,221 @@
+{
+  "page" : {
+    "xid" : "page2372",
+    "type" : "MatchItem",
+    "title" : "Practice 5",
+    "info" : null,
+    "prompt" : {
+      "text" : "Match the Afghan number to its English equivalent."
+    },
+    "matchSource" : [ {
+      "letter" : "A",
+      "record" : false,
+      "media" : {
+        "zid" : 1462819546015,
+        "xid" : "1462819546015.jpg",
+        "type" : "image",
+        "file" : "1462819546015.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "0 - ۰"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "media" : {
+        "zid" : 1462819681003,
+        "xid" : "1462819681003.jpg",
+        "type" : "image",
+        "file" : "1462819681003.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "2 - ۲"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "media" : {
+        "zid" : 1462819566657,
+        "xid" : "1462819566657.jpg",
+        "type" : "image",
+        "file" : "1462819566657.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "7 - ۷"
+          } ]
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "media" : {
+        "zid" : 1462819578991,
+        "xid" : "1462819578991.jpg",
+        "type" : "image",
+        "file" : "1462819578991.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "imagination",
+            "value" : "9 - ۹"
+          } ]
+        }
+      }
+    } ],
+    "matchTarget" : [ {
+      "letter" : "A",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "0"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "B",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "2"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "C",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "7"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "letter" : "D",
+      "record" : false,
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "en",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "en",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "en",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "9"
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page4732",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Video: The Air Force's Cultural Framework",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "\"One of the things that differentiates the Air Force Culture and Language Center from some of the other approaches within DoD is that we place more emphasis on general learning, that is, learning about the principles of culture and communication and negotiation, as opposed to the specifics of working a particular place. We don't do that to the specifics' exclusion, but because the Air Force trains, organizes, equips, deploys and employs in smaller units, globally, we found that to have that foundational learning; it makes our airmen much more adaptable, it makes them much quicker to learn when they go to a particular place, because we can't prepare you to go everywhere. And the Air Force doesn't deploy large units to fixed locations for long amounts of time the way that, say, the Army does. We have a globally-deployed force of small teams. So this approach represents a way that we can support the Air Force, it also represents a foundational learning approach.  If you've learned some of the general principles about culture, if you learned concepts like kinship in its general sense, well, everybody has kinship. How it's expressed in one place, how it's expressed in another place are going to be different. It increases the adaptability. And since we're a mobile force, we thought adaptability was critical.\""
+      }, {
+        "name" : "platforms",
+        "value" : "!NOT, vmob"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this video, an anthropologist from the Air Force Culture Center explains how the U.S. Air Force applies its cultural framework."
+    } ],
+    "media" : [ {
+      "zid" : 1400621630584,
+      "xid" : "1400621630584.mp4",
+      "type" : "video",
+      "file" : "1400621630584.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

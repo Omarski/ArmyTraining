@@ -1,0 +1,37 @@
+{
+  "page" : {
+    "xid" : "page1953",
+    "type" : "Info",
+    "title" : "Preparing for Conversation",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/243812/government-islamic-republic-afghanistan-meeting"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Service members discussing security with local counterparts"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Your counterparts' priorities may not entirely align with yours. Be prepared with an understanding of any issues currently affecting their region, and have a contingency plan for positive topics in case of unexpected conversational roadblocks."
+    }, {
+      "text" : "You may need to clarify information weeks after meetings, so be sure to take notes during engagements. However, never take out your notepad during small talk or before business topics are discussed. "
+    } ],
+    "media" : [ {
+      "zid" : 1465499324925,
+      "xid" : "1465499324925.jpg",
+      "type" : "image",
+      "file" : "1465499324925.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

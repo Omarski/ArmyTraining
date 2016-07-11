@@ -1,0 +1,76 @@
+{
+  "page" : {
+    "xid" : "page2114",
+    "type" : "MultipleChoice",
+    "title" : "Quiz 3",
+    "info" : null,
+    "prompt" : {
+      "text" : "If you are female, how should you greet a Pakistani man?"
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Extend your hand for a handshake, and follow their lead."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Smile and make eye contact."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Wait for him to extend his hand."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "translation" : {
+              "kind" : "standard",
+              "text" : "Kiss once on each cheek. "
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}

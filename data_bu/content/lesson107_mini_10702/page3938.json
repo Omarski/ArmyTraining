@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3938",
+    "type" : "Info",
+    "title" : "Climate",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/1531352/afghanistan-return-hope"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan farmer"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "The climate of Afghanistan is seasonal, with very hot summers and frigid winters that can be harsh at higher elevations.",
+      "media" : [ {
+        "zid" : 4032328,
+        "xid" : "4032328.mp3",
+        "type" : "audio",
+        "file" : "4032328.mp3"
+      } ]
+    }, {
+      "text" : "The amount of precipitation the country receives increases moving west to east, with lows of three inches a year in the drier west and as much as 53 inches a year in the eastern Hindu Kush mountains. The southeastern part of the country has the same monsoon season as the Indian subcontinent.",
+      "media" : [ {
+        "zid" : 4032329,
+        "xid" : "4032329.mp3",
+        "type" : "audio",
+        "file" : "4032329.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1452012229224,
+      "xid" : "1452012229224.jpg",
+      "type" : "image",
+      "file" : "1452012229224.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

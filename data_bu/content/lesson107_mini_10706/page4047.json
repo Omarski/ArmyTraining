@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page4047",
+    "type" : "Info",
+    "title" : "Etiquette",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/6092418771/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Shoes removed before a meal in Afghanistan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Remember to remove your shoes before entering an Afghan home. Food is often eaten with bare hands, but it’s okay to ask for utensils if you need them. Avoid serving people or eating with your left hand.",
+      "media" : [ {
+        "zid" : 4032431,
+        "xid" : "4032431.mp3",
+        "type" : "audio",
+        "file" : "4032431.mp3"
+      } ]
+    }, {
+      "text" : "Additionally, it is considered rude to blow your nose in public, or to point the soles of your feet at people.",
+      "media" : [ {
+        "zid" : 4032432,
+        "xid" : "4032432.mp3",
+        "type" : "audio",
+        "file" : "4032432.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1452029187247,
+      "xid" : "1452029187247.jpg",
+      "type" : "image",
+      "file" : "1452029187247.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "page" : {
+    "xid" : "page1940",
+    "type" : "Info",
+    "title" : "Elders",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/7yZmNS"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Two Afghan elders"
+      } ]
+    },
+    "note" : [ {
+      "text" : "Because age and experience are equated with wisdom and authority, Afghan elders are community leaders. If you're in a meeting where tribal elders are present, speak only when spoken to, and sit patiently until tea has been served and small talk has begun. Greet the elders first and ask them about their well-being. Never make decisions that affect a community without the input of its elders."
+    } ],
+    "media" : [ {
+      "zid" : 1463601449096,
+      "xid" : "1463601449096.jpg",
+      "type" : "image",
+      "file" : "1463601449096.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

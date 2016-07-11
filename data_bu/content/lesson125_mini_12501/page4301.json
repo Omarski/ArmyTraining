@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page4301",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Introduction",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "Objex is an exciting game where you apply your knowledge of local culture to help recover objects that have gone missing. Explore the scene to find where the cultural objects have disappeared to. It's up to you to find the objects and return them to their rightful owner. With each object you find, you will learn more about its cultural significance to the region.",
+      "media" : [ {
+        "zid" : 4032029,
+        "xid" : "4032029.mp3",
+        "type" : "audio",
+        "file" : "4032029.mp3"
+      } ]
+    }, {
+      "text" : "- There are two levels in the game, and 10 hidden objects per level.\n- Click on a hint token to reveal the position of an object. \n- Be careful as you only have a limited number of hints in each level!\n- Scroll over an empty slot at the bottom for a description of the object.\n- Complete both levels to enter Advanced Mode!\n- Click \"NEXT\" to launch the game.\n- If you wish to skip the game, click \"NEXT\" again.",
+      "media" : [ {
+        "zid" : 4032030,
+        "xid" : "4032030.mp3",
+        "type" : "audio",
+        "file" : "4032030.mp3"
+      } ]
+    }, {
+      "text" : "Good luck on your search!",
+      "media" : [ {
+        "zid" : 4032033,
+        "xid" : "4032033.mp3",
+        "type" : "audio",
+        "file" : "4032033.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1466090522940,
+      "xid" : "1466090522940.jpg",
+      "type" : "image",
+      "file" : "1466090522940.jpg",
+      "mime" : "image/png",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

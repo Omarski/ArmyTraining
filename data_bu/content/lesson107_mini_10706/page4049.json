@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page4049",
+    "type" : "Info",
+    "title" : "Sports and Pastimes",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/soldiersmediacenter/2086186581/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Afghan children playing soccer in Jalalabad"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "The national sport of Afghanistan is called “buzkashi,” which literally means “goat bashing.” Players mounted on horses compete to drag a goat carcass toward a goal. Buzkashi was originally developed by Genghis Khan to prepare soldiers for battle.",
+      "media" : [ {
+        "zid" : 4032435,
+        "xid" : "4032435.mp3",
+        "type" : "audio",
+        "file" : "4032435.mp3"
+      } ]
+    }, {
+      "text" : "Afghanistan is also famous for its competitive kite-flying, which was banned under the Taliban along with buzkashi. The goal of kite battles is to sever your opponent's kite string, bringing the kite to the ground.",
+      "media" : [ {
+        "zid" : 4032436,
+        "xid" : "4032436.mp3",
+        "type" : "audio",
+        "file" : "4032436.mp3"
+      } ]
+    }, {
+      "text" : "Soccer is also popular.",
+      "media" : [ {
+        "zid" : 4032437,
+        "xid" : "4032437.mp3",
+        "type" : "audio",
+        "file" : "4032437.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1452018250932,
+      "xid" : "1452018250932.jpg",
+      "type" : "image",
+      "file" : "1452018250932.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

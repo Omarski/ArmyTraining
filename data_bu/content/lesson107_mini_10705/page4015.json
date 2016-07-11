@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page4015",
+    "type" : "Info",
+    "title" : "Marriage",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/221817/medical-dental-and-humanitarian-aid"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan girl after a wedding celebration"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "When Afghans marry, they marry into an entire family. Many Afghans prefer to marry within their extended family, with first cousins traditionally favored as partners. This helps to maintain wealth within a family group and ensures that a bride isn’t going to live among strangers.",
+      "media" : [ {
+        "zid" : 4032399,
+        "xid" : "4032399.mp3",
+        "type" : "audio",
+        "file" : "4032399.mp3"
+      } ]
+    }, {
+      "text" : "Marriages are sometimes arranged by family elders. Within urban and educated families, young couples often have more choice in this decision.",
+      "media" : [ {
+        "zid" : 4032400,
+        "xid" : "4032400.mp3",
+        "type" : "audio",
+        "file" : "4032400.mp3"
+      } ]
+    }, {
+      "text" : "Under Islamic law, males are permitted to take up to four wives, but this tradition is rarely practiced in Afghanistan today. Divorce is rare and avoided whenever possible.",
+      "media" : [ {
+        "zid" : 4032401,
+        "xid" : "4032401.mp3",
+        "type" : "audio",
+        "file" : "4032401.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1457472858869,
+      "xid" : "1457472858869.jpg",
+      "type" : "image",
+      "file" : "1457472858869.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "page" : {
+    "xid" : "page1852",
+    "type" : "Info",
+    "title" : "Personal Safety",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/449463/chardah-key-leader-engagement#.VyGPHqODFBc"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A service member speaking with the local children in a village"
+      } ]
+    },
+    "note" : [ {
+      "text" : "If you travel outside of major cities or into Pashtun areas, you will most likely be welcomed and shown the hospitality Afghans are known for. However, keep in mind that safety is situational and village dynamics may have changed since your last visit.\n\nIf rural leaders or children approach and greet your arriving team, the area is probably friendly. However, if you enter a town where no children are visible, or the streets are empty, you may have entered a volatile area, or caused offense."
+    } ],
+    "media" : [ {
+      "zid" : 1463530247777,
+      "xid" : "1463530247777.jpg",
+      "type" : "image",
+      "file" : "1463530247777.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page1955",
+    "type" : "MultiNote",
+    "title" : "Appropriate Small Talk",
+    "related" : [ {
+      "xid" : "page1956",
+      "type" : "Info",
+      "title" : "Appropriate Small Talk 1",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/8by2Ta"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Service members chatting with an Afghan man"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Small talk can last 15 minutes in most situations, but might last an hour or more. Keep topics to things you know your counterparts can discuss. Good topics include:",
+        "media" : [ {
+          "zid" : 4032566,
+          "xid" : "4032566.mp3",
+          "type" : "audio",
+          "file" : "4032566.mp3"
+        } ]
+      }, {
+        "text" : "- Their interests or hobbies.\n- Soccer.\n- Positive comments on their house, livelihood, or livestock. \n- Their home province, especially if you have positive comments about the area.\n- Compliments about Afghan culture, the landscape, and food."
+      } ],
+      "media" : [ {
+        "zid" : 1463600888248,
+        "xid" : "1463600888248.jpg",
+        "type" : "image",
+        "file" : "1463600888248.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1957",
+      "type" : "Info",
+      "title" : "Appropriate Small Talk 2",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/9T9pTu"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Service members speaking with local shop owners"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Even after you've built a relationship, don't ask business-related questions until you've asked about your counterpart's health and their family's well-being.",
+        "media" : [ {
+          "zid" : 4032567,
+          "xid" : "4032567.mp3",
+          "type" : "audio",
+          "file" : "4032567.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1463600904302,
+        "xid" : "1463600904302.jpg",
+        "type" : "image",
+        "file" : "1463600904302.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1958",
+      "type" : "Info",
+      "title" : "Appropriate Small Talk 3",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/9M5ALG"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An Afghan elder"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Bringing up inappropriate subjects or discussing business too early could damage your rapport. Topics to avoid include:\n",
+        "media" : [ {
+          "zid" : 4034202,
+          "xid" : "4034202.mp3",
+          "type" : "audio",
+          "file" : "4034202.mp3"
+        } ]
+      }, {
+        "text" : "- Asking about female family members or family members you don't know personally.\n- Religion.\n- Politics.\n- Women's rights and equality.",
+        "media" : [ {
+          "zid" : 4034203,
+          "xid" : "4034203.mp3",
+          "type" : "audio",
+          "file" : "4034203.mp3"
+        } ]
+      } ],
+      "media" : [ {
+        "zid" : 1463600921317,
+        "xid" : "1463600921317.jpg",
+        "type" : "image",
+        "file" : "1463600921317.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

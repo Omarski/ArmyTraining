@@ -16,39 +16,40 @@ var CultureQuestQuiz = React.createClass({
         return {
             mediaPath:'data/media/',
             timerController:"play",
-            timerDuration:30,
+            timerDuration:59,
             timerMessage:"",
-            timerReportAt:{time:20, alert:"hintTime"},
+            timerReportAt:{time:30, alert:"hintTime"},
             timerParentAlerts:null,
             questionDisplayObj:{},
             correctAnswer:"",
             hintIntro: this.props.imageData.hintBlurb,
             answerRevealIntro: "Not quite, but here's the answer you are looking for.",
-            earnedPuzzleAwardText:"I want you to take this with you.",
+            wrongAnswerText:"That is incorrect. But since we are short on time, I want you to take this with you anyhow.",
+            correctAnswerText:"Yes, that's correct. Here's what you're looking for.",
             hintMode: false,
             skipMode: false,
             leaveRegionMode: false,
             showInputBlocks: true,
             puzzleAwardMode:false,
             atInputBlock:1,
-            inputBlocksTotal:0
+            inputBlocksTotal:0,
+            answeredCorrectly:false
         };
     },
 
     componentDidMount: function() {
-        this.getQuestionQuotes;
+        //this.getQuestionQuotes;
         this.renderQuestionText();
     },
 
     getSelectedIndex: function(){
-        console.log("id: " + this.props.lastSelected.getAttribute('id'));
+
         if (this.props.lastSelected) return parseInt(this.props.lastSelected.getAttribute('id').substring(18));
         return false;
     },
 
-    getQuestionQuotes: function(){
-        var questionIntr
-    },
+    // getQuestionQuotes: function(){
+    // },
 
     getSelectedJSON: function(){
 
@@ -65,9 +66,11 @@ var CultureQuestQuiz = React.createClass({
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
         var selectedJSON = self.getSelectedJSON();
 
+
         if (self.state.hintMode){
-            intro2 = self.state.hintIntro;
-            question = selectedJSON['hint'+ answerObj.onQuestion];
+            intro2 =  (<div><div>{self.state.hintIntro}</div>
+                         <div>{selectedJSON['hint'+ answerObj.onQuestion]}</div></div>);
+            question = selectedJSON['prompt'+ answerObj.onQuestion];
         }else{
             intro2 = "";
             question = selectedJSON['prompt'+ answerObj.onQuestion];
@@ -94,7 +97,7 @@ var CultureQuestQuiz = React.createClass({
     renderBlocks: function(){
 
         var self = this;
-
+        var blockCounter = 0;
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
         var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion];
 
@@ -107,8 +110,9 @@ var CultureQuestQuiz = React.createClass({
         for (var i = 0 ; i < answerBlocksArray.length; i++) {
 
             var blocks = answerBlocksArray[i].split('').map(function (letter, index) {
+                blockCounter += 1;
                 return (
-                    <CultureQuestInputBlocksView id={"culture-quest-quiz-view-inputBlock"+index} key={index}/>
+                    <CultureQuestInputBlocksView id={"culture-quest-quiz-view-inputBlock"+parseInt(blockCounter - 1)} key={index}/>
                 )
             });
 
@@ -192,20 +196,19 @@ var CultureQuestQuiz = React.createClass({
         });
 
         //correct
-        if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase()) {
+        if (completeAnswer.toLowerCase() === self.state.correctAnswer.toLowerCase().replace(" ","")) {
 
             answerObj["question"+ answerObj.onQuestion].answered = true;
 
             //Question 2 correct
             if (answerObj.onQuestion === 2) {
                 //change in answersColl triggers CQ-Map updateLayerAccess
-                self.awardPuzzlePiece();
+                self.setState({answeredCorrectly:true}, function(){self.awardPuzzlePiece()});
 
             //Question 1 correct
             }else{
                 answerObj.question1.answered = true;
-                answerObj.onQuestion = 2;
-                this.resetQuestion();
+                self.awardPuzzlePiece();
             }
         //incorrect
         }else{
@@ -238,6 +241,8 @@ var CultureQuestQuiz = React.createClass({
                         },2000);
                     }
                 }, 2000);
+
+                self.setState({answeredCorrectly:false});
             }
         }
     },
@@ -329,7 +334,7 @@ var CultureQuestQuiz = React.createClass({
 
                             {self.state.puzzleAwardMode ?
                                 <div>
-                                    <div className={puzzleAwardTextClass}>{self.state.earnedPuzzleAwardText}</div>
+                                    <div className={puzzleAwardTextClass}>{self.state.answeredCorrectly ? self.state.correctAnswerText:self.state.wrongAnswerText}</div>
                                 </div>:null}
                             
                             {self.state.showInputBlocks && !self.state.puzzleAwardMode? <div className="culture-quest-quiz-view-input-blocks-cont" id="culture-quest-quiz-view-input-blocks-cont">

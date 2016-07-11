@@ -1,0 +1,40 @@
+{
+  "page" : {
+    "xid" : "page1711",
+    "type" : "Info",
+    "title" : "Early Political Parties",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Flag_of_the_Indian_National_Congress.svg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Flag of the Indian National Congress"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "The Indian National Congress political party was formed in 1885 to give a voice to the Indian people under British rule. In 1906, Mohammed Ali Jinnah formed the All-India Muslim League to ensure Muslims were also represented.",
+      "media" : [ {
+        "zid" : 4032216,
+        "xid" : "4032216.mp3",
+        "type" : "audio",
+        "file" : "4032216.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1461020593620,
+      "xid" : "1461020593620.jpg",
+      "type" : "image",
+      "file" : "1461020593620.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

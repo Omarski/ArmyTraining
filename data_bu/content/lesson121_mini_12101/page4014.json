@@ -1,0 +1,32 @@
+{
+  "page" : {
+    "xid" : "page4014",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Introduction to Culture Quest",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "Culture Quest is an exciting trivia game in which you use your knowledge of local culture to uncover a missing artifact and return it to its rightful home."
+    }, {
+      "text" : "The artifact has been stolen and broken, and the pieces have been spread throughout the region. You must travel the region and answer questions to track down the missing artifact. With each correct answer, you'll receive a piece of the artifact. Answer all the questions to put it back together and uncover a surprise!"
+    }, {
+      "text" : "- To respond to questions, type your answer into the blanks.\n- To revise an answer, use the backspace button to delete letters.\n- To solve the puzzle, drag the pieces so they align correctly on the tiles.\n- To begin the game, click \"NEXT.\"\n- If you wish to skip the game, click \"NEXT\" again."
+    }, {
+      "text" : "Good luck on your quest!"
+    } ],
+    "media" : [ {
+      "zid" : 1364251129730,
+      "xid" : "1364251129730.jpg",
+      "type" : "image",
+      "file" : "1364251129730.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

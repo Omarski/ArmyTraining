@@ -1,0 +1,191 @@
+{
+  "page" : {
+    "type" : "MultiNote",
+    "xid" : "page1894",
+    "type" : "MultiNote",
+    "title" : "Gestures and Body Language",
+    "related" : [ {
+      "xid" : "page1895",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 1",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "Alelo Inc."
+        } ]
+      },
+      "note" : [ {
+        "text" : "In Afghanistan, it's common to greet with a handshake, followed by placing your hand over your heart. In some cases, for instance when greeting older men or women, greeting with just a hand over your heart may be appropriate. In addition, this gesture might be used to express heartfelt gratitude for something.",
+        "media" : [ null ]
+      } ],
+      "media" : [ {
+        "zid" : 1412799754923,
+        "xid" : "1412799754923.mp4",
+        "type" : "video",
+        "file" : "1412799754923.mp4",
+        "mime" : "video/x-flv",
+        "info" : null
+      } ]
+    }, {
+      "xid" : "page1896",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 2",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/7wA3Wn"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An Afghan police officer sharing information during a meeting"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Be aware of how your own body language might have a different meaning in Afghanistan. Afghan gestures have more sweeping or invitational motions than American gestures. For instance, your counterpart might use all fingers and an open palm to point at something, rather than using their index finger, which might be considered rude."
+      } ],
+      "media" : [ {
+        "zid" : 1463601005655,
+        "xid" : "1463601005655.jpg",
+        "type" : "image",
+        "file" : "1463601005655.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1897",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 3",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/7L6n74"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "An Afghan doctor meeting with elders"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Beckoning someone with your fingers pointing up and curling toward you may be considered rude. It's more common to beckon with the palm down, the fingers pointing to the ground, and moving the wrist and fingers in a sweeping motion toward you."
+      } ],
+      "media" : [ {
+        "zid" : 1463601020083,
+        "xid" : "1463601020083.jpg",
+        "type" : "image",
+        "file" : "1463601020083.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1898",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 4",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/NYBNF"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Aghan leaders meeting in a village"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Avoid giving a \"thumbs up\" or the \"OK\" sign. Older Afghans may see it as profane, or it could signal that someone has zero value."
+      } ],
+      "media" : [ {
+        "zid" : 1463601032161,
+        "xid" : "1463601032161.jpg",
+        "type" : "image",
+        "file" : "1463601032161.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1899",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 5",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "DVIDS"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "U.S. service members meeting with Afghan leaders"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Avoid pointing the soles of your feet at other people, even if your legs are crossed. When seated in a chair, keep a straight posture with your feet on the floor.\n"
+      } ],
+      "media" : [ {
+        "zid" : 1464822469926,
+        "xid" : "1464822469926.jpg",
+        "type" : "image",
+        "file" : "1464822469926.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    }, {
+      "xid" : "page1900",
+      "type" : "Info",
+      "title" : "Gestures and Body Language 6",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "https://flic.kr/p/961Bcu"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "A shephard waving as he passes by"
+        } ]
+      },
+      "note" : [ {
+        "text" : "Use your right hand for interaction. In Afghanistan, some people consider the left hand to be unclean. Many don't use their left hand for handshakes, eating, or giving and receiving objects. \n"
+      } ],
+      "media" : [ {
+        "zid" : 1463603303104,
+        "xid" : "1463603303104.jpg",
+        "type" : "image",
+        "file" : "1463603303104.jpg",
+        "mime" : "image/jpeg",
+        "info" : {
+          "property" : [ {
+            "name" : "mediacaption",
+            "value" : "NASA's Earth Observatory"
+          }, {
+            "name" : "mediadisplayblurb",
+            "value" : "Map of Afghanistan"
+          } ]
+        }
+      } ]
+    } ]
+  }
+}

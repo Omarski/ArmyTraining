@@ -1,0 +1,43 @@
+{
+  "page" : {
+    "xid" : "page3996",
+    "type" : "Info",
+    "title" : "Agriculture",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "An Afghan farmer weeding his field"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/dfataustralianaid/10664920436/"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "About one-quarter of Afghanistan’s land is arable, and about half of this is cultivated every year. Both subsistence farming and pastoral nomadism are common agricultural ways of life. About 20% of the rural population is nomadic and uses land for pasture. Land disputes are an ongoing source of conflict.",
+      "media" : [ {
+        "zid" : 4032388,
+        "xid" : "4032388.mp3",
+        "type" : "audio",
+        "file" : "4032388.mp3"
+      } ]
+    }, {
+      "text" : "Common crops include wheat, cereals, cotton, and opium poppies.",
+      "media" : [ null ]
+    } ],
+    "media" : [ {
+      "zid" : 1452020344650,
+      "xid" : "1452020344650.jpg",
+      "type" : "image",
+      "file" : "1452020344650.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "chapter" : {
+    "xid" : "lesson101_mini_10101",
+    "title" : "Prologue",
+    "info" : {
+      "property" : [ {
+        "name" : "fount",
+        "value" : "/lev1/lesson103"
+      }, {
+        "name" : "sharedLibraryRevision",
+        "value" : "83529"
+      }, {
+        "name" : "L2",
+        "value" : "fr"
+      }, {
+        "name" : "prologue",
+        "value" : ""
+      } ]
+    },
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page4017",
+        "type" : "Info",
+        "title" : "Welcome"
+      }, {
+        "xid" : "page4015",
+        "type" : "Info",
+        "title" : "Acknowledgement"
+      }, {
+        "xid" : "page1001",
+        "type" : "Info",
+        "title" : "Section 508 Compatibility"
+      }, {
+        "xid" : "page2601",
+        "type" : "Info",
+        "title" : "VCAT Introduction"
+      }, {
+        "xid" : "page1810",
+        "type" : "Info",
+        "title" : "Prologue"
+      }, {
+        "xid" : "page1206",
+        "type" : "Info",
+        "title" : "User Interface"
+      }, {
+        "xid" : "page1207",
+        "type" : "Info",
+        "title" : "Page Narration"
+      }, {
+        "xid" : "page2003",
+        "type" : "Info",
+        "title" : "Bookmarking"
+      }, {
+        "xid" : "page1208",
+        "type" : "Info",
+        "title" : "Lesson Explorer"
+      }, {
+        "xid" : "page1209",
+        "type" : "Info",
+        "title" : "Using the Record Button"
+      }, {
+        "xid" : "page2002",
+        "type" : "Info",
+        "title" : "Welcome to VCAT AFPAK"
+      }, {
+        "xid" : "page1201",
+        "type" : "Questionnaire",
+        "title" : "Questionnaire - Country Selection"
+      }, {
+        "xid" : "page1202",
+        "type" : "Questionnaire",
+        "title" : "Questionnaire - Mission Selection"
+      }, {
+        "xid" : "page1203",
+        "type" : "Questionnaire",
+        "title" : "Questionnaire - Recommended Content"
+      }, {
+        "xid" : "page1204",
+        "type" : "QuestionnaireEnd",
+        "title" : "Questionnaire - Summary"
+      } ]
+    } ],
+    "zmedia" : [ {
+      "zid" : 1459889480065,
+      "xid" : "1459889480065.mp4",
+      "type" : "video",
+      "file" : "1459889480065.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1416258096351,
+      "xid" : "1416258096351.mp4",
+      "type" : "video",
+      "file" : "1416258096351.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1467307526175,
+      "xid" : "1467307526175.jpg",
+      "type" : "image",
+      "file" : "1467307526175.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1340736395326,
+      "xid" : "1340736395326.jpg",
+      "type" : "image",
+      "file" : "1340736395326.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1465926302580,
+      "xid" : "1465926302580.jpg",
+      "type" : "image",
+      "file" : "1465926302580.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 1333574159526,
+      "xid" : "1333574159526.jpg",
+      "type" : "image",
+      "file" : "1333574159526.jpg",
+      "mime" : "image/png",
+      "info" : null
+    }, {
+      "zid" : 1340736395326,
+      "xid" : "1340736395326.jpg",
+      "type" : "image",
+      "file" : "1340736395326.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1340736395326,
+      "xid" : "1340736395326.jpg",
+      "type" : "image",
+      "file" : "1340736395326.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1467303888022,
+      "xid" : "1467303888022.jpg",
+      "type" : "image",
+      "file" : "1467303888022.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1340736395326,
+      "xid" : "1340736395326.jpg",
+      "type" : "image",
+      "file" : "1340736395326.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1460740663365,
+      "xid" : "1460740663365.mp4",
+      "type" : "video",
+      "file" : "1460740663365.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "page" : {
+    "xid" : "page4102",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Introduction",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : ""
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

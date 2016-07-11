@@ -1,0 +1,1747 @@
+{
+  "blockings": {},
+  "briefings": {"s0": {
+    "description": "Earlier this week, there was a high-magnitude earthquake in Pakistan. Today, you are meeting with Tariq Osmani, a Pakistan military leader, to coordinate a humanitarian assistance mission in the affected areas. You are authorized to offer temporary shelters, logistical support, and the transportation of supplies to victims.\nYour objectives are to:\n- Greet your counterpart appropriately.\n- Engage in appropriate small talk to build rapport.\n- Navigate sensitive topics appropriately.\n- Seek input from your counterpart when making decisions.\n- Encourage equal and reciprocal contribution to the mission.\n- Manage your counterpart\u2019s expectations.",
+    "title": ""
+  }},
+  "configed": {},
+  "debriefings": {"s8": {}},
+  "initialMemory": {
+    "BUSINESS": 0,
+    "CONTRIBUTE": false,
+    "GREET": 0,
+    "MANAGE": false,
+    "RET_SMALL_TALK": false,
+    "RET__SMALL_TALK_ASK_BEGIN_AID_WORK": false,
+    "RET__SMALL_TALK_ASK_FAMILY_AMERICA": false,
+    "RET__SMALL_TALK_ASK_SPORTING_EVENTS": false,
+    "RET__SMALL_TALK_ASK_WHERE_ELSE": false,
+    "SEEK": false,
+    "SENSITIVE": false,
+    "TALK": 0
+  },
+  "inputMappings": {
+    "ask_begin_aid_work": [{
+      "L1": "Are we all set to begin our aid work?",
+      "L2": "Are we all set to begin our aid work?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033102",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "ask_family_America": [{
+      "L1": "Do you have a lot of family in America?",
+      "L2": "Do you have a lot of family in America?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033100",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "ask_in_south": [{
+      "L1": "Isn't that in the south?",
+      "L2": "Isn't that in the south?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033073",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "ask_sporting_events": [{
+      "L1": "Have you been to any sporting events in LA?",
+      "L2": "Have you been to any sporting events in LA?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033105",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "ask_trucks": [{
+      "L1": "If you just use trucks, you shouldn't need our help.",
+      "L2": "If you just use trucks, you shouldn't need our help.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033116",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "ask_where_else": [{
+      "L1": "Where else have you traveled?",
+      "L2": "Where else have you traveled?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033096",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_greeting_asalaamu": [{
+      "L1": "asalaamo 'aleykum.",
+      "L2": "asalaamo 'aleykum.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033048",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_greeting_hello": [{
+      "L1": "Hello, sir.",
+      "L2": "Hello, sir.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033051",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_greeting_youreTariq": [{
+      "L1": "You're Tariq, right?",
+      "L2": "You're Tariq, right?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033066",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_heard_Lahore": [{
+      "L1": "I heard Lahore is a huge city.",
+      "L2": "I heard Lahore is a huge city.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033063",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_if_needed": [{
+      "L1": "If it's really needed, I'm sure I can make that happen.",
+      "L2": "If it's really needed, I'm sure I can make that happen.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033130",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_must_Punjabi": [{
+      "L1": "If you're from Lahore, you must be Punjabi.",
+      "L2": "If you're from Lahore, you must be Punjabi.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033062",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_nice_Osmani": [{
+      "L1": "Nice to meet you, Mr. Osmani.",
+      "L2": "Nice to meet you, Mr. Osmani.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033054",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_nice_Tariq": [{
+      "L1": "Nice to meet you, Tariq.",
+      "L2": "Nice to meet you, Tariq.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033052",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_nice_Tariq_sahib": [{
+      "L1": "Nice to meet you, Tariq sahib.",
+      "L2": "Nice to meet you, Tariq sahib.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033056",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_no_problem": [{
+      "L1": "No problem. My team will take over from here.",
+      "L2": "No problem. My team will take over from here.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033126",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_not_sure": [{
+      "L1": "I'll try my best, but I'm not sure it will be possible.",
+      "L2": "I'll try my best, but I'm not sure it will be possible.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033121",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_provide_food": [{
+      "L1": "We can probably provide food instead.",
+      "L2": "We can probably provide food instead.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033091",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_provide_tents": [{
+      "L1": "We are prepared to provide tents to those who were affected.",
+      "L2": "We are prepared to provide tents to those who were affected.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033084",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_provide_transportation": [{
+      "L1": "We can provide transportation, but you should distribute the supplies.",
+      "L2": "We can provide transportation, but you should distribute the supplies.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033125",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_soldiers_survey": [{
+      "L1": "My men can survey the area to determine local needs.",
+      "L2": "My men can survey the area to determine local needs.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033088",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_sure_happy": [{
+      "L1": "Sure. Happy to help any way we can.",
+      "L2": "Sure. Happy to help any way we can.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033133",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_what_instead": [{
+      "L1": "What can we provide instead?",
+      "L2": "What can we provide instead?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033093",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_what_you_think": [{
+      "L1": "What do you think is the best course of action?",
+      "L2": "What do you think is the best course of action?",
+      "anima": "",
+      "mode": "",
+      "sound": "4033079",
+      "terp": "L2",
+      "wrong": false
+    }],
+    "say_wont_this_time": [{
+      "L1": "We won't be able to do that at this time.",
+      "L2": "We won't be able to do that at this time.",
+      "anima": "",
+      "mode": "",
+      "sound": "4033134",
+      "terp": "L2",
+      "wrong": false
+    }]
+  },
+  "nls": {
+    "ask_begin_aid_work": "Set to begin our aid work?",
+    "ask_family_America": "have a lot of family in America?",
+    "ask_in_south": "Isn't that in the south?",
+    "ask_sporting_events": "Been to sporting events in LA?",
+    "ask_trucks": "Why don't you just use trucks instead?",
+    "ask_where_else": "Where else have you traveled?",
+    "say_greeting_asalaamu": "Greet in Urdu and give handshake.",
+    "say_greeting_hello": "Greet in English and give handshake.",
+    "say_greeting_youreTariq": "Greet informally in English.",
+    "say_heard_Lahore": "I heard Lahore is a huge city",
+    "say_if_needed": "If it's really needed, I'm sure I can make that happen",
+    "say_must_Punjabi": "If you're from Lahore, you must be Punjabi",
+    "say_nice_Osmani": "Nice to meet you Mr. Osmani",
+    "say_nice_Tariq": "Nice to meet you Tariq",
+    "say_nice_Tariq_sahib": "Nice to meet you Tariq sahib",
+    "say_no_problem": "No problem. My team will take over.",
+    "say_not_sure": "I'm not sure it will be possible but I'll try",
+    "say_provide_food": "We can probably provide food instead",
+    "say_provide_tents": "We are prepared to provide tents",
+    "say_provide_transportation": "We can provide transportation, but you should distribute",
+    "say_soldiers_survey": "My soldiers can survey the area",
+    "say_sure_happy": "Sure happy to help any way we can",
+    "say_what_instead": "What can we provide instead",
+    "say_what_you_think": "What do you think is the best course of action",
+    "say_wont_this_time": "We won't be able to do that at this time."
+  },
+  "nodesPy": "",
+  "objectives": [
+    {
+      "condition": "GREET 2 ==",
+      "failDescription": "Remember that it's important to greet and address counterparts appropriately in Pakistan. Always greet your counterparts, especially if they are older than you, and address them formally in English or the local language.",
+      "label": "Greet your counterpart appropriately.",
+      "oid": "c0c32864fc24ed1241713b3e0a34973a5679aed7",
+      "passDescription": "You greeted and addressed your counterpart appropriately. Though greeting using \"hello\" in English is acceptable, it's even better to greet in the local language to show interest in your counterpart's culture.",
+      "remediationq": [
+        "lesson114:page2366",
+        "lesson114:page2315"
+      ]
+    },
+    {
+      "condition": "TALK 3 ==",
+      "failDescription": "Remember, not engaging in small talk is considered rude and disrespectful. When meeting with counterparts, it\u2019s best to let them bring up business when they are ready to do so.",
+      "label": "Engage in appropriate small talk to build rapport.",
+      "oid": "e7827c2cc2e998b8295371b803be96e41fedbe29",
+      "passDescription": "You effectively built rapport with your counterpart by using appropriate small talk. When engaging your counterparts, one way to show interest is by discussing common experiences.",
+      "remediationq": ["lesson114:page2705"]
+    },
+    {
+      "condition": "SENSITIVE true ==",
+      "failDescription": "Remember that topics like ethnicity, politics, and religion are especially sensitive in Pakistan. It's best to avoid talking about these topics with Pakistani counterparts.",
+      "label": "Navigate sensitive topics appropriately.",
+      "oid": "a13dab406684fd67085aedb6ed62c7a62b65738a",
+      "passDescription": "You successfully navigated a sensitive conversation. In Pakistan, it's best to avoid topics like ethnicity, politics, and religion.",
+      "remediationq": ["lesson114:page2320"]
+    },
+    {
+      "condition": "SEEK true ==",
+      "failDescription": "Remember, it's best to discuss the situation and learn your counterpart's priorities when determining appropriate aid. Ask questions and seek input from your counterpart to get a local perspective.",
+      "label": "Seek input from your counterpart when making decisions.",
+      "oid": "3afa972873b5660e8c0e6cd596866ca0c2b69527",
+      "passDescription": "You discussed the situation and learned your counterpart's priorities. Before determining appropriate aid, it's best to seek a local perspective.",
+      "remediationq": ["lesson114:page2339"]
+    },
+    {
+      "condition": "CONTRIBUTE true ==",
+      "failDescription": "Remember, U.S. team members and Pakistani counterparts should be contributing to the mission equally. Encourage your counterpart to take a more hands-on role in the mission.",
+      "label": "Encourage equal and reciprocal contribution to the mission.",
+      "oid": "8e03f5c894c373c7c82d43c38885971fd3b0e476",
+      "passDescription": "You encouraged your counterpart to take a more hands-on role in the mission. It's important that U.S. team members and Pakistani counterparts contribute equally to the mission.",
+      "remediationq": ["lesson114:page2340"]
+    },
+    {
+      "condition": "MANAGE true ==",
+      "failDescription": "Your counterpart may ask for more than you can provide, but you don't want to be disrespectful or give them unrealistic expectations. Avoid this by finding out their priorities, then be clear about what you can provide to address them.",
+      "label": "Manage your counterpart\u2019s expectations.",
+      "oid": "e0fbf930d1d74e9839c85de7764605114defe0d1",
+      "passDescription": "You successfully made your counterpart aware that there may be limits to what you can do. If you're uncertain of your ability to commit to a request, it's best to say you'll make an effort, but avoid making promises.",
+      "remediationq": ["lesson114:page2343"]
+    }
+  ],
+  "outputMappings": {
+    "Frank_Gill-ask_ok_what_L2": {
+      "L1": "Okay. What can we do?",
+      "L2": "Okay. What can we do?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033085",
+      "terp": "L2",
+      "title": "ok what can we do?"
+    },
+    "Frank_Gill-ask_surprised_been_LA_L2": {
+      "L1": "You've been to LA?",
+      "L2": "You've been to LA?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033044",
+      "terp": "L2",
+      "title": "You've been to LA?"
+    },
+    "Frank_Gill-ask_where_from_L2": {
+      "L1": "Where in Pakistan are you from?",
+      "L2": "Where in Pakistan are you from?",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033059",
+      "terp": "L2",
+      "title": "Where in Pakistan are you from?"
+    },
+    "Frank_Gill-say_I_apologize_L2": {
+      "L1": "I apologize.",
+      "L2": "I apologize.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033112",
+      "terp": "L2",
+      "title": "I apologize."
+    },
+    "Frank_Gill-say_Im_Frank_L2": {
+      "L1": "I'm Frank Gill. I'm here to help with the earthquake relief efforts.",
+      "L2": "I'm Frank Gill. I'm here to help with the earthquake relief efforts.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033034",
+      "terp": "L2",
+      "title": "I'm Frank Gill. I'm here to help."
+    },
+    "Frank_Gill-say_Pak_food_good_L2": {
+      "L1": "Pakistani food is pretty good. I tried chapati the other day. It was great!",
+      "L2": "Pakistani food is pretty good. I tried chapati the other day. It was great!",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033145",
+      "terp": "L2",
+      "title": "Pakistani food is pretty good."
+    },
+    "Frank_Gill-say_apologize_L2": {
+      "L1": "Oh, I apologize, Tariq sahib.",
+      "L2": "Oh, I apologize, Tariq sahib.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033040",
+      "terp": "L2",
+      "title": "I apologize"
+    },
+    "Frank_Gill-say_arrange_helicopters_L2": {
+      "L1": "Alright. I can arrange for helicopters. But your men should collect and distribute the supplies.",
+      "L2": "Alright. I can arrange for helicopters. But your men should collect and distribute the supplies.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033128",
+      "terp": "L2",
+      "title": "Alright I can arrange for helicopters"
+    },
+    "Frank_Gill-say_from_California_L2": {
+      "L1": "I'm from California. It's on the west coast.",
+      "L2": "I'm from California. It's on the west coast.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033042",
+      "terp": "L2",
+      "title": "From California"
+    },
+    "Frank_Gill-say_gather_team_L2": {
+      "L1": "It may be hard to gather a team for that.",
+      "L2": "It may be hard to gather a team for that.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033120",
+      "terp": "L2",
+      "title": "It may be hard to gather a team for that"
+    },
+    "Frank_Gill-say_goodbye_L2": {
+      "L1": "Goodbye, Tariq sahib.",
+      "L2": "Goodbye, Tariq sahib.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033140",
+      "terp": "L2",
+      "title": "Goodbye Tariq sahib"
+    },
+    "Frank_Gill-say_love_visit_L2": {
+      "L1": "I would love to visit sometime.",
+      "L2": "I would love to visit sometime.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033077",
+      "terp": "L2",
+      "title": "I would love to visit sometime"
+    },
+    "Frank_Gill-say_nice_family_nearby_L2": {
+      "L1": "That must be nice to have most of your family nearby. My family is back in California.",
+      "L2": "That must be nice to have most of your family nearby. My family is back in California.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033109",
+      "terp": "L2",
+      "title": "That must be nice to have your family nearby"
+    },
+    "Frank_Gill-say_no_food_delicious_L2": {
+      "L1": "No, I haven't. But I've heard the food there is delicious.",
+      "L2": "No, I haven't. But I've heard the food there is delicious.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033107",
+      "terp": "L2",
+      "title": "No I haven't but the food there is delicious"
+    },
+    "Frank_Gill-say_oh_right_L2": {
+      "L1": "Oh, that's right. I would love to visit sometime.",
+      "L2": "Oh, that's right. I would love to visit sometime.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033144",
+      "terp": "L2",
+      "title": "Oh that's right. I would love to visit sometime"
+    },
+    "Frank_Gill-say_popular_sport_L2": {
+      "L1": "No, they're not. But I heard it's a popular sport in Pakistan.",
+      "L2": "No, they're not. But I heard it's a popular sport in Pakistan.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033110",
+      "terp": "L2",
+      "title": "No they're not but I heard it's a popular sport"
+    },
+    "Frank_Gill-say_sorry_L2": {
+      "L1": "Oh, I'm sorry.",
+      "L2": "Oh, I'm sorry.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033036",
+      "terp": "L2",
+      "title": "Oh, I'm sorry."
+    },
+    "Frank_Gill-say_sorry_offended_L2": {
+      "L1": "I'm sorry if I've offended you.",
+      "L2": "I'm sorry if I've offended you.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033075",
+      "terp": "L2",
+      "title": "I'm sorry if I've offended you"
+    },
+    "Frank_Gill-say_you_too_L2": {
+      "L1": "You as well, Tariq sahib.",
+      "L2": "You as well, Tariq sahib.",
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "4033138",
+      "terp": "L2",
+      "title": "You as well, Tariq sahib"
+    },
+    "Frank_Gill-shake_hands2_L2": {
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "and Tariq shake hands."
+    },
+    "Frank_Gill-shake_hands3_L2": {
+      "addressee": "Tariq_Osmani",
+      "anima": "",
+      "sound": "",
+      "terp": "L2",
+      "title": "and Tariq shake hands."
+    },
+    "Tariq_Osmani-ask_distribute_helicopters_L2": {
+      "L1": "Could you use U.S. helicopters to distribute the supplies? None of our helicopters are available for use at the moment.",
+      "L2": "Could you use U.S. helicopters to distribute the supplies? None of our helicopters are available for use at the moment.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032845",
+      "terp": "L2",
+      "title": "Could you distribute the supplies with US helicopters?"
+    },
+    "Tariq_Osmani-ask_yes_who_are_you_L2": {
+      "L1": "Yes, I am Tariq Osmani. I'm sorry, who are you?",
+      "L2": "Yes, I am Tariq Osmani. I'm sorry, who are you?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032823",
+      "terp": "L2",
+      "title": "Yes, I'm Tariq. Who are you?"
+    },
+    "Tariq_Osmani-say_American_support_L2": {
+      "L1": "But American support on the ground would be invaluable. Can you help us?",
+      "L2": "But American support on the ground would be invaluable. Can you help us?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032874",
+      "terp": "L2",
+      "title": "But American support on the ground would be invaluable"
+    },
+    "Tariq_Osmani-say_I_suppose_L2": {
+      "L1": "I suppose I can arrange that.",
+      "L2": "I suppose I can arrange that.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032868",
+      "terp": "L2",
+      "title": "I suppose I can arrange that"
+    },
+    "Tariq_Osmani-say_Im_Tariq_L2": {
+      "L1": "My name is Tariq Osmani.",
+      "L2": "My name is Tariq Osmani.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032810",
+      "terp": "L2",
+      "title": "My name is Tariq Osmani"
+    },
+    "Tariq_Osmani-say_Istanbul_L2": {
+      "L1": "I recently traveled to Istanbul. It's a beautiful city. Have you been there?",
+      "L2": "I recently traveled to Istanbul. It's a beautiful city. Have you been there?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032847",
+      "terp": "L2",
+      "title": "Recently traveled to Istanbul"
+    },
+    "Tariq_Osmani-say_Lahore_L2": {
+      "L1": "I'm from Lahore.",
+      "L2": "I'm from Lahore.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032822",
+      "terp": "L2",
+      "title": "I'm from Lahore"
+    },
+    "Tariq_Osmani-say_Pakistani_better_L2": {
+      "L1": "It is. But Pakistani food is better!",
+      "L2": "It is. But Pakistani food is better!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032849",
+      "terp": "L2",
+      "title": "It is but Pakistani food is better"
+    },
+    "Tariq_Osmani-say_So_Frank_L2": {
+      "L1": "So, Frank sahib, where are you from in the States?",
+      "L2": "So, Frank sahib, where are you from in the States?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032815",
+      "terp": "L2",
+      "title": "So Frank sahib where are you from?"
+    },
+    "Tariq_Osmani-say_actually_superiors_L2": {
+      "L1": "Actually, my superiors have already determined exactly what to supply to the affected villages. We just need your help with transportation and coordination.",
+      "L2": "Actually, my superiors have already determined exactly what to supply to the affected villages. We just need your help with transportation and coordination.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032840",
+      "terp": "L2",
+      "title": "Actually my superiors have already determined what to supply"
+    },
+    "Tariq_Osmani-say_actually_tents_L2": {
+      "L1": "Actually, tents aren't what's most needed.",
+      "L2": "Actually, tents aren't what's most needed.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032841",
+      "terp": "L2",
+      "title": "Actually tents aren't what's most needed"
+    },
+    "Tariq_Osmani-say_alright_well_meeting_L2": {
+      "L1": "Alright. Well, I have a meeting with my superiors now. I'll let them know what we've discussed. Goodbye, Frank sahib.",
+      "L2": "Alright. Well, I have a meeting with my superiors now. I'll let them know what we've discussed. Goodbye, Frank sahib.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032875",
+      "terp": "L2",
+      "title": "Alright. Well, I have a meeting with my superiors now."
+    },
+    "Tariq_Osmani-say_bro_Los_Angeles_L2": {
+      "L1": "California? My brother lives in Los Angeles with his family. The traffic there is almost as bad as it is in Karachi!",
+      "L2": "California? My brother lives in Los Angeles with his family. The traffic there is almost as bad as it is in Karachi!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032817",
+      "terp": "L2",
+      "title": "My brother lives in Los Angeles"
+    },
+    "Tariq_Osmani-say_brother_L2": {
+      "L1": "My brother is there, but most of my family lives in Pakistan.",
+      "L2": "My brother is there, but most of my family lives in Pakistan.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032851",
+      "terp": "L2",
+      "title": "My brother is there but most live in Pakistan"
+    },
+    "Tariq_Osmani-say_crowds_L2": {
+      "L1": "Also, crowds can be difficult to manage when relief arrives. Could you provide crowd control?",
+      "L2": "Also, crowds can be difficult to manage when relief arrives. Could you provide crowd control?",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032872",
+      "terp": "L2",
+      "title": "Also, crowds can be difficult to manage when relief providers arrive"
+    },
+    "Tariq_Osmani-say_difficult_far_away_L2": {
+      "L1": "Yes, it is nice to live near them. It's difficult to be far away from family.",
+      "L2": "Yes, it is nice to live near them. It's difficult to be far away from family.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032854",
+      "terp": "L2",
+      "title": "Yes it's nice to live near them"
+    },
+    "Tariq_Osmani-say_earthquake_destroyed_L2": {
+      "L1": "Just before you arrived, we found out that the earthquake completely destroyed many homes. The number of people in need of aid is increasing daily.",
+      "L2": "Just before you arrived, we found out that the earthquake completely destroyed many homes. The number of people in need of aid is increasing daily.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032836",
+      "terp": "L2",
+      "title": "Just before you arrived we found out that the earthquake destroyed"
+    },
+    "Tariq_Osmani-say_eastern_Pakistan_L2": {
+      "L1": "No, Lahore is actually in the east. It's the capital of the Punjab province.",
+      "L2": "No, Lahore is actually in the east. It's the capital of the Punjab province.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032833",
+      "terp": "L2",
+      "title": "Lahore is actually in eastern Pakistan. It's the capital of Punjab"
+    },
+    "Tariq_Osmani-say_glad_enjoyed_L2": {
+      "L1": "I'm glad to hear you enjoyed it.",
+      "L2": "I'm glad to hear you enjoyed it.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032884",
+      "terp": "L2",
+      "title": "I'm glad to hear you enjoyed it."
+    },
+    "Tariq_Osmani-say_good_L2": {
+      "L1": "Good.",
+      "L2": "Good.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032864",
+      "terp": "L2",
+      "title": "Good"
+    },
+    "Tariq_Osmani-say_growing_up_L2": {
+      "L1": "It is. Growing up, schools closed when there was a big match so that we could all watch.",
+      "L2": "It is. Growing up, schools closed when there was a big match so that we could all watch.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032857",
+      "terp": "L2",
+      "title": "Growing up schools were closed"
+    },
+    "Tariq_Osmani-say_heart_Pakistan_L2": {
+      "L1": "There is a lot to do there. We call it \"the heart of Pakistan.\" But the area is in some trouble now.",
+      "L2": "There is a lot to do there. We call it \"the heart of Pakistan.\" But the area is in some trouble now.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032830",
+      "terp": "L2",
+      "title": "There is a lot to do there. We call it the heart of Pakistan. Anyway we should move on."
+    },
+    "Tariq_Osmani-say_hello_to_you_L2": {
+      "L1": "Hello to you.",
+      "L2": "Hello to you.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032803",
+      "terp": "L2",
+      "title": "Hello to you"
+    },
+    "Tariq_Osmani-say_just_arrived_L2": {
+      "L1": "You just arrived! You Americans are always in such a hurry to address business concerns.",
+      "L2": "You just arrived! You Americans are always in such a hurry to address business concerns.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032859",
+      "terp": "L2",
+      "title": "You just arrived! Americans are in a hurry"
+    },
+    "Tariq_Osmani-say_mainly_cricket_L2": {
+      "L1": "No, I haven't. I'm mainly a cricket fan, but cricket matches aren't very common in America.",
+      "L2": "No, I haven't. I'm mainly a cricket fan, but cricket matches aren't very common in America.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032855",
+      "terp": "L2",
+      "title": "No I haven't I'm mainly a cricket fan"
+    },
+    "Tariq_Osmani-say_many_times_L2": {
+      "L1": "Yes, many times. I've enjoyed my trips very much.",
+      "L2": "Yes, many times. I've enjoyed my trips very much.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032820",
+      "terp": "L2",
+      "title": "Yes, many times. I've enjoyed my trips very much"
+    },
+    "Tariq_Osmani-say_meeting_now_L2": {
+      "L1": "I have a meeting with my superiors now. I'll let them know what we've discussed. I look forward to working with you.",
+      "L2": "I have a meeting with my superiors now. I'll let them know what we've discussed. I look forward to working with you.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032880",
+      "terp": "L2",
+      "title": "I have a meeting with my superiors now"
+    },
+    "Tariq_Osmani-say_move_on_L2": {
+      "L1": "Let's just move on.",
+      "L2": "Let's just move on.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032828",
+      "terp": "L2",
+      "title": "Let's just move on"
+    },
+    "Tariq_Osmani-say_nice_to_meet_L2": {
+      "L1": "Nice to meet you.",
+      "L2": "Nice to meet you.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032806",
+      "terp": "L2",
+      "title": "Nice to meet you."
+    },
+    "Tariq_Osmani-say_not_all_Punjabi_L2": {
+      "L1": "No, I'm not. Not everyone from Lahore is Punjabi.",
+      "L2": "No, I'm not. Not everyone from Lahore is Punjabi.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032825",
+      "terp": "L2",
+      "title": "Not everyone from Lahore is Punjabi"
+    },
+    "Tariq_Osmani-say_second_largest_L2": {
+      "L1": "Yes, it's the second largest in Pakistan!",
+      "L2": "Yes, it's the second largest in Pakistan!",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032831",
+      "terp": "L2",
+      "title": "Yes it's the second largest in Pakistan! We call it the heart of Pakistan"
+    },
+    "Tariq_Osmani-say_sufficient_supplies_L2": {
+      "L1": "We have sufficient supplies. We just need your help with transportation and coordination.",
+      "L2": "We have sufficient supplies. We just need your help with transportation and coordination.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032844",
+      "terp": "L2",
+      "title": "We have sufficient supplies"
+    },
+    "Tariq_Osmani-say_tariq_informal_L2": {
+      "L1": "Tariq? That is rather informal, Frank sahib.",
+      "L2": "Tariq? That is rather informal, Frank sahib.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032814",
+      "terp": "L2",
+      "title": "Tariq? That is rather informal"
+    },
+    "Tariq_Osmani-say_thank_you_L2": {
+      "L1": "Thank you, Frank sahib. I appreciate the effort.",
+      "L2": "Thank you, Frank sahib. I appreciate the effort.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032877",
+      "terp": "L2",
+      "title": "Thank you Frank sahib I appreciate the effort"
+    },
+    "Tariq_Osmani-say_thats_alright_L2": {
+      "L1": "That's alright.",
+      "L2": "That's alright.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032861",
+      "terp": "L2",
+      "title": "That's alright"
+    },
+    "Tariq_Osmani-say_trucks_reach_L2": {
+      "L1": "Trucks won't be able to reach the areas in need of aid. The roads are all inaccessible.",
+      "L2": "Trucks won't be able to reach the areas in need of aid. The roads are all inaccessible.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032866",
+      "terp": "L2",
+      "title": "Trucks won't be able to reach the areas in need of aid"
+    },
+    "Tariq_Osmani-say_wa_aleykum_L2": {
+      "L1": "wa 'aleykum asalaam! It's great to hear that an American has been studying our greetings.",
+      "L2": "wa 'aleykum asalaam! It's great to hear that an American has been studying our greetings.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032808",
+      "terp": "L2",
+      "title": "wa aleykum asalaam"
+    },
+    "Tariq_Osmani-say_we_have_L2": {
+      "L1": "We have the necessary supplies to provide assistance in the most affected areas. We just need your help with transportation and coordination.",
+      "L2": "We have the necessary supplies to provide assistance in the most affected areas. We just need your help with transportation and coordination.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032838",
+      "terp": "L2",
+      "title": "We have the necessary supplies to provide assistance"
+    },
+    "Tariq_Osmani-say_wonderful_L2": {
+      "L1": "Wonderful! I have a meeting with my superiors now. I'll let them know what we've discussed. Goodbye, Frank sahib.",
+      "L2": "Wonderful! I have a meeting with my superiors now. I'll let them know what we've discussed. Goodbye, Frank sahib.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032882",
+      "terp": "L2",
+      "title": "Wonderful! I have a meeting with my superiors now"
+    },
+    "Tariq_Osmani-say_work_well_L2": {
+      "L1": "That will work well.",
+      "L2": "That will work well.",
+      "addressee": "Frank_Gill",
+      "anima": "",
+      "sound": "4032869",
+      "terp": "L2",
+      "title": "That will work well"
+    }
+  },
+  "participants": {
+    "Frank_Gill": "Frank Gill",
+    "Tariq_Osmani": "Tariq Osmani"
+  },
+  "retq": {"SMALL_TALK": {"inputq": {
+    "ask_begin_aid_work": {
+      "addressee": "Tariq_Osmani",
+      "outputq": [{
+        "effects": [
+          {
+            "operand": "BUSINESS",
+            "operand2": "1",
+            "operator": "+="
+          },
+          {
+            "operand": "RET_SMALL_TALK",
+            "operand2": false,
+            "operator": "="
+          },
+          {
+            "operand": "RET__SMALL_TALK_ASK_BEGIN_AID_WORK",
+            "operand2": true,
+            "operator": "="
+          }
+        ],
+        "endState": "",
+        "speakerActq": [
+          "Tariq_Osmani-say_just_arrived_L2",
+          "Frank_Gill-say_I_apologize_L2",
+          "Tariq_Osmani-say_thats_alright_L2",
+          "Frank_Gill-ask_where_from_L2",
+          "Tariq_Osmani-say_Lahore_L2"
+        ],
+        "variableRanges": [{
+          "operator": "==",
+          "range": [false],
+          "variable": "RET__SMALL_TALK_ASK_BEGIN_AID_WORK"
+        }]
+      }],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_family_America": {
+      "addressee": "Tariq_Osmani",
+      "outputq": [
+        {
+          "effects": [
+            {
+              "operand": "TALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET__SMALL_TALK_ASK_FAMILY_AMERICA",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_brother_L2",
+            "Frank_Gill-say_nice_family_nearby_L2",
+            "Tariq_Osmani-say_difficult_far_away_L2"
+          ],
+          "variableRanges": [
+            {
+              "operator": "<",
+              "range": ["2"],
+              "variable": "TALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALL_TALK_ASK_FAMILY_AMERICA"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "operand": "TALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_SMALL_TALK",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__SMALL_TALK_ASK_FAMILY_AMERICA",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_brother_L2",
+            "Frank_Gill-say_nice_family_nearby_L2",
+            "Tariq_Osmani-say_difficult_far_away_L2",
+            "Frank_Gill-ask_where_from_L2",
+            "Tariq_Osmani-say_Lahore_L2"
+          ],
+          "variableRanges": [
+            {
+              "operator": "==",
+              "range": ["2"],
+              "variable": "TALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALL_TALK_ASK_FAMILY_AMERICA"
+            }
+          ]
+        }
+      ],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_sporting_events": {
+      "addressee": "Tariq_Osmani",
+      "outputq": [
+        {
+          "effects": [
+            {
+              "operand": "TALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET__SMALL_TALK_ASK_SPORTING_EVENTS",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_mainly_cricket_L2",
+            "Frank_Gill-say_popular_sport_L2",
+            "Tariq_Osmani-say_growing_up_L2"
+          ],
+          "variableRanges": [
+            {
+              "operator": "<",
+              "range": ["2"],
+              "variable": "TALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALL_TALK_ASK_SPORTING_EVENTS"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "operand": "TALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_SMALL_TALK",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__SMALL_TALK_ASK_SPORTING_EVENTS",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_mainly_cricket_L2",
+            "Frank_Gill-say_popular_sport_L2",
+            "Tariq_Osmani-say_growing_up_L2",
+            "Frank_Gill-ask_where_from_L2",
+            "Tariq_Osmani-say_Lahore_L2"
+          ],
+          "variableRanges": [
+            {
+              "operator": "==",
+              "range": ["2"],
+              "variable": "TALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALL_TALK_ASK_SPORTING_EVENTS"
+            }
+          ]
+        }
+      ],
+      "reusable": false,
+      "video": {}
+    },
+    "ask_where_else": {
+      "addressee": "Tariq_Osmani",
+      "outputq": [
+        {
+          "effects": [
+            {
+              "operand": "TALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET__SMALL_TALK_ASK_WHERE_ELSE",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_Istanbul_L2",
+            "Frank_Gill-say_no_food_delicious_L2",
+            "Tariq_Osmani-say_Pakistani_better_L2",
+            "Frank_Gill-say_Pak_food_good_L2",
+            "Tariq_Osmani-say_glad_enjoyed_L2"
+          ],
+          "variableRanges": [
+            {
+              "operator": "<",
+              "range": ["2"],
+              "variable": "TALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALL_TALK_ASK_WHERE_ELSE"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "operand": "TALK",
+              "operand2": "1",
+              "operator": "+="
+            },
+            {
+              "operand": "RET_SMALL_TALK",
+              "operand2": false,
+              "operator": "="
+            },
+            {
+              "operand": "RET__SMALL_TALK_ASK_WHERE_ELSE",
+              "operand2": true,
+              "operator": "="
+            }
+          ],
+          "endState": "",
+          "speakerActq": [
+            "Tariq_Osmani-say_Istanbul_L2",
+            "Frank_Gill-say_no_food_delicious_L2",
+            "Tariq_Osmani-say_Pakistani_better_L2",
+            "Frank_Gill-say_Pak_food_good_L2",
+            "Tariq_Osmani-say_glad_enjoyed_L2",
+            "Frank_Gill-ask_where_from_L2",
+            "Tariq_Osmani-say_Lahore_L2"
+          ],
+          "variableRanges": [
+            {
+              "operator": "==",
+              "range": ["2"],
+              "variable": "TALK"
+            },
+            {
+              "operator": "==",
+              "range": [false],
+              "variable": "RET__SMALL_TALK_ASK_WHERE_ELSE"
+            }
+          ]
+        }
+      ],
+      "reusable": false,
+      "video": {}
+    }
+  }}},
+  "roles": {
+    "npc": "Tariq_Osmani",
+    "player": "Frank_Gill"
+  },
+  "states": [],
+  "transitions": [
+    {
+      "actions": [
+        "Tariq_Osmani-say_wa_aleykum_L2",
+        "Frank_Gill-shake_hands3_L2",
+        "Frank_Gill-say_Im_Frank_L2",
+        "Tariq_Osmani-say_nice_to_meet_L2",
+        "Tariq_Osmani-say_Im_Tariq_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "GREET",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s1",
+      "inputSymbols": ["say_greeting_asalaamu"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-ask_yes_who_are_you_L2",
+        "Frank_Gill-say_sorry_L2",
+        "Frank_Gill-say_Im_Frank_L2",
+        "Tariq_Osmani-say_nice_to_meet_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s2",
+      "inputSymbols": ["say_greeting_youreTariq"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_hello_to_you_L2",
+        "Frank_Gill-shake_hands2_L2",
+        "Frank_Gill-say_Im_Frank_L2",
+        "Tariq_Osmani-say_nice_to_meet_L2",
+        "Tariq_Osmani-say_Im_Tariq_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "GREET",
+        "operand2": "1",
+        "operator": "+="
+      }],
+      "endState": "s1",
+      "inputSymbols": ["say_greeting_hello"],
+      "onlyOnce": false,
+      "startState": "s0",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_tariq_informal_L2",
+        "Frank_Gill-say_apologize_L2",
+        "Tariq_Osmani-say_thats_alright_L2",
+        "Tariq_Osmani-say_So_Frank_L2",
+        "Frank_Gill-say_from_California_L2",
+        "Tariq_Osmani-say_bro_Los_Angeles_L2",
+        "Frank_Gill-ask_surprised_been_LA_L2",
+        "Tariq_Osmani-say_many_times_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALL_TALK",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s3",
+      "inputSymbols": ["say_nice_Tariq"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_So_Frank_L2",
+        "Frank_Gill-say_from_California_L2",
+        "Tariq_Osmani-say_bro_Los_Angeles_L2",
+        "Frank_Gill-ask_surprised_been_LA_L2",
+        "Tariq_Osmani-say_many_times_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "GREET",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_nice_Osmani"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_So_Frank_L2",
+        "Frank_Gill-say_from_California_L2",
+        "Tariq_Osmani-say_bro_Los_Angeles_L2",
+        "Frank_Gill-ask_surprised_been_LA_L2",
+        "Tariq_Osmani-say_many_times_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "GREET",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_nice_Tariq_sahib"],
+      "onlyOnce": false,
+      "startState": "s1",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_tariq_informal_L2",
+        "Frank_Gill-say_apologize_L2",
+        "Tariq_Osmani-say_thats_alright_L2",
+        "Tariq_Osmani-say_So_Frank_L2",
+        "Frank_Gill-say_from_California_L2",
+        "Tariq_Osmani-say_bro_Los_Angeles_L2",
+        "Frank_Gill-ask_surprised_been_LA_L2",
+        "Tariq_Osmani-say_many_times_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALL_TALK",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s3",
+      "inputSymbols": ["say_nice_Tariq"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_So_Frank_L2",
+        "Frank_Gill-say_from_California_L2",
+        "Tariq_Osmani-say_bro_Los_Angeles_L2",
+        "Frank_Gill-ask_surprised_been_LA_L2",
+        "Tariq_Osmani-say_many_times_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "GREET",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_nice_Osmani"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_So_Frank_L2",
+        "Frank_Gill-say_from_California_L2",
+        "Tariq_Osmani-say_bro_Los_Angeles_L2",
+        "Frank_Gill-ask_surprised_been_LA_L2",
+        "Tariq_Osmani-say_many_times_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "GREET",
+          "operand2": "1",
+          "operator": "+="
+        },
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s3",
+      "inputSymbols": ["say_nice_Tariq_sahib"],
+      "onlyOnce": false,
+      "startState": "s2",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_second_largest_L2",
+        "Frank_Gill-say_love_visit_L2",
+        "Tariq_Osmani-say_heart_Pakistan_L2",
+        "Tariq_Osmani-say_earthquake_destroyed_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["say_heard_Lahore"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": ">",
+        "range": ["2"],
+        "variable": "TALK"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_eastern_Pakistan_L2",
+        "Frank_Gill-say_oh_right_L2",
+        "Tariq_Osmani-say_heart_Pakistan_L2",
+        "Tariq_Osmani-say_earthquake_destroyed_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["ask_in_south"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": ">",
+        "range": ["2"],
+        "variable": "TALK"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_not_all_Punjabi_L2",
+        "Frank_Gill-say_sorry_offended_L2",
+        "Tariq_Osmani-say_move_on_L2",
+        "Tariq_Osmani-say_earthquake_destroyed_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALL_TALK",
+        "operand2": false,
+        "operator": "="
+      }],
+      "endState": "s4",
+      "inputSymbols": ["say_must_Punjabi"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": ">",
+        "range": ["2"],
+        "variable": "TALK"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_second_largest_L2",
+        "Frank_Gill-say_love_visit_L2",
+        "Tariq_Osmani-say_heart_Pakistan_L2",
+        "Tariq_Osmani-say_earthquake_destroyed_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["say_heard_Lahore"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "BUSINESS"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_eastern_Pakistan_L2",
+        "Frank_Gill-say_oh_right_L2",
+        "Tariq_Osmani-say_heart_Pakistan_L2",
+        "Tariq_Osmani-say_earthquake_destroyed_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [
+        {
+          "operand": "RET_SMALL_TALK",
+          "operand2": false,
+          "operator": "="
+        },
+        {
+          "operand": "SENSITIVE",
+          "operand2": true,
+          "operator": "="
+        }
+      ],
+      "endState": "s4",
+      "inputSymbols": ["ask_in_south"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "BUSINESS"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_not_all_Punjabi_L2",
+        "Frank_Gill-say_sorry_offended_L2",
+        "Tariq_Osmani-say_move_on_L2",
+        "Tariq_Osmani-say_earthquake_destroyed_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "RET_SMALL_TALK",
+        "operand2": false,
+        "operator": "="
+      }],
+      "endState": "s4",
+      "inputSymbols": ["say_must_Punjabi"],
+      "onlyOnce": false,
+      "startState": "s3",
+      "variableRanges": [{
+        "operator": "==",
+        "range": ["1"],
+        "variable": "BUSINESS"
+      }]
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_we_have_L2",
+        "Frank_Gill-ask_ok_what_L2",
+        "Tariq_Osmani-ask_distribute_helicopters_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "SEEK",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s5",
+      "inputSymbols": ["say_what_you_think"],
+      "onlyOnce": false,
+      "startState": "s4",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_actually_superiors_L2",
+        "Frank_Gill-ask_ok_what_L2",
+        "Tariq_Osmani-ask_distribute_helicopters_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s5",
+      "inputSymbols": ["say_soldiers_survey"],
+      "onlyOnce": false,
+      "startState": "s4",
+      "variableRanges": []
+    },
+    {
+      "actions": ["Tariq_Osmani-say_actually_tents_L2"],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s6",
+      "inputSymbols": ["say_provide_tents"],
+      "onlyOnce": false,
+      "startState": "s4",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_work_well_L2",
+        "Tariq_Osmani-say_crowds_L2",
+        "Frank_Gill-say_gather_team_L2",
+        "Tariq_Osmani-say_American_support_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "CONTRIBUTE",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s7",
+      "inputSymbols": ["say_provide_transportation"],
+      "onlyOnce": false,
+      "startState": "s5",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_good_L2",
+        "Tariq_Osmani-say_crowds_L2",
+        "Frank_Gill-say_gather_team_L2",
+        "Tariq_Osmani-say_American_support_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s7",
+      "inputSymbols": ["say_no_problem"],
+      "onlyOnce": false,
+      "startState": "s5",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_trucks_reach_L2",
+        "Frank_Gill-say_arrange_helicopters_L2",
+        "Tariq_Osmani-say_I_suppose_L2",
+        "Tariq_Osmani-say_crowds_L2",
+        "Frank_Gill-say_gather_team_L2",
+        "Tariq_Osmani-say_American_support_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s7",
+      "inputSymbols": ["ask_trucks"],
+      "onlyOnce": false,
+      "startState": "s5",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_sufficient_supplies_L2",
+        "Frank_Gill-ask_ok_what_L2",
+        "Tariq_Osmani-ask_distribute_helicopters_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s5",
+      "inputSymbols": ["say_provide_food"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": []
+    },
+    {
+      "actions": ["Tariq_Osmani-ask_distribute_helicopters_L2"],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "SEEK",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s5",
+      "inputSymbols": ["say_what_instead"],
+      "onlyOnce": false,
+      "startState": "s6",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_thank_you_L2",
+        "Tariq_Osmani-say_meeting_now_L2",
+        "Frank_Gill-say_you_too_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [{
+        "operand": "MANAGE",
+        "operand2": true,
+        "operator": "="
+      }],
+      "endState": "s8",
+      "inputSymbols": ["say_not_sure"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_wonderful_L2",
+        "Frank_Gill-say_goodbye_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s8",
+      "inputSymbols": ["say_if_needed"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_wonderful_L2",
+        "Frank_Gill-say_goodbye_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s8",
+      "inputSymbols": ["say_sure_happy"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": []
+    },
+    {
+      "actions": [
+        "Tariq_Osmani-say_alright_well_meeting_L2",
+        "Frank_Gill-say_goodbye_L2"
+      ],
+      "addressee": "Tariq_Osmani",
+      "display": false,
+      "effects": [],
+      "endState": "s8",
+      "inputSymbols": ["say_wont_this_time"],
+      "onlyOnce": false,
+      "startState": "s7",
+      "variableRanges": []
+    }
+  ],
+  "version": "2014022801"
+}

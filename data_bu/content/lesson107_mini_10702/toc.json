@@ -1,0 +1,642 @@
+{
+  "chapter" : {
+    "xid" : "lesson107_mini_10702",
+    "title" : "Geography, Infrastructure, and Demographics",
+    "info" : {
+      "property" : [ {
+        "name" : "fount",
+        "value" : "/guru/lesson127"
+      }, {
+        "name" : "L2",
+        "value" : "en"
+      } ]
+    },
+    "preposttest" : [ "page3924" ],
+    "section" : [ {
+      "mode" : "practice",
+      "pageRef" : [ {
+        "xid" : "page1601",
+        "type" : "Info",
+        "title" : "Introduction to Afghanistan"
+      }, {
+        "xid" : "page1604",
+        "type" : "Info",
+        "title" : "Learning Objectives"
+      }, {
+        "xid" : "page3602",
+        "type" : "Info",
+        "title" : "Why It Matters"
+      }, {
+        "xid" : "page3942",
+        "type" : "Info",
+        "title" : "Introductory Remarks"
+      }, {
+        "xid" : "page3603",
+        "type" : "Info",
+        "title" : "Location in the World"
+      }, {
+        "xid" : "page4057",
+        "type" : "MultiNote",
+        "title" : "Geography"
+      }, {
+        "xid" : "page1645",
+        "type" : "PuzzleMap",
+        "title" : "Puzzle Map"
+      }, {
+        "xid" : "page3938",
+        "type" : "Info",
+        "title" : "Climate"
+      }, {
+        "xid" : "page1615",
+        "type" : "Info",
+        "title" : "Perspectives: Climate"
+      }, {
+        "xid" : "page4058",
+        "type" : "MultiNote",
+        "title" : "Major Cities"
+      }, {
+        "xid" : "page1616",
+        "type" : "Info",
+        "title" : "Perspectives: Major Cities"
+      }, {
+        "xid" : "page4061",
+        "type" : "Map",
+        "title" : "Interactive Map"
+      }, {
+        "xid" : "page3749",
+        "type" : "MultipleChoice",
+        "title" : "Practice 1"
+      }, {
+        "xid" : "page3801",
+        "type" : "MultipleChoice",
+        "title" : "Practice 2"
+      }, {
+        "xid" : "page4059",
+        "type" : "MultiNote",
+        "title" : "Travel and Transportation"
+      }, {
+        "xid" : "page3947",
+        "type" : "Info",
+        "title" : "Infrastructure"
+      }, {
+        "xid" : "page3948",
+        "type" : "Info",
+        "title" : "Housing"
+      }, {
+        "xid" : "page3802",
+        "type" : "MultipleChoice",
+        "title" : "Practice 3"
+      }, {
+        "xid" : "page3803",
+        "type" : "MultipleChoice",
+        "title" : "Practice 4"
+      }, {
+        "xid" : "page3954",
+        "type" : "Info",
+        "title" : "Population"
+      }, {
+        "xid" : "page4060",
+        "type" : "MultiNote",
+        "title" : "Major Ethnic Groups"
+      }, {
+        "xid" : "page1617",
+        "type" : "Info",
+        "title" : "Perspectives: Major Ethnic Groups"
+      }, {
+        "xid" : "page3959",
+        "type" : "Info",
+        "title" : "Life Expectancy and Mortality Rates"
+      }, {
+        "xid" : "page1614",
+        "type" : "EthnoMap",
+        "title" : "Interactive Ethnolinguistic Map: AFPAK"
+      }, {
+        "xid" : "page3804",
+        "type" : "MultipleChoice",
+        "title" : "Practice 5"
+      }, {
+        "xid" : "page3759",
+        "type" : "MatchItem",
+        "title" : "Practice 6"
+      }, {
+        "xid" : "page1605",
+        "type" : "Info",
+        "title" : "Section Checklist"
+      } ]
+    }, {
+      "mode" : "quiz",
+      "pageRef" : [ {
+        "xid" : "page1646",
+        "type" : "QuizStart",
+        "title" : "Quiz"
+      }, {
+        "xid" : "page3773",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 1"
+      }, {
+        "xid" : "page3924",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 2"
+      }, {
+        "xid" : "page3925",
+        "type" : "MultipleChoice",
+        "title" : "Quiz 3"
+      }, {
+        "xid" : "page1624",
+        "type" : "QuizEnd",
+        "title" : "Quiz Results"
+      }, {
+        "xid" : "page1636",
+        "type" : "SectionEnd",
+        "title" : "Section End"
+      } ]
+    } ],
+    "zmedia" : [ {
+      "zid" : 1451435319885,
+      "xid" : "1451435319885.jpg",
+      "type" : "image",
+      "file" : "1451435319885.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1452020918605,
+      "xid" : "1452020918605.jpg",
+      "type" : "image",
+      "file" : "1452020918605.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032337,
+      "xid" : "4032337.mp3",
+      "type" : "audio",
+      "file" : "4032337.mp3"
+    }, {
+      "zid" : 1302045193072,
+      "xid" : "1302045193072.jpg",
+      "type" : "image",
+      "file" : "1302045193072.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1467312021737,
+      "xid" : "1467312021737.jpg",
+      "type" : "image",
+      "file" : "1467312021737.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032346,
+      "xid" : "4032346.mp3",
+      "type" : "audio",
+      "file" : "4032346.mp3"
+    }, {
+      "zid" : 4032343,
+      "xid" : "4032343.mp3",
+      "type" : "audio",
+      "file" : "4032343.mp3"
+    }, {
+      "zid" : 4032322,
+      "xid" : "4032322.mp3",
+      "type" : "audio",
+      "file" : "4032322.mp3"
+    }, {
+      "zid" : 4032325,
+      "xid" : "4032325.mp3",
+      "type" : "audio",
+      "file" : "4032325.mp3"
+    }, {
+      "zid" : 4032347,
+      "xid" : "4032347.mp3",
+      "type" : "audio",
+      "file" : "4032347.mp3"
+    }, {
+      "zid" : 4032327,
+      "xid" : "4032327.mp3",
+      "type" : "audio",
+      "file" : "4032327.mp3"
+    }, {
+      "zid" : 4032335,
+      "xid" : "4032335.mp3",
+      "type" : "audio",
+      "file" : "4032335.mp3"
+    }, {
+      "zid" : 1465580205101,
+      "xid" : "1465580205101.mp4",
+      "type" : "video",
+      "file" : "1465580205101.mp4"
+    }, {
+      "zid" : 4032321,
+      "xid" : "4032321.mp3",
+      "type" : "audio",
+      "file" : "4032321.mp3"
+    }, {
+      "zid" : 4032329,
+      "xid" : "4032329.mp3",
+      "type" : "audio",
+      "file" : "4032329.mp3"
+    }, {
+      "zid" : 1462297463452,
+      "xid" : "1462297463452.jpg",
+      "type" : "image",
+      "file" : "1462297463452.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032339,
+      "xid" : "4032339.mp3",
+      "type" : "audio",
+      "file" : "4032339.mp3"
+    }, {
+      "zid" : 1389291394690,
+      "xid" : "1389291394690.jpg",
+      "type" : "image",
+      "file" : "1389291394690.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    }, {
+      "zid" : 4032328,
+      "xid" : "4032328.mp3",
+      "type" : "audio",
+      "file" : "4032328.mp3"
+    }, {
+      "zid" : 4032336,
+      "xid" : "4032336.mp3",
+      "type" : "audio",
+      "file" : "4032336.mp3"
+    }, {
+      "zid" : 1460655133569,
+      "xid" : "1460655133569.jpg",
+      "type" : "image",
+      "file" : "1460655133569.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 1460655371351,
+      "xid" : "1460655371351.jpg",
+      "type" : "image",
+      "file" : "1460655371351.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1465580205101,
+      "xid" : "1465580205101.mp4",
+      "type" : "video",
+      "file" : "1465580205101.mp4",
+      "mime" : "null",
+      "info" : null
+    }, {
+      "zid" : 4032323,
+      "xid" : "4032323.mp3",
+      "type" : "audio",
+      "file" : "4032323.mp3"
+    }, {
+      "zid" : 1465579440448,
+      "xid" : "1465579440448.mp4",
+      "type" : "video",
+      "file" : "1465579440448.mp4"
+    }, {
+      "zid" : 1463079783805,
+      "xid" : "1463079783805.jpg",
+      "type" : "image",
+      "file" : "1463079783805.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1463079731610,
+      "xid" : "1463079731610.jpg",
+      "type" : "image",
+      "file" : "1463079731610.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1465579884913,
+      "xid" : "1465579884913.mp4",
+      "type" : "video",
+      "file" : "1465579884913.mp4",
+      "mime" : "null",
+      "info" : null
+    }, {
+      "zid" : 1459889200442,
+      "xid" : "1459889200442.mp4",
+      "type" : "video",
+      "file" : "1459889200442.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    }, {
+      "zid" : 1465579440448,
+      "xid" : "1465579440448.mp4",
+      "type" : "video",
+      "file" : "1465579440448.mp4",
+      "mime" : "null",
+      "info" : null
+    }, {
+      "zid" : 1457470086388,
+      "xid" : "1457470086388.jpg",
+      "type" : "image",
+      "file" : "1457470086388.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1451949237149,
+      "xid" : "1451949237149.jpg",
+      "type" : "image",
+      "file" : "1451949237149.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032345,
+      "xid" : "4032345.mp3",
+      "type" : "audio",
+      "file" : "4032345.mp3"
+    }, {
+      "zid" : 4032344,
+      "xid" : "4032344.mp3",
+      "type" : "audio",
+      "file" : "4032344.mp3"
+    }, {
+      "zid" : 1457469474661,
+      "xid" : "1457469474661.jpg",
+      "type" : "image",
+      "file" : "1457469474661.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032332,
+      "xid" : "4032332.mp3",
+      "type" : "audio",
+      "file" : "4032332.mp3"
+    }, {
+      "zid" : 4032338,
+      "xid" : "4032338.mp3",
+      "type" : "audio",
+      "file" : "4032338.mp3"
+    }, {
+      "zid" : 1460397555868,
+      "xid" : "1460397555868.jpg",
+      "type" : "image",
+      "file" : "1460397555868.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    }, {
+      "zid" : 4033907,
+      "xid" : "4033907.mp3",
+      "type" : "audio",
+      "file" : "4033907.mp3"
+    }, {
+      "zid" : 1457469966484,
+      "xid" : "1457469966484.jpg",
+      "type" : "image",
+      "file" : "1457469966484.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4033908,
+      "xid" : "4033908.mp3",
+      "type" : "audio",
+      "file" : "4033908.mp3"
+    }, {
+      "zid" : 4032342,
+      "xid" : "4032342.mp3",
+      "type" : "audio",
+      "file" : "4032342.mp3"
+    }, {
+      "zid" : 1465579884913,
+      "xid" : "1465579884913.mp4",
+      "type" : "video",
+      "file" : "1465579884913.mp4"
+    }, {
+      "zid" : 4032349,
+      "xid" : "4032349.mp3",
+      "type" : "audio",
+      "file" : "4032349.mp3"
+    }, {
+      "zid" : 4032340,
+      "xid" : "4032340.mp3",
+      "type" : "audio",
+      "file" : "4032340.mp3"
+    }, {
+      "zid" : 4032326,
+      "xid" : "4032326.mp3",
+      "type" : "audio",
+      "file" : "4032326.mp3"
+    }, {
+      "zid" : 4033909,
+      "xid" : "4033909.mp3",
+      "type" : "audio",
+      "file" : "4033909.mp3"
+    }, {
+      "zid" : 1457469907628,
+      "xid" : "1457469907628.jpg",
+      "type" : "image",
+      "file" : "1457469907628.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1457469231740,
+      "xid" : "1457469231740.jpg",
+      "type" : "image",
+      "file" : "1457469231740.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1463079674098,
+      "xid" : "1463079674098.jpg",
+      "type" : "image",
+      "file" : "1463079674098.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1457470159276,
+      "xid" : "1457470159276.jpg",
+      "type" : "image",
+      "file" : "1457470159276.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1457469101200,
+      "xid" : "1457469101200.jpg",
+      "type" : "image",
+      "file" : "1457469101200.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1451950268830,
+      "xid" : "1451950268830.jpg",
+      "type" : "image",
+      "file" : "1451950268830.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032334,
+      "xid" : "4032334.mp3",
+      "type" : "audio",
+      "file" : "4032334.mp3"
+    }, {
+      "zid" : 1457469281243,
+      "xid" : "1457469281243.jpg",
+      "type" : "image",
+      "file" : "1457469281243.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1457469758109,
+      "xid" : "1457469758109.jpg",
+      "type" : "image",
+      "file" : "1457469758109.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032331,
+      "xid" : "4032331.mp3",
+      "type" : "audio",
+      "file" : "4032331.mp3"
+    }, {
+      "zid" : 4032324,
+      "xid" : "4032324.mp3",
+      "type" : "audio",
+      "file" : "4032324.mp3"
+    }, {
+      "zid" : 4034557,
+      "xid" : "4034557.mp3",
+      "type" : "audio",
+      "file" : "4034557.mp3"
+    }, {
+      "zid" : 4032330,
+      "xid" : "4032330.mp3",
+      "type" : "audio",
+      "file" : "4032330.mp3"
+    }, {
+      "zid" : 1457469651029,
+      "xid" : "1457469651029.jpg",
+      "type" : "image",
+      "file" : "1457469651029.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 1452012229224,
+      "xid" : "1452012229224.jpg",
+      "type" : "image",
+      "file" : "1452012229224.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    }, {
+      "zid" : 4032341,
+      "xid" : "4032341.mp3",
+      "type" : "audio",
+      "file" : "4032341.mp3"
+    } ]
+  }
+}

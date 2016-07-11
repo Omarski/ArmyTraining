@@ -1,0 +1,34 @@
+{
+  "page" : {
+    "xid" : "page4015",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Acknowledgement",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Department of Defense"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Defense Language and National Security Education Office and U.S. Central Command logos"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "This VCAT is a collaborative effort between the Defense Language and National Security Education Office and U.S. Central Command."
+    } ],
+    "media" : [ {
+      "zid" : 1467307526175,
+      "xid" : "1467307526175.jpg",
+      "type" : "image",
+      "file" : "1467307526175.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

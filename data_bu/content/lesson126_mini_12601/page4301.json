@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page4301",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Introduction to Mission: Connect",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "Mission: Connect is an exciting exploration game in which you use your cultural knowledge to  build a network of relationships in a community.",
+      "media" : [ {
+        "zid" : 4033275,
+        "xid" : "4033275.mp3",
+        "type" : "audio",
+        "file" : "4033275.mp3"
+      } ]
+    }, {
+      "text" : "You've been given a mission in your area of deployment, but your counterpart requires you to find and build rapport with several key community members before agreeing to collaborate with you. These key people will be listed on your notepad.",
+      "media" : [ {
+        "zid" : 4033276,
+        "xid" : "4033276.mp3",
+        "type" : "audio",
+        "file" : "4033276.mp3"
+      } ]
+    }, {
+      "text" : "At the start of the game, you will only have access to one community member. As you succeed in your interactions, your network will grow, allowing you to approach more community members.\n\n",
+      "media" : [ {
+        "zid" : 4033277,
+        "xid" : "4033277.mp3",
+        "type" : "audio",
+        "file" : "4033277.mp3"
+      } ]
+    }, {
+      "text" : "Click 'NEXT' to launch the game. Good luck!",
+      "media" : [ {
+        "zid" : 4033278,
+        "xid" : "4033278.mp3",
+        "type" : "audio",
+        "file" : "4033278.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1465914027455,
+      "xid" : "1465914027455.jpg",
+      "type" : "image",
+      "file" : "1465914027455.jpg",
+      "mime" : "image/png",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

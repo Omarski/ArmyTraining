@@ -1,0 +1,57 @@
+{
+  "page" : {
+    "xid" : "page3845",
+    "type" : "Info",
+    "title" : "Questions",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/soldiersmediacenter/5093328802/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "U.S. service member listening to an interpreter"
+      } ]
+    },
+    "note" : [ {
+      "text" : "The interpreter needs to feel free to ask speakers to repeat, rephrase, explain, slow down, pause more frequently, or take turns. Encourage interpreters to ask questions when they are uncertain about a word or phrase.",
+      "media" : [ {
+        "zid" : 4022131,
+        "xid" : "4022131.mp3",
+        "type" : "audio",
+        "file" : "4022131.mp3"
+      } ]
+    }, {
+      "text" : "In some cultures, people are less likely to admit that they do not know or understand something. This may affect both your local interpreter and your counterparts. You can mitigate this by:",
+      "media" : [ {
+        "zid" : 4022132,
+        "xid" : "4022132.mp3",
+        "type" : "audio",
+        "file" : "4022132.mp3"
+      } ]
+    }, {
+      "text" : "- Building rapport so that your interpreter feels comfortable asking questions.\n- Briefing your interpreter fully.\n- Asking your audience questions to verify that everything has been understood.",
+      "media" : [ {
+        "zid" : 4022133,
+        "xid" : "4022133.mp3",
+        "type" : "audio",
+        "file" : "4022133.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450726502517,
+      "xid" : "1450726502517.jpg",
+      "type" : "image",
+      "file" : "1450726502517.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

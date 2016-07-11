@@ -1,0 +1,77 @@
+{
+  "page" : {
+    "xid" : "page2008",
+    "type" : "Pronunciation",
+    "title" : "Sahib and sahiba",
+    "info" : null,
+    "nut" : [ {
+      "note" : {
+        "text" : "\"Sahib\" and \"sahiba\" are polite forms of address in Urdu, like \"Mr.\" and \"Ms.\" in English. If your counterpart's name is John Pearson, you can address him as \"John sahib,\" \"Pearson sahib,\" or \"John Pearson sahib.\" These terms of address are typically only used when speaking to someone older than you or in a position of authority. \"Mr. Pearson\" would also be appropriate."
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "جون پیرسن صاحب"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "John Pearson sahib"
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "Mr. John Pearson\n(Lit: John Pearson sir)"
+          }
+        },
+        "info" : null
+      }
+    }, {
+      "uttering" : {
+        "utterance" : {
+          "lang" : "en",
+          "anchor" : "ezread",
+          "native" : {
+            "lang" : "en",
+            "type" : "native",
+            "kind" : "standard",
+            "text" : "جیسیکا گل صاحبہ"
+          },
+          "ezread" : {
+            "lang" : "en",
+            "type" : "ezread",
+            "kind" : "standard",
+            "text" : "Jessica Gill sahiba"
+          },
+          "phonetic" : {
+            "lang" : "en",
+            "type" : "phonetic",
+            "kind" : "standard",
+            "text" : ""
+          },
+          "translation" : {
+            "lang" : "en",
+            "type" : "translation",
+            "kind" : "standard",
+            "text" : "Ms. Jessica Gill\n(Lit: Jessica Gill ma'am)"
+          }
+        },
+        "info" : null
+      }
+    } ]
+  }
+}

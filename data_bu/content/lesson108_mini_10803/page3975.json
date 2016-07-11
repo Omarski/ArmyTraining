@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page3975",
+    "type" : "Info",
+    "title" : "Power Struggles",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Mike_Mullen_reviews_Pakistani_troops.jpg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistani troops in Islamabad"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Throughout Pakistan's history, power has changed hands many times. The military has never been fully controlled by a civilian government, and it frequently steps in to govern. For example, though Army Chief Raheel Sharif was more popular than Prime Minister Nawaz Sharif in 2015, the army did not stage a coup against the government. Instead, the army took over certain functions. In particular, it controlled security and foreign affairs, and censored the news media.",
+      "media" : [ {
+        "zid" : 4032229,
+        "xid" : "4032229.mp3",
+        "type" : "audio",
+        "file" : "4032229.mp3"
+      } ]
+    }, {
+      "text" : "Different visions for the country have won out at different times. The country goes back and forth between policies of Islamization and secularization.",
+      "media" : [ {
+        "zid" : 4032230,
+        "xid" : "4032230.mp3",
+        "type" : "audio",
+        "file" : "4032230.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460568241167,
+      "xid" : "1460568241167.jpg",
+      "type" : "image",
+      "file" : "1460568241167.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

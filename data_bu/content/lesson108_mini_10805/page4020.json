@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page4020",
+    "type" : "Info",
+    "title" : "Etiquette",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://commons.wikimedia.org/wiki/File:Handshake.jpg"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Two men shaking hands"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "The words \"please\" and \"thank you\" are less common in Pakistani English than American English. Don't assume that your counterparts are being rude if they don't use them very much.",
+      "media" : [ {
+        "zid" : 4032297,
+        "xid" : "4032297.mp3",
+        "type" : "audio",
+        "file" : "4032297.mp3"
+      } ]
+    }, {
+      "text" : "Prolonged eye contact may be considered rude, especially between men and women.",
+      "media" : [ {
+        "zid" : 4032298,
+        "xid" : "4032298.mp3",
+        "type" : "audio",
+        "file" : "4032298.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460569562821,
+      "xid" : "1460569562821.jpg",
+      "type" : "image",
+      "file" : "1460569562821.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

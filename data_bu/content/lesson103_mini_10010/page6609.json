@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page6609",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "What Is Culture",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/kjfnjy/7508126706/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Man with his golden eagle in Kazakhstan"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "In this course, you will learn specific things about the culture of this area of interest, including ways in which cultures are different. But first we need to answer an important question:",
+      "media" : [ {
+        "zid" : 4011237,
+        "xid" : "4011237.mp3",
+        "type" : "audio",
+        "file" : "4011237.mp3"
+      } ]
+    }, {
+      "text" : "What is culture?",
+      "media" : [ {
+        "zid" : 4011238,
+        "xid" : "4011238.mp3",
+        "type" : "audio",
+        "file" : "4011238.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1414435165609,
+      "xid" : "1414435165609.jpg",
+      "type" : "image",
+      "file" : "1414435165609.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

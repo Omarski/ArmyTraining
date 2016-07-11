@@ -1,0 +1,20 @@
+{
+  "page" : {
+    "xid" : "page3401",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Test Out Option",
+    "hint" : "",
+    "comment" : "",
+    "info" : null,
+    "skills" : null,
+    "note" : [ {
+      "text" : "VCAT features an option to test out of portions of the course. You will now take a short test to assess your knowledge of the material in your Course of Instruction."
+    }, {
+      "text" : "At the end of the test, you will have the option to accept credit for any lessons that you passed at 100%. Note that if you accept credit for a lesson, you must still pass the corresponding mission scenario to graduate the course."
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

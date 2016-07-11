@@ -1,0 +1,23 @@
+{
+  "page" : {
+    "xid" : "page1204",
+    "type" : "QuestionnaireEnd",
+    "layout" : "",
+    "title" : "Questionnaire - Summary",
+    "hint" : "",
+    "comment" : "Confirm your choice:\n",
+    "info" : {
+      "property" : [ {
+        "name" : "questionnaireend",
+        "value" : ""
+      }, {
+        "name" : "mandatory",
+        "value" : "on"
+      } ]
+    },
+    "skills" : null,
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

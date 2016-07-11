@@ -1,0 +1,56 @@
+{
+  "page" : {
+    "xid" : "page3949",
+    "type" : "Info",
+    "title" : "Travel and Transportation",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediadisplayblurb",
+        "value" : "Bus in Pakistan"
+      }, {
+        "name" : "mediacaption",
+        "value" : "https://flic.kr/p/Gkin"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Major highways are in good condition and connect all of Pakistan's major cities. Pakistan is also connected to neighboring countries by road. Traffic flows on the left side of the road.",
+      "media" : [ {
+        "zid" : 4032317,
+        "xid" : "4032317.mp3",
+        "type" : "audio",
+        "file" : "4032317.mp3"
+      } ]
+    }, {
+      "text" : "In rural areas, animals are frequently used for transport.",
+      "media" : [ {
+        "zid" : 4032184,
+        "xid" : "4032184.mp3",
+        "type" : "audio",
+        "file" : "4032184.mp3"
+      } ]
+    }, {
+      "text" : "For long-distance travel, buses and trucks are common. These are often colorfully decorated with some of the country's most interesting public art.",
+      "media" : [ {
+        "zid" : 4032185,
+        "xid" : "4032185.mp3",
+        "type" : "audio",
+        "file" : "4032185.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1460567588143,
+      "xid" : "1460567588143.jpg",
+      "type" : "image",
+      "file" : "1460567588143.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "imagination",
+          "value" : ""
+        } ]
+      }
+    } ]
+  }
+}

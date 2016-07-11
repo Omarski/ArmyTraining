@@ -1,0 +1,334 @@
+{
+  "page" : {
+    "xid" : "page1202",
+    "type" : "Questionnaire",
+    "layout" : "",
+    "title" : "Questionnaire - Mission Selection",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "questionnaire",
+        "value" : ""
+      }, {
+        "name" : "mandatory",
+        "value" : "on"
+      } ]
+    },
+    "skills" : null,
+    "prompt" : {
+      "text" : "Choose one mission.\n(Note that all unselected mission units will be available as optional content.)\n\nIf you are unsure of your mission or are interested in basic cultural information and language instruction on topics like greetings, making introductions, and building rapport, select the Participating in Leader Engagements mission."
+    },
+    "answer" : [ {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "stamp" : 1352320495412,
+            "status" : "imported",
+            "provenance" : "",
+            "lang" : "fr",
+            "anchor" : "native",
+            "lexicon" : false,
+            "incomplete" : false,
+            "ontoid" : "",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "",
+              "text" : "",
+              "group" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "",
+              "text" : "Participating in Leader Engagements - Afghanistan (Dari)",
+              "group" : ""
+            },
+            "comment" : "",
+            "syntax" : null,
+            "parseTree" : null
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "playlist",
+              "value" : "5"
+            }, {
+              "name" : "radiobutton",
+              "value" : ""
+            }, {
+              "name" : "hidden",
+              "value" : "4 true =="
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Participating in Leader Engagements - Afghanistan (Pashto)"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "playlist",
+              "value" : "6"
+            }, {
+              "name" : "radiobutton",
+              "value" : ""
+            }, {
+              "name" : "hidden",
+              "value" : "4 true =="
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Providing Humanitarian Assistance - Afghanistan (Dari)"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "playlist",
+              "value" : "8"
+            }, {
+              "name" : "radiobutton",
+              "value" : ""
+            }, {
+              "name" : "hidden",
+              "value" : "4 true =="
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Providing Humanitarian Assistance - Afghanistan (Pashto)"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "playlist",
+              "value" : "9"
+            }, {
+              "name" : "radiobutton",
+              "value" : ""
+            }, {
+              "name" : "hidden",
+              "value" : "4 true =="
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Participating in Leader Engagements - Pakistan (Urdu)"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "playlist",
+              "value" : "7"
+            }, {
+              "name" : "radiobutton",
+              "value" : ""
+            }, {
+              "name" : "hidden",
+              "value" : "14 true =="
+            } ]
+          }
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : ""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "fr",
+            "anchor" : "native",
+            "native" : {
+              "lang" : "fr",
+              "type" : "native",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "ezread" : {
+              "lang" : "fr",
+              "type" : "ezread",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "phonetic" : {
+              "lang" : "fr",
+              "type" : "phonetic",
+              "kind" : "standard",
+              "text" : ""
+            },
+            "translation" : {
+              "lang" : "en",
+              "type" : "translation",
+              "kind" : "standard",
+              "text" : "Providing Humanitarian Assistance - Pakistan (Urdu)"
+            }
+          },
+          "info" : {
+            "property" : [ {
+              "name" : "playlist",
+              "value" : "10"
+            }, {
+              "name" : "radiobutton",
+              "value" : ""
+            }, {
+              "name" : "hidden",
+              "value" : "14 true =="
+            } ]
+          }
+        }
+      }
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

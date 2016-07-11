@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page1101",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Relations with Afghanistan",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/isafmedia/8049441394/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Locals along the Durand Line"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "Although Pakistan has conducted humanitarian assistance (HA) missions in neighboring Afghanistan, overall relations between the two countries are marked by tension and instability.",
+      "media" : [ {
+        "zid" : 4032451,
+        "xid" : "4032451.mp3",
+        "type" : "audio",
+        "file" : "4032451.mp3"
+      } ]
+    }, {
+      "text" : "Pakistan’s official border with Afghanistan, known as the Durand Line, runs through Pashtun territory where federal government control is very weak. Many local Afghans and Pakistanis do not recognize the border and cross it freely. In addition, various terrorist organizations operate in areas near the border.",
+      "media" : [ {
+        "zid" : 4032452,
+        "xid" : "4032452.mp3",
+        "type" : "audio",
+        "file" : "4032452.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1458331651904,
+      "xid" : "1458331651904.jpg",
+      "type" : "image",
+      "file" : "1458331651904.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

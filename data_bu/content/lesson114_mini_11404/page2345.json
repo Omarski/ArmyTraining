@@ -1,0 +1,48 @@
+{
+  "page" : {
+    "xid" : "page2345",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Taking Leave",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.dvidshub.net/image/345747/pakistan-flood-humanitarian-aid"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "Pakistani and U.S. service members saying goodbye"
+      } ]
+    },
+    "skills" : null,
+    "note" : [ {
+      "text" : "At the end of a meeting, if your counterparts give you a small gift, it is appropriate to offer a small gift in return, like a military challenge coin.",
+      "media" : [ {
+        "zid" : 4032528,
+        "xid" : "4032528.mp3",
+        "type" : "audio",
+        "file" : "4032528.mp3"
+      } ]
+    }, {
+      "text" : "Don’t rush to close a meeting or deal. Saying goodbye may take a long time, but following local social customs is very important for maintaining relationships.",
+      "media" : [ {
+        "zid" : 4032529,
+        "xid" : "4032529.mp3",
+        "type" : "audio",
+        "file" : "4032529.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1458333759839,
+      "xid" : "1458333759839.jpg",
+      "type" : "image",
+      "file" : "1458333759839.jpg",
+      "mime" : "image/jpeg",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

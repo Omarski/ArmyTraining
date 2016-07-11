@@ -1,0 +1,42 @@
+{
+  "page" : {
+    "xid" : "page1859",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perspectives: Speaking Dari",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "(Note: This transcript has been edited for readability.)<br><br>\"[insert transcription here]\""
+      }, {
+        "name" : "frame",
+        "value" : "5"
+      } ]
+    },
+    "note" : [ {
+      "text" : "An Afghan national explains the importance of speaking Dari in Afghanistan.",
+      "media" : [ {
+        "zid" : 1450383134234,
+        "xid" : "1450383134234.mp4",
+        "type" : "video",
+        "file" : "1450383134234.mp4"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1450383134234,
+      "xid" : "1450383134234.mp4",
+      "type" : "video",
+      "file" : "1450383134234.mp4",
+      "mime" : "video/x-flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

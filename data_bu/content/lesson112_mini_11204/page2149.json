@@ -1,0 +1,41 @@
+{
+  "page" : {
+    "xid" : "page2149",
+    "type" : "Info",
+    "title" : "Political Concerns",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "https://www.flickr.com/photos/afgmatters/4271135099/"
+      }, {
+        "name" : "mediadisplayblurb",
+        "value" : "A father and his children in Badgah village, Afghanistan"
+      } ]
+    },
+    "note" : [ {
+      "text" : "While it is important to follow the guidance of local leaders and experts, some local authorities may encourage projects that will bring themselves power or prestige, such as the construction of a new building. However, providing basic needs, like clean water, may be more urgent. You should address essential needs first. ",
+      "media" : [ {
+        "zid" : 4034401,
+        "xid" : "4034401.mp3",
+        "type" : "audio",
+        "file" : "4034401.mp3"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1465937642445,
+      "xid" : "1465937642445.jpg",
+      "type" : "image",
+      "file" : "1465937642445.jpg",
+      "mime" : "image/jpeg",
+      "info" : {
+        "property" : [ {
+          "name" : "mediacaption",
+          "value" : "NASA's Earth Observatory"
+        }, {
+          "name" : "mediadisplayblurb",
+          "value" : "Map of Afghanistan"
+        } ]
+      }
+    } ]
+  }
+}

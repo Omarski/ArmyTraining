@@ -1,0 +1,42 @@
+{
+  "page" : {
+    "xid" : "page2087",
+    "type" : "Info",
+    "layout" : "",
+    "title" : "Perspectives: Sensitive Topics",
+    "hint" : "",
+    "comment" : "",
+    "info" : {
+      "property" : [ {
+        "name" : "mediacaption",
+        "value" : "Alelo, Inc."
+      }, {
+        "name" : "videoTranscript",
+        "value" : "(Note: This transcript has been edited for readability.)<br><br>\"During key leader engagements, a lot of the questions involving the villages revolved particularly [around] things that you could ask that are traditionally respectful. One thing you could ask is, ‘How many families are in this village?’ They’ll say, maybe, ‘There’s ten families, twelve, fifteen families.’ Then you could ask, ‘How many children?’ Particularly, the obvious is steering away from any questions regarding their women. A lot of times, you would want to talk about children because that is a universal theme of humanizing the Afghans and them understanding that you’re like them. So you could ask them about their children. You could ask them about how many families are there. Because it’s a very—especially Kandahar region in the south—very, very strong traditions. Very conservative traditions that basically exclude any discussion about women.\""
+      }, {
+        "name" : "frame",
+        "value" : "3"
+      } ]
+    },
+    "note" : [ {
+      "text" : "An Air Force master sergeant discusses appropriate topics of conversation in Afghanistan.",
+      "media" : [ {
+        "zid" : 1288918297731,
+        "xid" : "1288918297731.mp4",
+        "type" : "video",
+        "file" : "1288918297731.mp4"
+      } ]
+    } ],
+    "media" : [ {
+      "zid" : 1288918297731,
+      "xid" : "1288918297731.mp4",
+      "type" : "video",
+      "file" : "1288918297731.mp4",
+      "mime" : "video/flv",
+      "info" : null
+    } ],
+    "calligraphy" : {
+      "nom" : ""
+    }
+  }
+}

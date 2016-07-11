@@ -1,0 +1,131 @@
+{
+  "page" : {
+    "xid" : "page2384",
+    "type" : "ListeningComprehension",
+    "title" : "Practice 9",
+    "info" : null,
+    "interlocutor" : {
+      "name" : "Tariq Osmani",
+      "zid" : 1462830371130,
+      "nom" : "Tariq_Osmani"
+    },
+    "media" : [ {
+      "zid" : 1466444721541,
+      "xid" : "1466444721541.jpg",
+      "type" : "image",
+      "file" : "1466444721541.jpg",
+      "mime" : "image/jpeg"
+    } ],
+    "prompt" : {
+      "text" : "Respond to your counterpart  appropriately."
+    },
+    "question" : {
+      "utterance" : {
+        "lang" : "en",
+        "anchor" : "ezread",
+        "native" : {
+          "lang" : "en",
+          "type" : "native",
+          "kind" : "standard",
+          "text" : "خدا حافظ"
+        },
+        "ezread" : {
+          "lang" : "en",
+          "type" : "ezread",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "phonetic" : {
+          "lang" : "en",
+          "type" : "phonetic",
+          "kind" : "standard",
+          "text" : ""
+        },
+        "translation" : {
+          "lang" : "en",
+          "type" : "translation",
+          "kind" : "standard",
+          "text" : "khudaa haafiz."
+        }
+      },
+      "info" : null
+    },
+    "answer" : [ {
+      "correct" : true,
+      "feedback" : {
+        "text" : "He said, \"goodbye.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "khudaa haafiz."
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That’s not an appropriate response to \"goodbye.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "kya aap ko sumajh aa gayi?"
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That’s not an appropriate response to \"goodbye.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "jee aa gayi. "
+            }
+          },
+          "info" : null
+        }
+      }
+    }, {
+      "correct" : false,
+      "feedback" : {
+        "text" : "That’s not an appropriate response to \"goodbye.\""
+      },
+      "nut" : {
+        "uttering" : {
+          "utterance" : {
+            "lang" : "en",
+            "anchor" : "ezread",
+            "translation" : {
+              "lang" : "en",
+              "kind" : "standard",
+              "text" : "sumajh nahin aayi. "
+            }
+          },
+          "info" : null
+        }
+      }
+    } ]
+  }
+}
