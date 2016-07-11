@@ -15,19 +15,35 @@
   }
 
   //levels pop
-  .objex-view-popLevelIconCont{
+  .objex-view-popLevelIconCont {
     position: absolute;
     width: 162px;
     height: 82px;
-    cursor:pointer;
+    cursor: pointer;
+
+    .objex-view-popLevelIconText {
+      position: absolute;
+      font-weight: bold;
+      font-size: 25px;
+      top: 24px;
+      left: 41px;
+    }
+
+    .objex-view-popLevelIconLock {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 50px;
+      right: 5px;
+    }
   }
 
-  .objex-view-popLevelIconText{
-    position:absolute;
-    font-weight:bold;
-    font-size:25px;
-    top:24px;
-    left:41px;
+  .objex-view-popLevelAdvancedIcon{
+    position: absolute;
+    width: 193px;
+    height: 40px;
+    bottom: 75px;
+    right: 70px;
   }
 
   //level complete pop
@@ -41,7 +57,7 @@
     font-size:70px;
   }
 
-  .objex-view-introButtonCont, .objex-view-completedButtonCont{
+  .objex-view-introButtonCont, .objex-view-completedButtonCont, .objex-view-advancedButtonCont{
     position:relative;
     margin-left: auto;
     margin-right: auto;
@@ -59,6 +75,47 @@
   }
   .objex-view-introButtonCont{
     top:350px;
+  }
+
+  .objex-view-advancedButtonCont{
+    top:60px;
+  }
+
+  .objex-view-completedButtonCont{
+    top:-70px;
+  }
+
+  //basic, game done, out of time pop
+  .objex-view-textAdvanced{
+    text-align: center;
+    font-size: 25px;
+    line-height: 33px;
+    width:450px;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:120px;
+  }
+
+  .objex-view-textGameDone{
+    text-align: center;
+    font-size: 25px;
+    line-height: 37px;
+    width:450px;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:180px;
+  }
+
+  .objex-view-textTimeUp{
+    text-align: center;
+    font-size: 52px;
+    width:450px;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:155px;
   }
 
   //info pop
@@ -183,8 +240,14 @@
     text-align:right;
     font-size:14px;
   }
-}
 
+  //timer
+  .objex-view-timer{
+    position: absolute;
+    right:20px;
+    top:10px;
+  }
+}
 
 .objex-view-textHalfway{
   display:none;
@@ -196,4 +259,3 @@
   text-align: center;
   font-size:70px;
 }
-

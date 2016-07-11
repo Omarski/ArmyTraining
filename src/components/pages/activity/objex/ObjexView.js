@@ -24,7 +24,8 @@ function getPageState(props) {
         showGame:false,
         currentLevel:1,
         levelsColl:[],
-        levelStats:{completed:[]}
+        levelStats:{basic:[], advanced:[]},
+        advancedLevel:false
     };
     
     if (props && props.page) {
@@ -128,11 +129,13 @@ var ObjexView = React.createClass({
         var levelIconPos = [null,[{x:310, y:130}, {x:310, y:285}]];
 
         for (var i = 0 ; i < 2; i++){ //levels.length
+
+            var mode = (self.state.advancedLevel) ? "advanced":"basic";
             var levelObj = {
                 level: i + 1,
                 posX:levelIconPos[1][i].x, //levels.length - 1
                 posY:levelIconPos[1][i].y, //levels.length - 1
-                locked: !(i === 0),
+                locked: (!(i === 0) && self.state.levelStats[mode].indexOf(i) === -1),
                 completed: false
             };
 
@@ -175,30 +178,138 @@ var ObjexView = React.createClass({
         self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
 
+    prepLevelsPopup: function(){
+
+        var self = this;
+        var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
+        var iconBg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_background;
+
+        var lockImg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_lock_icon;
+        var lockStyle = {background: 'url('+lockImg+') no-repeat 100% 100%'};
+
+        var advImg = self.state.mediaPath + "objex/img/advancedLevel.png";
+        var advStyle = {background: 'url('+advImg+') no-repeat 100% 100%'};
+
+        var levelIcons = self.state.levelsColl.map(function(levelObj,index){
+
+            var locked = self.state.levelsColl[index].locked;
+            var levelIconStyle = {left:levelObj.posX+'px', top:levelObj.posY+'px',
+                background: 'url('+iconBg+') no-repeat 100% 100%', pointerEvents:locked ? 'none':'auto'};
+            return(
+                <div id={"objexViewLevelIcon"+parseInt(index+1)} key={index}
+                     className="objex-view-popLevelIconCont"
+                     style={levelIconStyle}
+                     onClick={self.onLevelClick}>
+                    {locked ? <div className="objex-view-popLevelIconLock" style={lockStyle}></div>:null}
+                    <div className="objex-view-popLevelIconText">{"Level "+levelObj.level}</div>
+                </div>
+            )
+        });
+
+        var popupObj = {
+            id:"Levels",
+            onClickOutside: null,
+            popupStyle: {height:'100%', width:'100%', top:0, left:0,
+                background: 'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
+
+            content: function(){
+
+                return(
+                    <div className="objex-view-popCont">
+                        {levelIcons}
+                        {self.state.advancedLevel ? <div className="objex-view-popLevelAdvancedIcon" style={advStyle}></div>:null}
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+    },
+
     prepLevelCompletePopup: function(){
+
+        var self = this;
+        this.prepPopup("LevelOrRoundDone",
+
+        function(){
+
+                return(
+                    <div className="objex-view-popCont">
+                        <div className="objex-view-textComplete">Level complete!</div>
+                        <div className="objex-view-completedButtonCont">
+                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
+                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.onNextLevel}>Next Level</button>
+                        </div>
+                    </div>
+                )
+            });
+    },
+
+    prepBasicCompletePopup: function(){
+
+        var self = this;
+        var advancedText = (<div>"Congratulations! You have now <br></br>unlocked Advanced Mode! Try
+            playing again while racing against<br></br>the clock!"</div>);
+
+        this.prepPopup("BasicLevelDone",
+            function(){
+
+                return(
+                    <div className="objex-view-popCont">
+                        <div className="objex-view-textAdvanced">{advancedText}</div>
+                        <div className="objex-view-advancedButtonCont">
+                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
+                        </div>
+                    </div>
+                )
+            });
+    },
+
+    prepGameCompletePopup: function(){
+
+        var gameDoneText = (<div>"Congratulations! You completed <br></br>Advanced Mode!
+            Click "Next" to<br></br>continue"</div>);
+
+        this.prepPopup("GameDone",
+            function(){
+
+                return(
+                    <div className="objex-view-popCont">
+                        <div className="objex-view-textGameDone">{gameDoneText}</div>
+                    </div>
+                )
+            });
+    },
+    
+    prepTimeUpPopup: function(){
+
+        var self = this;
+        this.prepPopup("TimeUp",
+            function(){
+
+                return(
+                    <div className="objex-view-popCont">
+                        <div className="objex-view-textTimeUp">Out of time!</div>
+                        <div className="objex-view-completedButtonCont">
+                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
+                        </div>
+                    </div>
+                )
+            });
+    },
+
+    prepPopup: function(id, content){
 
         var self = this;
         var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
 
         var popupObj = {
-            id:"LevelOrRoundDone",
+            id:id,
             onClickOutside: null,
             popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
 
-            content: function(){
-
-                return(
-                        <div className="objex-view-popCont">
-                            <div className="objex-view-textComplete">Level complete!</div>
-                            <div className="objex-view-completedButtonCont">
-                                <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
-                                <button type="button" className="btn btn-default objex-view-btn" onClick={self.onNextLevel}>Next Level</button>
-                            </div>
-                        </div>
-
-                )
-            }
-        };
+            content: content
+            };
 
         self.displayPopup(popupObj);
     },
@@ -216,7 +327,8 @@ var ObjexView = React.createClass({
 
         self.setState({popupObj:null}, function(){
             setTimeout(function(){
-                self.prepLevelsPopup()},300);
+                //self.prepLevelsPopup()},300);
+                self.prepLevels()},300);
             });
     },
 
@@ -234,44 +346,6 @@ var ObjexView = React.createClass({
                 });
             }, 300);
         });
-    },
-
-    prepLevelsPopup: function(){
-
-        var self = this;
-        var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
-        var iconBg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_background;
-        var levelIcons = self.state.levelsColl.map(function(levelObj,index){
-
-            var levelIconStyle = {left:levelObj.posX+'px', top:levelObj.posY+'px', background: 'url('+iconBg+') no-repeat 100% 100%'};
-
-            return(
-                <div id={"objexViewLevelIcon"+parseInt(index+1)} key={index}
-                     className="objex-view-popLevelIconCont"
-                     style={levelIconStyle}
-                     onClick={self.onLevelClick}>
-                    <div className="objex-view-popLevelIconText">{"Level "+levelObj.level}</div>
-                </div>
-            )
-        });
-
-        var popupObj = {
-            id:"Levels",
-            onClickOutside: null,
-            popupStyle: {height:'100%', width:'100%', top:0, left:0,
-                        background: 'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
-
-            content: function(){
-
-                return(
-                    <div className="objex-view-popCont">
-                        {levelIcons}
-                    </div>
-                )
-            }
-        };
-
-        self.displayPopup(popupObj);
     },
 
     onLevelClick: function(e){
@@ -343,10 +417,41 @@ var ObjexView = React.createClass({
         switch (update.task){
 
             case "levelDone":
-                this.setState({showGame:false}, function(){
-                    this.prepLevelCompletePopup();
-                    this.viewUpdate({task:"buttonAudio", value:null});
+                var currentLevel = self.state.currentLevel;
+                var levelStats = self.state.levelStats;
+                var mode = (self.state.advancedLevel) ? "advanced":"basic";
+
+                levelStats[mode].push(currentLevel);
+
+                self.setState({levelStats:levelStats, showGame:false}, function(){
+
+                    if (self.state.levelStats[mode].length === self.state.levelsColl.length){
+                        if (self.state.advancedLevel) {
+                            self.prepGameCompletePopup();
+                        }else{
+                            self.prepBasicCompletePopup();
+                            self.setState({advancedLevel:true});
+                        }
+
+                    }else{
+                        self.prepLevelCompletePopup();
+                    }
+
+                    self.viewUpdate({task:"buttonAudio", value:null});
                 });
+                break;
+
+            case "timeUp":
+                this.setState({showGame:false},function(){
+                    self.prepTimeUpPopup();
+                });
+
+                var timeUpAudio = self.state.mediaPath + self.state.gameData.sound_files.audio_button_click;
+                self.playAudio({id:"success", autoPlay:true, sources:[{format:"mp3", url:timeUpAudio}]});
+                break;
+
+            case "advancedLevel":
+                this.setState({advancedLevel:true});
                 break;
 
             case "successAudio":
@@ -366,10 +471,6 @@ var ObjexView = React.createClass({
         }
     },
 
-    replayGame: function(){
-
-        var self = this;
-    },
 
     render: function() {
 
@@ -418,6 +519,7 @@ var ObjexView = React.createClass({
                         loadedObjexColl = {state.loadedObjexColl}
                         viewUpdate = {self.viewUpdate}
                         levelStats = {self.state.levelStats}
+                        advancedLevel = {self.state.advancedLevel}
                     />:null}
                 </div>
             </div>

@@ -1,5 +1,6 @@
 
 var React = require('react');
+var ReactDom = require('react-dom');
 var DnDPuzzleView = require('../../../widgets/dragAndDropPuzzle/DnDPuzzleView');
 var VideoPlayer = require('../../../widgets/VideoPlayer');
 var PropTypes = React.PropTypes;
@@ -141,7 +142,7 @@ var CultureQuestPuzzleGameView = React.createClass({
     prepStageTargetObj: function(){
 
         var stageStyle = {position:'absolute', width:'765px', height:'502px',
-            top:'0', left:'0', zIndex:'10'};
+            top:0, left:0, zIndex:'10'};
 
         return {
             id:"puzzleStageTarget",
@@ -158,7 +159,8 @@ var CultureQuestPuzzleGameView = React.createClass({
     },
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
-        var dragItem = component.getDOMNode();
+        var dragItem = ReactDom.findDOMNode(component);
+        //var dragItem = $("#"+monitor.getItem().id);
         this.setState({dragOriginX:parseInt(dragItem.style.left.replace("px",""))});
         dragItem.style.width  = "112px";
         dragItem.style.height = "168px";
@@ -166,7 +168,8 @@ var CultureQuestPuzzleGameView = React.createClass({
 
     onDraggableEndDrag: function(itemObj, monitor, component){
 
-        var dragItem = component.getDOMNode();
+        var dragItem = ReactDom.findDOMNode(component);
+        //var dragItem = $("#"+monitor.getItem().id);
 
         if (monitor.getDropResult()) {
             var target = $("#"+monitor.getDropResult().id);
@@ -236,7 +239,7 @@ var CultureQuestPuzzleGameView = React.createClass({
         //var videoUrl = this.state.mediaPath + this.state.imageData.videoReward;
         var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
         var stageStyle = {width:'768px', height:'506px', display:'block',
-                          top: '34px', left:'0', position:'absolute', zIndex:'25'};
+                          top: '34px', left:0, position:'absolute', zIndex:'25'};
 
         return (
             <div>
