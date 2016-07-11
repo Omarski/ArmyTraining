@@ -77,12 +77,10 @@ var ContentView = React.createClass({
     },
     handleLeftSwipe: function(){
         var self = this;
-        console.log("self.next");
         self.next();
     },
     handleRightSwipe: function () {
         var self = this;
-        console.log("self.previous");
         self.previous();
     },
     render: function() {
