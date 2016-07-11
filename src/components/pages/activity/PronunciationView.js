@@ -384,7 +384,7 @@ var PronunciationView = React.createClass({
             }else if(item === "note"){
                 note = self.state.notes[noteCounter] || "";
                 noteCounter++;
-                return(<tr><td colSpan="4"><p className="pronunciation-note" key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
+                return(<tr className="col-md-12 pronunciation-note-tr"><td colSpan="4"><p className="pronunciation-note" key={page.xid + "note" + String(noteCounter-1)} >{note}</p></td></tr>);
             }else{
                 return("");
             }
