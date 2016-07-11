@@ -1,11 +1,8 @@
-
-
 var React = require('react');
 var PropTypes  = React.PropTypes;
+
 var AudioPlayer = React.createClass({
-
     propTypes: {
-
         id: PropTypes.string.isRequired,
         sources: PropTypes.array.isRequired,
         autoPlay: PropTypes.bool,

@@ -29,3 +29,16 @@
 .reference-view-span-color {
   background-color: #337ab7;
 }
+
+#referenceModalBody{
+  .navbar-nav{
+    float: inherit;
+  }
+  .caret{
+    display: inline-block;
+  }
+}
+
+.hand-me{
+  cursor: pointer;
+}

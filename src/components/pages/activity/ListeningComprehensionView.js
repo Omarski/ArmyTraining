@@ -257,7 +257,7 @@ var ListeningComprehensionView = React.createClass({
                                                     alt={LocalizationStore.labelFor("tools", "btnListen")}
                                                     type="button"
                                                     onClick={self.listenCheck}
-                                                    className="btn btn-default btn-lg btn-link btn-step"
+                                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
                                                     aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
                                                 <span className="glyphicon glyphicon-play-circle btn-icon" aria-hidden="true"></span>
                                             </button>

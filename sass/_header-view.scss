@@ -7,9 +7,15 @@ button.navbar-toggle:hover {
 }
 
 .navbar-default {
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+  margin-top: 5px !important;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   .container {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    margin-top: 0px !important;
     width: 100%;
   }
   .nav>li>a {
@@ -88,8 +94,7 @@ button.navbar-toggle:hover {
   }
 
   .navbar-fixed-top {
-    border-bottom: 1px solid;
-    border-bottom-color: #337ab7 !important;
+    border: 1px solid $border-color !important;
   }
 
   .ul-containing-navbar-buttons {
@@ -144,9 +149,7 @@ button.navbar-toggle:hover {
   .navbar {
     min-height: 0;
   }
-  .navbar-default .btn-link {
-    color: #337ab7;
-  }
+
 
   .main-nav-bar {
     margin-bottom: 0;
@@ -162,6 +165,7 @@ button.navbar-toggle:hover {
     padding: 0;
     min-width: 40px;
     max-width: 40px;
+    color: $nav-button-color;
   }
 
   .main-nav-bar-header {

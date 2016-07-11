@@ -9,6 +9,7 @@ var LocalizationStore = require('../../stores/LocalizationStore');
 var ReferenceGestureView = require('../../components/reference_guide/ReferenceGestureView');
 var ReferenceMapView = require('../../components/reference_guide/ReferenceMapView');
 var ReferenceDictionaryView = require('../../components/reference_guide/ReferenceDictionaryView');
+var ReferencePdfView = require('../../components/reference_guide/ReferencePdfView');
 var Modal = ReactBootstrap.Modal;
 var Button = ReactBootstrap.Button;
 var Nav = ReactBootstrap.Nav;
@@ -34,6 +35,7 @@ function getSettingsState(props) {
         gestureSources: null,
         dictionarySources: null,
         dictionarySourceKey: null,
+        dictionaryLanguage: "none",
         jsonItems: []
     };
 
@@ -50,31 +52,41 @@ var ReferenceView = React.createClass({
         this.setState({ showModal: !this.state.showModal });
     },
     handleSelect: function(eventKey, e) {
-        if(typeof(eventKey) === "object"){
-            /* eventKey === "object" means you selected a drop-down menu sub-item and the event key
-                    is being passed in 'e' instead
+        /*
+         eventKey = <REFERENCE_PAGETYPE_CONSTANT>.<array index of source>
+                  = (selectedIndex).(sourceKey);
 
-                e = <REFERENCE_PAGETYPE_CONSTANT>.<array index of source>
+         example: e = 3.2 means the selected item is a dictionary view (const value 3) and should display
+         content from the dictionary with index [2]
+         */
+        var eventKeys = "";
+        var selectedIndex = "";
+        var sourceKey = "";
+        var languageName = "none";
+        if(typeof eventKey === "number"){
+            selectedIndex = eventKey;
+        }else{
+            eventKeys = eventKey.split('.');
+            selectedIndex = parseInt(eventKeys[0]);
+            sourceKey = parseInt(eventKeys[1]);
+            languageName = $(e.target).attr("data-name") ? $(e.target).attr("data-name") : "none";
+        }
 
-                example: e = 3.2 means the selected item is a dictionary view (const value 3) and should display
-                    content from the dictionary with index [2]
-             */
-            var eventKeys = e.split('.');
-            var selectedIndex = parseInt(eventKeys[0]);
-            var sourceKey = parseInt(eventKeys[1]);
 
-            switch(selectedIndex){
-                case REFERENCE_PDF_VIEW:
-                    this.setState({showModal: false});
-                    break;
-                case REFERENCE_DICTIONARY_VIEW:
-                    this.setState({selectedIndex: REFERENCE_DICTIONARY_VIEW, dictionarySourceKey: sourceKey });
-                    break;
-                default:
-                    // no op, more reference page types may come later
-            }
-        }else if(typeof(eventKey) === "number"){
-            this.setState({ selectedIndex: eventKey });
+
+        switch(selectedIndex){
+            case REFERENCE_MAP_VIEW:
+            case REFERENCE_GESTURE_VIEW:
+                this.setState({ selectedIndex: eventKey });
+                break;
+            case REFERENCE_DICTIONARY_VIEW:
+                this.setState({selectedIndex: selectedIndex, dictionarySourceKey: sourceKey, dictionaryLanguage: languageName });
+                break;
+            case REFERENCE_PDF_VIEW:
+                this.setState({ selectedIndex: eventKey });
+                break;
+            default:
+                // no op, more reference page types may come later
         }
     },
 
@@ -84,7 +96,7 @@ var ReferenceView = React.createClass({
     },
 
     componentDidMount: function() {
-        ReferenceStore.addChangeListener(this._onReferenceChange);
+        ReferenceStore.addUpdateListener(this._onReferenceChange);
     },
     render: function() {
         var self = this;
@@ -100,13 +112,14 @@ var ReferenceView = React.createClass({
                 return (<MenuItem key={"dropdownDictKey" + index}
                                   id={"WordsAndPhrasesDropdownItem" + item.name}
                                   eventKey={REFERENCE_DICTIONARY_VIEW + "." + index}
+                                  data-name={item.name}
                     >
                     {item.name}
                 </MenuItem>);
             });
 
             dictionaryNav = (<NavDropdown eventKey={REFERENCE_DICTIONARY_VIEW}
-                                          title={"Words "+ '\u0026' +" Phrases"}
+                                          title={LocalizationStore.labelFor("reference","refWordsTitle")}
                                           id="WordsAndPhrasesDropdownMenu"
                 >
                 {dictionaryDropdownItems}
@@ -114,29 +127,29 @@ var ReferenceView = React.createClass({
         }
         // pdf sources
         if(state.pdfSources){
-            var dropdownItems = state.pdfSources.map(function(item, index){
-                return (<MenuItem key={"dropdownItemsKey" + index}
-                                  eventKey={REFERENCE_PDF_VIEW + "." + index }
-                                  href={item.path} target={"_blank"}
-                                  id={"PDFTakeawaysItem"+item.name}
-                    >
-                    {item.name}
-                </MenuItem>);
-            });
+            //var dropdownItems = state.pdfSources.map(function(item, index){
+            //    return (<MenuItem key={"dropdownItemsKey" + index}
+            //                      eventKey={REFERENCE_PDF_VIEW + "." + index }
+            //                      href={item.path} target={"_blank"}
+            //                      id={"PDFTakeawaysItem"+item.name}
+            //        >
+            //        {item.name}
+            //    </MenuItem>);
+            //});
 
-            pdfNav = (<NavDropdown eventKey={REFERENCE_PDF_VIEW} title="PDF Takeaways" id="PDFTakeawaysDropdownMenu">
-                {dropdownItems}
-            </NavDropdown>);
+            pdfNav = (<NavItem eventKey={REFERENCE_PDF_VIEW} title={LocalizationStore.labelFor("reference","refPdfTitle")} id="PDFTakeawaysDropdownMenu">
+                {LocalizationStore.labelFor("reference","refPdfTitle")}
+            </NavItem>);
         }
 
         if(state.mapSource){
-            mapNav = (<NavItem eventKey={REFERENCE_MAP_VIEW}>
-                Map
+            mapNav = (<NavItem eventKey={REFERENCE_MAP_VIEW} title={LocalizationStore.labelFor("reference","refMapTitle")}>
+                {LocalizationStore.labelFor("reference","refMapTitle")}
             </NavItem>);
         }
 
         if(state.gestureSources){
-            gestureNav = (<NavItem eventKey={REFERENCE_GESTURE_VIEW} title="Item">Gestures</NavItem>);
+            gestureNav = (<NavItem eventKey={REFERENCE_GESTURE_VIEW} title={LocalizationStore.labelFor("reference","refGestureTitle")}>{LocalizationStore.labelFor("reference","refGestureTitle")}</NavItem>);
         }
 
         switch (state.selectedIndex) {
@@ -150,10 +163,14 @@ var ReferenceView = React.createClass({
                 break;
             case REFERENCE_DICTIONARY_VIEW:
                 content = (<ReferenceDictionaryView key={"referenceDictionaryViewKey"+state.selectedIndex + state.dictionarySourceKey}
-                                                    source={self.state.dictionarySources[state.dictionarySourceKey].path} />);
+                                                    source={self.state.dictionarySources[state.dictionarySourceKey].path}
+                                                    language={self.state.dictionaryLanguage} />);
+                break;
+            case REFERENCE_PDF_VIEW:
+                content = (<ReferencePdfView list={state.pdfSources} />);
                 break;
             default:
-                // no op, PDFs open in new tab/window
+                // no op
                 break;
         }
 
@@ -172,7 +189,7 @@ var ReferenceView = React.createClass({
 
                 <Modal dialogClassName="referenceModal" bsSize="large" show={state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Reference Guide</Modal.Title>
+                        <Modal.Title>{LocalizationStore.labelFor("reference", "refTitle")}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body id="referenceModalBody">
                         <Nav bsStyle="tabs" activeKey={state.selectedIndex} onSelect={this.handleSelect}>

@@ -95,7 +95,8 @@ var SortingView = React.createClass({
     },
 
     onDragging: function(e){
-        //e.dataTransfer.setData('text/plain', 'anything');
+       // e.dataTransfer.setData('text/plain', 'anything');
+        // great, need this to work on one browswer but it breaks the other...
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";

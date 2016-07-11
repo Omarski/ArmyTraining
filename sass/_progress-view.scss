@@ -1,3 +1,6 @@
+.progress {
+  background-color: $progress-bg-color;
+}
 .progress-bar-unit-complete {
   background-color: #ccc;
   background-image: none;
@@ -9,12 +12,12 @@
 }
 
 .progress-bar-total {
-  background-color: #ccc;
+  background-color: $progress-current-color;
   background-image: none;
 }
 
 .progress-bar-unit {
-  background-color: #ddd;
+  background-color: $progress-color;
   background-image: none;
 }
 

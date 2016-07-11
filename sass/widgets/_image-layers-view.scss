@@ -14,16 +14,17 @@
   z-index:2;
   pointer-events: auto;
   position: absolute;
-  cursor: pointer;
   opacity:0;
 }
 
 .image-layers-view-fade-out {
   opacity: 0;
+  cursor: auto;
   @include image-layers-view-trans(opacity);
 }
 
 .image-layers-view-fade-in {
   opacity: 1;
+  cursor:pointer;
   @include image-layers-view-trans(opacity);
 }
