@@ -28,8 +28,6 @@ var ImageLayersView = React.createClass({
 
         var state = {
             mediaPath: 'data/media/',
-            mapWidth: this.props.areaWidth,
-            mapHeight: this.props.areaHeight,
             loadedImageColl:[],
             loadCounter:0,
             totalImages:0,
@@ -95,14 +93,14 @@ var ImageLayersView = React.createClass({
         canv.setAttribute('width',canvasData.canvasWidth);
         canv.setAttribute('height',canvasData.canvasHeight);
         canv.setAttribute('id',canvasData.canvasId);
-        canv.style = canvasData.canvasStyle;
+        canv.style = canvasData.layerStyle;
         canv.state = "idle";
         canv.className = "image-layers-view-region-canvas";
         var context = canv.getContext("2d");
         var image = new Image();
         image.src = canvasData.mapSrc;
         image.onload = function(){
-            context.drawImage(image,0,0);
+            context.drawImage(image,0,0,canvasData.canvasWidth,canvasData.canvasHeight);
         };
 
         //events
@@ -125,11 +123,12 @@ var ImageLayersView = React.createClass({
         self.props.imageColl.map(function(image,index){
 
             var id = (image.id) ? image.id : index;
+            var layerStyle = (image.style) ? image.style : {zIndex:index+1};
             var regionCanvas =  self.createCanvas({
                 canvasWidth:self.props.areaWidth,
                 canvasHeight:self.props.areaHeight,
                 canvasId:"imageLayer_canvas_" + id,
-                canvasStyle:"{z-index:"+index+1+"}",
+                layerStyle:layerStyle,
                 mapSrc: self.state.loadedImageColl[index].src
             });
             document.getElementById("image-layers-view-back-image").appendChild(regionCanvas);
@@ -185,9 +184,10 @@ var ImageLayersView = React.createClass({
     render: function() {
 
         var self = this;
+
         var mapBackground = self.state.mediaPath + self.props.backgroundImage;
-        var mapStyle = {background:"#000 url("+mapBackground+") no-repeat 100% 100%",
-            position:"relative", width:self.state.mapWidth+"px", height:self.state.mapHeight, textAlign:"center"};
+        var mapStyle = {background:"#000 url("+mapBackground+") no-repeat", backgroundSize: self.props.areaWidth+"px " + self.props.areaHeight+"px",
+            position:"relative", width:self.props.areaWidth+"px", height:self.props.areaHeight+"px", textAlign:"center"};
 
         return (
             <div id="image-layers-view-back-image" className="image-layers-view-back-image" style={mapStyle}>

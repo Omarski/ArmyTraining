@@ -126,7 +126,7 @@ var ObjexView = React.createClass({
 
         var self = this;
         var levelsColl = [];
-        var levelIconPos = [null,[{x:310, y:130}, {x:310, y:285}]];
+        var levelIconPos = [null,[{x:425, y:130}, {x:425, y:285}]];
 
         for (var i = 0 ; i < 2; i++){ //levels.length
 
@@ -156,7 +156,7 @@ var ObjexView = React.createClass({
         var popupObj = {
             id:"Intro",
             onClickOutside: null,
-            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
+            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'url('+popBg+') no-repeat', backgroundSize:'1000px 504px', zIndex:'6'},
 
             content: function(){
 
@@ -210,7 +210,7 @@ var ObjexView = React.createClass({
             id:"Levels",
             onClickOutside: null,
             popupStyle: {height:'100%', width:'100%', top:0, left:0,
-                background: 'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
+                         background: 'url('+popBg+') no-repeat', backgroundSize:'1000px 504px', zIndex:'6'},
 
             content: function(){
 
@@ -306,7 +306,7 @@ var ObjexView = React.createClass({
         var popupObj = {
             id:id,
             onClickOutside: null,
-            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'url('+popBg+') no-repeat 100% 100%', zIndex:'6'},
+            popupStyle: {height:'100%', width:'100%', top:'0%', left:'0%', background:'url('+popBg+') no-repeat', backgroundSize:'1000px 504px', zIndex:'6'},
 
             content: content
             };
@@ -324,10 +324,8 @@ var ObjexView = React.createClass({
 
         var self=this;
         self.viewUpdate({task:"buttonAudio", value:null});
-
         self.setState({popupObj:null}, function(){
             setTimeout(function(){
-                //self.prepLevelsPopup()},300);
                 self.prepLevels()},300);
             });
     },
@@ -335,15 +333,14 @@ var ObjexView = React.createClass({
     onNextLevel: function(){
 
         var self=this;
+        self.prepObjex();
         self.bgAudio();
         self.viewUpdate({task:"buttonAudio", value:null});
         self.setState({popupObj:null, currentLevel: self.state.currentLevel +1}, function() {
 
             self.viewUpdate({task:"buttonAudio", value:null});
             setTimeout(function () {
-                self.setState({showGame:true}, function(){
-                    self.prepObjex();
-                });
+                self.setState({showGame:true});
             }, 300);
         });
     },
@@ -354,10 +351,11 @@ var ObjexView = React.createClass({
         var level = parseInt(e.currentTarget.id.substring(18));
 
         this.setState({popupObj:null, currentLevel:level}, function(){
+            self.prepObjex();
             self.viewUpdate({task:"successAudio", value:null});
             self.bgAudio();
             setTimeout(function(){
-                self.setState({showGame:true})
+                self.setState({showGame:true});
             },100);
         });
     },
@@ -479,7 +477,7 @@ var ObjexView = React.createClass({
         var page  = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
-        var blockStyle = {position:'relative', width:'768px', height:'504px', marginLeft:'auto', marginRight:'auto'};
+        var blockStyle = {position:'relative', width:'1000px', height:'504px', marginLeft:'auto', marginRight:'auto'};
 
         return (
             <div style={blockStyle}>
@@ -506,6 +504,7 @@ var ObjexView = React.createClass({
                     {self.state.popupObj ?
                         <PopupView
                             id = {"objexIntro"}
+                            backgroundStyle = {{width:'1000px', height:'505px'}}
                             popupStyle = {self.state.popupObj.popupStyle}
                             onClickOutside = {self.state.popupObj.onClickOutside}
                         >

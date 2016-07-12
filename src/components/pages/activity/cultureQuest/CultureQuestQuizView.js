@@ -140,8 +140,10 @@ var CultureQuestQuiz = React.createClass({
 
         //backspace
         $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
-            if(e.keyCode === 8 || e.keyCode === 46)
-                alert('backspace trapped')
+            if(e.keyCode === 8 || e.keyCode === 46){
+                self.state.atInputBlock--;
+                $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
+            }
         });
 
         $("#culture-quest-quiz-view-inputBlock0").focus();
@@ -215,7 +217,7 @@ var CultureQuestQuiz = React.createClass({
             //Question 1 correct
             }else{
                 answerObj.question1.answered = true;
-                self.awardPuzzlePiece();
+                self.setState({answeredCorrectly:true}, function(){self.awardPuzzlePiece()});
             }
         //incorrect
         }else{
