@@ -23,6 +23,7 @@ function getPageState(props) {
     data = {
         page: null,
         title: "",
+        sources: [],
         pageType: "",
         cols: [],
         note: [],
@@ -248,11 +249,14 @@ var MultiColumnPronunciationView = React.createClass({
     render: function() {
 
         var self = this;
-        var page = self.state.page;
+        var state = self.state;
+        var page = state.page;
         var nativeText = "";
         var translatedText = "";
         var ezreadText = "";
         var note = "";
+        var title = state.title;
+        var sources = state.sources;
         var feedbackClass = "glyphicon l2-glyphicon l2-feedback";
         var recordedClass = "glyphicon l2-glyphicon l2-playback";
         var recordingClass = "glyphicon l2-glyphicon l2-record";
@@ -369,14 +373,13 @@ var MultiColumnPronunciationView = React.createClass({
             );
         });
 
+        //return the multi column pronunciation view into content view
         return (
             <div>
                 <div className="l2-container" key={"page-" + this.state.page.xid}>
-                    <div className="row l2-title">
-                        <h3>{page.title}</h3>
-                    </div>
+                    <PageHeader sources={sources} title={title} key={page.xid}/>
                     <div className="row">
-                        <h4>{self.state.note}</h4>
+                        <h4 className="l2-note-text">{self.state.note}</h4>
                     </div>
                     <div className="row">
                         <div className="l2-answers-container">
