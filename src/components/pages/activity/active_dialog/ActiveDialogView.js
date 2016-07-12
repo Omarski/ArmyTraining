@@ -17,16 +17,9 @@ var ActiveDialogIntro = require('../../../../components/pages/activity/active_di
 var ActiveDialogEvaluation = require('../../../../components/pages/activity/active_dialog/ActiveDialogEvaluation');
 var RemediationView = require('../../../RemediationView');
 
-
 var _bAnimationPlaying = false;
 var _bSoundPlaying = false;
 var _dataLoaded = false;
-
-// TODO should be moved out into its own view component with a video
-var _animationMapping = {};
-
-var _currentAnimation = {};
-
 var _videoCountHack = 0;
 
 function getPageState(props) {
@@ -57,80 +50,6 @@ function getPageState(props) {
     };
 }
 
-function updatePageState(st) {
-
-    // get current action from store
-    var currentAction = ActiveDialogStore.getCurrentAction();
-    if (currentAction) {
-        switch(currentAction.type) {
-            case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING:
-                st.stageMedia = ActiveDialogStore.getCurrentBlockingAssets();
-                break;
-
-            case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT:
-                handleOutputAction(currentAction);
-                break;
-
-            default:
-            // no op
-        }
-    }
-
-    return {
-        activeCOA: st.activeCOA,
-        info: ActiveDialogStore.info(),
-        pageType: st.pageType || "",
-        title: st.title || "",
-        stageMedia: st.stageMedia
-    };
-}
-
-
-function playAnimation(speaker, animation) {
-    // see if it is a video or an image
-
-
-    // if video look up by name for character
-    var videoData = ActiveDialogStore.findVideoByAnimationNameForSpeaker(speaker, animation);
-
-    _currentAnimation = videoData;
-
-    var source = videoData.source;
-    var start = videoData.start;
-
-    // get video
-    var video = document.getElementById(source);
-
-
-    // set current time
-    video.currentTime = start;
-
-    // add event listeners
-    video.addEventListener("timeupdate", animationTimeUpdate);
-
-    // play
-    video.play();
-    _bAnimationPlaying = true;
-
-}
-
-function animationTimeUpdate(event) {
-    if (this.currentTime >= _currentAnimation.stop) {
-        // go back to idle animation
-        // for now stop the animation
-        this.pause();
-
-        // remove event listener
-        this.removeEventListener("timeupdate", animationTimeUpdate);
-
-        // change flag
-        _bAnimationPlaying = false;
-
-        // check if should continue
-        checkContinue();
-    }
-}
-
 function checkContinue() {
     if (_bSoundPlaying === false && _bAnimationPlaying === false ) {
         setTimeout(function() {
@@ -139,46 +58,26 @@ function checkContinue() {
     }
 }
 
-function handleOutputAction(actionObject) {
-    // get speaker
-    var speaker = actionObject.speaker;
-
-    // get audio
-    var sound = actionObject.sound;
-
-    // get animation
-    var animation = actionObject.anima;
-
-    if (sound) {
-        playSound(sound);
-    }
-
-    if (animation) {
-        playAnimation(speaker, animation);
-    }
-
-    // TODO remove this hack
-    if (!sound && !animation) {
-        checkContinue();
-    }
+function handleAnimationStart() {
+    // change flag
+    _bAnimationPlaying = true;
 }
 
-function handleVideoLoadStart(event) {
-    // remove event handler
-    if (event.currentTarget) {
-        event.currentTarget.removeEventListener("loadstart", handleVideoLoadStart);
-    }
+function handleAnimationStop() {
+    // change flag
+    _bAnimationPlaying = false;
 
+    // check if should continue
+    checkContinue();
+}
+
+
+function handlePersonaLoading() {
     // increase count
     _videoCountHack++;
 }
 
-function handleVideoCanPlayThrough(event) {
-    // remove event handler
-    if (event.currentTarget) {
-        event.currentTarget.removeEventListener("canplaythrough", handleVideoCanPlayThrough)
-    }
-
+function handlePersonaReady() {
     // decrease count
     _videoCountHack--;
 
@@ -186,10 +85,6 @@ function handleVideoCanPlayThrough(event) {
         // all videos loaded
         checkContinue();
     }
-
-    // hide it?
-
-    // trigger that is loaded?
 }
 
 function playSound(sound) {
@@ -227,6 +122,67 @@ var ActiveDialogView = React.createClass({
         return pageState;
     },
 
+    updatePageState: function(st) {
+        // get current action from store
+        var currentAction = ActiveDialogStore.getCurrentAction();
+        if (currentAction) {
+            switch(currentAction.type) {
+                case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING:
+                    st.stageMedia = ActiveDialogStore.getCurrentBlockingAssets();
+                    break;
+
+                case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT:
+                    this.handleOutputAction(currentAction);
+                    break;
+
+                default:
+                // no op
+            }
+        }
+
+        return {
+            activeCOA: st.activeCOA,
+            info: ActiveDialogStore.info(),
+            pageType: st.pageType || "",
+            title: st.title || "",
+            stageMedia: st.stageMedia
+        };
+    },
+
+    handleOutputAction: function(actionObject) {
+        // get speaker
+        var speaker = actionObject.speaker;
+
+        // get audio
+        var sound = actionObject.sound;
+
+        // get animation
+        var animation = actionObject.anima;
+
+        if (sound) {
+            playSound(sound);
+        }
+
+        if (animation) {
+            this.playAnimation(speaker, animation);
+        }
+
+        // TODO remove this hack
+        if (!sound && !animation) {
+            checkContinue();
+        }
+    },
+
+    playAnimation: function(speaker, animation) {
+        // find persona component
+        if (this.refs.ActiveDialogScenarioView && this.refs.ActiveDialogScenarioView.refs[speaker]) {
+            var personaComponent = this.refs.ActiveDialogScenarioView.refs[speaker];
+
+            // play animation
+            personaComponent.playAnimationVideo(animation);
+        }
+    },
+
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
         ActiveDialogStore.addChangeListener(this._onDialogChange);
@@ -234,7 +190,7 @@ var ActiveDialogView = React.createClass({
 
     componentDidMount: function() {
         if (this.state && this.state.title != "") {
-            this.setState(updatePageState(this.state));
+            this.setState(this.updatePageState(this.state));
         } else {
             this.setState(getPageState());
         }
@@ -268,7 +224,7 @@ var ActiveDialogView = React.createClass({
                                 </div>
                             </div>
                         </div>
-                        <ActiveDialogScenarioView composition={this.state.info.composition} media={this.state.stageMedia} />
+                        <ActiveDialogScenarioView composition={this.state.info.composition} ref="ActiveDialogScenarioView" media={this.state.stageMedia} />
                         <ActiveDialogIntro />
                         <ActiveDialogEvaluation />
                         <ActiveDialogAudio />
@@ -287,7 +243,7 @@ var ActiveDialogView = React.createClass({
     _onChange: function() {
         if (this.isMounted()) {
             if (this.state && this.state.title != "") {
-                this.setState(updatePageState(this.state));
+                this.setState(this.updatePageState(this.state));
             } else {
                 this.setState(getPageState());
             }
@@ -296,7 +252,7 @@ var ActiveDialogView = React.createClass({
 
     _onDialogChange: function() {
         if (this.isMounted()) {
-            this.setState(updatePageState(this.state));
+            this.setState(this.updatePageState(this.state));
         }
     }
 });
@@ -314,40 +270,23 @@ var ActiveDialogScenarioView = React.createClass({
         }
 
         if (this.props.media) {
-            var media;
-
-            var testDeleteMe;
+            var media = "";
 
             // reset counter
             _videoCountHack = 0;
 
-            media = this.props.media.map(function(mediaObj){
-
-                return mediaObj.assets.map(function(item, index) {
-                    var style = {top: item.top+'px', left: item.left+'px', position: "absolute", display: "block"};
-                    return (
-                        <div className="" key={index} style={style}>
-                            <video id={item.source}
-                                   alt=""
-                                   aria-label=""
-                                   title=""
-                                   onLoadStart={handleVideoLoadStart}
-                                   onCanPlayThrough={handleVideoCanPlayThrough}
-                                >
-                                <source src={"data/media/" + item.source} type="video/mp4"></source>
-                            </video>
-                        </div>
-                    );
-                });
-            });
-
-            testDeleteMe = this.props.media.map(function(item, index){
+            // iterate over media creating persona components
+            media = this.props.media.map(function(item, index){
                 return (
-                    <ActiveDialogPersona name={item.name} assets={item.assets} />
+                    <ActiveDialogPersona key={"persona" + index + item.name} name={item.name} ref={item.name}
+                                         assets={item.assets}
+                                         onLoadStart={handlePersonaLoading}
+                                         onLoadDone={handlePersonaReady}
+                                         onAnimationStart={handleAnimationStart}
+                                         onAnimationStop={handleAnimationStop} />
                 );
             });
         }
-
 
         return (
             <div id="Stage" className={this.props.composition}>
@@ -373,86 +312,157 @@ var ActiveDialogAudio = React.createClass({
 
 
 var ActiveDialogPersona = React.createClass({
-    defaultAnimationName: "",
+    defaultAnimationName: "Default",
     currentAnimation: "",
+    currentStop: "",
+    hack: false,
 
-    isReady: false,
-    videos: [],
-    images: [],
+    propTypes: {
+        name: React.PropTypes.string.isRequired,
+        onAnimationStart: React.PropTypes.func,
+        onAnimationStop: React.PropTypes.func,
+        onLoadStart: React.PropTypes.func,
+        onLoadDone: React.PropTypes.func
+
+    },
 
     getInitialState: function() {
-        console.log(this.props.assets.length);
-
         var videosNotReady = this.props.assets ? this.props.assets.length : 0;
 
+        // trigger callback function
+        if (this.props.onLoadStart !== null) {
+            this.props.onLoadStart();
+        }
 
         return {
             videosNotReady: videosNotReady
         }
-        // get name
-
-        // get current default animation
-
-        // get videos
     },
 
     componentWillUnmount: function() {
         // unregister event listeners on videos
     },
 
-    playAnimationVideo: function() {
+    playAnimationVideo: function(animationName) {
         // get video
+        var assetLength = this.props.assets.length;
+        while(assetLength--) {
+            var asset = this.props.assets[assetLength];
+            var assetData = asset.assetData;
 
-        // show video
+            if (assetData.animations && assetData.animations.hasOwnProperty(animationName)) {
+                var animation = assetData.animations[animationName];
+                var source = assetData.source;
 
-        // set current frame
+                // get video element
+                var video = document.getElementById(source);
 
-        // add listener
+                // set current time
+                video.currentTime = animation.start / 1000;
 
-        // start play
+                // add event listeners
+                video.addEventListener("timeupdate", this.videoTimeUpdateHandler);
+
+                // set current animation playing
+                this.currentAnimation = animationName;
+                this.currentStop = animation.stop / 1000;
+
+                // show video
+                video.style.display = "block";
+
+                // start playing
+                video.play();
+
+                // dispatch event if animation is not the default one
+                if (animationName != this.defaultAnimationName) {
+                    if (this.props.onAnimationStart !== null) {
+                        this.props.onAnimationStart();
+                    }
+                }
+
+                // found animation so break out!
+                break;
+            }
+        }
     },
 
     videoCanPlayThroughHandler: function(event) {
+        if (this.hack === true) {
+            return;
+        }
+
         // remove event listener
         if (event.currentTarget) {
-            event.currentTarget.removeEventListener("canplaythrough", this.videoCanPlayThroughHandler)
+            event.currentTarget.removeEventListener(event.type, this.videoCanPlayThroughHandler);
         }
 
         // decrease count
-        this.props.videosNotReady--;
+        this.state.videosNotReady--;
 
-        // all videos ready to play
-        if (this.props.videosNotReady <= 0) {
+        // all videos for this asset are ready to play
+        if (this.state.videosNotReady <= 0) {
 
             // set ready
 
-            // dispatch event
+            // play default animation
+            this.playAnimationVideo(this.defaultAnimationName);
+
+            // update stupid hack
+            this.hack = true;
+
+            // trigger callback function
+            if (this.props.onLoadDone !== null) {
+                this.props.onLoadDone();
+            }
         }
     },
 
     videoLoadStartHandler: function(event) {
-
+        // remove event handler
+        if (event.currentTarget) {
+            event.currentTarget.removeEventListener("loadstart", this.videoLoadStartHandler);
+        }
     },
 
     videoTimeUpdateHandler: function(event) {
+        if (event.currentTarget.currentTime >= this.currentStop) {
 
+            // remove event listener
+            event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
+
+            // hide video
+            event.currentTarget.style.display = "none";
+
+            // dispatch event if animation is not the default one
+            if (this.currentAnimation != this.defaultAnimationName) {
+                if (this.props.onAnimationStop !== null) {
+                    this.props.onAnimationStop();
+                }
+            }
+
+            // go back to default
+            this.playAnimationVideo(this.defaultAnimationName);
+        }
     },
 
     render: function() {
+        var self = this;
 
         // check if video
         var videos = this.props.assets.map(function(item, index) {
-            var style = {top: item.top+'px', left: item.left+'px', position: "absolute", display: "block"};
+            var style = {top: item.assetData.dimensions[1]+'px', left: item.assetData.dimensions[0]+'px', position: "absolute", display: "block"};
+            var videoStyle = {display: "none"};
             return (
                 <div className="" key={index} style={style}>
-                    <video id={item.source}
+                    <video id={item.assetData.source}
                            alt=""
                            aria-label=""
                            title=""
-                           onLoadStart={this.videoLoadStartHandler}
-                           onCanPlayThrough={this.videoCanPlayThroughHandler}
+                           onLoadStart={self.videoLoadStartHandler}
+                           onCanPlayThrough={self.videoCanPlayThroughHandler}
+                           style={videoStyle}
                         >
-                        <source src={"data/media/" + item.source} type="video/mp4"></source>
+                        <source src={"data/media/" + item.assetData.source} type="video/mp4"></source>
                     </video>
                 </div>
             );

@@ -544,37 +544,6 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
         return _objectives;
     },
 
-    findVideoByAnimationNameForSpeaker: function(speakerName, animationName) {
-        if (_currentBlocking !== null && _info !== null) {
-
-            var assetValue = _currentBlocking.assets[speakerName];
-
-            if (assetValue) {
-                switch (typeof assetValue) {
-                    case "string":
-                        if (_info.assets.hasOwnProperty(assetValue)) {
-                            var asset = _info.assets[assetValue];
-                            var source = asset.source;
-                            if (asset.hasOwnProperty("animations") && asset.animations.hasOwnProperty(animationName)) {
-                                var animation = asset.animations[animationName];
-                                var start = animation.start/1000;
-                                var stop = animation.stop/1000;
-                                return {source: source, start: start, stop: stop};
-                            }
-                        }
-                        break;
-                    case "object":
-                        // TODO
-                        break;
-                    default:
-                    //no op
-                }
-            }
-        }
-
-        return null;
-    },
-
     getCurrentBlockingAssets: function() {
         if (_currentBlocking !== null && _info !== null) {
 
@@ -583,25 +552,37 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
             for (var index in _currentBlocking.assets) {
                 var assetName = _currentBlocking.assets[index];
 
-                // look up in asset and add it
-                if (_info.assets.hasOwnProperty(assetName)) {
+                switch(typeof assetName) {
+                    case "string":
+                        if (_info.assets.hasOwnProperty(assetName)) {
+                            blockingAssets.push({
+                                name: index,
+                                assets: [{
+                                    name: assetName,
+                                    assetData: _info.assets[assetName]
+                                }]
+                            });
+                        }
+                        break;
+                    case "object":
+                        // create new array
+                        var assetArray = [];
+                        for (var assetIndex in assetName) {
+                            if (_info.assets.hasOwnProperty(assetName[assetIndex])) {
+                                assetArray.push({
+                                    name: assetName,
+                                    assetData: _info.assets[assetName[assetIndex]]
+                                });
+                            }
+                        }
 
-                    // gather asset data
-                    var newAssetObject = {
-                        name: assetName,
-                        left: _info.assets[assetName].dimensions[0],
-                        top: _info.assets[assetName].dimensions[1],
-                        source: _info.assets[assetName].source
-                    };
-
-
-                    // TODO update to handle multiple
-                    blockingAssets.push({
-                        name: index,
-                        assets: [
-                            newAssetObject
-                        ]
-                    });
+                        blockingAssets.push({
+                            name: index,
+                            assets: assetArray
+                        });
+                        break;
+                    default:
+                        break;
                 }
             }
 
