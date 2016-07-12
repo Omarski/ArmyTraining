@@ -333,15 +333,15 @@ var ObjexView = React.createClass({
     onNextLevel: function(){
 
         var self=this;
-        self.prepObjex();
-        self.bgAudio();
-        self.viewUpdate({task:"buttonAudio", value:null});
-        self.setState({popupObj:null, currentLevel: self.state.currentLevel +1}, function() {
+        var level = (self.state.currentLevel < 2) ? self.state.currentLevel +1:2;
 
+        self.setState({popupObj:null, currentLevel: level}, function() {
+            self.prepObjex();
             self.viewUpdate({task:"buttonAudio", value:null});
+            self.bgAudio();
             setTimeout(function () {
                 self.setState({showGame:true});
-            }, 300);
+            }, 100);
         });
     },
 
