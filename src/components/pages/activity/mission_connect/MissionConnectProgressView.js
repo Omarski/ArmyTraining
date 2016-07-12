@@ -5,7 +5,7 @@ var MissionConnectProgressView = React.createClass({
 
     propTypes: {
         mediaPath: PropTypes.string.isRequired,
-        charList:PropTypes.array.isRequired,
+        checkList:PropTypes.object.isRequired,
         wrongAttempts: PropTypes.number.isRequired
     },
 
@@ -15,13 +15,7 @@ var MissionConnectProgressView = React.createClass({
 
     renderChecklist: function(){
 
-
-        var list = this.props.charList.map(function(char,index){
-            return(
-                <div key={index}>{char}</div>
-            )
-        });
-
+        var list = this.props.checkList;
         return list;
     },
 
@@ -33,7 +27,10 @@ var MissionConnectProgressView = React.createClass({
         return (
             <div>
                 <div className="mission-connect-view-charListCont">
-                    {this.renderChecklist()}
+                    <div className="mission-connect-view-titleLeaders">Leaders</div>
+                    <div className="mission-connect-view-titleCont">Contractors</div>
+                    <div className="mission-connect-view-checksLeaders">{this.renderChecklist().leaders}</div>
+                    <div className="mission-connect-view-checksCont">{this.renderChecklist().contractors}</div>
                 </div>
 
                 <div className="mission-connect-view-meterCont" style={meterStyle}>

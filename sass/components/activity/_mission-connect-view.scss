@@ -60,16 +60,44 @@
   height:150px;
   top:404px;
   right:5px;
-  padding:5px;
   z-index:2;
-  font-size:13px;
-  line-height:14px;
+  font-size:12px;
+
+  .mission-connect-view-titleLeaders, .mission-connect-view-titleCont{
+    position: absolute;
+    top:3px;
+    left:2px;
+    width:40px;
+    height:12px;
+  }
+
+  .mission-connect-view-titleCont{
+    left:51px;
+    width:50px;
+  }
+
+  .mission-connect-view-checksLeaders, .mission-connect-view-checksCont{
+    position: absolute;
+    top:40px;
+    left:5px;
+    width:40px;
+    height:15px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size:17px;
+  }
+
+  .mission-connect-view-checksCont{
+    left:60px;
+  }
+
 }
 
 .mission-connect-view-meterCont{
   position: absolute;
-  width:112px;
-  height:21px;
+  width:166px;
+  height:33px;
   top:65px;
   right:3px;
   z-index:2;
