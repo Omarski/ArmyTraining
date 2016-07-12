@@ -14,10 +14,10 @@ var UnsupportedScreenSizeView = React.createClass({
 
         return (
             <div>
-                <h3>This activity is unsupported at the current screen size</h3>
+                <h3 className = "unsupported-view-header" >This activity is unsupported at the current screen size</h3>
             </div>
         );
-    },
+    }
 
 
 });

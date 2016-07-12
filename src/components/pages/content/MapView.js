@@ -3,6 +3,8 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var ReactBootstrap = require('react-bootstrap');
 var PageHeader = require('../../widgets/PageHeader');
+var AppStateStore = require('../../../stores/AppStateStore');
+var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 
 
 function getPageState(props) {
@@ -55,6 +57,7 @@ var MapView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+        AppStateStore.addChangeListener(this._onAppStateChange);
         var self = this;
         animatePins(self);
     },
@@ -81,6 +84,7 @@ var MapView = React.createClass({
     },
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
+        AppStateStore.removeChangeListener(this._onAppStateChange);
     },
     render: function() {
         var self = this;
@@ -97,7 +101,9 @@ var MapView = React.createClass({
         pins = getPins(self.state.json.nodes, self.state.hasMoved, self);
         backdropImage = self.state.json.backdrop;
 
-
+        if (AppStateStore.isMobile()) {
+            return (<UnsupportedScreenSizeView/>);
+        }
 
         return (
             <div>
@@ -114,6 +120,11 @@ var MapView = React.createClass({
                 </div>
             </div>
         );
+    },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
     },
     /**
      * Event handler for 'change' events coming from the BookStore

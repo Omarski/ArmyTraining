@@ -51,6 +51,9 @@
   }
 }
 
+
+
+
 .match-item-answer-prompt {
   margin-top: 5px;
 }
@@ -131,4 +134,11 @@
 
 .match-item-feedback-text {
 
+}
+
+@media screen and (max-width: 767px) {
+  .match-item-prompt {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
 }
