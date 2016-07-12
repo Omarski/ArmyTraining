@@ -48,65 +48,63 @@ var MissionConnectInterviewView = React.createClass({
 
     onSubmit: function(){
 
-        var self = this;
-        var scoreObj = self.props.scoreObjColl[self.props.activeNode - 1];
         var correct = $('input[name="missionConnectQuizRadio"]:checked').val();
-        var choiceNum = parseInt($('input[name="missionConnectQuizRadio"]:checked').attr('id'));
-        var attempt = scoreObj.attempts < 2 ? scoreObj.attempts + 1 : 0;
-        var attempts = scoreObj.allAttempts + 1;
-        var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
-        var localStats = self.props.stats;
+        if (correct){
+            var self = this;
+            var scoreObj = self.props.scoreObjColl[self.props.activeNode - 1];
+            var choiceNum = parseInt($('input[name="missionConnectQuizRadio"]:checked').attr('id'));
+            var attempt = scoreObj.attempts < 2 ? scoreObj.attempts + 1 : 0;
+            var attempts = scoreObj.allAttempts + 1;
+            var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
+            var localStats = self.props.stats;
 
-        if (correct === "true") {
+            if (correct === "true") {
 
-            var iconCheckImg = self.props.images[parseInt(self.props.activeNode) - 1].charIconCheckUrl;
-            self.props.updateScore([{property:'answered', value:true},
-                                    {property:'attempts', value:attempt},
-                                    {property:'allAttempts', value:attempts},
-                                    {property:'choiceNum', value:choiceNum}]);
-            
-            $("#MissionConnectIcon"+self.props.activeNode).css({
-                background: 'url('+iconCheckImg+') no-repeat 100% 100%', pointerEvents:'none'
-            });
+                var iconCheckImg = self.props.images[parseInt(self.props.activeNode) - 1].charIconCheckUrl;
+                self.props.updateScore([{property:'answered', value:true},
+                    {property:'attempts', value:attempt},
+                    {property:'allAttempts', value:attempts},
+                    {property:'choiceNum', value:choiceNum}]);
 
-            if (char.gameObjective){
+                $("#MissionConnectIcon"+self.props.activeNode).css({
+                    background: 'url('+iconCheckImg+') no-repeat 100% 100%', pointerEvents:'none'
+                });
 
-                self.props.updateGameView({task:"updateList", value:char.occupation});
-                localStats.completed = self.props.stats.completed + 1;
+                if (char.gameObjective){
 
-                if (localStats.completed === self.props.objectNodesNum) {
-                    console.log(">>>>>>>>>> Winner");
-                    self.viewUpdate({task:"won", value:null});
+                    self.props.updateGameView({task:"updateList", value:"leaders"});
+                    localStats.completed = self.props.stats.completed + 1;
+
+                    if (localStats.completed === self.props.objectNodesNum) {
+                        self.viewUpdate({task:"won", value:null});
+                    }
+                }else{
+                    self.props.updateGameView({task:"updateList", value:"contractors"});
                 }
+
+                localStats.hits = self.props.stats.hits + 1;
+
+                setTimeout(function(){self.renderFeedback();},250);
+
+            }else{
+                self.props.updateScore([{property:'attempts', value:attempt},
+                    {property:'allAttempts', value:attempts},
+                    {property:'choiceNum', value:choiceNum}]);
+
+                self.props.updateGameView({task:"updateWrong", value:null});
+
+                localStats.misses = self.props.stats.misses + 1;
+
+                if (localStats.misses === 6) {
+                    self.viewUpdate({task:"timeUp", value:null});
+                }
+
+                setTimeout(function(){self.renderFeedback();},250);
             }
 
-            localStats.hits = self.props.stats.hits + 1;
-
-            setTimeout(function(){self.renderFeedback();},250);
-
-        }else{
-            self.props.updateScore([{property:'attempts', value:attempt},
-                                    {property:'allAttempts', value:attempts},
-                                    {property:'choiceNum', value:choiceNum}]);
-
-            self.props.updateGameView({task:"updateWrong", value:null});
-
-            localStats.misses = self.props.stats.misses + 1;
-
-            if (localStats.misses === 6) {
-                console.log(">>>>>>>>>> Looser");
-                self.viewUpdate({task:"timeUp", value:null});
-            }
-
-            setTimeout(function(){self.renderFeedback();},250);
+            self.props.viewUpdate({task:"updateStats", value:localStats});
         }
 
-        self.props.viewUpdate({task:"updateStats", value:localStats});
-
-        console.log("Completed: " + localStats.completed);
-        console.log("Total obj: " + self.props.objectNodesNum);
-        console.log("Hits: " +      localStats.hits);
-        console.log("Misses: " + localStats.misses);
     },
 
     onClosePop: function(){
@@ -172,10 +170,10 @@ var MissionConnectInterviewView = React.createClass({
 
                     <div className = "mission-connect-view-popSenBtnGrpCont">
                         <div className = "mission-connect-view-popSenBtnCont">
-                            <button type="button" className="btn btn-default mission-connect-view-popSenBtn"
-                                    onClick={self.onInteract}>Interact</button>
-                            <button type="button" className="btn btn-default mission-connect-view-popSenBtn"
-                                    onClick={self.onClosePop}>Exit</button>
+                            <div type="button" className="btn btn-default mission-connect-view-popSenBtn"
+                                    onClick={self.onInteract}>Interact</div>
+                            <div type="button" className="btn btn-default mission-connect-view-popSenBtn"
+                                    onClick={self.onClosePop}>Exit</div>
                             </div>
                     </div>
                 </div>
@@ -201,8 +199,8 @@ var MissionConnectInterviewView = React.createClass({
 
                     <div className = "mission-connect-view-popIntBtnGrpCont">
                         <div className = "mission-connect-view-popIntBtnCont">
-                            <button type="button" className="btn btn-default"
-                                    onClick={self.onSubmit}>Submit</button>
+                            <div type="button" className="btn btn-default"
+                                    onClick={self.onSubmit}>Submit</div>
                         </div>
                     </div>
                 </div>
@@ -228,9 +226,7 @@ var MissionConnectInterviewView = React.createClass({
             var questionObj = questionTemplColl[scoreObj.attempts - 1];
         }
 
-
-
-        //console.log("answered")
+        
         var feedback = function(){
             var feedbackQuote =  scoreObj.answered ? char.positiveFeedback : char.negativeFeedback;
             return(
@@ -247,8 +243,8 @@ var MissionConnectInterviewView = React.createClass({
 
                     <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                         <div className = "mission-connect-view-popFeedbackBtnCont">
-                            <button type="button" className="btn btn-default"
-                                    onClick={self.onClosePop}>Exit</button>
+                            <div type="button" className="btn btn-default"
+                                    onClick={self.onClosePop}>Exit</div>
                         </div>
                     </div>
                 </div>

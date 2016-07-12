@@ -139,7 +139,13 @@ var CultureQuestQuiz = React.createClass({
         self.state.inputBlocksTotal = $("[id^='culture-quest-quiz-view-inputBlock']").length - 1;
 
         //backspace
-        $("[id^='culture-quest-quiz-view-inputBlock']").
+        $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
+            if(e.keyCode === 8 || e.keyCode === 46){
+                self.state.atInputBlock--;
+                $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
+            }
+        });
+
         $("#culture-quest-quiz-view-inputBlock0").focus();
         $("[id^='culture-quest-quiz-view-inputBlock']").on('input', function(){
             self.state.atInputBlock = $(this).attr('id').substring(34);
@@ -211,7 +217,7 @@ var CultureQuestQuiz = React.createClass({
             //Question 1 correct
             }else{
                 answerObj.question1.answered = true;
-                self.awardPuzzlePiece();
+                self.setState({answeredCorrectly:true}, function(){self.awardPuzzlePiece()});
             }
         //incorrect
         }else{
