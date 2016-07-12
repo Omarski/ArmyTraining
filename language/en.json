@@ -33,6 +33,7 @@
     "tooltipReference": "Reference Guide",
     "tooltipMute": "Mute Sound",
     "tooltipUnMute": "Turn on Sound",
+    "tooltipHelp": "Help",
     "tooltipSettings": "Settings"
   },
   "loader": {
