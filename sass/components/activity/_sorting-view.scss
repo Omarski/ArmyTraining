@@ -6,6 +6,10 @@
   }
 }
 
+[draggable=true] {
+  -khtml-user-drag: element;
+}
+
 .sorting-choices-container-text {
   text-align: center;
   border: 1px solid #ddd;
