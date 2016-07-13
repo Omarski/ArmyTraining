@@ -212,8 +212,6 @@ function playAudio(xid, index, self){
 
 function textClick(id, index, self){
     var isListening = self.state.isListening;
-    console.log("textClick");
-    console.log(isListening[index]);
 
     if(isListening[index]){
         isListening[index] = false;
@@ -372,8 +370,6 @@ var PronunciationView = React.createClass({
                 return (
                     <table className={"table pronunciation-view-table pronunciation-item-row " + cls}>
                         <tbody>
-                            {nativeText}
-
                             <tr>
                                 <td rowSpan="2" width="25">
                                     <audio id={id}></audio>

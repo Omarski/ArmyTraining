@@ -212,9 +212,8 @@ var ListeningComprehensionView = React.createClass({
         });
 
         var question = "";
-        var interactionColumn = "col-md-12";
+        var interactionColumn = "col-md-6";
         if(state.haveListened){
-            interactionColumn = "col-md-6";
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
@@ -230,6 +229,20 @@ var ListeningComprehensionView = React.createClass({
                         </div>
                         <div className="row">
                             {feedbackElement}
+                        </div>
+                    </div>
+                </div>
+            );
+        }else{
+            // right side before user listens to the question
+            console.log(state.prompt);
+            question = (
+                <div className="col-md-6">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <h4>
+                                {state.prompt}
+                            </h4>
                         </div>
                     </div>
                 </div>
