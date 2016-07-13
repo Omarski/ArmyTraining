@@ -23,6 +23,7 @@ function getPageState(props) {
     data = {
         page: null,
         title: "",
+        columns: 2,
         sources: [],
         pageType: "",
         cols: [],
@@ -49,9 +50,7 @@ function getPageState(props) {
     var isColElementPlaying = [];
     var isColElementListening = [];
     var colElementRecordingState = [];
-    for(var i=0; i<data.title.length; i++){
-        // the above line was previously the line below. David changed it on 6.14.16 to fix a bug on Lesson 7/18 Page 14/145 (Practice 4)
-        //for(var i=0; i<data.page.colTitle.length; i++){
+    for(var i=0; i<data.columns; i++){
         data.cols.push([]);
         isColElementCorrect.push([]);
         colElementPlayableState.push([]);
@@ -85,6 +84,7 @@ function getPageState(props) {
     data.isListening = isColElementListening;
     data.recordingState = colElementRecordingState;
 
+    console.dir(data);
     return data;
 }
 
@@ -197,7 +197,11 @@ function handlePlaying(id, colNumber, index, self){
 
 function textClick(id, colNumber, index, self){
     var isListening = self.state.isListening;
-    var zid = self.state.cols[colNumber][index].uttering.media[0].zid;
+    var uttering = self.state.cols[colNumber][index].uttering;
+    var zid = 0;
+    if(uttering.media && uttering.media[0] && uttering.media[0].zid){
+        zid = uttering.media[0].zid;
+    }
 
     if(isListening[colNumber][index]){
         isListening[colNumber][index] = false;
