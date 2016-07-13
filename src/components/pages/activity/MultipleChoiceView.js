@@ -197,16 +197,22 @@ var MultipleChoiceView = React.createClass({
                                 {state.prompt}
                             </h4>
                         </div>
-                        <div>
-                            {mediaContainer}
-                        </div>
-                        <div className="row">
-                            <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
-                                {choices}
-                            </ul>
-                        </div>
-                        <div className="row">
-                            {feedbackElement}
+                        <div className="multiple-choice-flex">
+                            <div>
+                                {mediaContainer}
+                            </div>
+                            <div className="multiple-choice-row-container">
+                                <div className="mc-choices-and-feedback-container">
+                                    <div className="row multiple-choice-row">
+                                        <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
+                                            {choices}
+                                        </ul>
+                                    </div>
+                                    <div className="row multiple-choice-row">
+                                            {feedbackElement}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

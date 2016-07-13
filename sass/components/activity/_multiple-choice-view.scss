@@ -4,6 +4,26 @@ input[type=checkbox] {
   }
 }
 
+.mc-choices-and-feedback-container{
+  display: block;
+}
+
+.multiple-choice-row-container {
+  width: 100%;
+}
+
+.multiple-choice-row {
+  margin: 0px;
+  width: 100%;
+}
+
+.multiple-choice-flex {
+  display: flex;
+  .infoMediaContainer {
+    margin-right: 20px;
+  }
+}
+
 .multiple-choice-choices-container {
   margin-top: 10px;
 }
