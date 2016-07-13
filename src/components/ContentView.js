@@ -249,6 +249,7 @@ var ContentView = React.createClass({
                     <div className={cls} key={"content-" + pageId}>
                         {page}
                     </div>
+                    <div className="main-content-bottom-border"></div>
                 </Swiper>
             </div>
         );

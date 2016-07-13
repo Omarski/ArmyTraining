@@ -13,7 +13,7 @@
 .info-container {
   border-style: solid;
   border-width: 1px;
-  border-color: $content-border-color;
+  border-color: $border-color;
   margin: 10px;
 }
 
@@ -89,6 +89,7 @@
 .infoAttributions{
   pointer-events: all;
   font-size: 16px;
+  color: $nav-button-color;
 }
 
 .fullcoach {

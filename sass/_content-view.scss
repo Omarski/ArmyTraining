@@ -23,12 +23,23 @@
   margin-left: inherit;
   width: inherit;
   border-style: solid;
-  border-top-width: 8px;
-  border-bottom-width: 8px;
+  border-top-width: 9px;
+  border-bottom-width: 9px;
   border-left-width: 0px;
   border-right-width: 0px;
-  border-color: #bcd5d1;
+  border-color: $content-border-color;
 
+}
+
+.main-content-bottom-border {
+  position: fixed;
+  left: 5px;
+  right: 5px;
+  bottom: 53px;
+  height: 1px;
+  border-bottom-color: $border-color;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
 @media screen and (max-width: 767px) {

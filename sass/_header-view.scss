@@ -32,6 +32,15 @@ button.navbar-toggle:hover {
   padding-bottom: 0px;
 }
 
+.navbar-brand {
+  position: fixed;
+  top: 8px;
+  left: 150px;
+  right: 253px;
+  text-align: center;
+  color: $nav-button-color;
+}
+
 @media screen and (min-width: 767px) {
 
   .reduce-padding-around-a-element-for-nav-buttons{
@@ -166,6 +175,9 @@ button.navbar-toggle:hover {
     min-width: 40px;
     max-width: 40px;
     color: $nav-button-color;
+    i {
+      font-size: 24px;
+    }
   }
 
   .main-nav-bar-header {
