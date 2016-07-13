@@ -29,6 +29,8 @@ var SettingsStore = require('../stores/SettingsStore');
 
 var ASRWidget = require('../components/widgets/ASR');
 
+var bDataLoaded = false;
+
 function getBookState() {
     var books = BookStore.getAll();
     var book = books[0] || null;
@@ -300,9 +302,12 @@ var MainView = React.createClass({
      */
     _onReferenceChange: function(){
         var self = this;
-        setTimeout(function() {
-            self.loadData();
-        }, 100)
+        if (bDataLoaded === false) {
+            setTimeout(function() {
+                self.loadData();
+            }, 100);
+            bDataLoaded = true;
+        }
     }
 
 
