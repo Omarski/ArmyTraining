@@ -23,6 +23,7 @@ function getPageState(props) {
     data = {
         page: null,
         title: "",
+        columns: 2,
         sources: [],
         pageType: "",
         cols: [],
@@ -30,6 +31,7 @@ function getPageState(props) {
         playableState: [],
         isCorrect: [],
         isPlaying: [],
+        isListening: [],
         recordingState: [],
         message: "",
         recordedSpeech: "",
@@ -46,14 +48,14 @@ function getPageState(props) {
     var isColElementCorrect = [];
     var colElementPlayableState = [];
     var isColElementPlaying = [];
+    var isColElementListening = [];
     var colElementRecordingState = [];
-    for(var i=0; i<data.title.length; i++){
-        // the above line was previously the line below. David changed it on 6.14.16 to fix a bug on Lesson 7/18 Page 14/145 (Practice 4)
-        //for(var i=0; i<data.page.colTitle.length; i++){
+    for(var i=0; i<data.columns; i++){
         data.cols.push([]);
         isColElementCorrect.push([]);
         colElementPlayableState.push([]);
         isColElementPlaying.push([]);
+        isColElementListening.push([]);
         colElementRecordingState.push([]);
     }
 
@@ -70,6 +72,7 @@ function getPageState(props) {
                 isColElementCorrect[colNumber].push(null);
                 colElementPlayableState[colNumber].push(false);
                 isColElementPlaying[colNumber].push(false);
+                isColElementListening[colNumber].push(false);
                 colElementRecordingState[colNumber].push(false);
             }
 
@@ -78,8 +81,10 @@ function getPageState(props) {
     data.isCorrect = isColElementCorrect;
     data.playableState = colElementPlayableState;
     data.isPlaying = isColElementPlaying;
+    data.isListening = isColElementListening;
     data.recordingState = colElementRecordingState;
 
+    console.dir(data);
     return data;
 }
 
@@ -191,23 +196,54 @@ function handlePlaying(id, colNumber, index, self){
 }
 
 function textClick(id, colNumber, index, self){
-    var zid = self.state.cols[colNumber][index].uttering.media[0].zid;
-    // get audio.
-    playAudio(zid);
+    var isListening = self.state.isListening;
+    var uttering = self.state.cols[colNumber][index].uttering;
+    var zid = 0;
+    if(uttering.media && uttering.media[0] && uttering.media[0].zid){
+        zid = uttering.media[0].zid;
+    }
+
+    if(isListening[colNumber][index]){
+        isListening[colNumber][index] = false;
+        var audio = document.getElementById('l2-demo-audio');
+        audio.pause();
+        self.setState({isListening: isListening});
+    }else{
+        // get audio.
+        setTimeout(function(){playAudio(zid, colNumber, index, self)},100);
+    }
+
+
 }
 
-function playAudio(xid){
+function playAudio(xid, colNumber, index, self){
     var audio = document.getElementById('l2-demo-audio');
+    var isListening = self.state.isListening;
     //var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     audio.src = "data/media/" + xid + ".mp3";
     // play audio, or stop the audio if currently playing
-    if(audio.paused){
+    if(self.state.isListening[colNumber][index]){
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        isListening.map(function(itemi, i){
+           isListening[i].map(function(itemj, j){
+               if(i !== colNumber && j !== index){
+                   isListening[i][j] = false;
+               }
+           });
+        });
+        isListening[colNumber][index] = true;
+        self.setState({isListening: isListening});
+        $(audio).bind('ended', function(){
+           isListening[colNumber][index] = false;
+            self.setState({isListening: isListening});
+        });
     }else{
         audio.pause();
+        isListening[colNumber][index] = false;
+        self.setState({isListening: isListening});
     }
 
 }
@@ -307,17 +343,13 @@ var MultiColumnPronunciationView = React.createClass({
                         }
                     }
 
+                    // translatedText, ezreadText, nativeText
+                    //update?
+
                     return (
                     <table className={"table pronunciation-view-table pronunciation-item-row " + "l2-vocal-answer"}
                            key={page.xid + String(index)}>
                         <tbody>
-                        <tr>
-                            <td colSpan="4">
-                                <div>
-                                    <ColorText props={nativeText}/>
-                                </div>
-                            </td>
-                        </tr>
                         <tr>
                             <td rowSpan="2" width="25">
                                 <audio id={id}></audio>
@@ -326,7 +358,7 @@ var MultiColumnPronunciationView = React.createClass({
                                         type="button" onClick={function(){textClick(id, colNumber, index, self)}}
                                         className="btn btn-default btn-lg btn-link btn-step"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
-                                    <span className={"glyphicon pronunciation-audio-button "+ L2_GLYPHICON_LISTEN_CLS} ></span>
+                                    <span className={"glyphicon pronunciation-audio-button "+ (state.isListening[colNumber][index] ? L2_GLYPHICON_STOP_CLS : L2_GLYPHICON_LISTEN_CLS)} ></span>
                                 </button>
                             </td>
                             <td rowSpan="2" width="25">
@@ -348,16 +380,16 @@ var MultiColumnPronunciationView = React.createClass({
                                 </button>
                                 <span className={itemFeedbackClass}></span>
                             </td>
-                            <td>
-                                <div>
-                                    <ColorText props={ezreadText}/>
+                            <td className="l2-native-text">
+                                <div className="l2-native-text">
+                                    <ColorText props={nativeText}/>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td colSpan="4">
                                 <div>
-                                    <ColorText props={translatedText}/>
+                                    <ColorText props={ezreadText}/>
                                 </div>
                             </td>
                         </tr>

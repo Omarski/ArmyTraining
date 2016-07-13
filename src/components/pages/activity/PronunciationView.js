@@ -132,6 +132,7 @@ function getPageState(props) {
         recordingState: [],
         playableState: [],
         isPlaying: [],
+        isListening: [],
         isCorrect: [],
         utterings: [],
         message: "",
@@ -156,6 +157,7 @@ function getPageState(props) {
             data.recordingState.push(false);
             data.playableState.push(false);
             data.isPlaying.push(false);
+            data.isListening.push(false);
             data.isCorrect.push(null);
             data.utterings.push(item);
             data.displayTracker.push("question");
@@ -174,26 +176,56 @@ function getPageState(props) {
 
 
 // Plays Audio filed named with the xid(zid?) given
-function playAudio(xid){
+function playAudio(xid, index, self){
     var audio = document.getElementById('audio');
+    var isListening = self.state.isListening;
+
+
     //var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     audio.src = "data/media/" + xid + ".mp3";
     // play audio, or stop the audio if currently playing
-    if(audio.paused){
+    if(!self.state.isListening[index]){
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        isListening.map(function(item, i){
+            if(i !== index){
+                isListening[i] = false;
+            }
+        });
+        isListening[index] = true;
+        self.setState({isListening: isListening});
+        // set ended function
+        $(audio).bind('ended', function(){
+            isListening[index] = false;
+            self.setState({isListening: isListening});
+        });
+
     }else{
         audio.pause();
+        isListening[index] = false;
+        self.setState({isListening: isListening});
     }
 
 }
 
 function textClick(id, index, self){
-    var zid = self.state.utterings[index].uttering.media[0].zid;
-    // get audio.
-    playAudio(zid);
+    var isListening = self.state.isListening;
+
+    if(isListening[index]){
+        isListening[index] = false;
+        var audio = document.getElementById('audio');
+        audio.pause();
+        self.setState({isListening: isListening});
+    }else{
+
+        var zid = self.state.utterings[index].uttering.media[0].zid;
+        // get audio.
+        setTimeout(function(){playAudio(zid, index, self)}, 100);
+    }
+
+
 }
 
 var PronunciationView = React.createClass({
@@ -250,6 +282,7 @@ var PronunciationView = React.createClass({
         var displayTracker = state.displayTracker;
         var questionCounter = 0;
         var noteCounter = 0;
+
 
         // need to check for notes and send those  to top of page
         var vaList = displayTracker.map(function(item, index){
@@ -334,12 +367,9 @@ var PronunciationView = React.createClass({
 
                 var cls = (index % 2) ? "pronunciation-item-row-odd" : "pronunciation-item-row-even";
 
-
                 return (
                     <table className={"table pronunciation-view-table pronunciation-item-row " + cls}>
                         <tbody>
-                            {nativeText}
-
                             <tr>
                                 <td rowSpan="2" width="25">
                                     <audio id={id}></audio>
@@ -348,7 +378,7 @@ var PronunciationView = React.createClass({
                                         type="button" onClick={function(){textClick(id, qcIndex, self)}}
                                         className="btn btn-default btn-lg btn-link btn-step"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
-                                        <span className={"glyphicon pronunciation-audio-button "+ LI_GLYPHICON_LISTEN_CLS} ></span>
+                                        <span className={"glyphicon pronunciation-audio-button "+ (state.isListening[qcIndex] ? LI_GLYPHICON_STOP_CLS : LI_GLYPHICON_LISTEN_CLS)} ></span>
                                     </button>
                                 </td>
                                 <td rowSpan="2" width="25">
