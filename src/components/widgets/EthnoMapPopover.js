@@ -133,7 +133,7 @@ var EthnoMapPopover = React.createClass({
         //console.log("style", style);
 
         var checkIfPrevButtonIsDisabled = function(){
-            if(self.state.indexOfOverlayInfo === 0){
+            if(self.props.currentPopoverIndex === 0){
                 return true;
             } else {
                 return false;
@@ -143,7 +143,7 @@ var EthnoMapPopover = React.createClass({
         var popoverPages = self.popoverPagesFunction();
 
         var checkIfNextButtonIsDisabled = function(){
-            if(self.state.indexOfOverlayInfo ===  (popoverPages.length - 1)){
+            if(self.props.currentPopoverIndex ===  (popoverPages.length - 1)){
                 return true;
             } else {
                 return false;
