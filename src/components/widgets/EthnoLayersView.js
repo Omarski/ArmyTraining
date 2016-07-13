@@ -75,6 +75,7 @@ var EthnoLayersView = React.createClass({
         canv.addEventListener("click", function(e){
             self.pixelTracker(e, "click");
         });
+
         canv.addEventListener("mousemove", function(e){
             self.pixelTracker(e, "mousemove");
         });
@@ -162,8 +163,8 @@ var EthnoLayersView = React.createClass({
         }
 
         if (!pixelHit) {
-            self.props.onRollover(null);
-            self.state.lastHighlightedRegion = null;
+            // self.props.onRollover(null);
+            self.state.lastHighlightedRegion = null
         }
     },
 
@@ -177,6 +178,7 @@ var EthnoLayersView = React.createClass({
             var y = function(){return e.pageY - offset.top}();
             // console.log("x", x, "y", y);
             self.detectRegion(e, x, y, e.pageX, e.pageY);
+            // console.log("document.body.style.cursor", document.body.style.cursor);
         }
         else if (mode == "click"){
             // console.log("self.state.lastHighlightedRegion", self.state.lastHighlightedRegion);
@@ -185,10 +187,12 @@ var EthnoLayersView = React.createClass({
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
             self.props.onClick(self.state.lastHighlightedRegion, x, y);
-        } else if (mode = "mouseout") {
+        }
+        else if (mode = "mouseout") {
             if(!$("#toolTipperId").hasClass("ethno-not-visible")) {
                 $("#toolTipperId").addClass("ethno-not-visible");
             }
+            // document.body.style.cursor = "zoom-in";
         }
     },
 

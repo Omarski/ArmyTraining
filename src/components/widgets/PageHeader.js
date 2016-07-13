@@ -12,6 +12,7 @@ var BookmarksView = require('../../components/BookmarksView');
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var LocalizationStore = require('../../stores/LocalizationStore');
+var AudioControl = require('../../components/widgets/AudioControl');
 
 function getPageState(props) {
     var page = null;
@@ -114,7 +115,7 @@ var PageHeader = React.createClass({
                     id="breadcrumbsButton"
                     type="button"
                     aria-label={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
-                    className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
+                    className={("btn btn-default btn-link main-nav-audio-control ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
                     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                 </Button>
@@ -135,7 +136,12 @@ var PageHeader = React.createClass({
                 <small>
                     {info}
                 </small>
-                {bookmarkBtn}
+                <ul className="page-header-controls">
+                    <li><AudioControl /></li>
+                    <li>{bookmarkBtn}</li>
+                </ul>
+
+
             </div>
         </div>;
     }

@@ -42,12 +42,11 @@ var ObjexGameView = React.createClass({
     prepLayersData: function(){
 
         var self = this;
-
         var artifactsColl = self.getRandomObjex();
         
         self.setState({imageLayersData:{
 
-            areaWidth: 768,
+            areaWidth: 1000,
             areaHeight: 400,
             imageColl: artifactsColl,
             backgroundImage: self.props.levelData.backgroundImage.src,
@@ -78,6 +77,7 @@ var ObjexGameView = React.createClass({
             var artifactObj = {};
             artifactObj["image"] = loadedObjexColl[index].fullImgUrl;
             artifactObj["id"] = loadedObjexColl[index].hog_id;
+            artifactObj["style"] = {zIndex:index+1,width:'1000',height:'400'};
             artifactsColl.push(artifactObj);
         });
            
@@ -107,12 +107,12 @@ var ObjexGameView = React.createClass({
 
         if (canvasElement && !canvasElement.hidden) {
 
-            var hit = $.grep(self.state.activeRoundObjexColl, function(e) { return e.hog_id === canvasElement.id })[0];
+            var hit = $.grep(self.state.activeRoundObjexColl, function(e) { return "imageLayer_canvas_" +e.hog_id === canvasElement.id })[0];
 
             if ((hit && self.state.hitColl.indexOf(hit.hog_id) === -1) ||
                 (hit && self.state.hintMode && hit.hog_id === self.state.hintedId)) {
 
-                $("#objexViewCellImg"+canvasElement.id).css("opacity","1");
+                $("#objexViewCellImg"+canvasElement.id.substring(18)).css("opacity","1");
                 var hitColl = self.state.hitColl;
                 hitColl.push(hit.hog_id);
 
@@ -148,7 +148,7 @@ var ObjexGameView = React.createClass({
                         var layerId = self.state.layersCanvColl[l].id;
                         if (layerId.indexOf(hog_id) !== -1) {
                             self.setState({hintMode:true, hintedId:hog_id});
-                            self.hintEffect($("#"+hog_id));
+                            self.hintEffect($("#imageLayer_canvas_" + hog_id));
                         }
                     }
                     break;

@@ -85,6 +85,10 @@ function getPageState(isNav) {
 }
 
 var HeaderView = React.createClass({
+    showHelp: function() {
+        var helpWindow = window.open("./help.html", "_blank");
+    },
+
     toggleMute: function() {
         var settings = store.get('settings') || {};
         var previousVolume = this.state.previousVolume;
@@ -158,6 +162,8 @@ var HeaderView = React.createClass({
         if (this.state.muted) {
             muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
         }
+
+
         var dliView = "";
         var referenceView = "";
         if(ConfigStore.hasDLI()){
@@ -187,7 +193,18 @@ var HeaderView = React.createClass({
                         <Nav id="navId" pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
                             <NavItem className="reference-guide-hide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView} ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
-                            <NavItem eventKey={3} href="#" onClick={this.toggleMute}>
+                            <NavItem eventKey={3} href="#" onClick={this.showHelp}>
+                                <button title={LocalizationStore.labelFor("header", "tooltipHelp")}
+                                    alt={LocalizationStore.labelFor("header", "tooltipHelp")}
+                                    type="button"
+                                    className="btn btn-default btn-lg btn-link main-nav-bar-button"
+                                    aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
+                                    <span className="glyphicon glyphicon-question-sign main-nav-bar-help-icon" aria-hidden="true"></span>
+                                </button>
+                                <p>Help</p>
+                            </NavItem>
+
+                            <NavItem eventKey={4} href="#" onClick={this.toggleMute}>
                                 <button title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
                                         alt={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
                                         type="button"

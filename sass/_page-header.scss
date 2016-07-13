@@ -1,18 +1,62 @@
 .page-header-custom {
-  padding-bottom: 5px;
-  margin: 10px 0 5px;
-  border-bottom: 1px solid #eee;
-  span {
-    margin-left: 10px;
-  }
+  padding: 10px 0 5px;
+  border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid $border-color;
 }
 
 .page-header-custom-title {
   font-size: 16px;
   font-weight: bold;
   padding-left: 15px;
+  color: $nav-button-color;
 }
 
+#breadcrumbsButton, #audioControlButton, #audioControlIcon {
+  margin-top: 4px;
+  padding: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #eaeaea;
+  width: 24px;
+  height: 32px;
+  span {
+    margin: 0;
+    padding: 0;
+    color: $nav-button-color;
+  }
+}
+
+#breadcrumbsButton {
+  span {
+    font-size: 17px;
+  }
+}
+
+.infoAttributions {
+  padding-left: 8px;
+}
+
+#audioControlIcon {
+  padding-top: 4px;
+  padding-left: 3px;
+}
+
+.audio-controls {
+  display: flex;
+}
+
+.page-header-controls {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  list-style-type: none;
+  li {
+    float: left;
+    button {
+      margin: 0;
+    }
+  }
+}
 
 
 

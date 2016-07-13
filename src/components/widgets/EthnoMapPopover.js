@@ -12,7 +12,6 @@ var EthnoMapPopover = React.createClass({
             show: true,
             showChanged: false,
             parentShow: this.props.showHide,
-            indexOfOverlayInfo: 0,
             popoverQuadrant: this.props.quadrant
         };
     },
@@ -79,19 +78,25 @@ var EthnoMapPopover = React.createClass({
     toggleParentStateAndResetIndexOfOverlayInfoandResetMoreLessInfo: function(){
         var self = this;
         self.props.toggleParentPopoverState();
-        self.setState({indexOfOverlayInfo: 0});
+        // self.setState({indexOfOverlayInfo: 0});
     },
     setStateIndexOfOverlayInfoPlusOne: function () {
         var self = this;
         var popoverPagesHolder = this.popoverPagesFunction();
-        if(self.state.indexOfOverlayInfo < (popoverPagesHolder.length - 1) ) {
-            self.setState({indexOfOverlayInfo: self.state.indexOfOverlayInfo + 1});
+
+        // console.log("self.props.indexOfOverlay", self.props.indexOfOverlay);
+        // console.log("self.props", self.props);
+
+        //console.log("self.props.currentPopoverIndex", self.props.currentPopoverIndex);
+
+        if(self.props.currentPopoverIndex < (popoverPagesHolder.length - 1) ) {
+            self.props.parentPopoverNext();
         }
     },
     setStateIndexOfOverlayInfoMinusOne: function () {
         var self = this;
-        if(self.state.indexOfOverlayInfo > 0) {
-            self.setState({indexOfOverlayInfo: self.state.indexOfOverlayInfo - 1});
+        if(self.props.currentPopoverIndex > 0) {
+            self.props.parentPopoverPrevious();
         }
     },
     render: function() {
@@ -163,8 +168,8 @@ var EthnoMapPopover = React.createClass({
                                 </ul>
                             </div>
                             <div className="ethno-overlay-info">
-                                <p className="ethno-overlay-info-title">{popoverPages[self.state.indexOfOverlayInfo][0]}</p>
-                                <p className="ethno-overlay-info-text">{popoverPages[self.state.indexOfOverlayInfo][1]}</p>
+                                <p className="ethno-overlay-info-title">{popoverPages[self.props.currentPopoverIndex][0]}</p>
+                                <p className="ethno-overlay-info-text">{popoverPages[self.props.currentPopoverIndex][1]}</p>
                             </div>
                             <EthnoMapButtons disabledPrev={checkIfPrevButtonIsDisabled}
                                              disabledNext={checkIfNextButtonIsDisabled}

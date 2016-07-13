@@ -77,12 +77,10 @@ var ContentView = React.createClass({
     },
     handleLeftSwipe: function(){
         var self = this;
-        console.log("self.next");
         self.next();
     },
     handleRightSwipe: function () {
         var self = this;
-        console.log("self.previous");
         self.previous();
     },
     render: function() {
@@ -251,6 +249,7 @@ var ContentView = React.createClass({
                     <div className={cls} key={"content-" + pageId}>
                         {page}
                     </div>
+                    <div className="main-content-bottom-border"></div>
                 </Swiper>
             </div>
         );

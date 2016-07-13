@@ -487,7 +487,7 @@ var SortingView = React.createClass({
                             Your browser does not support the audio format.
                         </audio>
                         <div className="row">
-                            <h4>
+                            <h4 className="sorting-view-header-prompt">
                                 {state.prompt}
                             </h4>
                         </div>

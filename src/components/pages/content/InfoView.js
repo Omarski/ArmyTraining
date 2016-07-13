@@ -259,7 +259,7 @@ var InfoView = React.createClass({
         var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
 
         if(state.page.note && state.page.note.length > 1){
-            noteDisplay = <div className={mediaType + " infoNoteContainer"}>
+            noteDisplay = <div className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}>
                 <ul>{pageNotes}</ul>
             </div>;
         }
@@ -286,7 +286,7 @@ var InfoView = React.createClass({
             }
 
             mediaContainer = (
-                <div className="infoMediaContainer">
+                <div className="infoMediaContainer col-md-6 col-sm-6">
                     {media}
                 </div>
                 );
@@ -300,12 +300,8 @@ var InfoView = React.createClass({
 
             content = (
                 <div className="row">
-                    <div className="col-sm-6 col-md-6">
-                        {mediaContainer}
-                    </div>
-                    <div className="col-sm-6 col-md-6">
-                        {noteDisplay}
-                    </div>
+                    {mediaContainer}
+                    {noteDisplay}
                 </div>
             );
 
@@ -328,7 +324,7 @@ var InfoView = React.createClass({
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="infoDataContainer container-fluid">
+                    <div className="info-container container-fluid">
                         {content}
                     </div>
                 </div>

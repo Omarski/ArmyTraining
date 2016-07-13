@@ -37,7 +37,7 @@ var ObjexInfoPopView = React.createClass({
         var popupObj = {
             id:"InfoPop",
             onClickOutside: null,
-            popupStyle: {height:'230px', width:'300px', top:'100px', right:'50px',
+            popupStyle: {height:'230px', width:'300px', top:'70px', right:'50px',
                          background: '#fff', border:'2px solid gray', padding:'5px', zIndex:'6'},
 
             content: function(){
@@ -71,6 +71,7 @@ var ObjexInfoPopView = React.createClass({
         return(<div>
                 {self.state.popupObj ? <PopupView
                     id = {"objexPopInfo"}
+                    backgroundStyle = {{width:'1000px', height:'505px'}}
                     popupStyle = {self.state.popupObj.popupStyle}
                     onClickOutside = {self.state.popupObj.onClickOutside}
                 >
