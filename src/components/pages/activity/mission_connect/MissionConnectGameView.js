@@ -13,8 +13,9 @@ var MissionConnectGameView = React.createClass({
             endNode:null,
             showInterview:false,
             scoreObjColl:[],
-            charList:[],
-            wrongAttempts:0
+            wrongAttempts:0,
+            checkList:{leaders:"", contractors:""},
+            contractList:""
         };
     },
 
@@ -63,7 +64,10 @@ var MissionConnectGameView = React.createClass({
             var ableToInteract = char.startNode ? "auto":"none";
             var visible = char.startNode? "1":"0";
 
-            if (char.endNode) visible = 0.4;
+            if (char.endNode) {
+                visible = 0.4;
+                ableToInteract = "auto";
+            }
 
             var blockStyle = {top: char.yPos+'px', left: char.xPos+'px',
                 pointerEvents:ableToInteract, opacity:visible};
@@ -113,9 +117,9 @@ var MissionConnectGameView = React.createClass({
                 break;
 
             case "updateList":
-                var list = self.state.charList;
-                list.push(update.value);
-                this.setState({charList:list});
+                var checkList = self.state.checkList;
+                checkList[update.value] += "|";
+                this.setState({checkList:checkList});
                 break;
 
             case "updateWrong":
@@ -158,7 +162,7 @@ var MissionConnectGameView = React.createClass({
 
                 <MissionConnectProgressView
                     mediaPath = {self.props.mediaPath}
-                    charList  = {self.state.charList}
+                    checkList  = {self.state.checkList}
                     wrongAttempts = {self.state.wrongAttempts}
                 />
 

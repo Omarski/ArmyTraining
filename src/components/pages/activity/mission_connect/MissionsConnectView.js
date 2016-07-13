@@ -175,8 +175,8 @@ var MissionConnectView = React.createClass({
                         </div>
                         <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                             <div className = "mission-connect-view-popFeedbackBtnCont">
-                                <button type="button" className="btn btn-default"
-                                        onClick={self.onClosePopup}>Start</button>
+                                <div type="button" className="btn btn-default"
+                                        onClick={self.onClosePopup}>Start</div>
                             </div>
                         </div>
                     </div>
@@ -214,9 +214,9 @@ var MissionConnectView = React.createClass({
 
                         <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                             <div className = "mission-connect-view-popFeedbackBtnCont">
-                                <button type="button" className="btn btn-default"
+                                <div type="button" className="btn btn-default"
                                             onClick={mode === "incomplete" ? self.onClosePopup:
-                                                 self.prepStatsPopup}>Continue</button>
+                                                 self.prepStatsPopup}>Continue</div>
                             </div>
                         </div>
                     </div>
@@ -261,8 +261,8 @@ var MissionConnectView = React.createClass({
 
                         <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                             <div className = "mission-connect-view-popFeedbackBtnCont">
-                                <button type="button" className="btn btn-default"
-                                        onClick={self.replayGame}>Restart</button>
+                                <div type="button" className="btn btn-default"
+                                        onClick={self.replayGame}>Restart</div>
                             </div>
                         </div>
                     </div>

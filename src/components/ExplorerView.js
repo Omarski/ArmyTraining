@@ -436,7 +436,7 @@ var TOCPageRow = React.createClass({
             cls += ' visited';
         } else {
             cls += ' not-seen';
-            icon = (<span className="glyphicon glyphicon-off not-seen" aria-hidden="true"></span>);
+            icon = (<i className="fa fa-circle-o" aria-hidden="true"></i>);
         }
 
         return (

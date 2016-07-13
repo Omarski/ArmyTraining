@@ -5,6 +5,10 @@
   font-size: 72px;
 }
 
+[draggable=true] {
+  -khtml-user-drag: element;
+}
+
 .match-item-image{
   height: 100px;
   width: 100px;
