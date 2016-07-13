@@ -19,7 +19,7 @@
   .culture-quest-quiz-view-timer{
     position: absolute;
     left:350px;
-    top:10px;
+    top:3px;
   }
 
   .culture-quest-quiz-view-quizCont{
@@ -38,22 +38,30 @@
     .culture-quest-quiz-view-quizBody{
       background:#fff;
       position: absolute;
-      width:470px;
-      height:200px;
-      top:45px;
+      width:480px;
+      height:205px;
+      top:32px;
       left:210px;
       overflow:auto;
 
-      .culture-quest-quiz-view-input-blocks-cont{
+      .culture-quest-quiz-view-input-blocks-cont {
         position: absolute;
-        top:115px;
-        left:30px;
+        top: 115px;
+        left: 0;
 
-        .culture-quest-quiz-view-blockGroup {
+        .culture-quest-quiz-view-input-blocks-cent{
           position: relative;
-          margin-right:20px;
-          margin-top:5px;
-          float:left;
+          width:480px;
+          height:100%;
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;;
+
+          .culture-quest-quiz-view-blockGroup {
+            position: relative;
+            margin-right: 20px;
+            margin-top: 5px;
+          }
         }
       }
 
