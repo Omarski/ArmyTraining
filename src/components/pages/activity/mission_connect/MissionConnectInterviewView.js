@@ -53,7 +53,7 @@ var MissionConnectInterviewView = React.createClass({
             var self = this;
             var scoreObj = self.props.scoreObjColl[self.props.activeNode - 1];
             var choiceNum = parseInt($('input[name="missionConnectQuizRadio"]:checked').attr('id'));
-            var attempt = scoreObj.attempts < 2 ? scoreObj.attempts + 1 : 0;
+            var attempt = scoreObj.attempts < 3 ? scoreObj.attempts + 1 : 0;
             var attempts = scoreObj.allAttempts + 1;
             var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
             var localStats = self.props.stats;
@@ -146,10 +146,11 @@ var MissionConnectInterviewView = React.createClass({
 
                 return(<div key={index}>
                     <input type="radio" name={"missionConnectQuizRadio"} //+self.props.activeNode
+                           style={{float:"left"}}
                            value={answer.correct}
                            id={index}
                            className="mission-connect-view-popIntRadio"
-                           />{answer.choice}
+                           /><div style={{float:"left", width:"92%"}}>{answer.choice}</div>
                     </div>
                 )
             });
@@ -163,7 +164,7 @@ var MissionConnectInterviewView = React.createClass({
                 <div className = "mission-connect-view-popCont">
                     <div className = "mission-connect-view-popSenImgCont">
                         <div className = "mission-connect-view-popSenImg" style={imgScnStyle}></div>
-                        <div className = "mission-connect-view-popSenImgTitle"></div>
+                        <div className = "mission-connect-view-popSenImgTitle">{char.profileName}</div>
                     </div>
 
                     <div className = "mission-connect-view-popSenTextCont" dangerouslySetInnerHTML={{__html:char.interactionWindowText}}></div>
@@ -188,7 +189,7 @@ var MissionConnectInterviewView = React.createClass({
                 <div className = "mission-connect-view-popCont">
                     <div className = "mission-connect-view-popIntImgCont">
                         <div className = "mission-connect-view-popIntImg" style={imgQuizStyle}></div>
-                        <div className = "mission-connect-view-popIntImgTitle"></div>
+                        <div className = "mission-connect-view-popIntImgTitle">{char.profileName}</div>
                     </div>
 
                     <div className = "mission-connect-view-popIntTextCont" dangerouslySetInnerHTML={{__html:questionObj.question}}></div>
@@ -223,7 +224,7 @@ var MissionConnectInterviewView = React.createClass({
         if (scoreObj.attempts === 0){
             var questionObj = questionTemplColl[0];
         }else{
-            var questionObj = questionTemplColl[scoreObj.attempts - 1];
+            var questionObj = questionTemplColl[parseInt(scoreObj.attempts - 1)];
         }
 
         
@@ -250,6 +251,8 @@ var MissionConnectInterviewView = React.createClass({
                 </div>
             );
         };
+
+        if (scoreObj.attempts >= 3) scoreObj.attempts = 0;
 
         self.setState({feedbackTempl:feedback(), popState:"feedback"});
 
