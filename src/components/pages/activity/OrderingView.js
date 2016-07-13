@@ -348,7 +348,7 @@ var OrderingView = React.createClass({
                     var answerLetter = item.letter;
                     var text = item.passedData;
 
-                    draggable = <li key={page.xid + "choice-"+index}>
+                    draggable = <li className="or-text-choice-li" key={page.xid + "choice-"+index}>
                         <div
                             data-passed={item.passedData}
                             data={answerLetter}

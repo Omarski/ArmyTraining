@@ -9,11 +9,12 @@
 .sorting-choices-container-text {
   text-align: center;
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 0px;
   margin: 5px;
   border-radius: 4px;
   position: relative;
   div {
+    padding: 10px;
     color: #000;
     font-weight: bold;
   }
@@ -92,7 +93,6 @@
 
       .sorting-view-header-prompt {
         margin-left: 10px;
-        margin-right: 10px;
       }
 
       .sorting-columnA {

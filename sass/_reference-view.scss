@@ -42,3 +42,7 @@
 .hand-me{
   cursor: pointer;
 }
+
+.modal-open .modal {
+  z-index: 100000;
+}

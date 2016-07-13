@@ -6,6 +6,7 @@
 }
 
 .or-answers-container, .or-choices-container {
+  padding-left: 0px;
   display: inline-flex;
   li{
     margin-top: 5px;
@@ -59,4 +60,35 @@
   font-size: 42px;
   margin-top: 25%;
   color: #ddd;
+}
+
+@media screen and (max-width: 767px) {
+  .or-answers-container, .or-choices-container {
+    padding-left: 0px;
+    display: block;
+    .or-text-choice-li{
+      margin-right: 0px;
+      .or-text-choice {
+        display: inline-block;
+        margin-left: 0px;
+        margin-right: 0px;
+        height: auto;
+        width: 95%;
+      }
+    }
+    .or-answer{
+      margin-left: 0px;
+      margin-right: 0px;
+      .or-answer-drop-area {
+        margin-left: 0px;
+        margin-right: 0px;
+        height: auto;
+        width: 95%;
+        .or-drop-area-index {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
 }
