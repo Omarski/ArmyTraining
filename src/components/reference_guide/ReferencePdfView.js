@@ -30,8 +30,8 @@ var ReferencePdfView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
-        var rows = state.list.map(function(item){
-            return(<tr className={"hand-me"} >
+        var rows = state.list.map(function(item, i){
+            return(<tr key={"referencePdfView-tableRow-"+item.name+"-"+i} className={"hand-me"} >
                 <td width={"100%"}>
                     <a href={item.path} target={"_blank"}>{item.name}</a>
                 </td>
