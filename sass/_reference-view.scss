@@ -52,6 +52,16 @@
       border-top: 5px solid grey;
     }
   }
+  li.active{
+    a:hover{
+      border-top: 5px solid grey;
+    }
+  }
+  li.active{
+    a:focus{
+      border-top: 5px solid grey;
+    }
+  }
 }
 
 #referenceModalBody{
