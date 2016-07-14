@@ -146,7 +146,6 @@ var ReferenceView = React.createClass({
 
         if(state.mapSource){
             mapNav = (<NavItem className="reference-tab" eventKey={REFERENCE_MAP_VIEW} title={LocalizationStore.labelFor("reference","refMapTitle")}>
-                <div></div>
                 {LocalizationStore.labelFor("reference","refMapTitle")}
             </NavItem>);
         }
