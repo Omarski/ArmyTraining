@@ -30,6 +30,46 @@
   background-color: #337ab7;
 }
 
+.pdf-header{
+  color: white;
+  background-color: grey;
+}
+
+.referenceModal{
+  border: 1px solid black;
+  .modal-header{
+    color: white;
+    background-color: grey;
+  }
+  .modal-content{
+    border: 2px solid white;
+  }
+  a {
+    color: #555;
+  }
+  li.active{
+    a{
+      border-top: 5px solid grey;
+    }
+  }
+  li.active{
+    a:hover{
+      border-top: 5px solid grey;
+    }
+  }
+  li.active{
+    a:focus{
+      border-top: 5px solid grey;
+    }
+  }
+
+  .reference-container-div{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
 #referenceModalBody{
   .navbar-nav{
     float: inherit;

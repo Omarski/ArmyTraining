@@ -347,7 +347,7 @@ var MultiColumnPronunciationView = React.createClass({
                     //update?
 
                     return (
-                    <table className={"table pronunciation-view-table pronunciation-item-row " + "l2-vocal-answer"}
+                    <table className={"table table-condensed pronunciation-view-table pronunciation-item-row " + "l2-vocal-answer"}
                            key={page.xid + String(index)}>
                         <tbody>
                         <tr>

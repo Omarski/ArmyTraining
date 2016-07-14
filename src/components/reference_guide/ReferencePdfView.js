@@ -3,6 +3,7 @@
  */
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
+var LocalizationStore = require('../../stores/LocalizationStore');
 
 
 function getSettingsState(props) {
@@ -41,6 +42,11 @@ var ReferencePdfView = React.createClass({
         return (
             <div id="referencePdfView">
                 <table className="table table-striped table-bordered">
+                    <thead className="pdf-header">
+                        <tr><td width={"100%"}>
+                            {LocalizationStore.labelFor("reference", "refDliInstructions")}
+                        </td></tr>
+                    </thead>
                     <tbody>
                         {rows}
                     </tbody>

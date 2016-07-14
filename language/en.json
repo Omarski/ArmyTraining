@@ -84,7 +84,8 @@
     "refPdfTitle": "PDF Takeaways",
     "refWordsTitle": "Words \u0026 Phrases",
     "refMapTitle": "Map",
-    "refGestureTitle": "Gestures"
+    "refGestureTitle": "Gestures",
+    "refDliInstructions": "Click on a link below to download lesson summary PDFs."
   },
   "settings": {
     "lblTitle": "Settings",
