@@ -41,6 +41,11 @@ var ReferencePdfView = React.createClass({
         return (
             <div id="referencePdfView">
                 <table className="table table-striped table-bordered">
+                    <thead className="pdf-header">
+                        <tr><td width={"100%"}>
+                            {"Click on a link below to download lesson summary PDFs."}
+                        </td></tr>
+                    </thead>
                     <tbody>
                         {rows}
                     </tbody>

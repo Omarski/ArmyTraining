@@ -30,6 +30,25 @@
   background-color: #337ab7;
 }
 
+.pdf-header{
+  color: white;
+  background-color: grey;
+}
+
+.referenceModal{
+  border: 1px solid black;
+  .modal-header{
+    color: white;
+    background-color: grey;
+  }
+  .modal-content{
+    border: 2px solid white;
+  }
+  a {
+    color: #555;
+  }
+}
+
 #referenceModalBody{
   .navbar-nav{
     float: inherit;

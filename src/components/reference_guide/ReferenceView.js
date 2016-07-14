@@ -110,6 +110,7 @@ var ReferenceView = React.createClass({
         if(state.dictionarySources){
             var dictionaryDropdownItems = state.dictionarySources.map(function(item, index){
                 return (<MenuItem key={"dropdownDictKey" + index}
+                                  className="reference-tab"
                                   id={"WordsAndPhrasesDropdownItem" + item.name}
                                   eventKey={REFERENCE_DICTIONARY_VIEW + "." + index}
                                   data-name={item.name}
@@ -137,19 +138,19 @@ var ReferenceView = React.createClass({
             //    </MenuItem>);
             //});
 
-            pdfNav = (<NavItem eventKey={REFERENCE_PDF_VIEW} title={LocalizationStore.labelFor("reference","refPdfTitle")} id="PDFTakeawaysDropdownMenu">
+            pdfNav = (<NavItem className="reference-tab" eventKey={REFERENCE_PDF_VIEW} title={LocalizationStore.labelFor("reference","refPdfTitle")} id="PDFTakeawaysDropdownMenu">
                 {LocalizationStore.labelFor("reference","refPdfTitle")}
             </NavItem>);
         }
 
         if(state.mapSource){
-            mapNav = (<NavItem eventKey={REFERENCE_MAP_VIEW} title={LocalizationStore.labelFor("reference","refMapTitle")}>
+            mapNav = (<NavItem className="reference-tab" eventKey={REFERENCE_MAP_VIEW} title={LocalizationStore.labelFor("reference","refMapTitle")}>
                 {LocalizationStore.labelFor("reference","refMapTitle")}
             </NavItem>);
         }
 
         if(state.gestureSources){
-            gestureNav = (<NavItem eventKey={REFERENCE_GESTURE_VIEW} title={LocalizationStore.labelFor("reference","refGestureTitle")}>{LocalizationStore.labelFor("reference","refGestureTitle")}</NavItem>);
+            gestureNav = (<NavItem className="reference-tab" eventKey={REFERENCE_GESTURE_VIEW} title={LocalizationStore.labelFor("reference","refGestureTitle")}>{LocalizationStore.labelFor("reference","refGestureTitle")}</NavItem>);
         }
 
         switch (state.selectedIndex) {
@@ -188,7 +189,7 @@ var ReferenceView = React.createClass({
             <div id="referenceView">
 
                 <Modal dialogClassName="referenceModal" bsSize="large" show={state.showModal} onHide={this.close}>
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                         <Modal.Title>{LocalizationStore.labelFor("reference", "refTitle")}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body id="referenceModalBody">
