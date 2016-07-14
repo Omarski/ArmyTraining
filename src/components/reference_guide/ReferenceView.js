@@ -110,7 +110,7 @@ var ReferenceView = React.createClass({
         if(state.dictionarySources){
             var dictionaryDropdownItems = state.dictionarySources.map(function(item, index){
                 return (<MenuItem key={"dropdownDictKey" + index}
-                                  className="reference-tab"
+                                  className={"reference-tab"}
                                   id={"WordsAndPhrasesDropdownItem" + item.name}
                                   eventKey={REFERENCE_DICTIONARY_VIEW + "." + index}
                                   data-name={item.name}
@@ -120,6 +120,7 @@ var ReferenceView = React.createClass({
             });
 
             dictionaryNav = (<NavDropdown eventKey={REFERENCE_DICTIONARY_VIEW}
+                                          className={"reference-nav-dropdown" + (state.selectedIndex === REFERENCE_DICTIONARY_VIEW ? " active" : "")}
                                           title={LocalizationStore.labelFor("reference","refWordsTitle")}
                                           id="WordsAndPhrasesDropdownMenu"
                 >
@@ -145,6 +146,7 @@ var ReferenceView = React.createClass({
 
         if(state.mapSource){
             mapNav = (<NavItem className="reference-tab" eventKey={REFERENCE_MAP_VIEW} title={LocalizationStore.labelFor("reference","refMapTitle")}>
+                <div></div>
                 {LocalizationStore.labelFor("reference","refMapTitle")}
             </NavItem>);
         }
@@ -187,7 +189,6 @@ var ReferenceView = React.createClass({
 
         return (
             <div id="referenceView">
-
                 <Modal dialogClassName="referenceModal" bsSize="large" show={state.showModal} onHide={this.close}>
                     <Modal.Header>
                         <Modal.Title>{LocalizationStore.labelFor("reference", "refTitle")}</Modal.Title>

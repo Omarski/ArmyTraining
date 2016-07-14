@@ -47,6 +47,11 @@
   a {
     color: #555;
   }
+  li.active{
+    a{
+      border-top: 5px solid grey;
+    }
+  }
 }
 
 #referenceModalBody{
