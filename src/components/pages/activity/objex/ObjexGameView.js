@@ -122,7 +122,7 @@ var ObjexGameView = React.createClass({
                                hintMode:false
                 });
 
-                $("#"+hit.hog_id).remove();
+                $("#imageLayer_canvas_"+hit.hog_id).remove();
 
                 self.viewUpdate({task:"successAudio", value:null});
             }
@@ -148,6 +148,7 @@ var ObjexGameView = React.createClass({
                         var layerId = self.state.layersCanvColl[l].id;
                         if (layerId.indexOf(hog_id) !== -1) {
                             self.setState({hintMode:true, hintedId:hog_id});
+                            self.glowEffect(document.getElementById("imageLayer_canvas_" + hog_id));
                             self.hintEffect($("#imageLayer_canvas_" + hog_id));
                         }
                     }
@@ -155,6 +156,21 @@ var ObjexGameView = React.createClass({
                 }
             }
         }
+    },
+
+    glowEffect: function(canvasLayer){
+        var context = canvasLayer.getContext("2d");
+        var imageData = context.getImageData(0, 0, 1000, 400);
+        var p = imageData.data;
+
+        for(var i = 0; i < p.length; i += 4)
+        {
+            p[i] = p[i]+100 < 255 ? p[i]+100 : 255;
+            p[i+1] = p[i+1]+100 < 255 ? p[i+1]+100 : 255;
+            p[i+2] = p[i+2]+100 < 255 ? p[i+2]+100 : 255;
+        }
+
+        context.putImageData(imageData, 0, 0);
     },
 
     hintEffect: function(hintLayer){

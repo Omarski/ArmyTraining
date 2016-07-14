@@ -15,6 +15,7 @@ function getPageState(props) {
         title: "",
         pageType: "",
         audioObj:null,
+        audioBgObj:null,
         audioController:"",
         popupObj:null,
         mediaPath:'data/media/',
@@ -55,6 +56,7 @@ var MissionConnectView = React.createClass({
     },
 
     componentDidMount: function() {
+        this.bgAudio();
         this.preloadImages();
     },
 
@@ -131,6 +133,7 @@ var MissionConnectView = React.createClass({
         switch (update.task){
 
             case "leaderClicked":
+                console.log("compl: "+this.state.stats.completed + " all: "+this.state.objectNodesNum);
                 if (this.state.stats.completed === this.state.objectNodesNum){
                     this.prepLeaderPopup("won");
                 }else this.prepLeaderPopup("incomplete");
@@ -149,9 +152,11 @@ var MissionConnectView = React.createClass({
     replayGame: function(){
 
         var self = this;
+        self.bgAudio();
         self.onClosePopup();
         self.setState({stats:{completed:0, hits:0, misses:0}, mapReady:false},
-        function(){self.setState({mapReady:true})});
+        function(){self.setState({mapReady:true});
+        });
     },
 
     prepIntroPopup: function(){
@@ -183,6 +188,9 @@ var MissionConnectView = React.createClass({
                 )
             }
         };
+
+        var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
+        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
 
         self.displayPopup(popupObj);
     },
@@ -286,8 +294,26 @@ var MissionConnectView = React.createClass({
         });
     },
 
+    playBgAudio: function(audioObj){
+        var self = this;
+
+        this.setState({audioBgObj:audioObj}, function(){
+            if (!audioObj.loop) {
+                $("#"+audioObj.id).on("ended", function(){
+                    self.setState({audioBgObj:null});
+                });
+            }
+        });
+    },
+
     setAudioControl: function(mode){
         this.setState({audioController:mode});
+    },
+
+    bgAudio: function(){
+
+        var bgAudio = this.state.mediaPath + "AFPAK_missionconnect_music.mp3";
+        this.playBgAudio({id:"music", autoPlay:true, loop:true, sources:[{format:"mp3", url:bgAudio}]});
     },
 
     displayPopup: function(popupObj){
@@ -319,6 +345,22 @@ var MissionConnectView = React.createClass({
 
                 <div id="missionConnectViewBlock">
 
+                    {self.state.audioObj ?
+                        <AudioPlayer
+                            id = {self.state.audioObj.id}
+                            sources    = {self.state.audioObj.sources}
+                            autoPlay   = {self.state.audioObj.autoPlay}
+                            controller = {self.state.audioController}
+                        /> : null}
+
+                    {self.state.mapReady ?
+                        <AudioPlayer
+                            id = {self.state.audioBgObj.id}
+                            sources    = {self.state.audioBgObj.sources}
+                            autoPlay   = {self.state.audioBgObj.autoPlay}
+                            controller = {self.state.audioController}
+                        /> : null}
+                    
                     {self.state.popupObj ?
                         <PopupView
                             id = {"missionConnectIntro"}

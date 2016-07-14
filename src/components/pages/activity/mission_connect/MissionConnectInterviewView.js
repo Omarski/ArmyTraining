@@ -115,6 +115,7 @@ var MissionConnectInterviewView = React.createClass({
         var connectNodes = this.props.gameData.networkGameNodes[this.props.activeNode - 1].connectedNodes;
 
         if (scoreObj.answered) {
+            console.log("answered: connect nodes: " + connectNodes.toString());
             for (var i=0; i < connectNodes.length; i++){
                 var node = $("#missionConnectViewPieceBlock"+connectNodes[i]);
                 $(node).animate({'opacity':'1'},500).css({'pointerEvents':'auto'});
