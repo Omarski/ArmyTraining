@@ -86,6 +86,12 @@
     "refMapTitle": "Map",
     "refGestureTitle": "Gestures"
   },
+  "sectionEnd": {
+    "lblCourseComplete": "COURSE COMPLETE NEEDS TO BE AUTHORED!!!!!!",
+    "lblSectionComplete": "You have successfully completed the section. Click 'NEXT' to continue to the next section in this lesson.",
+    "lblSectionFailed": "Your score does not allow you to progress to the next section. Please review the section again.",
+    "lblLessonComplete": "Congratulations! You have successfully completed this lesson. Click 'NEXT' to continue to the next lesson in the course."
+  },
   "settings": {
     "lblTitle": "Settings",
     "lblAutoPlaySound": "Auto Play Sound",
