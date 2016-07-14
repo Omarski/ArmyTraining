@@ -58,7 +58,7 @@
   "PronunciationPage":{
     "btnPlay": "Play",
     "btnRecord": "Record",
-    "btnPlayback": "Listen to Recording"
+    "btnPlayback": "Play Recording"
   },
   "quizEnd": {
     "headerResult": "Result",

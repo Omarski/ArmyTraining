@@ -31,7 +31,7 @@ var ReferenceMapView = React.createClass({
 
         return (
             <div id="referenceMapView">
-                <img src={source} alt={""}></img>
+                <img className="reference-map" src={source} alt={""}></img>
             </div>
         );
     },
