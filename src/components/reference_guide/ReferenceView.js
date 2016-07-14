@@ -199,7 +199,7 @@ var ReferenceView = React.createClass({
                             {dictionaryNav}
                             {pdfNav}
                         </Nav>
-                        <div className="container-fluid">
+                        <div className="container-fluid reference-container-div">
                             {content}
                         </div>
                     </Modal.Body>
