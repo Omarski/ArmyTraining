@@ -111,7 +111,7 @@ var EthnoMapView = React.createClass({
 
         return (
             <div>
-                <div className="container" key={"page-" + this.state.page.xid}>
+                <div className="" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                 </div>
                 <EthnoMap mediaPath="data/media/" imageData={parsedJSON} mapData={parsedJSON} />

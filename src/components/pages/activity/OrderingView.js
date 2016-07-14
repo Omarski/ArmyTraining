@@ -93,14 +93,18 @@ var OrderingView = React.createClass({
     },
 
     onDragging: function(e){
-        var dragItems = document.querySelectorAll('[draggable=true]');
-        for (var i = 0; i < dragItems.length; i++) {
-            addEvent(dragItems[i], 'dragstart', function (event) {
-                // store the ID of the element, and collect it on the drop later on
+        // var dragItems = document.querySelectorAll('[draggable=true]');
+        // for (var i = 0; i < dragItems.length; i++) {
+        //     addEvent(dragItems[i], 'dragstart', function (event) {
+        //         // store the ID of the element, and collect it on the drop later on
+        //
+        //         event.dataTransfer.setData('Text', 'nothing');
+        //     });
+        // }
 
-                event.dataTransfer.setData('Text', 'nothing');
-            });
-        }
+        e.dataTransfer.setData("text", e.target.id);
+
+
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";

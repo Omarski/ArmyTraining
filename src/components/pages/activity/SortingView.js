@@ -93,16 +93,41 @@ var SortingView = React.createClass({
         var pageState = getPageState(this.props);
         return pageState;
     },
+    onDragTwo: function(e){
+      e.dataTransfer.setData("text", e.target.id);
 
-    onDragging: function(e){
-        var dragItems = document.querySelectorAll('[draggable=true]');
-        for (var i = 0; i < dragItems.length; i++) {
-            addEvent(dragItems[i], 'dragstart', function (event) {
-                // store the ID of the element, and collect it on the drop later on
+        var self = this;
+        var state = self.state;
+        var draggedItemLetter = "";
+        var draggedItemTarget = "";
 
-                event.dataTransfer.setData('Text', 'nothing');
-            });
+        if(state.numMoved != state.answerState.length && $(e.target).css("opacity") != 0.3) {
+            if (e.target) {
+                draggedItemLetter = $(e.target).attr("data");
+                draggedItemTarget = e.target;
+            }
+        }else{
+            draggedItemLetter = "";
+            draggedItemTarget = "";
         }
+
+        self.setState({
+            draggedItemLetter: draggedItemLetter,
+            draggedItemTarget: draggedItemTarget
+        });
+    },
+    onDragging: function(e){
+        // var dragItems = document.querySelectorAll('[draggable=true]');
+        // for (var i = 0; i < dragItems.length; i++) {
+        //     addEvent(dragItems[i], 'dragstart', function (event) {
+        //         // store the ID of the element, and collect it on the drop later on
+        //
+        //         event.dataTransfer.setData('Text', 'nothing');
+        //     });
+        // }
+
+        e.dataTransfer.setData("text", e.target.id);
+
         // great, need this to work on one browswer but it breaks the other...
         var self = this;
         var state = self.state;
