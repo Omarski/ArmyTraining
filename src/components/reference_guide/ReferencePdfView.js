@@ -3,6 +3,7 @@
  */
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
+var LocalizationStore = require('../../stores/LocalizationStore');
 
 
 function getSettingsState(props) {
@@ -30,8 +31,8 @@ var ReferencePdfView = React.createClass({
     render: function() {
         var self = this;
         var state = self.state;
-        var rows = state.list.map(function(item){
-            return(<tr className={"hand-me"} >
+        var rows = state.list.map(function(item, i){
+            return(<tr key={"referencePdfView-tableRow-"+item.name+"-"+i} className={"hand-me"} >
                 <td width={"100%"}>
                     <a href={item.path} target={"_blank"}>{item.name}</a>
                 </td>
@@ -41,6 +42,11 @@ var ReferencePdfView = React.createClass({
         return (
             <div id="referencePdfView">
                 <table className="table table-striped table-bordered">
+                    <thead className="pdf-header">
+                        <tr><td width={"100%"}>
+                            {LocalizationStore.labelFor("reference", "refDliInstructions")}
+                        </td></tr>
+                    </thead>
                     <tbody>
                         {rows}
                     </tbody>

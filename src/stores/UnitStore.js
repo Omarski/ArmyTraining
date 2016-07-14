@@ -186,6 +186,18 @@ var UnitStore = assign({}, EventEmitter.prototype, {
         return true;
     },
 
+    areAllRequiredComplete: function() {
+        for (var id in _units) {
+            if (_units[id].state && _units[id].state.required) {
+                if (_units[id].state.complete !== true) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    },
+
     /**
      * Get the entire collection of UNITs.
      * @return {object}
