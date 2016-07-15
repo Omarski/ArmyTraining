@@ -40,7 +40,6 @@ var CultureQuestPuzzleGameView = React.createClass({
         var self = this;
         var popupObj = {
             id:"PuzzleBackground",
-            //onClickOutside: this.props.onClosePopup,
             popupStyle: {height:'80%', width:'70%', top:'10%', left:'10%', background:'#fff', zIndex:'25'},
 
             content: function(){
@@ -236,8 +235,8 @@ var CultureQuestPuzzleGameView = React.createClass({
     render: function() {
 
         var self=this;
-        //var videoUrl = this.state.mediaPath + this.state.imageData.videoReward;
-        var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
+        var videoUrl = this.state.mediaPath + this.state.imageData.videoReward;
+        //var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
         var stageStyle = {width:'768px', height:'506px', display:'block',
                           top: '34px', left:0, position:'absolute', zIndex:'25'};
 
