@@ -4,6 +4,8 @@ var InfoTagConstants = require('../constants/InfoTagConstants');
 var PageConstants = require('../constants/PageConstants');
 var PageActions = require('../actions/PageActions');
 var PageTypeConstants = require('../constants/PageTypeConstants');
+var PersistenceActions = require('../actions/PersistenceActions');
+var PersistenceStore = require('../stores/PersistenceStore');
 var PrePostTestStore = require('../stores/PrePostTestStore');
 var NotificationActions = require('../actions/NotificationActions');
 var UnitStore = require('../stores/UnitStore');
@@ -350,17 +352,18 @@ function jump(data) {
 }
 
 function reset() {
-    store.remove('pages');
+    setTimeout(function() {
+        PersistenceActions.remove('pages');
 
-    var units = UnitStore.getAll();
-    for (var key in units) {
-        _currentUnit = units[key];
-        _currentChapter = _currentUnit.data.chapter[0];
-        _currentPage = _currentChapter.pages[0];
-        load({unit:_currentUnit, chapter:_currentChapter, page:_currentPage});
-        break;
-    }
-
+        var units = UnitStore.getAll();
+        for (var key in units) {
+            _currentUnit = units[key];
+            _currentChapter = _currentUnit.data.chapter[0];
+            _currentPage = _currentChapter.pages[0];
+            load({unit:_currentUnit, chapter:_currentChapter, page:_currentPage});
+            break;
+        }
+    });
 }
 
 function resetQuiz() {
@@ -414,17 +417,19 @@ function saveCurrentPage() {
         return false;
     }
 
-    // load pages
-    var storedPages = store.get('pages');
-    if (!storedPages) {
-        storedPages = {};
-    }
+    setTimeout(function() {
+        // load pages
+        var storedPages = PersistenceStore.get('pages');
+        if (!storedPages) {
+            storedPages = {};
+        }
 
-    // update data
-    storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = _currentPage.state;
+        // update data
+        storedPages[_currentUnit.data.xid + "_" + _currentChapter.xid + "_" + _currentPage.xid] = _currentPage.state;
 
-    // save page
-    store.set('pages', storedPages);
+        // save page
+        PersistenceActions.set('pages', storedPages);
+    });
 
     return true;
 }

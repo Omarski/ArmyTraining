@@ -1,5 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
+var PersistenceActions = require('../actions/PersistenceActions');
+var PersistenceStore = require('../stores/PersistenceStore');
 var UnitConstants = require('../constants/UnitConstants');
 var assign = require('object-assign');
 
@@ -42,7 +44,7 @@ function create(data) {
 function load(id) {
     if (_units[id] && _units[id].data && _units[id].data.xid && _units[id].state) {
         // load saved units
-        var storedUnits = store.get('units');
+        var storedUnits = PersistenceStore.get('units');
         if (storedUnits) {
             _units[id].state = assign({}, _units[id].state, storedUnits[_units[id].data.xid]);
             if (_units[id].state.required === true) {
@@ -58,17 +60,19 @@ function load(id) {
  */
 function save(id) {
     if (_units[id] && _units[id].data && _units[id].data.xid && _units[id].state) {
-        // load saved units
-        var storedUnits = store.get('units');
-        if (!storedUnits) {
-            storedUnits = {};
-        }
+        setTimeout(function() {
+            // load saved units
+            var storedUnits = PersistenceStore.get('units');
+            if (!storedUnits) {
+                storedUnits = {};
+            }
 
-        // update unit data
-        storedUnits[_units[id].data.xid] = _units[id].state;
+            // update unit data
+            storedUnits[_units[id].data.xid] = _units[id].state;
 
-        // save unit
-        store.set('units', storedUnits);
+            // save unit
+            PersistenceActions.set('units', storedUnits);
+        });
     }
 }
 
@@ -76,14 +80,16 @@ function save(id) {
  * Reset all unit state data to default state data
  */
 function reset() {
-    _requiredExists = false;
-    // remove saved data
-    store.remove('units');
+    setTimeout(function() {
+        _requiredExists = false;
+        // remove saved data
+        PersistenceActions.remove('units');
 
-    // iterate over units and reset state
-    for (var id in _units) {
-        _units[id].state = _defaultState;
-    }
+        // iterate over units and reset state
+        for (var id in _units) {
+            _units[id].state = _defaultState;
+        }
+    });
 }
 
 /**
