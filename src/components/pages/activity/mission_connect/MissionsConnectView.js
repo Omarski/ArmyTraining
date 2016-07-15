@@ -189,7 +189,8 @@ var MissionConnectView = React.createClass({
             }
         };
 
-        var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
+        //var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
+        var debriefAudio = self.state.mediaPath + "missionconnect_briefing.mp3";
         self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
 
         self.displayPopup(popupObj);
