@@ -6,6 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var ConfigConstants = require('../constants/ConfigConstants');
 var ConfigActions = require('../actions/ConfigActions');
 var PageStore = require('../stores/PageStore');
+var PersistenceActions = require('../actions/PersistenceActions');
 var DliView = require("../components/widgets/DliView");
 
 var assign = require('object-assign');
@@ -26,6 +27,7 @@ function destroy() {
 var _needsASR = false;
 var _hasDLI = false;
 var _hasReference = false;
+var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
 
 
  function loadConfig() {
@@ -46,8 +48,14 @@ var _hasReference = false;
              if(data.hasOwnProperty('reference')){
                  _hasReference = true;
              }
+
+             // get storage type
+             if (data.hasOwnProperty('storage')){
+                 _storageType = data['storage'];
+             }
          }
          ConfigActions.loadComplete();
+         PersistenceActions.setStorageType(_storageType);
         })
         .fail(function(){
              ConfigActions.loadComplete();
@@ -62,6 +70,10 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
 
     isASREnabled: function(){
         return (_needsASR);
+    },
+
+    getStorageType: function(){
+        return _storageType;
     },
 
     hasDLI: function(){
