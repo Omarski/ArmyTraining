@@ -17,7 +17,7 @@ var CultureQuestQuiz = React.createClass({
             mediaPath:'data/media/',
             timerController:"play",
             timerDuration:59,
-            timerMessage:"",
+            timerEndMessage:null,
             timerReportAt:{time:30, alert:"hintTime"},
             timerParentAlerts:null,
             questionDisplayObj:{},
@@ -47,9 +47,6 @@ var CultureQuestQuiz = React.createClass({
         if (this.props.lastSelected) return parseInt(this.props.lastSelected.getAttribute('id').substring(18));
         return false;
     },
-
-    // getQuestionQuotes: function(){
-    // },
 
     getSelectedJSON: function(){
 
@@ -123,10 +120,10 @@ var CultureQuestQuiz = React.createClass({
         var blocksRender = blocksColl.map(function(wordBlock,index){
 
             return (
-                <div className="culture-quest-quiz-view-blockGroup"
+                <span className="culture-quest-quiz-view-blockGroup"
                      id="culture-quest-quiz-view-blockGroup" key={index}>
                     {wordBlock}
-                </div>
+                </span>
             )
         });
 
@@ -173,7 +170,7 @@ var CultureQuestQuiz = React.createClass({
                     this.resetQuestion();
                 }else{
                     this.updateTimerController("pause");
-                    this.setState({timerMessage:"Out of time!", leaveRegionMode:true, skipMode:false, showInputBlocks:false});
+                    this.setState({timerEndMessage:"Out of time!", leaveRegionMode:true, skipMode:false, showInputBlocks:false});
                 }
                 break;
 
@@ -293,19 +290,19 @@ var CultureQuestQuiz = React.createClass({
 
         var quizPopClasses = (self.props.showQuiz) ? "culture-quest-quiz-view-fade-in" : ".culture-quest-quiz-view-fade-out";
 
-        var btnRespondClasses = "btn btn-primary";
+        var btnRespondClasses = "btn btn-default";
         var btnRespondStyle = {position: 'absolute', zIndex:20, top:'238px', left:'400px', display:(self.state.showInputBlocks)? "block":"none"};
 
-        var btnSkipClasses = "btn btn-primary";
+        var btnSkipClasses = "btn btn-default";
         var btnSkipStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', display:(self.state.skipMode)? "block":"none"};
 
-        var btnLeaveRegionClasses = "btn btn-primary";
+        var btnLeaveRegionClasses = "btn btn-default";
         var btnLeaveRegionStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', display:(self.state.leaveRegionMode)? "block":"none"};
 
         var instImg = self.state.mediaPath + self.getSelectedJSON()['face'];
         var instStyle = {background:"#000 url("+instImg+") no-repeat 100% 100%"};
 
-        var timerStyle = {fontSize:'20px',color:'red',textAlign:'center',zIndex:'20'};
+        var timerStyle = {fontSize:'20px', textAlign:'center',zIndex:'20'};
 
         var quizTextClass = "culture-quest-quiz-view-quizText";
 
@@ -322,7 +319,8 @@ var CultureQuestQuiz = React.createClass({
                                 timerParentAlerts       = {self.state.timerParentAlerts}
                                 timerController         = {self.state.timerController}
                                 updateTimerController   = {self.updateTimerController}
-                                message                 = {self.state.timerMessage}
+                                timerLabel              = {"Time left: "}
+                                endMessage              = {self.state.timerEndMessage}
                                 reportAt                = {self.state.timerReportAt}
                                 timerStatusReporter     = {self.timerStatusListener}
                             />
@@ -347,15 +345,15 @@ var CultureQuestQuiz = React.createClass({
                                 </div>:null}
                             
                             {self.state.showInputBlocks && !self.state.puzzleAwardMode? <div className="culture-quest-quiz-view-input-blocks-cont" id="culture-quest-quiz-view-input-blocks-cont">
-                                {this.renderBlocks()}
+                                <div className="culture-quest-quiz-view-input-blocks-cent">{this.renderBlocks()}</div>
                             </div>:null}
                         </div>
                     </div>
 
                     {!self.state.puzzleAwardMode ? <div>
-                    <button type="button" onClick={self.checkAnswer} style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
-                    <button type="button" onClick={self.onSkipAnswer} style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
-                    <button type="button" onClick={self.onSkipRegion} style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</button>
+                    <div type="button" onClick={self.checkAnswer} style={btnRespondStyle} className={btnRespondClasses}>Respond</div>
+                    <div type="button" onClick={self.onSkipAnswer} style={btnSkipStyle} className={btnSkipClasses}>Skip question</div>
+                    <div type="button" onClick={self.onSkipRegion} style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</div>
                     </div>:null}
                 </div>
 

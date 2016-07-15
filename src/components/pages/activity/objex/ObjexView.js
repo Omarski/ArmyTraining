@@ -237,8 +237,8 @@ var ObjexView = React.createClass({
                     <div className="objex-view-popCont">
                         <div className="objex-view-textComplete">Level complete!</div>
                         <div className="objex-view-completedButtonCont">
-                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
-                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.onNextLevel}>Next Level</button>
+                            <div type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</div>
+                            <div type="button" className="btn btn-default objex-view-btn" onClick={self.onNextLevel}>Next Level</div>
                         </div>
                     </div>
                 )
@@ -258,7 +258,7 @@ var ObjexView = React.createClass({
                     <div className="objex-view-popCont">
                         <div className="objex-view-textAdvanced">{advancedText}</div>
                         <div className="objex-view-advancedButtonCont">
-                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
+                            <div type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</div>
                         </div>
                     </div>
                 )
@@ -290,8 +290,8 @@ var ObjexView = React.createClass({
                 return(
                     <div className="objex-view-popCont">
                         <div className="objex-view-textTimeUp">Out of time!</div>
-                        <div className="objex-view-completedButtonCont">
-                            <button type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</button>
+                        <div className="objex-view-noTimeButtonCont">
+                            <div type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</div>
                         </div>
                     </div>
                 )

@@ -57,7 +57,7 @@
     font-size:70px;
   }
 
-  .objex-view-introButtonCont, .objex-view-completedButtonCont, .objex-view-advancedButtonCont{
+  .objex-view-introButtonCont, .objex-view-completedButtonCont, .objex-view-advancedButtonCont, .objex-view-noTimeButtonCont {
     position:relative;
     margin-left: auto;
     margin-right: auto;
@@ -83,6 +83,10 @@
 
   .objex-view-completedButtonCont{
     top:285px;
+  }
+
+  .objex-view-noTimeButtonCont{
+    top:10px;
   }
 
   //basic, game done, out of time pop
@@ -241,7 +245,7 @@
     font-size:14px;
   }
 
-  //timer
+  //timers
   .objex-view-timer{
     position: absolute;
     left:820px;

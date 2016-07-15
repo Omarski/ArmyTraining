@@ -118,7 +118,8 @@ var ObjexNavView = React.createClass({
                         timerParentAlerts       = {null}
                         timerController         = {null}
                         updateTimerController   = {null}
-                        message                 = {"Time left "}
+                        timerLabel              = {"Time left: "}
+                        endMessage              = {null}
                         reportAt                = {null}
                         timerStatusReporter     = {self.timerReporter}
                     />

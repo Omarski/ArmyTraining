@@ -40,7 +40,6 @@ var CultureQuestPuzzleGameView = React.createClass({
         var self = this;
         var popupObj = {
             id:"PuzzleBackground",
-            //onClickOutside: this.props.onClosePopup,
             popupStyle: {height:'80%', width:'70%', top:'10%', left:'10%', background:'#fff', zIndex:'25'},
 
             content: function(){
@@ -236,8 +235,8 @@ var CultureQuestPuzzleGameView = React.createClass({
     render: function() {
 
         var self=this;
-        //var videoUrl = this.state.mediaPath + this.state.imageData.videoReward;
-        var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
+        var videoUrl = this.state.mediaPath + this.props.imageData.videoReward;
+        //var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
         var stageStyle = {width:'768px', height:'506px', display:'block',
                           top: '34px', left:0, position:'absolute', zIndex:'25'};
 
@@ -262,7 +261,7 @@ var CultureQuestPuzzleGameView = React.createClass({
                 {self.state.showVideo ?
                     <VideoPlayer
                         id="puzzleAwardVideo"
-                        style={{zIndex:'50',position:'absolute',top:'20%',left:'10%'}}
+                        style={{zIndex:'50',position:'absolute',top:'35%',left:'29%'}}
                         sources={[{format:"mp4",url:videoUrl}]}
                         autoPlay={true}
                         width="400"

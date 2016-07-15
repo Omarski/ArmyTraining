@@ -51,8 +51,11 @@ var CultureQuestView = React.createClass({
     },
 
     onLayersReady:function(layersColl){
+
         var self = this;
-        
+        for (var i = 0; i < layersColl.length; i++){
+            layersColl[i].style.opacity = "0.5";
+        }
         this.setState({layersColl:layersColl}, function(){
             self.prepAnswersColl();
             self.prepIntroPopup();
