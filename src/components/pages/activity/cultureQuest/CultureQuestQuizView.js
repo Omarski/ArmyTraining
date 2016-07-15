@@ -38,7 +38,6 @@ var CultureQuestQuiz = React.createClass({
     },
 
     componentDidMount: function() {
-        //this.getQuestionQuotes;
         this.renderQuestionText();
     },
 
@@ -309,8 +308,9 @@ var CultureQuestQuiz = React.createClass({
         var puzzleAwardTextClass = "culture-quest-quiz-view-quizText " + (self.state.puzzleAwardMode) ? "culture-quest-quiz-view-show":"culture-quest-quiz-view-hide";
 
         return (
-                <div className={"culture-quest-quiz-view-quizPop "+quizPopClasses}>
-
+            <div>
+            <div className="culture-quest-quiz-view-regionBanner">{self.getSelectedJSON()["name"]}</div>div>
+            <div className={"culture-quest-quiz-view-quizPop "+quizPopClasses}>
                     {!self.state.puzzleAwardMode ?
                         <div className="culture-quest-quiz-view-timer" id="culture-quest-quiz-view-timer">
                             <TimerCountdownView
@@ -325,7 +325,6 @@ var CultureQuestQuiz = React.createClass({
                                 timerStatusReporter     = {self.timerStatusListener}
                             />
                     </div>:null}
-
                     <div className="culture-quest-quiz-view-quizCont" id="culture-quest-quiz-view-quizCont">
 
                         {this.props.lastSelected ? <div style={instStyle} className="culture-quest-quiz-view-instructorImg"></div> : null}
@@ -355,6 +354,7 @@ var CultureQuestQuiz = React.createClass({
                     <div type="button" onClick={self.onSkipAnswer} style={btnSkipStyle} className={btnSkipClasses}>Skip question</div>
                     <div type="button" onClick={self.onSkipRegion} style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</div>
                     </div>:null}
+                </div>
                 </div>
 
         );
