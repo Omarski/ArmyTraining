@@ -9,6 +9,7 @@ var PageActions = require('../actions/PageActions');
 var UnitStore = require('../stores/UnitStore');
 var UnitActions = require('../actions/UnitActions');
 var NotificationActions = require('../actions/NotificationActions');
+var PersistenceStore = require('../stores/PersistenceStore');
 var assign = require('object-assign');
 
 
@@ -76,7 +77,7 @@ function loadChapterPages(units, unit, index) {
 
             $.getJSON("data/content/" + chapter.xid + "/toc.json", function (result) {
 
-                var storedPages = store.get('pages');
+                var storedPages = PersistenceStore.get('pages');
 
                 var sections = result.chapter.section;
                 var preposttestpages = result.chapter.preposttest;
