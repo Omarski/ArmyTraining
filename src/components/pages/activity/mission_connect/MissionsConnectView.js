@@ -24,7 +24,8 @@ function getPageState(props) {
         totalImages:0,
         mapReady:false,
         stats:{completed:0, hits:0, misses:0},
-        objectNodesNum:0
+        objectNodesNum:0,
+        chiefNode:null
     };
     
     if (props && props.page) {
@@ -52,7 +53,12 @@ var MissionConnectView = React.createClass({
             return obj.gameObjective === true;
         });
 
-        this.setState({objectNodesNum:nodes.length});
+        //find chief nodes
+        var chiefNode = this.state.gameData.networkGameNodes.filter(function (obj) {
+            return obj.endNode === true;
+        });
+
+        this.setState({objectNodesNum:nodes.length, chiefNode:chiefNode[0]});
     },
 
     componentDidMount: function() {
@@ -133,7 +139,6 @@ var MissionConnectView = React.createClass({
         switch (update.task){
 
             case "leaderClicked":
-                console.log("compl: "+this.state.stats.completed + " all: "+this.state.objectNodesNum);
                 if (this.state.stats.completed === this.state.objectNodesNum){
                     this.prepLeaderPopup("won");
                 }else this.prepLeaderPopup("incomplete");
@@ -145,6 +150,10 @@ var MissionConnectView = React.createClass({
             
             case "updateStats":
                 this.setState({stats:update.value});
+                break;
+
+            case "won":
+                $("#missionConnectViewPieceBlock"+this.state.chiefNode.nodeNumber).css("opacity","1");
                 break;
         }
     },
