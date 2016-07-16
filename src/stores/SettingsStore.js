@@ -5,6 +5,7 @@ var SettingsConstants = require('../constants/SettingsConstants');
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
+var _showLessonIDs = false;
 
 function create(data) {
     store.set('settings', data);
@@ -12,6 +13,10 @@ function create(data) {
 
 function destroy() {
     store.remove('settings');
+}
+
+function toggleLessonIDs() {
+    _showLessonIDs = !_showLessonIDs;
 }
 
 function updateVoiceVolume(val) {
@@ -86,6 +91,10 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
         return store.get('settings');
     },
 
+    showLessonIDs: function() {
+        return _showLessonIDs;
+    },
+
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
@@ -108,6 +117,10 @@ AppDispatcher.register(function(action) {
             break;
         case SettingsConstants.SETTINGS_DESTROY:
             destroy();
+            SettingsStore.emitChange();
+            break;
+        case SettingsConstants.SETTINGS_TOGGLE_IDS:
+            toggleLessonIDs();
             SettingsStore.emitChange();
             break;
         case SettingsConstants.SETTINGS_UPDATE_AUTO_PLAY_SOUND:
