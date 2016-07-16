@@ -23,6 +23,12 @@ var SettingsActions = {
         });
     },
 
+    toggleLessonIDs: function() {
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_TOGGLE_IDS
+        });
+    },
+
     updateAutoPlaySound: function(data) {
         AppDispatcher.dispatch({
             actionType: SettingsConstants.SETTINGS_UPDATE_AUTO_PLAY_SOUND,

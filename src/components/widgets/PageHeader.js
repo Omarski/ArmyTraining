@@ -13,6 +13,7 @@ var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var LocalizationStore = require('../../stores/LocalizationStore');
 var AudioControl = require('../../components/widgets/AudioControl');
+var SettingsStore = require('../../stores/SettingsStore');
 
 function getPageState(props) {
     var page = null;
@@ -26,6 +27,10 @@ function getPageState(props) {
         unitTitle = PageStore.unit().data.title;
         chapterTitle = PageStore.chapter().title;
         pageTitle = PageStore.page().title;
+
+        if (SettingsStore.showLessonIDs()) {
+            pageTitle += " - " + PageStore.chapter().xid + " : " + page.xid;
+        }
 
         var bm = {
             unit: PageStore.unit().data.xid,

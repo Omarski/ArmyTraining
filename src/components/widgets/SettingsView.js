@@ -79,6 +79,11 @@ var SettingsView = React.createClass({
     resetSettings: function() {
         SettingsActions.destroy();
     },
+
+    toggleLessonIDs: function() {
+        SettingsActions.toggleLessonIDs();
+    },
+
     menuItemClick: function(){
         this._forceOpen = true;
     },
@@ -153,6 +158,9 @@ var SettingsView = React.createClass({
                     </ListGroupItem>
                     <ListGroupItem>
                         <Button bsStyle='info' onClick={this.resetSettings}>Reset Settings</Button>
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <Button bsStyle='warning' onClick={this.toggleLessonIDs}>Toggle Lesson IDs</Button>
                     </ListGroupItem>
                 </ListGroup>
             </Popover>;
