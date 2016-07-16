@@ -462,7 +462,7 @@ var ActiveDialogPersona = React.createClass({
                            onCanPlayThrough={self.videoCanPlayThroughHandler}
                            style={videoStyle}
                         >
-                        <source src={"data/media/" + item.assetData.source} type="video/mp4"></source>
+                        <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
                     </video>
                 </div>
             );
