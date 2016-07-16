@@ -1,10 +1,21 @@
 .table {
   &.pronunciation-view-table {
+    width: 100%;
+    .btn-pronunciation{
+      padding: 0;
+      margin-top: -7px;
+    }
     tr, td {
       background: #fff;
       border: none;
     }
   }
+}
+
+.pronunciation-container-table{
+  margin: 50px;
+  border: 1px solid #ddd;
+  width: unset;
 }
 
 .pronunciation-note-tr{
@@ -14,6 +25,10 @@
 .pronunciation-note{
   padding-top: 10px;
   margin: 0;
+}
+
+.pronunciation-ezread{
+  font-weight: bold;
 }
 
 .table {
@@ -28,9 +43,6 @@
     td {
       background: #fff;
     }
-  }
-  &.pronunciation-item-row:last-child {
-    border-bottom: 1px solid #ddd
   }
 }
 

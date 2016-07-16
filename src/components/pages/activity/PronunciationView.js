@@ -301,7 +301,7 @@ var PronunciationView = React.createClass({
                 if(nativeText !== ""){
                     nativeText = (<tr>
                         <td colSpan="4">
-                            <div>
+                            <div className="pronunciation-native">
                                 <ColorText props={nativeText}/>
                             </div>
                         </td>
@@ -311,7 +311,7 @@ var PronunciationView = React.createClass({
                 if(translatedText !== ""){
                     translatedText = (<tr>
                         <td colSpan="4">
-                            <div>
+                            <div className="pronunciation-translated">
                                 <ColorText props={translatedText}/>
                             </div>
                         </td>
@@ -320,7 +320,7 @@ var PronunciationView = React.createClass({
 
                 if(ezreadText !== ""){
                     ezreadText = (<td>
-                        <div>
+                        <div className="pronunciation-ezread">
                             <ColorText props={ezreadText}/>
                         </div>
                     </td>);
@@ -368,7 +368,7 @@ var PronunciationView = React.createClass({
                 var cls = (index % 2) ? "pronunciation-item-row-odd" : "pronunciation-item-row-even";
 
                 return (
-                    <table className={"table pronunciation-view-table pronunciation-item-row " + cls}>
+                    <tr><table className={"col-md-8 table table-condensed pronunciation-view-table pronunciation-item-row " + cls}>
                         <tbody>
                             <tr>
                                 <td rowSpan="2" width="25">
@@ -376,7 +376,7 @@ var PronunciationView = React.createClass({
                                     <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
                                         alt={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
                                         type="button" onClick={function(){textClick(id, qcIndex, self)}}
-                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
                                         <span className={"glyphicon pronunciation-audio-button "+ (state.isListening[qcIndex] ? LI_GLYPHICON_STOP_CLS : LI_GLYPHICON_LISTEN_CLS)} ></span>
                                     </button>
@@ -385,7 +385,7 @@ var PronunciationView = React.createClass({
                                     <button title={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
                                             alt={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
                                             type="button" onClick={function(){handleRecord(id, qcIndex, self)}}
-                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                             aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
                                         <span className={itemRecordingClass + " pronunciation-audio-button"} ></span>
                                     </button>
@@ -394,7 +394,7 @@ var PronunciationView = React.createClass({
                                     <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
                                             alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
                                             type="button" onClick={function(){handlePlaying(id, qcIndex, self)}}
-                                            className="btn btn-default btn-lg btn-link btn-step"
+                                            className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                             aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
                                         <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
                                     </button>
@@ -407,7 +407,7 @@ var PronunciationView = React.createClass({
 
                             {translatedText}
                         </tbody>
-                    </table>
+                    </table></tr>
 
                 );
 
@@ -429,7 +429,9 @@ var PronunciationView = React.createClass({
                         Your browser does not support the audio format.
                     </audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
-                    {vaList}
+                    <table className="table table-condensed pronunciation-container-table">
+                        {vaList}
+                    </table>
                 </div>
             </div>
         );
