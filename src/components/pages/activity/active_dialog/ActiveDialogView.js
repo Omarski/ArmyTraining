@@ -315,6 +315,7 @@ var ActiveDialogPersona = React.createClass({
     defaultAnimationName: "Default",
     currentAnimation: "",
     currentStop: "",
+    currentVideosPlayingHack: [],
     hack: false,
 
     propTypes: {
@@ -344,6 +345,11 @@ var ActiveDialogPersona = React.createClass({
     },
 
     playAnimationVideo: function(animationName) {
+        var bFoundVideo2Play = false;
+
+        // reset hack
+        this.currentVideosPlayingHack = [];
+
         // get video
         var assetLength = this.props.assets.length;
         while(assetLength--) {
@@ -373,15 +379,20 @@ var ActiveDialogPersona = React.createClass({
                 // start playing
                 video.play();
 
-                // dispatch event if animation is not the default one
+                // increment counter if animation is not the default one
                 if (animationName != this.defaultAnimationName) {
-                    if (this.props.onAnimationStart !== null) {
-                        this.props.onAnimationStart();
-                    }
-                }
+                    bFoundVideo2Play = true;
 
-                // found animation so break out!
-                break;
+                    // add to hack
+                    this.currentVideosPlayingHack.push(video);
+                }
+            }
+        }
+
+        // if found videos to play dispatch event
+        if (bFoundVideo2Play === true) {
+            if (this.props.onAnimationStart !== null) {
+                this.props.onAnimationStart();
             }
         }
     },
@@ -417,6 +428,15 @@ var ActiveDialogPersona = React.createClass({
         }
     },
 
+    videoErrorHandler: function(event) {
+        // do something
+    },
+
+    videoEndedHandler: function(event) {
+        // remove event listener?
+        event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
+    },
+
     videoLoadStartHandler: function(event) {
         // remove event handler
         if (event.currentTarget) {
@@ -430,13 +450,19 @@ var ActiveDialogPersona = React.createClass({
             // remove event listener
             event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
 
-            // hide video
-            event.currentTarget.style.display = "none";
-
             // dispatch event if animation is not the default one
             if (this.currentAnimation != this.defaultAnimationName) {
                 if (this.props.onAnimationStop !== null) {
                     this.props.onAnimationStop();
+                }
+
+                // hide all videos that are playing
+                var vidLength = this.currentVideosPlayingHack.length;
+                while(vidLength--) {
+                    var video = this.currentVideosPlayingHack[vidLength];
+
+                    // hide video
+                    video.style.display = "none";
                 }
             }
 
@@ -460,6 +486,8 @@ var ActiveDialogPersona = React.createClass({
                            title=""
                            onLoadStart={self.videoLoadStartHandler}
                            onCanPlayThrough={self.videoCanPlayThroughHandler}
+                           onError={self.videoErrorHandler}
+                           onEnded={self.videoEndedHandler}
                            style={videoStyle}
                         >
                         <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
