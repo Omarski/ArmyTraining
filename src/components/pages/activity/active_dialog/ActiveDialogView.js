@@ -278,7 +278,7 @@ var ActiveDialogScenarioView = React.createClass({
             // iterate over media creating persona components
             media = this.props.media.map(function(item, index){
                 return (
-                    <ActiveDialogPersona key={"persona" + index + item.name} name={item.name} ref={item.name}
+                    <ActiveDialogPersona key={"persona" + index + item.name + item.blockingId} name={item.name} ref={item.name}
                                          assets={item.assets}
                                          onLoadStart={handlePersonaLoading}
                                          onLoadDone={handlePersonaReady}
