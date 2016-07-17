@@ -383,13 +383,6 @@ function create(fsm) {
         data: "0000"
     });
 
-    // TODO hack remove me
-    _actionQueue.push({
-        type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING,
-        data: "0001"
-    });
-
-
     // trigger initial action
     continueDialog();
 }
