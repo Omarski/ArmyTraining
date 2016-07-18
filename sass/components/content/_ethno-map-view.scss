@@ -73,7 +73,7 @@
 
 .ethno-visible {
   visibility: visible !important;
-  opacity: 1 !important;
+  opacity: 0.8 !important;
   z-index: 12;
 }
 
@@ -105,7 +105,8 @@
 
 .well {
   margin-top: 0px;
-  margin-left: 20px;
+  margin-left: 10px;
+  margin-right: 0px;
 }
 
 

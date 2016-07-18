@@ -111,7 +111,7 @@ var EthnoMapView = React.createClass({
 
         return (
             <div>
-                <div className="container" key={"page-" + this.state.page.xid}>
+                <div className="" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                 </div>
                 <EthnoMap mediaPath="data/media/" imageData={parsedJSON} mapData={parsedJSON} />
@@ -257,8 +257,6 @@ var EthnoMap = React.createClass({
     onRegionRollover: function(canvasElement, x, y, pageX, pageY, invisible) {
         var self = this;
 
-        //console.log("onRegionRollover");
-
         // console.log("ETHNOMAPVIEW: onRegionRollover : canvasElement", canvasElement);
 
         //if(invisible === false){
@@ -394,10 +392,9 @@ var EthnoToggleDiv = React.createClass({
             var zIndex = getComputedStyle(target).getPropertyValue("z-index");
             if(opacity === 0 || visibleTrueFalse === false){
                 var newzIndex = self.props.topZIndex + 1;
-                // console.log("newzIndex");
                 // self.setState({topZindex: newzIndex});
                 $("#imageLayer_canvas_" + index).addClass("ethno-visible");
-                $("#imageLayer_canvas_" + index).css("opacity", "1");
+                $("#imageLayer_canvas_" + index).css("opacity", "0.8");
                 $("#imageLayer_canvas_" + index).css("zIndex", newzIndex);
                 $("#ethno-toggle-name-" + index).css("color", self.state.regionColors[index]);
                 $("#ethno-checkbox-"+index).css("backgroundColor", self.state.regionColors[index]);
@@ -409,13 +406,11 @@ var EthnoToggleDiv = React.createClass({
                 for(var i = 1; i < self.props.mapData.areas.length; i += 2){
                     if (i !== numIndex + 1) {
                         var opacityLevel = $("#imageLayer_canvas_" + i).css("opacity");
-                        if(opacityLevel === "1") {
-                            // console.log("INDSIDE FIRST ONE");
+                        if(opacityLevel === "0.8") {
                             $("#imageLayer_canvas_" + i).removeClass("ethno-visible");
                             $("#imageLayer_canvas_" + i).addClass("ethno-not-visible");
                         }
                     } else if (i === numIndex + 1) {
-                        // console.log("INSIDE", i);
                         // console.log("i", i);
                         var targetElement = document.getElementById("imageLayer_canvas_" + i);
                         //console.log("targetElement", targetElement);
@@ -424,7 +419,7 @@ var EthnoToggleDiv = React.createClass({
                         $("#imageLayer_canvas_" + i).css("zIndex", self.props.topZIndex + 19);
                     }
                 }
-            } else if (opacity === "1" && visibleTrueFalse === true){
+            } else if (opacity === "0.8" && visibleTrueFalse === true){
                 $("#ethno-toggle-name-" + index).css("color", "black");
                 $("#ethno-checkbox-"+index).css("backgroundColor", "transparent");
                 $("#imageLayer_canvas_" + index).removeClass("ethno-visible");
