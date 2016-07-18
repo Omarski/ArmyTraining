@@ -4,6 +4,8 @@ input[type=checkbox] {
   }
 }
 
+
+
 .mc-choices-and-feedback-container{
   display: block;
 }
@@ -26,12 +28,23 @@ input[type=checkbox] {
 
 .multiple-choice-choices-container {
   margin-top: 10px;
-}
-.multiple-choice-label-remove-padding-left{
-  .multiple-choice-checkbox, .multiple-choice-input-padding-right {
-    margin-right: 10px;
+  .list-group-item, .multiple-choice-list-group-item{
+    padding: 0px;
   }
 }
+.checkbox, .multiple-choice-checbox {
+  label, .multiple-choice-label-remove-padding-left{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 35px;
+    padding-right: 15px;
+    width: 100%;
+    .multiple-choice-checkbox, .multiple-choice-input-padding-right {
+      margin-right: 10px;
+    }
+  }
+}
+
 
 .multi-choice-header-mobile-margin {
   margin-left: 10px;
@@ -67,9 +80,11 @@ input[type=checkbox] {
   margin-top: -1px;
   margin-bottom: 0px;
   margin-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
+
+
 
 .multiple-choice-incorrect {
   color: red;
