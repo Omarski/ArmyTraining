@@ -14,8 +14,14 @@ $(document).on("click", ".btn-clk", function(){
     var audio = document.getElementById('mainViewAudio');
     var source = document.getElementById('mainViewMp3Source');
 
-    source.src = "data/media/Neutral.mp3";
-    audio.load();
-    audio.play();
-    audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+    if (source) {
+        source.src = "data/media/Neutral.mp3";
+    }
+
+    if (audio) {
+        audio.load();
+        audio.play();
+        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+    }
+
 });
