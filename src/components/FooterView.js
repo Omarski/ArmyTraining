@@ -32,8 +32,9 @@ function getUnitState(expanded) {
         if (unit.data.chapter) {
             for (var i = 0; i < unit.data.chapter.length; i++) {
                 var bHidden = false;
-                var c = unit.data.chapter[i];
 
+                var c = unit.data.chapter[i];
+                
                 if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
                     currentUnitTotalPages += c.pages.length;
                     for( var j = 0; j < c.pages.length; j++) {

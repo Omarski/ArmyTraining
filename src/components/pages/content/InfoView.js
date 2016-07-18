@@ -150,7 +150,6 @@ function getPageState(props) {
                     result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index} altText={altText} />);
                 }
 
-
                 return result;
 
             });
