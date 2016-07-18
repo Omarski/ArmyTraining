@@ -4,8 +4,10 @@ var PageStore = require('../../../../stores/PageStore');
 
 
 var ActiveDialogComponent = React.createClass({
-    defaultAnimationName: "Default",
+    bAnimationPlaying: false,
     currentAnimation: "",
+    currentChatAnimationName: "",
+    currentIdleAnimationName: "Default",
     currentStop: "",
     currentVideosPlayingHack: [],
     hack: false,
@@ -34,6 +36,17 @@ var ActiveDialogComponent = React.createClass({
 
     componentWillUnmount: function() {
         // unregister event listeners on videos
+    },
+
+    changeIdleAnimation: function(animationName) {
+        this.currentIdleAnimationName = animationName;
+        if (this.bAnimationPlaying === false) {
+            this.playAnimationVideo(this.currentIdleAnimationName);
+        }
+    },
+
+    changeChatAnimation: function(animationName) {
+        this.currentChatAnimationName = animationName;
     },
 
     playAnimationVideo: function(animationName) {
@@ -72,7 +85,7 @@ var ActiveDialogComponent = React.createClass({
                 video.play();
 
                 // increment counter if animation is not the default one
-                if (animationName != this.defaultAnimationName) {
+                if (animationName != this.currentIdleAnimationName) {
                     bFoundVideo2Play = true;
 
                     // add to hack
@@ -83,8 +96,13 @@ var ActiveDialogComponent = React.createClass({
 
         // if found videos to play dispatch event
         if (bFoundVideo2Play === true) {
+
+            // mark as playing
+            this.bAnimationPlaying = true;
+
             if (this.props.onAnimationStart !== null) {
                 this.props.onAnimationStart();
+
             }
         }
     },
@@ -108,7 +126,7 @@ var ActiveDialogComponent = React.createClass({
             // set ready
 
             // play default animation
-            this.playAnimationVideo(this.defaultAnimationName);
+            this.playAnimationVideo(this.currentIdleAnimationName);
 
             // update stupid hack
             this.hack = true;
@@ -143,7 +161,10 @@ var ActiveDialogComponent = React.createClass({
             event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
 
             // dispatch event if animation is not the default one
-            if (this.currentAnimation != this.defaultAnimationName) {
+            if (this.currentAnimation != this.currentIdleAnimationName) {
+                // mark as stopped
+                this.bAnimationPlaying = false;
+
                 if (this.props.onAnimationStop !== null) {
                     this.props.onAnimationStop();
                 }
@@ -159,7 +180,7 @@ var ActiveDialogComponent = React.createClass({
             }
 
             // go back to default
-            this.playAnimationVideo(this.defaultAnimationName);
+            this.playAnimationVideo(this.currentIdleAnimationName);
         }
     },
 

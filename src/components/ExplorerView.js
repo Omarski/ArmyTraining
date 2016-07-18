@@ -11,6 +11,7 @@ var ExplorerStore = require('../stores/ExplorerStore');
 
 var _expanded = {};
 var _expandedChapters = {};
+var _fromHeaderAction = false;
 
 function getUnitState(expanded) {
     var units = UnitStore.getAll();
@@ -77,13 +78,20 @@ function getUnitState(expanded) {
                         completedCount++;
                         tcpCompleted++;
                     }
+
+
+                    if (PageStore.page() && page.xid === PageStore.page().xid && !_fromHeaderAction) {
+                        _expandedChapters[c.xid] = true;
+                    }
                 }
 
-
                 var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
-                expandCollapseIconCls += ' glyphicon-plus-sign';
                 var ex = (_expandedChapters[c.xid]) ? _expandedChapters[c.xid] : false;
-
+                if (ex) {
+                    expandCollapseIconCls += ' glyphicon-minus-sign';
+                } else {
+                    expandCollapseIconCls += ' glyphicon-plus-sign';
+                }
                 chapters.push({
                     expandCollapseIconCls: expandCollapseIconCls,
                     expanded: ex,
@@ -104,7 +112,7 @@ function getUnitState(expanded) {
             var unitCls = '';
             var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
             var unitExpandedCls = ' panel-collapse collapse ';
-            if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid) {
+            if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid && !_fromHeaderAction) {
                 currentUnitIndex = totalUnits;
                 unitCls = 'main-footer-accordian-table-row-active';
                 unitExpandedCls += ' in';
@@ -136,8 +144,11 @@ function getUnitState(expanded) {
                 optionalUnits.push(obj);
             }
         }
+
+
     }
 
+    _fromHeaderAction = false;
 
     return {
         requiredUnits: requiredUnits,
@@ -154,22 +165,25 @@ function getUnitState(expanded) {
 
 var ExplorerView = React.createClass({
     panelHeaderClick: function(item, index, idStr) {
+        _fromHeaderAction = true;
         var btn = $('#heading' + idStr + index).find('.footer-expand-collapse-btn');
         if (btn.hasClass('glyphicon-plus-sign')) {
             btn.removeClass('glyphicon-plus-sign').addClass('glyphicon-minus-sign');
             $('#collapse' + idStr + index).collapse('show');
-            _expanded[item.unit.id] = true;
+            _expanded[item.unit.data.xid] = true;
         } else {
             btn.removeClass('glyphicon-minus-sign').addClass('glyphicon-plus-sign');
             $('#collapse' + idStr + index).collapse('hide');
-            _expanded[item.unit.id] = false;
+            _expanded[item.unit.data.xid] = false;
         }
 
         this.setState(getUnitState(true));
     },
 
     chapterHeaderClick: function(item, index, idStr) {
+        _fromHeaderAction = true;
         item.expanded = true;
+        console.log("chapter "  + item.id)
         if (_expandedChapters[item.id]) {
             _expandedChapters[item.id] = !_expandedChapters[item.id];
         } else {
@@ -261,11 +275,15 @@ var ExplorerView = React.createClass({
 
         if (items) {
             html = items.map(function(item, index) {
+                var icon = "";
                 var sitems = "";
-                if (_expanded[item.unit.id]) {
+
+                if (_expanded[item.unit.data.xid]) {
+
                     sitems = item.rows.map(function(sitem, index) {
                         var pages = "";
-                        if (sitem.expanded) {
+
+                        if (_expandedChapters[sitem.id]) {
                             pages = (<TOCPages data={sitem.data.pages} chapter={sitem} unit={item.unit} idstr={idStr}/>);
                         }
                         return (
@@ -294,7 +312,7 @@ var ExplorerView = React.createClass({
                             {item.title}
 
                             <span className="badge">
-                                <span className="glyphicon glyphicon-adjust" aria-hidden="true"></span>
+                                {icon}
                              </span>
                         </li>
                         {sitems}
@@ -358,6 +376,7 @@ var TOCChapterRow = React.createClass({
         var self = this;
         var icon = '';
         var cls = '';
+
         if (this.props.item.completed) {
             cls += ' current';
             icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
@@ -371,6 +390,7 @@ var TOCChapterRow = React.createClass({
             cls += ' not-seen';
         }
 
+        icon = ""; // temp until logic is figured out
         return (
             <li className="list-group-item main-footer-chapter-row main-footer-row btn-clk" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
@@ -378,7 +398,7 @@ var TOCChapterRow = React.createClass({
                 </a>
                 {this.props.item.title}
                 <span className="badge">
-                 <span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>
+                    {icon}
                  </span>
             </li>
         );
