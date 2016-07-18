@@ -257,8 +257,6 @@ var EthnoMap = React.createClass({
     onRegionRollover: function(canvasElement, x, y, pageX, pageY, invisible) {
         var self = this;
 
-        console.log("onRegionRollover");
-
         // console.log("ETHNOMAPVIEW: onRegionRollover : canvasElement", canvasElement);
 
         //if(invisible === false){
@@ -394,7 +392,6 @@ var EthnoToggleDiv = React.createClass({
             var zIndex = getComputedStyle(target).getPropertyValue("z-index");
             if(opacity === 0 || visibleTrueFalse === false){
                 var newzIndex = self.props.topZIndex + 1;
-                console.log("checkOpacity 11111111");
                 // self.setState({topZindex: newzIndex});
                 $("#imageLayer_canvas_" + index).addClass("ethno-visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "0.8");
@@ -410,12 +407,10 @@ var EthnoToggleDiv = React.createClass({
                     if (i !== numIndex + 1) {
                         var opacityLevel = $("#imageLayer_canvas_" + i).css("opacity");
                         if(opacityLevel === "0.8") {
-                            console.log("checkOpacity 222222 opacityLevel", opacityLevel);
                             $("#imageLayer_canvas_" + i).removeClass("ethno-visible");
                             $("#imageLayer_canvas_" + i).addClass("ethno-not-visible");
                         }
                     } else if (i === numIndex + 1) {
-                        console.log("checkOpacity 33333");
                         // console.log("i", i);
                         var targetElement = document.getElementById("imageLayer_canvas_" + i);
                         //console.log("targetElement", targetElement);
