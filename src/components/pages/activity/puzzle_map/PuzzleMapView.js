@@ -7,7 +7,7 @@ var PopupView = require('./../../../widgets/PopupView');
 var PuzzleMapDnDView = require("./PuzzleMapDnDView");
 var PuzzleMapHUDView = require('./PuzzleMapHUDView');
 var PageHeader = require('../../../widgets/PageHeader');
-var AppStateStore = require("../../../../stores/AppStateStore")
+var AppStateStore = require("../../../../stores/AppStateStore");
 var UnsupportedScreenSizeView = require('../../../../components/UnsupportedScreenSizeView');
 
 
@@ -151,8 +151,6 @@ var PuzzleMapView = React.createClass({
                        scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1, correct:0},
                        showBottomCanvas:false,
                        correctAttempts:0
-
-
         },
             function(){
                 self.updateHUDView(true);
@@ -169,10 +167,12 @@ var PuzzleMapView = React.createClass({
             <div className = "puzzle-map-view-HUD-cont" id="puzzle-map-view-HUD-start">
                 <div className="puzzle-map-view-HUD-text">Click and drag the country pieces to their correct locations on the map.</div>
                 <div className="puzzle-map-view-HUD-buttonCont">
-                    <button className = "btn btn-primary" onClick={
-                    this.updateHudDisplay
-                    }>Start</button>
-                </div>
+                    <div className="puzzle-map-view-HUD-buttonContCent">
+                        <div className = "btn btn-default" onClick={
+                        this.updateHudDisplay
+                        }>Start</div>
+                        </div>
+                    </div>
 
             </div>
         );
@@ -186,9 +186,11 @@ var PuzzleMapView = React.createClass({
                 <div className="puzzle-map-view-HUD-text">Map complete!<br/>
                     {self.state.correctAttempts}/{self.state.scoreObj.totalPieces}&nbsp; correct</div>
                 <div className="puzzle-map-view-HUD-buttonCont">
-                    <button className = "btn btn-primary" onClick={
-                    this.replayGame
-                    }>Try Again</button>
+                    <div className="puzzle-map-view-HUD-buttonContCent">
+                        <div className = "btn btn-default" onClick={
+                        this.replayGame
+                        }>Play Again</div>
+                    </div>
                 </div>
 
             </div>

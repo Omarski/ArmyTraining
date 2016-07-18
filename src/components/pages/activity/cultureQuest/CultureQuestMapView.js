@@ -88,6 +88,7 @@ var CultureQuestMap = React.createClass({
         if (this.props.answersColl.length > 0){
             for (var i=0; i < this.props.layersColl.length; i++){
                 if (this.props.answersColl[i].completed){
+                    this.props.lastSelected.style.opacity = "1";
                     this.props.updateLayersColl(this.props.lastSelected, "attributeAdd", [{name:'state', value:"static"}]);
                     this.props.updateLayersColl(this.props.lastSelected, "classRemove", [{name:'image-layers-view-fade-out'}]);
                     this.props.updateLayersColl(this.props.lastSelected, "classAdd", [{name:'image-layers-view-fade-in'}]);

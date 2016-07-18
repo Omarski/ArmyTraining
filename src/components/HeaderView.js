@@ -191,7 +191,10 @@ var HeaderView = React.createClass({
                     </Navbar.Header>
                     <NavbarCollapse id="navbarCollapseId" style={self.state.hideInClass} id="collapseNav">
                         <Nav id="navId" pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
-                            <NavItem className="reference-guide-hide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView} ><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                            <NavItem className="reference-guide-hide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView}
+                                     title={LocalizationStore.labelFor("header", "tooltipReference")}
+                                     alt={LocalizationStore.labelFor("header", "tooltipReference")}
+                                     aria-label={LocalizationStore.labelFor("header", "tooltipReference")}><div>{referenceView}<p>ReferenceView</p></div></NavItem>
                             <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
                             <NavItem eventKey={3} href="#" onClick={this.showHelp}>
                                 <button title={LocalizationStore.labelFor("header", "tooltipHelp")}

@@ -72,7 +72,7 @@ var TimerCountdown = React.createClass({
 
         var self = this;
         return (
-           <div style={this.props.styling}>{(self.props.message) ? self.props.message + self.state.timeLeft : "Time left " + self.state.timeLeft + " seconds"}</div>
+           <div style={this.props.styling}>{(self.props.endMessage) ? self.props.endMessage : self.props.timerLabel + self.state.timeLeft}</div>
         )
     }
 });

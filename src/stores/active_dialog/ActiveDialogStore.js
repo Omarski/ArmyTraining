@@ -253,7 +253,13 @@ function handleTransitionInput(trans) {
     trans.actions.forEach(function(action)
     {
         if(action.indexOf('GoToBlocking') != -1 ) {
-            blockId = 'b' + action.substring(action.lastIndexOf('-') + 1 );
+            blockId = action.substring(action.lastIndexOf('-') + 1 );
+
+            _actionQueue.push({
+                type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING,
+                data: blockId
+            });
+
         } else {
             addOutputMappingActionByAct(action);
         }
@@ -382,13 +388,6 @@ function create(fsm) {
         type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING,
         data: "0000"
     });
-
-    // TODO hack remove me
-    _actionQueue.push({
-        type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING,
-        data: "0001"
-    });
-
 
     // trigger initial action
     continueDialog();
@@ -560,7 +559,8 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
                                 assets: [{
                                     name: assetName,
                                     assetData: _info.assets[assetName]
-                                }]
+                                }],
+                                blockingId: blockId
                             });
                         }
                         break;
@@ -578,7 +578,8 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 
                         blockingAssets.push({
                             name: index,
-                            assets: assetArray
+                            assets: assetArray,
+                            blockingId: blockId
                         });
                         break;
                     default:
