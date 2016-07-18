@@ -261,6 +261,7 @@ var ExplorerView = React.createClass({
 
         if (items) {
             html = items.map(function(item, index) {
+                var icon = "";
                 var sitems = "";
                 if (_expanded[item.unit.id]) {
                     sitems = item.rows.map(function(sitem, index) {
@@ -294,7 +295,7 @@ var ExplorerView = React.createClass({
                             {item.title}
 
                             <span className="badge">
-                                <span className="glyphicon glyphicon-adjust" aria-hidden="true"></span>
+                                {icon}
                              </span>
                         </li>
                         {sitems}
@@ -371,6 +372,7 @@ var TOCChapterRow = React.createClass({
             cls += ' not-seen';
         }
 
+        icon = ""; // temp until logic is figured out
         return (
             <li className="list-group-item main-footer-chapter-row main-footer-row btn-clk" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
@@ -378,7 +380,7 @@ var TOCChapterRow = React.createClass({
                 </a>
                 {this.props.item.title}
                 <span className="badge">
-                 <span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>
+                    {icon}
                  </span>
             </li>
         );
