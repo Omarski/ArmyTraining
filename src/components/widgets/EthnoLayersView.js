@@ -131,7 +131,7 @@ var EthnoLayersView = React.createClass({
             if (pixel[3] !== 0) {
                 pixelHit = true;
                 //If the region is visible
-                if(opacityLevel === "1") {
+                if(opacityLevel === "0.8") {
                     self.state.lastHighlightedRegion = canvasElement;
                     self.props.onRollover(canvasElement, pixelX, pixelY, pageX, false);
                     if(opacityLevelHilight === "0" ) {
