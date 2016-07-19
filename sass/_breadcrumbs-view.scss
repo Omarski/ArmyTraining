@@ -1,4 +1,22 @@
-
+.bookmark-link-btn {
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+.bookmark-item-remove {
+  position: absolute;
+  top: 11px;
+  right: 5px;
+  padding: 4px;
+  margin: 0;
+  width: inherit !important;
+}
+.bookmark-list-item {
+  padding-right: 30px;
+  padding-left: 5px;
+}
 
 @media screen and (max-width: 767px){
   .hide-bread-crumbs-for-tablet {
@@ -21,6 +39,7 @@
 
   .main-nav-bookmark {
     font-size: 20px;
+    color: $nav-button-color;;
     &.selected{
       color: #000;
     }

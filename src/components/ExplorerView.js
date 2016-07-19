@@ -183,7 +183,6 @@ var ExplorerView = React.createClass({
     chapterHeaderClick: function(item, index, idStr) {
         _fromHeaderAction = true;
         item.expanded = true;
-        console.log("chapter "  + item.id)
         if (_expandedChapters[item.id]) {
             _expandedChapters[item.id] = !_expandedChapters[item.id];
         } else {
