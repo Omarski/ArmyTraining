@@ -128,7 +128,7 @@ var SortingView = React.createClass({
 
         e.dataTransfer.setData("text", e.target.id);
 
-        // great, need this to work on one browswer but it breaks the other...
+        // great, need this to work on one browser but it breaks the other...
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";
@@ -181,6 +181,12 @@ var SortingView = React.createClass({
                     dropLocation = "A";
                 }
                 if($(e.target).parent().attr("class") == "sorting-columnB-dropArea sorting-drop-area"){
+                    dropLocation = "B";
+                }
+                if($(e.target).attr("class") === "placed-A"){ // if you drop on something in the sorting container
+                    dropLocation = "A";
+                }
+                if($(e.target).attr("class") === "placed-B"){
                     dropLocation = "B";
                 }
         }
@@ -431,6 +437,7 @@ var SortingView = React.createClass({
                     answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+index+itemA.passedData}>
                         <div
                             draggable="true"
+                            className="placed-A"
                             onDragStart={self.onDragging}>
                             {itemA.passedData}
                         </div>
@@ -488,6 +495,7 @@ var SortingView = React.createClass({
                     answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+itemB.passedData}>
                         <div
                             draggable="true"
+                            className="placed-B"
                             onDragStart={self.onDragging}>
                             {itemB.passedData}
                         </div>

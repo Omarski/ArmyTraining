@@ -167,12 +167,30 @@ var MultiNoteView = React.createClass({
                 }
             }
 
+            var image = null;
 
+            if(imageURL.split(".")[1] === "mp4"){
+                image = (
+                    <video autoPlay={SettingsStore.autoPlaySound()}
+                           volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}
+                           id="video"
+                           title={caption}
+                           key={index+"video"}
+                           aria-label={caption}
+                           alt={caption}>
+                        <source src={"data/media/"+imageURL} type="video/mp4"></source>
+                    </video>
+                );
+            }else{ // else it should be jpg or png
+                image = (
+                    <ImageCaption videoType=""
+                                  src={"data/media/"+imageURL}
+                                  caption={caption}
+                                  key={index+"image"}
+                                  altText={caption}/>
+                );// <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
 
-            var image = (
-                <ImageCaption videoType="" src={"data/media/"+imageURL} caption={caption} key={index} altText={caption}/>
-            );// <img alt={title} key={self.state.xid + String(index)} src={"data/media/"+imageURL} alt={item.title}></img>;
-
+            }
 
             return({
                 imageURL: imageURL,
@@ -188,10 +206,23 @@ var MultiNoteView = React.createClass({
             var imageURL = item.imageURL;
             var title = item.title;
             var caption = item.caption;
+            var buttonImage = "";
             // title will be the individual page titles, and caption is that pages image caption
             var sty = {
                 "backgroundImage": "url(data/media/"+imageURL+")"
             };
+
+            if(imageURL.split(".")[1] === "mp4"){
+                buttonImage = (<span  className="glyphicon glyphicon-play-circle thumbnail thumbnail-video multi-note-thumbnail"
+                                     alt={title}
+                                     aira-hidden="true"></span>);
+            }else{ // else it should be jpg or png
+                buttonImage = (<div  className="thumbnail multi-note-thumbnail"
+                                     alt={title}
+                                     style={sty}
+                                     aira-hidden="true"></div>);
+            }
+
             var thumbnail = (
                 <button className="btn btn-default" data={index}
                         onClick={self.handleClick}
@@ -199,10 +230,7 @@ var MultiNoteView = React.createClass({
                         alt={title}
                         aria-label={title}
                         key={"multinote-thumb-" + index}>
-                    <div  className="thumbnail multi-note-thumbnail"
-                          alt={title}
-                          style={sty}
-                          aira-hidden="true"></div>
+                    {buttonImage}
                 </button>
             );
             return (thumbnail);

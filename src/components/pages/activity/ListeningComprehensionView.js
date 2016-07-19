@@ -7,6 +7,9 @@ var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageActions = require('../../../actions/PageActions');
 var PageHeader = require('../../widgets/PageHeader');
 
+var LC_PLAY_ICON = " glyphicon glyphicon-play-circle";
+var LC_STOP_ICON = " fa fa-stop-circle-o";
+
 function getPageState(props) {
     var data = {
         title: "",
@@ -18,6 +21,7 @@ function getPageState(props) {
         haveListened: false,
         haveAnswered: false,
         isCorrect: false,
+        isListening: false,
         isQuizPage: false,
         answers: [],
         correctAnswer: "",
@@ -164,14 +168,18 @@ var ListeningComprehensionView = React.createClass({
             if(self.state.page.media){
 
             }
-            zid = self.state.page.question.media[0].zid;
+            zid = self.state.page.question.media[0].zid || 0;
         }
 
         if(zid && zid !== 0){
+            self.setState({
+                isListening: true
+            });
             playAudio(zid);
             $("#audio").bind('ended', function(){
                 self.setState({
-                    haveListened: true
+                    haveListened: true,
+                    isListening: false
                 });
             });
         }
@@ -187,6 +195,7 @@ var ListeningComprehensionView = React.createClass({
         var title = page.title;
         var sources = self.state.sources;
         var feedbackElement = "";
+        var playButtonIcon = self.state.isListening ? LC_STOP_ICON : LC_PLAY_ICON;
         // if answered added coach feedback
         if(state.haveAnswered && !state.isQuizPage) {
             feedbackElement = state.answerFeedback
@@ -293,7 +302,7 @@ var ListeningComprehensionView = React.createClass({
                                                     onClick={self.listenCheck}
                                                     className="btn btn-default btn-lg btn-link btn-step btn-clk"
                                                     aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
-                                                <span className="glyphicon glyphicon-play-circle btn-icon" aria-hidden="true"></span>
+                                                <span className={"btn-icon" + playButtonIcon} aria-hidden="true"></span>
                                             </button>
                                         </div>
                                     </div>

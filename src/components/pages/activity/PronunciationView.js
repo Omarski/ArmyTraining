@@ -8,12 +8,12 @@ var PageHeader = require('../../widgets/PageHeader');
 var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
-var LI_GLYPHICON_RECORD_CLS = "glyphicon-record";
-var LI_GLYPHICON_LISTEN_CLS = "glyphicon-play-circle";
-var LI_GLYPHICON_STOP_CLS = "glyphicon-stop";
-var LI_GLYPHICON_PLAY_CLS = "glyphicon-refresh";
-var LI_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
-var LI_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+var LI_GLYPHICON_RECORD_CLS = "glyphicon glyphicon-record";
+var LI_GLYPHICON_LISTEN_CLS = "glyphicon glyphicon-play-circle";
+var LI_GLYPHICON_STOP_CLS = "fa fa-stop-circle-o";
+var LI_GLYPHICON_PLAY_CLS = "glyphicon glyphicon-repeat";
+var LI_GLYPHICON_CORRECT_CLS = "glyphicon glyphicon-ok-circle";
+var LI_GLYPHICON_INCORRECT_CLS = "glyphicon glyphicon-remove-circle";
 
 
 var recorder;
@@ -276,9 +276,9 @@ var PronunciationView = React.createClass({
         var translatedText = "";
         var ezreadText = "";
         var note = "";
-        var feedbackClass = "glyphicon";
-        var recordedClass = "glyphicon";
-        var recordingClass = "glyphicon";
+        var feedbackClass = "";
+        var recordedClass = "";
+        var recordingClass = "";
         var displayTracker = state.displayTracker;
         var questionCounter = 0;
         var noteCounter = 0;
