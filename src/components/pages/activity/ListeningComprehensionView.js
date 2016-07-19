@@ -172,16 +172,23 @@ var ListeningComprehensionView = React.createClass({
         }
 
         if(zid && zid !== 0){
-            self.setState({
-                isListening: true
-            });
-            playAudio(zid);
-            $("#audio").bind('ended', function(){
+            if(self.state.isListening){
                 self.setState({
-                    haveListened: true,
                     isListening: false
                 });
-            });
+                playAudio(zid);
+            }else{
+                self.setState({
+                    isListening: true
+                });
+                playAudio(zid);
+                $("#audio").bind('ended', function(){
+                    self.setState({
+                        haveListened: true,
+                        isListening: false
+                    });
+                });
+            }
         }
     },
 
