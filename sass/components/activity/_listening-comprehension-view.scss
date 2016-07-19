@@ -8,6 +8,13 @@ input[type=checkbox] {
 
 .listening-comp-choices-container {
   margin-top: 20px;
+  .list-group-item {
+    padding: 0;
+    label {
+      width: 100%;
+      padding: 10px 15px 10px 25px;
+    }
+  }
   .listening-comp-checkbox {
     margin-right: 15px;
   }
