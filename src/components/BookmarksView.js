@@ -11,6 +11,8 @@ var Button = require("react-bootstrap/lib/Button");
 var NavDropdown = require("react-bootstrap/lib/NavDropdown");
 var MenuItem = require("react-bootstrap/lib/MenuItem");
 var LocalizationStore = require('../stores/LocalizationStore');
+var UnitStore = require('../stores/UnitStore');
+var LoaderStore = require('../stores/LoaderStore');
 
 function getPageState(isNav) {
     var page = null;
@@ -101,13 +103,19 @@ var BookmarksView = React.createClass({
 
     componentDidMount: function() {
         BookmarkStore.addChangeListener(this._onChange);
+        LoaderStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
         BookmarkStore.removeChangeListener(this._onChange);
+        LoaderStore.removeChangeListener(this._onChange);
     },
 
     render: function() {
+
+        if (!LoaderStore.loadingComplete()) {
+            return (<div></div>);
+        }
 
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
@@ -146,8 +154,13 @@ var BookmarksView = React.createClass({
                 </NavDropdown>);
             } else {
                 var subItems = bookmarks.map(function (item, index) {
+                    var unit = UnitStore.getUnitById(item.unit);
+                    var unitTitle = (unit) ? unit.data.title : "";
+                    var chapter = UnitStore.getChapterById(item.unit, item.chapter);
+                    var chapterTitle = (chapter) ? chapter.title : "";
+
                     return (<ListGroupItem key={"bookmarkitems" + index} className="bookmark-list-item">
-                        <button className="btn btn-link bookmark-link-btn" title={item.title} onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                        <button className="btn btn-link bookmark-link-btn" title={unitTitle + " / " + chapterTitle + " / " + item.title} onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
 
                         <button className="btn btn-default bookmark-item-remove" onClick={self.bookmarkRemove.bind(self, item)}>
                             <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
