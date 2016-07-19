@@ -125,7 +125,9 @@ function getPageState(props) {
                                    alt={props.page.title}
                                    aria-label={props.page.title}
                                    className="hand-me"
-                                   id="video" controls autoPlay={SettingsStore.autoPlaySound()} volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                                   id="video" controls
+                                   autoPlay={SettingsStore.autoPlaySound()}
+                                   volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                             {data.caption}

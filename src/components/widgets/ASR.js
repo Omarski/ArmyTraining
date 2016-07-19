@@ -9,7 +9,7 @@ var ASR = React.createClass({
 
     render: function() {
         // setup plugin html code
-        var pluginHTML = '<applet code="org.jdesktop.applet.util.JNLPAppletLauncher" archive="applet-launcher.jar,SpeechInterfaceApplet.jar" height="1" mayscript="yes" scriptable="true" id="ASRApplet" name="ASRApplet">\n';
+        var pluginHTML = '<applet code="org.jdesktop.applet.util.JNLPAppletLauncher" archive="applet-launcher.jar,SpeechInterfaceApplet.jar" height="0" mayscript="yes" scriptable="true" id="ASRApplet" name="ASRApplet">\n';
         pluginHTML += '<param name="codebase_lookup" value="false"/>\n';
         pluginHTML += '<param name="prgressbar" value="true"/>\n';
         pluginHTML += '<param name="subapplet.classname" value="com.alelo.speechinterfaceapplet.SpeechInterfaceApplet"/>\n';
