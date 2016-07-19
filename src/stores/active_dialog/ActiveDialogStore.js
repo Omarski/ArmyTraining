@@ -242,7 +242,6 @@ function addOutputMappingActionByAct(actName) {
 }
 
 function handleTransitionInput(trans) {
-
     // update current state
     activityState = trans.endState;
 
@@ -270,7 +269,6 @@ function handleTransitionInput(trans) {
 }
 
 function handleRetInput(retId, retInputId) {
-
     var outputQ = DATA.retq[retId].inputq[retInputId].outputq;
     var filteredOutputQ = outputQ.filter(checkVRQ);
 
@@ -282,6 +280,10 @@ function handleRetInput(retId, retInputId) {
         // update effects
         output.effects.forEach(applyEffect);
 
+        // update current state if specified
+        if (output.endState != null && (output.endState.length > 0)) {
+            activityState = output.endState;
+        }
     });
 }
 
