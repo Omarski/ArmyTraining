@@ -120,7 +120,7 @@ var BookmarksView = React.createClass({
                     return (<MenuItem id={"bookmarkitems" + index} key={"bookmarkitems" + index} eventKey={6 + index} href="#"
                                       className="bookmark-nav-item"
                                       onClick={function(){self.menuItemClickedThatShouldntCloseDropdown()}}>
-                        <button className="btn btn-link"
+                        <button className="btn btn-link bookmark-link-btn"
                                 onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                     </MenuItem>);
                 });
@@ -147,7 +147,7 @@ var BookmarksView = React.createClass({
             } else {
                 var subItems = bookmarks.map(function (item, index) {
                     return (<ListGroupItem key={"bookmarkitems" + index} className="bookmark-list-item">
-                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                        <button className="btn btn-link bookmark-link-btn" title={item.title} onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
 
                         <button className="btn btn-default bookmark-item-remove" onClick={self.bookmarkRemove.bind(self, item)}>
                             <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>

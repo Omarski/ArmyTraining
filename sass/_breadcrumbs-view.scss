@@ -1,3 +1,10 @@
+.bookmark-link-btn {
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+  text-align: left;
+}
 .bookmark-item-remove {
   position: absolute;
   top: 11px;
