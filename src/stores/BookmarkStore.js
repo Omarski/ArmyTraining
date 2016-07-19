@@ -32,10 +32,29 @@ function create(data) {
     }
 
     store.set('bookmark', obj);
+    console.log("in bookmark update")
 }
 
 function destroy() {
     store.remove('bookmark');
+}
+
+function remove(item) {
+    var bm = store.get('bookmark');
+    if (bm) {
+        var bookmarks = bm.bookmarks;
+        var len = bookmarks.length;
+        var newBookmarks = [];
+        for (var i = 0; i < len; i++) {
+            var existingBookmark = bookmarks[i];
+            if (existingBookmark.page !== item.page) {
+                newBookmarks.push(existingBookmark);
+            }
+        }
+        bm.bookmarks = newBookmarks;
+    }
+    store.set('bookmark', bm);
+
 }
 
 var BookmarkStore = assign({}, EventEmitter.prototype, {
@@ -48,6 +67,19 @@ var BookmarkStore = assign({}, EventEmitter.prototype, {
     bookmarks: function() {
         var bm = store.get('bookmark');
         return (bm) ? bm.bookmarks : null;
+    },
+
+    bookmarkExists: function(data) {
+        var bm = store.get('bookmark');
+        var bookmarks = bm.bookmarks;
+        var len = bookmarks.length;
+        while (len--) {
+            var existingBookmark = bookmarks[len];
+            if (data.page === existingBookmark.page) {
+                return true;
+            }
+        }
+        return false;
     },
 
     emitChange: function() {
@@ -68,10 +100,14 @@ AppDispatcher.register(function(action) {
     switch(action.actionType) {
         case BookmarkConstants.BOOKMARK_SET_CURRENT:
             setCurrent(action.data);
-            BookmarkStore.emitChange();
+            //BookmarkStore.emitChange();
             break;
         case BookmarkConstants.BOOKMARK_CREATE:
             create(action.data);
+            BookmarkStore.emitChange();
+            break;
+        case BookmarkConstants.BOOKMARK_REMOVE:
+            remove(action.data);
             BookmarkStore.emitChange();
             break;
         case BookmarkConstants.BOOKMARK_DESTROY:
