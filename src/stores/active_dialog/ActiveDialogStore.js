@@ -44,8 +44,8 @@ function makeCOAs( acts, transInd, retId, retInputId ) {
                 };
             })};
 
-        res.isChoice = res.realizations[0].gesture !== null || res.realizations[0].terp === "L1";
-        res.isChoice = !asrMode || res.isChoice; // always use choice if no asr
+        res.isChoice = res.realizations[0].gesture !== null;
+        //res.isChoice = !asrMode || res.isChoice; // always use choice if no asr
 
         return res
     });
