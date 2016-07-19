@@ -160,7 +160,7 @@ var BookmarksView = React.createClass({
                     var chapterTitle = (chapter) ? chapter.title : "";
 
                     return (<ListGroupItem key={"bookmarkitems" + index} className="bookmark-list-item">
-                        <button className="btn btn-link bookmark-link-btn" title={unitTitle + " / " + chapterTitle + " / " + item.title} onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                        <button className="btn btn-link bookmark-link-btn" title={chapterTitle + " / " + item.title} onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
 
                         <button className="btn btn-default bookmark-item-remove" onClick={self.bookmarkRemove.bind(self, item)}>
                             <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
