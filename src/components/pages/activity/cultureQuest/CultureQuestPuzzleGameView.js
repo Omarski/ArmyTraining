@@ -178,6 +178,7 @@ var CultureQuestPuzzleGameView = React.createClass({
                     dragItem.style.top  = $(target).position().top+"px";
                     dragItem.style.left = $(target).position().left+"px";
                     $(target).attr("pieceNumber", $(dragItem).attr("id").substring(15));
+                    this.viewUpdate({task:"tileAudio", value:null});
                     this.checkCompletion();
                 }else{
                     dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
@@ -230,6 +231,11 @@ var CultureQuestPuzzleGameView = React.createClass({
     onClosePopup: function(){
         //bubble up
         this.props.onClosePopup();
+    },
+
+    viewUpdate: function(update){
+        //propagate up
+        this.props.viewUpdate(update);
     },
 
     render: function() {

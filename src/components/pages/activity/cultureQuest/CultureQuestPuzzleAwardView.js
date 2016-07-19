@@ -18,6 +18,7 @@ var CultureQuestPuzzleView = React.createClass({
         var self = this;
         window.setTimeout(function(){
             $("#culture-quest-puzzle-award-view-puzzleSlider").animate({right:'0'},1000,'swing');
+            self.viewUpdate({task:"tileAudio", value:null});
         },1200);
         
         window.setTimeout(function(){
@@ -59,6 +60,11 @@ var CultureQuestPuzzleView = React.createClass({
             )
         });
         return sliderPuzzles;
+    },
+
+    viewUpdate: function(update){
+        //propagate up
+        this.props.viewUpdate(update);
     },
 
     render: function() {

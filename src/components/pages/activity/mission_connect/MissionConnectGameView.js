@@ -25,7 +25,7 @@ var MissionConnectGameView = React.createClass({
         mediaPath: PropTypes.string.isRequired,
         viewUpdate: PropTypes.func.isRequired,
         stats: PropTypes.object.isRequired,
-        objectNodesNum: PropTypes.number.isRequired
+        objectNodesNum: PropTypes.number.isRequired,
     },
 
     componentWillMount: function(){
@@ -179,6 +179,7 @@ var MissionConnectGameView = React.createClass({
                     updateWrongAttempts = {self.updateWrongAttempts}
                     objectNodesNum = {self.props.objectNodesNum}
                     stats = {self.props.stats}
+                    endNode = {parseInt(self.state.endNode)}
                 />:null}
 
 

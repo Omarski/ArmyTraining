@@ -11,7 +11,7 @@
   color: $nav-button-color;
 }
 
-#breadcrumbsButton, #audioControlButton, #audioControlIcon {
+#bookmarkButton, #audioControlButton, #audioControlIcon {
   margin-top: 4px;
   padding: 1px;
   border-style: solid;
@@ -26,6 +26,10 @@
   }
 }
 
+.btn-action {
+  background-color: $nav-button-color;
+  color: #fff;
+}
 #breadcrumbsButton {
   span {
     font-size: 17px;

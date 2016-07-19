@@ -8,13 +8,13 @@ var PageHeader = require('../../widgets/PageHeader');
 var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
-var L2_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
-var L2_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
-var L2_GLYPHICON_STOP_CLS = "glyphicon-stop";
-var L2_GLYPHICON_PLAY_CLS = "glyphicon-refresh";
-var L2_GLYPHICON_RECORD_CLS = "glyphicon-record";
+var L2_GLYPHICON_CORRECT_CLS = "glyphicon glyphicon-ok-circle";
+var L2_GLYPHICON_INCORRECT_CLS = "glyphicon glyphicon-remove-circle";
+var L2_GLYPHICON_STOP_CLS = "fa fa-stop-circle-o";
+var L2_GLYPHICON_PLAY_CLS = "glyphicon glyphicon-repeat";
+var L2_GLYPHICON_RECORD_CLS = "glyphicon glyphicon-record";
 var L2_GLYPHICON_CLS = "l2-glyphicon";
-var L2_GLYPHICON_LISTEN_CLS = "glyphicon-play-circle";
+var L2_GLYPHICON_LISTEN_CLS = "glyphicon glyphicon-play-circle";
 
 var recorder;
 
@@ -203,6 +203,7 @@ function textClick(id, colNumber, index, self){
         zid = uttering.media[0].zid;
     }
 
+
     if(isListening[colNumber][index]){
         isListening[colNumber][index] = false;
         var audio = document.getElementById('l2-demo-audio');
@@ -224,26 +225,26 @@ function playAudio(xid, colNumber, index, self){
     audio.src = "data/media/" + xid + ".mp3";
     // play audio, or stop the audio if currently playing
     if(self.state.isListening[colNumber][index]){
+        audio.pause();
+        isListening[colNumber][index] = false;
+        self.setState({isListening: isListening});
+    }else{
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
         isListening.map(function(itemi, i){
-           isListening[i].map(function(itemj, j){
-               if(i !== colNumber && j !== index){
-                   isListening[i][j] = false;
-               }
-           });
+            isListening[i].map(function(itemj, j){
+                if(i !== colNumber && j !== index){
+                    isListening[i][j] = false;
+                }
+            });
         });
         isListening[colNumber][index] = true;
         self.setState({isListening: isListening});
         $(audio).bind('ended', function(){
-           isListening[colNumber][index] = false;
+            isListening[colNumber][index] = false;
             self.setState({isListening: isListening});
         });
-    }else{
-        audio.pause();
-        isListening[colNumber][index] = false;
-        self.setState({isListening: isListening});
     }
 
 }
@@ -293,9 +294,9 @@ var MultiColumnPronunciationView = React.createClass({
         var note = "";
         var title = state.title;
         var sources = state.sources;
-        var feedbackClass = "glyphicon l2-glyphicon l2-feedback";
-        var recordedClass = "glyphicon l2-glyphicon l2-playback";
-        var recordingClass = "glyphicon l2-glyphicon l2-record";
+        var feedbackClass = "l2-glyphicon l2-feedback";
+        var recordedClass = "l2-glyphicon l2-playback";
+        var recordingClass = "l2-glyphicon l2-record";
 
         var columns = self.state.cols.map(function(colList, colNumber){
             var vaList = colList.map(function(item, index){

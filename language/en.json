@@ -6,6 +6,12 @@
   "breadcrumbs": {
     "tooltipBookmark": "Bookmarks"
   },
+  "bookmarks": {
+    "lblTitle": "Bookmarks",
+    "lblLimitWarning": "Only 5 bookmarks allowed, please delete unused bookmarks to add this one.",
+    "btnBookmark": "Bookmark Current Page",
+    "lblExistsWarning": "Bookmark already exists for this page."
+  },
   "evaluation": {
     "btnContinue": "Continue",
     "btnRestart": "Restart Episode",

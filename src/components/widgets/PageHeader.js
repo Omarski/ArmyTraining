@@ -100,12 +100,11 @@ var PageHeader = React.createClass({
         var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
             <ListGroup key="bookmarkbreadcrumbsbutton">
                 <Button
-                    id="breadcrumbsButton"
                     type="button"
                     className="btn btn-default btn-block btn-action"
                     onClick={this.bookmark}
                 >
-                    Bookmark This Page
+                    {LocalizationStore.labelFor("bookmarks", "btnBookmark")}
                 </Button>
             </ListGroup>
             <ListGroup>
@@ -116,9 +115,9 @@ var PageHeader = React.createClass({
         var bookmarkBtn = (
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
+                    id="bookmarkButton"
                     title={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
                     alt={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
-                    id="breadcrumbsButton"
                     type="button"
                     aria-label={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
                     className={("btn btn-default btn-link main-nav-audio-control ") + ((this.state.bookmarked) ? "selected" : "")}
