@@ -24,11 +24,12 @@ function getCompState(show) {
         // pull out realizations
         for (var i = 0; i < coasLen; i++) {
             var coa = coas[i];
+            var isChoice = coa.isChoice === true ? true : false;
             var realizations = coa.realizations;
             var realizationsLen = realizations.length;
             for (var j = 0; j < realizationsLen; j++) {
                 var r = realizations[j];
-                if (!isDuplicate(temp, r)) {
+                if (!isDuplicate(temp, r, isChoice)) {
                     data.push({coa: coa, realization: r});
                     temp.push(r);
                 }
@@ -45,12 +46,18 @@ function getCompState(show) {
 }
 
 
-function isDuplicate(temp, realization) {
+function isDuplicate(temp, realization, isChoice) {
     var len = temp.length;
     while (len--) {
         var r = temp[len];
-        if (realization.uttText === r.uttText) {
-            return true;
+        if (isChoice) {
+            if (realization.gesture === r.gesture) {
+                return true;
+            }
+        } else {
+            if (realization.uttText === r.uttText) {
+                return true;
+            }
         }
     }
     return false;
@@ -90,9 +97,19 @@ var ActiveDialogCOAs = React.createClass({
         if (this.state.coas && this.state.coas.length > 0) {
             coasList = this.state.coas.map(function(item, index) {
                 var name = item.realization.anima;
+                var displayText = "";
+
+                // get display text
+                if (item.coa.isChoice === true) {
+                    displayText = item.realization.gesture;
+                } else {
+                    displayText = item.realization.uttText;
+
+                }
+
                 return  <ListGroupItem key={index}>
                     <a className="" href="#" data-animation-name={name} onClick={_self.coaAction.bind(_self, item.coa)}>
-                        {item.realization.uttText}
+                        {displayText}
                     </a>
                 </ListGroupItem>
             });
