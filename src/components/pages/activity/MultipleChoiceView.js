@@ -153,6 +153,14 @@ var MultipleChoiceView = React.createClass({
         var self = this;
         var state = this.state;
         var page = self.state.page;
+
+        if (!page) {
+            return (<div></div>);
+        }
+
+
+
+
         var title = page.title;
         var sources = self.state.sources;
         var media = state.media;
@@ -224,7 +232,7 @@ var MultipleChoiceView = React.createClass({
      */
     _onChange: function() {
         if(this.isMounted()) {
-            this.setState(getPageState());
+            this.setState(getPageState(this.props));
         }
     }
 });

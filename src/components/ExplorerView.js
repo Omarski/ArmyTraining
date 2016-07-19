@@ -366,10 +366,6 @@ var TOCChapterRow = React.createClass({
         this.props.expandHandler(item, index, idStr);
     },
 
-    loadPage: function(item, chapter, unit) {
-        PageActions.jump({page:item.xid, chapter:chapter.data.xid, unit:unit.id});
-
-    },
     render: function() {
         var idStr = this.props.idstr;
         var index = this.props.index;
@@ -464,7 +460,7 @@ var TOCPageRow = React.createClass({
                 <span className="badge">
                     {icon}
                 </span>
-                <a href="#" onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>{this.props.item.title}</a>
+                <a href="#">{this.props.item.title}</a>
             </li>
 
         );
