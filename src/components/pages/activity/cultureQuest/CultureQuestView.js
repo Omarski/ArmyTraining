@@ -27,6 +27,7 @@ function getPageState(props) {
         lastSelected: null,
         answersColl:[],
         audioObj:null,
+        audioBgObj:null,
         audioController:"",
         popupObj:null,
         mediaPath:'data/media/'
@@ -61,6 +62,8 @@ var CultureQuestView = React.createClass({
             self.prepIntroPopup();
             self.markHomeRegion();
         });
+
+        this.bgAudio();
     },
     componentDidMount: function() {
         AppStateStore.addChangeListener(this._onAppStateChange);
@@ -275,6 +278,24 @@ var CultureQuestView = React.createClass({
         });
     },
 
+    playBgAudio: function(audioObj){
+        var self = this;
+
+        this.setState({audioBgObj:audioObj}, function(){
+            if (!audioObj.loop) {
+                $("#"+audioObj.id).on("ended", function(){
+                    self.setState({audioBgObj:null});
+                });
+            }
+        });
+    },
+
+    bgAudio: function(){
+        var bgAudio = this.state.mediaPath + "afpak_CQ_music_loop-28dB.mp3";
+        this.playBgAudio({id:"bgMusic", autoPlay:true, loop:true, sources:[{format:"mp3", url:bgAudio}]});
+    },
+
+
     audioController: function(mode){
         return mode;
     },
@@ -286,6 +307,23 @@ var CultureQuestView = React.createClass({
 
     setAudioControl: function(mode){
         this.setState({audioController:mode});
+    },
+
+    viewUpdate: function(update){
+
+        var self = this;
+        switch (update.task){
+
+            case "countrySelect":
+                var countryAudio = self.state.mediaPath + "country_select.mp3";
+                self.playAudio({id:"countrySelect", autoPlay:true, sources:[{format:"mp3", url:countryAudio}]});
+                break;
+
+            case "tileAudio":
+                var tileAudio = self.state.mediaPath + "add_tile.mp3";
+                self.playAudio({id:"tile", autoPlay:true, sources:[{format:"mp3", url:tileAudio}]});
+                break;
+        }
     },
 
     render: function() {
@@ -314,6 +352,15 @@ var CultureQuestView = React.createClass({
                         controller = {self.state.audioController}
                     /> : null}
 
+                    {self.state.audioBgObj ?
+                        <AudioPlayer
+                            id = {self.state.audioBgObj.id}
+                            sources    = {self.state.audioBgObj.sources}
+                            autoPlay   = {self.state.audioBgObj.autoPlay}
+                            loop       = {self.state.audioBgObj.loop}
+                            controller = {self.state.audioController}
+                        /> : null}
+
                     {self.state.popupObj ?
                     <PopupView
                         id = {self.state.popupObj.id}
@@ -331,6 +378,7 @@ var CultureQuestView = React.createClass({
                         answersColl = {state.answersColl}
                         lastSelected = {state.lastSelected}
                         updateLayersColl = {self.updateLayersColl}
+                        viewUpdate = {self.viewUpdate}
                     >
 
                     </CultureQuestMapView>
@@ -354,12 +402,14 @@ var CultureQuestView = React.createClass({
                         answersColl = {state.answersColl}
                         showQuizUpdate = {self.showQuizUpdate}
                         showPuzzleUpdate = {self.showPuzzleUpdate}
+                        viewUpdate = {self.viewUpdate}
                     />:null}
 
                     {self.state.showPuzzleGame? <CultureQuestPuzzleGameView
                     imageData={state.imageData}
                     displayPopup={this.displayPopup}
                     onClosePopup={this.onClosePopup}
+                    viewUpdate = {self.viewUpdate}
                     />:null}
 
                 </div>

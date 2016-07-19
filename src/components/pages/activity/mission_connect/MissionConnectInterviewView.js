@@ -30,7 +30,8 @@ var MissionConnectInterviewView = React.createClass({
         updateGameView: PropTypes.func.isRequired,
         updateScore: PropTypes.func.isRequired,
         objectNodesNum: PropTypes.number.isRequired,
-        stats: PropTypes.object.isRequired
+        stats: PropTypes.object.isRequired,
+        endNode: PropTypes.number.isRequired
     },
 
     componentDidMount: function(){
@@ -116,8 +117,11 @@ var MissionConnectInterviewView = React.createClass({
 
         if (scoreObj.answered) {
             for (var i=0; i < connectNodes.length; i++){
-                var node = $("#missionConnectViewPieceBlock"+connectNodes[i]);
-                $(node).animate({'opacity':'1'},500).css({'pointerEvents':'auto'});
+                if (connectNodes[i] !== this.props.endNode){
+                    var node = $("#missionConnectViewPieceBlock"+connectNodes[i]);
+                    $(node).animate({'opacity':'1'},500).css({'pointerEvents':'auto'});
+                }
+
             }
         }
     },

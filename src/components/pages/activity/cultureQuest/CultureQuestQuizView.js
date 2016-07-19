@@ -33,12 +33,12 @@ var CultureQuestQuiz = React.createClass({
             puzzleAwardMode:false,
             atInputBlock:1,
             inputBlocksTotal:0,
-            answeredCorrectly:false
+            answeredCorrectly:false,
+            respBtnOn:true
         };
     },
 
     componentDidMount: function() {
-        //this.getQuestionQuotes;
         this.renderQuestionText();
     },
 
@@ -120,10 +120,10 @@ var CultureQuestQuiz = React.createClass({
         var blocksRender = blocksColl.map(function(wordBlock,index){
 
             return (
-                <span className="culture-quest-quiz-view-blockGroup"
+                <div className="culture-quest-quiz-view-blockGroup"
                      id="culture-quest-quiz-view-blockGroup" key={index}>
                     {wordBlock}
-                </span>
+                </div>
             )
         });
 
@@ -134,12 +134,19 @@ var CultureQuestQuiz = React.createClass({
     setInputTabbing: function(){
         var self = this;
         self.state.inputBlocksTotal = $("[id^='culture-quest-quiz-view-inputBlock']").length - 1;
+        self.setState({respBtnOn:true});
+        //remove past events
+        $("[id^='culture-quest-quiz-view-inputBlock']").find("*").addBack().off();
 
+        //box click:
+        $("[id^='culture-quest-quiz-view-inputBlock']").click(function(){
+            console.log("Click....");
+        });
         //backspace
         $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
-            if(e.keyCode === 8 || e.keyCode === 46){
-                self.state.atInputBlock--;
+            if(e.keyCode === 8){
                 $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
+                self.state.atInputBlock--;
             }
         });
 
@@ -148,6 +155,7 @@ var CultureQuestQuiz = React.createClass({
             self.state.atInputBlock = $(this).attr('id').substring(34);
             if ($(this).val().length === 1) {
                 if (parseInt(self.state.atInputBlock) < parseInt(self.state.inputBlocksTotal)) {
+                    //self.setState({atInputBlock:self.state.atInputBlock + 1});
                     self.state.atInputBlock++;
                     $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
                 }
@@ -227,6 +235,7 @@ var CultureQuestQuiz = React.createClass({
 
             //2nd attempt
             }else{
+                self.setState({respBtnOn:false});
                 self.updateTimerController("pause");
                 var answer = this.getSelectedJSON()["answer"+answerObj.onQuestion].replace(/\s/g, '');
                 var answerArray = answer.split('');
@@ -291,7 +300,7 @@ var CultureQuestQuiz = React.createClass({
         var quizPopClasses = (self.props.showQuiz) ? "culture-quest-quiz-view-fade-in" : ".culture-quest-quiz-view-fade-out";
 
         var btnRespondClasses = "btn btn-default";
-        var btnRespondStyle = {position: 'absolute', zIndex:20, top:'238px', left:'400px', display:(self.state.showInputBlocks)? "block":"none"};
+        var btnRespondStyle = {position: 'absolute', zIndex:20, top:'238px', left:'400px', display:(self.state.showInputBlocks && self.state.respBtnOn)? "block":"none"};
 
         var btnSkipClasses = "btn btn-default";
         var btnSkipStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', display:(self.state.skipMode)? "block":"none"};
@@ -309,8 +318,9 @@ var CultureQuestQuiz = React.createClass({
         var puzzleAwardTextClass = "culture-quest-quiz-view-quizText " + (self.state.puzzleAwardMode) ? "culture-quest-quiz-view-show":"culture-quest-quiz-view-hide";
 
         return (
-                <div className={"culture-quest-quiz-view-quizPop "+quizPopClasses}>
-
+            <div>
+            <div className="culture-quest-quiz-view-regionBanner">{self.getSelectedJSON()["name"]}</div>div>
+            <div className={"culture-quest-quiz-view-quizPop "+quizPopClasses}>
                     {!self.state.puzzleAwardMode ?
                         <div className="culture-quest-quiz-view-timer" id="culture-quest-quiz-view-timer">
                             <TimerCountdownView
@@ -325,7 +335,6 @@ var CultureQuestQuiz = React.createClass({
                                 timerStatusReporter     = {self.timerStatusListener}
                             />
                     </div>:null}
-
                     <div className="culture-quest-quiz-view-quizCont" id="culture-quest-quiz-view-quizCont">
 
                         {this.props.lastSelected ? <div style={instStyle} className="culture-quest-quiz-view-instructorImg"></div> : null}
@@ -343,7 +352,7 @@ var CultureQuestQuiz = React.createClass({
                                 <div>
                                     <div className={puzzleAwardTextClass}>{self.state.answeredCorrectly ? self.state.correctAnswerText:self.state.wrongAnswerText}</div>
                                 </div>:null}
-                            
+
                             {self.state.showInputBlocks && !self.state.puzzleAwardMode? <div className="culture-quest-quiz-view-input-blocks-cont" id="culture-quest-quiz-view-input-blocks-cont">
                                 <div className="culture-quest-quiz-view-input-blocks-cent">{this.renderBlocks()}</div>
                             </div>:null}
@@ -355,6 +364,7 @@ var CultureQuestQuiz = React.createClass({
                     <div type="button" onClick={self.onSkipAnswer} style={btnSkipStyle} className={btnSkipClasses}>Skip question</div>
                     <div type="button" onClick={self.onSkipRegion} style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</div>
                     </div>:null}
+                </div>
                 </div>
 
         );
