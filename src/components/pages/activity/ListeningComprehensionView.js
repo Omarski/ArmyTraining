@@ -4,6 +4,7 @@ var ClosedCaption = require('../../widgets/ClosedCaption');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var LocalizationStore = require('../../../stores/LocalizationStore');
+var PageActions = require('../../../actions/PageActions');
 var PageHeader = require('../../widgets/PageHeader');
 
 var LC_PLAY_ICON = " glyphicon glyphicon-play-circle";
@@ -21,6 +22,7 @@ function getPageState(props) {
         haveAnswered: false,
         isCorrect: false,
         isListening: false,
+        isQuizPage: false,
         answers: [],
         correctAnswer: "",
         answerFeedback: "No Answer Selected.",
@@ -29,6 +31,9 @@ function getPageState(props) {
     };
 
     var imageZid = "";
+
+    // set if quiz page
+    data.isQuizPage = PageStore.isQuizPage();
 
     if (props && props.page) {
         data.page = props.page;
@@ -127,6 +132,23 @@ var ListeningComprehensionView = React.createClass({
                         this.checked = false;
                     }
                 });
+
+                // record if is a quiz page
+                if (state.isQuizPage) {
+                    // create new answer object
+                    var answerObj = {
+                        answer: {
+                            answer: selectedAns,
+                            passed: isCorrect,
+                            question: state.prompt,
+                            target: state.correctAnswer
+                        }
+                    };
+
+                    // submit answer to page
+                    PageActions.answer(answerObj);
+                }
+
                 self.setState({
                     haveAnswered: haveAnswered,
                     isCorrect: isCorrect,
@@ -138,7 +160,7 @@ var ListeningComprehensionView = React.createClass({
     },
 
     listenCheck: function(){
-        // play the audio prmopt from the click to listen box
+        // play the audio prompt from the click to listen box
         //find the zid of the audio
         var self = this;
         var zid = 0;
@@ -175,7 +197,7 @@ var ListeningComprehensionView = React.createClass({
         var feedbackElement = "";
         var playButtonIcon = self.state.isListening ? LC_STOP_ICON : LC_PLAY_ICON;
         // if answered added coach feedback
-        if(state.haveAnswered) {
+        if(state.haveAnswered && !state.isQuizPage) {
             feedbackElement = state.answerFeedback
         }
 
@@ -244,7 +266,6 @@ var ListeningComprehensionView = React.createClass({
             );
         }else{
             // right side before user listens to the question
-            console.log(state.prompt);
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
