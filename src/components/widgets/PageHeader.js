@@ -54,7 +54,8 @@ function getPageState(props) {
 
     var sources = "";
     if (props && props.sources && props.sources.length) {
-        sources = props.sources.concat(", ")
+        //sources = props.sources.concat(", ")
+        sources = props.sources;
     }
 
     return {
@@ -111,7 +112,7 @@ var PageHeader = React.createClass({
                 <BookmarksView isNav={false}/>
             </ListGroup>
         </Popover>);
-
+        
         var bookmarkBtn = (
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
