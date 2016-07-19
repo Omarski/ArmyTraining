@@ -120,7 +120,7 @@ function getPageState(props) {
 
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
-                        result = <div className={data.videoType} key={index}>
+                        result = <div className={data.videoType} key={index + filePath}>
                             <video title={props.page.title}
                                    alt={props.page.title}
                                    aria-label={props.page.title}
@@ -147,7 +147,7 @@ function getPageState(props) {
                             }
                         });
                     }
-                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index} altText={altText} />);
+                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index + filePath} altText={altText} />);
                 }
 
                 return result;
@@ -263,9 +263,6 @@ var InfoView = React.createClass({
             </div>;
         }
 
-        //console.log("self", self);
-
-
         var cc = "";
         if (state.transcript !== "") {
             cc = (
@@ -340,9 +337,9 @@ var InfoView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        if (this.isMounted()) {
+        // if (this.isMounted()) {
             this.setState(getPageState(this.props));
-        }
+        // }
     }
 });
 
