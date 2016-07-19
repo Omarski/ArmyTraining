@@ -15,7 +15,6 @@ var ImageCaptionView = React.createClass({
     },
     render: function() {
         captionDiv = "";
-
         // check if caption object pass in is valid
         switch(typeof this.state.caption) {
             case "undefined":
@@ -33,7 +32,7 @@ var ImageCaptionView = React.createClass({
         }
 
         return  (
-            <div className="image-caption-container">
+            <div key={"imageCaptionContainer-" + this.state.filePath} className="image-caption-container">
                 <img className={this.state.videoType} src={this.state.filePath} aria-label={this.state.altText} title={this.state.altText} alt={this.state.altText}></img>
                 {captionDiv}
             </div>
