@@ -45,6 +45,19 @@ input[type=checkbox] {
   }
 }
 
+.list-group-item, .multiple-choice-list-group-item {
+  .checkbox {
+    margin: 0px;
+    label {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 55px;
+      padding-right: 15px;
+      width: 100%;
+    }
+  }
+}
+
 
 .multi-choice-header-mobile-margin {
   margin-left: 10px;
