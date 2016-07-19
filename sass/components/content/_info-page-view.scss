@@ -98,3 +98,9 @@
     max-height: 350px;
   }
 }
+
+.info-video-player::-webkit-media-controls-play-button, .info-video-player::-webkit-media-controls-volume-slider,
+.info-video-player::-webkit-media-controls-mute-button, .info-video-player::-webkit-media-controls-timeline,
+.info-video-player::-webkit-media-controls-fullscreen-button,{
+  cursor: pointer;
+}

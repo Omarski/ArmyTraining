@@ -165,7 +165,7 @@ var InteractiveTimelineView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        this.setState(getPageState());
+        this.setState(getPageState(this.props));
     }
 });
 
