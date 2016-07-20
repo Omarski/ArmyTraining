@@ -3,9 +3,12 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
 var ClosedCaption = require('../../widgets/ClosedCaption');
+var ClosedCaptionPanel = require('../../widgets/ClosedCaptionPanel');
 var ImageCaption = require('../../widgets/ImageCaption');
 var AppStateStore = require('../../../stores/AppStateStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
+var ClosedCaptionStore = require('../../../stores/ClosedCaptionStore');
+var Utils = require('../../widgets/Utils');
 
 var SettingsActions = require('../../../actions/SettingsActions');
 
@@ -69,19 +72,9 @@ function getPageState(props) {
 
             if(notes && notes.length > 1){
                 noteItems = notes.map(function(item, index) {
-                    var hasBullet = (item.text.indexOf('-') === 0);
-                    var str = item.text;
-                    if (hasBullet) {
-                        //str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
-                        //str = str.replace(new RegExp('- ', 'g'), '<span class="info-view-bullet-item"></span>');
-                        var arr = str.split('- ');
-                        var len = arr.length;
-                        var result = "";
-                        for ( var i = 1; i < len; i++) {
-                            result += '<p><span class="info-view-bullet-item"></span>' + arr[i] + '</p>';
-                        }
-                        str = result;
-                    }
+
+                    var str = Utils.parseBullets(item.text);
+
 
                     if(item.media && item.media[0]){
                         // if statement to detect media in note, should be true
@@ -120,6 +113,15 @@ function getPageState(props) {
 
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
+                        var cc = "";
+                        if (data.transcript !== "") {
+                            cc = (
+                                <div>
+                                    <ClosedCaption transcript={data.transcript}/>
+                                </div>
+                            );
+                        }
+
                         result = <div className={data.videoType} key={index + filePath}>
                             <video title={props.page.title}
                                    alt={props.page.title}
@@ -131,6 +133,7 @@ function getPageState(props) {
                                 <source src={filePath} type="video/mp4"></source>
                             </video>
                             {data.caption}
+                            {cc}
                         </div>
                     }
                 }
@@ -196,6 +199,7 @@ var InfoView = React.createClass({
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
         SettingsStore.addChangeListener(this._onChange);
+        ClosedCaptionStore.addChangeListener(this._onClosedCaptionChange);
     },
 
     componentDidMount: function() {
@@ -235,18 +239,11 @@ var InfoView = React.createClass({
         SettingsActions.updateVoiceVolume(vol);
     },
 
-    componentWillUpdate: function(){
-
-    },
-
-    componentDidUpdate: function(){
-
-    },
-
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
         SettingsStore.removeChangeListener(this._onChange);
         AppStateStore.removeChangeListener(this._onAppStateChange);
+        ClosedCaptionStore.removeChangeListener(this._onClosedCaptionChange);
     },
     render: function() {
         var self = this;
@@ -258,19 +255,29 @@ var InfoView = React.createClass({
         var mediaType = state.videoType;
         var isFullCoach = state.fullCoach;
         var content = "";
-        var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
+        var transcriptContainer = "";
 
-        if(state.page.note && state.page.note.length > 1){
-            noteDisplay = <div className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}>
-                <ul>{pageNotes}</ul>
-            </div>;
+        if (this.state.transcript) {
+            transcriptContainer = (
+                <ClosedCaptionPanel transcript={this.state.transcript} />
+            );
         }
 
-        var cc = "";
-        if (state.transcript !== "") {
-            cc = (
-                <div>
-                    <ClosedCaption transcript={state.transcript}/>
+        var noteDisplay = (
+            <div
+                className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}
+            >
+                <div className="info-page-notes">
+                    {pageNotes}
+                </div>
+                {transcriptContainer}
+            </div>);
+
+        if(state.page.note && state.page.note.length > 1){
+            noteDisplay =   (
+                <div className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}>
+                    <ul className="info-page-notes">{pageNotes}</ul>
+                    {transcriptContainer}
                 </div>
             );
         }
@@ -318,7 +325,6 @@ var InfoView = React.createClass({
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
                 <div className="infoContainer" key={"page-" + this.state.page.xid}>
-                    {cc}
                     <audio autoPlay id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
@@ -340,9 +346,17 @@ var InfoView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        // if (this.isMounted()) {
+        if (this.isMounted()) {
             this.setState(getPageState(this.props));
-        // }
+        }
+    },
+
+    _onClosedCaptionChange: function () {
+        if (ClosedCaptionStore.visible()) {
+            $('.info-page-notes').hide();
+        } else {
+            $('.info-page-notes').show();
+        }
     }
 });
 
