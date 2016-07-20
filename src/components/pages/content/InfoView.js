@@ -6,6 +6,7 @@ var ClosedCaption = require('../../widgets/ClosedCaption');
 var ImageCaption = require('../../widgets/ImageCaption');
 var AppStateStore = require('../../../stores/AppStateStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
+var Utils = require('../../widgets/Utils');
 
 var SettingsActions = require('../../../actions/SettingsActions');
 
@@ -65,23 +66,14 @@ function getPageState(props) {
 
 
         if (props.page.note) {
+
             var notes = props.page.note;
 
             if(notes && notes.length > 1){
                 noteItems = notes.map(function(item, index) {
-                    var hasBullet = (item.text.indexOf('-') === 0);
-                    var str = item.text;
-                    if (hasBullet) {
-                        //str = str.replace('-', '<span class="info-view-bullet-item"></span>'); // first dash
-                        //str = str.replace(new RegExp('- ', 'g'), '<span class="info-view-bullet-item"></span>');
-                        var arr = str.split('- ');
-                        var len = arr.length;
-                        var result = "";
-                        for ( var i = 1; i < len; i++) {
-                            result += '<p><span class="info-view-bullet-item"></span>' + arr[i] + '</p>';
-                        }
-                        str = result;
-                    }
+
+                    var str = Utils.parseBullets(item.text);
+
 
                     if(item.media && item.media[0]){
                         // if statement to detect media in note, should be true
@@ -192,12 +184,10 @@ var InfoView = React.createClass({
         var pageState = getPageState(this.props);
         return pageState;
     },
-
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
         SettingsStore.addChangeListener(this._onChange);
     },
-
     componentDidMount: function() {
         //play audio recording for info page
         var self = this;
@@ -228,8 +218,8 @@ var InfoView = React.createClass({
         vol = video.volume;
 
         //this is a bad fix, do not do this
-       // settings['voiceVolume'] = vol;
-       // store.set('settings', settings);
+        // settings['voiceVolume'] = vol;
+        // store.set('settings', settings);
         // ...
 
         SettingsActions.updateVoiceVolume(vol);
