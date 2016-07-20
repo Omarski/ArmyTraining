@@ -146,6 +146,22 @@ var MultipleChoiceView = React.createClass({
 
             // submit answer to page
             PageActions.answer(answerObj);
+        }else{
+            /* trigger audio */
+            var audio = document.getElementById('mainViewAudio');
+            var source = document.getElementById('mainViewMp3Source');
+            if (source) {
+                if(answer.correct){
+                    source.src = "data/media/Correct.mp3";
+                }else{
+                    source.src = "data/media/Incorrect.mp3";
+                }
+            }
+            if(audio && source) {
+                audio.load();
+                audio.play();
+                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            }
         }
     },
 

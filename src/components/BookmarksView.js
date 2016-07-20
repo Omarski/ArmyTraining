@@ -136,7 +136,7 @@ var BookmarksView = React.createClass({
                         title={LocalizationStore.labelFor("bookmark", "lblTitle")}
                         alt={LocalizationStore.labelFor("bookmark", "lblTitle")}
                         type="button"
-                        className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
+                        className={("btn btn-default btn-link main-nav-bookmark btn-bmk ") + ((this.state.bookmarked) ? "selected" : "")}
                     >
                         <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                     </Button>
