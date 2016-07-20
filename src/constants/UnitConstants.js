@@ -6,6 +6,7 @@ module.exports = keyMirror({
     UNIT_COMPLETE: null,
     UNIT_DESTROY: null,
     UNIT_DESTROY_COMPLETED: null,
+    UNIT_EVALUATE_COMPLETE: null,
     UNIT_MARK_REQUIRED: null,
     UNIT_TOGGLE_COMPLETE_ALL: null,
     UNIT_RESET: null,
