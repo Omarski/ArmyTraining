@@ -1,3 +1,4 @@
+var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageHeader = require('../../widgets/PageHeader');
 var PageStore = require('../../../stores/PageStore');
 var React = require('react');
@@ -6,14 +7,39 @@ var React = require('react');
 function getPageState(props) {
     var data = {
         page: "",
+        pageFeedback: "",
+        pageFeedbackHeader: "",
+        pageFeedbackImage: "",
         pageType: "",
         title: ""
-    }
+    };
 
     if (props && props.page) {
         data.title = props.page.title;
         data.pageType = props.page.type;
         data.page = props.page;
+    }
+
+
+    // check if current chapter is completed
+    if (!PageStore.isChapterComplete()) {
+        data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblSectionFailed");
+    }
+    // course complete TODO
+    else if (false) {
+        data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblCourseComplete");
+        data.pageFeedbackHeader = LocalizationStore.labelFor("sectionEnd", "lblCongratulations");
+        data.pageFeedbackImage = LocalizationStore.labelFor("sectionEnd", "imageComplete");
+    }
+    // lesson complete TODO
+    else if (false) {
+        data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblLessonComplete");
+        data.pageFeedbackHeader = LocalizationStore.labelFor("sectionEnd", "lblCongratulations");
+        data.pageFeedbackImage = LocalizationStore.labelFor("sectionEnd", "imageComplete");
+    } else {
+        data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblSectionComplete");
+        data.pageFeedbackHeader = LocalizationStore.labelFor("sectionEnd", "lblCongratulations");
+        data.pageFeedbackImage = LocalizationStore.labelFor("sectionEnd", "imageComplete");
     }
 
     return data;
@@ -34,9 +60,32 @@ var SectionEndView = React.createClass({
         var self = this;
         var state = self.state;
         var title = state.title;
+        var feedback = state.pageFeedback;
+        var feedbackHeader = state.pageFeedbackHeader;
+        var feedbackImageSrc = state.pageFeedbackImage;
+        var feedbackImage = "";
+
+        if (feedbackImageSrc !== "") {
+            feedbackImage = <img className="" src={feedbackImageSrc}></img>;
+        }
 
         return (
-            <PageHeader sources={state.sources} title={title} key={state.page.xid}/>
+            <div>
+                <PageHeader sources={state.sources} title={title} key={state.page.xid}/>
+                <div className="container section-end-container">
+                    <div className="container-fluid">
+                        <div className="row">
+                            {feedbackHeader}
+                        </div>
+                        <div className="row">
+                            {feedbackImage}
+                        </div>
+                        <div className="row">
+                            {feedback}
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     },
 
@@ -45,6 +94,6 @@ var SectionEndView = React.createClass({
             this.setState(getPageState(this.props));
         }
     }
-})
+});
 
 module.exports = SectionEndView;
