@@ -109,7 +109,15 @@ var OrderingView = React.createClass({
         var state = self.state;
         var draggedItemLetter = "";
         var draggedItemTarget = "";
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
 
+        source.src = "data/media/Grab02.mp3";
+        if(audio && source) {
+            audio.load();
+            audio.play();
+            audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        }
         if(state.numMoved != state.answerState.length && $(e.target).css("opacity") != 0.3) {
             if (e.target) {
                 draggedItemLetter = $(e.target).attr("data");
@@ -141,6 +149,8 @@ var OrderingView = React.createClass({
         var state = self.state;
         var numMoved = state.numMoved;
         var answerState = state.answerState;
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
 
         // get dragged item
         var draggedItemTarget = state.draggedItemTarget;
@@ -194,6 +204,16 @@ var OrderingView = React.createClass({
         }
 
         var itemFound = false;
+
+        if($(draggedItemTarget).css("opacity") != 0.3 && (dropLocation !== "") ){
+            source.src = "data/media/Drop01.mp3";
+            if(audio && source) {
+                audio.load();
+                audio.play();
+                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            }
+        }
+
         if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter !== "" && dropLocation !== "") {
                 answerState.map(function (item) {
@@ -314,14 +334,24 @@ var OrderingView = React.createClass({
                 }
             }
 
-            if(!isCorrect) {
-                button = <button className="btn btn-action or-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
-            }else{
-
+            var audio = document.getElementById('mainViewAudio');
+            var source = document.getElementById('mainViewMp3Source');
+            if(isCorrect){
+                // play correct audio
+                source.src = "data/media/Correct.mp3";
+            } else {
+                // play incorrect audio
+                source.src = "data/media/Incorrect.mp3";
+                button = <button className="btn btn-action or-tryAgain btn-rst" onClick={self.reset}>Try Again</button>; // reset button if wrong
+            }
+            if(audio && source) {
+                audio.load();
+                audio.play();
+                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
             }
         }
         if(numMoved > 0 && numMoved < numQuestions){
-            button = <button className="btn btn-action or-clear" onClick={self.reset}>Clear All</button>; // clear all button
+            button = <button className="btn btn-action or-clear btn-rst" onClick={self.reset}>Clear All</button>; // clear all button
         }
 
         choices = state.answerState.map(function(item, index){
