@@ -25,7 +25,8 @@ function getPageState(props) {
         currentLevel:1,
         levelsColl:[],
         levelStats:{basic:[], advanced:[]},
-        advancedLevel:true
+        advancedLevel:false,
+        showAdvanced:false
     };
     
     if (props && props.page) {
@@ -188,8 +189,9 @@ var ObjexView = React.createClass({
         var lockImg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_lock_icon;
         var lockStyle = {background: 'url('+lockImg+') no-repeat 100% 100%'};
 
-        var advImg = self.state.mediaPath + "objex/img/advancedLevel.png";
-        var advStyle = {background: 'url('+advImg+') no-repeat 100% 100%'};
+        var advImg = self.state.advancedLevel ? self.state.mediaPath + "objex/img/advancedLevelOn.png": self.state.mediaPath + "objex/img/advancedLevelOff.png";
+        // var advImg = self.state.mediaPath + "objex/img/advancedLevel.png";
+        var advStyle = {background: 'url('+advImg+') no-repeat 100% 100%', cursor:'pointer'};
 
         var levelIcons = self.state.levelsColl.map(function(levelObj,index){
 
@@ -218,13 +220,25 @@ var ObjexView = React.createClass({
                 return(
                     <div className="objex-view-popCont">
                         {levelIcons}
-                        {self.state.advancedLevel ? <div className="objex-view-popLevelAdvancedIcon" style={advStyle}></div>:null}
+                        {self.state.showAdvanced ? <div className="objex-view-popLevelAdvancedIcon"
+                                                         style={advStyle}
+                                                         onClick={self.updateAdvClick}>
+                                                    </div>:null}
                     </div>
                 )
             }
         };
 
         self.displayPopup(popupObj);
+    },
+
+    updateAdvClick: function(){
+
+        var self = this;
+        self.setState({advancedLevel:!self.state.advancedLevel}, function(){
+            console.log("now ... : " + self.state.advancedLevel);
+            self.prepLevelsPopup();
+        });
     },
 
     prepLevelCompletePopup: function(){
@@ -428,7 +442,8 @@ var ObjexView = React.createClass({
                             self.prepGameCompletePopup();
                         }else{
                             self.prepBasicCompletePopup();
-                            self.setState({advancedLevel:true});
+                            self.setState({showAdvanced:true});
+                            // self.setState({advancedLevel:true});
                         }
 
                     }else{
