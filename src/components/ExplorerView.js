@@ -277,6 +277,10 @@ var ExplorerView = React.createClass({
                 var icon = "";
                 var sitems = "";
 
+
+                if (item.unit.state.complete) {
+                    icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
+                }
                 if (_expanded[item.unit.data.xid]) {
 
                     sitems = item.rows.map(function(sitem, index) {
@@ -370,22 +374,11 @@ var TOCChapterRow = React.createClass({
         var index = this.props.index;
         var self = this;
         var icon = '';
-        var cls = '';
 
-        if (this.props.item.completed) {
-            cls += ' current';
+        if (this.props.item.data.state && this.props.item.data.state.complete) {
             icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
-        } else if (!this.props.item.completed) {
-            icon = (<span className="glyphicon glyphicon-remove fail" aria-hidden="true"></span>);
-            cls += ' visited';
-        } else if (this.props.item.visited) {
-            icon = (<span className="glyphicon glyphicon-adjust visited" aria-hidden="true"></span>);
-            cls += ' visited';
-        } else {
-            cls += ' not-seen';
         }
 
-        icon = ""; // temp until logic is figured out
         return (
             <li className="list-group-item main-footer-chapter-row main-footer-row btn-clk" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
@@ -443,12 +436,15 @@ var TOCPageRow = React.createClass({
     render: function() {
         var cls = '';
         var icon = '';
+        var itemState = this.props.item.state || null;
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
             cls += ' current';
             icon = (<span className="glyphicon glyphicon-star current" aria-hidden="true"></span>);
-        } else if (this.props.item.state && this.props.item.state.visited) {
+        } else if (itemState && itemState.visited) {
             icon = (<span className="glyphicon glyphicon-adjust visited" aria-hidden="true"></span>);
             cls += ' visited';
+        } else if (itemState && itemState.complete) {
+            icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
         } else {
             cls += ' not-seen';
             icon = (<i className="fa fa-circle-o" aria-hidden="true"></i>);
