@@ -273,7 +273,7 @@ var FooterView = React.createClass({
                             <button title={LocalizationStore.labelFor("footer", "tooltipPrevious")}
                                     alt={LocalizationStore.labelFor("footer", "tooltipPrevious")}
                                     type="button" onClick={this.previous}
-                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
+                                    className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
                                 <span className="glyphicon glyphicon-chevron-left btn-icon" aria-hidden="true"></span>
                             </button>
@@ -286,7 +286,7 @@ var FooterView = React.createClass({
                                     alt={LocalizationStore.labelFor("footer", "tooltipNext")}
                                     type="button"
                                     onClick={this.next}
-                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
+                                    className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipNext")}>
                                 <span className="glyphicon glyphicon-chevron-right btn-icon" aria-hidden="true"></span>
                             </button>
@@ -295,7 +295,7 @@ var FooterView = React.createClass({
                                     alt={LocalizationStore.labelFor("footer", "tooltipClose")}
                                     type="button"
                                     onClick={this.toggleTOC}
-                                    className="btn btn-default btn-lg btn-link btn-close"
+                                    className="btn btn-default btn-lg btn-link btn-close btn-exp"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipClose")}>
                                     <span className="glyphicon glyphicon-remove btn-icon" aria-hidden="true"></span>
                             </button>

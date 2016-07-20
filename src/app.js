@@ -23,7 +23,7 @@ $(document).on("click", ".btn-bmk", function(){
         source.src = "data/media/Bookmark01.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -40,7 +40,7 @@ $(document).on("click", ".btn-drp", function(){
         source.src = "data/media/Drop01.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -57,7 +57,7 @@ $(document).on("click", ".btn-exp", function(){
         source.src = "data/media/explorerwhoosh01.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -74,7 +74,7 @@ $(document).on("click", ".btn-drg", function(){
         source.src = "data/media/Grab02.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -90,7 +90,7 @@ $(document).on("click", ".btn-cnf", function(){
         source.src = "data/media/PDQconfirm01.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -107,7 +107,7 @@ $(document).on("click", ".btn-nxt", function(){
         source.src = "data/media/PrevNext01.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -124,7 +124,7 @@ $(document).on("click", ".btn-rst", function(){
         source.src = "data/media/ResetPractice01.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -141,7 +141,24 @@ $(document).on("click", ".btn-set", function(){
         source.src = "data/media/ToolbarIcon01.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
+        audio.load();
+        audio.play();
+        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+    }
+
+});
+
+// user Clicks checkboxes in PDQ and Quizzes
+$(document).on("click", ".btn-clk", function(){
+    var audio = document.getElementById('mainViewAudio');
+    var source = document.getElementById('mainViewMp3Source');
+
+    if (source) {
+        source.src = "data/media/Click01a.mp3";
+    }
+
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
@@ -158,7 +175,7 @@ $(document).on("click", ".btn-misc", function(){
         source.src = "data/media/Neutral.mp3";
     }
 
-    if (audio) {
+    if(audio && source) {
         audio.load();
         audio.play();
         audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();

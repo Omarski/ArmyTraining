@@ -74,6 +74,18 @@
 
     }
   }
+
+  #cultureQuestResponseBtn:hover, #cultureQuestSkipAnswerBtn:hover, #cultureQuestSkipRegBtn:hover {
+    border: 1px solid grey;
+  }
+
+  #cultureQuestResponseBtn:focus, #cultureQuestSkipAnswerBtn:focus, #cultureQuestSkipRegBtn:focus {
+    border: 1px solid grey;
+  }
+
+  #cultureQuestResponseBtn:active, #cultureQuestSkipAnswerBtn:active, #cultureQuestSkipRegBtn:active {
+    border: 1px solid grey;
+  }
 }
 
 .culture-quest-quiz-view-fade-out {
