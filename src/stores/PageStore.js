@@ -468,6 +468,13 @@ var PageStore = assign({}, EventEmitter.prototype, {
         return false;
     },
 
+    isUnitComplete: function() {
+        if (_currentUnit && _currentUnit.state && (_currentUnit.state.complete === true)) {
+            return true;
+        }
+        return false;
+    },
+
     isQuizPage: function() {
         if (_currentPage && _currentPage.state && _currentPage.state.quizpage) {
             return true;
