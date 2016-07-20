@@ -452,6 +452,13 @@ var PageStore = assign({}, EventEmitter.prototype, {
         return _loaded;
     },
 
+    isChapterComplete: function() {
+        if (_currentChapter && _currentChapter.state && (_currentChapter.state.complete === true)) {
+            return true;
+        }
+        return false;
+    },
+
     isQuizPage: function() {
         if (_currentPage && _currentPage.state && _currentPage.state.quizpage) {
             return true;
