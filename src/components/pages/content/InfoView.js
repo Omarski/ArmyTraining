@@ -12,7 +12,7 @@ var Utils = require('../../widgets/Utils');
 
 var SettingsActions = require('../../../actions/SettingsActions');
 
-
+var _hasNotes = false;
 function getPageState(props) {
     var noteItems = "";
     var mediaItems = "";
@@ -255,6 +255,7 @@ var InfoView = React.createClass({
         var content = "";
         var transcriptContainer = "";
 
+
         if (this.state.transcript) {
             transcriptContainer = (
                 <ClosedCaptionPanel transcript={this.state.transcript} />
@@ -280,13 +281,21 @@ var InfoView = React.createClass({
             );
         }
 
+        console.log(pageNotes)
+        if ((state.page.note && state.page.note.length) || pageNotes !== "") {
+            _hasNotes = true;
+        } else {
+            _hasNotes = false;
+        }
+
         var mediaContainer = "";
+        var cols = "col-md-6 col-sm-6";
+        if (!_hasNotes) {
+            cols = "col-md-12 col-sm-12";
+        }
         if (media) {
-
-
-
             mediaContainer = (
-                <div className="infoMediaContainer col-md-6 col-sm-6">
+                <div className={"infoMediaContainer " + cols}>
                     {media}
                 </div>
                 );
@@ -347,8 +356,18 @@ var InfoView = React.createClass({
 
     _onClosedCaptionChange: function () {
         if (ClosedCaptionStore.visible()) {
+            if (!_hasNotes) {
+                $('.infoMediaContainer').addClass('col-md-6');
+                $('.infoMediaContainer').addClass('col-sm-6');
+            }
+
             $('.info-page-notes').hide();
         } else {
+            if (!_hasNotes) {
+                $('.infoMediaContainer').removeClass('col-md-6');
+                $('.infoMediaContainer').removeClass('col-sm-6');
+            }
+
             $('.info-page-notes').show();
         }
     }
