@@ -16,9 +16,9 @@ var CultureQuestQuiz = React.createClass({
         return {
             mediaPath:'data/media/',
             timerController:"play",
-            timerDuration:59,
+            timerDuration:60,
             timerEndMessage:null,
-            timerReportAt:{time:30, alert:"hintTime"},
+            timerReportAt:{time:29, alert:"hintTime"},
             timerParentAlerts:null,
             questionDisplayObj:{},
             correctAnswer:"",
@@ -139,9 +139,10 @@ var CultureQuestQuiz = React.createClass({
         $("[id^='culture-quest-quiz-view-inputBlock']").find("*").addBack().off();
 
         //box click:
-        $("[id^='culture-quest-quiz-view-inputBlock']").click(function(){
-            console.log("Click....");
+        $("#culture-quest-quiz-view-quizBody").click(function(){
+            if (self.state.showInputBlocks) $("#culture-quest-quiz-view-inputBlock0").focus();
         });
+
         //backspace
         $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
             if(e.keyCode === 8){
@@ -155,7 +156,6 @@ var CultureQuestQuiz = React.createClass({
             self.state.atInputBlock = $(this).attr('id').substring(34);
             if ($(this).val().length === 1) {
                 if (parseInt(self.state.atInputBlock) < parseInt(self.state.inputBlocksTotal)) {
-                    //self.setState({atInputBlock:self.state.atInputBlock + 1});
                     self.state.atInputBlock++;
                     $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
                 }
@@ -197,8 +197,6 @@ var CultureQuestQuiz = React.createClass({
     checkAnswer: function(){
 
         var self = this;
-        var mediaPath = self.state.mediaPath;
-        var keepTryingAudio = mediaPath + self.props.imageData.keepTryingAudio;
         var completeAnswer = "";
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
 
@@ -319,7 +317,7 @@ var CultureQuestQuiz = React.createClass({
 
         return (
             <div>
-            <div className="culture-quest-quiz-view-regionBanner">{self.getSelectedJSON()["name"]}</div>div>
+            <div className="culture-quest-quiz-view-regionBanner">{self.getSelectedJSON()["name"]}</div>
             <div className={"culture-quest-quiz-view-quizPop "+quizPopClasses}>
                     {!self.state.puzzleAwardMode ?
                         <div className="culture-quest-quiz-view-timer" id="culture-quest-quiz-view-timer">
@@ -333,6 +331,8 @@ var CultureQuestQuiz = React.createClass({
                                 endMessage              = {self.state.timerEndMessage}
                                 reportAt                = {self.state.timerReportAt}
                                 timerStatusReporter     = {self.timerStatusListener}
+                                timerLabelAfter         = {" seconds"}
+                                secondsOnly             = {true}
                             />
                     </div>:null}
                     <div className="culture-quest-quiz-view-quizCont" id="culture-quest-quiz-view-quizCont">
@@ -360,9 +360,9 @@ var CultureQuestQuiz = React.createClass({
                     </div>
 
                     {!self.state.puzzleAwardMode ? <div>
-                    <div type="button" onClick={self.checkAnswer} style={btnRespondStyle} className={btnRespondClasses}>Respond</div>
-                    <div type="button" onClick={self.onSkipAnswer} style={btnSkipStyle} className={btnSkipClasses}>Skip question</div>
-                    <div type="button" onClick={self.onSkipRegion} style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</div>
+                    <button type="button" onClick={self.checkAnswer}  id="cultureQuestResponseBtn" style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
+                    <button type="button" onClick={self.onSkipAnswer} id="cultureQuestSkipAnswerBtn" style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
+                    <button type="button" onClick={self.onSkipRegion} id="cultureQuestSkipRegBtn" style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</button>
                     </div>:null}
                 </div>
                 </div>

@@ -62,9 +62,8 @@ var CultureQuestView = React.createClass({
             self.prepIntroPopup();
             self.markHomeRegion();
         });
-
-        this.bgAudio();
     },
+
     componentDidMount: function() {
         AppStateStore.addChangeListener(this._onAppStateChange);
     },
@@ -91,7 +90,7 @@ var CultureQuestView = React.createClass({
                         </div>
                         <div className="popup-view-buttonCont">
                             <button type="button" className="btn btn-default"
-                                    onClick={self.onClosePopup}>Start</button>
+                                    onClick={self.onStartGame}>Start</button>
                         </div>
                     </div>
                 )
@@ -102,6 +101,11 @@ var CultureQuestView = React.createClass({
         
         var debriefAudio = self.state.mediaPath + self.state.imageData.briefAudio;
         self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
+    },
+
+    onStartGame: function(){
+        this.onClosePopup();
+        this.bgAudio();
     },
     
     prepGoBackPopup: function(){
