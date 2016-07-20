@@ -158,6 +158,7 @@ var PrePostTestActions = {
 
     markTestOutUnitsComplete: function(unitIdArray) {
         var length = unitIdArray.length;
+        console.log("PrePostTestActions:  markTestOutUnitsComplete");
         while(length--) {
 
             var unitId = unitIdArray[length];

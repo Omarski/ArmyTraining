@@ -4,6 +4,7 @@ var PageStore = require('../../../../stores/PageStore');
 var PageHeader = require('../../../widgets/PageHeader');
 var SettingsStore = require('../../../../stores/SettingsStore');
 var ImageCaption = require('../../../widgets/ImageCaption');
+var Utils = require('../../../widgets/Utils');
 
 function getPageState(props) {
     var data = {
@@ -106,7 +107,7 @@ var MultiNoteView = React.createClass({
         var title = self.state.title;
         var sourceInfo = "";
         var infoPages = self.state.related;
-
+        
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
             var sources = "";
@@ -115,24 +116,7 @@ var MultiNoteView = React.createClass({
                 var notes = item.note;
                 if(notes && notes.length){
                     text = notes.map(function(item, index) {
-                        var hasBullet = (item.text.indexOf('-') === 0);
-
-                        var str = item.text;
-                        if (hasBullet) {
-                            var arr = str.split('- ');
-                            var len = arr.length;
-                            var result = "";
-                            for ( var i = 1; i < len; i++) {
-                                if(i !== 1){
-                                    result += '<p><span class="info-view-bullet-item"></span>' + arr[i] + '</p>';
-                                }else{
-                                    result += '<p>' + arr[i] + '</p>';
-                                }
-                            }
-                            str = result;
-
-
-                        }
+                        var str = Utils.parseBulletsWithBreak(item.text);
 
                         function createNote() {
                             return {__html: str};
