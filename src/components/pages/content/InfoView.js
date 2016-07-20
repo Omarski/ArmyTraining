@@ -283,11 +283,7 @@ var InfoView = React.createClass({
         var mediaContainer = "";
         if (media) {
 
-            if (AppStateStore.isMobile()) {
-                if(self.props.page.media[0].type === "video"){
-                    return (<UnsupportedScreenSizeView/>);
-                }
-            }
+
 
             mediaContainer = (
                 <div className="infoMediaContainer col-md-6 col-sm-6">
@@ -327,7 +323,7 @@ var InfoView = React.createClass({
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="info-container container-fluid">
+                    <div className="info-container container">
                         {content}
                     </div>
                 </div>
