@@ -29,7 +29,7 @@ var UnitActions = {
      * @param unitId
      * @param chapterId
      */
-    markUnitChapterComplete: function(unitId, chapterId) {
+    markChapterComplete: function(unitId, chapterId) {
         AppDispatcher.dispatch({
             actionType: UnitConstants.UNIT_CHAPTER_COMPLETE,
             id: unitId,
