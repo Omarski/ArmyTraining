@@ -115,26 +115,24 @@ function getPageState(props) {
                     if(item.file.split(".")[1] === "mp4") {
                         var cc = "";
                         if (data.transcript !== "") {
-                            cc = (
-                                <div>
-                                    <ClosedCaption transcript={data.transcript}/>
-                                </div>
-                            );
+                            cc = (<ClosedCaption transcript={data.transcript}/>);
                         }
 
-                        result = <div className={data.videoType} key={index + filePath}>
-                            <video title={props.page.title}
-                                   alt={props.page.title}
-                                   aria-label={props.page.title}
-                                   className="info-video-player"
-                                   id="video" controls
-                                   autoPlay={SettingsStore.autoPlaySound()}
-                                   volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
-                                <source src={filePath} type="video/mp4"></source>
-                            </video>
-                            {data.caption}
-                            {cc}
-                        </div>
+                        result = (
+                            <div className={data.videoType + " info-view-video-container"} key={index + filePath}>
+                                <video title={props.page.title}
+                                       alt={props.page.title}
+                                       aria-label={props.page.title}
+                                       className="info-video-player"
+                                       id="video" controls
+                                       autoPlay={SettingsStore.autoPlaySound()}
+                                       volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                                    <source src={filePath} type="video/mp4"></source>
+                                </video>
+                                {data.caption}
+                                {cc}
+                            </div>
+                        )
                     }
                 }
 
