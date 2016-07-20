@@ -1,4 +1,6 @@
 var React = require('react');
+var SettingsStore = require('../../stores/SettingsStore');
+
 var PropTypes  = React.PropTypes;
 
 var AudioPlayer = React.createClass({
@@ -53,7 +55,7 @@ var AudioPlayer = React.createClass({
         var loop = this.props.loop? true:false;
         var controls = this.props.controls? true:false;
         return (
-            <audio id={this.props.id} preload="auto" autoPlay={autoPlay} loop={loop} controls = {controls}>
+            <audio id={this.props.id} preload="auto" autoPlay={autoPlay} loop={loop} controls = {controls} volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                 {this.renderAudioSources()}
             </audio>
         )

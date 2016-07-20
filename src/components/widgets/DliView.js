@@ -76,7 +76,7 @@ var DliView = React.createClass({
                 <Button title={LocalizationStore.labelFor("header", "tooltipDLI")}
                         alt={LocalizationStore.labelFor("header", "tooltipDLI")}
                         aria-label={LocalizationStore.labelFor("header", "tooltipDLI")}
-                        className="btn btn-default btn-lg btn-link main-nav-bar-button">
+                        className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set">
                     {dliIcon}
                 </Button>
             </OverlayTrigger>

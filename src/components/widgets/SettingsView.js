@@ -171,7 +171,7 @@ var SettingsView = React.createClass({
                         <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                             <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
                                     alt={LocalizationStore.labelFor("header", "tooltipSettings")}
-                                    aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
+                                    aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button btn-set">
                                 <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
                             </Button>
                         </OverlayTrigger>

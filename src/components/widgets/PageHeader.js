@@ -100,7 +100,10 @@ var PageHeader = React.createClass({
         var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
             <ListGroup key="bookmarkbreadcrumbsbutton">
                 <Button
+                    title={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
+                    alt={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     type="button"
+                    aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     className="btn btn-default btn-block btn-action"
                     onClick={this.bookmark}
                 >
@@ -116,10 +119,10 @@ var PageHeader = React.createClass({
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
                     id="bookmarkButton"
-                    title={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
-                    alt={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
+                    title={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
+                    alt={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     type="button"
-                    aria-label={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
+                    aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     className={("btn btn-default btn-link main-nav-audio-control ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
                     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
@@ -145,8 +148,6 @@ var PageHeader = React.createClass({
                     <li><AudioControl /></li>
                     <li>{bookmarkBtn}</li>
                 </ul>
-
-
             </div>
         </div>;
     }

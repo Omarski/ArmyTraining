@@ -116,7 +116,7 @@ function getPageState(props) {
                             <video title={props.page.title}
                                    alt={props.page.title}
                                    aria-label={props.page.title}
-                                   className="hand-me"
+                                   className="info-video-player"
                                    id="video" controls
                                    autoPlay={SettingsStore.autoPlaySound()}
                                    volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
@@ -128,7 +128,7 @@ function getPageState(props) {
                 }
 
                 if (item.type === "image") {
-                    var altText = "";
+                    var altText = ""; // TODO: add check for mediatitle and mediaalttext
                     if(item.info && item.info.property){
                         item.info.property.map(function(item){
                             if(item.name === "mediadisplayblurb"){

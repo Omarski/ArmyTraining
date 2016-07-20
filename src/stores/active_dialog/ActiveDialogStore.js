@@ -19,6 +19,7 @@ var _briefings = "";
 var _courseOfActions = [];
 var _currentAction = null;
 var _currentBlocking = null;
+var _currentBlockingId = "0000";
 var _currentSpeakerName = null;
 var _currentDialogHistory = null;
 var _objectives;
@@ -70,6 +71,7 @@ function changeBlocking(blockingAction) {
     // look up blocking by id
     if (_info.blockings && _info.blockings.hasOwnProperty(blockingId)) {
         _currentBlocking = _info.blockings[blockingId];
+        _currentBlockingId = blockingId;
     }
 }
 
@@ -242,7 +244,6 @@ function addOutputMappingActionByAct(actName) {
 }
 
 function handleTransitionInput(trans) {
-
     // update current state
     activityState = trans.endState;
 
@@ -270,7 +271,6 @@ function handleTransitionInput(trans) {
 }
 
 function handleRetInput(retId, retInputId) {
-
     var outputQ = DATA.retq[retId].inputq[retInputId].outputq;
     var filteredOutputQ = outputQ.filter(checkVRQ);
 
@@ -282,6 +282,10 @@ function handleRetInput(retId, retInputId) {
         // update effects
         output.effects.forEach(applyEffect);
 
+        // update current state if specified
+        if (output.endState != null && (output.endState.length > 0)) {
+            activityState = output.endState;
+        }
     });
 }
 
@@ -462,6 +466,7 @@ function resetDialog() {
     _courseOfActions = [];
     _currentAction = null;
     _currentBlocking = null;
+    _currentBlockingId = "0000";
     _currentSpeakerName = null;
     _currentDialogHistory = null;
     _objectives = null;
@@ -560,7 +565,7 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
                                     name: assetName,
                                     assetData: _info.assets[assetName]
                                 }],
-                                blockingId: blockId
+                                blockingId: _currentBlockingId
                             });
                         }
                         break;
@@ -579,7 +584,7 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
                         blockingAssets.push({
                             name: index,
                             assets: assetArray,
-                            blockingId: blockId
+                            blockingId: _currentBlockingId
                         });
                         break;
                     default:

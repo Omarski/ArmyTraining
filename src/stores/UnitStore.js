@@ -228,6 +228,37 @@ var UnitStore = assign({}, EventEmitter.prototype, {
         return chapterIds;
     },
 
+    getUnitById: function(id) {
+        var unit = null;
+        if (_units) {
+            for (var key in _units) {
+                var u = _units[key];
+                if (u.data && u.data.xid === id) {
+                    unit = u;
+                    console.log(u)
+                    break;
+                }
+            }
+        }
+        return unit;
+    },
+
+    getChapterById: function(id, chapterId) {
+        var chapter = null;
+        var unit = this.getUnitById(id);
+        if (unit && unit.data.chapter) {
+            var chapters = unit.data.chapter;
+            for (var chapterIndex in chapters) {
+                if (chapters[chapterIndex].xid === chapterId) {
+                    chapter = chapters[chapterIndex];
+                    break;
+                }
+
+            }
+        }
+        return chapter;
+    },
+
     /**
      * Checks if the state property required is true
      * @param id
