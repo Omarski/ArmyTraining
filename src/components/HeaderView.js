@@ -152,6 +152,16 @@ var HeaderView = React.createClass({
 
     },
     showReferenceView: function(){
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
+        if (source) {
+            source.src = "data/media/ToolbarIcon01.mp3";
+        }
+        if(audio && source) {
+            audio.load();
+            audio.play();
+            audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        }
         setTimeout(function () {
             ReferenceActions.show(true);
         });
@@ -200,7 +210,7 @@ var HeaderView = React.createClass({
                                 <button title={LocalizationStore.labelFor("header", "tooltipHelp")}
                                     alt={LocalizationStore.labelFor("header", "tooltipHelp")}
                                     type="button"
-                                    className="btn btn-default btn-lg btn-link main-nav-bar-button"
+                                    className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
                                     aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
                                     <span className="glyphicon glyphicon-question-sign main-nav-bar-help-icon" aria-hidden="true"></span>
                                 </button>
@@ -211,7 +221,7 @@ var HeaderView = React.createClass({
                                 <button title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
                                         alt={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
                                         type="button"
-                                        className="btn btn-default btn-lg btn-link main-nav-bar-button"
+                                        className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
                                         aria-label={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}>
                                     {muteIcon}
                                 </button>

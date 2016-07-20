@@ -147,6 +147,22 @@ var ListeningComprehensionView = React.createClass({
 
                     // submit answer to page
                     PageActions.answer(answerObj);
+                }else{
+                    /* trigger audio */
+                    var audio = document.getElementById('mainViewAudio');
+                    var source = document.getElementById('mainViewMp3Source');
+                    if (source) {
+                        if(isCorrect){
+                            source.src = "data/media/Correct.mp3";
+                        }else{
+                            source.src = "data/media/Incorrect.mp3";
+                        }
+                    }
+                    if(audio && source) {
+                        audio.load();
+                        audio.play();
+                        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+                    }
                 }
 
                 self.setState({
@@ -172,16 +188,23 @@ var ListeningComprehensionView = React.createClass({
         }
 
         if(zid && zid !== 0){
-            self.setState({
-                isListening: true
-            });
-            playAudio(zid);
-            $("#audio").bind('ended', function(){
+            if(self.state.isListening){
                 self.setState({
-                    haveListened: true,
                     isListening: false
                 });
-            });
+                playAudio(zid);
+            }else{
+                self.setState({
+                    isListening: true
+                });
+                playAudio(zid);
+                $("#audio").bind('ended', function(){
+                    self.setState({
+                        haveListened: true,
+                        isListening: false
+                    });
+                });
+            }
         }
     },
 
