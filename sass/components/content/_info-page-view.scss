@@ -68,6 +68,7 @@
   }
 
   .infoNoteContainer {
+    position: relative;
     width: 95%;
     ul {
       padding-left: 0px;
@@ -81,6 +82,7 @@
   margin: 0 auto;
   margin-top: 20px;
   text-align: left;
+  position: relative;
   p {
     font-size: 18px;
     font-weight: 300;
@@ -104,9 +106,11 @@
     max-height: 350px;
   }
 }
-
+.info-video-player {
+  margin-top: 10px;
+}
 .info-video-player::-webkit-media-controls-play-button, .info-video-player::-webkit-media-controls-volume-slider,
 .info-video-player::-webkit-media-controls-mute-button, .info-video-player::-webkit-media-controls-timeline,
-.info-video-player::-webkit-media-controls-fullscreen-button,{
+.info-video-player::-webkit-media-controls-fullscreen-button {
   cursor: pointer;
 }
