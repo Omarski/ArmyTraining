@@ -2,6 +2,8 @@ var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageHeader = require('../../widgets/PageHeader');
 var PageStore = require('../../../stores/PageStore');
 var React = require('react');
+var SCORMActions = require('../../../actions/SCORMActions');
+var UnitStore = require('../../../stores/UnitStore');
 
 
 function getPageState(props) {
@@ -25,14 +27,12 @@ function getPageState(props) {
     if (!PageStore.isChapterComplete()) {
         data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblSectionFailed");
     }
-    // course complete TODO
-    else if (false) {
+    else if (UnitStore.areAllRequiredComplete()) {
         data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblCourseComplete");
         data.pageFeedbackHeader = LocalizationStore.labelFor("sectionEnd", "lblCongratulations");
         data.pageFeedbackImage = LocalizationStore.labelFor("sectionEnd", "imageComplete");
     }
-    // lesson complete TODO
-    else if (false) {
+    else if (PageStore.isUnitComplete()) {
         data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblLessonComplete");
         data.pageFeedbackHeader = LocalizationStore.labelFor("sectionEnd", "lblCongratulations");
         data.pageFeedbackImage = LocalizationStore.labelFor("sectionEnd", "imageComplete");
@@ -50,6 +50,11 @@ var SectionEndView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
         return pageState;
+
+        // send course completion HACK
+        if (UnitStore.areAllRequiredComplete()) {
+            SCORMActions.complete();
+        }
     },
 
     componentWillMount: function() {
