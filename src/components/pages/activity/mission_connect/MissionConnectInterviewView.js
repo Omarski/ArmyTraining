@@ -15,7 +15,8 @@ var MissionConnectInterviewView = React.createClass({
             quizTempl:null,
             feedbackTempl:null,
             questionTemplColl:[],
-            popState: "scenario"
+            popState: "scenario",
+            answered: false
         };
     },
 
@@ -49,8 +50,7 @@ var MissionConnectInterviewView = React.createClass({
 
     onSubmit: function(){
 
-        var correct = $('input[name="missionConnectQuizRadio"]:checked').val();
-        if (correct){
+            var correct = $('input[name="missionConnectQuizRadio"]:checked').val();
             var self = this;
             var scoreObj = self.props.scoreObjColl[self.props.activeNode - 1];
             var choiceNum = parseInt($('input[name="missionConnectQuizRadio"]:checked').attr('id'));
@@ -104,8 +104,6 @@ var MissionConnectInterviewView = React.createClass({
             }
 
             self.props.viewUpdate({task:"updateStats", value:localStats});
-        }
-
     },
 
     onClosePop: function(){
@@ -149,11 +147,12 @@ var MissionConnectInterviewView = React.createClass({
                 questionObj["feedback"].push(answer.feedback);
 
                 return(<div key={index}>
-                    <input type="radio" name={"missionConnectQuizRadio"} //+self.props.activeNode
+                    <input type="radio" name={"missionConnectQuizRadio"}
                            style={{float:"left"}}
                            value={answer.correct}
                            id={index}
                            className="mission-connect-view-popIntRadio"
+                           onClick={self.markAnswered}
                            /><div style={{float:"left", width:"92%"}}>{answer.choice}</div>
                     </div>
                 )
@@ -188,7 +187,8 @@ var MissionConnectInterviewView = React.createClass({
         var quizTempl = function() {
 
             var questionObj = questionTemplColl[self.props.scoreObjColl[self.props.activeNode - 1].attempts];
-
+            var submitStyle = self.state.answered ? "auto":"none";
+            //var correct = $('input[name="missionConnectQuizRadio"]:checked').val();
             return(
                 <div className = "mission-connect-view-popCont">
                     <div className = "mission-connect-view-popIntImgCont">
@@ -205,7 +205,9 @@ var MissionConnectInterviewView = React.createClass({
                     <div className = "mission-connect-view-popIntBtnGrpCont">
                         <div className = "mission-connect-view-popIntBtnCont">
                             <div type="button" className="btn btn-default"
-                                    onClick={self.onSubmit}>Submit</div>
+                                 id="missionConnectSubmitBtn"
+                                 style = {{pointerEvents: submitStyle}}
+                                 onClick={self.onSubmit}>Submit</div>
                         </div>
                     </div>
                 </div>
@@ -213,6 +215,11 @@ var MissionConnectInterviewView = React.createClass({
         };
 
         self.setState({scenarioTempl:scenarioTempl(), quizTempl:quizTempl(), questionTemplColl:questionTemplColl});
+    },
+
+    markAnswered: function(){
+        this.setState({answered:true});
+        $("#missionConnectSubmitBtn").css("pointer-events","auto");
     },
 
     renderFeedback: function(){

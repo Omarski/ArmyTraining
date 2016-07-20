@@ -25,7 +25,7 @@ function getPageState(props) {
         currentLevel:1,
         levelsColl:[],
         levelStats:{basic:[], advanced:[]},
-        advancedLevel:false
+        advancedLevel:true
     };
     
     if (props && props.page) {
@@ -120,6 +120,7 @@ var ObjexView = React.createClass({
 
     onObjexReady: function(){
         this.prepIntroPopup();
+        this.bgAudio();
     },
 
     prepLevels: function(){
@@ -353,7 +354,6 @@ var ObjexView = React.createClass({
         this.setState({popupObj:null, currentLevel:level}, function(){
             self.prepObjex();
             self.viewUpdate({task:"successAudio", value:null});
-            self.bgAudio();
             setTimeout(function(){
                 self.setState({showGame:true});
             },100);
@@ -493,7 +493,7 @@ var ObjexView = React.createClass({
                             controller = {self.state.audioController}
                         /> : null}
 
-                    {self.state.showGame ?
+                    {self.state.audioBgObj ?
                         <AudioPlayer
                             id = {self.state.audioBgObj.id}
                             sources    = {self.state.audioBgObj.sources}
