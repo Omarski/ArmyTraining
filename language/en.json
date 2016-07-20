@@ -3,12 +3,10 @@
     "imageSplash": "data/media/AfpakSplash07d3.jpg",
     "rightToLeft": false
   },
-  "breadcrumbs": {
-    "tooltipBookmark": "Bookmarks"
-  },
   "bookmarks": {
+    "tooltipBookmark": "Bookmarks",
     "lblTitle": "Bookmarks",
-    "lblLimitWarning": "Only 5 bookmarks allowed, please delete unused bookmarks to add this one.",
+    "lblLimitWarning": "Only five bookmarks allowed, please delete unused bookmarks to add this one.",
     "btnBookmark": "Bookmark Current Page",
     "lblExistsWarning": "Bookmark already exists for this page."
   },
