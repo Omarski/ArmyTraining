@@ -145,7 +145,7 @@ function destroyCompleted() {
  * @param unitId
  * @param chapterId
  */
-function markUnitChapterComplete(unitId, chapterId) {
+function markChapterComplete(unitId, chapterId) {
     // find unit by id
     var unit = _units[unitId];
     if (unit && unit.data && unit.data.chapter) {
@@ -296,7 +296,7 @@ AppDispatcher.register(function(action) {
 
     switch(action.actionType) {
         case UnitConstants.UNIT_CHAPTER_COMPLETE:
-            markUnitChapterComplete(action.id, action.chapterId);
+            markChapterComplete(action.id, action.chapterId);
             break;
 
         case UnitConstants.UNIT_CREATE:
