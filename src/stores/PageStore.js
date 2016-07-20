@@ -8,6 +8,7 @@ var PersistenceActions = require('../actions/PersistenceActions');
 var PersistenceStore = require('../stores/PersistenceStore');
 var PrePostTestStore = require('../stores/PrePostTestStore');
 var NotificationActions = require('../actions/NotificationActions');
+var UnitActions = require('../actions/UnitActions');
 var UnitStore = require('../stores/UnitStore');
 var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
@@ -332,6 +333,14 @@ function markChapterComplete() {
 
         // mark it as complete
         _currentChapter.state = assign({}, state, {complete: true});
+
+        // check if the unit is complete
+        setTimeout(function() {
+            if (_currentUnit && _currentUnit.id) {
+                UnitActions.evaluateUnitComplete(_currentUnit.id);
+            }
+        }, 0.1);
+
     }
 }
 
