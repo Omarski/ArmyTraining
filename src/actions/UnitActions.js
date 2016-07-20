@@ -14,6 +14,17 @@ var UnitActions = {
     },
 
     /**
+     * Checks for unit complete by checking its chapters
+     * @param unitId
+     */
+    evaluateUnitComplete: function(unitId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_EVALUATE_COMPLETE,
+            data: unitId
+        });
+    },
+
+    /**
      * Mark unit with given id as complete
      * @param unitId
      */

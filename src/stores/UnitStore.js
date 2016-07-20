@@ -141,6 +141,31 @@ function destroyCompleted() {
 }
 
 /**
+ * Checks all the units chapters to see if it is complete
+ * @param unitId
+ */
+function evaluateUnitComplete(unitId) {
+    // find unit by id
+    var unit = _units[unitId];
+
+    // iterate over chapters
+    if (unit && unit.data && unit.data.chapter) {
+        var chapterLength = unit.data.chapter.length;
+        while (chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+
+            // exit if even one is not complete
+            if (!(chapter.state && chapter.state.complete === true)) {
+                return;
+            }
+        }
+
+        // mark unit complete
+        update(unitId, {complete: true});
+    }
+}
+
+/**
  * Marks a units chapter as complete
  * @param unitId
  * @param chapterId
@@ -305,6 +330,11 @@ AppDispatcher.register(function(action) {
                 create(action.data);
                 UnitStore.emitChange();
             }
+            break;
+
+        case UnitConstants.UNIT_EVALUATE_COMPLETE:
+            evaluateUnitComplete(action.data);
+            // emit change?
             break;
 
         case UnitConstants.UNIT_MARK_REQUIRED:
