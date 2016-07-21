@@ -10,9 +10,6 @@
   z-index: 9999;
 }
 
-#lessonsIndexBtnIcon {
-}
-
 .footer-nav {
   height: 100%;
 }
@@ -208,7 +205,7 @@
 }
 
 .btn-text-icon {
-  display: inline-flex;
+  display: -webkit-inline-flex;
 }
 
 .btn-text-icon .btn-icon {
