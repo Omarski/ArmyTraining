@@ -46,7 +46,6 @@ input[type=checkbox] {
 }
 
 .list-group-item, .multiple-choice-list-group-item {
-  padding-left: 30px;
   .checkbox {
     margin: 0px;
     label {
@@ -60,7 +59,10 @@ input[type=checkbox] {
 }
 
 .multiple-choice-list-group-item .radio label {
+  padding-left: 30px !important;
+}
 
+.multiple-choice-list-group-item .checkbox label {
   padding-left: 30px !important;
 }
 
