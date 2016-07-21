@@ -10,6 +10,9 @@
     "btnBookmark": "Bookmark Current Page",
     "lblExistsWarning": "Bookmark already exists for this page."
   },
+  "briefing": {
+    "image": "data/media/briefing.jpg"
+  },
   "closedCaption": {
     "lblTitle": "Transcript"
   },

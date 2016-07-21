@@ -48,6 +48,9 @@ function playAudio(xid){
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
+    //audio.pause();
+    //audio.currentTime = 0;
+    //source.src = "";
     source.src = "data/media/" + xid;
     audio.load();
     audio.play();
