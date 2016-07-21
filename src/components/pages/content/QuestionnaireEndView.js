@@ -145,7 +145,7 @@ var QuestionnaireEndView = React.createClass({
                 }
 
                 return (
-                    <ListGroupItem key={index}>{item.title}</ListGroupItem>
+                    <li key={index}>{item.title}</li>
                 )
             });
         }
@@ -154,24 +154,31 @@ var QuestionnaireEndView = React.createClass({
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={state.page.xid}/>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12 col-md-12">
-                            <div className="quiz-feedback">
+
+                <div className="panel panel-default questionnaire-container">
+                    <div className="panel-heading">
+                        <h3 className="panel-title">Summary</h3>
+                    </div>
+                    <div className="panel-body">
+                        <div className="row">
+                            <h4>
                                 {state.lblConfirm}
-                            </div>
-
-                            <ListGroup>
+                            </h4>
+                        </div>
+                        <div className="row">
+                            <ul className="questionnaire-results-container">
                                 {playlistGroupItems}
-                            </ListGroup>
-
-                            <div>
-                                <button bsStyle="primary" onClick={self.reset}>{state.btnRestart}</button>
-                                <button bsStyle="primary" className={"btn-cnf"} onClick={self.confirm}>{state.btnConfirm}</button>
+                            </ul>
+                            <h4 className="questionnaire-time-lbl">{state.lblTime}</h4>
+                        </div>
+                    </div>
+                    <div className="panel-footer">
+                        <div className="row">
+                            <div className="col-md-6 col-sm-6 questionnaire-end-btn-col">
+                                <button className="btn btn-default btn-action" onClick={self.reset}>{state.btnRestart}</button>
                             </div>
-
-                            <div>
-                                {state.lblTime}
+                            <div className="col-md-6 col-sm-6 questionnaire-end-btn-col">
+                                <button className="btn btn-default btn-action" onClick={self.confirm}>{state.btnConfirm}</button>
                             </div>
                         </div>
                     </div>
