@@ -51,6 +51,9 @@
 
 .image-caption-container {
   margin-top: 25px;
+  border-style: solid;
+  border-color: $caption-bg-color;
+  border-width: 1px;
   img: {
     width: 100%;
 
