@@ -158,7 +158,6 @@ var PrePostTestActions = {
 
     markTestOutUnitsComplete: function(unitIdArray) {
         var length = unitIdArray.length;
-        console.log("PrePostTestActions:  markTestOutUnitsComplete");
         while(length--) {
 
             var unitId = unitIdArray[length];
@@ -170,14 +169,13 @@ var PrePostTestActions = {
             // mark chapters as complete
             while(chapterLength--) {
                 var chapterId = chaptersArray[chapterLength];
-                UnitActions.markUnitChapterComplete(unitId, chapterId)
+                UnitActions.markChapterComplete(unitId, chapterId);
             }
 
             // mark unit as complete
             UnitActions.markUnitComplete(unitId);
         }
     }
-
 };
 
 module.exports = PrePostTestActions;

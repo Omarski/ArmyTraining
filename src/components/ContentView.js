@@ -38,6 +38,7 @@ var CultureQuestView = require('../components/pages/activity/cultureQuest/Cultur
 var PuzzleMapView = require('../components/pages/activity/puzzle_map/PuzzleMapView');
 var MissionConnectView = require('../components/pages/activity/mission_connect/MissionsConnectView');
 var ObjexView = require('../components/pages/activity/objex/ObjexView');
+var ClosedCaptionActions = require('../actions/ClosedCaptionActions');
 
 function getPageState() {
     var page = null;
@@ -84,6 +85,10 @@ var ContentView = React.createClass({
         self.previous();
     },
     render: function() {
+        setTimeout(function() {
+            ClosedCaptionActions.hide();
+        });
+
         var self = this;
         var page = <div></div>;
         var pageId = (this.state.page) ? this.state.page.xid : "";

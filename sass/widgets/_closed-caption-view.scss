@@ -1,0 +1,35 @@
+.closed-caption-button {
+  position: absolute;
+  top: 13px;
+  right: 7px;
+  padding: 0;
+}
+
+.closed-caption-panel {
+  background-color: $info-panel-bg-color;
+  color: $info-panel-font-color;
+  &.panel-default>.panel-heading {
+    background-color: $info-panel-bg-color;
+    color: $info-panel-font-color;
+  }
+}
+
+.closed-caption-close-button {
+  position: absolute;
+  padding: 3px;
+  top: 5px;
+  right: 20px;
+  color: $info-panel-font-color;
+  border-color: $info-panel-bg-color;
+  background-color: $info-panel-bg-color;
+}
+
+.closed-caption-close-button:hover {
+  color: $info-panel-font-color;
+  background-color: $info-panel-bg-color;
+}
+
+.closed-caption-close-button:focus {
+  color: $info-panel-font-color;
+  background-color: $info-panel-bg-color;
+}

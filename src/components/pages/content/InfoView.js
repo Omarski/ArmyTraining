@@ -3,14 +3,16 @@ var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
 var ClosedCaption = require('../../widgets/ClosedCaption');
+var ClosedCaptionPanel = require('../../widgets/ClosedCaptionPanel');
 var ImageCaption = require('../../widgets/ImageCaption');
 var AppStateStore = require('../../../stores/AppStateStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
+var ClosedCaptionStore = require('../../../stores/ClosedCaptionStore');
 var Utils = require('../../widgets/Utils');
 
 var SettingsActions = require('../../../actions/SettingsActions');
 
-
+var _hasNotes = false;
 function getPageState(props) {
     var noteItems = "";
     var mediaItems = "";
@@ -66,7 +68,6 @@ function getPageState(props) {
 
 
         if (props.page.note) {
-
             var notes = props.page.note;
 
             if(notes && notes.length > 1){
@@ -112,18 +113,26 @@ function getPageState(props) {
 
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
-                        result = <div className={data.videoType} key={index + filePath}>
-                            <video title={props.page.title}
-                                   alt={props.page.title}
-                                   aria-label={props.page.title}
-                                   className="info-video-player"
-                                   id="video" controls
-                                   autoPlay={SettingsStore.autoPlaySound()}
-                                   volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
-                                <source src={filePath} type="video/mp4"></source>
-                            </video>
-                            {data.caption}
-                        </div>
+                        var cc = "";
+                        if (data.transcript !== "") {
+                            cc = (<ClosedCaption transcript={data.transcript}/>);
+                        }
+
+                        result = (
+                            <div className={data.videoType + " info-view-video-container"} key={index + filePath}>
+                                <video title={props.page.title}
+                                       alt={props.page.title}
+                                       aria-label={props.page.title}
+                                       className="info-video-player"
+                                       id="video" controls
+                                       autoPlay={SettingsStore.autoPlaySound()}
+                                       volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                                    <source src={filePath} type="video/mp4"></source>
+                                </video>
+                                {data.caption}
+                                {cc}
+                            </div>
+                        )
                     }
                 }
 
@@ -184,10 +193,13 @@ var InfoView = React.createClass({
         var pageState = getPageState(this.props);
         return pageState;
     },
+
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
         SettingsStore.addChangeListener(this._onChange);
+        ClosedCaptionStore.addChangeListener(this._onClosedCaptionChange);
     },
+
     componentDidMount: function() {
         //play audio recording for info page
         var self = this;
@@ -218,25 +230,18 @@ var InfoView = React.createClass({
         vol = video.volume;
 
         //this is a bad fix, do not do this
-        // settings['voiceVolume'] = vol;
-        // store.set('settings', settings);
+       // settings['voiceVolume'] = vol;
+       // store.set('settings', settings);
         // ...
 
         SettingsActions.updateVoiceVolume(vol);
-    },
-
-    componentWillUpdate: function(){
-
-    },
-
-    componentDidUpdate: function(){
-
     },
 
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
         SettingsStore.removeChangeListener(this._onChange);
         AppStateStore.removeChangeListener(this._onAppStateChange);
+        ClosedCaptionStore.removeChangeListener(this._onClosedCaptionChange);
     },
     render: function() {
         var self = this;
@@ -248,34 +253,49 @@ var InfoView = React.createClass({
         var mediaType = state.videoType;
         var isFullCoach = state.fullCoach;
         var content = "";
-        var noteDisplay = <div className={mediaType + " infoNoteContainer"}>{pageNotes}</div>;
+        var transcriptContainer = "";
 
-        if(state.page.note && state.page.note.length > 1){
-            noteDisplay = <div className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}>
-                <ul>{pageNotes}</ul>
-            </div>;
+
+        if (this.state.transcript) {
+            transcriptContainer = (
+                <ClosedCaptionPanel transcript={this.state.transcript} />
+            );
         }
 
-        var cc = "";
-        if (state.transcript !== "") {
-            cc = (
-                <div>
-                    <ClosedCaption transcript={state.transcript}/>
+        var noteDisplay = (
+            <div
+                className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}
+            >
+                <div className="info-page-notes">
+                    {pageNotes}
+                </div>
+                {transcriptContainer}
+            </div>);
+
+        if(state.page.note && state.page.note.length > 1){
+            noteDisplay =   (
+                <div className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}>
+                    <ul className="info-page-notes">{pageNotes}</ul>
+                    {transcriptContainer}
                 </div>
             );
         }
 
+        console.log(pageNotes)
+        if ((state.page.note && state.page.note.length) || pageNotes !== "") {
+            _hasNotes = true;
+        } else {
+            _hasNotes = false;
+        }
+
         var mediaContainer = "";
+        var cols = "col-md-6 col-sm-6";
+        if (!_hasNotes) {
+            cols = "col-md-12 col-sm-12";
+        }
         if (media) {
-
-            if (AppStateStore.isMobile()) {
-                if(self.props.page.media[0].type === "video"){
-                    return (<UnsupportedScreenSizeView/>);
-                }
-            }
-
             mediaContainer = (
-                <div className="infoMediaContainer col-md-6 col-sm-6">
+                <div className={"infoMediaContainer " + cols}>
                     {media}
                 </div>
                 );
@@ -308,12 +328,11 @@ var InfoView = React.createClass({
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
                 <div className="infoContainer" key={"page-" + this.state.page.xid}>
-                    {cc}
                     <audio autoPlay id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="info-container container-fluid">
+                    <div className="info-container container">
                         {content}
                     </div>
                 </div>
@@ -330,9 +349,27 @@ var InfoView = React.createClass({
      * Event handler for 'change' events coming from the BookStore
      */
     _onChange: function() {
-        // if (this.isMounted()) {
+        if (this.isMounted()) {
             this.setState(getPageState(this.props));
-        // }
+        }
+    },
+
+    _onClosedCaptionChange: function () {
+        if (ClosedCaptionStore.visible()) {
+            if (!_hasNotes) {
+                $('.infoMediaContainer').addClass('col-md-6');
+                $('.infoMediaContainer').addClass('col-sm-6');
+            }
+
+            $('.info-page-notes').hide();
+        } else {
+            if (!_hasNotes) {
+                $('.infoMediaContainer').removeClass('col-md-6');
+                $('.infoMediaContainer').removeClass('col-sm-6');
+            }
+
+            $('.info-page-notes').show();
+        }
     }
 });
 
