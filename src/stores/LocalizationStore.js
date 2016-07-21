@@ -24,7 +24,7 @@ var LocalizationStore = assign({}, EventEmitter.prototype, {
         return _data;
     },
 
-    /**
+     /*
      * @param (string) section
      * @param (string) item
      * @param (item) parameters - Optional. List of parameters that will be replaced into the found resource
