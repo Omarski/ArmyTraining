@@ -45,8 +45,6 @@ var CultureQuestMap = React.createClass({
         if (canvasElement && !canvasElement.hidden) {
             this.props.onRegionClicked(canvasElement);
         }
-
-        this.viewUpdate({task:"countrySelect", value:null});
     },
 
     onRegionRollover: function(canvasElement, pageX, pageY) {

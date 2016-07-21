@@ -121,7 +121,6 @@ var ObjexView = React.createClass({
 
     onObjexReady: function(){
         this.prepIntroPopup();
-        this.bgAudio();
     },
 
     prepLevels: function(){
@@ -236,7 +235,6 @@ var ObjexView = React.createClass({
 
         var self = this;
         self.setState({advancedLevel:!self.state.advancedLevel}, function(){
-            console.log("now ... : " + self.state.advancedLevel);
             self.prepLevelsPopup();
         });
     },
@@ -253,7 +251,7 @@ var ObjexView = React.createClass({
                         <div className="objex-view-textComplete">Level complete!</div>
                         <div className="objex-view-completedButtonCont">
                             <div type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</div>
-                            <div type="button" className="btn btn-default objex-view-btn" onClick={self.onNextLevel}>Next Level</div>
+                            {self.state.currentLevel < self.state.levelsColl.length ? <div type="button" className="btn btn-default objex-view-btn" onClick={self.onNextLevel}>Next Level</div>:null}
                         </div>
                     </div>
                 )
@@ -333,6 +331,7 @@ var ObjexView = React.createClass({
         this.viewUpdate({task:"buttonAudio", value:null});
         this.setState({audioObj:null});
         this.prepLevels();
+        this.bgAudio();
     },
 
     menuToLevels: function(){
@@ -443,7 +442,6 @@ var ObjexView = React.createClass({
                         }else{
                             self.prepBasicCompletePopup();
                             self.setState({showAdvanced:true});
-                            // self.setState({advancedLevel:true});
                         }
 
                     }else{
@@ -514,6 +512,7 @@ var ObjexView = React.createClass({
                             sources    = {self.state.audioBgObj.sources}
                             autoPlay   = {self.state.audioBgObj.autoPlay}
                             controller = {self.state.audioController}
+                            loop       = {self.state.audioBgObj.loop}
                         /> : null}
 
                     {self.state.popupObj ?

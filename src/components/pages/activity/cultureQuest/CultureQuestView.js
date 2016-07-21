@@ -55,7 +55,7 @@ var CultureQuestView = React.createClass({
 
         var self = this;
         for (var i = 0; i < layersColl.length; i++){
-            layersColl[i].style.opacity = "0.5";
+            layersColl[i].style.opacity = "0.8";
         }
         this.setState({layersColl:layersColl}, function(){
             self.prepAnswersColl();
@@ -187,6 +187,7 @@ var CultureQuestView = React.createClass({
         if (canvasElement.getAttribute('state') !== "homeState"){
             this.updateLayersColl(canvasElement,'attributeAdd', [{'name':'lastClicked','value':true}]);
             this.setState({'lastSelected': canvasElement});
+            this.viewUpdate({task:"countrySelect", value:null});
             this.showQuizUpdate("show");
         }else{
             //regions done
