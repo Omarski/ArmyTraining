@@ -34,7 +34,7 @@ var LocalizationStore = assign({}, EventEmitter.prototype, {
         var result = "Unknown label for " + section + " : " + item;
         if (section && item && _data[section] && _data[section][item]) {
             result = _data[section][item];
-
+            
             // if provided, iterate over parameters replacing tokens for replacement text
             if (parameters != null) {
                 var paramLen = parameters.length;
