@@ -175,6 +175,27 @@ var ListeningComprehensionView = React.createClass({
         }
     },
 
+    handleClick: function(){
+        var self = this;
+        var state = self.state;
+
+        if(state.isQuizPage){
+            var audio = document.getElementById('mainViewAudio');
+            var source = document.getElementById('mainViewMp3Source');
+
+            if (source) {
+                source.src = "data/media/Click01a.mp3";
+            }
+
+            if(audio && source) {
+                audio.load();
+                audio.play();
+                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            }
+        }
+
+    },
+
     listenCheck: function(){
         // play the audio prompt from the click to listen box
         //find the zid of the audio
@@ -252,7 +273,7 @@ var ListeningComprehensionView = React.createClass({
             return (<li key={page.xid + String(index)} className="list-group-item" >
                         <div class="checkbox">
                             <label>
-                                    <input title={ans} alt={ans} aria-label={ans} type="radio" className="listening-comp-checkbox" value={ans}>
+                                    <input title={ans} alt={ans} aria-label={ans} type="radio" onClick={self.handleClick} className="listening-comp-checkbox" value={ans}>
                                     </input>
                                 {ans}
                             </label>
