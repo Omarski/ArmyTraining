@@ -5,6 +5,7 @@ var PageHeader = require('../../widgets/PageHeader');
 var QuestionnaireActions = require('../../../actions/QuestionnaireActions');
 var QuestionnaireStore = require('../../../stores/QuestionnaireStore');
 var Utils = require('../../widgets/Utils');
+var SettingsStore = ('../../../stores/SettingsStore');
 
 var INPUT_TYPE_CHECKBOX = "checkbox";
 var INPUT_TYPE_RADIO = "radio";
@@ -281,7 +282,7 @@ var QuestionnaireView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
+                    <div className="questionnaire-container">
                         <div className="row">
                             <h4>
                                 {state.prompt}

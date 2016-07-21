@@ -7,3 +7,25 @@
     }
   }
 }
+
+.multiple-choice-list-group-item {
+  margin: 0;
+  padding: 0;
+
+}
+
+.questionnaire-container {
+  border-style: solid;
+  border-width: 1px;
+  border-color: $border-color;
+  position: absolute;
+  top: 70px;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  padding: 27px;
+  padding-top: 5px;
+  h4 {
+    margin-bottom: 20px;
+  }
+}
