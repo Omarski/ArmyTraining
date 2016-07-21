@@ -180,13 +180,15 @@ var FooterView = React.createClass({
     keypress: function(e){
         var event = window.event ? window.event : e;
         if(event.keyCode === 39){ // if right arrow pressed
-            //TODO: check if next() is allowed
-            event.preventDefault();
-            this.next();
+            if (!FooterStore.isNextDisabled()) {
+                event.preventDefault();
+                this.next();
+            }
         }else if(event.keyCode === 37){ // if left arrow pressed
-            //TODO: check if previous() is allowed
-            event.preventDefault();
-            this.previous();
+            if (!FooterStore.isPrevDisabled()) {
+                event.preventDefault();
+                this.previous();
+            }
         }
     },
 
