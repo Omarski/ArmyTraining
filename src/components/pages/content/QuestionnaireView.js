@@ -185,6 +185,20 @@ var QuestionnaireView = React.createClass({
         PageStore.removeChangeListener(this._onChange);
     },
 
+    handleClick: function(){
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
+
+        if (source) {
+            source.src = "data/media/Click01a.mp3";
+        }
+
+        if(audio && source) {
+            audio.load();
+            audio.play();
+            audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        }
+    },
 
     answerChange: function(answer, event) {
         var state = this.state;
@@ -222,7 +236,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input id={inputId} name={item.groupid} type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                <input id={inputId} name={item.groupid} type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -230,7 +244,7 @@ var QuestionnaireView = React.createClass({
                     else {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input name={item.groupid} type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                <input name={item.groupid} type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -240,7 +254,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="checkbox">
                             <label for={inputId}>
-                                <input type="checkbox" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                <input type="checkbox" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -249,7 +263,7 @@ var QuestionnaireView = React.createClass({
                         inputElement = (
                             <div className="checkbox">
                                 <label for={inputId}>
-                                    <input type="checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                    <input type="checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                     {item.text}
                                 </label>
                             </div>);

@@ -150,7 +150,7 @@ var QuestionnaireEndView = React.createClass({
 
                             <div>
                                 <button bsStyle="primary" onClick={self.reset}>{state.btnRestart}</button>
-                                <button bsStyle="primary" onClick={self.confirm}>{state.btnConfirm}</button>
+                                <button bsStyle="primary" className={"btn-cnf"} onClick={self.confirm}>{state.btnConfirm}</button>
                             </div>
 
                             <div>
