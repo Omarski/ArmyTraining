@@ -1,11 +1,8 @@
 var Utils = (function() {
     function parseBullets(str) {
-        str = str.replace(new RegExp('- ', 'g'), '<span class="info-view-bullet-item"></span>');
-        return str;
-    }
-
-    function parseBulletsWithBreak(str){
-        str = str.replace(new RegExp('- ', 'g'), '<br><span class="info-view-bullet-item"></span>');
+        str = '<p>' + str;
+        str = str.replace(new RegExp('- ', 'g'), '</p><p class="info-bullets-indent"><span class="info-view-bullet-item"></span>');
+        str = str + '</p>';
         return str;
     }
 
@@ -107,8 +104,7 @@ var Utils = (function() {
         evalPostfix: evalPostfix,
         findInfo: findInfo,
         minutesToDisplayText: minutesToDisplayText,
-        parseBullets: parseBullets,
-        parseBulletsWithBreak: parseBulletsWithBreak
+        parseBullets: parseBullets
     }
 
 })();

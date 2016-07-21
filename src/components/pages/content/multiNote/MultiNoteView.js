@@ -107,7 +107,7 @@ var MultiNoteView = React.createClass({
         var title = self.state.title;
         var sourceInfo = "";
         var infoPages = self.state.related;
-        
+
         var pagesHTML = infoPages.map(function(item, index){
             var imageURL = item.media[0].xid;
             var sources = "";
@@ -116,14 +116,14 @@ var MultiNoteView = React.createClass({
                 var notes = item.note;
                 if(notes && notes.length){
                     text = notes.map(function(item, index) {
-                        var str = Utils.parseBulletsWithBreak(item.text);
+                        var str = Utils.parseBullets(item.text);
 
                         function createNote() {
                             return {__html: str};
                         }
 
                         return (<li key={page.xid + String(index) + "li"}>
-                                    <p key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()} className="multi-note-text"></p>
+                                    <div key={page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()} className="multi-note-text"></div>
                         </li>);
                     });
                 }
