@@ -27,6 +27,12 @@
 
 /*.info-view-list-item {margin-top: -20px;}*/
 
+
+.info-bullets-indent {
+  margin-left: 25px;
+}
+
+
 .info-view-bullet-item:before {
   content: "\2022  ";
   color: #000;
@@ -95,7 +101,7 @@
   p {
     font-size: 18px;
     font-weight: 300;
-    white-space: pre-wrap;
+    white-space: pre-line;
   }
 }
 

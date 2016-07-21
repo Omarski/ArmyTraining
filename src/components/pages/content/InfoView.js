@@ -87,7 +87,7 @@ function getPageState(props) {
 
                     return (
                         <li key={index}>
-                            <p  key={data.page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></p>
+                            <div class="div-info-notes-bullets" key={data.page.xid + String(index) + "note"} dangerouslySetInnerHTML={createNote()}></div>
                         </li>
                     );
                 });
