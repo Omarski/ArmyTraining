@@ -1,11 +1,9 @@
-/**
- * Created by Alec on 4/7/2016.
- */
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
 var AppStateStore = require('../../../stores/AppStateStore');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 
 
@@ -62,9 +60,9 @@ var LessonStartView = React.createClass({
         var self = this;
         var state = self.state;
         var title = state.title;
-        var pageType = state.pageType;
         var imageXid = state.image;
         var imageHtml = "";
+        var time = 25;
 
         if(imageXid !== ""){
             imageHtml = <img className="lesson-start-image" src={"data/media/"+imageXid}></img>;
@@ -74,11 +72,10 @@ var LessonStartView = React.createClass({
             return (<UnsupportedScreenSizeView/>);
         }
 
-
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                <h3 className="lesson-start-timer">This lesson will take approximately 25 minutes to complete.</h3>
+                <h3 className="lesson-start-timer">{LocalizationStore.labelFor("lessonStart", "lblTime", [time])}</h3>
                 {imageHtml}
             </div>
         );
