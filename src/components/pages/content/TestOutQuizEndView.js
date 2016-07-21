@@ -131,18 +131,20 @@ var TestOutQuizEndView = React.createClass({
         var passedRow = "";
         if (passed) {
             passedRow = (
-                <div className="row">
-                    <div className="col-lg-4">
-                        <label className="">
-                            <input name="radioGroup" type="radio" className="multiple-choice-checkbox" defaultChecked onChange={this.acceptSelected}></input>
-                            {LocalizationStore.labelFor("pretest", "lblCreditAccept")}
-                        </label>
-                    </div>
-                    <div className="col-lg-4">
-                        <label className="">
-                            <input name="radioGroup" type="radio" className="multiple-choice-checkbox" onChange={this.declinedSelected}></input>
-                            {LocalizationStore.labelFor("pretest", "lblCreditDecline")}
-                        </label>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-6 col-md-6 col-lg-6 test-out-credit-col">
+                            <label className="radio">
+                                <input name="radioGroup" type="radio" className="multiple-choice-checkbox" defaultChecked onChange={this.acceptSelected}></input>
+                                {LocalizationStore.labelFor("pretest", "lblCreditAccept")}
+                            </label>
+                        </div>
+                        <div className="col-sm-6 col-md-6 col-lg-6 test-out-credit-col">
+                            <label className="radio">
+                                <input name="radioGroup" type="radio" className="multiple-choice-checkbox" onChange={this.declinedSelected}></input>
+                                {LocalizationStore.labelFor("pretest", "lblCreditDecline")}
+                            </label>
+                        </div>
                     </div>
                 </div>
             );
@@ -155,27 +157,23 @@ var TestOutQuizEndView = React.createClass({
             )
         });
 
+        var str = state.pageFeedback;
+        function createFeedback() {
+            return {__html: str};
+        }
+
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12 col-md-12">
-                            <div className="quiz-feedback">
-                                {state.pageFeedback}
-                            </div>
-                        </div>
-                    </div>
+                <div className="test-out-results-container">
+                    <h4 dangerouslySetInnerHTML={createFeedback()}></h4>
                     {passedRow}
-                    <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <table className="table table-bordered table-striped">
-                                <TestOutTableHeader/>
-                                {testOutRows}
-                            </table>
-                        </div>
-
-                    </div>
+                    <table className="table table-bordered">
+                        <tbody>
+                        <TestOutTableHeader/>
+                        {testOutRows}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         );
@@ -196,8 +194,8 @@ var TestOutTableHeader = React.createClass({
     render: function() {
         return (
             <tr>
-                <th className="text-center">{LocalizationStore.labelFor("pretest", "headerTitle")}</th>
-                <th className="text-center">{LocalizationStore.labelFor("pretest", "headerTestOut")}</th>
+                <th className="text-center test-out-results-th">{LocalizationStore.labelFor("pretest", "headerTitle")}</th>
+                <th className="text-center test-out-results-th">{LocalizationStore.labelFor("pretest", "headerTestOut")}</th>
             </tr>
         );
     }
@@ -208,11 +206,11 @@ var TestOutRow = React.createClass({
     render: function() {
         var passed = this.props.passed;
         var title = this.props.title;
-        var className = "glyphicon glyphicon-remove-circle quiz-feedback-icon quiz-feedback-icon-incorrect";
+        var className = "glyphicon glyphicon-remove quiz-feedback-icon quiz-feedback-icon-incorrect";
 
         // changed if passed
         if (passed) {
-            className = "glyphicon glyphicon-ok-circle quiz-feedback-icon quiz-feedback-icon-correct";
+            className = "glyphicon glyphicon-ok quiz-feedback-icon quiz-feedback-icon-correct";
         }
 
         return (

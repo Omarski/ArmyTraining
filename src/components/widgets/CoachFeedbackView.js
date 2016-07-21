@@ -2,8 +2,8 @@ var React = require('react');
 var CoachFeedbackStore = require('../../stores/CoachFeedbackStore');
 var SettingsStore = require('../../stores/SettingsStore');
 
-var COACH_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
-var COACH_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+var COACH_GLYPHICON_CORRECT_CLS = "glyphicon-ok";
+var COACH_GLYPHICON_INCORRECT_CLS = "glyphicon-remove";
 
 function getCoachFeedbackState(props) {
     return {
