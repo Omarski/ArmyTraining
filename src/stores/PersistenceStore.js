@@ -45,7 +45,7 @@ function getData(name) {
     if (_dataCache && _dataCache.hasOwnProperty(name)) {
         return _dataCache[name];
     } else {
-        console.log("error loading data for: " + name);
+        // report some error
         return null;
     }
 }

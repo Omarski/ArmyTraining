@@ -100,12 +100,14 @@ var PageHeader = React.createClass({
         var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
             <ListGroup key="bookmarkbreadcrumbsbutton">
                 <Button
-                    id="breadcrumbsButton"
+                    title={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
+                    alt={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     type="button"
+                    aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     className="btn btn-default btn-block btn-action"
                     onClick={this.bookmark}
                 >
-                    Bookmark This Page
+                    {LocalizationStore.labelFor("bookmarks", "btnBookmark")}
                 </Button>
             </ListGroup>
             <ListGroup>
@@ -116,12 +118,12 @@ var PageHeader = React.createClass({
         var bookmarkBtn = (
             <OverlayTrigger trigger='click' rootClose placement='left' overlay={popover}>
                 <Button
-                    title={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
-                    alt={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
-                    id="breadcrumbsButton"
+                    id="bookmarkButton"
+                    title={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
+                    alt={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     type="button"
-                    aria-label={LocalizationStore.labelFor("breadcrumbs", "tooltipBookmark")}
-                    className={("btn btn-default btn-link main-nav-audio-control ") + ((this.state.bookmarked) ? "selected" : "")}
+                    aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
+                    className={("btn btn-default btn-link main-nav-audio-control btn-bmk ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
                     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                 </Button>
@@ -146,8 +148,6 @@ var PageHeader = React.createClass({
                     <li><AudioControl /></li>
                     <li>{bookmarkBtn}</li>
                 </ul>
-
-
             </div>
         </div>;
     }

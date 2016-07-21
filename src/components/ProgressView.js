@@ -148,7 +148,9 @@ var ProgressView = React.createClass({
     },
 
     _onChange: function() {
-        this.setState(getUnitState());
+        if (this.isMounted()) {
+            this.setState(getUnitState());
+        }
     }
 });
 

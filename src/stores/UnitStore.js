@@ -141,11 +141,36 @@ function destroyCompleted() {
 }
 
 /**
+ * Checks all the units chapters to see if it is complete
+ * @param unitId
+ */
+function evaluateUnitComplete(unitId) {
+    // find unit by id
+    var unit = _units[unitId];
+
+    // iterate over chapters
+    if (unit && unit.data && unit.data.chapter) {
+        var chapterLength = unit.data.chapter.length;
+        while (chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+
+            // exit if even one is not complete
+            if (!(chapter.state && chapter.state.complete === true)) {
+                return;
+            }
+        }
+
+        // mark unit complete
+        update(unitId, {complete: true});
+    }
+}
+
+/**
  * Marks a units chapter as complete
  * @param unitId
  * @param chapterId
  */
-function markUnitChapterComplete(unitId, chapterId) {
+function markChapterComplete(unitId, chapterId) {
     // find unit by id
     var unit = _units[unitId];
     if (unit && unit.data && unit.data.chapter) {
@@ -228,6 +253,37 @@ var UnitStore = assign({}, EventEmitter.prototype, {
         return chapterIds;
     },
 
+    getUnitById: function(id) {
+        var unit = null;
+        if (_units) {
+            for (var key in _units) {
+                var u = _units[key];
+                if (u.data && u.data.xid === id) {
+                    unit = u;
+                    console.log(u)
+                    break;
+                }
+            }
+        }
+        return unit;
+    },
+
+    getChapterById: function(id, chapterId) {
+        var chapter = null;
+        var unit = this.getUnitById(id);
+        if (unit && unit.data.chapter) {
+            var chapters = unit.data.chapter;
+            for (var chapterIndex in chapters) {
+                if (chapters[chapterIndex].xid === chapterId) {
+                    chapter = chapters[chapterIndex];
+                    break;
+                }
+
+            }
+        }
+        return chapter;
+    },
+
     /**
      * Checks if the state property required is true
      * @param id
@@ -265,7 +321,7 @@ AppDispatcher.register(function(action) {
 
     switch(action.actionType) {
         case UnitConstants.UNIT_CHAPTER_COMPLETE:
-            markUnitChapterComplete(action.id, action.chapterId);
+            markChapterComplete(action.id, action.chapterId);
             break;
 
         case UnitConstants.UNIT_CREATE:
@@ -274,6 +330,11 @@ AppDispatcher.register(function(action) {
                 create(action.data);
                 UnitStore.emitChange();
             }
+            break;
+
+        case UnitConstants.UNIT_EVALUATE_COMPLETE:
+            evaluateUnitComplete(action.data);
+            // emit change?
             break;
 
         case UnitConstants.UNIT_MARK_REQUIRED:

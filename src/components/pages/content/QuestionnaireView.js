@@ -1,16 +1,19 @@
 var React = require('react');
 var InfoTagConstants = require('../../../constants/InfoTagConstants');
+var FooterActions = require('../../../actions/FooterActions');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var QuestionnaireActions = require('../../../actions/QuestionnaireActions');
 var QuestionnaireStore = require('../../../stores/QuestionnaireStore');
 var Utils = require('../../widgets/Utils');
+var SettingsStore = ('../../../stores/SettingsStore');
 
 var INPUT_TYPE_CHECKBOX = "checkbox";
 var INPUT_TYPE_RADIO = "radio";
 
 function getPageState(props) {
     var data = {
+        isMandatory: false,
         page: null,
         title: "",
         sources: [],
@@ -19,6 +22,9 @@ function getPageState(props) {
         prompt: "",
         selectedPlaylists: {}
     };
+
+    var isMandatory = false;
+    var isPreSelected = false;
 
     // load previous answers
     var previousAnswer = QuestionnaireStore.getAnswer();
@@ -66,6 +72,7 @@ function getPageState(props) {
         // mark checked if any one of these conditions is true
         if (isAlreadySelected(answerObj, previousAnswer) || isRecommended(answerObj) || isRequired(answerObj)) {
             rooneyEatsIt.checked = "checked";
+            isPreSelected = true;
         }
 
         // add answer object to be displayed to the user
@@ -75,7 +82,13 @@ function getPageState(props) {
         answerToPlaylistMapping[rooneyEatsIt.text] = rooneyEatsIt.playlist;
     }
 
+    // check if mandatory or preselected
+    if (Utils.findInfo(props.page.info, InfoTagConstants.INFO_PROP_MANDATORY) !== null) {
+        isMandatory = true;
+    }
+
     if (props && props.page) {
+        data.isMandatory = isMandatory && !isPreSelected;
         data.answers = answersObjsToDisplay;
         data.page = props.page;
         data.answerToPlaylistMapping = answerToPlaylistMapping;
@@ -166,6 +179,13 @@ function isRequired(answerObj) {
 var QuestionnaireView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
+
+        if (pageState.isMandatory) {
+            setTimeout(function() {
+                FooterActions.disableNext();
+            }, 0.1);
+        }
+
         return pageState;
     },
 
@@ -185,20 +205,42 @@ var QuestionnaireView = React.createClass({
         PageStore.removeChangeListener(this._onChange);
     },
 
+    handleClick: function(){
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
+
+        if (source) {
+            source.src = "data/media/Click01a.mp3";
+        }
+
+        if(audio && source) {
+            audio.load();
+            audio.play();
+            audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        }
+    },
 
     answerChange: function(answer, event) {
         var state = this.state;
+        var isAnswerSelected = false;
 
         // iterate over each item and see if it selected
         $("#questionnaireForm :input").each(function () {
             if (this.checked) {
                 state.selectedPlaylists[this.value] = state.answerToPlaylistMapping[this.value];
+                isAnswerSelected = true;
             } else {
                 if (state.selectedPlaylists[this.value]) {
                     delete state.selectedPlaylists[this.value];
                 }
             }
         });
+
+        if (isAnswerSelected) {
+            FooterActions.enableNext();
+        } else if (state.isMandatory){
+            FooterActions.disableNext();
+        }
 
         // submit answer to store
         QuestionnaireActions.answer(state.selectedPlaylists);
@@ -222,7 +264,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input id={inputId} name={item.groupid} type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                <input id={inputId} name={item.groupid} type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -230,7 +272,7 @@ var QuestionnaireView = React.createClass({
                     else {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input name={item.groupid} type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                <input name={item.groupid} type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -240,7 +282,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="checkbox">
                             <label for={inputId}>
-                                <input type="checkbox" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                <input type="checkbox" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -249,7 +291,7 @@ var QuestionnaireView = React.createClass({
                         inputElement = (
                             <div className="checkbox">
                                 <label for={inputId}>
-                                    <input type="checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)}/>
+                                    <input type="checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                     {item.text}
                                 </label>
                             </div>);
@@ -267,7 +309,7 @@ var QuestionnaireView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
+                    <div className="questionnaire-container">
                         <div className="row">
                             <h4>
                                 {state.prompt}

@@ -169,14 +169,13 @@ var PrePostTestActions = {
             // mark chapters as complete
             while(chapterLength--) {
                 var chapterId = chaptersArray[chapterLength];
-                UnitActions.markUnitChapterComplete(unitId, chapterId)
+                UnitActions.markChapterComplete(unitId, chapterId);
             }
 
             // mark unit as complete
             UnitActions.markUnitComplete(unitId);
         }
     }
-
 };
 
 module.exports = PrePostTestActions;

@@ -10,6 +10,9 @@ var ListGroupItem = ReactBootstrap.ListGroupItem;
 var Button = require("react-bootstrap/lib/Button");
 var NavDropdown = require("react-bootstrap/lib/NavDropdown");
 var MenuItem = require("react-bootstrap/lib/MenuItem");
+var LocalizationStore = require('../stores/LocalizationStore');
+var UnitStore = require('../stores/UnitStore');
+var LoaderStore = require('../stores/LoaderStore');
 
 function getPageState(isNav) {
     var page = null;
@@ -71,11 +74,14 @@ var BookmarksView = React.createClass({
         });
         BookmarkActions.create(bm);
         this.setState(getPageState(this.props.isNav));
-
     },
 
     bookmarkSelected: function(bm) {
         PageActions.jump(bm);
+    },
+
+    bookmarkRemove: function(bm) {
+        BookmarkActions.remove(bm);
     },
 
     getInitialState: function() {
@@ -94,19 +100,22 @@ var BookmarksView = React.createClass({
             this.setState({ menuOpen: newValue });
         }
     },
-    componentWillMount: function() {
-        PageStore.addChangeListener(this._onChange);
-    },
 
     componentDidMount: function() {
-        PageStore.removeChangeListener(this._onChange);
-        PageStore.addChangeListener(this._onChange);
+        BookmarkStore.addChangeListener(this._onChange);
+        LoaderStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount: function() {
-        PageStore.removeChangeListener(this._onChange);
+        BookmarkStore.removeChangeListener(this._onChange);
+        LoaderStore.removeChangeListener(this._onChange);
     },
+
     render: function() {
+
+        if (!LoaderStore.loadingComplete()) {
+            return (<div></div>);
+        }
 
         var self = this;
         var bookmarks = BookmarkStore.bookmarks();
@@ -119,36 +128,44 @@ var BookmarksView = React.createClass({
                     return (<MenuItem id={"bookmarkitems" + index} key={"bookmarkitems" + index} eventKey={6 + index} href="#"
                                       className="bookmark-nav-item"
                                       onClick={function(){self.menuItemClickedThatShouldntCloseDropdown()}}>
-                        <button className="btn btn-link"
+                        <button className="btn btn-link bookmark-link-btn"
                                 onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
                     </MenuItem>);
                 });
                 subItems.push(<MenuItem id={"bookmarkitems" + fakeIndex} key={"bookmarkitems" + fakeIndex} eventKey={6 + fakeIndex} href="#"
                                         className="bookmark-nav-item"
                                         onClick={function(){self.menuItemClickedThatShouldntCloseDropdown()}}>
-                    <button onClick={this.bookmark} className="btn btn-link">Bookmark Current Page</button>
+                    <button onClick={this.bookmark} className="btn btn-link">{LocalizationStore.labelFor("bookmark", "btnBookmark")}</button>
                 </MenuItem>);
                 items = (<NavDropdown id={this.props.id} open={self.state.menuOpen} onToggle={function(val){self.dropdownToggle(val)}} eventKey="5"
                                       title={(
                 <div id="BookmarkDropdownDiv">
                     <Button
-                        title={"Bookmarks"}
-                        alt={"Bookmarks"}
-                        id="breadcrumbsButton"
+                        title={LocalizationStore.labelFor("bookmark", "lblTitle")}
+                        alt={LocalizationStore.labelFor("bookmark", "lblTitle")}
                         type="button"
-                        className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
+                        className={"btn btn-default btn-link main-nav-bookmark btn-bmk " + ((this.state.bookmarked) ? "selected" : "")}
                     >
                         <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                     </Button>
-                    <p>Bookmarks</p>
                 </div>
                 )}>
                     {subItems}
                 </NavDropdown>);
             } else {
                 var subItems = bookmarks.map(function (item, index) {
-                    return (<ListGroupItem key={"bookmarkitems" + index}>
-                        <button className="btn btn-link" onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+                    var unit = UnitStore.getUnitById(item.unit);
+                    var unitTitle = (unit) ? unit.data.title : "";
+                    var chapter = UnitStore.getChapterById(item.unit, item.chapter);
+                    var chapterTitle = (chapter) ? chapter.title : "";
+
+                    return (<ListGroupItem key={"bookmarkitems" + index} className="bookmark-list-item">
+                        <button className="btn btn-link bookmark-link-btn" title={chapterTitle + " / " + item.title} onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
+
+                        <button className="btn btn-default bookmark-item-remove" onClick={self.bookmarkRemove.bind(self, item)}>
+                            <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+
                     </ListGroupItem>);
                 });
                 items = (<ListGroup id="listGroupItems">

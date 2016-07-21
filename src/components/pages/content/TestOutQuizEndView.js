@@ -110,7 +110,6 @@ var TestOutQuizEndView = React.createClass({
 
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
-
         TestOutComplete(this.state);
     },
 

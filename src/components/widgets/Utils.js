@@ -1,4 +1,10 @@
 var Utils = (function() {
+    function parseBullets(str) {
+        str = '<p>' + str;
+        str = str.replace(new RegExp('- ', 'g'), '</p><p class="info-bullets-indent"><span class="info-view-bullet-item"></span>');
+        str = str + '</p>';
+        return str;
+    }
 
     /**
      * @param (string) condition - Postfix condition string to evaluate
@@ -97,7 +103,8 @@ var Utils = (function() {
     return {
         evalPostfix: evalPostfix,
         findInfo: findInfo,
-        minutesToDisplayText: minutesToDisplayText
+        minutesToDisplayText: minutesToDisplayText,
+        parseBullets: parseBullets
     }
 
 })();

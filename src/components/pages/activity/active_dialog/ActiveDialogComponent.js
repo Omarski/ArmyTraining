@@ -155,8 +155,10 @@ var ActiveDialogComponent = React.createClass({
     },
 
     videoTimeUpdateHandler: function(event) {
-        if (event.currentTarget.currentTime >= this.currentStop) {
+        // get time to 3 decimal places
+        var currentAnimationTime = event.currentTarget.currentTime.toFixed(3);
 
+        if (currentAnimationTime >= this.currentStop) {
             // remove event listener
             event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
 

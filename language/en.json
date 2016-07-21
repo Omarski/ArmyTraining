@@ -3,8 +3,18 @@
     "imageSplash": "data/media/AfpakSplash07d3.jpg",
     "rightToLeft": false
   },
-  "breadcrumbs": {
-    "tooltipBookmark": "Bookmarks"
+  "bookmarks": {
+    "tooltipBookmark": "Bookmarks",
+    "lblTitle": "Bookmarks",
+    "lblLimitWarning": "Only five bookmarks allowed, please delete unused bookmarks to add this one.",
+    "btnBookmark": "Bookmark Current Page",
+    "lblExistsWarning": "Bookmark already exists for this page."
+  },
+  "briefing": {
+    "image": "data/media/briefing.jpg"
+  },
+  "closedCaption": {
+    "lblTitle": "Transcript"
   },
   "evaluation": {
     "btnContinue": "Continue",
@@ -35,6 +45,9 @@
     "tooltipUnMute": "Turn on Sound",
     "tooltipHelp": "Help",
     "tooltipSettings": "Settings"
+  },
+  "lessonStart": {
+    "lblTime": "This lesson is made up of multiple sections. The entire lesson will take approximately {0} minutes to complete."
   },
   "loader": {
     "lblLoading": "Loading"
@@ -88,6 +101,8 @@
     "refDliInstructions": "Click on a link below to download lesson summary PDFs."
   },
   "sectionEnd": {
+    "imageComplete": "data/media/diploma.png",
+    "lblCongratulations": "CONGRATULATIONS",
     "lblCourseComplete": "COURSE COMPLETE NEEDS TO BE AUTHORED!!!!!!",
     "lblSectionComplete": "You have successfully completed the section. Click 'NEXT' to continue to the next section in this lesson.",
     "lblSectionFailed": "Your score does not allow you to progress to the next section. Please review the section again.",

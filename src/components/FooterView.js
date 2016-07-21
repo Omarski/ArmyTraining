@@ -11,6 +11,7 @@ var ExplorerView = require('../components/ExplorerView');
 var ExplorerActions = require('../actions/ExplorerActions');
 var Utils = require('../components/widgets/Utils');
 var InfoTagConstants = require('../constants/InfoTagConstants');
+var FooterStore = require('../stores/FooterStore');
 
 function getUnitState(expanded) {
     var units = UnitStore.getAll();
@@ -119,7 +120,6 @@ function getUnitState(expanded) {
         }
     }
 
-
     return {
         totalUnits: totalUnits,
         currentPageIndex: currentPageIndex,
@@ -127,7 +127,9 @@ function getUnitState(expanded) {
         totalPages: totalPages,
         unitsPercent: Math.round((totalUnitsComplete / totalUnits) * 100),
         expanded: expanded,
-        contentLoaded: LoaderStore.loadingComplete()
+        contentLoaded: LoaderStore.loadingComplete(),
+        nextDisabled: FooterStore.isNextDisabled(),
+        prevDisabled: FooterStore.isPrevDisabled()
     };
 }
 
@@ -169,6 +171,7 @@ var FooterView = React.createClass({
     },
 
     componentWillMount: function() {
+        FooterStore.addChangeListener(this._onLoadChange);
         LoaderStore.addChangeListener(this._onLoadChange);
         PageStore.addChangeListener(this._onPageChange);
         document.addEventListener("keydown", this.keypress);
@@ -177,13 +180,15 @@ var FooterView = React.createClass({
     keypress: function(e){
         var event = window.event ? window.event : e;
         if(event.keyCode === 39){ // if right arrow pressed
-            //TODO: check if next() is allowed
-            event.preventDefault();
-            this.next();
+            if (!FooterStore.isNextDisabled()) {
+                event.preventDefault();
+                this.next();
+            }
         }else if(event.keyCode === 37){ // if left arrow pressed
-            //TODO: check if previous() is allowed
-            event.preventDefault();
-            this.previous();
+            if (!FooterStore.isPrevDisabled()) {
+                event.preventDefault();
+                this.previous();
+            }
         }
     },
 
@@ -193,6 +198,7 @@ var FooterView = React.createClass({
     },
 
     componentWillUnmount: function() {
+        FooterStore.removeChangeListener(this._onLoadChange);
         LoaderStore.removeChangeListener(this._onLoadChange);
         PageStore.removeChangeListener(this._onPageChange);
     },
@@ -258,7 +264,6 @@ var FooterView = React.createClass({
 
         var footerElements = "";
         if (this.state.contentLoaded) {
-
             footerElements = (
                 <table className="table footer-table">
                     <tbody>
@@ -272,8 +277,9 @@ var FooterView = React.createClass({
                         <td>
                             <button title={LocalizationStore.labelFor("footer", "tooltipPrevious")}
                                     alt={LocalizationStore.labelFor("footer", "tooltipPrevious")}
+                                    disabled={this.state.prevDisabled}
                                     type="button" onClick={this.previous}
-                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
+                                    className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
                                 <span className="glyphicon glyphicon-chevron-left btn-icon" aria-hidden="true"></span>
                             </button>
@@ -284,9 +290,10 @@ var FooterView = React.createClass({
                         <td>
                             <button title={LocalizationStore.labelFor("footer", "tooltipNext")}
                                     alt={LocalizationStore.labelFor("footer", "tooltipNext")}
+                                    disabled={this.state.nextDisabled}
                                     type="button"
                                     onClick={this.next}
-                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
+                                    className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipNext")}>
                                 <span className="glyphicon glyphicon-chevron-right btn-icon" aria-hidden="true"></span>
                             </button>
@@ -295,7 +302,7 @@ var FooterView = React.createClass({
                                     alt={LocalizationStore.labelFor("footer", "tooltipClose")}
                                     type="button"
                                     onClick={this.toggleTOC}
-                                    className="btn btn-default btn-lg btn-link btn-close"
+                                    className="btn btn-default btn-lg btn-link btn-close btn-exp"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipClose")}>
                                     <span className="glyphicon glyphicon-remove btn-icon" aria-hidden="true"></span>
                             </button>

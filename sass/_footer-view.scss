@@ -73,12 +73,21 @@
 
 .main-footer-section {
   background-color: $explorer-section-bg-color;
-}
+  .list-group-item {
+    a {
+      font-weight: bold;
+    }
+  }
 
+}
+.main-footer-row:hover {
+  background-color: #ECFAFE;
+}
 .main-footer-row {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
+  cursor: pointer;
   .badge {
     background-color: transparent;
     color: $badge-color;
@@ -196,7 +205,7 @@
 }
 
 .btn-text-icon {
-  display: inline-flex;
+  display: -webkit-inline-flex;
 }
 
 .btn-text-icon .btn-icon {
