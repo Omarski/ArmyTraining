@@ -4,6 +4,7 @@ var Button = ReactBootstrap.Button;
 var Modal = ReactBootstrap.Modal;
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
+var LocalizationStore = require('../../../../stores/LocalizationStore');
 
 var _shownOnce = true;
 function getCompState(show) {
@@ -69,6 +70,7 @@ var ActiveDialogIntro = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
+                    <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
                     {content}
                     {steps}
                     <br/>
