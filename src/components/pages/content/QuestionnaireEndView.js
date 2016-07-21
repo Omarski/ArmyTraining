@@ -42,10 +42,23 @@ function getPageState(props) {
         var unit = units[unitIndex];
         var unitId = unit.id;
         var unitData = unit.data;
+        var bHidden = false;
 
+        // hide certain units
+        var chapterLength = unitData.chapter.length;
+        while(chapterLength--) {
+            var chapter = unitData.chapter[chapterLength];
+            if (Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null ||
+                Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_POSTTEST) !== null) {
+                bHidden = true;
+                break;
+            }
+        }
+
+        // get info
         if (unitData.xid && (plists.indexOf(unitData.xid) !== -1)) {
             // create object and add it
-            selectedUnits.push({id: unitId, title: unitData.title});
+            selectedUnits.push({id: unitId, title: unitData.title, hidden: bHidden});
 
             // gather minutes
             if (unitData.playlistInfo != null) {
@@ -127,6 +140,10 @@ var QuestionnaireEndView = React.createClass({
 
         if (this.state.selectedUnits && this.state.selectedUnits.length > 0) {
             playlistGroupItems = this.state.selectedUnits.map(function(item, index) {
+                if(item.hidden === true) {
+                    return null;
+                }
+
                 return (
                     <ListGroupItem key={index}>{item.title}</ListGroupItem>
                 )
