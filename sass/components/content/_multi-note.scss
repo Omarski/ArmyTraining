@@ -1,3 +1,44 @@
+.slick-prev, .slick-next {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #eaeaea;
+  height: 100%;
+  padding-left: 2px;
+  padding-right: 21px;
+  background-color: #F5F5F5;
+}
+
+.multi-note-container {
+  border-style: solid;
+  border-width: 1px;
+  border-color: $border-color;
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.multi-note-slider-container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.multi-note-page-btn {
+  margin-right: 10px;
+  padding: 4px;
+  border-radius: 0;
+}
+
+.multi-note-page-btn:first-child {
+  margin-left: 10px;
+}
+
+.slick-active.multi-note-page-btn {
+  background-color: #C1D4D1;
+  border-color: #C1D4D1;
+}
+
 .multi-note-thumbnail {
   width: 100px;
   height: 100px;
@@ -9,6 +50,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  margin: 0;
+  border-radius: 0;
 }
 @media screen and (max-width: 767px) {
   .multi-note-image {
@@ -41,11 +84,13 @@
 }
 
 .multi-note-image {
+  margin-bottom: 15px;
   img {
     max-width: 100%;
     max-height: 300px;
   }
 }
+
 
 .multi-note-choices {
   margin-top: 10px;
@@ -63,6 +108,7 @@
 .multi-note-text {
   font-size: 18px;
   white-space: pre-line;
+  margin-top: 18px;
 }
 
 @media screen and (max-width: 767px){
