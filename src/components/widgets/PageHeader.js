@@ -123,7 +123,7 @@ var PageHeader = React.createClass({
                     alt={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     type="button"
                     aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
-                    className={("btn btn-default btn-link main-nav-audio-control ") + ((this.state.bookmarked) ? "selected" : "")}
+                    className={("btn btn-default btn-link main-nav-audio-control btn-bmk ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
                     <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                 </Button>
