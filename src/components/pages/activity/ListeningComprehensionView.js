@@ -193,7 +193,6 @@ var ListeningComprehensionView = React.createClass({
                 audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
             }
         }
-
     },
 
     listenCheck: function(){
