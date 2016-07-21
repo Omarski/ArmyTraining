@@ -1,5 +1,6 @@
 var InfoTagConstants = require('../../../constants/InfoTagConstants');
 var ReactBootstrap = require('react-bootstrap');
+var FooterActions = require('../../../actions/FooterActions');
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var LocalizationStore = require('../../../stores/LocalizationStore');
@@ -98,6 +99,11 @@ function getPageState(props) {
 
 var QuestionnaireEndView = React.createClass({
     getInitialState: function() {
+
+        setTimeout(function() {
+            FooterActions.disableNext();
+        }, 0.1);
+
         return getPageState(this.props);
     },
 
