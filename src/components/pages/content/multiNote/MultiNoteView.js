@@ -90,12 +90,23 @@ var MultiNoteView = React.createClass({
         playMediaAudio(pageMediaArray);
     },
 
+    updateSlick: function() {
+        var activeIndex = this.state.activePage;
+        setTimeout(function () {
+            $('.slick-slide').removeClass('slick-active');
+            var selected = $('.slick-slide')[activeIndex];
+            $(selected).addClass('slick-active');
+        });
+    },
+
     componentDidMount: function() {
         this.updateMediaAndPlay();
+        this.updateSlick();
     },
 
     componentDidUpdate: function(){
         this.updateMediaAndPlay();
+        this.updateSlick();
     },
 
     componentWillUnmount: function() {
@@ -208,7 +219,7 @@ var MultiNoteView = React.createClass({
             }
 
             var thumbnail = (
-                <button className="btn btn-default" data={index}
+                <button className="btn btn-default multi-note-page-btn" data={index}
                         onClick={self.handleClick}
                         title={title}
                         alt={title}
@@ -226,6 +237,20 @@ var MultiNoteView = React.createClass({
 
         //mouse work for mouseover'ed selections
 
+        var sliderSettings = { // settigns for the carousel
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            centerMode: false,
+            variableWidth: true,
+            accessibility: true,
+            focusOnSelect: false,
+            initialSlide: 0
+        };
+
+
         var noteImage = "";
         var text = (<div className="col-md-4" key={xid + "activetext"}></div>);
 
@@ -237,13 +262,36 @@ var MultiNoteView = React.createClass({
         }
         if (p && p.image) {
             noteImage = (
-                <div className="col-md-6">
-                    <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
+                <div className="col-md-6 col-sm-6">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
+                        </div>
+                        <div className="row">
+                            <div className="multi-note-slider-container">
+
+                                <Slider
+                                    dots={sliderSettings.dots}
+                                    infinite={sliderSettings.infinite}
+                                    speed={sliderSettings.speed}
+                                    slidesToShow={sliderSettings.slidesToShow}
+                                    slidesToScroll={sliderSettings.slidesToScroll}
+                                    centerMode={sliderSettings.centerMode}
+                                    variableWidth={sliderSettings.variableWidth}
+                                    focusOnSelect={sliderSettings.focusOnSelect}
+                                    beforeChange={this.updateSlick}
+                                    afterChange={this.updateSlick}
+                                >
+                                    {pageChoices}
+                                </Slider>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             );
 
             text = (
-                <div className="col-md-6" key={xid + "activetext"}>
+                <div className="col-md-6 col-sm-6" key={xid + "activetext"}>
                     {p.text}
                 </div>
             );
@@ -255,15 +303,7 @@ var MultiNoteView = React.createClass({
             );
         }
 
-        var sliderSettings = { // settigns for the carousel
-            dots: false,
-            infinite: false,
-            speed: 500,
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            centerMode: false,
-            variableWidth: true
-        };
+
 
         return (
             <div>
@@ -273,26 +313,10 @@ var MultiNoteView = React.createClass({
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="container">
+                    <div className="container multi-note-container">
                         <div className="row">
                             {noteImage}
                             {text}
-                        </div>
-                        <div className="row">
-                            <div className="container">
-
-                                <Slider
-                                    dots={sliderSettings.dots}
-                                    infinite={sliderSettings.infinite}
-                                    speed={sliderSettings.speed}
-                                    slidesToShow={sliderSettings.slidesToShow}
-                                    slidesToScroll={sliderSettings.slidesToScroll}
-                                    centerMode={sliderSettings.centerMode}
-                                    variableWidth={sliderSettings.variableWidth}
-                                >
-                                    {pageChoices}
-                                </Slider>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -119,6 +119,8 @@ var MultipleChoiceView = React.createClass({
     answerChange: function(answer) {
         var self = this;
         var state = this.state;
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
 
         // for the answer you clicked, get it's feedback
         var feedbackText = (answer.feedback && answer.feedback.text) ? answer.feedback.text : "";
@@ -143,13 +145,12 @@ var MultipleChoiceView = React.createClass({
                 }
             };
             // TODO END <-------------- MOVE TO ITS OWN OBJECT---------------------------------------
-
+            source.src = "data/media/Click01a.mp3";
             // submit answer to page
             PageActions.answer(answerObj);
         }else{
             /* trigger audio */
-            var audio = document.getElementById('mainViewAudio');
-            var source = document.getElementById('mainViewMp3Source');
+
             if (source) {
                 if(answer.correct){
                     source.src = "data/media/Correct.mp3";
@@ -157,11 +158,12 @@ var MultipleChoiceView = React.createClass({
                     source.src = "data/media/Incorrect.mp3";
                 }
             }
-            if(audio && source) {
-                audio.load();
-                audio.play();
-                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-            }
+
+        }
+        if(audio && source) {
+            audio.load();
+            audio.play();
+            audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
         }
     },
 

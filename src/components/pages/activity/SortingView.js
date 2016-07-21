@@ -133,6 +133,15 @@ var SortingView = React.createClass({
         var state = self.state;
         var draggedItemLetter = "";
         var draggedItemTarget = "";
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
+
+        source.src = "data/media/Grab02.mp3";
+        if(audio && source) {
+            audio.load();
+            audio.play();
+            audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+        }
 
         if(state.numMoved != state.answerState.length && $(e.target).css("opacity") != 0.3) {
             if (e.target) {
@@ -162,6 +171,8 @@ var SortingView = React.createClass({
         var state = self.state;
         var numMoved = state.numMoved;
         var answerState = state.answerState;
+        var audio = document.getElementById('mainViewAudio');
+        var source = document.getElementById('mainViewMp3Source');
         // {label: label, isMoved: false, currentBox: ""}
 
         // get dragged item
@@ -191,6 +202,16 @@ var SortingView = React.createClass({
                 }
         }
         var itemFound = false;
+
+        if($(draggedItemTarget).css("opacity") != 0.3 && (dropLocation !== "") ){
+            source.src = "data/media/Drop01.mp3";
+            if(audio && source) {
+                audio.load();
+                audio.play();
+                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            }
+        }
+
         if(state.numMoved != state.answerState.length && $(draggedItemTarget).css("opacity") != 0.3) {
             if (draggedItemLetter != "" && dropLocation != "") {
                 answerState.map(function (item) {
@@ -308,12 +329,24 @@ var SortingView = React.createClass({
                             </h5>
                         </div>;
 
-            if(!isCorrect) {
-                button = <button className="btn btn-action sorting-tryAgain" onClick={self.reset}>Try Again</button>; // reset button if wrong
+            var audio = document.getElementById('mainViewAudio');
+            var source = document.getElementById('mainViewMp3Source');
+            if(isCorrect){
+                // play correct audio
+                source.src = "data/media/Correct.mp3";
+            } else {
+                // play incorrect audio
+                source.src = "data/media/Incorrect.mp3";
+                button = <button className="btn btn-action sorting-tryAgain btn-rst" onClick={self.reset}>Try Again</button>; // reset button if wrong
+            }
+            if(audio && source) {
+                audio.load();
+                audio.play();
+                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
             }
         }
         if(numMoved > 0 && numMoved < numQuestions){
-            button = <button className="btn btn-action sorting-clear" onClick={self.reset}>Clear All</button>; // clear all button
+            button = <button className="btn btn-action sorting-clear btn-rst" onClick={self.reset}>Clear All</button>; // clear all button
         }
         //a clear all button, and a reset button. These do the same thing but are displayed as different things
 
