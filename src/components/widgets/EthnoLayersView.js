@@ -52,7 +52,6 @@ var EthnoLayersView = React.createClass({
             if(i > 0){
                 // console.log("i/imageColl.length", i/(imageColl.length - 1 ), "i", i, "imageColl.length" ,imageColl.length - 1);
                 var x = ((i+1)/imageColl.length) * 100;
-                // self.props.updateNotificationModal(x);
                 // console.log("i", i, "imageColl.length", imageColl.length, "x", x);
                 NotificationActions.updatePercent(x);
                 if( (i + 1) === (imageColl.length)){
