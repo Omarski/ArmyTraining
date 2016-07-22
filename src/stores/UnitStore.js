@@ -268,6 +268,10 @@ var UnitStore = assign({}, EventEmitter.prototype, {
         return unit;
     },
 
+    getUnitTime: function(id){
+        return _units[id].data.playlistInfo[0].property[1].value;
+    },
+
     getChapterById: function(id, chapterId) {
         var chapter = null;
         var unit = this.getUnitById(id);
@@ -318,7 +322,7 @@ var UnitStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     var text;
-    
+
     switch(action.actionType) {
         case UnitConstants.UNIT_CHAPTER_COMPLETE:
             markChapterComplete(action.id, action.chapterId);
