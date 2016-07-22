@@ -14,8 +14,6 @@ var ActiveDialogIntro = require('../../../../components/pages/activity/active_di
 var ActiveDialogEvaluation = require('../../../../components/pages/activity/active_dialog/ActiveDialogEvaluation');
 var RemediationView = require('../../../RemediationView');
 
-var _bAnimationPlaying = false;
-var _bSoundPlaying = false;
 var _dataLoaded = false;
 var _videoCountHack = 0;
 
@@ -48,26 +46,14 @@ function getPageState(props) {
 }
 
 function checkContinue() {
-    if (_bSoundPlaying === false && _bAnimationPlaying === false ) {
-        setTimeout(function() {
-            ActiveDialogActions.continueDialog();
-        }, .1);
-    }
+    setTimeout(function() {
+        ActiveDialogActions.continueDialog();
+    }, .1);
 }
 
-function handleAnimationStart() {
-    // change flag
-    _bAnimationPlaying = true;
-}
-
-function handleAnimationStop() {
-    // change flag
-    _bAnimationPlaying = false;
-
-    // check if should continue
+function handlePersonaDonePlaying() {
     checkContinue();
 }
-
 
 function handlePersonaLoading() {
     // increase count
@@ -84,32 +70,9 @@ function handlePersonaReady() {
     }
 }
 
-function playSound(sound) {
-    var player = document.getElementById('activeDialogAudioPlayer');
-    player.setAttribute('src', 'data/media/' + sound + '.mp3');
-    player.addEventListener('loadeddata', soundLoaded);
-    player.addEventListener('ended', soundEnded);
-    player.load();
-}
-
 function resetDialog() {
-    _bAnimationPlaying = false;
-    _bSoundPlaying = false;
     _dataLoaded = false;
 }
-
-function soundLoaded(event) {
-    this.play();
-    this.removeEventListener('loadeddata', soundLoaded);
-    _bSoundPlaying = true;
-}
-
-function soundEnded(event) {
-    this.removeEventListener('ended', soundEnded);
-    _bSoundPlaying = false;
-    checkContinue();
-}
-
 
 var ActiveDialogView = React.createClass({
 
@@ -157,7 +120,7 @@ var ActiveDialogView = React.createClass({
         var animation = actionObject.anima;
 
         if (sound) {
-            playSound(sound);
+            this.playSound(speaker, sound);
         }
 
         if (animation) {
@@ -177,6 +140,16 @@ var ActiveDialogView = React.createClass({
 
             // play animation
             personaComponent.playAnimationVideo(animation);
+        }
+    },
+
+    playSound: function(speaker, sound) {
+        // find persona component
+        if (this.refs.ActiveDialogScenarioView && this.refs.ActiveDialogScenarioView.refs[speaker]) {
+            var personaComponent = this.refs.ActiveDialogScenarioView.refs[speaker];
+
+            // play sound
+            personaComponent.soundPlay(sound);
         }
     },
 
@@ -224,7 +197,6 @@ var ActiveDialogView = React.createClass({
                         <ActiveDialogScenarioView composition={this.state.info.composition} ref="ActiveDialogScenarioView" media={this.state.stageMedia} />
                         <ActiveDialogIntro />
                         <ActiveDialogEvaluation />
-                        <ActiveDialogAudio />
                         <RemediationView />
                     </div>
                 </div>
@@ -279,8 +251,7 @@ var ActiveDialogScenarioView = React.createClass({
                                          assets={item.assets}
                                          onLoadStart={handlePersonaLoading}
                                          onLoadDone={handlePersonaReady}
-                                         onAnimationStart={handleAnimationStart}
-                                         onAnimationStop={handleAnimationStop} />
+                                         onPlayingDone={handlePersonaDonePlaying} />
                 );
             });
         }
@@ -293,21 +264,6 @@ var ActiveDialogScenarioView = React.createClass({
     }
 
 });
-
-var ActiveDialogAudio = React.createClass({
-    shouldRender: true,
-    shouldComponentUpdate: function(nextProps, nextState) {
-        return this.shouldRender;
-    },
-
-    render: function() {
-        this.shouldRender = false;
-        return (<audio id="activeDialogAudioPlayer" src="" ></audio>);
-    }
-
-});
-
-
 
 
 module.exports = ActiveDialogView;
