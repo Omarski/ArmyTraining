@@ -59,32 +59,27 @@ function getPageState(props) {
 /*INTERACTIVE ETHNOLINGUISTIC MAP VIEW ------ [[[EthnoMapView]]] <--- EthnoMap <--- ImageLayerView & EthnoToggleDiv */
 var EthnoMapView = React.createClass({
     getInitialState: function() {
+
         var pageState = getPageState(this.props);
         return pageState;
     },
-    onLayersReady: function(x){
+    updateNotificationModal: function(x){
         
-        // if(x < 1) {
-        //     NotificationActions.updatePercent(x);
-        // } else if (x === 1){
-        //      NotificationActions.updatePercent(x);
-        //     setTimeout(function(){NotificationActions.hide()});
-        //     $('.modal-backdrop').remove();
+        // console.log("x", x);
+        NotificationActions.updatePercent(x);
+        if(x === 100){
+            setTimeout(function(){NotificationActions.hide()});
+        }
+        // Layer
+        // if(x === 100){
+
+            console.log("x", x);
+            // setTimeout(function(){NotificationActions.hide()});
         // }
     },
     componentWillMount: function(){
         var self = this;
         console.log("COMPONENTWILLMOUNT");
-        // setTimeout(
-        //     function(){
-        //         NotificationActions.show({
-        //             title: 'Please wait',
-        //             body: 'Loading...',
-        //             full: false,
-        //             percent: 0
-        //         })
-        //     }
-        // );
     },
     componentDidMount: function() {
         var self = this
@@ -127,7 +122,7 @@ var EthnoMapView = React.createClass({
                 <div className="" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                 </div>
-                <EthnoMap mediaPath="data/media/" imageData={parsedJSON} mapData={parsedJSON} />
+                <EthnoMap mediaPath="data/media/" updateNotificationModal = {self.updateNotificationModal} imageData={parsedJSON} mapData={parsedJSON} />
             </div>
         );
     },
@@ -157,6 +152,10 @@ var EthnoMap = React.createClass({
             currentPopoverSlide: 0
         };
     },
+    updateNotificationModal: function(x){
+        var self = this;
+        self.props.updateNotificationModal(x);
+    },
     componentWillMount: function() {
         //prep CultureQuestMap data from original JSON
         var self = this;
@@ -169,7 +168,8 @@ var EthnoMap = React.createClass({
             onLayersReady: self.onLayersReady,
             onRollover: self.onRegionRollover,
             onClick: self.onRegionClick,
-            showHilightedRegion: self.showHilightedRegion
+            showHilightedRegion: self.showHilightedRegion,
+            updateNotificationModal: self.updateNotificationModal
         });
     },
     onRegionClick: function(canvasElement, xVal, yVal) {
@@ -361,7 +361,7 @@ var EthnoMap = React.createClass({
                 {toolTipperInRender}
                 <div id="wrapperDiv"  className = "container ethno-wrapper-div">
                     {popoverInRender}
-                    <EthnoLayersView className="ethno-image-layers-view" topZIndex = {self.state.topZindex} areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick} />
+                    <EthnoLayersView className="ethno-image-layers-view" updateNotificationModal={this.state.updateNotificationModal}topZIndex = {self.state.topZindex} areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick} />
                     <EthnoToggleDiv id="ethnoToggle" mapData = {mapData} topZIndex={self.state.topZindex} changeLabelState = {this.changeLabelState} whatIsLabelState ={this.whatIsLabelState} canvasColl = {canvasColl} popoverShow={this.state.popoverShow} toggleParentPopoverState={toggleParentPopoverState} />
                 </div>
             </div>
