@@ -217,7 +217,7 @@ var MultipleChoiceView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
+                    <div className="container mc-view">
                         <div className="row">
                             <h4 className="multi-choice-header-mobile-margin">
                                 {state.prompt}
