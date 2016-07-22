@@ -2,6 +2,8 @@
  * Created by Alec on 4/11/2016.
  */
 var React = require('react');
+var ReactBootstrap = require('react-bootstrap');
+var Button = ReactBootstrap.Button;
 var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
@@ -111,11 +113,15 @@ var QuizView = React.createClass({
         $('[data-toggle="tooltip"]').tooltip();
     },
 
+    restartQuiz: function() {
+        PageActions.restartQuiz();
+    },
+
     render: function() {
         var self = this;
         var state = self.state;
         var title = state.title;
-        var pageType = state.pageType;
+        var passed = state.quizPassed;
 
         // render rows
         var questionsRows = this.state.answers.map(function(item, index) {
@@ -123,6 +129,12 @@ var QuizView = React.createClass({
                 <QuizAnswerRow answer={item.answer} passed={item.passed} key={index} question={item.question}/>
             )
         });
+
+        // render button
+        var restartButton = "";
+        if (passed !== true) {
+            restartButton = <Button bsStyle='default' onClick={this.restartQuiz}>{LocalizationStore.labelFor("quizEnd", "btnRestart")}</Button>
+        }
 
         var str = state.pageFeedback;
         function createFeedback() {
@@ -140,6 +152,9 @@ var QuizView = React.createClass({
                             {questionsRows}
                         </tbody>
                     </table>
+                    <div className="test-out-results-btn-container">
+                        {restartButton}
+                    </div>
                 </div>
             </div>
         );
