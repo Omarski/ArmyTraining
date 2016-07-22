@@ -252,6 +252,10 @@ var FooterView = React.createClass({
                         onClick={this.toggleTOC}>
                     <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon" : "glyphicon glyphicon-circle-arrow-up btn-icon"} aria-hidden="true"></span>
                     <span className="explorer-link">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
+                    <div style={{'height':'25px', 'lineHeight':'21px'}}>
+                        <span style={{'verticalAlign':'middle'}} id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon" : "glyphicon glyphicon-circle-arrow-up btn-icon"} aria-hidden="true"></span>
+                        <span style={{'verticalAlign':'middle'}} className="explorer-link">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
+                    </div>
                 </button>
             );
             progressView = (
