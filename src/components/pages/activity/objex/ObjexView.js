@@ -189,7 +189,6 @@ var ObjexView = React.createClass({
         var lockStyle = {background: 'url('+lockImg+') no-repeat 100% 100%'};
 
         var advImg = self.state.advancedLevel ? self.state.mediaPath + "objex/img/advancedLevelOn.png": self.state.mediaPath + "objex/img/advancedLevelOff.png";
-        // var advImg = self.state.mediaPath + "objex/img/advancedLevel.png";
         var advStyle = {background: 'url('+advImg+') no-repeat 100% 100%', cursor:'pointer'};
 
         var levelIcons = self.state.levelsColl.map(function(levelObj,index){
@@ -261,8 +260,7 @@ var ObjexView = React.createClass({
     prepBasicCompletePopup: function(){
 
         var self = this;
-        var advancedText = (<div>"Congratulations! You have now <br></br>unlocked Advanced Mode! Try
-            playing again while racing against<br></br>the clock!"</div>);
+        var advancedText = self.state.gameData.text_assets.text_advanced_unlocked;
 
         this.prepPopup("BasicLevelDone",
             function(){
@@ -280,8 +278,7 @@ var ObjexView = React.createClass({
 
     prepGameCompletePopup: function(){
 
-        var gameDoneText = (<div>"Congratulations! You completed <br></br>Advanced Mode!
-            Click "Next" to<br></br>continue"</div>);
+        var gameDoneText = this.state.gameData.text_assets.text_advanced_complete;
 
         this.prepPopup("GameDone",
             function(){
