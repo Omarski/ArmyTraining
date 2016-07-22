@@ -250,11 +250,9 @@ var FooterView = React.createClass({
                         className="btn btn-default btn-lg btn-link btn-text-icon btn-clk"
                         aria-label={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
                         onClick={this.toggleTOC}>
-                    <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon" : "glyphicon glyphicon-circle-arrow-up btn-icon"} aria-hidden="true"></span>
-                    <span className="explorer-link">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
-                    <div style={{'height':'25px', 'lineHeight':'21px'}}>
-                        <span style={{'verticalAlign':'middle'}} id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon" : "glyphicon glyphicon-circle-arrow-up btn-icon"} aria-hidden="true"></span>
-                        <span style={{'verticalAlign':'middle'}} className="explorer-link">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
+                    <div className="explorer-icon-text-div">
+                        <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon explorer-icon-text-span " : "glyphicon glyphicon-circle-arrow-up btn-icon explorer-icon-text-span "} aria-hidden="true"></span>
+                        <span className="explorer-link explorer-icon-text-span ">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
                     </div>
                 </button>
             );
