@@ -1,3 +1,6 @@
+/**
+ * Created by Alec on 4/11/2016.
+ */
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var Button = ReactBootstrap.Button;
@@ -133,26 +136,23 @@ var QuizView = React.createClass({
             restartButton = <Button bsStyle='default' onClick={this.restartQuiz}>{LocalizationStore.labelFor("quizEnd", "btnRestart")}</Button>
         }
 
+        var str = state.pageFeedback;
+        function createFeedback() {
+            return {__html: str};
+        }
+
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12 col-md-12">
-                            <div className="quiz-feedback">
-                                {state.pageFeedback}
-                            </div>
-                            <table className="table table-bordered quiz-feedback-table">
-                                <QuizTableHeader/>
-                                {questionsRows}
-                            </table>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-12 col-md-12">
-                            {restartButton}
-                        </div>
-                    </div>
+                <div className="test-out-results-container">
+                    <h4 dangerouslySetInnerHTML={createFeedback()}></h4>
+                    <table className="table table-bordered">
+                        <tbody>
+                            <QuizTableHeader/>
+                            {questionsRows}
+                        </tbody>
+                    </table>
+                    {restartButton}
                 </div>
             </div>
         );
@@ -173,9 +173,9 @@ var QuizTableHeader = React.createClass({
    render: function() {
        return (
            <tr className="">
-               <th>{LocalizationStore.labelFor("quizEnd", "headerResult")}</th>
-               <th>{LocalizationStore.labelFor("quizEnd", "headerQuestion")}</th>
-               <th>{LocalizationStore.labelFor("quizEnd", "headerAnswer")}</th>
+               <th className="text-center test-out-results-th">{LocalizationStore.labelFor("quizEnd", "headerResult")}</th>
+               <th className="text-center test-out-results-th">{LocalizationStore.labelFor("quizEnd", "headerQuestion")}</th>
+               <th className="text-center test-out-results-th">{LocalizationStore.labelFor("quizEnd", "headerAnswer")}</th>
            </tr>
        );
    }
@@ -188,11 +188,11 @@ var QuizAnswerRow = React.createClass({
         var answer = this.props.answer;
         var passed = this.props.passed;
         var question = this.props.question;
-        var className = "glyphicon glyphicon-remove-circle quiz-feedback-icon quiz-feedback-icon-incorrect"
+        var className = "glyphicon glyphicon-remove quiz-feedback-icon quiz-feedback-icon-incorrect"
 
         // changed if passed
         if (passed) {
-            className = "glyphicon glyphicon-ok-circle quiz-feedback-icon quiz-feedback-icon-correct"
+            className = "glyphicon glyphicon-ok quiz-feedback-icon quiz-feedback-icon-correct"
         }
 
         return (

@@ -16,6 +16,7 @@ function getPageState(props) {
         image: ""
     };
 
+
     if (props && props.page) {
         data.title = props.page.title;
         data.pageType = props.page.type;
@@ -63,18 +64,25 @@ var LessonStartView = React.createClass({
         var imageXid = state.image;
         var imageHtml = "";
         var time = 25;
+        
+        imageHtmlStyle = {backgroundImage: "url(data/media/"+imageXid +")" };
+
+        var unitTitleText = PageStore.unit().data.title;
 
         if(imageXid !== ""){
-            imageHtml = <img className="lesson-start-image" src={"data/media/"+imageXid}></img>;
+            imageHtml = <div className="lesson-start-image-container"><div className="lesson-start-image" style={imageHtmlStyle} ><h3 className="lesson-start-image-text">{unitTitleText}</h3></div></div>;
         }
 
         if (AppStateStore.isMobile()) {
             return (<UnsupportedScreenSizeView/>);
         }
 
+        //<PageHeader className="page-header-lesson-start" sources={state.sources} title={title} key={this.state.page.xid}/>
+
+
         return (
             <div>
-                <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
+                <PageHeader className="page-header-lesson-start" sources={state.sources} llHide={true} title={title} key={this.state.page.xid}/>
                 <h3 className="lesson-start-timer">{LocalizationStore.labelFor("lessonStart", "lblTime", [time])}</h3>
                 {imageHtml}
             </div>
