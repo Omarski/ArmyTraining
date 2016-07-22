@@ -4,13 +4,19 @@
   border-top: 1px solid $border-color;
 }
 
+.tooltip-inner{
+  -webkit-touch-callout: all;
+  -webkit-user-select: all;
+  -khtml-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
+
 .page-title-height {
   height: 22px;
 }
 
-.page-header-lesson-start{
-  display: none !important;
-}
 
 .page-header-custom-title {
   font-size: 16px;

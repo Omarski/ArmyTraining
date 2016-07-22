@@ -12,6 +12,8 @@ var Utils = require("../../widgets/Utils");
 var AppStateStore = require('../../../stores/AppStateStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 var NotificationActions = require('../../../actions/NotificationActions');
+var LocalizationActions = require('../../../actions/LocalizationActions');
+
 
 
 function getPageState(props) {
@@ -61,23 +63,34 @@ var EthnoMapView = React.createClass({
         return pageState;
     },
     onLayersReady: function(x){
+        
+        // if(x < 1) {
+        //     NotificationActions.updatePercent(x);
+        // } else if (x === 1){
+        //     setTimeout(function(){NotificationActions.hide()});
+        //     $('.modal-backdrop').remove();
+        // }
     },
     componentWillMount: function(){
         var self = this;
-        setTimeout(
-            function(){NotificationActions.show({
-                title: 'Please wait',
-                body: 'Loading...',
-                full: false,
-                percent: 100
-            })}
-        );
+        console.log("COMPONENTWILLMOUNT");
+        // setTimeout(
+        //     function(){
+        //         NotificationActions.show({
+        //             title: 'Please wait',
+        //             body: 'Loading...',
+        //             full: false,
+        //             percent: 0
+        //         })
+        //         // LocalizationActions.load();
+        //     }
+        // );
     },
     componentDidMount: function() {
         var self = this
         //console.log("EthnoMap view component did mount");
-        setTimeout(function(){NotificationActions.hide()});
-        $('.modal-backdrop').remove();
+        // setTimeout(function(){NotificationActions.hide()});
+        // $('.modal-backdrop').remove();
         AppStateStore.addChangeListener(this._onAppStateChange);
 
     },

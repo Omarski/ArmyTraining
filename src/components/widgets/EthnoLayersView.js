@@ -37,7 +37,12 @@ var EthnoLayersView = React.createClass({
             state.loadedImageColl[i] = new Image();
             state.loadedImageColl[i].src = imageColl[i];
             state.loadedImageColl[i].onload = self.loadCounter;
+            if(i > 0){
+                console.log("i/imageColl.length", i/(imageColl.length - 1 ), "i", i, "imageColl.length" ,imageColl.length - 1);
+                // self.props.onLayersReady((i/imageColl.length) * 100);
+            }
         }
+
     },
     componentWillUnmount: function() {
     },

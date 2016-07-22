@@ -136,10 +136,11 @@ var PageHeader = React.createClass({
             </OverlayTrigger>
         );
 
+        var infoLink = this.state.sources;
         var attributions = <Tooltip id="sourcesTooltip">{this.state.sources}</Tooltip>;
         var info = "";
         if (this.state.sources !== "") {
-            info = <OverlayTrigger placement="right" overlay={attributions}>
+            info = <OverlayTrigger delayHide={4000} placement="right" overlay={attributions}>
                         <span className="infoAttributions glyphicon glyphicon-info-sign"></span>
                     </OverlayTrigger>;
         }
