@@ -104,13 +104,17 @@ input[type=checkbox] {
 }
 
 .multiple-choice-feedback-icon {
-  margin-right: 5px;
+  float: left;
+  margin-left: 10px;
+  margin-top: 2px;
 }
 
 .multiple-choice-alert-text {
   display: inline-flex;
   h5 {
-    margin-left: 20px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 2px;
   }
   .thumbnail {
     height: 120px;
