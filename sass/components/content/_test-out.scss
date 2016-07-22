@@ -19,6 +19,11 @@
   color: #fff;
 }
 
-.test-out-credit-col {
+.test-out-credit-col, .test-out-results-btn-container {
   text-align: center;
+  button {
+    background-color: $activity-btn-bg-color;
+    color: $activity-btn-font-color;
+  }
 }
+

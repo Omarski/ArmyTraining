@@ -152,7 +152,9 @@ var QuizView = React.createClass({
                             {questionsRows}
                         </tbody>
                     </table>
-                    {restartButton}
+                    <div className="test-out-results-btn-container">
+                        {restartButton}
+                    </div>
                 </div>
             </div>
         );
