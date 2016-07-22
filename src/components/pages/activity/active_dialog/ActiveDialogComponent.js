@@ -205,15 +205,6 @@ var ActiveDialogComponent = React.createClass({
         event.currentTarget.removeEventListener('loadeddata', this.soundLoaded);
         this.bSoundPlaying = true;
         this.bSoundLoading = false;
-
-        // sync hack....
-        if (!this.bAnimationPlaying) {
-            var videosLength = this.currentVideosPlayingHack.length;
-            while(videosLength--) {
-                this.currentVideosPlayingHack[videosLength].play();
-            }
-        }
-
     },
 
     soundEnded: function(event) {
