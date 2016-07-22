@@ -9,5 +9,6 @@ module.exports = keyMirror({
     PAGE_COMPLETE: null,
     PAGE_JUMP: null,
     PAGE_RESET: null,
-    QUIZ_RESET: null
+    QUIZ_RESET: null,
+    QUIZ_RESTART: null
 });

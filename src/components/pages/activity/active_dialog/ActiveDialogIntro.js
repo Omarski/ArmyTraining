@@ -78,7 +78,7 @@ var ActiveDialogIntro = React.createClass({
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={this.hideModal}>Close</Button>
+                    <Button onClick={this.hideModal}>Start</Button>
                 </Modal.Footer>
             </Modal>
         );

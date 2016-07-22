@@ -124,7 +124,7 @@ var ActiveDialogCOAs = React.createClass({
                 onHide={this.hideModal}
                 >
                 <Modal.Header>
-                    <Modal.Title>Choose</Modal.Title>
+                    <Modal.Title>Select your Course of Action</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>

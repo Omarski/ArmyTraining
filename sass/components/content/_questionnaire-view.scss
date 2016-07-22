@@ -1,4 +1,4 @@
-.list-group-item, .multiple-choice-list-group-item {
+.list-group-item, .questionnaire-list-group-item {
   .radio {
     margin: 0;
     label {
@@ -6,4 +6,75 @@
       padding: 10px 15px 10px 55px;
     }
   }
+
+  .checkbox {
+    margin: 0;
+    label {
+      width: 100%;
+      padding: 10px 15px 10px 55px;
+    }
+  }
+}
+
+.questionnaire-container {
+
+  position: absolute;
+  top: 70px;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  .panel-body {
+    padding: 30px;
+  }
+  .panel-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  h4 {
+    margin-bottom: 20px;
+  }
+}
+
+.questionnaire-time-lbl {
+  margin-top: 30px;
+}
+.questionnaire-results-container {
+  li {
+    list-style-type: disc;
+  }
+}
+
+.questionnaire-time-lbl {
+  text-align: center;
+}
+
+.questionnaire-list-group-item {
+  margin: 0;
+  padding: 0;
+  .checkbox {
+    margin: 0px;
+    label {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 30px;
+      padding-right: 15px;
+      width: 100%;
+    }
+  }
+  .radio {
+    margin: 0px;
+    label {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 30px !important;
+      padding-right: 15px;
+      width: 100%;
+    }
+  }
+}
+
+.questionnaire-end-btn-col {
+  text-align: center;
 }

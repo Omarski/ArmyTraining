@@ -8,6 +8,7 @@ var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
 var ExplorerStore = require('../stores/ExplorerStore');
+var InfoTagConstants = require('../constants/InfoTagConstants');
 
 var _expanded = {};
 var _expandedChapters = {};
@@ -39,7 +40,9 @@ function getUnitState(expanded) {
                 if (c.info && c.info.property) {
                     c.info.property.map(function(item) {
                         switch (item.name) {
-                            case "prologue":
+                            case InfoTagConstants.INFO_PROP_PROLOGUE:
+                            case InfoTagConstants.INFO_PROP_PRETEST:
+                            case InfoTagConstants.INFO_PROP_POSTTEST:
                                 bHidden = true;
                                 break;
                             default:
@@ -219,15 +222,6 @@ var ExplorerView = React.createClass({
         document.addEventListener("keydown", this.keypress);
     },
 
-    keypress: function(e){
-        var event = window.event ? window.event : e;
-        if(event.keyCode === 39){ // if right arrow pressed
-            this.next();
-        }else if(event.keyCode === 37){ // if left arrow pressed
-            this.previous();
-        }
-    },
-
     componentDidMount: function() {
         LoaderStore.addChangeListener(this._onLoadChange);
         PageStore.addChangeListener(this._onPageChange);
@@ -374,7 +368,7 @@ var TOCChapterRow = React.createClass({
         var index = this.props.index;
         var self = this;
         var icon = '';
-
+        
         if (this.props.item.data.state && this.props.item.data.state.complete) {
             icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
         }

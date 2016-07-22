@@ -21,6 +21,7 @@ function getPageState(props) {
     var chapterTitle = "";
     var pageTitle = "";
     var bookmarked = false;
+    var hidden = false;
 
     if (PageStore.loadingComplete()) {
         page = PageStore.page();
@@ -52,6 +53,10 @@ function getPageState(props) {
         bookmarked = true;
     }
 
+    if (props && props.llHide){
+        hidden = props.llHide;
+    }
+
     var sources = "";
     if (props && props.sources && props.sources.length) {
         //sources = props.sources.concat(", ")
@@ -63,7 +68,8 @@ function getPageState(props) {
         pageTitle: pageTitle,
         unitTitle: unitTitle,
         chapterTitle: chapterTitle,
-        bookmarked: bookmarked
+        bookmarked: bookmarked,
+        hidden: hidden
     };
 }
 
@@ -137,13 +143,24 @@ var PageHeader = React.createClass({
                         <span className="infoAttributions glyphicon glyphicon-info-sign"></span>
                     </OverlayTrigger>;
         }
+        // var titleOfPageHeader = "";
+        // var titleOfPageHeaderFunction = function(){return this.state.pageTitle;};
+
+        var pageTitle = this.state.pageTitle;
+
+        if(this.state.hidden){
+            pageTitle = "";
+        }
+
+        //<p className="page-title-height"></p>
 
         return  <div className="page-header-custom">
             <div className="page-header-custom-title">
-                {this.state.pageTitle}
-                <small>
-                    {info}
-                </small>
+                <div className="page-title-height">{pageTitle}
+                    <small>
+                        {info}
+                    </small>
+                </div>
                 <ul className="page-header-controls">
                     <li><AudioControl /></li>
                     <li>{bookmarkBtn}</li>

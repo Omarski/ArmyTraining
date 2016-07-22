@@ -5,6 +5,8 @@ var PageStore = require('../../../../stores/PageStore');
 
 var ActiveDialogComponent = React.createClass({
     bAnimationPlaying: false,
+    bSoundLoading: false,
+    bSoundPlaying: false,
     currentAnimation: "",
     currentChatAnimationName: "",
     currentIdleAnimationName: "Default",
@@ -14,11 +16,9 @@ var ActiveDialogComponent = React.createClass({
 
     propTypes: {
         name: React.PropTypes.string.isRequired,
-        onAnimationStart: React.PropTypes.func,
-        onAnimationStop: React.PropTypes.func,
         onLoadStart: React.PropTypes.func,
-        onLoadDone: React.PropTypes.func
-
+        onLoadDone: React.PropTypes.func,
+        onPlayingDone: React.PropTypes.func
     },
 
     getInitialState: function() {
@@ -47,6 +47,15 @@ var ActiveDialogComponent = React.createClass({
 
     changeChatAnimation: function(animationName) {
         this.currentChatAnimationName = animationName;
+    },
+
+    checkDonePlaying: function() {
+        // if no animation or sound it playing then trigger callback
+        if (!this.bAnimationPlaying && !this.bSoundPlaying) {
+            if (this.props.onPlayingDone !== null) {
+                this.props.onPlayingDone();
+            }
+        }
     },
 
     playAnimationVideo: function(animationName) {
@@ -99,11 +108,6 @@ var ActiveDialogComponent = React.createClass({
 
             // mark as playing
             this.bAnimationPlaying = true;
-
-            if (this.props.onAnimationStart !== null) {
-                this.props.onAnimationStart();
-
-            }
         }
     },
 
@@ -167,9 +171,8 @@ var ActiveDialogComponent = React.createClass({
                 // mark as stopped
                 this.bAnimationPlaying = false;
 
-                if (this.props.onAnimationStop !== null) {
-                    this.props.onAnimationStop();
-                }
+                // trigger callback
+                this.checkDonePlaying();
 
                 // hide all videos that are playing
                 var vidLength = this.currentVideosPlayingHack.length;
@@ -184,6 +187,32 @@ var ActiveDialogComponent = React.createClass({
             // go back to default
             this.playAnimationVideo(this.currentIdleAnimationName);
         }
+    },
+
+    soundPlay: function (sound){
+        if (this.refs.activeDialogAudioRef && this.refs.activeDialogAudioRef.refs.audioRef) {
+            this.bSoundLoading = true;
+            var player = this.refs.activeDialogAudioRef.refs.audioRef;
+            player.setAttribute('src', 'data/media/' + sound + '.mp3');
+            player.addEventListener('loadeddata', this.soundLoaded);
+            player.addEventListener('ended', this.soundEnded);
+            player.load();
+        }
+    },
+
+    soundLoaded: function(event) {
+        event.currentTarget.play();
+        event.currentTarget.removeEventListener('loadeddata', this.soundLoaded);
+        this.bSoundPlaying = true;
+        this.bSoundLoading = false;
+    },
+
+    soundEnded: function(event) {
+        event.currentTarget.removeEventListener('ended', this.soundEnded);
+        this.bSoundPlaying = false;
+
+        // trigger callback
+        this.checkDonePlaying();
     },
 
     render: function() {
@@ -214,9 +243,23 @@ var ActiveDialogComponent = React.createClass({
         return (
             <div>
                 {videos}
+                <ActiveDialogAudio ref="activeDialogAudioRef" />
             </div>
         );
     }
+});
+
+var ActiveDialogAudio = React.createClass({
+    shouldRender: true,
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return this.shouldRender;
+    },
+
+    render: function() {
+        this.shouldRender = false;
+        return (<audio ref="audioRef" src="" ></audio>);
+    }
+
 });
 
 module.exports = ActiveDialogComponent;
