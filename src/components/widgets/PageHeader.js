@@ -156,10 +156,11 @@ var PageHeader = React.createClass({
 
         return  <div className="page-header-custom">
             <div className="page-header-custom-title">
-                <div className="page-title-height">{pageTitle}</div>
-                <small>
-                    {info}
-                </small>
+                <div className="page-title-height">{pageTitle}
+                    <small>
+                        {info}
+                    </small>
+                </div>
                 <ul className="page-header-controls">
                     <li><AudioControl /></li>
                     <li>{bookmarkBtn}</li>
