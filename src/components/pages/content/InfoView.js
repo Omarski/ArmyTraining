@@ -286,7 +286,7 @@ var InfoView = React.createClass({
             );
         }
 
-        console.log(pageNotes)
+
         if ((state.page.note && state.page.note.length) || pageNotes !== "") {
             _hasNotes = true;
         } else {
