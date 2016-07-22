@@ -8,6 +8,7 @@ var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
 var ExplorerStore = require('../stores/ExplorerStore');
+var InfoTagConstants = require('../constants/InfoTagConstants');
 
 var _expanded = {};
 var _expandedChapters = {};
@@ -39,7 +40,9 @@ function getUnitState(expanded) {
                 if (c.info && c.info.property) {
                     c.info.property.map(function(item) {
                         switch (item.name) {
-                            case "prologue":
+                            case InfoTagConstants.INFO_PROP_PROLOGUE:
+                            case InfoTagConstants.INFO_PROP_PRETEST:
+                            case InfoTagConstants.INFO_PROP_POSTTEST:
                                 bHidden = true;
                                 break;
                             default:

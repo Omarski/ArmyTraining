@@ -195,8 +195,9 @@ function isValidPrevUnit(unit) {
             var chapter = unit.data.chapter[chapterLength];
 
             if (chapter.info) {
-                // return false if prologue chapter
-                if (Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) {
+                // return false if prologue or pretest chapter
+                if ((Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) ||
+                    (Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
                     return false;
                 }
             }
