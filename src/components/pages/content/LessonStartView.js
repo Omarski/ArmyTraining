@@ -5,6 +5,8 @@ var PageHeader = require('../../widgets/PageHeader');
 var AppStateStore = require('../../../stores/AppStateStore');
 var LocalizationStore = require('../../../stores/LocalizationStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
+var UnitStore = require('../../../stores/UnitStore');
+
 
 
 function getPageState(props) {
@@ -63,8 +65,8 @@ var LessonStartView = React.createClass({
         var title = state.title;
         var imageXid = state.image;
         var imageHtml = "";
-        var time = 25;
-        
+        var time = UnitStore.getUnitTime(PageStore.unit().id);
+
         imageHtmlStyle = {backgroundImage: "url(data/media/"+imageXid +")" };
 
         var unitTitleText = PageStore.unit().data.title;
