@@ -1,5 +1,6 @@
 var React = require('react');
 var InfoTagConstants = require('../../../constants/InfoTagConstants');
+var FooterActions = require('../../../actions/FooterActions');
 var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var QuestionnaireActions = require('../../../actions/QuestionnaireActions');
@@ -12,6 +13,7 @@ var INPUT_TYPE_RADIO = "radio";
 
 function getPageState(props) {
     var data = {
+        isMandatory: false,
         page: null,
         title: "",
         sources: [],
@@ -20,6 +22,9 @@ function getPageState(props) {
         prompt: "",
         selectedPlaylists: {}
     };
+
+    var isMandatory = false;
+    var isPreSelected = false;
 
     // load previous answers
     var previousAnswer = QuestionnaireStore.getAnswer();
@@ -67,6 +72,7 @@ function getPageState(props) {
         // mark checked if any one of these conditions is true
         if (isAlreadySelected(answerObj, previousAnswer) || isRecommended(answerObj) || isRequired(answerObj)) {
             rooneyEatsIt.checked = "checked";
+            isPreSelected = true;
         }
 
         // add answer object to be displayed to the user
@@ -76,12 +82,20 @@ function getPageState(props) {
         answerToPlaylistMapping[rooneyEatsIt.text] = rooneyEatsIt.playlist;
     }
 
+    var titleSplit = props.page.title.split(" - ");
+    // check if mandatory or preselected
+    if (Utils.findInfo(props.page.info, InfoTagConstants.INFO_PROP_MANDATORY) !== null) {
+        isMandatory = true;
+    }
+
     if (props && props.page) {
+        data.isMandatory = isMandatory && !isPreSelected;
         data.answers = answersObjsToDisplay;
         data.page = props.page;
         data.answerToPlaylistMapping = answerToPlaylistMapping;
         data.prompt = props.page.prompt.text;
-        data.title = props.page.title;
+        data.title = titleSplit[0];
+        data.panelTitle = titleSplit[1];
     }
 
     return data;
@@ -167,6 +181,13 @@ function isRequired(answerObj) {
 var QuestionnaireView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
+
+        if (pageState.isMandatory) {
+            setTimeout(function() {
+                FooterActions.disableNext();
+            }, 0.1);
+        }
+
         return pageState;
     },
 
@@ -203,17 +224,25 @@ var QuestionnaireView = React.createClass({
 
     answerChange: function(answer, event) {
         var state = this.state;
+        var isAnswerSelected = false;
 
         // iterate over each item and see if it selected
         $("#questionnaireForm :input").each(function () {
             if (this.checked) {
                 state.selectedPlaylists[this.value] = state.answerToPlaylistMapping[this.value];
+                isAnswerSelected = true;
             } else {
                 if (state.selectedPlaylists[this.value]) {
                     delete state.selectedPlaylists[this.value];
                 }
             }
         });
+
+        if (isAnswerSelected) {
+            FooterActions.enableNext();
+        } else if (state.isMandatory){
+            FooterActions.disableNext();
+        }
 
         // submit answer to store
         QuestionnaireActions.answer(state.selectedPlaylists);
@@ -223,7 +252,7 @@ var QuestionnaireView = React.createClass({
         var self = this;
         var state = this.state;
         var page = self.state.page;
-        var title = page.title;
+        var title = this.state.title;
         var sources = self.state.sources;
 
         var choices;
@@ -273,7 +302,7 @@ var QuestionnaireView = React.createClass({
 
 
 
-            return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
+            return (<li key={page.xid + String(index)} className="list-group-item questionnaire-list-group-item" >
                         {inputElement}
             </li>);
         });
@@ -281,19 +310,25 @@ var QuestionnaireView = React.createClass({
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
-                    <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="questionnaire-container">
-                        <div className="row">
-                            <h4>
-                                {state.prompt}
-                            </h4>
+                    <PageHeader sources={sources} title={this.state.title} key={this.state.page.xid}/>
+
+                    <div className="panel panel-default questionnaire-container">
+                        <div className="panel-heading">
+                            <h3 className="panel-title">{this.state.panelTitle}</h3>
                         </div>
-                        <div className="row">
-                            <form id="questionnaireForm">
-                                <ul className="list-group multiple-choice-choices-container">
-                                    {choices}
-                                </ul>
-                            </form>
+                        <div className="panel-body">
+                            <div className="row">
+                                <h4>
+                                    {state.prompt}
+                                </h4>
+                            </div>
+                            <div className="row">
+                                <form id="questionnaireForm">
+                                    <ul className="list-group questionnaire-choices-container">
+                                        {choices}
+                                    </ul>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

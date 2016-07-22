@@ -12,6 +12,7 @@ var UnitActions = require('../actions/UnitActions');
 var UnitStore = require('../stores/UnitStore');
 var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
+var FooterActions = require('../actions/FooterActions');
 var Utils = require('../components/widgets/Utils');
 
 var assign = require('object-assign');
@@ -309,6 +310,8 @@ function load(data) {
             saveCurrentPage();
 
             PageActions.complete(result);
+            FooterActions.enableAll(); // TODO: dont like this here <---
+
         });
     } else {
         //BookmarkActions.destroy(); // if the data directory has changed, it can mess up the bookmark situation.  force remove bookmark and alert user

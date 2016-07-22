@@ -176,13 +176,11 @@ var MultipleChoiceView = React.createClass({
             return (<div></div>);
         }
 
-
-
-
         var title = page.title;
         var sources = self.state.sources;
         var media = state.media;
         var feedbackElement = "";
+        var chapterId = PageStore.chapter().xid;
 
         // construct media container
         var mediaContainer = "";
@@ -202,7 +200,7 @@ var MultipleChoiceView = React.createClass({
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
             // TODO: allow for the text to be any of the text channels
-            return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
+            return (<li key={chapterId + page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
                             <label className="multiple-choice-label-remove-padding-left">
                                 <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox multiple-choice-input-padding-right" value={ans} onClick={self.answerChange.bind(self, item)}></input>
@@ -217,7 +215,7 @@ var MultipleChoiceView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
+                    <div className="container multiple-choice-container">
                         <div className="row">
                             <h4 className="multi-choice-header-mobile-margin">
                                 {state.prompt}
