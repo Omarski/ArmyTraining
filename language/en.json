@@ -74,6 +74,7 @@
     "btnPlayback": "Play Recording"
   },
   "quizEnd": {
+    "btnRestart": "Retake",
     "headerResult": "Result",
     "headerQuestion": "Question",
     "headerAnswer": "Answer",

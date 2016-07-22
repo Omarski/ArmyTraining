@@ -405,6 +405,28 @@ function resetQuiz() {
     // TODO dispatch quiz reset event?
 }
 
+function restartQuiz() {
+    // clear quiz answers
+    resetQuiz();
+
+    if (_currentUnit && _currentChapter) {
+        // get pages in the current chapter
+        var chapterPages = _currentChapter.pages;
+        var pageIndex = 0;
+
+        // find the first quiz page and jump to it
+        while (pageIndex < chapterPages.length) {
+            var page = chapterPages[pageIndex];
+
+            if (page.state && page.state.quizpage === true) {
+                jump({page:page.xid, chapter:_currentChapter.xid, unit:_currentUnit.id});
+                return;
+            }
+            pageIndex++;
+        }
+    }
+}
+
 function saveCurrentPage() {
 
     // check for valid current unit
@@ -582,9 +604,11 @@ AppDispatcher.register(function(action) {
         case PageConstants.QUIZ_RESET:
             resetQuiz();
             break;
-
+        case PageConstants.QUIZ_RESTART:
+            restartQuiz();
+            break;
         default:
-        // no op
+            // no op
     }
 });
 

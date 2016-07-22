@@ -66,6 +66,15 @@ var PageActions = {
         AppDispatcher.dispatch({
             actionType: PageConstants.QUIZ_RESET
         });
+    },
+
+    /**
+     * Restart the current sections quiz and jumps to the start of it
+     */
+    restartQuiz: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.QUIZ_RESTART
+        });
     }
 };
 
