@@ -67,6 +67,7 @@ var EthnoMapView = React.createClass({
         // if(x < 1) {
         //     NotificationActions.updatePercent(x);
         // } else if (x === 1){
+        //      NotificationActions.updatePercent(x);
         //     setTimeout(function(){NotificationActions.hide()});
         //     $('.modal-backdrop').remove();
         // }
@@ -82,7 +83,6 @@ var EthnoMapView = React.createClass({
         //             full: false,
         //             percent: 0
         //         })
-        //         // LocalizationActions.load();
         //     }
         // );
     },
