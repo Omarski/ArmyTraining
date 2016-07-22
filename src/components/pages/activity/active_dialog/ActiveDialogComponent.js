@@ -50,8 +50,8 @@ var ActiveDialogComponent = React.createClass({
     },
 
     checkDonePlaying: function() {
-        // if no animation or sound it playing then trigger callback
-        if (!this.bAnimationPlaying && !this.bSoundPlaying) {
+        // if no animation or sound is playing then trigger callback
+        if (!this.bAnimationPlaying && !this.bSoundPlaying && !this.bSoundLoading) {
             if (this.props.onPlayingDone !== null) {
                 this.props.onPlayingDone();
             }
@@ -90,24 +90,22 @@ var ActiveDialogComponent = React.createClass({
                 // show video
                 video.style.display = "block";
 
-                // start playing
-                video.play();
 
-                // increment counter if animation is not the default one
+                // increment counter if animation is not the default one otherwise play
                 if (animationName != this.currentIdleAnimationName) {
                     bFoundVideo2Play = true;
 
                     // add to hack
                     this.currentVideosPlayingHack.push(video);
+                } else {
+                    video.play();
                 }
             }
         }
 
-        // if found videos to play dispatch event
+        // if found videos attempt to play them
         if (bFoundVideo2Play === true) {
-
-            // mark as playing
-            this.bAnimationPlaying = true;
+            this.syncPlayback();
         }
     },
 
@@ -205,6 +203,9 @@ var ActiveDialogComponent = React.createClass({
         event.currentTarget.removeEventListener('loadeddata', this.soundLoaded);
         this.bSoundPlaying = true;
         this.bSoundLoading = false;
+
+        // if videos are found play them
+        this.syncPlayback();
     },
 
     soundEnded: function(event) {
@@ -213,6 +214,24 @@ var ActiveDialogComponent = React.createClass({
 
         // trigger callback
         this.checkDonePlaying();
+    },
+
+
+    syncPlayback: function() {
+        if (!this.bSoundLoading) {
+
+            // play videos
+            var videoLen = this.currentVideosPlayingHack.length;
+            if (videoLen > 0) {
+                while(videoLen--) {
+                    var video = this.currentVideosPlayingHack[videoLen];
+                    video.play();
+                }
+
+                // mark as playing
+                this.bAnimationPlaying = true;
+            }
+        }
     },
 
     render: function() {
