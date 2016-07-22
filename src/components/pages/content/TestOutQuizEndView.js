@@ -135,13 +135,13 @@ var TestOutQuizEndView = React.createClass({
                     <div className="row">
                         <div className="col-sm-6 col-md-6 col-lg-6 test-out-credit-col">
                             <label className="radio">
-                                <input name="radioGroup" type="radio" className="multiple-choice-checkbox" defaultChecked onChange={this.acceptSelected}></input>
+                                <input name="radioGroup" type="radio" className="multiple-choice-checkbox multiple-choice-radio" defaultChecked onChange={this.acceptSelected}></input>
                                 {LocalizationStore.labelFor("pretest", "lblCreditAccept")}
                             </label>
                         </div>
                         <div className="col-sm-6 col-md-6 col-lg-6 test-out-credit-col">
                             <label className="radio">
-                                <input name="radioGroup" type="radio" className="multiple-choice-checkbox" onChange={this.declinedSelected}></input>
+                                <input name="radioGroup" type="radio" className="multiple-choice-checkbox multiple-choice-radio" onChange={this.declinedSelected}></input>
                                 {LocalizationStore.labelFor("pretest", "lblCreditDecline")}
                             </label>
                         </div>

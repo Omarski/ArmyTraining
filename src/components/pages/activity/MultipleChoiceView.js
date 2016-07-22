@@ -203,7 +203,7 @@ var MultipleChoiceView = React.createClass({
             return (<li key={chapterId + page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
                             <label className="multiple-choice-label-remove-padding-left">
-                                <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox multiple-choice-input-padding-right" value={ans} onClick={self.answerChange.bind(self, item)}></input>
+                                <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox multiple-choice-radio multiple-choice-input-padding-right" value={ans} onClick={self.answerChange.bind(self, item)}></input>
                                 {ans}
                             </label>
                         </div>

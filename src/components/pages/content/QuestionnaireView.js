@@ -266,7 +266,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input id={inputId} name={item.groupid} type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
+                                <input id={inputId} name={item.groupid} className="questionnaire-radio-button" type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -274,7 +274,7 @@ var QuestionnaireView = React.createClass({
                     else {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input name={item.groupid} type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
+                                <input name={item.groupid} className="questionnaire-radio-button" type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);

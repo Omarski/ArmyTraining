@@ -272,7 +272,7 @@ var ListeningComprehensionView = React.createClass({
             return (<li key={page.xid + String(index)} className="list-group-item" >
                         <div class="checkbox">
                             <label>
-                                    <input title={ans} alt={ans} aria-label={ans} type="radio" onClick={self.handleClick} className="listening-comp-checkbox" value={ans}>
+                                    <input title={ans} alt={ans} aria-label={ans} type="radio" onClick={self.handleClick} className="listening-comp-checkbox listening-comp-radio" value={ans}>
                                     </input>
                                 {ans}
                             </label>
