@@ -365,7 +365,7 @@ var TOCChapterRow = React.createClass({
         var index = this.props.index;
         var self = this;
         var icon = '';
-
+        
         if (this.props.item.data.state && this.props.item.data.state.complete) {
             icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
         }

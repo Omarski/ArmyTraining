@@ -296,9 +296,7 @@ function load(data) {
             _currentUnit = data.unit;
             _currentChapter = data.chapter;
             _currentPage = data.page;
-
             _data = result.page;
-
             // check if page is a copied page if so update title
             if (data.page.preposttest === true) {
                 _data.title = data.page.title;
@@ -449,6 +447,7 @@ function saveCurrentPage() {
 var PageStore = assign({}, EventEmitter.prototype, {
 
     page: function() {
+        // console.log("_data", _data);
         return _data;
     },
 
