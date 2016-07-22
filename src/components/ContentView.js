@@ -96,6 +96,7 @@ var ContentView = React.createClass({
         if (this.state.page) {
             switch (this.state.page.type) {
                 case PageTypeConstants.ACTIVE_DIALOG:
+                    console.log("this.state", this.state);
                     page = <ActiveDialogView page={this.state.page} />;
                     break;
                 case PageTypeConstants.LISTENING_COMPREHENSION:

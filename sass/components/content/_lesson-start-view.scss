@@ -1,9 +1,29 @@
+.lesson-start-image-container {
+  height: 427px;
+  width: 650px;
+  vertical-align: middle;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .lesson-start-image{
   margin-right: auto;
   margin-left: auto;
-  display: block;
+  text-align:center;
+  display:table-cell;
+  vertical-align:middle;
+  height: 427px;
+  width: 650px;
 }
 
 .lesson-start-timer{
   text-align: center;
+}
+
+.lesson-start-image-text {
+  /*width: 100%;
+  height: 100%;*/
+  /*text-align: center;
+  vertical-align: middle;
+  display: table-cell;*/
 }

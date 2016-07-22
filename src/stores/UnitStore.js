@@ -318,7 +318,7 @@ var UnitStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     var text;
-
+    
     switch(action.actionType) {
         case UnitConstants.UNIT_CHAPTER_COMPLETE:
             markChapterComplete(action.id, action.chapterId);
