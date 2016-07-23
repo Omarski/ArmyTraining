@@ -183,14 +183,16 @@ function stopRecording(id, colNumber, index, self){
     }
 }
 
-function handlePlaying(id, colNumber, index, self){
-    if(ASRStore.isInitialized()){
-        ASRStore.PlayRecording();
-    }else {
-        if (self.state.isPlaying[colNumber][index]) {
-            stop(id, colNumber, index, self);
+function handlePlaying(id, colNumber, index, self, recordedClass){
+    if(self.state.playableState[colNumber][index]) {
+        if (ASRStore.isInitialized()) {
+            ASRStore.PlayRecording();
         } else {
-            play(id, colNumber, index, self);
+            if (self.state.isPlaying[colNumber][index]) {
+                stop(id, colNumber, index, self);
+            } else {
+                play(id, colNumber, index, self);
+            }
         }
     }
 }
@@ -294,9 +296,9 @@ var MultiColumnPronunciationView = React.createClass({
         var note = "";
         var title = state.title;
         var sources = state.sources;
-        var feedbackClass = "l2-glyphicon l2-feedback";
-        var recordedClass = "l2-glyphicon l2-playback";
-        var recordingClass = "l2-glyphicon l2-record";
+        var feedbackClass = "";
+        var recordedClass = "";
+        var recordingClass = "";
 
         var columns = self.state.cols.map(function(colList, colNumber){
             var vaList = colList.map(function(item, index){
@@ -321,18 +323,19 @@ var MultiColumnPronunciationView = React.createClass({
                     } else {
                         itemFeedbackClass = feedbackClass;
                     }
-
+                    recordedClass = "";
                     var hasRecorded = self.state.playableState[colNumber][index];
                     if (hasRecorded) {
-
-                        if (self.state.isPlaying[colNumber][index]) {
-                            itemRecordedClass = recordedClass + " " + L2_GLYPHICON_STOP_CLS;
-                        } else {
-                            itemRecordedClass = recordedClass + " " + L2_GLYPHICON_PLAY_CLS;
-                        }
+                        recordedClass = " ";
                     } else {
-                        itemRecordedClass = recordedClass;
+                        recordedClass = "pb-disabled";
                     }
+                    if (self.state.isPlaying[colNumber][index]) {
+                        itemRecordedClass = recordedClass + " " + L2_GLYPHICON_STOP_CLS;
+                    } else {
+                        itemRecordedClass = recordedClass + " " + L2_GLYPHICON_PLAY_CLS;
+                    }
+
 
                     //if(self.state.message != "No data found.") {
                     if(self.state.message != "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.") {
@@ -357,7 +360,7 @@ var MultiColumnPronunciationView = React.createClass({
                                 <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
                                         alt={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}
                                         type="button" onClick={function(){textClick(id, colNumber, index, self)}}
-                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        className="btn btn-default btn-lg btn-link btn-step l2-btn"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
                                     <span className={"glyphicon pronunciation-audio-button "+ (state.isListening[colNumber][index] ? L2_GLYPHICON_STOP_CLS : L2_GLYPHICON_LISTEN_CLS)} ></span>
                                 </button>
@@ -366,7 +369,7 @@ var MultiColumnPronunciationView = React.createClass({
                                 <button title={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
                                         alt={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
                                         type="button" onClick={function(){handleRecord(id, colNumber, index, self)}}
-                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        className="btn btn-default btn-lg btn-link btn-step l2-btn"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
                                     <span className={itemRecordingClass + " pronunciation-audio-button"} ></span>
                                 </button>
@@ -374,8 +377,8 @@ var MultiColumnPronunciationView = React.createClass({
                             <td rowSpan="2" width="25">
                                 <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
                                         alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
-                                        type="button" onClick={function(){handlePlaying(id, colNumber, index, self)}}
-                                        className="btn btn-default btn-lg btn-link btn-step"
+                                        type="button" onClick={function(){handlePlaying(id, colNumber, index, self, recordedClass)}}
+                                        className="btn btn-default btn-lg btn-link btn-step l2-btn"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
                                     <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
                                 </button>
@@ -388,7 +391,7 @@ var MultiColumnPronunciationView = React.createClass({
                             </td>
                         </tr>
                         <tr>
-                            <td colSpan="4">
+                            <td className="l2-ezread-text" colSpan="4">
                                 <div>
                                     <ColorText props={ezreadText}/>
                                 </div>
@@ -406,20 +409,33 @@ var MultiColumnPronunciationView = React.createClass({
             );
         });
 
+        var finalColumns = columns[0].props.children.map(function(item, index){
+            return (<tr key={page.xid + String(index) + "l2-table-rows"}>
+                <td className="l2-table-row">
+                    {columns[0].props.children[index]}
+                </td>
+                <td className="l2-table-row">
+                    {columns[1].props.children[index]}
+                </td>
+            </tr>);
+        });
+
         //return the multi column pronunciation view into content view
         return (
             <div>
                 <div className="l2-container" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
-                    <div className="row">
-                        <h4 className="l2-note-text">{self.state.note}</h4>
-                    </div>
-                    <div className="row">
-                        <div className="l2-answers-container">
-                            <audio id="l2-demo-audio"></audio>
-                            {columns}
-                        </div>
-                    </div>
+                    <audio id="l2-demo-audio"></audio>
+                    <table className="table table-bordered table-striped l2-table-container">
+                        <tbody>
+                        <tr>
+                            <td colSpan="2">
+                                <h4 className="l2-note-text">{self.state.note}</h4>
+                            </td>
+                        </tr>
+                        {finalColumns}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         );
