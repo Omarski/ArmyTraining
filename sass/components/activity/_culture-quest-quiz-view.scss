@@ -9,17 +9,18 @@
   background-color: #fff;
   display:block;
   position:absolute;
-  top: 150px;
-  left:15px;
-  width:700px;
-  height:275px;
+  top: 90px;
+  left:63px;
+  width:640px;
+  height:360px;
   opacity:0;
   overflow: hidden;
+  border: 2px solid #fff;
 
   .culture-quest-quiz-view-timer{
     position: absolute;
-    left:350px;
-    top:3px;
+    left:325px;
+    top:16px;
   }
 
   .culture-quest-quiz-view-quizCont{
@@ -32,27 +33,43 @@
       width:200px;
       height:275px;
       position: absolute;
-      top:0;
-      left:0;
+      top:22px;
+      left:12px;
+      border: 1px solid #ba9077;
     }
     .culture-quest-quiz-view-quizBody{
       background:#fff;
       position: absolute;
-      width:480px;
-      height:205px;
-      top:32px;
-      left:210px;
+      width:400px;
+      height:75%;
+      top:50px;
+      left:230px;
       overflow:auto;
+
+      .culture-quest-quiz-view-questionText-intro{
+        padding-bottom:3px;
+      }
+
+      .culture-quest-quiz-view-questionText-hint{
+        padding-bottom:3px;
+        color:#fe0000;
+        font-weight:400;
+      }
+
+      .culture-quest-quiz-view-questionText{
+        padding-bottom:3px;
+        font-weight:400;
+      }
 
       .culture-quest-quiz-view-input-blocks-cont {
         position: absolute;
-        top: 145px;
+        top: 155px;
         left: 0;
         z-index: 50;
 
         .culture-quest-quiz-view-input-blocks-cent{
           position: relative;
-          width:480px;
+          width:399px;
           height:100%;
           margin-left: auto;
           margin-right: auto;
@@ -66,12 +83,6 @@
           }
         }
       }
-
-      .culture-quest-quiz-view-questionText{
-        color:#325B75;
-        font-weight:400;
-      }
-
     }
   }
 
@@ -85,6 +96,15 @@
 
   #cultureQuestResponseBtn:active, #cultureQuestSkipAnswerBtn:active, #cultureQuestSkipRegBtn:active {
     border: 1px solid grey;
+  }
+
+  .culture-quest-quiz-view-btnBackground{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:640px;
+    height:38px;
+    background-color:#cccccc;
   }
 }
 
@@ -117,16 +137,17 @@
 
 .culture-quest-quiz-view-regionBanner{
   position:absolute;
-  top:38px;
+  top:39px;
   left:0;
   font-size:16px;
-  line-height: 1;
+  line-height: 1.6;
   padding-left: 15px;
   width:215px;
-  height:20px;
+  height:27px;
   border-right:1px solid #686868;
   border-bottom:1px solid #686868;
-  background: #fff;
   text-align: center;
+  background-color:rgba(255, 255, 255, 0.5);
+  border-radius: 0 0 10px 0;
 }
 

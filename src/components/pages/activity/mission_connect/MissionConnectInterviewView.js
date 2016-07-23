@@ -71,7 +71,7 @@ var MissionConnectInterviewView = React.createClass({
                     background: 'url('+iconCheckImg+') no-repeat 100% 100%', pointerEvents:'none'
                 });
 
-                if (char.gameObjective){
+                if (char.difficulty === "leader"){
 
                     self.props.updateGameView({task:"updateList", value:"leaders"});
                     localStats.completed = self.props.stats.completed + 1;
@@ -79,8 +79,8 @@ var MissionConnectInterviewView = React.createClass({
                     if (localStats.completed === self.props.objectNodesNum) {
                         self.viewUpdate({task:"won", value:null});
                     }
-                }else{
-                    if (!char.startNode) self.props.updateGameView({task:"updateList", value:"contractors"});
+                }else if (char.difficulty === "contractor"){
+                    self.props.updateGameView({task:"updateList", value:"contractors"});
                 }
 
                 localStats.hits = self.props.stats.hits + 1;
