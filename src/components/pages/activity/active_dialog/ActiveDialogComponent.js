@@ -24,6 +24,9 @@ var ActiveDialogComponent = React.createClass({
     getInitialState: function() {
         var videosNotReady = this.props.assets ? this.props.assets.length : 0;
 
+        // look up chat animation
+        this.findChatAnimation();
+
         // trigger callback function
         if (this.props.onLoadStart !== null) {
             this.props.onLoadStart();
@@ -54,6 +57,23 @@ var ActiveDialogComponent = React.createClass({
         if (!this.bAnimationPlaying && !this.bSoundPlaying && !this.bSoundLoading) {
             if (this.props.onPlayingDone !== null) {
                 this.props.onPlayingDone();
+            }
+        }
+    },
+
+    findChatAnimation() {
+        var assetLength = this.props.assets.length;
+        while(assetLength--) {
+            var asset = this.props.assets[assetLength];
+            var assetData = asset.assetData;
+
+            if (assetData && assetData.animations) {
+                for (var animationName in assetData.animations) {
+                    if (animationName.toLowerCase().indexOf("chat") !== -1) {
+                        this.currentChatAnimationName = animationName;
+                        break;
+                    }
+                }
             }
         }
     },
