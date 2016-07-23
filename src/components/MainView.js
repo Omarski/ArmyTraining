@@ -24,6 +24,8 @@ var ReferenceStore = require('../stores/ReferenceStore');
 var AppStateActions = require('../actions/AppStateActions');
 var PopupView = require('../components/widgets/PopupView');
 var SettingsStore = require('../stores/SettingsStore');
+var DevToolsView = require('../components/DevToolsView');
+var DevToolsActions = require('../actions/DevToolsActions');
 
 
 
@@ -118,6 +120,7 @@ var MainView = React.createClass({
             full: true
         });
         LocalizationActions.load();
+        document.addEventListener("keydown", this.keypress);
     },
 
     componentWillUnmount: function() {
@@ -207,6 +210,14 @@ var MainView = React.createClass({
     },
 
 
+    keypress: function(e){
+        var event = window.event ? window.event : e;
+        if(event.keyCode === 192){ // if right arrow pressed
+            DevToolsActions.show();
+            event.preventDefault();
+        }
+    },
+
     /**
      * @return {object}
      */
@@ -231,6 +242,7 @@ var MainView = React.createClass({
                 <ContentView />
                 <FooterView  />
                 <NotificationView />
+                <DevToolsView />
                 {asrFallback}
             </div>
         );
