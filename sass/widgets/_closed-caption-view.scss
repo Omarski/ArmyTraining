@@ -3,6 +3,9 @@
   top: 13px;
   right: 7px;
   padding: 0;
+  span {
+    color: $transcript-btn-color !important;
+  }
 }
 
 .closed-caption-panel {
