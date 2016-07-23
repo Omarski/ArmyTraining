@@ -48,7 +48,7 @@ function load() {
         },
         {
             "asset": "coach_feedback_KEEPTRYING.mp4",
-            "text": "Keep Trying.",
+            "text": "Keep trying.",
             "type": "video/mp4"
         },
         {

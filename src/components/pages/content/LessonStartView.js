@@ -72,7 +72,7 @@ var LessonStartView = React.createClass({
         var unitTitleText = PageStore.unit().data.title;
 
         if(imageXid !== ""){
-            imageHtml = <div className="lesson-start-image-container"><div className="lesson-start-image" style={imageHtmlStyle} ><h3 className="lesson-start-image-text">{unitTitleText}</h3></div></div>;
+            imageHtml = <div className="lesson-start-image-container"><div className="lesson-start-image" style={imageHtmlStyle} ><h1 className="lesson-start-image-text"><strong>{unitTitleText}</strong></h1></div></div>;
         }
 
         if (AppStateStore.isMobile()) {
@@ -85,8 +85,8 @@ var LessonStartView = React.createClass({
         return (
             <div>
                 <PageHeader className="page-header-lesson-start" sources={state.sources} llHide={true} title={title} key={this.state.page.xid}/>
-                <h3 className="lesson-start-timer">{LocalizationStore.labelFor("lessonStart", "lblTime", [time])}</h3>
                 {imageHtml}
+            <p className="lesson-start-timer">{LocalizationStore.labelFor("lessonStart", "lblTime", [time])}</p>
             </div>
         );
     },

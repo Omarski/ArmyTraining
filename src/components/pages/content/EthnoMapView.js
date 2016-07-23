@@ -12,6 +12,8 @@ var Utils = require("../../widgets/Utils");
 var AppStateStore = require('../../../stores/AppStateStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 var NotificationActions = require('../../../actions/NotificationActions');
+var LocalizationActions = require('../../../actions/LocalizationActions');
+
 
 
 function getPageState(props) {
@@ -57,27 +59,19 @@ function getPageState(props) {
 /*INTERACTIVE ETHNOLINGUISTIC MAP VIEW ------ [[[EthnoMapView]]] <--- EthnoMap <--- ImageLayerView & EthnoToggleDiv */
 var EthnoMapView = React.createClass({
     getInitialState: function() {
+
         var pageState = getPageState(this.props);
         return pageState;
     },
-    onLayersReady: function(x){
-    },
     componentWillMount: function(){
         var self = this;
-        setTimeout(
-            function(){NotificationActions.show({
-                title: 'Please wait',
-                body: 'Loading...',
-                full: false,
-                percent: 100
-            })}
-        );
+        console.log("COMPONENTWILLMOUNT");
     },
     componentDidMount: function() {
         var self = this
         //console.log("EthnoMap view component did mount");
-        setTimeout(function(){NotificationActions.hide()});
-        $('.modal-backdrop').remove();
+        // setTimeout(function(){NotificationActions.hide()});
+        // $('.modal-backdrop').remove();
         AppStateStore.addChangeListener(this._onAppStateChange);
 
     },
