@@ -61,7 +61,7 @@ var ActiveDialogComponent = React.createClass({
         }
     },
 
-    findChatAnimation() {
+    findChatAnimation: function() {
         var assetLength = this.props.assets.length;
         while(assetLength--) {
             var asset = this.props.assets[assetLength];
