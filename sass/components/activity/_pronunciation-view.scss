@@ -13,13 +13,19 @@
 }
 
 .pronunciation-container-table{
-  margin: 50px;
-  border: 1px solid #ddd;
+  margin: 50px auto;
+  border: 1px solid #bcd5d1;
   width: unset;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  border-collapse: inherit;
+  overflow: hidden;
+  max-width: 80%;
 }
 
 .pronunciation-note-tr{
-  border-top: 1px solid #ddd;
+
 }
 
 .pronunciation-note{
@@ -37,7 +43,7 @@
     td {
       background: #f9f9f9;
     }
-    border-top: 1px solid #ddd
+    border-top: 1px solid #bcd5d1;
   }
   &.pronunciation-item-row-odd {
     td {
@@ -56,8 +62,8 @@
   min-width: 50px;
   text-align: center;
   vertical-align: middle;
-  font-size: 36px;
-  margin-top: 13px;
+  font-size: 42px;
+  margin-top: 9px;
   pointer-events: all;
   cursor: pointer;
 
@@ -65,4 +71,9 @@
     display: inline;
     margin-right: 5px;
   }
+}
+
+.pb-disabled{
+  opacity: 0.3;
+  cursor: not-allowed;
 }

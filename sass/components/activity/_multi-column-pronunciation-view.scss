@@ -1,50 +1,37 @@
 .l2-answers-container{
-
+  margin: 50px auto;
+  max-width: 80%;
 }
 
-.l2-column{
-
-}
-
-.l2-vocal-answer{
-
-}
-
-.l2-glyphicon{
-
+.l2-table-container{
+  margin: 35px auto;
+  max-width: 80%;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  border-collapse: inherit;
+  .l2-btn{
+    padding: 0;
+  }
+  .l2-table-row{
+    padding: 0;
+  }
+  .l2-native-text{
+    font-size: 35px;
+    padding: 0;
+  }
+  .l2-ezread-text{
+    padding: 0;
+  }
+  .pronunciation-item-row{
+    border: none;
+  }
 }
 
 .l2-note-text{
   margin-left: 30px;
   margin-right: 30px;
-}
-
-.l2-text-area{
-
-}
-
-.l2-native-text{
-  font-size: 35px;
-}
-
-.l2-ezread-text{
-
-}
-
-.l2-translated-text{
-
-}
-
-.l2-record{
-
-}
-
-.l2-stop{
-
-}
-
-.l2-playback{
-
 }
 
 .l2-correct{
@@ -53,8 +40,4 @@
 
 .l2-incorrect{
   color: red;
-}
-
-.l2-feedback{
-
 }
