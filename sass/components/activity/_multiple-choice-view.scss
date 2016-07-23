@@ -30,6 +30,11 @@ input[type=checkbox] {
   h4 {
     margin-bottom: 20px;
   }
+  .infoMediaContainer {
+    .image-caption-container {
+      margin-top: 0px;
+    }
+  }
 }
 
 .multi-choice-header-mobile-margin {
@@ -52,6 +57,7 @@ input[type=checkbox] {
 .multiple-choice-flex {
   display: flex;
   .infoMediaContainer {
+    margin-top: 0px;
     margin-right: 20px;
   }
 }
