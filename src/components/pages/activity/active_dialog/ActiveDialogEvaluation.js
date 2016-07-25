@@ -156,7 +156,7 @@ var ActiveDialogEvaluation = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    {this.state.feedback}
+                    <p className="active-dialog-evaluation-feedback-text">{this.state.feedback}</p>
                     <div className="panel panel-default">
                         <Carousel interval={0} wrap={false}>
                             {carouselItems}

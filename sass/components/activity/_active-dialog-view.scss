@@ -77,3 +77,27 @@
     }
   }
 }
+
+.carousel-control {
+  width: 26px !important;
+  background-image: none !important;
+  background-color: #eaeaea;
+}
+
+.carousel-indicators {
+  display: none !important;
+}
+.carousel-inner {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  padding-top: 0px !important;
+  .item {
+    .panel-default {
+      border-radius: 0 !important;
+    }
+  }
+}
+
+.active-dialog-evaluation-feedback-text {
+  margin-bottom: 20px;
+}
