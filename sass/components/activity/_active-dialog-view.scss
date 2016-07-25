@@ -1,3 +1,11 @@
+.glyphicon.glyphicon-ok-sign.pass {
+  color: green;
+}
+
+.glyphicon.glyphicon-remove-sign.fail {
+  color: red;
+}
+
 .active-dialog-view {
   position: relative;
   min-height: 504px;
@@ -27,13 +35,45 @@
 }
 
 #objectivesPopover {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-color: #fff;
   .popover-title {
-
+    background-color: transparent;
+    border-color: #fff;
+    color: #fff;
   }
   .popover-content {
+    background-color: transparent;
+    color: #fff;
+    margin: 0;
+    padding: 0;
     .list-group {
-
+      margin: 0;
+      padding: 0;
+      .list-group-item:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: none;
+      }
+      .list-group-item:last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+      .list-group-item {
+        background-color: transparent;
+        color: #fff;
+        border-left: none;
+        border-right: none;
+        span {
+          .pass {
+            color: green;
+          }
+          .fail {
+            color: red;
+          }
+        }
+      }
     }
   }
-
 }
