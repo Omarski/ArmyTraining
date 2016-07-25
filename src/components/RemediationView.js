@@ -77,7 +77,7 @@ var RemediationView = React.createClass({
         }
 
         return (
-            <Modal show={this.state.show} onHide={this.hideModal}>
+            <Modal show={this.state.show} onHide={this.hideModal} className="active-dialog-modal-full">
                 <Modal.Body>
                     <div key={"remediation-" + pageId}>
                         {page}
