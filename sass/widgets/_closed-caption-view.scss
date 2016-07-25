@@ -9,6 +9,8 @@
 }
 
 .closed-caption-panel {
+  max-height: 320px;
+  overflow: scroll;
   background-color: $info-panel-bg-color;
   color: $info-panel-font-color;
   &.panel-default>.panel-heading {
