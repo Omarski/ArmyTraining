@@ -30,7 +30,7 @@ function getBookState() {
     }
 
     if (book) {
-        title = book.data.config.title;
+        title = LocalizationStore.labelFor("header", "lbltitle");
     }
 
     return {
