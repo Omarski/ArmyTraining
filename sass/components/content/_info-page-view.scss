@@ -9,6 +9,10 @@
   }
 }
 
+.info-bullets-div {
+  display: inline-flex !important;
+}
+
 .infoMediaContainer {
   text-align: center;
 }
@@ -31,7 +35,12 @@
 
 
 .info-bullets-indent {
+  margin-left: 10px;
+}
+
+.info-view-bullet-item{
   margin-left: 25px;
+  font-size: 20px;
 }
 
 
