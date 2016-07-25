@@ -18,11 +18,11 @@
   },
   "evaluation": {
     "btnContinue": "Continue",
-    "btnRestart": "Restart Episode",
+    "btnRestart": "Replay Scenario",
     "brnReview": "Review Lessons",
     "lblContent": "Click the forward and back buttons to review the objectives from this episode.",
     "lblObjectives": "Objectives",
-    "lblRestart": "I want more practice",
+    "lblRestart": "Do you want to try again?",
     "lblReview": "I want to review the information I missed",
     "lblTitle": "After Action Review",
     "lblTestPassed": "Excellent work on this episode! You selected the optimal choice on every decision point! You clearly know this mission topic well and are ready to move on in the course!",
