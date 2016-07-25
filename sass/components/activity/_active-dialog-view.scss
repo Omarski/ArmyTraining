@@ -138,6 +138,18 @@
     margin: 0;
     display: block;
     width: inherit;
+    .modal-body {
+      padding: 0;
+      .container {
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        .infoContainer {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+      }
+    }
     .modal-content {
       position: absolute;
       display: block;
@@ -146,5 +158,11 @@
       left: 0;
       right: 0;
     }
+    .modal-footer {
+      text-align: center;
+      border-top: 1px solid #e5e5e5;
+      background-color: #eaeaea;
+    }
   }
 }
+
