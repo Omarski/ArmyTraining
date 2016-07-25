@@ -48,7 +48,7 @@
     "tooltipSettings": "Settings"
   },
   "lessonStart": {
-    "lblTime": "This lesson is made up of multiple sections. The entire lesson will take approximately {0} minutes to complete."
+    "lblTime": "This lesson may contain multiple sections. The entire lesson will take approximately {0} minutes to complete."
   },
   "loader": {
     "lblLoading": "Loading"
