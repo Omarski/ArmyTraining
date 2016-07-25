@@ -71,8 +71,8 @@ var ActiveDialogObjectives = React.createClass({
 
         return (
             <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover} ref="objectivesPopover">
-                <Button className="btn btn-default">
-                    Objectives
+                <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
+                    <span className="glyphicon glyphicon-record" aria-hidden="true"></span>
                 </Button>
             </OverlayTrigger>
 
