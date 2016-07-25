@@ -1,0 +1,17 @@
+.active-dialog-closed-caption-button {
+  position: absolute;
+  bottom: 0px;
+  left: 8px;
+  padding: 0;
+  span {
+    color: $transcript-btn-color !important;
+  }
+}
+
+.active-dialog-closed-caption-panel {
+  max-height: 320px;
+  overflow: scroll;
+  background-color: $info-panel-bg-color;
+  color: $info-panel-font-color;
+}
+

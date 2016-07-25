@@ -51,10 +51,12 @@ var ActiveDialogObjectives = React.createClass({
 
                 return  <ListGroupItem key={index}>
                         <table>
-                            <tr>
-                                <td width="25">{check}</td>
-                                <td>{item.label}</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td width="25">{check}</td>
+                                    <td>{item.label}</td>
+                                </tr>
+                            </tbody>
                         </table>
 
                         </ListGroupItem>
