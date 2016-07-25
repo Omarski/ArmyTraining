@@ -180,7 +180,7 @@ var SortingView = React.createClass({
         var draggedItemTarget = state.draggedItemTarget;
         var draggedItemLetter = state.draggedItemLetter;
         var dropLocation = "";
-
+        
         switch($(e.target).attr("class")){
             case "sorting-columnA-dropArea sorting-drop-area":
                 dropLocation = "A";
@@ -195,10 +195,10 @@ var SortingView = React.createClass({
                 if($(e.target).parent().attr("class") == "sorting-columnB-dropArea sorting-drop-area"){
                     dropLocation = "B";
                 }
-                if($(e.target).attr("class") === "placed-A"){ // if you drop on something in the sorting container
+                if($(e.target).hasClass("placed-A")){ // if you drop on something in the sorting container
                     dropLocation = "A";
                 }
-                if($(e.target).attr("class") === "placed-B"){
+                if($(e.target).hasClass("placed-B")){
                     dropLocation = "B";
                 }
         }
@@ -468,7 +468,7 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "string":
-                    answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+index+itemA.passedData}>
+                    answerRender = <li className="sorting-choices-container-text answer placed-A" key={page.xid + "colA-"+index+itemA.passedData}>
                         <div
                             draggable="true"
                             className="placed-A"
@@ -526,7 +526,7 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "string":
-                    answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+itemB.passedData}>
+                    answerRender = <li className="sorting-choices-container-text answer placed-B" key={page.xid + "colA-"+itemB.passedData}>
                         <div
                             draggable="true"
                             className="placed-B"
