@@ -75,22 +75,28 @@ var CultureQuestView = React.createClass({
     prepIntroPopup: function(){
 
         var self = this;
-
+        var txtBxStyle = {height:'100%'};
         var popupObj = {
             id:"Intro",
             onClickOutside: self.onClosePopup,
-            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1},
+            popupStyle: {height:'315px', width:'455px', top:'20%', left:'20%', background:'#fff', border:'2px solid #fff'},
 
             content: function(){
                 
                 return(
                     <div className="popup-view-content">
-                        <div className="popup-view-bodyText">
-                            {self.state.imageData.briefText}
+                        <div className="culture-quest-view-popHeaderCont">
+                            <div className="culture-quest-view-popHeaderText">{"Welcome to ..."}</div>
                         </div>
-                        <div className="popup-view-buttonCont">
-                            <button type="button" className="btn btn-default"
-                                    onClick={self.onStartGame}>Start</button>
+                        <div className="popup-view-bodyText" style={txtBxStyle}>
+                            <div>{self.state.imageData.briefText}</div>
+                        </div>
+                        <div className="popup-view-buttonContCent" style={{background:'#cccccc'}}>
+                            <div className="popup-view-buttonCont">
+                                <button type="button" className="btn btn-default" style={{paddingLeft:'30px', paddingRight:'30px'}}
+                                    onClick={self.onStartGame}>Start
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )

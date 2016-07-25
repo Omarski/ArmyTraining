@@ -1,4 +1,5 @@
 module.exports = {
+    INFO_PROP_AUTOPASS: "autopass",
     INFO_PROP_GROUPID: "exclusivegroupid",
     INFO_PROP_HIDDEN: "hidden",
     INFO_PROP_MANDATORY: "mandatory",

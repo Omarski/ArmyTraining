@@ -267,7 +267,7 @@ var MultiNoteView = React.createClass({
             noteImage = (
                 <div className="col-md-6 col-sm-6">
                     <div className="container-fluid">
-                        <div className="row">
+                        <div className="row multi-note-img-row">
                             <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
                         </div>
                         <div className="row">

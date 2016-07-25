@@ -5,6 +5,7 @@ var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var QuestionnaireActions = require('../../../actions/QuestionnaireActions');
 var QuestionnaireStore = require('../../../stores/QuestionnaireStore');
+var SettingsStore = require('../../../stores/SettingsStore');
 var Utils = require('../../widgets/Utils');
 var SettingsStore = ('../../../stores/SettingsStore');
 

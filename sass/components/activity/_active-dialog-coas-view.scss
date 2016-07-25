@@ -1,3 +1,30 @@
 #coasModal {
   margin-top: 280px;
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        background-color: #5A5C51;
+        color: #fff;
+      }
+      .modal-body {
+        padding: 0;
+        .list-group {
+          .list-group-item:first-child {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+          }
+
+          .list-group-item:last-child {
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+          }
+        }
+
+      }
+      .modal-footer {
+        text-align: center !important;
+        background: #E5E5E5 !important;
+      }
+    }
+  }
 }

@@ -298,18 +298,18 @@ var CultureQuestQuiz = React.createClass({
         var quizPopClasses = (self.props.showQuiz) ? "culture-quest-quiz-view-fade-in" : ".culture-quest-quiz-view-fade-out";
 
         var btnRespondClasses = "btn btn-default";
-        var btnRespondStyle = {position: 'absolute', zIndex:20, top:'238px', left:'400px', display:(self.state.showInputBlocks && self.state.respBtnOn)? "block":"none"};
+        var btnRespondStyle = {position: 'absolute', zIndex:20, bottom:'2px', left:'280px', display:(self.state.showInputBlocks && self.state.respBtnOn)? "block":"none"};
 
         var btnSkipClasses = "btn btn-default";
-        var btnSkipStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', display:(self.state.skipMode)? "block":"none"};
+        var btnSkipStyle = {position: 'absolute', zIndex:20, bottom:'2px', left:'364px', display:(self.state.skipMode && self.state.respBtnOn)? "block":"none"};
 
         var btnLeaveRegionClasses = "btn btn-default";
-        var btnLeaveRegionStyle = {position: 'absolute', zIndex:20, top:'5px', right:'5px', display:(self.state.leaveRegionMode)? "block":"none"};
+        var btnLeaveRegionStyle = {position: 'absolute', zIndex:20, bottom:'2px', left:'280px', display:(self.state.leaveRegionMode)? "block":"none"};
 
         var instImg = self.state.mediaPath + self.getSelectedJSON()['face'];
         var instStyle = {background:"#000 url("+instImg+") no-repeat 100% 100%"};
 
-        var timerStyle = {fontSize:'20px', textAlign:'center',zIndex:'20'};
+        var timerStyle = {fontSize:'20px', textAlign:'center', color:'#0000ff', zIndex:'20'};
 
         var quizTextClass = "culture-quest-quiz-view-quizText";
 
@@ -344,7 +344,7 @@ var CultureQuestQuiz = React.createClass({
                             {!self.state.puzzleAwardMode?
                                 <div className={quizTextClass} id="culture-quest-quiz-view-quizText">
                                     <div className="culture-quest-quiz-view-questionText-intro">{self.state.questionDisplayObj.intro}</div>
-                                    <div className="culture-quest-quiz-view-questionText-intro">{self.state.questionDisplayObj.introL2}</div>
+                                    <div className="culture-quest-quiz-view-questionText-hint">{self.state.questionDisplayObj.introL2}</div>
                                     <div className="culture-quest-quiz-view-questionText">{self.state.questionDisplayObj.question}</div>
                                 </div>:null}
 
@@ -363,6 +363,7 @@ var CultureQuestQuiz = React.createClass({
                     <button type="button" onClick={self.checkAnswer}  id="cultureQuestResponseBtn" style={btnRespondStyle} className={btnRespondClasses}>Respond</button>
                     <button type="button" onClick={self.onSkipAnswer} id="cultureQuestSkipAnswerBtn" style={btnSkipStyle} className={btnSkipClasses}>Skip question</button>
                     <button type="button" onClick={self.onSkipRegion} id="cultureQuestSkipRegBtn" style={btnLeaveRegionStyle} className={btnLeaveRegionClasses}>Leave region</button>
+                    <div className = "culture-quest-quiz-view-btnBackground"></div>
                     </div>:null}
                 </div>
                 </div>

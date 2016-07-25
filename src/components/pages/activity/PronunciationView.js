@@ -65,14 +65,16 @@ function stopRecording(id, index, self){
     }
 }
 
-function handlePlaying(id, index, self){
-    if(ASRStore.isInitialized()){
-        ASRStore.PlayRecording();
-    }else {
-        if (self.state.isPlaying[index]) {
-            stop(id, index, self);
+function handlePlaying(id, index, self, recordedClass){
+    if(recordedClass !== "pb-disabled") {
+        if (ASRStore.isInitialized()) {
+            ASRStore.PlayRecording();
         } else {
-            play(id, index, self);
+            if (self.state.isPlaying[index]) {
+                stop(id, index, self);
+            } else {
+                play(id, index, self);
+            }
         }
     }
 }
@@ -340,14 +342,16 @@ var PronunciationView = React.createClass({
 
                 var hasRecorded = self.state.playableState[qcIndex];
                 if (hasRecorded) {
-                    if (self.state.isPlaying[qcIndex]) {
-                        itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
-                    } else {
-                        itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
-                    }
+                    recordedClass = "";
                 } else {
-                    itemRecordedClass = recordedClass;
+                    recordedClass = "pb-disabled";
                 }
+                if (self.state.isPlaying[qcIndex]) {
+                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
+                } else {
+                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
+                }
+
                 //if(self.state.message != "No data found.") {
                 if(self.state.message != "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.") {
                     var isRecording = self.state.recordingState[qcIndex];
@@ -393,7 +397,7 @@ var PronunciationView = React.createClass({
                                 <td rowSpan="2" width="25">
                                     <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
                                             alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
-                                            type="button" onClick={function(){handlePlaying(id, qcIndex, self)}}
+                                            type="button" onClick={function(){handlePlaying(id, qcIndex, self, recordedClass)}}
                                             className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                             aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
                                         <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
@@ -420,6 +424,8 @@ var PronunciationView = React.createClass({
             }
 
         });
+
+        // table with border-radius seems to get cut off in the table
 
         return (
             <div key={"page-" + this.state.page.xid}>

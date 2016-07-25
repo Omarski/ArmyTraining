@@ -26,7 +26,8 @@
     "lblReview": "I want to review the information I missed",
     "lblTitle": "After Action Review",
     "lblTestPassed": "Excellent work on this episode! You selected the optimal choice on every decision point! You clearly know this mission topic well and are ready to move on in the course!",
-    "lblTestFailed": "I can tell that you are working hard to remember all of the cultural information you've learned so far, but unfortunately, your score does not allow you to move on in the course. Please review the information provided in the After Action Review below. It will help you to remember the cultural points necessary to perform better on your next try. When you feel that you are ready, play the episode again."
+    "lblTestFailed": "I can tell that you are working hard to remember all of the cultural information you've learned so far, but unfortunately, your score does not allow you to move on in the course. Please review the information provided in the After Action Review below. It will help you to remember the cultural points necessary to perform better on your next try. When you feel that you are ready, play the episode again.",
+    "lblEndInstructions": "Click the buttons below to review the information you missed or play the scenario again."
   },
   "footer": {
     "tooltipNext": "Next Page",
@@ -38,6 +39,7 @@
     "lblExplorer": "Explorer"
   },
   "header": {
+    "lbltitle": "AFPAK",
     "tooltipLogo": "Virtual Culture Awareness Trainer",
     "tooltipDLI": "DLI Guide",
     "tooltipReference": "Reference Guide",
@@ -47,7 +49,7 @@
     "tooltipSettings": "Settings"
   },
   "lessonStart": {
-    "lblTime": "This lesson is made up of multiple sections. The entire lesson will take approximately {0} minutes to complete."
+    "lblTime": "This lesson may contain multiple sections. The entire lesson will take approximately {0} minutes to complete."
   },
   "loader": {
     "lblLoading": "Loading"

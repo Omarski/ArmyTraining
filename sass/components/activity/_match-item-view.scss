@@ -1,8 +1,19 @@
-.match-item-answer-drop-area, .match-item-play-icon {
+.match-item-answer-drop-area{
   width: 75px;
   height: 75px;
   margin: 5px;
   font-size: 72px;
+}
+
+.match-item-play-icon {
+  width: 75px;
+  height: 75px;
+  margin: 5px;
+  font-size: 55px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding-left: 8px;
+  padding-top: 6px;
 }
 
 [draggable=true] {

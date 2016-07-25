@@ -56,7 +56,7 @@ var MissionConnectGameView = React.createClass({
         var pieces = chars.map(function(char,index){
 
             var houseImg = self.props.images[parseInt(char.nodeNumber) - 1].houseUrl;
-            var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize:'100% 100%'};
+            var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize:'200px 150px'};
 
             var iconImg = self.props.images[parseInt(char.nodeNumber) - 1].charIconUrl;
             var iconStyle = {background:'url(' + iconImg + ') no-repeat', backgroundSize: '100% 100%'};

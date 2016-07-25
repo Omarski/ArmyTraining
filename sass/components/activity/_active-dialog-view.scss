@@ -1,10 +1,150 @@
+.glyphicon.glyphicon-ok-sign.pass {
+  color: green;
+}
+
+.glyphicon.glyphicon-remove-sign.fail {
+  color: red;
+}
+
 .active-dialog-view {
   position: relative;
+  min-height: 504px;
 }
 .active-dialog-toolbar {
+  top: 0px;
+  left: 0px;
+  right: 0px;
   position: absolute;
-  top: 70px;
-  left: 20px;
-  right: 20px;
+  display: block;
+  max-width: 1000px;
+  text-align: right;
+  padding-top: 5px;
+  padding-right: 5px;
   z-index: 1999;
+}
+
+.active-dialog-toolbar-btn {
+  margin-top: 4px;
+  padding: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #6F6F77;
+  color: #6F6F77;
+  width: 24px;
+  height: 32px;
+}
+
+#objectivesPopover {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-color: #fff;
+  .popover-title {
+    background-color: transparent;
+    border-color: #fff;
+    color: #fff;
+  }
+  .popover-content {
+    background-color: transparent;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    .list-group {
+      margin: 0;
+      padding: 0;
+      .list-group-item:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: none;
+      }
+      .list-group-item:last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+      .list-group-item {
+        background-color: transparent;
+        color: #fff;
+        border-left: none;
+        border-right: none;
+        span {
+          .pass {
+            color: green;
+          }
+          .fail {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}
+
+.carousel-control {
+  width: 26px !important;
+  background-image: none !important;
+  background-color: #eaeaea;
+}
+
+.carousel-indicators {
+  display: none !important;
+}
+.carousel-inner {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  padding-top: 0px !important;
+  .item {
+    .panel {
+      margin-bottom: 0;
+    }
+    .panel-default {
+      border-radius: 0 !important;
+    }
+    .panel-footer {
+      text-align: center;
+      button {
+        margin-right: 15px;
+        margin-left: 15px;
+      }
+    }
+  }
+}
+
+.active-dialog-evaluation-feedback-text {
+  margin-bottom: 20px;
+}
+
+.active-dialog-eval-icon {
+  float: right;
+}
+
+.active-dialog-eval-title {
+  line-height: 15.5px !important;
+  &.pass {
+    color: green !important;
+  }
+  &.fail {
+    color: red !important;
+  }
+}
+
+
+.active-dialog-modal-full {
+  .modal-dialog {
+    position: absolute;
+    top: 35px;
+    bottom: 70px;
+    left: 35px;
+    right: 35px;
+    text-align: center;
+    margin: 0;
+    display: block;
+    width: inherit;
+    .modal-content {
+      position: absolute;
+      display: block;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
 }

@@ -25,6 +25,10 @@ input[type=checkbox] {
   }
 }
 
+.lc-glyphicon{
+  font-size: 53px;
+}
+
 .listening-comp-alert {
   background-color: #f7f7f9;
   border-color: #e1e1e8;
@@ -47,8 +51,12 @@ input[type=checkbox] {
 }
 
 .listening-comp-prompt {
-  font-size: 72px;
   text-align: center;
+}
+
+.btn-lc-btn{
+  padding-left: 0;
+  padding-top: 0;
 }
 
 .listening-comp-interaction-container {

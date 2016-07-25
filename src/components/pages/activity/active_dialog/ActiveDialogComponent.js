@@ -3,6 +3,8 @@ var ReactBootstrap = require('react-bootstrap');
 var PageStore = require('../../../../stores/PageStore');
 
 
+
+
 var ActiveDialogComponent = React.createClass({
     bAnimationPlaying: false,
     bSoundLoading: false,
@@ -23,6 +25,9 @@ var ActiveDialogComponent = React.createClass({
 
     getInitialState: function() {
         var videosNotReady = this.props.assets ? this.props.assets.length : 0;
+
+        // look up chat animation
+        this.findChatAnimation();
 
         // trigger callback function
         if (this.props.onLoadStart !== null) {
@@ -58,6 +63,23 @@ var ActiveDialogComponent = React.createClass({
         }
     },
 
+    findChatAnimation: function() {
+        var assetLength = this.props.assets.length;
+        while(assetLength--) {
+            var asset = this.props.assets[assetLength];
+            var assetData = asset.assetData;
+
+            if (assetData && assetData.animations) {
+                for (var animationName in assetData.animations) {
+                    if (animationName.toLowerCase().indexOf("chat") !== -1) {
+                        this.currentChatAnimationName = animationName;
+                        break;
+                    }
+                }
+            }
+        }
+    },
+
     playAnimationVideo: function(animationName) {
         var bFoundVideo2Play = false;
 
@@ -77,6 +99,8 @@ var ActiveDialogComponent = React.createClass({
                 // get video element
                 var video = document.getElementById(source);
 
+
+
                 // set current time
                 video.currentTime = animation.start / 1000;
 
@@ -87,14 +111,17 @@ var ActiveDialogComponent = React.createClass({
                 this.currentAnimation = animationName;
                 this.currentStop = animation.stop / 1000;
 
+
                 // show video
                 video.style.display = "block";
+
+
 
 
                 // increment counter if animation is not the default one otherwise play
                 if (animationName != this.currentIdleAnimationName) {
                     bFoundVideo2Play = true;
-
+                    console.log(video)
                     // add to hack
                     this.currentVideosPlayingHack.push(video);
                 } else {
@@ -176,7 +203,6 @@ var ActiveDialogComponent = React.createClass({
                 var vidLength = this.currentVideosPlayingHack.length;
                 while(vidLength--) {
                     var video = this.currentVideosPlayingHack[vidLength];
-
                     // hide video
                     video.style.display = "none";
                 }
@@ -243,18 +269,20 @@ var ActiveDialogComponent = React.createClass({
             var videoStyle = {display: "none"};
             return (
                 <div className="" key={index} style={style}>
-                    <video id={item.assetData.source}
-                           alt=""
-                           aria-label=""
-                           title=""
-                           onLoadStart={self.videoLoadStartHandler}
-                           onCanPlayThrough={self.videoCanPlayThroughHandler}
-                           onError={self.videoErrorHandler}
-                           onEnded={self.videoEndedHandler}
-                           style={videoStyle}
-                        >
-                        <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
-                    </video>
+                    <div className="active-dialog-video-and-captions">
+                        <video id={item.assetData.source}
+                               alt=""
+                               aria-label=""
+                               title=""
+                               onLoadStart={self.videoLoadStartHandler}
+                               onCanPlayThrough={self.videoCanPlayThroughHandler}
+                               onError={self.videoErrorHandler}
+                               onEnded={self.videoEndedHandler}
+                               style={videoStyle}
+                            >
+                            <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
+                        </video>
+                    </div>
                 </div>
             );
         });

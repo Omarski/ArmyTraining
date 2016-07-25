@@ -1,3 +1,15 @@
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.centerVertical{
+  @include vertical-align();
+}
+
 .popup-view-background{
   position: absolute;
   display:block;
@@ -10,24 +22,37 @@
 
   .popup-view-cont{
     position: absolute;
+    width:100%;
+    height:100%;
 
     .popup-view-content {
       position:absolute;
       top:0;
       left:0;
+      width:100%;
+      height:100%;
 
       .popup-view-bodyText{
         color:#0a0a0a;
         padding:15px;
+
+        div {
+          @include vertical-align();
+        }
       }
 
-      .popup-view-buttonCont{
-        position: relative;
-        width:80px;
-        height:30px;
-        margin-left:auto;
-        margin-right:auto;
-        margin-top:-20px;
+      .popup-view-buttonContCent{
+        position: absolute;
+        width:100%;
+        height:33px;
+        bottom:0;
+
+        .popup-view-buttonCont{
+          position:relative;
+          margin-left:auto;
+          margin-right:auto;
+          text-align:center;
+        }
       }
     }
   }

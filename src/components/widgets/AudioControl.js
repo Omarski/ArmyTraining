@@ -9,7 +9,16 @@ var AudioControl = React.createClass({
     },
 
     toggle: function() {
-      this.setState({isPlaying:!this.state.isPlaying});
+        this.setState({isPlaying:!this.state.isPlaying});
+        var audio = $('#audio')[0];
+        if (audio) {
+            if (audio.duration > 0 && !audio.paused) { // is playing
+                audio.pause();
+            } else {
+                audio.play();
+            }
+        }
+
     },
 
     render: function() {

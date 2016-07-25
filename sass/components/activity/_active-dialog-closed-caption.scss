@@ -1,0 +1,46 @@
+.active-dialog-closed-caption-button {
+  padding: 0;
+  margin-left: 12px;
+  margin-bottom: 0px;
+  span {
+    color: $transcript-btn-color !important;
+  }
+}
+.active-dialog-closed-caption-button:hover {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.active-dialog-closed-caption-panel {
+  max-height: 320px;
+  min-width: 1000px;
+  overflow: scroll;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: $info-panel-bg-color;
+  color: $info-panel-font-color;
+  p {
+    margin: 15px;
+  }
+}
+
+.active-dialog-closed-caption-container {
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  position: absolute;
+  display: block;
+  max-width: 1000px;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0;
+  padding-bottom: 0;
+  z-index: 1999;
+}
+
+.active-dialog-video-and-captions {
+  display: inline-block;
+  max-width: 1000px;
+  max-height: 504px;
+}

@@ -46,15 +46,19 @@ var ActiveDialogObjectives = React.createClass({
             objectivesList = this.state.objectives.map(function(item, index) {
                 var check = "";
                 if (item.pass) {
-                    check = <span className="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    check = <span className="glyphicon glyphicon-ok-sign pass" aria-hidden="true"></span>
+                } else {
+                    check = <span className="glyphicon glyphicon-remove-sign fail" aria-hidden="true"></span> // TODO: Greg, we need to not show this if the user has not got this far
                 }
 
                 return  <ListGroupItem key={index}>
                         <table>
-                            <tr>
-                                <td width="25">{check}</td>
-                                <td>{item.label}</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td width="25">{check}</td>
+                                    <td>{item.label}</td>
+                                </tr>
+                            </tbody>
                         </table>
 
                         </ListGroupItem>
@@ -69,8 +73,8 @@ var ActiveDialogObjectives = React.createClass({
 
         return (
             <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover} ref="objectivesPopover">
-                <Button className="btn btn-default">
-                    Objectives
+                <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
+                    <span className="glyphicon glyphicon-record" aria-hidden="true"></span>
                 </Button>
             </OverlayTrigger>
 

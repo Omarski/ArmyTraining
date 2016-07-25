@@ -67,6 +67,7 @@ var SettingsView = React.createClass({
         SettingsActions.updateAutoPlaySound();
     },
 
+    /*
     clearBookmark: function() {
         BookmarkActions.destroy();
     },
@@ -82,7 +83,7 @@ var SettingsView = React.createClass({
 
     toggleLessonIDs: function() {
         SettingsActions.toggleLessonIDs();
-    },
+    },*/
 
     menuItemClick: function(){
         this._forceOpen = true;
@@ -147,23 +148,27 @@ var SettingsView = React.createClass({
                             toolTip={false}
                             onSlide={this.backgroundVolumeChange} />
                     </ListGroupItem>
-                    <ListGroupItem>
-                        <p><i>BUTTONS BELOW ARE FOR DEVELOPERS NOT FOR FINAL PRODUCT</i></p>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                        <Button bsStyle='warning' onClick={this.clearBookmark}>Clear Bookmark</Button>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                        <Button bsStyle='danger' onClick={this.resetProgress}>Reset Progress</Button>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                        <Button bsStyle='info' onClick={this.resetSettings}>Reset Settings</Button>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                        <Button bsStyle='warning' onClick={this.toggleLessonIDs}>Toggle Lesson IDs</Button>
-                    </ListGroupItem>
                 </ListGroup>
             </Popover>;
+
+
+            /**
+             * <ListGroupItem>
+             <p><i>BUTTONS BELOW ARE FOR DEVELOPERS NOT FOR FINAL PRODUCT</i></p>
+             </ListGroupItem>
+             <ListGroupItem>
+             <Button bsStyle='warning' onClick={this.clearBookmark}>Clear Bookmark</Button>
+             </ListGroupItem>
+             <ListGroupItem>
+             <Button bsStyle='danger' onClick={this.resetProgress}>Reset Progress</Button>
+             </ListGroupItem>
+             <ListGroupItem>
+             <Button bsStyle='info' onClick={this.resetSettings}>Reset Settings</Button>
+             </ListGroupItem>
+             <ListGroupItem>
+             <Button bsStyle='warning' onClick={this.toggleLessonIDs}>Toggle Lesson IDs</Button>
+             </ListGroupItem>
+             */
 
             return  (
                 <li>

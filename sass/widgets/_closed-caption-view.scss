@@ -3,9 +3,14 @@
   top: 13px;
   right: 7px;
   padding: 0;
+  span {
+    color: $transcript-btn-color !important;
+  }
 }
 
 .closed-caption-panel {
+  max-height: 320px;
+  overflow: scroll;
   background-color: $info-panel-bg-color;
   color: $info-panel-font-color;
   &.panel-default>.panel-heading {
@@ -33,3 +38,4 @@
   color: $info-panel-font-color;
   background-color: $info-panel-bg-color;
 }
+

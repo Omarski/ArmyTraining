@@ -310,8 +310,13 @@ function load(data) {
             // save current page
             saveCurrentPage();
 
+            // after load actions
             PageActions.complete(result);
             FooterActions.enableAll(); // TODO: dont like this here <---
+            if (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_AUTOPASS) !== null) {
+                markChapterComplete();  // TODO: dont like this here <---
+            }
+
 
         });
     } else {
