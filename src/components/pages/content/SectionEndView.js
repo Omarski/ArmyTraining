@@ -1,3 +1,4 @@
+var FooterActions = require('../../../actions/FooterActions');
 var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageHeader = require('../../widgets/PageHeader');
 var PageStore = require('../../../stores/PageStore');
@@ -49,12 +50,21 @@ function getPageState(props) {
 var SectionEndView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
-        return pageState;
 
         // send course completion HACK
         if (UnitStore.areAllRequiredComplete()) {
             SCORMActions.complete();
         }
+
+        // disable next button if failed chapter
+        setTimeout(function() {
+            if (!PageStore.isChapterComplete()) {
+                FooterActions.disableNext();
+            }
+        }, 0.1);
+
+
+        return pageState;
     },
 
     componentWillMount: function() {
