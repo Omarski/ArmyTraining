@@ -67,11 +67,25 @@ var ActiveDialogIntro = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
-                    {content}
-                    {steps}
-                    <br/>
-                    {end}
+                    <div className="active-dialog-evaluation-feedback-text">
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
+                                    </td>
+                                    <td>
+                                        <div className="active-dialog-evaluation-feedback">
+                                            <p>{content}</p>
+                                            {steps}
+                                            <br/>
+                                            {end}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </Modal.Body>
 
                 <Modal.Footer>

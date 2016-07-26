@@ -171,10 +171,22 @@ var ActiveDialogEvaluation = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <p className="active-dialog-evaluation-feedback-text">
-                        <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
-                        {this.state.feedback}
-                    </p>
+                    <div className="active-dialog-evaluation-feedback-text">
+                        <table className="table">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
+                                </td>
+                                <td>
+                                    <div className="active-dialog-evaluation-feedback">
+                                        {this.state.feedback}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div className="panel panel-default">
                         <Carousel interval={0} wrap={false}>
                             {carouselItems}
