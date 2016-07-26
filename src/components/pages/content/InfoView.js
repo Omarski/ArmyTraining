@@ -267,9 +267,38 @@ var InfoView = React.createClass({
             );
         }
 
+
+
+        if ((state.page.note && state.page.note.length) || pageNotes !== "") {
+            _hasNotes = true;
+        } else {
+            _hasNotes = false;
+        }
+
+        var hasMedia = false;
+        var mediaContainer = "";
+        var cols = "col-md-6 col-sm-6";
+        if (!_hasNotes) {
+            cols = "col-md-12 col-sm-12";
+        }
+        if (media) {
+            hasMedia = true;
+            mediaContainer = (
+                <div className={"infoMediaContainer " + cols}>
+                    {media}
+                </div>
+                );
+        }
+
+
+        var mCols = "col-md-6 col-sm-6";
+        if (!hasMedia) {
+            mCols = "col-md-12 col-sm-12";
+        }
+
         var noteDisplay = (
             <div
-                className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}
+                className={mediaType + " infoNoteContainer " + mCols}
             >
                 <div className="info-page-notes">
                     {pageNotes}
@@ -279,32 +308,13 @@ var InfoView = React.createClass({
 
         if(state.page.note && state.page.note.length > 1){
             noteDisplay =   (
-                <div className={mediaType + " infoNoteContainer col-md-6 col-sm-6"}>
+                <div className={mediaType + " infoNoteContainer " + mCols}>
                     <ul className="info-page-notes">{pageNotes}</ul>
                     {transcriptContainer}
                 </div>
             );
         }
 
-
-        if ((state.page.note && state.page.note.length) || pageNotes !== "") {
-            _hasNotes = true;
-        } else {
-            _hasNotes = false;
-        }
-
-        var mediaContainer = "";
-        var cols = "col-md-6 col-sm-6";
-        if (!_hasNotes) {
-            cols = "col-md-12 col-sm-12";
-        }
-        if (media) {
-            mediaContainer = (
-                <div className={"infoMediaContainer " + cols}>
-                    {media}
-                </div>
-                );
-        }
 
         if (isFullCoach) {
 
