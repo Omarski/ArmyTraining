@@ -290,21 +290,21 @@ var ListeningComprehensionView = React.createClass({
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
-                        <div className="row">
-                            <h4>
-                                {state.prompt}
-                            </h4>
-                        </div>
-                        <div className="listening-comp-prompt">
-                            <button title={btnTitleText}
-                                    alt={btnTitleText}
-                                    type="button"
-                                    onClick={self.listenCheck}
-                                    className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
-                                    aria-label={btnTitleText}>
-                                <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
-                            </button>
-                        </div>
+                            <div className="row lc-prompt-row">
+                                <h4>
+                                    {state.prompt}
+                                </h4>
+                                <div className="listening-comp-prompt">
+                                    <button title={btnTitleText}
+                                            alt={btnTitleText}
+                                            type="button"
+                                            onClick={self.listenCheck}
+                                            className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
+                                            aria-label={btnTitleText}>
+                                        <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
                         <div className="row">
                             <ul className="list-group listening-comp-choices-container">
                                 {choices}
@@ -321,7 +321,7 @@ var ListeningComprehensionView = React.createClass({
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
-                        <div className="row">
+                        <div className="row lc-prompt-row">
                             <h4>
                                 {state.prompt}
                             </h4>
@@ -346,7 +346,7 @@ var ListeningComprehensionView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
+                    <div className="container lc-page-container-container">
                         {cc}
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
