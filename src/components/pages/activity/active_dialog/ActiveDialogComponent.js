@@ -121,7 +121,7 @@ var ActiveDialogComponent = React.createClass({
                 // increment counter if animation is not the default one otherwise play
                 if (animationName != this.currentIdleAnimationName) {
                     bFoundVideo2Play = true;
-                    console.log(video)
+                    
                     // add to hack
                     this.currentVideosPlayingHack.push(video);
                 } else {
