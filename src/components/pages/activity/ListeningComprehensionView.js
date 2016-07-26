@@ -208,6 +208,7 @@ var ListeningComprehensionView = React.createClass({
         }
 
         if(zid && zid !== 0){
+            var audio = document.getElementById('audio');
             if(self.state.isListening){
                 self.setState({
                     isListening: false
@@ -217,13 +218,15 @@ var ListeningComprehensionView = React.createClass({
                 self.setState({
                     isListening: true
                 });
-                playAudio(zid);
                 $("#audio").bind('ended', function(){
+                    audio.pause();
                     self.setState({
                         haveListened: true,
                         isListening: false
                     });
                 });
+                playAudio(zid);
+
             }
         }
     },
@@ -270,7 +273,7 @@ var ListeningComprehensionView = React.createClass({
             }
 
             return (<li key={page.xid + String(index)} className="list-group-item" >
-                        <div class="checkbox">
+                        <div className="checkbox">
                             <label>
                                     <input title={ans} alt={ans} aria-label={ans} type="radio" onClick={self.handleClick} className="listening-comp-checkbox listening-comp-radio" value={ans}>
                                     </input>
@@ -282,25 +285,26 @@ var ListeningComprehensionView = React.createClass({
 
         var question = "";
         var interactionColumn = "col-md-6";
+        var btnTitleText = state.isListening ? LocalizationStore.labelFor("tools", "btnStop") : LocalizationStore.labelFor("tools", "btnListen");
         if(state.haveListened){
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
-                        <div className="row">
-                            <h4>
-                                {state.prompt}
-                            </h4>
-                        </div>
-                        <div className="listening-comp-prompt">
-                            <button title={LocalizationStore.labelFor("tools", "btnListen")}
-                                    alt={LocalizationStore.labelFor("tools", "btnListen")}
-                                    type="button"
-                                    onClick={self.listenCheck}
-                                    className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
-                                    aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
-                                <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
-                            </button>
-                        </div>
+                            <div className="row lc-prompt-row">
+                                <h4>
+                                    {state.prompt}
+                                </h4>
+                                <div className="listening-comp-prompt">
+                                    <button title={btnTitleText}
+                                            alt={btnTitleText}
+                                            type="button"
+                                            onClick={self.listenCheck}
+                                            className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
+                                            aria-label={btnTitleText}>
+                                        <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
                         <div className="row">
                             <ul className="list-group listening-comp-choices-container">
                                 {choices}
@@ -317,17 +321,17 @@ var ListeningComprehensionView = React.createClass({
             question = (
                 <div className="col-md-6">
                     <div className="container-fluid">
-                        <div className="row">
+                        <div className="row lc-prompt-row">
                             <h4>
                                 {state.prompt}
                             </h4>
                             <div className="listening-comp-prompt">
-                                <button title={LocalizationStore.labelFor("tools", "btnListen")}
-                                        alt={LocalizationStore.labelFor("tools", "btnListen")}
+                                <button title={btnTitleText}
+                                        alt={btnTitleText}
                                         type="button"
                                         onClick={self.listenCheck}
                                         className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
-                                        aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
+                                        aria-label={btnTitleText}>
                                     <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
                                 </button>
                             </div>
@@ -342,7 +346,7 @@ var ListeningComprehensionView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
+                    <div className="container lc-page-container-container">
                         {cc}
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>

@@ -168,12 +168,12 @@ var PuzzleMapView = React.createClass({
                 <div className="puzzle-map-view-HUD-text">Click and drag the country pieces to their correct locations on the map.</div>
                 <div className="puzzle-map-view-HUD-buttonCont">
                     <div className="puzzle-map-view-HUD-buttonContCent">
-                        <div className = "btn btn-default" onClick={
+                        <div className = "btn btn-default" style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={
                         this.updateHudDisplay
                         }>Start</div>
-                        </div>
                     </div>
-
+                </div>
+                <div className="puzzle-map-view-btnBackground"></div>
             </div>
         );
     },
@@ -187,12 +187,12 @@ var PuzzleMapView = React.createClass({
                     {self.state.correctAttempts}/{self.state.scoreObj.totalPieces}&nbsp; correct</div>
                 <div className="puzzle-map-view-HUD-buttonCont">
                     <div className="puzzle-map-view-HUD-buttonContCent">
-                        <div className = "btn btn-default" onClick={
+                        <div className = "btn btn-default" style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={
                         this.replayGame
                         }>Play Again</div>
                     </div>
                 </div>
-
+                <div className="puzzle-map-view-btnBackground"></div>
             </div>
         );
     },
@@ -291,7 +291,7 @@ var PuzzleMapView = React.createClass({
                             correctAttempts = {self.state.correctAttempts}
                         />:null}
 
-                        {state.phase === "start" ? self.showStartHud(): null}
+                        {state.phase === "start" && state.puzzlePiecesColl ? self.showStartHud(): null}
 
                         {state.phase === "finished" ? self.showFinishHud(): null}
 

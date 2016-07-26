@@ -1,6 +1,8 @@
 var React = require('react');
 var ActiveDialogClosedCaptionStore = require('../../../../stores/active_dialog/ActiveDialogClosedCaptionStore');
 var ActiveDialogClosedCaptionActions = require('../../../../actions/active_dialog/ActiveDialogClosedCaptionActions');
+var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
+var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 
 function getCCState() {
     return {
@@ -63,6 +65,17 @@ var ActiveDialogClosedCaptionPanelView = React.createClass({
     _onChange: function() {
         if (this.isMounted()) {
             this.setState(getCCState(this.props));
+
+            // hide on dialog complete
+            var currentAction = ActiveDialogStore.getCurrentAction();
+            if (currentAction) {
+                if (currentAction.type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE) {
+                    setTimeout(function() {
+                        ActiveDialogClosedCaptionActions.hide();
+                    }, 0.1);
+                }
+            }
+
         }
     }
 });

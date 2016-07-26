@@ -119,6 +119,7 @@
   },
   "tools":{
     "btnListen": "Click to Listen",
+    "btnStop": "Stop",
     "mdlClose": "Close"
   }
 }
