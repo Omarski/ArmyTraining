@@ -14,3 +14,24 @@
     font-weight:normal;
   }
 }
+
+.culture-quest-goBackHeader{
+  position: absolute;
+  left:0;
+  top:7px;
+  width:260px;
+  height:40px;
+
+  .culture-quest-goBackHeaderAlert{
+    padding: 15px 20px 1px 15px;
+    width:31px;
+    height:28px;
+    margin-right:5px;
+  }
+
+  .culture-quest-goBackHeaderTitle{
+    color:#6f6f77;
+    font-size:22px;
+    font-weight:200;
+  }
+}

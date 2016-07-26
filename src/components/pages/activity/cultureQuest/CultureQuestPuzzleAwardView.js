@@ -77,6 +77,7 @@ var CultureQuestPuzzleView = React.createClass({
         return (
             <div className="culture-quest-puzzle-award-view-puzzleCont" id="culture-quest-puzzle-award-view-puzzleCont">
                 <div className = {sliderClasses} id="culture-quest-puzzle-award-view-puzzleSlider">
+                    <div className = "culture-quest-puzzle-award-view-slideHeader">Collection</div>
                     {self.renderSliderPieces()}
                 </div>
                 <div className="culture-quest-puzzle-award-view-puzzleAwardImg" id="culture-quest-puzzle-award-view-puzzleAwardImg"

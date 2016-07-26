@@ -117,17 +117,22 @@ var CultureQuestView = React.createClass({
     prepGoBackPopup: function(){
 
         var self = this;
+        var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
 
         var popupObj = {
             id:"GoBack",
             onClickOutside: self.onClosePopup,
-            popupStyle: {height:'20%', width:'60%', top:'40%', left:'20%', background:'#fff', opacity:1},
+            popupStyle: {height:'148px', width:'460px', top:'40%', left:'20%', background:'#fff'},
 
             content: function(){
                 
                 return(
                     <div className="popup-view-content">
-                        <div className="popup-view-bodyText">
+                        <div className="culture-quest-goBackHeader">
+                            <span className="culture-quest-goBackHeaderAlert" style={iconStyle}/>
+                            <span className="culture-quest-goBackHeaderTitle">Message Box</span>
+                        </div>
+                        <div className="popup-view-bodyText" style={{marginLeft:'20px', marginTop:'60px'}}>
                             {self.state.imageData.keepTryingText}
                         </div>
                     </div>

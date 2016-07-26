@@ -1,9 +1,22 @@
 .culture-quest-puzzle-game-view-puzzleSlider{
   position: absolute;
-  background-color:#fff;
-  height: 430px;
-  width: 72px;
-  right:0px;
-  top: 73px;
-  z-index:24;
-  border: 1px solid gray;}
+  background-color:rgba(0,0,0,0.5);
+  height: 465px;
+  width: 135px;
+  right: 0;
+  top: 57px;
+  border: 1px solid #cccccc;
+  z-index: 24;
+}
+
+.culture-quest-puzzle-game-slider-title{
+  color:#6f6f77;
+  font-size:22px;
+  font-weight:200;
+  width:134px;
+  height:45px;
+  border-bottom:1px solid #cccccc;
+  line-height:40px;
+  text-align: center;
+  letter-spacing:.5px;
+}
