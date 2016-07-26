@@ -140,7 +140,7 @@ var QuizView = React.createClass({
         function createFeedback() {
             return {__html: str};
         }
-
+        
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>

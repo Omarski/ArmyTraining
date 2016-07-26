@@ -51,11 +51,11 @@ function getPageState(props) {
 var SectionEndView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
+        var self = this;
 
         // send course completion HACK
         if (UnitStore.areAllRequiredComplete()) {
             SCORMActions.complete();
-            self.getPDF
         }
 
         // disable next button if failed chapter
@@ -74,8 +74,8 @@ var SectionEndView = React.createClass({
     },
 
     getPDF: function(){
-        console.log("PageStore.chatper()", PageStore.chapter());
-        // ReferenceStore.getPDF(unitID)
+        var pdfPath = ReferenceStore.getPDF(PageStore.chapter().xid);
+        return pdfPath;
     },
 
     render: function() {
@@ -91,9 +91,15 @@ var SectionEndView = React.createClass({
             feedbackImage = <img className="" src={feedbackImageSrc}></img>;
         }
 
-        // console.log("self.props", self.props, "self.state", self.state);
-        self.getPDF();
 
+        var PDFcontent = "";
+        if (PageStore.isChapterComplete()) {
+            var pdfPath = self.getPDF();
+            if (pdfPath) {
+                var pdfText = PageStore.unit().data.title + " PDF Takeaways";
+                PDFcontent = <div className = "row"><a href={pdfPath} target="_blank">{pdfText}</a></div>;
+            }
+        }
 
         return (
             <div>
@@ -109,6 +115,7 @@ var SectionEndView = React.createClass({
                         <div className="row">
                             {feedback}
                         </div>
+                        {PDFcontent}
                     </div>
                 </div>
             </div>
