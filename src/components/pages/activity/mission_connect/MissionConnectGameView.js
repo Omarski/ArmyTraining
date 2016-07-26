@@ -63,6 +63,7 @@ var MissionConnectGameView = React.createClass({
 
             var ableToInteract = char.startNode ? "auto":"none";
             var visible = char.startNode? "1":"0";
+            
 
             if (char.endNode) {
                 visible = 0.4;

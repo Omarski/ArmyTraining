@@ -25,19 +25,33 @@
 
   .culture-quest-puzzle-award-view-puzzleSlider{
     position: absolute;
-    background-color:#fff;
-    height: 430px;
-    width: 72px;
-    right: -75px;
-    top: 45px;
-    border: 1px solid gray;
+    background-color:rgba(0,0,0,0.5);
+    height: 465px;
+    width: 135px;
+    right: -135px;
+    top: 20px;
+    border: 1px solid #cccccc;
+
+    .culture-quest-puzzle-award-view-slideHeader{
+      position: absolute;
+      top:3px;
+      width:134px;
+      height:45px;
+      text-align: center;
+      color:#cccccc;
+      border-bottom:1px solid #cccccc;
+      font-size:20px;
+      line-height:40px;
+      font-weight:200;
+      letter-spacing:.5px;
+    }
 
     .culture-quest-puzzle-award-view-sliderPuzzle{
 
       position: absolute;
       width:40px;
       height:50px;
-      left:15px;
+      left:46px;
     }
   }
 

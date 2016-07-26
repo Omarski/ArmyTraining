@@ -38,15 +38,17 @@ var CultureQuestPuzzleGameView = React.createClass({
     displayPuzzlePopup: function(){
 
         var self = this;
+        var debriefText = {width:'400px',marginLeft:'33px'}
+
         var popupObj = {
             id:"PuzzleBackground",
-            popupStyle: {height:'80%', width:'70%', top:'10%', left:'10%', background:'#fff', zIndex:'25'},
+            popupStyle: {height:'400px', width:'460px', top:'10%', left:'10%', background:'#fff', zIndex:'25'},
 
             content: function(){
 
                 return(
                     <div className="popup-view-content">
-                        <div className="popup-view-bodyText">
+                        <div className="popup-view-bodyText" style={debriefText}>
                             {self.props.imageData.debriefText}
                         </div> 
                     </div>
@@ -61,7 +63,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         var imageData = this.props.imageData;
         var draggableColl = [];
-        var pieceHeight = 55, topStart = 110, left = 710;
+        var pieceHeight = 55, topStart = 90, left = 680;
 
         for (var i=0; i < imageData.regions.length; i++){
 
@@ -72,7 +74,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
             if (i === 0) {
                 draggableStyle.top = "113px";
-                draggableStyle.left = "215px";
+                draggableStyle.left = "140px";
                 draggableStyle.width = "112px";
                 draggableStyle.height = "168px";
             }
@@ -98,7 +100,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         var imageData = this.props.imageData;
         var targetColl = [];
-        var gridOrigin = {x:215, y:113}, targetWidth = 110, targetHeight = 165;
+        var gridOrigin = {x:140, y:113}, targetWidth = 110, targetHeight = 165;
         var targetPosColl = [];
 
         for (var r = 0 ; r < 3; r++){
@@ -159,7 +161,6 @@ var CultureQuestPuzzleGameView = React.createClass({
 
     onDraggableBeginDrag: function(itemObj, monitor, component){
         var dragItem = ReactDom.findDOMNode(component);
-        //var dragItem = $("#"+monitor.getItem().id);
         this.setState({dragOriginX:parseInt(dragItem.style.left.replace("px",""))});
         dragItem.style.width  = "112px";
         dragItem.style.height = "168px";
@@ -168,7 +169,6 @@ var CultureQuestPuzzleGameView = React.createClass({
     onDraggableEndDrag: function(itemObj, monitor, component){
 
         var dragItem = ReactDom.findDOMNode(component);
-        //var dragItem = $("#"+monitor.getItem().id);
 
         if (monitor.getDropResult()) {
             var target = $("#"+monitor.getDropResult().id);
@@ -242,7 +242,6 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         var self=this;
         var videoUrl = this.state.mediaPath + this.props.imageData.videoReward;
-        //var videoUrl = "http://techslides.com/demos/sample-videos/small.mp4";
         var stageStyle = {width:'768px', height:'506px', display:'block',
                           top: '34px', left:0, position:'absolute', zIndex:'25'};
 
@@ -262,12 +261,13 @@ var CultureQuestPuzzleGameView = React.createClass({
                     onPuzzleReady        = {this.onPuzzleReady}
                 />
                 <div className = "culture-quest-puzzle-game-view-puzzleSlider">
+                    <div className = "culture-quest-puzzle-game-slider-title">Collection</div>
                 </div>
 
                 {self.state.showVideo ?
                     <VideoPlayer
                         id="puzzleAwardVideo"
-                        style={{zIndex:'50',position:'absolute',top:'35%',left:'29%'}}
+                        style={{zIndex:'50',position:'absolute',top:'35%',left:'145px'}}
                         sources={[{format:"mp4",url:videoUrl}]}
                         autoPlay={true}
                         width="400"
