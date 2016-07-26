@@ -13,7 +13,11 @@ var Utils = require('../../widgets/Utils');
 var SettingsActions = require('../../../actions/SettingsActions');
 
 var _hasNotes = false;
-function getPageState(props) {
+var _imageReady = false;
+var _hasImage = false;
+var _wideImageLayout = false;
+
+function getPageState(cmp, props) {
     var noteItems = "";
     var mediaItems = "";
     var data = {
@@ -151,7 +155,8 @@ function getPageState(props) {
                             }
                         });
                     }
-                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index + filePath} altText={altText} />);
+                    _hasImage = true;
+                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index + filePath} altText={altText} onImageLoaded={cmp.imageReady}/>);
                 }
 
                 return result;
@@ -195,7 +200,7 @@ function playAudio(xid){
 
 var InfoView = React.createClass({
     getInitialState: function() {
-        var pageState = getPageState(this.props);
+        var pageState = getPageState(this, this.props);
         return pageState;
     },
 
@@ -222,6 +227,15 @@ var InfoView = React.createClass({
         }
         $('[data-toggle="tooltip"]').tooltip();
 
+    },
+
+    imageReady:function(w, h) {
+        console.log(w + " ** " + h);
+        _imageReady = true;
+        if (w > 447) {
+            _wideImageLayout = true;
+        }
+        this.setState(getPageState(this, this.props));
     },
 
     updateVolume: function(){
@@ -261,6 +275,7 @@ var InfoView = React.createClass({
         var transcriptContainer = "";
 
 
+
         if (this.state.transcript) {
             transcriptContainer = (
                 <ClosedCaptionPanel transcript={this.state.transcript} />
@@ -275,45 +290,89 @@ var InfoView = React.createClass({
             _hasNotes = false;
         }
 
+        if (_hasImage && _imageReady === false) {
+            //content = "";
+        }
+
+
         var hasMedia = false;
         var mediaContainer = "";
-        var cols = "col-md-6 col-sm-6";
-        if (!_hasNotes) {
-            cols = "col-md-12 col-sm-12";
-        }
-        if (media) {
-            hasMedia = true;
-            mediaContainer = (
-                <div className={"infoMediaContainer " + cols}>
-                    {media}
-                </div>
+        var noteDisplay = "";
+        if(_wideImageLayout) {
+            if (media) {
+                hasMedia = true;
+                mediaContainer = (
+                    <div className={"row infoMediaContainer"}>
+                        {media}
+                    </div>
                 );
-        }
+            }
 
 
-        var mCols = "col-md-6 col-sm-6";
-        if (!hasMedia) {
-            mCols = "col-md-12 col-sm-12";
-        }
 
-        var noteDisplay = (
-            <div
-                className={mediaType + " infoNoteContainer " + mCols}
-            >
-                <div className="info-page-notes">
-                    {pageNotes}
-                </div>
-                {transcriptContainer}
-            </div>);
 
-        if(state.page.note && state.page.note.length > 1){
-            noteDisplay =   (
-                <div className={mediaType + " infoNoteContainer " + mCols}>
-                    <ul className="info-page-notes">{pageNotes}</ul>
+            noteDisplay = (
+                <div
+                    className={mediaType + " infoNoteContainer row"}
+                >
+                    <div className="info-page-notes">
+                        {pageNotes}
+                    </div>
                     {transcriptContainer}
-                </div>
-            );
+                </div>);
+
+            if(state.page.note && state.page.note.length > 1){
+                noteDisplay =   (
+                    <div className={mediaType + " infoNoteContainer row"}>
+                        <ul className="info-page-notes">{pageNotes}</ul>
+                        {transcriptContainer}
+                    </div>
+                );
+            }
+
+        } else {
+            var cols = "col-md-6 col-sm-6";
+            if (!_hasNotes) {
+                cols = "col-md-12 col-sm-12";
+            }
+            if (media) {
+                hasMedia = true;
+                mediaContainer = (
+                    <div className={"infoMediaContainer " + cols}>
+                        {media}
+                    </div>
+                );
+            }
+
+            var mCols = "col-md-6 col-sm-6";
+            if (!hasMedia) {
+                mCols = "col-md-12 col-sm-12";
+            }
+
+            noteDisplay = (
+                <div
+                    className={mediaType + " infoNoteContainer " + mCols}
+                >
+                    <div className="info-page-notes">
+                        {pageNotes}
+                    </div>
+                    {transcriptContainer}
+                </div>);
+
+            if(state.page.note && state.page.note.length > 1){
+                noteDisplay =   (
+                    <div className={mediaType + " infoNoteContainer " + mCols}>
+                        <ul className="info-page-notes">{pageNotes}</ul>
+                        {transcriptContainer}
+                    </div>
+                );
+            }
         }
+
+
+
+
+
 
 
         if (isFullCoach) {
@@ -356,7 +415,7 @@ var InfoView = React.createClass({
     },
     _onAppStateChange: function () {
         if (AppStateStore.renderChange()) {
-            this.setState(getPageState(this.props));
+            this.setState(getPageState(this, this.props));
         }
     },
 
@@ -365,7 +424,7 @@ var InfoView = React.createClass({
      */
     _onChange: function() {
         if (this.isMounted()) {
-            this.setState(getPageState(this.props));
+            this.setState(getPageState(this, this.props));
         }
     },
 
