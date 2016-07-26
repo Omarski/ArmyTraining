@@ -22,6 +22,7 @@ var _currentBlocking = null;
 var _currentBlockingId = "0000";
 var _currentSpeakerName = null;
 var _currentDialogHistory = null;
+var _dialogStarted = false;
 var _objectives;
 
 function makeCOAs( acts, transInd, retId, retInputId ) {
@@ -349,13 +350,13 @@ function handleInput(coa) {
 
 }
 
-function create(fsm) {
+function create(fsmData, infoData) {
 
     // reset any old data
     resetDialog();
 
     // get scenario data
-    DATA = fsm.data;
+    DATA = fsmData;
 
     // parse memory data
     memory = JSON.parse( JSON.stringify( DATA.initialMemory ) ); // deep copy so DATA contents never mutated
@@ -368,8 +369,8 @@ function create(fsm) {
     activityState = 's0';
 
     // set initial blocking image
-    if (fsm.nodesPy) {
-        blockImg = fsm.nodesPy;
+    if (fsmData.nodesPy) {
+        blockImg = fsmData.nodesPy;
     }
     // overwrite old method if new one is in place
     if (DATA.blockings) {
@@ -379,7 +380,7 @@ function create(fsm) {
     }
 
     // set info data
-    _info = fsm.info;
+    _info = infoData;
 
     // set briefing data
     _briefings = DATA.briefings.s0.description;
@@ -438,7 +439,7 @@ return {
 function load(args) {
     $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + "_info.json", function(info) {
         $.getJSON("data/content/" + args.chapterId + "/" + args.dialogId + ".json", function (result) {
-            ActiveDialogActions.create({data: result, info: info});
+            ActiveDialogActions.create(result, info);
         });
     })
     .error(function(jqXHR, textStatus, errorThrown) {
@@ -469,6 +470,7 @@ function resetDialog() {
     _currentBlockingId = "0000";
     _currentSpeakerName = null;
     _currentDialogHistory = null;
+    _dialogStarted = false;
     _objectives = null;
 }
 
@@ -499,6 +501,9 @@ function showRemediation() {
 }
 
 function startDialog() {
+    // mark it has started
+    _dialogStarted = true;
+
     // attempt automatic input
     if( DATA.transitions.length > 0 && DATA.transitions[0].inputSymbols[0] === 'automatic' ) {
         var automaticCOA = {
@@ -527,6 +532,10 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
         return _briefings;
     },
 
+    isDialogStarted: function() {
+        return _dialogStarted;
+    },
+
     getCurrentAction: function() {
         return _currentAction;
     },
@@ -542,7 +551,6 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
     getCurrentSpeakerName: function() {
         return _currentSpeakerName;
     },
-
 
     getObjectives: function() {
         return _objectives;
@@ -613,7 +621,7 @@ var ActiveDialogStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
     switch(action.actionType) {
         case ActiveDialogConstants.ACTIVE_DIALOG_CREATE:
-            create(action.data);
+            create(action.data, action.info);
             ActiveDialogStore.emitChange();
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_CONTINUE_DIALOG:
@@ -630,6 +638,10 @@ AppDispatcher.register(function(action) {
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_HANDLE_INPUT:
             handleInput(action.data);
+            ActiveDialogStore.emitChange();
+            break;
+        case ActiveDialogConstants.ACTIVE_DIALOG_RESTART:
+            create(DATA, _info);
             ActiveDialogStore.emitChange();
             break;
         case ActiveDialogConstants.ACTIVE_DIALOG_SHOW_REMEDIATION:
