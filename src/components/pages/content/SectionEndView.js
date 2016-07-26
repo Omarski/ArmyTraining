@@ -56,9 +56,12 @@ var SectionEndView = React.createClass({
             SCORMActions.complete();
         }
 
-        // disable next button if failed chapter
+        // disable next button
         setTimeout(function() {
             if (!PageStore.isChapterComplete()) {
+                FooterActions.disableNext();
+            }
+            if(UnitStore.areAllRequiredComplete()) {
                 FooterActions.disableNext();
             }
         }, 0.1);
