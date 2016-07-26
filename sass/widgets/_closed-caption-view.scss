@@ -1,12 +1,40 @@
-.closed-caption-button {
-  position: absolute;
-  top: 13px;
-  right: 7px;
-  padding: 0;
-  span {
-    color: $transcript-btn-color !important;
+
+.info-view-video-container{
+  .closed-caption-button {
+    position: absolute;
+    top: 13px;
+    right: 7px;
+    padding: 0;
+    height: 28px;
+    width: 30px;
+    text-shadow: 0 0 3px black;
+    span {
+      color: $transcript-btn-color !important;
+    }
+  }
+
+  .closed-caption-button:visited {
+    height: 28px;
+    background-color: black;
+    text-shadow: 0 0 3px black;
+  }
+
+  .closed-caption-button:hover {
+    height: 28px;
+    text-shadow: 0 0 3px black;
+  }
+
+  .closed-caption-button:focus {
+    height: 28px;
+    text-shadow: 0 0 3px black;
+  }
+
+  .closed-caption-button:active {
+    height: 28px;
+    text-shadow: 0 0 3px black;
   }
 }
+
 
 .closed-caption-panel {
   max-height: 320px;
