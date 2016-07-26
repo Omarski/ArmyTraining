@@ -193,7 +193,7 @@ var HeaderView = React.createClass({
             <div>
                 <Navbar className="navbar-fixed-top navbarHeightDesktop main-navbar">
                     <Navbar.Header id="navbarHeader" className="main-navbar-brand">
-                        <img src="images/VCAT_H5_logo.png" className="pull-left vcat-logo"/>
+                        <img src="images/VCAT_H5_logo.jpg" className="pull-left vcat-logo"/>
                         <Navbar.Brand>
                                 <a className="navbar-brand" href="#">{this.state.title}</a>
                         </Navbar.Brand>

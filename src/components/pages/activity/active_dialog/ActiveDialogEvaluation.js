@@ -90,15 +90,29 @@ var ActiveDialogEvaluation = React.createClass({
         if (this.state.objectives) {
             carouselItems = this.state.objectives.map(function(item, index) {
                 var objectiveFeedback = "";
+                var check = "";
+                var titleCls = ""
+
                 if (item.pass) {
+                    check = <span className="glyphicon glyphicon-ok-sign pass active-dialog-eval-icon" aria-hidden="true"></span>
                     objectiveFeedback = item.passDescription;
+                    titleCls = "pass";
                 } else {
+                    check = <span className="glyphicon glyphicon-remove-sign fail active-dialog-eval-icon" aria-hidden="true"></span>
                     objectiveFeedback = item.failDescription;
+                    titleCls = "fail";
                 }
+
+                var h = (
+                    <div className={"active-dialog-eval-title " + titleCls}>
+                        {item.label}
+                        {check}
+                    </div>
+                );
 
                 return (
                     <CarouselItem key={index}>
-                        <Panel header={item.label}>
+                        <Panel header={h}>
                             {objectiveFeedback}
                         </Panel>
                     </CarouselItem>
@@ -126,19 +140,20 @@ var ActiveDialogEvaluation = React.createClass({
                     </CarouselItem>
                 );
             } else {
+                var btns = (
+                    <div>
+                        <button type="button" className="btn btn-default" aria-label="Next" onClick={this.restart}>
+                            {LocalizationStore.labelFor("evaluation", "btnRestart")}
+                        </button>
+                        <button type="button" className="btn btn-default" aria-label="Next" onClick={this.review}>
+                            {LocalizationStore.labelFor("evaluation", "brnReview")}
+                        </button>
+                    </div>
+                );
                 carouselItems.push(
                     <CarouselItem key="carouselEnd">
-                        <Panel header={LocalizationStore.labelFor("evaluation", "lblObjectives")}>
-                            <h4>{LocalizationStore.labelFor("evaluation", "lblRestart")}</h4>
-                            <br></br>
-                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.restart}>
-                                {LocalizationStore.labelFor("evaluation", "btnRestart")}
-                            </button>
-                            <h4>{LocalizationStore.labelFor("evaluation", "lblReview")}</h4>
-                            <br></br>
-                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.review}>
-                                {LocalizationStore.labelFor("evaluation", "brnReview")}
-                            </button>
+                        <Panel footer={btns}>
+                            <p>{LocalizationStore.labelFor("evaluation", "lblEndInstructions")}</p>
                         </Panel>
                     </CarouselItem>
                 );
@@ -156,7 +171,10 @@ var ActiveDialogEvaluation = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    {this.state.feedback}
+                    <p className="active-dialog-evaluation-feedback-text">
+                        <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
+                        {this.state.feedback}
+                    </p>
                     <div className="panel panel-default">
                         <Carousel interval={0} wrap={false}>
                             {carouselItems}

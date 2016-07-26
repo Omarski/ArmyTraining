@@ -1,9 +1,8 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var PageStore = require('../../../../stores/PageStore');
-var ActiveDialogClosedCaption = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaption');
-var ActiveDialogClosedCaptionPanel = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaptionPanel');
-var ActiveDialogClosedCaptionActions = require('../../../../actions/active_dialog/ActiveDialogClosedCaptionActions');
+
+
 
 
 var ActiveDialogComponent = React.createClass({
@@ -99,8 +98,7 @@ var ActiveDialogComponent = React.createClass({
 
                 // get video element
                 var video = document.getElementById(source);
-                var cc = document.getElementById(source+ 'captionButton');
-                var ccPanel = document.getElementById(source+ 'captionPanel');
+
 
 
                 // set current time
@@ -113,14 +111,10 @@ var ActiveDialogComponent = React.createClass({
                 this.currentAnimation = animationName;
                 this.currentStop = animation.stop / 1000;
 
-                setTimeout(function() {
-                    ActiveDialogClosedCaptionActions.update('Need transcripts here.  ' + source);
-                });
 
                 // show video
                 video.style.display = "block";
-                cc.style.display = "block";
-                ccPanel.style.display = "block";
+
 
 
 
@@ -209,13 +203,8 @@ var ActiveDialogComponent = React.createClass({
                 var vidLength = this.currentVideosPlayingHack.length;
                 while(vidLength--) {
                     var video = this.currentVideosPlayingHack[vidLength];
-                    var cc = document.getElementById(video.id + 'captionButton');
-                    var ccPanel = document.getElementById(video.id + 'captionPanel');
-
                     // hide video
                     video.style.display = "none";
-                    cc.style.display = "none";
-                    ccPanel.style.display = "none";
                 }
             }
 
@@ -276,34 +265,24 @@ var ActiveDialogComponent = React.createClass({
 
         // check if video
         var videos = this.props.assets.map(function(item, index) {
-            console.log(item.assetData)
             var style = {top: item.assetData.dimensions[1], left: item.assetData.dimensions[0], position: "absolute", display: "block"};
             var videoStyle = {display: "none"};
             return (
                 <div className="" key={index} style={style}>
-
-                    <video id={item.assetData.source}
-                           alt=""
-                           aria-label=""
-                           title=""
-                           onLoadStart={self.videoLoadStartHandler}
-                           onCanPlayThrough={self.videoCanPlayThroughHandler}
-                           onError={self.videoErrorHandler}
-                           onEnded={self.videoEndedHandler}
-                           style={videoStyle}
-                        >
-                        <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
-                    </video>
-                    <div id={item.assetData.source + 'captionButton'} style={videoStyle}>
-                        <ActiveDialogClosedCaption />
+                    <div className="active-dialog-video-and-captions">
+                        <video id={item.assetData.source}
+                               alt=""
+                               aria-label=""
+                               title=""
+                               onLoadStart={self.videoLoadStartHandler}
+                               onCanPlayThrough={self.videoCanPlayThroughHandler}
+                               onError={self.videoErrorHandler}
+                               onEnded={self.videoEndedHandler}
+                               style={videoStyle}
+                            >
+                            <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
+                        </video>
                     </div>
-
-                    <div id={item.assetData.source + 'captionPanel'} style={videoStyle}>
-                        <ActiveDialogClosedCaptionPanel/>
-                    </div>
-
-
-
                 </div>
             );
         });

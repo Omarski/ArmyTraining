@@ -8,11 +8,15 @@ var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialo
 var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dialog/ActiveDialogCOAs');
 var ActiveDialogComponent = require('../active_dialog/ActiveDialogComponent');
 var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
-var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory');
+//var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory');
 var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives');
 var ActiveDialogIntro = require('../../../../components/pages/activity/active_dialog/ActiveDialogIntro');
 var ActiveDialogEvaluation = require('../../../../components/pages/activity/active_dialog/ActiveDialogEvaluation');
+var ActiveDialogClosedCaptionActions = require('../../../../actions/active_dialog/ActiveDialogClosedCaptionActions');
+var ActiveDialogClosedCaption = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaption');
+var ActiveDialogClosedCaptionPanel = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaptionPanel');
 var RemediationView = require('../../../RemediationView');
+
 
 var _dataLoaded = false;
 var _videoCountHack = 0;
@@ -100,6 +104,21 @@ var ActiveDialogView = React.createClass({
             }
         }
 
+        var speaker = ActiveDialogStore.getCurrentSpeakerName();
+
+        // get text
+        var text = ActiveDialogStore.getCurrentDialogHistory();
+
+        // set data
+        if (speaker !== null && text !== null) {
+            setTimeout(function() {
+                ActiveDialogClosedCaptionActions.update(speaker + ' : ' + text);
+            });
+        }
+
+
+
+
         return {
             activeCOA: st.activeCOA,
             info: ActiveDialogStore.info(),
@@ -178,23 +197,23 @@ var ActiveDialogView = React.createClass({
             content = (
                 <div>
                     <div className="container active-dialog-view" key={"page-" + this.state.page.xid}>
-                        <h3>{this.state.title} : {this.state.pageType}</h3>
                         <div className="active-dialog-toolbar">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-md-10">
-                                        <ActiveDialogCOAs />
-                                    </div>
-                                    <div className="col-md-1">
-                                        <ActiveDialogHistory />
-                                    </div>
-                                    <div className="col-md-1">
-                                        <ActiveDialogObjectives />
-                                    </div>
-                                </div>
-                            </div>
+                            <ActiveDialogCOAs />
+                            <Button className="btn btn-default btn-link active-dialog-toolbar-btn">
+                                <span className="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                            </Button>
+                            <ActiveDialogObjectives />
                         </div>
                         <ActiveDialogScenarioView composition={this.state.info.composition} ref="ActiveDialogScenarioView" media={this.state.stageMedia} />
+                        <div className="active-dialog-closed-caption-container">
+                            <div className="row">
+                                <ActiveDialogClosedCaption />
+                            </div>
+
+                            <div className="row">
+                                <ActiveDialogClosedCaptionPanel/>
+                            </div>
+                        </div>
                         <ActiveDialogIntro />
                         <ActiveDialogEvaluation />
                         <RemediationView />
