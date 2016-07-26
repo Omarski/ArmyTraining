@@ -186,7 +186,9 @@ var ActiveDialogEvaluation = React.createClass({
     },
 
     _onDialogChange: function() {
-        if (ActiveDialogStore.getCurrentAction() && ActiveDialogStore.getCurrentAction().type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE) {
+        if (ActiveDialogStore.getCurrentAction() &&
+            ActiveDialogStore.getCurrentAction().type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE &&
+            ActiveDialogStore.isDialogStarted()) {
             var compState = getCompState(true);
             this.setState(compState);
 
@@ -196,6 +198,9 @@ var ActiveDialogEvaluation = React.createClass({
                     PageActions.markChapterComplete();
                 }, 0.1);
             }
+        } else {
+            var compState = getCompState(false);
+            this.setState(compState);
         }
     }
 });

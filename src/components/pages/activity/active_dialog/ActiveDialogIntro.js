@@ -6,7 +6,6 @@ var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogSt
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 var LocalizationStore = require('../../../../stores/LocalizationStore');
 
-var _shownOnce = true;
 function getCompState(show) {
     return {
         show: show,
@@ -17,14 +16,12 @@ function getCompState(show) {
 var ActiveDialogIntro = React.createClass({
 
     hideModal: function() {
-        _shownOnce = false;
         this.setState(getCompState(false));
         ActiveDialogActions.startDialog();
         ActiveDialogActions.continueDialog();
     },
 
     getInitialState: function() {
-        _shownOnce = true;
         return getCompState(false);
     },
 
@@ -85,8 +82,8 @@ var ActiveDialogIntro = React.createClass({
     },
 
     _onDialogChange: function() {
-        if (ActiveDialogStore.briefings() !== "") {
-            this.setState(getCompState(_shownOnce));
+        if (ActiveDialogStore.briefings() !== "" && !ActiveDialogStore.isDialogStarted()) {
+            this.setState(getCompState(true));
         }
     }
 });
