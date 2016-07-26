@@ -12,6 +12,7 @@ var UnitActions = require('../actions/UnitActions');
 var UnitStore = require('../stores/UnitStore');
 var BookmarkActions = require('../actions/BookmarkActions');
 var BookmarkStore = require('../stores/BookmarkStore');
+var FooterActions = require('../actions/FooterActions');
 var Utils = require('../components/widgets/Utils');
 
 var assign = require('object-assign');
@@ -194,8 +195,9 @@ function isValidPrevUnit(unit) {
             var chapter = unit.data.chapter[chapterLength];
 
             if (chapter.info) {
-                // return false if prologue chapter
-                if (Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) {
+                // return false if prologue or pretest chapter
+                if ((Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) ||
+                    (Utils.findInfo(chapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
                     return false;
                 }
             }
@@ -295,9 +297,7 @@ function load(data) {
             _currentUnit = data.unit;
             _currentChapter = data.chapter;
             _currentPage = data.page;
-
             _data = result.page;
-
             // check if page is a copied page if so update title
             if (data.page.preposttest === true) {
                 _data.title = data.page.title;
@@ -310,7 +310,14 @@ function load(data) {
             // save current page
             saveCurrentPage();
 
+            // after load actions
             PageActions.complete(result);
+            FooterActions.enableAll(); // TODO: dont like this here <---
+            if (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_AUTOPASS) !== null) {
+                markChapterComplete();  // TODO: dont like this here <---
+            }
+
+
         });
     } else {
         //BookmarkActions.destroy(); // if the data directory has changed, it can mess up the bookmark situation.  force remove bookmark and alert user
@@ -404,6 +411,28 @@ function resetQuiz() {
     // TODO dispatch quiz reset event?
 }
 
+function restartQuiz() {
+    // clear quiz answers
+    resetQuiz();
+
+    if (_currentUnit && _currentChapter) {
+        // get pages in the current chapter
+        var chapterPages = _currentChapter.pages;
+        var pageIndex = 0;
+
+        // find the first quiz page and jump to it
+        while (pageIndex < chapterPages.length) {
+            var page = chapterPages[pageIndex];
+
+            if (page.state && page.state.quizpage === true) {
+                jump({page:page.xid, chapter:_currentChapter.xid, unit:_currentUnit.id});
+                return;
+            }
+            pageIndex++;
+        }
+    }
+}
+
 function saveCurrentPage() {
 
     // check for valid current unit
@@ -446,6 +475,7 @@ function saveCurrentPage() {
 var PageStore = assign({}, EventEmitter.prototype, {
 
     page: function() {
+        // console.log("_data", _data);
         return _data;
     },
 
@@ -580,9 +610,11 @@ AppDispatcher.register(function(action) {
         case PageConstants.QUIZ_RESET:
             resetQuiz();
             break;
-
+        case PageConstants.QUIZ_RESTART:
+            restartQuiz();
+            break;
         default:
-        // no op
+            // no op
     }
 });
 

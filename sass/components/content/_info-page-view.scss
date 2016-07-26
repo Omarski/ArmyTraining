@@ -4,7 +4,13 @@
   margin-top: 10px;
   video {
     width: 100%;
+    max-width: 512px;
+    max-height: 384px;
   }
+}
+
+.info-bullets-div {
+  display: inline-flex !important;
 }
 
 .infoMediaContainer {
@@ -29,7 +35,12 @@
 
 
 .info-bullets-indent {
+  margin-left: 10px;
+}
+
+.info-view-bullet-item{
   margin-left: 25px;
+  font-size: 20px;
 }
 
 
@@ -50,11 +61,12 @@
 }
 
 .image-caption-container {
-  margin-top: 25px;
+  margin-top: 10px;
+  margin-bottom: 15px;
   border-style: solid;
   border-color: $caption-bg-color;
   border-width: 1px;
-  img: {
+  img {
     width: 100%;
 
   }
@@ -66,7 +78,7 @@
 @media screen and (max-width: 767px){
   .image-caption-container {
     width: 95%;
-    img: {
+    img {
       width: 100%;
     }
     .caption {

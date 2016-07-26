@@ -168,13 +168,18 @@ function getPageState(props) {
 
 function playMediaAudio(xidArray){
     //xid is of the form "000000000.mp3"
-
     if(xidArray.length > 0){
-        $("#audio").bind('ended', function(){
+        document.getElementById("audio").onended = (function(){
             xidArray.shift();
             playMediaAudio(xidArray);
         });
         playAudio(xidArray[0]);
+    }
+    if(xidArray.length === 0){
+        var audio = document.getElementById('audio');
+        var source = document.getElementById('mp3Source');
+        source.src = "";
+        audio.load();
     }
 }
 
@@ -281,7 +286,7 @@ var InfoView = React.createClass({
             );
         }
 
-        console.log(pageNotes)
+
         if ((state.page.note && state.page.note.length) || pageNotes !== "") {
             _hasNotes = true;
         } else {

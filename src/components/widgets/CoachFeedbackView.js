@@ -2,8 +2,8 @@ var React = require('react');
 var CoachFeedbackStore = require('../../stores/CoachFeedbackStore');
 var SettingsStore = require('../../stores/SettingsStore');
 
-var COACH_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
-var COACH_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+var COACH_GLYPHICON_CORRECT_CLS = "glyphicon-ok";
+var COACH_GLYPHICON_INCORRECT_CLS = "glyphicon-remove";
 
 function getCoachFeedbackState(props) {
     return {
@@ -123,9 +123,10 @@ var CoachFeedbackView = React.createClass({
 
         return (
             <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
-                <button type="button" className="close" aria-label="Close" onClick={this.handleClose}><span aria-hidden="true">&times;</span></button>
                 <div className="multiple-choice-alert-text">
-                    {coachMedia}<h5><span className={feedbackClass}></span>{cannedText}<br></br>{this.props.text}</h5>
+                    {coachMedia}
+                    <span className={feedbackClass}></span>
+                    <h5>{cannedText}<br></br>{this.props.text}</h5>
                 </div>
             </div>
         );

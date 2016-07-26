@@ -1,8 +1,8 @@
 var Utils = (function() {
     function parseBullets(str) {
-        str = '<p>' + str;
-        str = str.replace(new RegExp('- ', 'g'), '</p><p class="info-bullets-indent"><span class="info-view-bullet-item"></span>');
-        str = str + '</p>';
+        str = '<div><p>' + str;
+        str = str.replace(new RegExp('- ', 'g'), '</p></div><div class="info-bullets-div"><span class="info-view-bullet-item"></span><p class="info-bullets-indent">');
+        str = str + '</p></div>';
         return str;
     }
 

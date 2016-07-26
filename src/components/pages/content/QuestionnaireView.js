@@ -5,6 +5,7 @@ var PageStore = require('../../../stores/PageStore');
 var PageHeader = require('../../widgets/PageHeader');
 var QuestionnaireActions = require('../../../actions/QuestionnaireActions');
 var QuestionnaireStore = require('../../../stores/QuestionnaireStore');
+var SettingsStore = require('../../../stores/SettingsStore');
 var Utils = require('../../widgets/Utils');
 var SettingsStore = ('../../../stores/SettingsStore');
 
@@ -82,6 +83,7 @@ function getPageState(props) {
         answerToPlaylistMapping[rooneyEatsIt.text] = rooneyEatsIt.playlist;
     }
 
+    var titleSplit = props.page.title.split(" - ");
     // check if mandatory or preselected
     if (Utils.findInfo(props.page.info, InfoTagConstants.INFO_PROP_MANDATORY) !== null) {
         isMandatory = true;
@@ -93,7 +95,8 @@ function getPageState(props) {
         data.page = props.page;
         data.answerToPlaylistMapping = answerToPlaylistMapping;
         data.prompt = props.page.prompt.text;
-        data.title = props.page.title;
+        data.title = titleSplit[0];
+        data.panelTitle = titleSplit[1];
     }
 
     return data;
@@ -250,7 +253,7 @@ var QuestionnaireView = React.createClass({
         var self = this;
         var state = this.state;
         var page = self.state.page;
-        var title = page.title;
+        var title = this.state.title;
         var sources = self.state.sources;
 
         var choices;
@@ -264,7 +267,7 @@ var QuestionnaireView = React.createClass({
                     if (item.checked) {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input id={inputId} name={item.groupid} type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
+                                <input id={inputId} name={item.groupid} className="questionnaire-radio-button" type="radio" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -272,7 +275,7 @@ var QuestionnaireView = React.createClass({
                     else {
                         inputElement = (<div className="radio">
                             <label for={inputId}>
-                                <input name={item.groupid} type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
+                                <input name={item.groupid} className="questionnaire-radio-button" type="radio" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                 {item.text}
                             </label>
                         </div>);
@@ -300,7 +303,7 @@ var QuestionnaireView = React.createClass({
 
 
 
-            return (<li key={page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
+            return (<li key={page.xid + String(index)} className="list-group-item questionnaire-list-group-item" >
                         {inputElement}
             </li>);
         });
@@ -308,19 +311,25 @@ var QuestionnaireView = React.createClass({
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
-                    <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="questionnaire-container">
-                        <div className="row">
-                            <h4>
-                                {state.prompt}
-                            </h4>
+                    <PageHeader sources={sources} title={this.state.title} key={this.state.page.xid}/>
+
+                    <div className="panel panel-default questionnaire-container">
+                        <div className="panel-heading">
+                            <h3 className="panel-title">{this.state.panelTitle}</h3>
                         </div>
-                        <div className="row">
-                            <form id="questionnaireForm">
-                                <ul className="list-group multiple-choice-choices-container">
-                                    {choices}
-                                </ul>
-                            </form>
+                        <div className="panel-body">
+                            <div className="row">
+                                <h4>
+                                    {state.prompt}
+                                </h4>
+                            </div>
+                            <div className="row">
+                                <form id="questionnaireForm">
+                                    <ul className="list-group questionnaire-choices-container">
+                                        {choices}
+                                    </ul>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

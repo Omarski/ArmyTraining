@@ -8,6 +8,7 @@ var PageStore = require('../stores/PageStore');
 var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
 var ExplorerStore = require('../stores/ExplorerStore');
+var InfoTagConstants = require('../constants/InfoTagConstants');
 
 var _expanded = {};
 var _expandedChapters = {};
@@ -39,7 +40,9 @@ function getUnitState(expanded) {
                 if (c.info && c.info.property) {
                     c.info.property.map(function(item) {
                         switch (item.name) {
-                            case "prologue":
+                            case InfoTagConstants.INFO_PROP_PROLOGUE:
+                            case InfoTagConstants.INFO_PROP_PRETEST:
+                            case InfoTagConstants.INFO_PROP_POSTTEST:
                                 bHidden = true;
                                 break;
                             default:
@@ -303,8 +306,7 @@ var ExplorerView = React.createClass({
                             <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
                                 <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
                             </a>
-                            {item.title}
-
+                            <span className="explorer-section-title">{item.title}</span>
                             <span className="badge">
                                 {icon}
                              </span>
@@ -365,7 +367,7 @@ var TOCChapterRow = React.createClass({
         var index = this.props.index;
         var self = this;
         var icon = '';
-
+        
         if (this.props.item.data.state && this.props.item.data.state.complete) {
             icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
         }
@@ -375,7 +377,7 @@ var TOCChapterRow = React.createClass({
                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
                     <span className={this.props.item.expandCollapseIconCls} aria-hidden="true"></span>
                 </a>
-                {this.props.item.title}
+                <span className="explorer-section-title">{this.props.item.title}</span>
                 <span className="badge">
                     {icon}
                  </span>
@@ -446,7 +448,9 @@ var TOCPageRow = React.createClass({
                 <span className="badge">
                     {icon}
                 </span>
-                <a href="#">{this.props.item.title}</a>
+                <a href="#">
+                    <span className="explorer-section-title">{this.props.item.title}</span>
+                </a>
             </li>
 
         );

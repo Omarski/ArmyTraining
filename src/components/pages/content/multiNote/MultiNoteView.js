@@ -36,11 +36,17 @@ function getPageState(props) {
 function playMediaAudio(xidArray){
     //xid is of the form "000000000.mp3"
     if(xidArray.length > 0){
-        $("#audio").bind('ended', function(){
+        document.getElementById("audio").onended = (function(){
             xidArray.shift();
             playMediaAudio(xidArray);
         });
         playAudio(xidArray[0]);
+    }
+    if(xidArray.length === 0){
+        var audio = document.getElementById('audio');
+        var source = document.getElementById('mp3Source');
+        source.src = "";
+        audio.load();
     }
 }
 
@@ -267,7 +273,7 @@ var MultiNoteView = React.createClass({
             noteImage = (
                 <div className="col-md-6 col-sm-6">
                     <div className="container-fluid">
-                        <div className="row">
+                        <div className="row multi-note-img-row">
                             <div className="multi-note-image" key={xid +"activeimage"}>{p.image}</div>
                         </div>
                         <div className="row">

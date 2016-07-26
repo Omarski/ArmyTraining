@@ -82,6 +82,10 @@
 }
 .main-footer-row:hover {
   background-color: #ECFAFE;
+  .explorer-section-title {
+    font-weight: bold !important;
+    text-decoration: underline;
+  }
 }
 .main-footer-row {
   -webkit-border-radius: 0;
@@ -150,6 +154,19 @@
 }
 .main-footer-page-nav-row {
   background-color: #fff;
+}
+
+.explorer-icon-text-div {
+  height: 25px;
+  line-height: 21px;
+}
+
+.explorer-section-title:hover {
+  font-weight: bold;
+}
+
+.explorer-icon-text-span {
+  vertical-align: middle;
 }
 
 

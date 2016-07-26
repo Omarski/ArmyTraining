@@ -18,6 +18,7 @@ function getPageState(props) {
         numMoved: 0
     } ;
 
+
     if (props && props.page) {
         data.title = props.page.title;
         data.pageType = props.page.type;
@@ -179,7 +180,7 @@ var SortingView = React.createClass({
         var draggedItemTarget = state.draggedItemTarget;
         var draggedItemLetter = state.draggedItemLetter;
         var dropLocation = "";
-
+        
         switch($(e.target).attr("class")){
             case "sorting-columnA-dropArea sorting-drop-area":
                 dropLocation = "A";
@@ -194,10 +195,10 @@ var SortingView = React.createClass({
                 if($(e.target).parent().attr("class") == "sorting-columnB-dropArea sorting-drop-area"){
                     dropLocation = "B";
                 }
-                if($(e.target).attr("class") === "placed-A"){ // if you drop on something in the sorting container
+                if($(e.target).hasClass("placed-A")){ // if you drop on something in the sorting container
                     dropLocation = "A";
                 }
-                if($(e.target).attr("class") === "placed-B"){
+                if($(e.target).hasClass("placed-B")){
                     dropLocation = "B";
                 }
         }
@@ -304,8 +305,8 @@ var SortingView = React.createClass({
         var colBTitle = "";
         var colBContent = [];
         var colBRender;
-        var correct = "glyphicon sorting-feedback sorting-correct glyphicon-ok-circle";
-        var incorrect = "glyphicon sorting-feedback sorting-incorrect glyphicon-remove-circle";
+        var correct = "glyphicon sorting-feedback sorting-correct glyphicon-ok";
+        var incorrect = "glyphicon sorting-feedback sorting-incorrect glyphicon-remove";
         var isGraded = state.isGraded;
         var numMoved = state.numMoved;
         var numCorrect = 0;
@@ -467,7 +468,7 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "string":
-                    answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+index+itemA.passedData}>
+                    answerRender = <li className="sorting-choices-container-text answer placed-A" key={page.xid + "colA-"+index+itemA.passedData}>
                         <div
                             draggable="true"
                             className="placed-A"
@@ -525,7 +526,7 @@ var SortingView = React.createClass({
                     </li>;
                     break;
                 case "string":
-                    answerRender = <li className="sorting-choices-container-text answer" key={page.xid + "colA-"+itemB.passedData}>
+                    answerRender = <li className="sorting-choices-container-text answer placed-B" key={page.xid + "colA-"+itemB.passedData}>
                         <div
                             draggable="true"
                             className="placed-B"
@@ -547,7 +548,7 @@ var SortingView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
-                    <div className="container">
+                    <div className="sorting-view-container">
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.

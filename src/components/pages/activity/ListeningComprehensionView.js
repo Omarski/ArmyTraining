@@ -193,7 +193,6 @@ var ListeningComprehensionView = React.createClass({
                 audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
             }
         }
-
     },
 
     listenCheck: function(){
@@ -273,7 +272,7 @@ var ListeningComprehensionView = React.createClass({
             return (<li key={page.xid + String(index)} className="list-group-item" >
                         <div class="checkbox">
                             <label>
-                                    <input title={ans} alt={ans} aria-label={ans} type="radio" onClick={self.handleClick} className="listening-comp-checkbox" value={ans}>
+                                    <input title={ans} alt={ans} aria-label={ans} type="radio" onClick={self.handleClick} className="listening-comp-checkbox listening-comp-radio" value={ans}>
                                     </input>
                                 {ans}
                             </label>
@@ -291,6 +290,16 @@ var ListeningComprehensionView = React.createClass({
                             <h4>
                                 {state.prompt}
                             </h4>
+                        </div>
+                        <div className="listening-comp-prompt">
+                            <button title={LocalizationStore.labelFor("tools", "btnListen")}
+                                    alt={LocalizationStore.labelFor("tools", "btnListen")}
+                                    type="button"
+                                    onClick={self.listenCheck}
+                                    className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
+                                    aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
+                                <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
+                            </button>
                         </div>
                         <div className="row">
                             <ul className="list-group listening-comp-choices-container">
@@ -312,6 +321,16 @@ var ListeningComprehensionView = React.createClass({
                             <h4>
                                 {state.prompt}
                             </h4>
+                            <div className="listening-comp-prompt">
+                                <button title={LocalizationStore.labelFor("tools", "btnListen")}
+                                        alt={LocalizationStore.labelFor("tools", "btnListen")}
+                                        type="button"
+                                        onClick={self.listenCheck}
+                                        className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
+                                        aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
+                                    <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -334,16 +353,7 @@ var ListeningComprehensionView = React.createClass({
                                 <div className="container-fluid">
                                     <div className="listening-comp-interaction-container">
                                         <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} className="row listening-comp-image" src={state.image}></img>
-                                        <div className="listening-comp-prompt">
-                                            <button title={LocalizationStore.labelFor("tools", "btnListen")}
-                                                    alt={LocalizationStore.labelFor("tools", "btnListen")}
-                                                    type="button"
-                                                    onClick={self.listenCheck}
-                                                    className="btn btn-default btn-lg btn-link btn-step btn-clk"
-                                                    aria-label={LocalizationStore.labelFor("tools", "btnListen")}>
-                                                <span className={"btn-icon" + playButtonIcon} aria-hidden="true"></span>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

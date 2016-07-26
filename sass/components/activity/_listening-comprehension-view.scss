@@ -6,6 +6,11 @@ input[type=checkbox] {
 }
 */
 
+.listening-comp-radio{
+  width: 15px;
+  height: 15px;
+}
+
 .listening-comp-choices-container {
   margin-top: 20px;
   .list-group-item {
@@ -18,6 +23,10 @@ input[type=checkbox] {
   .listening-comp-checkbox {
     margin-right: 15px;
   }
+}
+
+.lc-glyphicon{
+  font-size: 53px;
 }
 
 .listening-comp-alert {
@@ -42,8 +51,12 @@ input[type=checkbox] {
 }
 
 .listening-comp-prompt {
-  font-size: 72px;
   text-align: center;
+}
+
+.btn-lc-btn{
+  padding-left: 0;
+  padding-top: 0;
 }
 
 .listening-comp-interaction-container {

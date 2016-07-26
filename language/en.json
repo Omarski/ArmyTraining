@@ -18,15 +18,16 @@
   },
   "evaluation": {
     "btnContinue": "Continue",
-    "btnRestart": "Restart Episode",
+    "btnRestart": "Replay Scenario",
     "brnReview": "Review Lessons",
     "lblContent": "Click the forward and back buttons to review the objectives from this episode.",
     "lblObjectives": "Objectives",
-    "lblRestart": "I want more practice",
+    "lblRestart": "Do you want to try again?",
     "lblReview": "I want to review the information I missed",
-    "lblTitle": "Evaluation",
+    "lblTitle": "After Action Review",
     "lblTestPassed": "Excellent work on this episode! You selected the optimal choice on every decision point! You clearly know this mission topic well and are ready to move on in the course!",
-    "lblTestFailed": "I can tell that you are working hard to remember all of the cultural information you've learned so far, but unfortunately, your score does not allow you to move on in the course. Please review the information provided in the After Action Review below. It will help you to remember the cultural points necessary to perform better on your next try. When you feel that you are ready, play the episode again."
+    "lblTestFailed": "I can tell that you are working hard to remember all of the cultural information you've learned so far, but unfortunately, your score does not allow you to move on in the course. Please review the information provided in the After Action Review below. It will help you to remember the cultural points necessary to perform better on your next try. When you feel that you are ready, play the episode again.",
+    "lblEndInstructions": "Click the buttons below to review the information you missed or play the scenario again."
   },
   "footer": {
     "tooltipNext": "Next Page",
@@ -38,6 +39,7 @@
     "lblExplorer": "Explorer"
   },
   "header": {
+    "lbltitle": "AFPAK",
     "tooltipLogo": "Virtual Culture Awareness Trainer",
     "tooltipDLI": "DLI Guide",
     "tooltipReference": "Reference Guide",
@@ -47,7 +49,7 @@
     "tooltipSettings": "Settings"
   },
   "lessonStart": {
-    "lblTime": "This lesson is made up of multiple sections. The entire lesson will take approximately {0} minutes to complete."
+    "lblTime": "This lesson may contain multiple sections. The entire lesson will take approximately {0} minutes to complete."
   },
   "loader": {
     "lblLoading": "Loading"
@@ -61,8 +63,8 @@
     "lblCreditAccept": "Accept Credit",
     "lblCreditDecline": "Do Not Accept Credit",
     "lblTitle": "Question {0}",
-    "lblFailed": "Thank you for taking the test! Unfortunately, your score does not qualify you to test out of any portion of the course. \n\nClick \"Next\" to go to the first lesson in your required Course of Instruction.",
-    "lblPassed": "Congratulations! Your score qualifies you to test out of portions of the course. Review the lessons below for which you can receive credit, then check the \"Accept Credit\" button if you wish to accept credit for those lessons, or the \"Do Not Accept Credit\" button if you don't.\n\nIf you choose not to accept credit for the lessons, you will have to take them as part of your required Course of Instruction (COI), and score at least 80% on the lesson quizzes."
+    "lblFailed": "Thank you for taking the test! Unfortunately, your score does not qualify you to test out of any portion of the course. <br><br>Click &quot;Next&quot; to go to the first lesson in your required Course of Instruction.",
+    "lblPassed": "Congratulations! Your score qualifies you to test out of portions of the course. Review the lessons below for which you can receive credit, then check the &quot;Accept Credit&quot; button if you wish to accept credit for those lessons, or the &quot;Do Not Accept Credit&quot; button if you don't.<br><br>If you choose not to accept credit for the lessons, you will have to take them as part of your required Course of Instruction (COI), and score at least 80% on the lesson quizzes."
   },
   "progress": {
     "lblLessons": "Lessons",
@@ -74,6 +76,7 @@
     "btnPlayback": "Play Recording"
   },
   "quizEnd": {
+    "btnRestart": "Retake",
     "headerResult": "Result",
     "headerQuestion": "Question",
     "headerAnswer": "Answer",

@@ -268,6 +268,10 @@ var UnitStore = assign({}, EventEmitter.prototype, {
         return unit;
     },
 
+    getUnitTime: function(id){
+        return _units[id].data.playlistInfo[0].property[1].value;
+    },
+
     getChapterById: function(id, chapterId) {
         var chapter = null;
         var unit = this.getUnitById(id);

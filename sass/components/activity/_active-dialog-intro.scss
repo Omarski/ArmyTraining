@@ -1,3 +1,15 @@
 .active-dialog-intro-image {
   float: left;
+  margin-right: 10px;
+}
+
+#introModal {
+  .modal-dialog {
+    .modal-content {
+      .modal-footer {
+        text-align: center !important;
+        background: #E5E5E5 !important;
+      }
+    }
+  }
 }
