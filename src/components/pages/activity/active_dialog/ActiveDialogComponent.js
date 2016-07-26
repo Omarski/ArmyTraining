@@ -214,6 +214,9 @@ var ActiveDialogComponent = React.createClass({
     },
 
     soundPlay: function (sound){
+        // sound hack
+        sound = sound.split(',')[0];
+
         if (this.refs.activeDialogAudioRef && this.refs.activeDialogAudioRef.refs.audioRef) {
             this.bSoundLoading = true;
             var player = this.refs.activeDialogAudioRef.refs.audioRef;
