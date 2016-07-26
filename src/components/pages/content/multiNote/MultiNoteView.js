@@ -260,6 +260,11 @@ var MultiNoteView = React.createClass({
         };
 
 
+        var showButtons = (pageChoices && pageChoices.length > 3);
+
+
+
+
         var noteImage = "";
         var text = (<div className="col-md-4" key={xid + "activetext"}></div>);
 
@@ -290,6 +295,7 @@ var MultiNoteView = React.createClass({
                                     focusOnSelect={sliderSettings.focusOnSelect}
                                     beforeChange={this.updateSlick}
                                     afterChange={this.updateSlick}
+                                    arrows={showButtons}
                                 >
                                     {pageChoices}
                                 </Slider>
