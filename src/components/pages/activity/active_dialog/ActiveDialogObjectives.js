@@ -86,7 +86,9 @@ var ActiveDialogObjectives = React.createClass({
         var currentAction = ActiveDialogStore.getCurrentAction();
         if (currentAction) {
             if (currentAction.type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE) {
-                // TODO hide overlay
+                if (this.refs.objectivesPopover) {
+                    this.refs.objectivesPopover.hide();
+                }
             }
         }
     }
