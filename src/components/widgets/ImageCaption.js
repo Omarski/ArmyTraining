@@ -15,7 +15,6 @@ var ImageCaptionView = React.createClass({
         var img = document.getElementById('captionImage');
 
         if (img && img.clientWidth && this.state.onImageLoaded) {
-            console.log('sup??? ' + img.clientWidth  + ' ' + this.state.onImageLoaded );
             this.state.onImageLoaded(img.clientWidth, img.clientHeight);
         }
     },

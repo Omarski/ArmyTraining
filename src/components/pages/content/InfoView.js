@@ -167,7 +167,7 @@ function getPageState(cmp, props) {
 
     data.note = noteItems;
     data.media = mediaItems;
-    //console.dir(data);
+
     return data;
 }
 
@@ -230,7 +230,6 @@ var InfoView = React.createClass({
     },
 
     imageReady:function(w, h) {
-        console.log(w + " ** " + h);
         _imageReady = true;
         if (w > 447) {
             _wideImageLayout = true;
