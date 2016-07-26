@@ -5,6 +5,7 @@ var PageStore = require('../../../stores/PageStore');
 var React = require('react');
 var SCORMActions = require('../../../actions/SCORMActions');
 var UnitStore = require('../../../stores/UnitStore');
+var ReferenceStore = require('../../../stores/ReferenceStore');
 
 
 function getPageState(props) {
@@ -54,6 +55,7 @@ var SectionEndView = React.createClass({
         // send course completion HACK
         if (UnitStore.areAllRequiredComplete()) {
             SCORMActions.complete();
+            self.getPDF
         }
 
         // disable next button if failed chapter
@@ -71,6 +73,11 @@ var SectionEndView = React.createClass({
         PageStore.addChangeListener(this._onChange);
     },
 
+    getPDF: function(){
+        console.log("PageStore.chatper()", PageStore.chapter());
+        // ReferenceStore.getPDF(unitID)
+    },
+
     render: function() {
         var self = this;
         var state = self.state;
@@ -83,6 +90,10 @@ var SectionEndView = React.createClass({
         if (feedbackImageSrc !== "") {
             feedbackImage = <img className="" src={feedbackImageSrc}></img>;
         }
+
+        // console.log("self.props", self.props, "self.state", self.state);
+        self.getPDF();
+
 
         return (
             <div>

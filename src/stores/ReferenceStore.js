@@ -53,6 +53,23 @@ var ReferenceStore = assign({}, EventEmitter.prototype, {
         this.emit(UPDATE_EVENT);
     },
 
+    getPDF: function(chapterIdParameter){
+
+        if(_data.hasOwnProperty("items")){
+                for(var i = 0; i < _data.items.length; i++){
+                    if (_data.items[i].name === "PDF Takeaways"){
+                        for(var j = 0; j < _data.items[i].assets[j]; i < _data.items[i].assets[j].length){
+                            if(_data.items[i].assets[j].chapterId === chapterIdParameter){
+                                console.log("_data.items[i].assets[j].path", _data.items[i].assets[j].path);
+                                return _data.items[i].assets[j].path;
+                            }
+                        }
+                    }
+            }
+        }
+        return null;
+    },
+
     /**
      * @param {function} callback
      */
