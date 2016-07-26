@@ -9,8 +9,20 @@
   }
 }
 
+.infoMediaContainer {
+  .cutscene {
+    video {
+      margin-top: 0px;
+      width: 100%;
+      max-width: 576px;
+      max-height: none;
+    }
+  }
+}
+
 .info-bullets-div {
   display: inline-flex !important;
+  width: 100%;
 }
 
 .infoMediaContainer {
@@ -29,6 +41,10 @@
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 20px;
+}
+
+div.cutscene.infoNoteContainer{
+  margin-top: 0px;
 }
 
 /*.info-view-list-item {margin-top: -20px;}*/
