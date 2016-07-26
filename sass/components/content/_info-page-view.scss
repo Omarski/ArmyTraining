@@ -53,10 +53,15 @@ div.cutscene.infoNoteContainer{
 .info-bullets-indent {
   margin-left: 10px;
 }
+.info-bullets-div {
+  clear: both;
+}
 
 .info-view-bullet-item{
   margin-left: 25px;
   font-size: 20px;
+  float: left;
+  padding-right: 10px;
 }
 
 
