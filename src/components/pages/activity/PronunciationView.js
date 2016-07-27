@@ -66,7 +66,18 @@ function stopRecording(id, index, self){
 }
 
 function handlePlaying(id, index, self, recordedClass){
-    if(recordedClass !== "pb-disabled") {
+    // if(recordedClass !== "pb-disabled") {
+    //     if (ASRStore.isInitialized()) {
+    //         ASRStore.PlayRecording();
+    //     } else {
+    //         if (self.state.isPlaying[index]) {
+    //             stop(id, index, self);
+    //         } else {
+    //             play(id, index, self);
+    //         }
+    //     }
+    // }
+    if(self.state.playableState[index]){
         if (ASRStore.isInitialized()) {
             ASRStore.PlayRecording();
         } else {
@@ -353,7 +364,7 @@ var PronunciationView = React.createClass({
                 }
 
                 //if(self.state.message != "No data found.") {
-                if(self.state.message != "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.") {
+                if(self.state.message != "This needs to be a unique message that isn't returned by the applet.") {
                     var isRecording = self.state.recordingState[qcIndex];
                     if (isRecording) {
                         itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
@@ -436,7 +447,9 @@ var PronunciationView = React.createClass({
                     </audio>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <table className="table table-condensed pronunciation-container-table">
+                        <tbody>
                         {vaList}
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -455,14 +468,14 @@ var PronunciationView = React.createClass({
         var state = this.state;
         var newIsCorrect = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
-        var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        var recordedSpeech = "This needs to be a unique message that isn't returned by the applet.";
 
         if(!ConfigStore.isASREnabled()){
-            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+            newMessage = "This needs to be a unique message that isn't returned by the applet.";
         }
-
+        //console.log("the current message is: " + newMessage);
         switch(newMessage){
-            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+            case "This needs to be a unique message that isn't returned by the applet.":
                 break;
             case "initialized":
 
