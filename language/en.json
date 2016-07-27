@@ -109,7 +109,7 @@
   "sectionEnd": {
     "imageComplete": "data/media/diploma.png",
     "lblCongratulations": "CONGRATULATIONS",
-    "lblCourseComplete": "COURSE COMPLETE NEEDS TO BE AUTHORED!!!!!!",
+    "lblCourseComplete": "You have completed your required Course of Instruction and the Post-Test. To receive credit, you MUST take the brief Post-Course Assessment Survey. Select the survey link in the tree on the left side of this browser window. Once completed, click 'Submit' to receive your final congratulations notice. Exit the course to print your certificate from your student desktop.\nPlease remember, if you do not complete the survey and exit the course, you can always come back later.",
     "lblSectionComplete": "You have successfully completed the section. Click 'NEXT' to continue to the next section in this lesson.",
     "lblSectionFailed": "Your score does not allow you to progress to the next section. Please review the section again.",
     "lblLessonComplete": "Congratulations! You have successfully completed this lesson. Click 'NEXT' to continue to the next lesson in the course."
