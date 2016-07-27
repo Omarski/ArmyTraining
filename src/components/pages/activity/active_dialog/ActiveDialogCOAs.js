@@ -39,6 +39,9 @@ function getCompState(show) {
         show = false;
     }
 
+    // shuffle data
+    data = AGeneric().shuffle(data);
+
     return {
         show: show,
         coas: data
