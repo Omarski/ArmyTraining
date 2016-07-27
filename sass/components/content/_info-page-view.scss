@@ -19,6 +19,15 @@
     }
   }
 }
+.closed-caption-panel{
+  overflow-x: hidden;
+  overflow-y: hidden;
+  .panel-body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 290px;
+  }
+}
 
 .info-bullets-div {
   display: inline-flex !important;
