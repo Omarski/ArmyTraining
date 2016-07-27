@@ -199,7 +199,7 @@ var HeaderView = React.createClass({
                         </Navbar.Brand>
                         <Navbar.Toggle onClick={changeNavBarCollapse} />
                     </Navbar.Header>
-                    <NavbarCollapse id="navbarCollapseId" style={self.state.hideInClass} id="collapseNav">
+                    <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
                         <Nav id="navId" pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
                             <NavItem className="reference-guide-hide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView}
                                      title={LocalizationStore.labelFor("header", "tooltipReference")}
