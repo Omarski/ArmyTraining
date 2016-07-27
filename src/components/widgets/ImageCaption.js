@@ -5,16 +5,43 @@ function getImageCaptionState(props) {
         videoType: props.videoType || "",
         filePath: props.src || "",
         caption: props.caption || "",
-        altText: props.altText || ""
+        altText: props.altText || "",
+        onImageLoaded: props.onImageLoaded || null
     };
 }
 
 var ImageCaptionView = React.createClass({
+    checkImage: function() {
+        var img = document.getElementById('captionImage');
+
+        if (img && img.clientWidth && this.state.onImageLoaded) {
+            this.state.onImageLoaded(img.clientWidth, img.clientHeight);
+        }
+    },
+
+    handleImageLoaded: function () {
+        this.checkImage();
+    },
+
+    handleImageErrored: function () {
+        // handle error
+    },
+
     getInitialState: function() {
         return getImageCaptionState(this.props);
     },
+
+    componentDidMount: function() {
+        //this.checkImage();
+    },
+
+    componentDidUpdate: function() {
+        //this.checkImage();
+    },
+
+
     render: function() {
-        captionDiv = "";
+        var captionDiv = "";
         // check if caption object pass in is valid
         switch(typeof this.state.caption) {
             case "undefined":
@@ -33,7 +60,17 @@ var ImageCaptionView = React.createClass({
 
         return  (
             <div key={"imageCaptionContainer-" + this.state.filePath} className="image-caption-container">
-                <img className={this.state.videoType} src={this.state.filePath} aria-label={this.state.altText} title={this.state.altText} alt={this.state.altText}></img>
+                <img
+                    id="captionImage"
+                    className={this.state.videoType}
+                    src={this.state.filePath}
+                    aria-label={this.state.altText}
+                    title={this.state.altText}
+                    alt={this.state.altText}
+                    onLoad={this.handleImageLoaded}
+                    onError={this.handleImageErrored}
+                >
+                </img>
                 {captionDiv}
             </div>
         );
