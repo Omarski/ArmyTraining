@@ -76,20 +76,27 @@ var InteractiveTimelineView = React.createClass({
     },
     render: function() {
         var self = this;
+        var state = self.state;
         var page = self.state.page;
         var title = page.title;
         var sources = self.state.sources;
         var image = "";
         var description = "";
+        var attribution = "";
 
         if (AppStateStore.isMobile()) {
             return (<UnsupportedScreenSizeView/>);
         }
 
+        console.log("state");
+        console.dir(state);
 
         //image in center
         image = getImage(self.state.selectedDate, self.state.timelineJSON.nodes);
         description = getDescription(self.state.selectedDate, self.state.timelineJSON.nodes);
+        attribution = getAttribution(self.state.selectedDate, self.state.timelineJSON.nodes);
+
+        console.log(attribution);
 
         var row1 = [];
         var row2 = [];
@@ -121,13 +128,12 @@ var InteractiveTimelineView = React.createClass({
                 {item.year}</div>);
         });
 
-
         return (
             <div className="absolute-full">
                 <div className="absolute-full" key={"page-" + this.state.page.xid}>
 
                     <div className="absolute-full">
-                            <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
+                            <PageHeader sources={attribution} title={title} key={this.state.page.xid + "source" + attribution}/>
 
                             <div className="timeline-image-container thumbnail">
                                 {image}
@@ -181,6 +187,14 @@ function getDescription(selectedDateString, nodeList){
     for(var i=0;i<nodeList.length;i++){
         if(selectedDateString == nodeList[i].title){
             return(<span><b>{nodeList[i].year + ": "}</b>{nodeList[i].desc}</span>);
+        }
+    }
+}
+
+function getAttribution(selectedDateString, nodeList){
+    for(var i=0;i<nodeList.length;i++){
+        if(selectedDateString == nodeList[i].title){
+            return(nodeList[i].attribution);
         }
     }
 }
