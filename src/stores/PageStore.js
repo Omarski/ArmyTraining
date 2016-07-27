@@ -316,6 +316,21 @@ function isValidPrevUnit(unit) {
     return true;
 }
 
+function isFirstPageOfUnit() {
+    if (_currentUnit && _currentUnit.data.chapter) {
+        if (_currentUnit.data.chapter.length > 0) {
+            var firstChapter = _currentUnit.data.chapter[0];
+            if (firstChapter.pages && firstChapter.pages.length > 0) {
+                var firstPage = firstChapter.pages[0];
+                if (firstPage.xid === _currentPage.xid) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 /**
  * Checks current state to see if the requested previous page is valid to show
  * @param page
@@ -424,6 +439,9 @@ function load(data) {
             FooterActions.enableAll(); // TODO: dont like this here <---
             if (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_AUTOPASS) !== null) {
                 markChapterComplete();  // TODO: dont like this here <---
+            }
+            if (isFirstPageOfUnit()) { // TODO: dont like this here <---
+                FooterActions.disabledPrevious();
             }
 
 
