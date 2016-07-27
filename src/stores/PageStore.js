@@ -394,6 +394,7 @@ function loadPrevious() {
  * @param  {string} data The content of the PAGE
  */
 function load(data) {
+    // console.log("data", data);
     if (data && data.chapter && data.page) {
         setTimeout(function() {
             NotificationActions.updateBody("Loading Page : " + data.page.title );

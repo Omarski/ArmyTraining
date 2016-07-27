@@ -373,6 +373,9 @@ var MatchItemView = React.createClass({
         choices = state.answerState.map(function(item, index){
             var draggable = "";
             // if(audio)
+            // console.log("state.answerState", state.answerState);
+            // console.log("item", item);
+            var numberNextToSpan = index + ".";
             switch(item.mediaType){
                 case "audio":
                     var zid = item.passedData;
@@ -389,6 +392,7 @@ var MatchItemView = React.createClass({
                             onDrop={self.onDropping}
                             onClick={self.onClick}>
                             <span className="glyphicon glyphicon-play-circle"></span>
+                            <h5 className="match-item-number">{numberNextToSpan}</h5>
                         </div>);
                     break;
                 case "image":
@@ -441,7 +445,8 @@ var MatchItemView = React.createClass({
             var needCheck = state.numMoved == answerState.length;
             // have array of boolean's equal length to answerState
             for(var i=0;i<state.answerState.length;i++){
-                console.log("i", i);
+                // console.log("i", i);
+                // console.log("state.answerState", state.answerState);
                 // loop through the answerState array
                 if(index === state.answerState[i].currentBoxIndex) { // if there is an answer in this box
                     if (needCheck) { // does it need to be graded?
@@ -451,6 +456,7 @@ var MatchItemView = React.createClass({
                             feedback = incorrect;
                         }
                     }
+
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
                     switch (state.answerState[i].mediaType) {
                         case "audio":
