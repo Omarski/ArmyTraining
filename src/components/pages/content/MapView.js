@@ -4,6 +4,7 @@ var SettingsStore = require('../../../stores/SettingsStore');
 var ReactBootstrap = require('react-bootstrap');
 var PageHeader = require('../../widgets/PageHeader');
 var AppStateStore = require('../../../stores/AppStateStore');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 var UnsupportedScreenSizeView = require('../../../components/UnsupportedScreenSizeView');
 
 
@@ -110,12 +111,16 @@ var MapView = React.createClass({
                 <div className="container" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <audio id="audio"></audio>
-                    <div className="mapContainer">
-                        <div className="mapInstructions">{"Click the tacks to learn about points of interest in " + self.state.json.title + "."}</div>
-                        <img className="backdropImage" src={"data/media/" + backdropImage} alt={title}></img>
-                        <img className="compass" src="data/media/compass.png"></img>
-                        {pins}
-                        {textBox}
+                    <div className="map-view-content col-md-10 col-md-offset-2">
+                        <div className="mapContainer">
+                            <img className="backdropImage" src={"data/media/" + backdropImage} alt={title}></img>
+                            {pins}
+                            {textBox}
+                        </div>
+                        <div className="mapSidebar">
+                            <div className="mapInstructions">{LocalizationStore.labelFor("mapView","mapInstructions") + self.state.json.title + "."}</div>
+                            <img className="compass" src="data/media/compass.png"></img>
+                        </div>
                     </div>
                 </div>
             </div>

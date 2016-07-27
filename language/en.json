@@ -121,5 +121,8 @@
     "btnListen": "Click to Listen",
     "btnStop": "Stop",
     "mdlClose": "Close"
+  },
+  "mapView":{
+    "mapInstructions": "Click the tacks to learn about points of interest in "
   }
 }
