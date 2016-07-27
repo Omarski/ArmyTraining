@@ -75,7 +75,6 @@ var MultiNoteView = React.createClass({
     },
 
     handleClick: function(e){
-        console.log(e)
         var activeIndex = this.state.activePage;
         setTimeout(function () {
             $('.slick-slide').removeClass('slick-active');
