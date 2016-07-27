@@ -2,10 +2,33 @@
  * Created by Alec on 6/7/2016.
  */
 var React = require('react');
+var ASRActions = require('../../actions/ASRActions');
+var ASRStore = require('../../stores/ASRStore');
 
+function asrState() {
+    return {};
+}
 var ASR = React.createClass({
+    getInitialState: function() {
+        return asrState();
+    },
 
+    componentWillMount: function() {
+        ASRStore.addChangeListener(this._onASRChange);
+    },
 
+    componentDidMount: function() {
+         setTimeout(function() {
+             self.loadASR();
+         }, 100);
+    },
+
+    componentWillUnmount: function() {
+        ASRStore.removeChangeListener(this._onChange);
+    },
+    loadASR: function(){
+        ASRActions.load();
+    },
 
     render: function() {
         // setup plugin html code
@@ -27,7 +50,17 @@ var ASR = React.createClass({
         return (
             <div dangerouslySetInnerHTML={dangerousMarkup}></div>);
 
-    }
+    },
+
+    /**
+     * Event handler for 'change' events coming from the ASRStore
+     */
+    _onASRChange: function (){
+        var self = this;
+
+    },
+
+
 });
 
 module.exports = ASR;
