@@ -18,9 +18,7 @@ var ASR = React.createClass({
     },
 
     componentDidMount: function() {
-         setTimeout(function() {
-             self.loadASR();
-         }, 100);
+
     },
 
     componentWillUnmount: function() {
@@ -43,12 +41,26 @@ var ASR = React.createClass({
         pluginHTML += '<param name="jnlp_href" value="speechinterface16.jnlp"/>\n';
         pluginHTML += '</applet>\n';
 
-        var dangerousMarkup = {
-            __html: pluginHTML // the whole markup string you want to inject
-        };
+        var self = this;
+        setTimeout(function() {
+            document.getElementById('asr').innerHTML = pluginHTML;
 
-        return (
-            <div dangerouslySetInnerHTML={dangerousMarkup}></div>);
+            setTimeout(function() {
+                self.loadASR();
+            });
+        });
+
+        //pluginHTML = "";
+
+        //var dangerousMarkup = {
+
+          //  __html: pluginHTML // the whole markup string you want to inject
+        //};
+
+
+        return (<div></div>);
+        //return (
+        //    <div dangerouslySetInnerHTML={dangerousMarkup}></div>);
 
     },
 
