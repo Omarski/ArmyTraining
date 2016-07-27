@@ -432,6 +432,7 @@ var MatchItemView = React.createClass({
             var needCheck = state.numMoved == answerState.length;
             // have array of boolean's equal length to answerState
             for(var i=0;i<state.answerState.length;i++){
+                console.log("i", i);
                 // loop through the answerState array
                 if(index === state.answerState[i].currentBoxIndex) { // if there is an answer in this box
                     if (needCheck) { // does it need to be graded?
@@ -444,14 +445,17 @@ var MatchItemView = React.createClass({
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
                     switch (state.answerState[i].mediaType) {
                         case "audio":
+
+                            console.log("i");
                             answerRender = (<div
                                     data={state.answerState[i].passedData}
                                     data-passed={state.answerState[i].passedData}
                                     draggable="true"
-                                    className="match-item-play-icon"
+                                    className="match-item-play-icon blue-test-style"
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
                                     <span className="glyphicon glyphicon-play-circle"></span>
+                                    <p>{i}</p>
 
                                     <div className={(feedback + ' match-item-feedback-audio')}></div>
                                 </div>);
