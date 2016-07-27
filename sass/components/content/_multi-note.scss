@@ -1,14 +1,19 @@
 .multi-note-img-row {
   min-height: 360px;
 }
-.slick-prev, .slick-next {
+.multi-note-carousel-btn {
   border-style: solid;
   border-width: 1px;
   border-color: #eaeaea;
   height: 100%;
-  padding-left: 2px;
-  padding-right: 21px;
+  padding-left: 3px;
+  padding-right: 3px;
   background-color: #F5F5F5;
+}
+
+.multi-note-carousel-btn.active {
+  background-color: #bcd5d1 !important;
+  border-color: #bcd5d1 !important;
 }
 
 .multi-note-container {
@@ -37,10 +42,7 @@
   margin-left: 10px;
 }
 
-.slick-active.multi-note-page-btn {
-  background-color: #C1D4D1;
-  border-color: #C1D4D1;
-}
+
 
 .multi-note-thumbnail {
   width: 100px;
