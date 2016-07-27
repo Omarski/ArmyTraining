@@ -1,5 +1,6 @@
 var React = require('react');
-var Slider = require('react-slick');
+//var Slider = require('react-slick');
+var NukaCarousel = require('nuka-carousel');
 var PageStore = require('../../../../stores/PageStore');
 var PageHeader = require('../../../widgets/PageHeader');
 var SettingsStore = require('../../../../stores/SettingsStore');
@@ -262,12 +263,8 @@ var MultiNoteView = React.createClass({
 
         var showButtons = (pageChoices && pageChoices.length > 3);
 
-
-
-
         var noteImage = "";
         var text = (<div className="col-md-4" key={xid + "activetext"}></div>);
-
 
         var p = pagesHTML[self.state.activePage];
         var xid = self.state.xid;
@@ -275,6 +272,45 @@ var MultiNoteView = React.createClass({
             sourceInfo = p.sources;
         }
         if (p && p.image) {
+
+            var Decorators = [
+                {
+                    component: React.createClass({
+                        render() {
+                            return (
+                                <button
+                                    onClick={this.props.previousSlide}
+                                >
+                                    Previous Slide
+                                </button>
+                            )
+                        }
+                    }),
+                    position: 'CenterLeft',
+                    style: {
+                        padding: 20
+                    }
+                },
+                {
+                    component: React.createClass({
+                        render() {
+                            return (
+                                <button
+                                    onClick={this.props.nextSlide}
+                                >
+                                    Next Slide
+                                </button>
+                            )
+                        }
+                    }),
+                    position: 'CenterRight',
+                    style: {
+                        padding: 20
+                    }
+                }
+            ];
+
+
             noteImage = (
                 <div className="col-md-6 col-sm-6">
                     <div className="container-fluid">
@@ -284,8 +320,9 @@ var MultiNoteView = React.createClass({
                         <div className="row">
                             <div className="multi-note-slider-container">
 
-                                <Slider
-                                    dots={sliderSettings.dots}
+                                <NukaCarousel
+                                    decorators={Decorators}
+
                                     infinite={sliderSettings.infinite}
                                     speed={sliderSettings.speed}
                                     slidesToShow={sliderSettings.slidesToShow}
@@ -298,7 +335,7 @@ var MultiNoteView = React.createClass({
                                     arrows={showButtons}
                                 >
                                     {pageChoices}
-                                </Slider>
+                                </NukaCarousel>
                             </div>
                         </div>
                     </div>
