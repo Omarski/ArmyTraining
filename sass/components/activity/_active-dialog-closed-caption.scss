@@ -1,4 +1,4 @@
-.active-dialog-closed-caption-button {
+.active-dialog-closed-caption-button, .active-dialog-closed-caption-button:hover, .active-dialog-closed-caption-button:focus {
   margin-left: 12px;
   margin-bottom: 3px;
 
@@ -13,10 +13,7 @@
     color: #fff;
   }
 }
-.active-dialog-closed-caption-button:hover {
-  background-color: transparent;
-  border-color: transparent;
-}
+
 
 .active-dialog-closed-caption-panel {
   max-height: 320px;
