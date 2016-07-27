@@ -440,6 +440,11 @@ function load(data) {
             if (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_AUTOPASS) !== null) {
                 markChapterComplete();  // TODO: dont like this here <---
             }
+            if ((Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_POSTTEST) !== null) ||
+                (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
+                FooterActions.disabledPrevious();
+            }
+
             if (isFirstPageOfUnit()) { // TODO: dont like this here <---
                 FooterActions.disabledPrevious();
             }
