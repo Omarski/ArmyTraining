@@ -256,6 +256,8 @@ var ListeningComprehensionView = React.createClass({
             );
         }
 
+        // {cc} goes on 
+
         var choices;
         choices = state.answers.map(function(item, index){
             var ans = "";
@@ -347,7 +349,6 @@ var ListeningComprehensionView = React.createClass({
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={this.state.page.xid}/>
                     <div className="container lc-page-container-container">
-                        {cc}
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.

@@ -34,15 +34,15 @@ function getPageState(props) {
             var displayField = "";
             var uttering = "";
             var utterance = "";
-            var passedData = "";
+            var passedData = "000"+index;
 
             if(item.nut){
                 uttering = item.nut.uttering;
                 utterance = uttering.utterance;
 
                 if(uttering.media){
-                    mediaType = uttering.media[0].type;
-                    passedData = uttering.media[0].zid;
+                    mediaType = uttering.media[0].type || "audio";
+                    passedData = uttering.media[0].zid || "000"+index;
                 }else{
                     mediaType = "string";
                     if(utterance.ezread && utterance.ezread.text !== ""){
@@ -60,11 +60,13 @@ function getPageState(props) {
                     }
                 }
             }else if (item.media){
-                mediaType = item.media.type;
-                passedData = item.media.xid;
+
+                mediaType = item.media.type || "audio";
+                passedData = item.media.xid || "000"+index;
+                // console.log("passedData", passedData);
             }
 
-
+            // console.log("passedData", passedData);
             data.answerState.push({letter: letter, isMoved: false, currentBox: "", currentBoxIndex: -1, mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
@@ -229,6 +231,8 @@ var MatchItemView = React.createClass({
                             itemFound = true;
                         }
                     }else{ // if( "image" || "audio" )
+
+                        // console.log("draggedItemTarget", draggedItemTarget, "draggedItemTarget.attributes", draggedItemTarget.attributes);
                         if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
                             item.currentBox = dropLocation;
                             item.currentBoxIndex = dropLocationIndex;
@@ -363,6 +367,8 @@ var MatchItemView = React.createClass({
             switch(item.mediaType){
                 case "audio":
                     var zid = item.passedData;
+                    // console.log("state", state);
+                    // console.log("item.passedData", item.passedData);
                     draggable = (<div
                             key={page.xid + "choice-"+index}
                             data={zid}

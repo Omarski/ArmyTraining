@@ -53,6 +53,30 @@ var ReferenceStore = assign({}, EventEmitter.prototype, {
         this.emit(UPDATE_EVENT);
     },
 
+    getPDF: function(chapterIdParameter){
+
+        // console.log("chapterIdParameter",chapterIdParameter);
+        // console.log("_data.hasOwnProperty(items)", _data.hasOwnProperty("items"));
+        if(_data.hasOwnProperty("items")){
+                for(var i = 0; i < _data.items.length; i++){
+                    if (_data.items[i].name === "PDF Takeaways"){
+                        // console.log("_data.items[i].name === PDF Takeaways", _data.items[i].name === "PDF Takeaways");
+                        // console.log("_data.items[i].assets", _data.items[i].assets);
+                        // console.log("")
+                        for(var j = 0; j < _data.items[i].assets.length; j++){
+                            // console.log("_data.items[i].assets[j]", _data.items[i].assets[j]);
+                            // console.log("_data.items[i].assets[j].chapterId === chapterIdParameter", _data.items[i].assets[j].chapterId === chapterIdParameter);
+                            if(_data.items[i].assets[j].chapterId === chapterIdParameter){
+                                // console.log("_data.items[i].assets[j].path", _data.items[i].assets[j].path);
+                                return _data.items[i].assets[j].path;
+                            }
+                        }
+                    }
+            }
+        }
+        return null;
+    },
+
     /**
      * @param {function} callback
      */
