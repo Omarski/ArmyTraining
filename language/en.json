@@ -30,8 +30,8 @@
     "lblEndInstructions": "Click the buttons below to review the information you missed or play the scenario again."
   },
   "footer": {
-    "tooltipNext": "Next Page",
-    "tooltipPrevious": "Previous Page",
+    "tooltipNext": "Next",
+    "tooltipPrevious": "Previous",
     "tooltipIndexExpand": "Open Explorer",
     "tooltipIndexCollapse": "Close Explorer",
     "lblRequired": "Required",
