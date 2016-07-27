@@ -36,7 +36,6 @@ var ActiveDialogIntro = React.createClass({
     render: function() {
         var content= "";
         var steps = "";
-        var end = "";
 
         if (this.state.intro && (typeof this.state.intro === "string") && this.state.intro !== "") {
             var intro = this.state.intro;
@@ -44,7 +43,6 @@ var ActiveDialogIntro = React.createClass({
             if (intro.indexOf("\n")) {
                 var parts = intro.split("\n");
                 content = parts.shift();
-                end = parts.pop();
 
                 steps = parts.map(function(item, index) {
                    return (
@@ -78,8 +76,6 @@ var ActiveDialogIntro = React.createClass({
                                         <div className="active-dialog-evaluation-feedback">
                                             <p>{content}</p>
                                             {steps}
-                                            <br/>
-                                            {end}
                                         </div>
                                     </td>
                                 </tr>

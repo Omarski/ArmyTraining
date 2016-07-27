@@ -55,24 +55,24 @@ var MissionConnectGameView = React.createClass({
 
         var pieces = chars.map(function(char,index){
 
-            var houseImg = self.props.images[parseInt(char.nodeNumber) - 1].houseUrl;
-            var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize:'200px 150px'};
-
-            var iconImg = self.props.images[parseInt(char.nodeNumber) - 1].charIconUrl;
-            var iconStyle = {background:'url(' + iconImg + ') no-repeat', backgroundSize: '100% 100%'};
-
-            var ableToInteract = char.startNode ? "auto":"none";
             var visible = char.startNode? "1":"0";
-            
+            var ableToInteract = char.startNode ? "auto":"none";
 
             if (char.endNode) {
                 visible = 0.4;
                 ableToInteract = "auto";
             }
 
-            var blockStyle = {top: char.yPos+'px', left: char.xPos+'px',
-                pointerEvents:ableToInteract, opacity:visible};
+            var houseImg = self.props.images[parseInt(char.nodeNumber) - 1].houseUrl;
+            var houseStyle = {background:'url(' + houseImg + ') no-repeat', backgroundSize:'200px 150px'};
 
+            var iconImg = self.props.images[parseInt(char.nodeNumber) - 1].charIconUrl;
+            var iconStyle = {background:'url(' + iconImg + ') no-repeat', backgroundSize: '100% 100%',  opacity:visible};
+
+
+            var blockStyle = {top: char.yPos+'px', left: char.xPos+'px',
+                pointerEvents:ableToInteract};
+          
             return(
                 <div className = "mission-connect-view-piece-block" style={blockStyle} id={"missionConnectViewPieceBlock"+char.nodeNumber} key={index}>
                     <div className = "mission-connect-view-home" style={houseStyle}></div>

@@ -1,15 +1,19 @@
-.active-dialog-closed-caption-button {
-  padding: 0;
+.active-dialog-closed-caption-button, .active-dialog-closed-caption-button:hover, .active-dialog-closed-caption-button:focus {
   margin-left: 12px;
-  margin-bottom: 0px;
+  margin-bottom: 3px;
+
+  text-decoration: none;
+  background-color: #5A5C51;
+  border-color: #BA9077;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 5px !important;
+  padding-right: 4px !important;
   span {
-    color: $transcript-btn-color !important;
+    color: #fff;
   }
 }
-.active-dialog-closed-caption-button:hover {
-  background-color: transparent;
-  border-color: transparent;
-}
+
 
 .active-dialog-closed-caption-panel {
   max-height: 320px;

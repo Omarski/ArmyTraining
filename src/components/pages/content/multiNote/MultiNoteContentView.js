@@ -1,5 +1,4 @@
 var React = require('react');
-var Slider = require('react-slick');
 var PageStore = require('../../../../stores/PageStore');
 var PageHeader = require('../../../widgets/PageHeader');
 var SettingsStore = require('../../../../stores/SettingsStore');

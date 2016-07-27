@@ -80,6 +80,7 @@ var MissionConnectInterviewView = React.createClass({
                         self.viewUpdate({task:"won", value:null});
                     }
                 }else if (char.difficulty === "contractor"){
+                    localStats.completed = self.props.stats.completed + 1;
                     self.props.updateGameView({task:"updateList", value:"contractors"});
                 }
 
@@ -117,7 +118,9 @@ var MissionConnectInterviewView = React.createClass({
             for (var i=0; i < connectNodes.length; i++){
                 if (connectNodes[i] !== this.props.endNode){
                     var node = $("#missionConnectViewPieceBlock"+connectNodes[i]);
-                    $(node).animate({'opacity':'1'},500).css({'pointerEvents':'auto'});
+                    var nodeIcon = $("#missionConnectViewPieceBlock"+connectNodes[i] + " .mission-connect-view-icon");
+                    $(nodeIcon).animate({'opacity':'1'},500);
+                    $(node).css({'pointerEvents':'auto'});
                 }
 
             }
@@ -165,6 +168,7 @@ var MissionConnectInterviewView = React.createClass({
         var scenarioTempl = function() {
             return(
                 <div className = "mission-connect-view-popCont">
+                    <div className="mission-connect-view-popHeader">Interaction</div>
                     <div className = "mission-connect-view-popSenImgCont">
                         <div className = "mission-connect-view-popSenImg" style={imgScnStyle}></div>
                         <div className = "mission-connect-view-popSenImgTitle">{char.profileName}</div>
@@ -175,11 +179,12 @@ var MissionConnectInterviewView = React.createClass({
                     <div className = "mission-connect-view-popSenBtnGrpCont">
                         <div className = "mission-connect-view-popSenBtnCont">
                             <div type="button" className="btn btn-default mission-connect-view-popSenBtn"
-                                    onClick={self.onInteract}>Interact</div>
+                                 style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={self.onInteract}>Interact</div>
                             <div type="button" className="btn btn-default mission-connect-view-popSenBtn"
-                                    onClick={self.onClosePop}>Exit</div>
+                                 style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={self.onClosePop}>Exit</div>
                             </div>
                     </div>
+                    <div className="mission-connect-view-btnBackground"></div>
                 </div>
             )
         };
@@ -188,9 +193,10 @@ var MissionConnectInterviewView = React.createClass({
 
             var questionObj = questionTemplColl[self.props.scoreObjColl[self.props.activeNode - 1].attempts];
             var submitStyle = self.state.answered ? "auto":"none";
-            //var correct = $('input[name="missionConnectQuizRadio"]:checked').val();
+           
             return(
                 <div className = "mission-connect-view-popCont">
+                    <div className="mission-connect-view-popHeader">Interaction</div>
                     <div className = "mission-connect-view-popIntImgCont">
                         <div className = "mission-connect-view-popIntImg" style={imgQuizStyle}></div>
                         <div className = "mission-connect-view-popIntImgTitle">{char.profileName}</div>
@@ -206,10 +212,10 @@ var MissionConnectInterviewView = React.createClass({
                         <div className = "mission-connect-view-popIntBtnCont">
                             <div type="button" className="btn btn-default"
                                  id="missionConnectSubmitBtn"
-                                 style = {{pointerEvents: submitStyle}}
-                                 onClick={self.onSubmit}>Submit</div>
+                                 style={{pointerEvents: submitStyle, paddingLeft:'30px', paddingRight:'30px'}} onClick={self.onSubmit}>Submit</div>
                         </div>
                     </div>
+                    <div className="mission-connect-view-btnBackground"></div>
                 </div>
             )
         };
@@ -228,7 +234,7 @@ var MissionConnectInterviewView = React.createClass({
         var gameData = self.props.gameData;
         var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
         var origImg = self.props.images[parseInt(char.nodeNumber) - 1].charOrigUrl;
-        var imgFeedStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'103px 103px'};
+        var imgFeedStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'130px 130px'};
         var questionTemplColl = self.state.questionTemplColl;
         var scoreObj = self.props.scoreObjColl[self.props.activeNode - 1];
 
@@ -242,12 +248,13 @@ var MissionConnectInterviewView = React.createClass({
         var feedback = function(){
             var feedbackQuote =  scoreObj.answered ? char.positiveFeedback : char.negativeFeedback;
             return(
-                <div className = "mission-connect-view-popCont">
+                <div className = "mission-connect-view-popCont" style={{marginTop: '28px'}}>
 
+                    <div className="mission-connect-view-popHeader">Interaction</div>
                     <div className = "mission-connect-view-popFeedbackImg" style={imgFeedStyle}></div>
-
-                    <div className = "mission-connect-view-popFeedbackTextQuote" dangerouslySetInnerHTML={{__html:feedbackQuote}}></div>
-
+                    <div className="mission-connect-view-popFeedbackQuoteBox">
+                        <div className = "mission-connect-view-popFeedbackTextQuote centerVertical" dangerouslySetInnerHTML={{__html:feedbackQuote}}></div>
+                    </div>
                     <div className = "mission-connect-view-popFeedbackTextTitle">
                         {scoreObj.answered ? gameData.feedbackCorrectTitle: gameData.feedbackIncorrectTitle}</div>
 
@@ -256,9 +263,10 @@ var MissionConnectInterviewView = React.createClass({
                     <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                         <div className = "mission-connect-view-popFeedbackBtnCont">
                             <div type="button" className="btn btn-default"
-                                    onClick={self.onClosePop}>Exit</div>
+                                 style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={self.onClosePop}>Exit</div>
                         </div>
                     </div>
+                    <div className="mission-connect-view-btnBackground"></div>
                 </div>
             );
         };
@@ -272,8 +280,8 @@ var MissionConnectInterviewView = React.createClass({
     render: function() {
 
         var self = this;
-        var popStyle = {display: 'block', width: '515px', height:'auto', top:'20%', left:'15%',
-                        minHeight: '315px', background: '#fff', padding:'20px'};
+        var popStyle = {display: 'block', width: '515px', height:'auto', top:'16%', left:'15%',
+                        minHeight: '315px', background: '#fff', padding:'20px', paddingBottom:'50px', border:'2px solid #cccccc'};
         
         return (<div>
                     {self.props.showInterview ?

@@ -50,14 +50,14 @@ var MissionConnectView = React.createClass({
 
         //find objective nodes
         var nodes = this.state.gameData.networkGameNodes.filter(function (obj) {
-            return obj.gameObjective === true;
+            return obj.difficulty !== "none";
         });
 
         //find chief nodes
         var chiefNode = this.state.gameData.networkGameNodes.filter(function (obj) {
             return obj.endNode === true;
         });
-
+        
         this.setState({objectNodesNum:nodes.length, chiefNode:chiefNode[0]});
     },
 
@@ -153,7 +153,7 @@ var MissionConnectView = React.createClass({
                 break;
 
             case "won":
-                $("#missionConnectViewPieceBlock"+this.state.chiefNode.nodeNumber).css("opacity","1");
+                $("#missionConnectViewPieceBlock"+this.state.chiefNode.nodeNumber + " .mission-connect-view-icon").css("opacity","1");
                 break;
         }
     },
@@ -172,17 +172,18 @@ var MissionConnectView = React.createClass({
 
         var self = this;
         var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;
-        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'100px 100px', marginRight:'20px'};
+        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'130px 130px', marginRight:'20px'};
 
         var popupObj = {
             id:"Intro",
             onClickOutside: null,
-            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1, zIndex:'6'},
+            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff'},
 
             content: function(){
 
                 return(
                     <div className="mission-connect-view-popCont">
+                        <div className="mission-connect-view-popHeader">Briefing</div>
                         <div className = "mission-connect-view-popLeaderImg" style={imgStyle}></div>
                         <div className="mission-connect-view-popIntroText"
                              dangerouslySetInnerHTML={{__html:self.state.gameData.briefingText}}>
@@ -190,15 +191,15 @@ var MissionConnectView = React.createClass({
                         <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                             <div className = "mission-connect-view-popFeedbackBtnCont">
                                 <div type="button" className="btn btn-default"
-                                        onClick={self.onClosePopup}>Start</div>
+                                     style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={self.onClosePopup}>Start</div>
                             </div>
                         </div>
+                        <div className="mission-connect-view-btnBackground"></div>
                     </div>
                 )
             }
         };
 
-        //var debriefAudio = self.state.mediaPath + self.state.gameData.briefingAudioName;
         var debriefAudio = self.state.mediaPath + "missionconnect_briefing.mp3";
         self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
 
@@ -210,7 +211,7 @@ var MissionConnectView = React.createClass({
 
         var self = this;
         var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;
-        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'100px 100px'};
+        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'130px 130px', marginTop:'30px'};
         var quote = mode==="won" ? self.state.gameData.congratulationsTitle : self.state.gameData.timeOverTitle;
         var bodyText = mode==="won" ? self.state.gameData.congratulationsText : self.state.gameData.timeOverText;
          
@@ -218,25 +219,26 @@ var MissionConnectView = React.createClass({
 
             id:mode+"Pop",
             onClickOutside: null,
-            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', opacity:1, zIndex:'6'},
+            popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff', marginBottom:'30px'},
 
             content: function(){
 
                 return(
                     <div className = "mission-connect-view-popCont">
+                        <div className="mission-connect-view-popHeader" dangerouslySetInnerHTML={{__html:quote}}></div>
                         <div className = "mission-connect-view-popLeaderImg" style={imgStyle}></div>
-                        <div className = "mission-connect-view-popLeaderTextQuote"
-                             dangerouslySetInnerHTML={{__html:quote}}></div>
-                        <div className = "mission-connect-view-popLeaderText"
+                        <div className="mission-connect-view-popLeaderQuoteBox">
+                            <div className = "mission-connect-view-popLeaderText centerVertical"
                              dangerouslySetInnerHTML={{__html:bodyText}}></div>
-
+                        </div>
                         <div className = "mission-connect-view-popFeedbackBtnGrpCont">
                             <div className = "mission-connect-view-popFeedbackBtnCont">
                                 <div type="button" className="btn btn-default"
-                                            onClick={mode === "incomplete" ? self.onClosePopup:
+                                     style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={mode === "incomplete" ? self.onClosePopup:
                                                  self.prepStatsPopup}>Continue</div>
                             </div>
                         </div>
+                        <div className="mission-connect-view-btnBackground"></div>
                     </div>
                 )
             }
@@ -268,10 +270,7 @@ var MissionConnectView = React.createClass({
 
                 return(
                     <div className = "mission-connect-view-popCont">
-
-                        <div className = "mission-connect-view-popStatsHead">
-                            Statistics
-                        </div>
+                        <div className="mission-connect-view-popHeader">Statistics</div>
 
                         <div className = "mission-connect-view-popStatsText">
                             {statsText()}
@@ -283,6 +282,7 @@ var MissionConnectView = React.createClass({
                                         onClick={self.replayGame}>Restart</div>
                             </div>
                         </div>
+                        <div className="mission-connect-view-btnBackground"></div>
                     </div>
                 )
             }
@@ -347,7 +347,7 @@ var MissionConnectView = React.createClass({
         var backMapStyle = {background:'url('+mapUrl+') no-repeat', backgroundSize:'768px 504px'};
 
         var popStyle = {display: 'block', width: '515px', height:'auto', top:'20%', left:'15%',
-            minHeight: '315px', background: '#fff', padding:'20px'};
+            background: '#fff', padding:'20px 20px 50px 20px', border:'2px solid #cccccc'};
 
         return (
             <div style={blockStyle}>
@@ -369,6 +369,7 @@ var MissionConnectView = React.createClass({
                             sources    = {self.state.audioBgObj.sources}
                             autoPlay   = {self.state.audioBgObj.autoPlay}
                             controller = {self.state.audioController}
+                            loop       = {self.state.audioBgObj.loop}
                         /> : null}
                     
                     {self.state.popupObj ?

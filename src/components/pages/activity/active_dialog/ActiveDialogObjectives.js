@@ -1,12 +1,14 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
+var Tooltip = ReactBootstrap.Tooltip;
 var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
+var LocalizationStore = require('../../../../stores/LocalizationStore');
 
 function getCompState() {
     var objectives = [];
@@ -71,11 +73,18 @@ var ActiveDialogObjectives = React.createClass({
             </ListGroup>
         </Popover>;
 
+
+        var tt = (<Tooltip>{LocalizationStore.labelFor("evaluation", "lblObjectives")}</Tooltip>);
         return (
             <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover} ref="objectivesPopover">
-                <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
-                    <span className="glyphicon glyphicon-record" aria-hidden="true"></span>
-                </Button>
+                <OverlayTrigger
+                    overlay={tt} placement="top"
+                    delayShow={300} delayHide={150}
+                >
+                    <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
+                            <span className="glyphicon glyphicon-record" aria-hidden="true"></span>
+                    </Button>
+                </OverlayTrigger>
             </OverlayTrigger>
 
         );
