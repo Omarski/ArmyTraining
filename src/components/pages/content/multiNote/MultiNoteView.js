@@ -276,7 +276,7 @@ var MultiNoteView = React.createClass({
             var Decorators = [
                 {
                     component: React.createClass({
-                        render() {
+                        render: function() {
                             return (
                                 <button
                                     onClick={this.props.previousSlide}
@@ -293,7 +293,7 @@ var MultiNoteView = React.createClass({
                 },
                 {
                     component: React.createClass({
-                        render() {
+                        render: function() {
                             return (
                                 <button
                                     onClick={this.props.nextSlide}
