@@ -176,14 +176,16 @@ var ObjexGameView = React.createClass({
     hintEffect: function(hintLayer){
 
         var self = this;
+
         if ($(hintLayer).length > 0) {
             $(hintLayer).animate({
-                opacity:1,
-                webkitFilter: "brightness(3)",
-                filter: "brightness(3)"
+                opacity:1
             }, 500, function(){
-                $(hintLayer).css({"opacity":"0", webkitFilter:"brightness(100%)", filter:"brightness(100%)"});
-                if (self.state.hintMode) self.hintEffect(hintLayer);
+                $(hintLayer).animate({
+                    opacity:.5
+                },500, function(){
+                    if (self.state.hintMode) self.hintEffect(hintLayer);
+                });
             });
         }else return false;
     },
