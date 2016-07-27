@@ -272,7 +272,7 @@ var InfoView = React.createClass({
         var isFullCoach = state.fullCoach;
         var content = "";
         var transcriptContainer = "";
-
+        
 
 
         if (this.state.transcript) {

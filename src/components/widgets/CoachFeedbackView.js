@@ -121,12 +121,16 @@ var CoachFeedbackView = React.createClass({
             }
         }
 
+        //<p className="coach-feedback-text"><strong>{cannedText}<br></br>{this.props.text}</strong></p>
+
+        console.log("this.props.text", this.props.text);
+
         return (
             <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
                 <div className="multiple-choice-alert-text">
                     {coachMedia}
                     <span className={feedbackClass}></span>
-                    <h5>{cannedText}<br></br>{this.props.text}</h5>
+                    <p className="coach-feedback-text"><strong>{cannedText}<br></br>{this.props.text}</strong></p>
                 </div>
             </div>
         );
