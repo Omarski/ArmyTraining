@@ -15,7 +15,8 @@ function getPageState(props) {
         draggedItemLetter: "",
         draggedItemTarget: "",
         draggedItemData: "",
-        numMoved: 0
+        numMoved: 0,
+        mediaCaption: null
     };
 
     if (props && props.page) {
@@ -25,6 +26,14 @@ function getPageState(props) {
         data.page = props.page;
 
         //LINE 25 causes an error on Lesson 9/18 Pages 33/167 (cannot read property 'text' of null --> Is this supposed to be props.page.text?
+
+        if(props.page.info && props.page.info.property){
+            props.page.info.property.map(function(item){
+                if(item.name === "mediacaption"){
+                    data.mediaCaption = item.value;
+                }
+            });
+        }
 
         props.page.matchSource.map(function(item, index){
           //  var label = item.nut.uttering.utterance.native.text;
@@ -507,7 +516,7 @@ var MatchItemView = React.createClass({
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
-                    <PageHeader sources={sources} title={title} key={page.xid}/>
+                    <PageHeader sources={state.mediaCaption} title={title} key={page.xid}/>
                     <div className="container">
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
