@@ -109,9 +109,27 @@
   background: #fff;
   height:auto;
 
+  //header
+  .mission-connect-view-popHeader{
+    position: absolute;
+    top:18px;
+    left:0;
+    letter-spacing:.5px;
+    padding-left: 19px;
+    font-size:25px;
+    color:#cccccc;
+    font-weight:200;
+    border-bottom: 1px solid #cccccc;
+    line-height:1px;
+    height:20px;
+    width:100%;
+  }
 
   //scenario - photo
   .mission-connect-view-popSenImgCont {
+    position: relative;
+    margin-top: 33px;
+    margin-left:-17px;
     float: left;
     width: 165px;
     height: 215px;
@@ -122,8 +140,7 @@
       left:10px;
       width:164px;
       height:164px;
-      border: 1px solid #737373;
-      border-radius: 12px;
+      border: 2px solid #cccccc;
     }
 
     .mission-connect-view-popSenImgTitle {
@@ -152,8 +169,7 @@
         left: 0;
         width:92px;
         height:92px;
-        border: 1px solid #737373;
-        border-radius: 15px;
+        border: 2px solid #cccccc;
       }
 
       .mission-connect-view-popIntImgTitle {
@@ -171,27 +187,25 @@
      //feedback - photo
     .mission-connect-view-popFeedbackImg {
       position: relative;
-      width: 100px;
-      height: 100px;
-      border: 1px solid #737373;
-      border-radius: 15px;
+      width: 130px;
+      height: 130px;
+      border: 2px solid #cccccc;
       float:left;
   }
 
   //leader - photo
     .mission-connect-view-popLeaderImg {
       position: relative;
-      width: 100px;
-      height: 100px;
-      border: 1px solid #737373;
-      border-radius: 15px;
+      width: 130px;
+      height: 130px;
+      border: 2px solid #cccccc;
       float:left;
-      margin-bottom:20px;
+      margin-bottom:5px;
   }
 
    //intro - text
   .mission-connect-view-popIntroText{
-    margin-top:5px;
+    margin-top:30px;
     margin-bottom:20px;
     width: 470px;
     line-height:20px;
@@ -200,25 +214,35 @@
 
   //scenario - text
   .mission-connect-view-popSenTextCont{
-    margin-left:10px;
+    margin-left:22px;
+    margin-top: 40px;
     float: left;
     width: 290px;
   }
 
    //interview - text
   .mission-connect-view-popIntTextCont{
+    margin-top: 40px;
     width: 375px;
   }
 
   //feedback - text
-  .mission-connect-view-popFeedbackTextQuote{
-    float:left;
-    margin-left:15px;
-    width: 350px;
-    font-style: italic;
-    font-weight: bold;
-    font-size:14px;
-    line-height:16px;
+  .mission-connect-view-popFeedbackQuoteBox{
+    position: absolute;
+    top:48px;
+    left:150px;
+    width:340px;
+    height:130px;
+
+    .mission-connect-view-popFeedbackTextQuote{
+      float:left;
+      margin-left:15px;
+      width: 310px;
+      font-style: italic;
+      font-weight: bold;
+      font-size:14px;
+      line-height:16px;
+    }
   }
 
   .mission-connect-view-popFeedbackTextTitle{
@@ -229,7 +253,7 @@
   }
 
   .mission-connect-view-popFeedbackText{
-    margin-top:5px;
+    margin-top:10px;
     margin-bottom:20px;
     width: 470px;
     line-height:16px;
@@ -248,13 +272,21 @@
     line-height:16px;
   }
 
-  .mission-connect-view-popLeaderText{
-    clear:left;
-    margin-top:5px;
-    margin-bottom:20px;
-    width: 470px;
-    line-height:16px;
-    font-size:14px;
+  .mission-connect-view-popLeaderQuoteBox {
+    position: absolute;
+    top: 48px;
+    left: 150px;
+    width: 340px;
+    height: 130px;
+
+    .mission-connect-view-popLeaderText {
+      clear: left;
+      margin-left: 12px;
+      margin-bottom: 20px;
+      width: 350px;
+      line-height: 16px;
+      font-size: 14px;
+    }
   }
 
   //stats - text
@@ -267,7 +299,7 @@
 
   .mission-connect-view-popStatsText{
     clear:left;
-    margin-top:5px;
+    margin-top:30px;
     margin-bottom:20px;
     width: 470px;
     line-height:25px;
@@ -277,16 +309,17 @@
    //scenario - buttons
   .mission-connect-view-popSenBtnGrpCont{
     position: absolute;
-    bottom:-20px;
+    bottom:1px;
     left:0;
     width:515px;
-    height:60px;
+    height:35px;
 
     .mission-connect-view-popSenBtnCont{
       position:relative;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
+      z-index:10;
 
       .mission-connect-view-popSenBtn{
         margin-right:10px;
@@ -296,33 +329,34 @@
     //interview - button
     .mission-connect-view-popIntBtnGrpCont {
       position: absolute;
-      bottom:-20px;
+      bottom:1px;
       left: 0;
       width: 515px;
-      height: 60px;
+      height: 35px;
 
       .mission-connect-view-popIntBtnCont {
         position: relative;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-
+        z-index:10;
       }
     }
 
     //feedback - button
     .mission-connect-view-popFeedbackBtnGrpCont {
       position: absolute;
-      bottom:-20px;
+      bottom:1px;
       left: 0;
       width: 515px;
-      height: 60px;
+      height: 35px;
 
       .mission-connect-view-popFeedbackBtnCont {
         position: relative;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+        z-index:10;
       }
     }
 
@@ -338,5 +372,14 @@
       margin-top: 2px;
       margin-right:10px;
     }
+  }
+
+  .mission-connect-view-btnBackground{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:38px;
+    background-color:#cccccc;
   }
 }

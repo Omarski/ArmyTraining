@@ -182,7 +182,7 @@ var ObjexView = React.createClass({
     prepLevelsPopup: function(){
 
         var self = this;
-        var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
+        var popBg = self.state.mediaPath + self.state.gameData.ui_images.menu_screen_background;
         var iconBg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_background;
 
         var lockImg = self.state.mediaPath + self.state.gameData.ui_images.menu_button_lock_icon;
