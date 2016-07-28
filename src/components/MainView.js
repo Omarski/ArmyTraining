@@ -194,7 +194,7 @@ var MainView = React.createClass({
         if (this.state.explorerVer <= 8){
             return false;
         }else{
-            this.loadProject();
+            //this.loadProject(); TODO: commented out for now
         }
     },
 
