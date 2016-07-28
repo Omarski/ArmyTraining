@@ -84,13 +84,13 @@ var RemediationView = React.createClass({
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button type="button" className="btn btn-default" aria-label="Previous" onClick={this.onPrevious} disabled={!this.state.enablePrev}>
+                    <button type="button" className="btn btn-default" aria-label="Previous" title="Previous" onClick={this.onPrevious} disabled={!this.state.enablePrev}>
                         {LocalizationStore.labelFor("remediation", "btnPrevious")}
                     </button>
-                    <button type="button" className="btn btn-default" aria-label="Next" onClick={this.onNext} disabled={!this.state.enableNext}>
+                    <button type="button" className="btn btn-default" aria-label="Next" title="Next" onClick={this.onNext} disabled={!this.state.enableNext}>
                         {LocalizationStore.labelFor("remediation", "btnNext")}
                     </button>
-                    <button type="button" className="btn btn-default" aria-label="Close" onClick={this.onClose}>
+                    <button type="button" className="btn btn-default" aria-label="Close" title="close" onClick={this.onClose}>
                         {LocalizationStore.labelFor("remediation", "btnClose")}
                     </button>
                 </Modal.Footer>
