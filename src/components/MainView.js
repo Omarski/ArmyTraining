@@ -17,8 +17,7 @@ var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
 var DliActions = require('../actions/DliActions');
 var DliStore = require('../stores/DliStore');
-var ASRActions = require('../actions/ASRActions');
-var ASRStore = require('../stores/ASRStore');
+
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
 var AppStateActions = require('../actions/AppStateActions');
@@ -32,6 +31,7 @@ var DevToolsActions = require('../actions/DevToolsActions');
 var ASRWidget = require('../components/widgets/ASR');
 
 var bDataLoaded = false;
+var _asrLoaded = false;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -80,9 +80,7 @@ var MainView = React.createClass({
         CoachFeedbackActions.load();
     },
 
-    loadASR: function(){
-        ASRActions.load();
-    },
+
 
     loadData: function() {
         LoaderActions.load();
@@ -108,7 +106,6 @@ var MainView = React.createClass({
         LoaderStore.addChangeListener(this._onChange);
         DliStore.addChangeListener(this._onDliChange);
         ReferenceStore.addChangeListener(this._onReferenceChange);
-        ASRStore.addChangeListener(this._onASRChange);
     },
 
     componentDidMount: function() {
@@ -222,7 +219,12 @@ var MainView = React.createClass({
      * @return {object}
      */
     render: function() {
-        var asrFallback = hasGetUserMedia() ? "" : (<ASRWidget />);
+        var asrFallback = "";
+        if (LoaderStore.loadingComplete() && !_asrLoaded) {
+            _asrLoaded = true;
+            asrFallback = hasGetUserMedia() ? "" : (<ASRWidget />);
+        }
+
 
         return (
             <div>
@@ -295,18 +297,9 @@ var MainView = React.createClass({
     _onDliChange: function (){
         var self = this;
         setTimeout(function() {
-            self.loadASR();
-        }, 100)
-    },
-
-    /**
-     * Event handler for 'change' events coming from the DLIStore
-     */
-    _onASRChange: function (){
-        var self = this;
-        setTimeout(function() {
             self.loadReference();
         }, 100)
+
     },
 
     /**

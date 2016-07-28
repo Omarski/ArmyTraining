@@ -338,7 +338,7 @@ var MultiColumnPronunciationView = React.createClass({
 
 
                     //if(self.state.message != "No data found.") {
-                    if(self.state.message != "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.") {
+                    if(self.state.message != "This needs to be a unique message that isn't returned by the applet.") {
                         var isRecording = self.state.recordingState[colNumber][index];
                         if (isRecording) {
                             itemRecordingClass = recordingClass + " " + L2_GLYPHICON_STOP_CLS;
@@ -447,14 +447,14 @@ var MultiColumnPronunciationView = React.createClass({
         var state = this.state;
         var isCorrectLists = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
-        var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        var recordedSpeech = "This needs to be a unique message that isn't returned by the applet.";
 
         if(!ConfigStore.isASREnabled()){
-            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+            newMessage = "This needs to be a unique message that isn't returned by the applet.";
         }
 
         switch(newMessage){
-            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+            case "This needs to be a unique message that isn't returned by the applet.":
                 break;
             case "initialized":
                 console.log(newMessage);
