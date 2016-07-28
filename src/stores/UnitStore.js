@@ -269,7 +269,7 @@ var UnitStore = assign({}, EventEmitter.prototype, {
     },
 
     getUnitTime: function(id){
-        if(_units[id].data.playlistInfo[0].property[1].value) {
+        if(_units[id].data.playlistInfo[0].property[1]) {
             return _units[id].data.playlistInfo[0].property[1].value;
         }
     },

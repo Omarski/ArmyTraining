@@ -174,7 +174,7 @@ var MatchItemView = React.createClass({
         var dropLocationIndex = -1;
 
 
-        if($(e.target).hasClass("match-item-answer-drop-area")){
+        if($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image")){
             //if(drop location isn't taken)
             var spotTaken = false;
             answerState.map(function(item){
@@ -239,7 +239,7 @@ var MatchItemView = React.createClass({
                             }
                             itemFound = true;
                         }
-                    }else{ // if( "image" || "audio" )
+                    } else { // if( "image" || "audio" )
 
                         // console.log("draggedItemTarget", draggedItemTarget, "draggedItemTarget.attributes", draggedItemTarget.attributes);
                         if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
@@ -463,8 +463,6 @@ var MatchItemView = React.createClass({
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
                     switch (state.answerState[i].mediaType) {
                         case "audio":
-
-                            console.log("inside answerContainers", i);
                             answerRender = (<div
                                     data={state.answerState[i].passedData}
                                     data-passed={state.answerState[i].passedData}
@@ -508,25 +506,57 @@ var MatchItemView = React.createClass({
             }
 
             // this return is for the drop areas with their question prompts
-            // we can convert this into the rows for the table.
-            var row = (<tr>
-                <td className={"matchitem-choice-td"}>
-                    {choices[index]}
-                </td>
-                <td className={"matchitem-droparea-td"}>
-                    <div className="match-item-answer-drop-area dropped"
-                         data-letter={letter}
-                         data-index={index}
-                         onDragOver={self.onDraggingOver}
-                         onDrop={self.onDropping}>
-                        {answerRender}
-                    <span className="glyphicon glyphicon-play-circle match-item-audio match-item-audio-grayed-out"></span>
-                    </div>
-                </td>
-                <td className={"matchitem-question-td"}>
-                    <div className="match-item-answer-prompt">{answerPrompt}</div>
-                </td>
-            </tr>);
+            //
+            switch (state.answerState[0].mediaType) {
+                case "audio":
+                var row = (<tr>
+                                <td className={"matchitem-choice-td"}>
+                                    {choices[index]}
+                                </td>
+                                <td className={"matchitem-droparea-td"}>
+                                    <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                        {answerRender}
+                                        <span className="glyphicon glyphicon-play-circle match-item-audio match-item-audio-grayed-out"></span>
+                                    </div>
+                                </td>
+                                <td className={"matchitem-question-td"}>
+                                    <div className="match-item-answer-prompt">{answerPrompt}</div>
+                                </td>
+                            </tr>);
+                break;
+                case "image":
+                    var row = (<tr>
+                                    <td className={"matchitem-choice-td match-item-choice-image"}>
+                                        {choices[index]}
+                                    </td>
+                                    <td className={"matchitem-droparea-td"}>
+                                        <div className="match-item-answer-drop-area-image dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                            {answerRender}
+                                        </div>
+                                    </td>
+                                    <td className={"matchitem-question-td"}>
+                                        <div className="match-item-answer-prompt">{answerPrompt}</div>
+                                    </td>
+                                </tr>);
+                break;
+                case "string":
+                    var row = (<tr>
+                                    <td className={"matchitem-choice-td"}>
+                                    {choices[index]}
+                                    </td>
+                                    <td className={"matchitem-droparea-td"}>
+                                        <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                            {answerRender}
+                                            <span className="glyphicon glyphicon-play-circle match-item-audio match-item-audio-grayed-out"></span>
+                                        </div>
+                                    </td>
+                                    <td className={"matchitem-question-td"}>
+                                        <div className="match-item-answer-prompt">{answerPrompt}</div>
+                                    </td>
+                              </tr>);
+                break;
+                default:
+            }
 
 
             return (row);

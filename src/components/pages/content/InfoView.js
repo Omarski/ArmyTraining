@@ -43,6 +43,7 @@ function getPageState(cmp, props) {
         if(props.page.info){
             if(props.page.info.property){
                 props.page.info.property.map(function(item){
+                    console.log("item", item);
                     switch(item.name){
                         case "cutscene":
                             // TODO: add a class that allows css to distinguish display types?
