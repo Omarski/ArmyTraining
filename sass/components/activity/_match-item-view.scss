@@ -57,12 +57,6 @@
   -khtml-user-drag: element;
 }
 
-.match-item-image{
-  height: 100px;
-  width: 100px;
-  margin: 5px;
-}
-
 .matchitem-question-td{
   width: 100%;
 }
@@ -226,5 +220,69 @@
   .match-item-prompt {
     margin-right: 15px;
     margin-left: 15px;
+  }
+}
+
+/*IMAGE STYLING*/
+
+.match-item-image{
+  height: 100px;
+  width: 100px;
+  margin: 0px;
+}
+
+div{
+  table {
+    tbody{
+      tr {
+        .match-item-choice-image {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}
+
+.matchitem-droparea-td {
+  .match-item-answer-drop-area-image {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    position: relative;
+    display: block;
+    padding: 0px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: none;
+    min-height: 55px;
+    .glyphicon-remove{
+      font-size: 20px;
+      display: block;
+    }
+    .glyphicon-ok {
+      font-size: 20px;
+      display: block;
+    }
+    &.dropped {
+        .match-item-answer-image{
+            height: 100%;
+          .match-item-image {
+            margin: 0px;
+          }
+        }
+        .MI-feedback {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          &.MI-correct {
+            color: green;
+          }
+          &.MI-incorrect {
+            color: red;
+          }
+        }
+    }
   }
 }
