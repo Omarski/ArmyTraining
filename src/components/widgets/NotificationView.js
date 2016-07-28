@@ -64,7 +64,7 @@ var NotificationView = React.createClass({
         }
 
         if (this.state.onClose) {
-            close = <button onClick={this.dismiss} type="button" className="btn btn-default">{LocalizationStore.labelFor("tools", "mdlOK")}</button>;
+            close = <button onClick={this.dismiss} type="button" className="btn btn-default">{LocalizationStore.labelFor("notificationView", "btnOk")}</button>;
         }
 
         if (this.state.image) {
