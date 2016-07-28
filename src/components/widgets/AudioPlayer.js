@@ -4,6 +4,7 @@ var SettingsStore = require('../../stores/SettingsStore');
 var PropTypes  = React.PropTypes;
 
 var AudioPlayer = React.createClass({
+    
     propTypes: {
         id: PropTypes.string.isRequired,
         sources: PropTypes.array.isRequired,
@@ -20,7 +21,6 @@ var AudioPlayer = React.createClass({
 
     renderAudioSources: function(){
 
-        //self = this;
         var audioSources = this.props.sources.map(function(source, index){
             var type = "audio/"+source.format;
             var id = source.format+"Source";
@@ -63,7 +63,14 @@ var AudioPlayer = React.createClass({
         var volumeSet = SettingsStore.voiceVolume();
 
         return (
-            <audio id={this.props.id} preload="auto" autoPlay={autoPlay} loop={loop} controls={controls} volume={volumeSet} muted={isMuted} onCanPlay={self.setVolume}>
+            <audio id={this.props.id}
+                   preload="auto"
+                   autoPlay={autoPlay}
+                   loop={loop}
+                   controls={controls}
+                   volume={volumeSet}
+                   muted={isMuted}
+                   onLoadStart={self.setVolume}>
                 {this.renderAudioSources()}
             </audio>
         )
