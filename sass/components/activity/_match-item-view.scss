@@ -1,25 +1,53 @@
 .match-item-answer-drop-area{
-  width: 75px;
-  height: 75px;
+  width: 80px;
+  height: 77px;
   margin: 5px;
   font-size: 72px;
+  .match-item-play-icon {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+  }
 }
 
-.match-item-play-icon {
-  width: 75px;
-  height: 75px;
-  margin: 5px;
-  font-size: 55px;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding-left: 8px;
-  padding-top: 6px;
-  display: inline-flex;
+.matchitem-choice-td{
+  .match-item-play-icon {
+    margin: 0px;
+    font-size: 55px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-flex;
+    position: relative;
+    .match-item-number {
+      position: absolute;
+      bottom: -9px;
+      right: 1px;
+    }
+  }
+}
+.match-item-answer-drop-area{
+  position: relative;
+  .match-item-play-icon {
+    margin: 0px;
+    left: -1px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-flex;
+    font-size: 55px;
+  }
 }
 
-.match-item-number{
-  margin-top: 75%;
+.match-item-audio{
+  margin-left: 11px;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  margin-right: 11px;
+  top: 0px;
+  left: 0px;
 }
+
 
 .blue-test-style{
   background-color: blue;
@@ -33,6 +61,27 @@
   height: 100px;
   width: 100px;
   margin: 5px;
+}
+
+.matchitem-question-td{
+  width: 100%;
+}
+
+.matchitem-droparea-td{
+  .match-item-answer-drop-area{
+    height: 79px;
+    width: 80px;
+    margin: 0px;
+    .match-item-audio-grayed-out{
+      top: 0px;
+      left: 0px;
+      font-size: 55px;
+      color: #AAAFB4;
+      opacity: 0.7;
+      position: absolute;
+      z-index: 1;
+    }
+  }
 }
 
 .match-item-text-choice{
@@ -95,7 +144,18 @@
   min-height: 55px;
   position: relative;
   &.dropped {
-    margin: 2px;
+    .match-item-play-icon {
+      display: block;
+      .match-item-number {
+        position: absolute;
+        top: 57px;
+        right: 2px;
+        margin-top: 0;
+
+
+      }
+    }
+    margin: 0px;
     padding: 0;
     .match-item-text-choice {
       margin: 0;
@@ -125,16 +185,22 @@
 
 }
 
-.match-item-answer-image {
+.match-item-answer-drop-area {
   padding: 5px;
   text-align: center;
   vertical-align: middle;
-  img {
-    margin: 0;
+  .glyphicon-remove{
+    font-size: 20px;
+    display: block;
+  }
+  .glyphicon-ok {
+    font-size: 20px;
+    display: block;
   }
   .MI-feedback {
     position: absolute;
     top: -5px;
+    right: -5px;
     &.MI-correct {
       color: green;
     }

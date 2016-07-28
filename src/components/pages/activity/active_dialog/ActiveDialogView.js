@@ -195,7 +195,7 @@ var ActiveDialogView = React.createClass({
     render: function() {
         var content = <div></div>;
 
-        var tt = (<Tooltip>{LocalizationStore.labelFor("evaluation", "lblPause")}</Tooltip>);
+        var tt = (<Tooltip id="pauseTooltip">{LocalizationStore.labelFor("evaluation", "lblPause")}</Tooltip>);
 
         if (this.state.info) {
 
