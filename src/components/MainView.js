@@ -156,8 +156,6 @@ var MainView = React.createClass({
         // (indicating the use of another browser).
         {
             var rv = -1; // Return value assumes failure.
-            console.log("navigator.appName" + navigator.appName);
-            console.log("userAgent"+navigator.userAgent);
 
             var iere = new RegExp("Trident");
             var ieua = navigator.userAgent;
