@@ -143,7 +143,6 @@ var PageHeader = React.createClass({
             </OverlayTrigger>
         );
 
-        console.log("sources !!! " + this.state.sources);
         var attributions = (<Tooltip id="sourcesTooltip">{this.state.sources}</Tooltip>);
 
         var info = "";
