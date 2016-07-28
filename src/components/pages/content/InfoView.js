@@ -40,6 +40,7 @@ function getPageState(cmp, props) {
         data.pageType = props.page.type;
         data.page = props.page;
 
+
         if(props.page.info){
             if(props.page.info.property){
                 props.page.info.property.map(function(item){
@@ -395,6 +396,7 @@ var InfoView = React.createClass({
                 </div>
             );
         }
+
 
         //update Please
         return (

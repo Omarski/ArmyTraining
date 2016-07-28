@@ -74,7 +74,7 @@ var ActiveDialogObjectives = React.createClass({
         </Popover>;
 
 
-        var tt = (<Tooltip>{LocalizationStore.labelFor("evaluation", "lblObjectives")}</Tooltip>);
+        var tt = (<Tooltip id="objectivesTooltip">{LocalizationStore.labelFor("evaluation", "lblObjectives")}</Tooltip>);
         return (
             <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover} ref="objectivesPopover">
                 <OverlayTrigger
