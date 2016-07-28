@@ -11,6 +11,7 @@ var _percent = "";
 var _image = null;
 var _full = false;
 var _allowDismiss = false;
+var _onClose = null;
 
 function show(data) {
     _title = data.title;
@@ -18,6 +19,7 @@ function show(data) {
     _percent = data.percent;
     _image = data.image;
     _full = data.full;
+    _onClose = data.onClose;
     if (data.allowDismiss === true) {
         _allowDismiss = true;
     }
@@ -60,6 +62,10 @@ var NotificationStore = assign({}, EventEmitter.prototype, {
 
     image: function() {
         return _image;
+    },
+
+    onClose: function() {
+        return _onClose;
     },
 
     emitChange: function() {

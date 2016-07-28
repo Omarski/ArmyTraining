@@ -10,11 +10,18 @@ function getNotificationState() {
         allowDismiss: NotificationStore.allowDismiss(),
         percent: NotificationStore.percent(),
         image: NotificationStore.image(),
-        full: NotificationStore.full()
+        full: NotificationStore.full(),
+        onClose: NotificationStore.onClose()
     }
 }
 
 var NotificationView = React.createClass({
+    dismiss: function() {
+        if (this.state.onClose) {
+            this.state.onClose();
+        }
+    },
+
     getInitialState: function() {
         var notificationState = getNotificationState(this.props);
         return notificationState;
@@ -34,6 +41,7 @@ var NotificationView = React.createClass({
     render: function() {
         var dismiss = '';
         var close = '';
+        var onClose = '';
         var progress = '';
         var image = '';
         var isFullCls = "";
@@ -53,6 +61,10 @@ var NotificationView = React.createClass({
         if (this.state.allowDismiss) {
             dismiss = <button type="button" className="close" data-dismiss="modal" aria-label={LocalizationStore.labelFor("tools", "mdlClose")}><span aria-hidden="true">&times;</span></button>;
             close = <button type="button" className="btn btn-default" data-dismiss="modal">{LocalizationStore.labelFor("tools", "mdlClose")}</button>;
+        }
+
+        if (this.state.onClose) {
+            close = <button onClick={this.dismiss} type="button" className="btn btn-default">{LocalizationStore.labelFor("tools", "mdlOK")}</button>;
         }
 
         if (this.state.image) {
