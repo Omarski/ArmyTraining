@@ -127,5 +127,8 @@
   },
   "mapView":{
     "mapInstructions": "Click the tacks to learn about points of interest in "
+  },
+  "notificationView":{
+    "btnOk": "OK"
   }
 }

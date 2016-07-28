@@ -2,6 +2,7 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
+var UnitStore = require('../../../stores/UnitStore');
 
 
 function getPageState(props) {
@@ -117,7 +118,6 @@ var MatchItemView = React.createClass({
         //         event.dataTransfer.setData('Text', 'nothing');
         //     });
         // }
-
         e.dataTransfer.setData("text", e.target.id);
 
         var self = this;
@@ -571,17 +571,17 @@ var MatchItemView = React.createClass({
                                             {answerRender}
                                         </div>
                                     </td>
-                                    <td className={"matchitem-question-td"}>
+                                    <td className={"matchitem-question-td "}>
                                         <div className="match-item-answer-prompt">{answerPrompt}</div>
                                     </td>
                                 </tr>);
                 break;
                 case "string":
                     var row = (<tr>
-                                    <td className={"matchitem-choice-td"}>
+                                    <td className={"matchitem-choice-td match-item-choice-td-text"}>
                                     {choices[index]}
                                     </td>
-                                    <td className={"matchitem-droparea-td"}>
+                                    <td className={"matchitem-droparea-td matchitem-droparea-td-text"}>
                                         <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                             {answerRender}
                                         </div>
@@ -593,11 +593,26 @@ var MatchItemView = React.createClass({
                 break;
                 default:
             }
-
-
             return (row);
         });
 
+        // var imageGrid = "";
+
+            // var imageToupleRows = imageGridList.map(function(item, index){
+            //     if (index % 2 === 0 ){
+            //         return (<tr>{item[i]}{item[i+2]}</tr>);
+            //     }
+            //     if (index % 2 !== 0){
+            //         return (<tr)
+            //     }
+            // });
+        // var imagesLeftColumn = (<td>{imageToupleRows}</td>);
+        // var answerRightColumn = (<td></td>);
+        //
+        // answerContainers = (
+        //                        {imagesLeftColumn}
+        //                        {answerRightColumn}
+        //                    );
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
@@ -610,7 +625,6 @@ var MatchItemView = React.createClass({
                         <div className="row">
                             <h4 className="match-item-prompt">{state.prompt}</h4>
                         </div>
-
                         <table className={"table table-striped table-bordered table-condensed"}>
                             <tbody>
                                 {answerContainers}

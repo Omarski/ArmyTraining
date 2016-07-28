@@ -30,8 +30,11 @@ var LocalizationStore = assign({}, EventEmitter.prototype, {
      * @param (item) parameters - Optional. List of parameters that will be replaced into the found resource
      * @returns (string) Value of resource if found or an empty string if not found
      */
-    labelFor: function(section, item, parameters) {
+    labelFor: function(section, item, parameters, alternate) {
         var result = "Unknown label for " + section + " : " + item;
+        if (alternate) {
+            result = alternate;
+        }
         if (section && item && _data[section] && _data[section][item]) {
             result = _data[section][item];
 

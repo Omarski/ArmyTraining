@@ -503,7 +503,6 @@ var ObjexView = React.createClass({
                             id = {self.state.audioObj.id}
                             sources    = {self.state.audioObj.sources}
                             autoPlay   = {self.state.audioObj.autoPlay}
-                            controller = {self.state.audioController}
                         /> : null}
 
                     {self.state.audioBgObj ?
@@ -511,7 +510,6 @@ var ObjexView = React.createClass({
                             id = {self.state.audioBgObj.id}
                             sources    = {self.state.audioBgObj.sources}
                             autoPlay   = {self.state.audioBgObj.autoPlay}
-                            controller = {self.state.audioController}
                             loop       = {self.state.audioBgObj.loop}
                         /> : null}
 

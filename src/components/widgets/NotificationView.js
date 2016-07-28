@@ -59,12 +59,12 @@ var NotificationView = React.createClass({
                         </div>;
         }
         if (this.state.allowDismiss) {
-            dismiss = <button type="button" className="close" data-dismiss="modal" aria-label={LocalizationStore.labelFor("tools", "mdlClose")}><span aria-hidden="true">&times;</span></button>;
-            close = <button type="button" className="btn btn-default" data-dismiss="modal">{LocalizationStore.labelFor("tools", "mdlClose")}</button>;
+            dismiss = <button type="button" className="close" data-dismiss="modal" aria-label={LocalizationStore.labelFor("tools", "mdlClose", null, "Close")}><span aria-hidden="true">&times;</span></button>;
+            close = <button type="button" className="btn btn-default" data-dismiss="modal">{LocalizationStore.labelFor("tools", "mdlClose", null, "Close")}</button>;
         }
 
         if (this.state.onClose) {
-            close = <button onClick={this.dismiss} type="button" className="btn btn-default">{LocalizationStore.labelFor("tools", "mdlOK")}</button>;
+            close = <button onClick={this.dismiss} type="button" className="btn btn-default">{LocalizationStore.labelFor("notificationView", "btnOk", null, "Ok")}</button>;
         }
 
         if (this.state.image) {
