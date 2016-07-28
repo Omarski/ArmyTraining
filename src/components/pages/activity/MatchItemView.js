@@ -87,16 +87,19 @@ function playAudio(zid){
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
-    source.src = "data/media/" + zid + ".mp3";
-    // play audio, or stop the audio if currently playing
-    if(audio.paused){
-        audio.load();
-        audio.play();
-        audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-    }else{
-        audio.pause();
+    var newSource = "data/media/" + zid + ".mp3";
+    if(audio && source){
+        // play audio, or stop the audio if currently playing
+        source.src = newSource;
+        if(audio.paused){
+            audio.load();
+            audio.play();
+            audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            audio.onended = function(){audio.pause(); };
+        }else{
+            audio.pause();
+        }
     }
-
 }
 
 var MatchItemView = React.createClass({
@@ -270,7 +273,7 @@ var MatchItemView = React.createClass({
         var playable = true;
         var answerState = state.answerState;
 
-        if($($(e.target).parent()).attr("class") == "match-item-choices-container"){
+        if($(e.target).hasClass("match-item-play-icon")){
             answerState.map(function(item){
                 if($(e.target).attr("data") == item.passedData){
                     if(item.isMoved){
