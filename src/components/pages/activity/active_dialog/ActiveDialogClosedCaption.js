@@ -21,7 +21,7 @@ var ActiveDialogClosedCaptionView = React.createClass({
     },
 
     render: function() {
-        var tt = (<Tooltip>{LocalizationStore.labelFor("evaluation", "lblClosedCaptions")}</Tooltip>);
+        var tt = (<Tooltip id="closedCaptionTooltip">{LocalizationStore.labelFor("evaluation", "lblClosedCaptions")}</Tooltip>);
         return  (
             <OverlayTrigger
                 overlay={tt} placement="top"

@@ -127,7 +127,7 @@ var ObjexView = React.createClass({
 
         var self = this;
         var levelsColl = [];
-        var levelIconPos = [null,[{x:425, y:130}, {x:425, y:285}]];
+        var levelIconPos = [null,[{x:425, y:195}, {x:425, y:275}]];
 
         for (var i = 0 ; i < 2; i++){ //levels.length
 
@@ -163,6 +163,7 @@ var ObjexView = React.createClass({
 
                 return(
                     <div className="objex-view-popCont">
+                        <div className="objex-view-textIntroTitle">Helping Locals</div>
                         <div className="objex-view-textIntro">{self.state.gameData.text_assets["text_your_mission_"+self.state.currentLevel]}</div>
                         <div className="objex-view-introButtonCont">
                             <button type="button" className="btn btn-default objex-view-btn" onClick={self.closeIntro}>Continue</button>
@@ -189,7 +190,8 @@ var ObjexView = React.createClass({
         var lockStyle = {background: 'url('+lockImg+') no-repeat 100% 100%'};
 
         var advImg = self.state.advancedLevel ? self.state.mediaPath + "objex/img/advancedLevelOn.png": self.state.mediaPath + "objex/img/advancedLevelOff.png";
-        var advStyle = {background: 'url('+advImg+') no-repeat 100% 100%', cursor:'pointer'};
+        var advStyle = {background: 'url('+advImg+') no-repeat 100% 100%', cursor:'pointer',
+            opacity:self.state.showAdvanced ?'1':'.5', pointerEvents:self.state.showAdvanced ? 'auto':'none'};
 
         var levelIcons = self.state.levelsColl.map(function(levelObj,index){
 
@@ -217,11 +219,12 @@ var ObjexView = React.createClass({
 
                 return(
                     <div className="objex-view-popCont">
+                        <div className="objex-view-textLevelTitle">Select Level</div>
                         {levelIcons}
-                        {self.state.showAdvanced ? <div className="objex-view-popLevelAdvancedIcon"
+                        <div className="objex-view-popLevelAdvancedIcon"
                                                          style={advStyle}
                                                          onClick={self.updateAdvClick}>
-                                                    </div>:null}
+                        </div>
                     </div>
                 )
             }
@@ -311,7 +314,7 @@ var ObjexView = React.createClass({
     prepPopup: function(id, content){
 
         var self = this;
-        var popBg = self.state.mediaPath + self.state.gameData.ui_images.briefing_screen_background;
+        var popBg = self.state.mediaPath + self.state.gameData.ui_images.menu_screen_background;
 
         var popupObj = {
             id:id,

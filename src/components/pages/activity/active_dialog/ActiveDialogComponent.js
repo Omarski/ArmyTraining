@@ -268,7 +268,9 @@ var ActiveDialogComponent = React.createClass({
 
         // check if video
         var videos = this.props.assets.map(function(item, index) {
-            var style = {top: item.assetData.dimensions[1], left: item.assetData.dimensions[0], position: "absolute", display: "block"};
+            var top = Number(item.assetData.dimensions[1].split("px")[0]);
+            var left = Number(item.assetData.dimensions[0].split("px")[0]);
+            var style = {top: top, left: left, position: "absolute", display: "block"};
             var videoStyle = {display: "none"};
             return (
                 <div className="" key={index} style={style}>
