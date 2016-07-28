@@ -48,6 +48,7 @@ $(document).on("click", ".btn-drp", function(){
 
 });
 
+document.onselectstart = function() { return false; };
 // user clicks explorer button
 $(document).on("click", ".btn-exp", function(){
     var audio = document.getElementById('mainViewAudio');
