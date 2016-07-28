@@ -141,7 +141,8 @@ var MissionConnectView = React.createClass({
             case "leaderClicked":
                 if (this.state.stats.completed === this.state.objectNodesNum){
                     this.prepLeaderPopup("won");
-                }else this.prepLeaderPopup("incomplete");
+                }else
+                    this.prepLeaderPopup("incomplete");
                 break;
            
             case "timeUp":
@@ -209,14 +210,19 @@ var MissionConnectView = React.createClass({
 
      prepLeaderPopup: function(mode){
 
-        console.log("Mode is: " + mode);
-        var self = this;
-        var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;
-        var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'130px 130px', marginTop:'30px'};
-        var quote = mode==="won" ? self.state.gameData.congratulationsTitle : self.state.gameData.timeOverTitle;
-        var bodyText = mode==="won" ? self.state.gameData.congratulationsText : self.state.gameData.timeOverText;
-         
-         var popupObj = {
+         console.log("Mode is: " + mode);
+         var notYetText = "I appreciate your ambition, but you haven’t finished speaking to the necessary leaders and contractors.Some of the locals might be able to direct you. Come back when you\’re ready.";
+         var self = this;
+         var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;
+         var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'130px 130px', marginTop:'30px'};
+         var quote = mode==="won" ? self.state.gameData.congratulationsTitle : self.state.gameData.timeOverTitle;
+
+         var bodyText;
+         if (mode === "won"){bodyText = self.state.gameData.congratulationsText; quote = self.state.gameData.congratulationsTitle}
+         else if (mode === "lost"){bodyText = self.state.gameData.timeOverText; quote = self.state.gameData.timeOverTitle}
+         else {bodyText = notYetText; quote = "You're not there yet";}
+
+             var popupObj = {
 
             id:mode+"Pop",
             onClickOutside: null,

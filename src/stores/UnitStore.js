@@ -269,9 +269,10 @@ var UnitStore = assign({}, EventEmitter.prototype, {
     },
 
     getUnitTime: function(id){
-        if(_units[id].data.playlistInfo[0].property[1].value) {
-            return _units[id].data.playlistInfo[0].property[1].value;
-        }
+        var object = _units[id].data.playlistInfo[0].property.filter(function (obj){
+            return obj.name === "minutes";
+        });
+        return object[0].value;
     },
 
     getChapterById: function(id, chapterId) {
