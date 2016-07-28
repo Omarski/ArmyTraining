@@ -209,6 +209,7 @@ var MissionConnectView = React.createClass({
 
      prepLeaderPopup: function(mode){
 
+        console.log("Mode is: " + mode);
         var self = this;
         var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;
         var imgStyle = {background:'url('+ origImg + ') no-repeat', backgroundSize:'130px 130px', marginTop:'30px'};

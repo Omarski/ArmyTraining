@@ -224,6 +224,8 @@ var ObjexGameView = React.createClass({
     render: function() {
 
         var self = this;
+        var halfImg = self.props.mediaPath + 'objex/img/halfway.png';
+        var halfwayStyle = {background:'url('+halfImg+') no-repeat 100% 100%'};
 
         return (<div>
 
@@ -233,7 +235,7 @@ var ObjexGameView = React.createClass({
                     updateGameView = {self.updateGameView}
                 />:null}
 
-                <div className="objex-view-textHalfway" id="objexViewTextHalfway">Halfway there!</div>
+                <div className="objex-view-textHalfway" id="objexViewTextHalfway" style={halfwayStyle}>Halfway There!</div>
 
                 {self.state.imageLayersData.imageColl ? <ImageLayersView
                     areaWidth       = {self.state.imageLayersData.areaWidth}
