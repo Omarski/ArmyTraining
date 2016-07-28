@@ -5,11 +5,28 @@
   width: 100%;
 
   //intro pop
+
+  .objex-view-textIntroTitle ,.objex-view-textLevelTitle{
+    position:absolute;
+    width:300px;
+    top:90px;
+    left:230px;
+    font-size:32px;
+    font-style:italic;
+    color:#4b3928
+  }
+
+  .objex-view-textLevelTitle{
+    font-size:27px;
+    left:340px;
+    top:110px;
+  }
+
   .objex-view-textIntro{
     position:absolute;
     width:550px;
     left:230px;
-    top:124px;
+    top:150px;
     line-height:24px;
     font-size:17px;
   }
@@ -17,24 +34,23 @@
   //levels pop
   .objex-view-popLevelIconCont {
     position: absolute;
-    width: 162px;
-    height: 82px;
+    width: 146px;
+    height: 45px;
     cursor: pointer;
 
     .objex-view-popLevelIconText {
       position: absolute;
-      font-weight: bold;
-      font-size: 25px;
-      top: 24px;
+      font-size: 20px;
+      top: 8px;
       left: 41px;
     }
 
     .objex-view-popLevelIconLock {
       position: absolute;
-      width: 40px;
-      height: 40px;
-      top: 50px;
-      right: 5px;
+      width: 18px;
+      height: 25px;
+      top: 10px;
+      right: 10px;
     }
   }
 
@@ -42,19 +58,20 @@
     position: absolute;
     width: 193px;
     height: 40px;
-    bottom: 75px;
-    right: 180px;
+    bottom: 97px;
+    right: 305px;
   }
 
   //level complete pop
   .objex-view-textComplete{
     position: absolute;
-    color:#000;
+    font-size:48px;
+    font-style:italic;
+    color:#4b3928;
     z-index:10;
-    top:35%;
+    top:32%;
     width:100%;
     text-align: center;
-    font-size:70px;
   }
 
   .objex-view-introButtonCont, .objex-view-completedButtonCont, .objex-view-advancedButtonCont, .objex-view-noTimeButtonCont {
@@ -71,10 +88,14 @@
       display:block;
       width:100px;
       height:30px;
+      border:2px solid #000;
+      padding-top:3px;
+      background-color: #d7c19b;
+      color:#000;
     }
   }
   .objex-view-introButtonCont{
-    top:335px;
+    top:355px;
   }
 
   .objex-view-advancedButtonCont{
@@ -86,7 +107,7 @@
   }
 
   .objex-view-noTimeButtonCont{
-    top:10px;
+    top:25px;
   }
 
   //basic, game done, out of time pop
@@ -94,18 +115,18 @@
     text-align: center;
     font-size: 25px;
     line-height: 33px;
-    width:450px;
+    width:340px;
     height:auto;
     margin-left:auto;
     margin-right:auto;
-    margin-top:120px;
+    margin-top:133px;
   }
 
   .objex-view-textGameDone{
     text-align: center;
     font-size: 25px;
     line-height: 37px;
-    width:450px;
+    width:350px;
     height:auto;
     margin-left:auto;
     margin-right:auto;
@@ -114,31 +135,34 @@
 
   .objex-view-textTimeUp{
     text-align: center;
-    font-size: 52px;
+    font-size:45px;
+    font-style:italic;
+    color:#4b3928;
     width:450px;
     height:auto;
     margin-left:auto;
     margin-right:auto;
-    margin-top:155px;
+    margin-top:175px;
   }
 
   //info pop
   .objex-view-infoPopClose{
     position: absolute;
-    top:-20px;
-    right:-20px;
-    width:42px;
-    height:42px;
+    top:6px;
+    right:0;
+    width:23px;
+    height:25px;
     cursor: pointer;
   }
 
   .objex-view-infoPopTitle{
+    color: #878787;
     display:block;
-    width:275px;
+    width:287px;
     height:32px;
-    border-bottom:2px solid #000;
-    font-size:20px;
-    font-weight:bold;
+    border-bottom:1px solid #cccccc;
+    font-size:22px;
+    font-style:italic;
     margin-bottom:10px
   }
 
@@ -152,7 +176,7 @@
 
   .objex-view-infoPopText{
     font-size:13px;
-    line-height:13px;
+    line-height:14px;
   }
 }
 
@@ -255,11 +279,15 @@
 
 .objex-view-textHalfway{
   display:none;
+  width:399px;
+  height:79px;
   position: absolute;
-  color:#fff;
+  font-size:45px;
+  font-style:italic;
+  color:#4b3928;
   z-index:10;
-  top:35%;
-  width:100%;
-  text-align: center;
-  font-size:70px;
+  left:288px;
+  top:37%;
+  padding-left:57px;
+  padding-top:6px;
 }
