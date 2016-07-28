@@ -49,13 +49,21 @@ var AudioPlayer = React.createClass({
         }
     },
 
-    render: function() {
+    setVolume: function(){
+       var volumeSet = SettingsStore.voiceVolume();
+       document.getElementById(this.props.id).volume = volumeSet;
+    },
 
+    render: function() {
+        var self = this;
         var autoPlay = this.props.autoPlay? true:false;
         var loop = this.props.loop? true:false;
         var controls = this.props.controls? true:false;
+        var isMuted = SettingsStore.muted();
+        var volumeSet = SettingsStore.voiceVolume();
+
         return (
-            <audio id={this.props.id} preload="auto" autoPlay={autoPlay} loop={loop} controls = {controls} volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+            <audio id={this.props.id} preload="auto" autoPlay={autoPlay} loop={loop} controls={controls} volume={volumeSet} muted={isMuted} onCanPlay={self.setVolume}>
                 {this.renderAudioSources()}
             </audio>
         )
