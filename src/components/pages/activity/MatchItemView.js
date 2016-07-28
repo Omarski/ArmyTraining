@@ -117,7 +117,6 @@ var MatchItemView = React.createClass({
         //         event.dataTransfer.setData('Text', 'nothing');
         //     });
         // }
-
         e.dataTransfer.setData("text", e.target.id);
 
         var self = this;
@@ -325,6 +324,7 @@ var MatchItemView = React.createClass({
     },
     render: function() {
         var self = this;
+        console.log("self", self);
         var state = self.state;
         var page = self.state.page;
         var title = self.state.title;
@@ -382,8 +382,8 @@ var MatchItemView = React.createClass({
             var numberNextToSpan = index + 1 + ".";
             switch(item.mediaType){
                 case "audio":
-                    var zid = item.passedData;
-                    // console.log("state", state);
+                    var zid = item.passedData.toString();
+                    console.log("state", state);
                     // console.log("item.passedData", item.passedData);
                     draggable = (<div
                             key={page.xid + "choice-"+index}
@@ -395,8 +395,8 @@ var MatchItemView = React.createClass({
                             onDragOver={self.onDraggingOver}
                             onDrop={self.onDropping}
                             onClick={self.onClick}>
-                            <span className="glyphicon glyphicon-play-circle match-item-audio"></span>
-                            <h5 className="match-item-number">{numberNextToSpan}</h5>
+                            <span className="glyphicon glyphicon-play-circle match-item-audio" ></span>
+                            <h5 className="match-item-number" >{numberNextToSpan}</h5>
                         </div>);
                     break;
                 case "image":
@@ -447,6 +447,7 @@ var MatchItemView = React.createClass({
             var answerRender = "";
             var feedback = "";
             var needCheck = state.numMoved == answerState.length;
+            console.log("state,", state);
             // have array of boolean's equal length to answerState
             for(var i=0;i<state.answerState.length;i++){
                 // console.log("i", i);
@@ -537,20 +538,19 @@ var MatchItemView = React.createClass({
                                             {answerRender}
                                         </div>
                                     </td>
-                                    <td className={"matchitem-question-td"}>
+                                    <td className={"matchitem-question-td "}>
                                         <div className="match-item-answer-prompt">{answerPrompt}</div>
                                     </td>
                                 </tr>);
                 break;
                 case "string":
                     var row = (<tr>
-                                    <td className={"matchitem-choice-td"}>
+                                    <td className={"matchitem-choice-td match-item-choice-td-text"}>
                                     {choices[index]}
                                     </td>
-                                    <td className={"matchitem-droparea-td"}>
+                                    <td className={"matchitem-droparea-td matchitem-droparea-td-text"}>
                                         <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                             {answerRender}
-                                            <span className="glyphicon glyphicon-play-circle match-item-audio match-item-audio-grayed-out"></span>
                                         </div>
                                     </td>
                                     <td className={"matchitem-question-td"}>
@@ -565,6 +565,15 @@ var MatchItemView = React.createClass({
             return (row);
         });
 
+        // var imageGrid = "";
+        // var imagesLeftColumn = (<td></td>);
+        // var answerRightColumn = (<td></td>);
+        //
+        // imageGrid = (<tbody>
+        //                 {imagesLeftColumn}
+        //                 {answerRightColumn}
+        //             </tbody>);
+
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
@@ -577,7 +586,6 @@ var MatchItemView = React.createClass({
                         <div className="row">
                             <h4 className="match-item-prompt">{state.prompt}</h4>
                         </div>
-
                         <table className={"table table-striped table-bordered table-condensed"}>
                             <tbody>
                                 {answerContainers}
