@@ -51,7 +51,7 @@ function getPageState(props) {
 
                 if(uttering.media){
                     mediaType = uttering.media[0].type || "audio";
-                    passedData = uttering.media[0].zid || "000"+index;
+                    passedData = uttering.media[0].zid.toString() || "000"+index;
                 }else{
                     mediaType = "string";
                     if(utterance.ezread && utterance.ezread.text !== ""){
@@ -71,7 +71,7 @@ function getPageState(props) {
             }else if (item.media){
 
                 mediaType = item.media.type || "audio";
-                passedData = item.media.xid || "000"+index;
+                passedData = item.media.xid.toString() || "000"+index;
                 // console.log("passedData", passedData);
             }
 
@@ -174,8 +174,7 @@ var MatchItemView = React.createClass({
         var draggedItemData = state.draggedItemData;
         var dropLocation = "";
         var dropLocationIndex = -1;
-
-
+        
         if($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image")){
             //if(drop location isn't taken)
             var spotTaken = false;
@@ -195,7 +194,8 @@ var MatchItemView = React.createClass({
         }
 
         // clear answer if dragging off where it's placed.
-        if($(e.target).hasClass("match-item-text-choice") || $(e.target).hasClass("match-item-image") || $(e.target).hasClass("match-item-play-icon")) {
+        //if($(e.target).hasClass("match-item-text-choice") || $(e.target).hasClass("match-item-image") || $(e.target).hasClass("match-item-play-icon")) {
+        if($(e.target).hasClass("match-item-choices-container")) {
             if( !!$(draggedItemTarget).css("opacity")){
                 if($(draggedItemTarget).parent().hasClass("match-item-answer-drop-area")) {
                     answerState.map(function (item) {
@@ -241,7 +241,7 @@ var MatchItemView = React.createClass({
                             }
                             itemFound = true;
                         }
-                    } else { // if( "image" || "audio" )
+                    }else{ // if( "image" || "audio" )
 
                         // console.log("draggedItemTarget", draggedItemTarget, "draggedItemTarget.attributes", draggedItemTarget.attributes);
                         if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
