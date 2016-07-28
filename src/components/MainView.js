@@ -159,7 +159,11 @@ var MainView = React.createClass({
             var iere = new RegExp("Trident");
             var ieua = navigator.userAgent;
 
-            var rvv = ieua.match(/(rv:)\d+/g)[0];
+            var rvMatch = ieua.match(/(rv:)\d+/g);
+            var rvv = "";
+            if (rvMatch) {
+                rvv = rvMatch[0];
+            }
 
             if (navigator.appName == 'Microsoft Internet Explorer') {
                 var ua = navigator.userAgent;
