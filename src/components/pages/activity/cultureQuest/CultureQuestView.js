@@ -29,6 +29,7 @@ function getPageState(props) {
         audioObj:null,
         audioBgObj:null,
         audioController:"",
+        audioBgController:"",
         popupObj:null,
         mediaPath:'data/media/'
     };
@@ -119,9 +120,11 @@ var CultureQuestView = React.createClass({
         var self = this;
         var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
 
+        self.setState({audioBgController:"pause"});
+
         var popupObj = {
             id:"GoBack",
-            onClickOutside: self.onClosePopup,
+            onClickOutside: self.onReturnClosePopup,
             popupStyle: {height:'148px', width:'460px', top:'40%', left:'20%', background:'#fff'},
 
             content: function(){
@@ -146,6 +149,10 @@ var CultureQuestView = React.createClass({
 
     onClosePopup: function(){
         this.setState(({popupObj:null,audioObj:null}));
+    },
+
+    onReturnClosePopup: function(){
+        this.setState(({popupObj:null, audioObj:null, audioBgController:"play"}));
     },
 
     markHomeRegion: function(){
@@ -374,7 +381,7 @@ var CultureQuestView = React.createClass({
                             sources    = {self.state.audioBgObj.sources}
                             autoPlay   = {self.state.audioBgObj.autoPlay}
                             loop       = {self.state.audioBgObj.loop}
-                            controller = {self.state.audioController}
+                            controller = {self.state.audioBgController}
                         /> : null}
 
                     {self.state.popupObj ?
