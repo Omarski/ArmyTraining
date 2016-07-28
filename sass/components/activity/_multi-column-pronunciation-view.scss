@@ -3,6 +3,25 @@
   max-width: 80%;
 }
 
+.l2-vocal-answer{
+  margin-bottom: 0;
+}
+
+.l2-table-container{
+  tr:nth-child(odd){
+    background: #fff;
+    .l2-ezread-text{
+      background: #fff;
+    }
+  }
+  tr:nth-child(even){
+    background: #f9f9f9;
+    td{
+      background: #f9f9f9;
+    }
+  }
+}
+
 .l2-table-container{
   margin: 35px auto;
   max-width: 80%;

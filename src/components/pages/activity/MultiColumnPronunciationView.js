@@ -351,7 +351,7 @@ var MultiColumnPronunciationView = React.createClass({
                     //update?
 
                     return (
-                    <table className={"table table-condensed pronunciation-view-table pronunciation-item-row " + "l2-vocal-answer"}
+                    <table className={"table table-condensed pronunciation-view-table l2-pronunciation-item-row " + "l2-vocal-answer"}
                            key={page.xid + String(index)}>
                         <tbody>
                         <tr>
@@ -410,7 +410,7 @@ var MultiColumnPronunciationView = React.createClass({
         });
 
         var finalColumns = columns[0].props.children.map(function(item, index){
-            return (<tr key={page.xid + String(index) + "l2-table-rows"}>
+            return (<tr key={page.xid + String(index) + "l2-table-rows"} className="l2-two-column-row">
                 <td className="l2-table-row">
                     {columns[0].props.children[index]}
                 </td>
@@ -426,7 +426,7 @@ var MultiColumnPronunciationView = React.createClass({
                 <div className="l2-container" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <audio id="l2-demo-audio"></audio>
-                    <table className="table table-bordered table-striped l2-table-container">
+                    <table className="table table-bordered l2-table-container">
                         <tbody>
                         <tr>
                             <td colSpan="2">
