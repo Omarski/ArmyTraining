@@ -325,7 +325,7 @@ var MatchItemView = React.createClass({
     },
     render: function() {
         var self = this;
-        console.log("self", self);
+        // console.log("self", self);
         var state = self.state;
         var page = self.state.page;
         var title = self.state.title;
@@ -384,7 +384,6 @@ var MatchItemView = React.createClass({
             switch(item.mediaType){
                 case "audio":
                     var zid = item.passedData.toString();
-                    console.log("state", state);
                     // console.log("item.passedData", item.passedData);
                     draggable = (<div
                             key={page.xid + "choice-"+index}
@@ -447,7 +446,6 @@ var MatchItemView = React.createClass({
             var answerRender = "";
             var feedback = "";
             var needCheck = state.numMoved == answerState.length;
-            console.log("state,", state);
             // have array of boolean's equal length to answerState
             for(var i=0;i<state.answerState.length;i++){
                 // console.log("i", i);
@@ -579,9 +577,6 @@ var MatchItemView = React.createClass({
         //                        {imagesLeftColumn}
         //                        {answerRightColumn}
         //                    );
-        console.log("ps page,", PageStore.page());
-        console.log("ps chapter,", PageStore.chapter());
-        console.log("ps unit,", PageStore.unit());
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
