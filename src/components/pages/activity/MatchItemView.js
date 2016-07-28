@@ -2,6 +2,7 @@ var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var PageHeader = require('../../widgets/PageHeader');
+var UnitStore = require('../../../stores/UnitStore');
 
 
 function getPageState(props) {
@@ -396,7 +397,6 @@ var MatchItemView = React.createClass({
                             onDrop={self.onDropping}
                             onClick={self.onClick}>
                             <span className="glyphicon glyphicon-play-circle match-item-audio" ></span>
-                            <h5 className="match-item-number" >{numberNextToSpan}</h5>
                         </div>);
                     break;
                 case "image":
@@ -475,7 +475,6 @@ var MatchItemView = React.createClass({
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
                                     <span className="glyphicon glyphicon-play-circle match-item-audio"></span>
-                                    <h5 className="match-item-number">{numberNextToSpan}</h5>
                                     <div className={(feedback + ' match-item-feedback-audio')}></div>
                                 </div>);
                             break;
@@ -560,20 +559,29 @@ var MatchItemView = React.createClass({
                 break;
                 default:
             }
-
-
             return (row);
         });
 
         // var imageGrid = "";
-        // var imagesLeftColumn = (<td></td>);
+
+            // var imageToupleRows = imageGridList.map(function(item, index){
+            //     if (index % 2 === 0 ){
+            //         return (<tr>{item[i]}{item[i+2]}</tr>);
+            //     }
+            //     if (index % 2 !== 0){
+            //         return (<tr)
+            //     }
+            // });
+        // var imagesLeftColumn = (<td>{imageToupleRows}</td>);
         // var answerRightColumn = (<td></td>);
         //
-        // imageGrid = (<tbody>
-        //                 {imagesLeftColumn}
-        //                 {answerRightColumn}
-        //             </tbody>);
-
+        // answerContainers = (
+        //                        {imagesLeftColumn}
+        //                        {answerRightColumn}
+        //                    );
+        console.log("ps page,", PageStore.page());
+        console.log("ps chapter,", PageStore.chapter());
+        console.log("ps unit,", PageStore.unit());
         return (
             <div>
                 <div key={"page-" + this.state.page.xid}>
