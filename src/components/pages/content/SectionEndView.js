@@ -99,7 +99,7 @@ var SectionEndView = React.createClass({
         if (PageStore.isChapterComplete()) {
             var pdfPath = self.getPDF();
             if (pdfPath) {
-                var pdfText = PageStore.unit().data.title + " PDF Takeaways";
+                var pdfText = PageStore.unit().data.title + " PDF Takeaway";
                 PDFcontent = <div className = "row"><a href={pdfPath} target="_blank">{pdfText}</a></div>;
             }
         }
