@@ -11,12 +11,12 @@ var AudioPlayer = React.createClass({
         autoPlay: PropTypes.bool,
         loop: PropTypes.bool,
         controls: PropTypes.bool,
-        controller: PropTypes.string
+        controller: PropTypes.func
     },
 
     componentDidMount: function() {
         this.renderAudioSources();
-        this.audioController();
+        if (this.props.controller) this.props.controller(this.audioController);
     },
 
     renderAudioSources: function(){
@@ -32,11 +32,11 @@ var AudioPlayer = React.createClass({
         return audioSources;
     },
 
-    audioController: function(){
+    audioController: function(mode){
+        
+        var player = document.getElementById(this.props.id);
 
-        var player = $("#"+this.props.id);
-
-        switch (this.props.controller){
+        switch (mode){
             case "play":
                 player.play();
                 break;
