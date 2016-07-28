@@ -330,11 +330,12 @@ var MatchItemView = React.createClass({
         var choices;
         var answerState = state.answerState;
         var numQuestions = answerState.length;
-        var correct = "glyphicon MI-feedback MI-correct glyphicon-ok-circle";
-        var incorrect = "glyphicon MI-feedback MI-incorrect glyphicon-remove-circle";
+        var correct = "glyphicon MI-feedback MI-correct glyphicon-ok";
+        var incorrect = "glyphicon MI-feedback MI-incorrect glyphicon-remove";
         var answerContainers;
 
         var numMoved = state.numMoved;
+        //                                    <div className={(feedback + ' match-item-feedback-audio')}></div>
 
         if(numMoved === numQuestions){
             var isCorrect = true;
@@ -375,7 +376,7 @@ var MatchItemView = React.createClass({
             // if(audio)
             // console.log("state.answerState", state.answerState);
             // console.log("item", item);
-            var numberNextToSpan = index + ".";
+            var numberNextToSpan = index + 1 + ".";
             switch(item.mediaType){
                 case "audio":
                     var zid = item.passedData;
@@ -391,7 +392,7 @@ var MatchItemView = React.createClass({
                             onDragOver={self.onDraggingOver}
                             onDrop={self.onDropping}
                             onClick={self.onClick}>
-                            <span className="glyphicon glyphicon-play-circle"></span>
+                            <span className="glyphicon glyphicon-play-circle match-item-audio"></span>
                             <h5 className="match-item-number">{numberNextToSpan}</h5>
                         </div>);
                     break;
@@ -448,6 +449,7 @@ var MatchItemView = React.createClass({
                 // console.log("i", i);
                 // console.log("state.answerState", state.answerState);
                 // loop through the answerState array
+                var numberNextToSpan = i + 1 + ".";
                 if(index === state.answerState[i].currentBoxIndex) { // if there is an answer in this box
                     if (needCheck) { // does it need to be graded?
                         if (state.answerState[i].currentBox == state.answerState[i].letter) { // if correct
@@ -457,21 +459,21 @@ var MatchItemView = React.createClass({
                         }
                     }
 
+
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
                     switch (state.answerState[i].mediaType) {
                         case "audio":
 
-                            console.log("i");
+                            console.log("inside answerContainers", i);
                             answerRender = (<div
                                     data={state.answerState[i].passedData}
                                     data-passed={state.answerState[i].passedData}
                                     draggable="true"
-                                    className="match-item-play-icon blue-test-style"
+                                    className="match-item-play-icon"
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
-                                    <span className="glyphicon glyphicon-play-circle"></span>
-                                    <p>{i}</p>
-
+                                    <span className="glyphicon glyphicon-play-circle match-item-audio"></span>
+                                    <h5 className="match-item-number">{numberNextToSpan}</h5>
                                     <div className={(feedback + ' match-item-feedback-audio')}></div>
                                 </div>);
                             break;
@@ -518,6 +520,7 @@ var MatchItemView = React.createClass({
                          onDragOver={self.onDraggingOver}
                          onDrop={self.onDropping}>
                         {answerRender}
+                    <span className="glyphicon glyphicon-play-circle match-item-audio match-item-audio-grayed-out"></span>
                     </div>
                 </td>
                 <td className={"matchitem-question-td"}>
