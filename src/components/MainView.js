@@ -130,6 +130,7 @@ var MainView = React.createClass({
 
         var self = this;
         var ver = this.getInternetExplorerVersion();
+        console.log("ie version: " + ver);
         var infoText = "";
         if (ver >= 0 && ver <= 11){
             var ie8Text = "Your browser version is unsupported for this course. Please upgrade your browser.";
@@ -155,11 +156,23 @@ var MainView = React.createClass({
         // (indicating the use of another browser).
         {
             var rv = -1; // Return value assumes failure.
+            console.log("navigator.appName" + navigator.appName);
+            console.log("userAgent"+navigator.userAgent);
+
+            var iere = new RegExp("Trident");
+            var ieua = navigator.userAgent;
+
+            var rvv = ieua.match(/(rv:)\d+/g)[0];
+
             if (navigator.appName == 'Microsoft Internet Explorer') {
                 var ua = navigator.userAgent;
                 var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
                 if (re.exec(ua) != null)
                     rv = parseFloat(RegExp.$1);
+            }
+
+            if(iere.test(ieua)){
+                rv = rvv.substring(rvv.indexOf(":")+1);
             }
             return Math.floor(rv);
         }
