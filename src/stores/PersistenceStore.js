@@ -133,7 +133,9 @@ function setDataSCORM() {
     // convert data to string
     var dataString = JSON.stringify(_dataCache);
 
-    SCORMActions.dataSave(dataString);
+    setTimeout(function() {
+        SCORMActions.dataSave(dataString);
+    }, 0.1);
 }
 
 
@@ -141,7 +143,9 @@ function setStorageType(type) {
     _storageType = type;
 
     if (_storageType === ConfigConstants.CONFIG_STORAGE_TYPE_SCORM) {
-        SCORMActions.initialize();
+        setTimeout(function() {
+            SCORMActions.initialize();
+        }, 0.1);
     }
 }
 

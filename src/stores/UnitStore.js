@@ -269,6 +269,7 @@ var UnitStore = assign({}, EventEmitter.prototype, {
     },
 
     getUnitTime: function(id){
+
         var object = _units[id].data.playlistInfo[0].property.filter(function (obj){
             return obj.name === "minutes";
         });

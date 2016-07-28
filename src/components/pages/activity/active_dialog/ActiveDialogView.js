@@ -2,7 +2,9 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
 var Button = ReactBootstrap.Button;
+var Tooltip = ReactBootstrap.Tooltip;
 var PageStore = require('../../../../stores/PageStore');
+var LocalizationStore = require('../../../../stores/LocalizationStore');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dialog/ActiveDialogCOAs');
@@ -16,6 +18,7 @@ var ActiveDialogClosedCaptionActions = require('../../../../actions/active_dialo
 var ActiveDialogClosedCaption = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaption');
 var ActiveDialogClosedCaptionPanel = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaptionPanel');
 var RemediationView = require('../../../RemediationView');
+
 
 
 var _dataLoaded = false;
@@ -192,6 +195,8 @@ var ActiveDialogView = React.createClass({
     render: function() {
         var content = <div></div>;
 
+        var tt = (<Tooltip id="pauseTooltip">{LocalizationStore.labelFor("evaluation", "lblPause")}</Tooltip>);
+
         if (this.state.info) {
 
             content = (
@@ -199,9 +204,14 @@ var ActiveDialogView = React.createClass({
                     <div className="container active-dialog-view" key={"page-" + this.state.page.xid}>
                         <div className="active-dialog-toolbar">
                             <ActiveDialogCOAs />
-                            <Button className="btn btn-default btn-link active-dialog-toolbar-btn">
-                                <span className="glyphicon glyphicon-pause" aria-hidden="true"></span>
-                            </Button>
+                            <OverlayTrigger
+                                overlay={tt} placement="top"
+                                delayShow={300} delayHide={150}
+                            >
+                                <Button className="btn btn-default btn-link active-dialog-toolbar-btn">
+                                    <span className="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                                </Button>
+                            </OverlayTrigger>
                             <ActiveDialogObjectives />
                         </div>
                         <ActiveDialogScenarioView composition={this.state.info.composition} ref="ActiveDialogScenarioView" media={this.state.stageMedia} />

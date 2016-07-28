@@ -16,10 +16,11 @@ var ActiveDialogActions = {
     /**
      * @param  {string} data
      */
-    create: function(data) {
+    create: function(jsonData, infoData) {
         AppDispatcher.dispatch({
             actionType: ActiveDialogConstants.ACTIVE_DIALOG_CREATE,
-            data: data
+            data: jsonData,
+            info: infoData
         });
     },
 

@@ -181,6 +181,115 @@ function loadNext() {
     load({unit:_currentUnit, chapter:_currentChapter, page:nextPage});
 }
 
+function findNextRequiredUnit() {
+    var units = UnitStore.getAll();
+    var result = null;
+    var foundOptional = false;
+    var firstOptional = false;
+
+    for (var key in units) {
+        var unit = units[key];
+
+        if (unit.state) {
+
+            // required unit
+            if (unit.state.required === true) {
+
+                // complete required
+                if (unit.state.complete === true) {
+                    continue;
+                }
+
+                // incomplete required
+                return key;
+            }
+            // optional unit
+            else {
+                // get the first optional regardless
+                if (firstOptional === false) {
+                    result = key;
+                    firstOptional = true;
+                }
+
+                // complete optional
+                if (unit.state.complete === true) {
+                    continue;
+                }
+
+                // incomplete optional
+                if (foundOptional === false) {
+                    result = key;
+                    foundOptional = true;
+                }
+            }
+        }
+        else {
+            // get the first optional regardless
+            if (firstOptional === false) {
+                result = key;
+                firstOptional = true;
+            }
+
+            // optional
+            if (foundOptional === false) {
+                result = key;
+                foundOptional = true;
+            }
+        }
+    }
+
+    return result;
+}
+
+function findNextRequiredChapter(unit) {
+    // set to length
+    var result = unit.data.chapter.length;
+    for (var chapterIndex in unit.data.chapter) {
+        var chapter = unit.data.chapter[chapterIndex];
+        // skip if complete
+        if (chapter.state && chapter.state.complete === true) {
+            continue;
+        }
+        return chapterIndex;
+    }
+    return result;
+}
+
+function loadNextRequired() {
+    var unitIndex;
+    var currentIndex = findCurrentPageIndex();
+    var newIndex = currentIndex + 1;
+
+    // reached the last page of the chapter
+    if (newIndex >= _currentChapter.pages.length) {
+
+        var chapterIndex = findNextRequiredChapter(_currentUnit);
+        // reached the last chapter of the unit
+        if (chapterIndex >= _currentUnit.data.chapter.length) {
+            // get the next required unit
+            unitIndex = findNextRequiredUnit();
+            _currentUnit = UnitStore.getAll()[unitIndex];
+
+            // find the first incomplete chapter of the new unit
+            chapterIndex = findNextRequiredChapter(_currentUnit);
+
+            // if all complete then just go to the first one
+            if (chapterIndex >= _currentUnit.data.chapter.length) {
+                chapterIndex = 0;
+            }
+        }
+
+        // set the current chapter
+        _currentChapter = _currentUnit.data.chapter[chapterIndex];
+
+        // set to first page
+        newIndex = 0;
+    }
+
+    var nextPage = _currentChapter.pages[newIndex];
+    load({unit:_currentUnit, chapter:_currentChapter, page:nextPage});
+}
+
 
 /**
  * Checks current state to see if the requested previous unit is valid to switch
@@ -205,6 +314,21 @@ function isValidPrevUnit(unit) {
     }
 
     return true;
+}
+
+function isFirstPageOfUnit() {
+    if (_currentUnit && _currentUnit.data.chapter) {
+        if (_currentUnit.data.chapter.length > 0) {
+            var firstChapter = _currentUnit.data.chapter[0];
+            if (firstChapter.pages && firstChapter.pages.length > 0) {
+                var firstPage = firstChapter.pages[0];
+                if (firstPage.xid === _currentPage.xid) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 /**
@@ -270,6 +394,7 @@ function loadPrevious() {
  * @param  {string} data The content of the PAGE
  */
 function load(data) {
+    // console.log("data", data);
     if (data && data.chapter && data.page) {
         setTimeout(function() {
             NotificationActions.updateBody("Loading Page : " + data.page.title );
@@ -316,6 +441,14 @@ function load(data) {
             if (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_AUTOPASS) !== null) {
                 markChapterComplete();  // TODO: dont like this here <---
             }
+            if ((Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_POSTTEST) !== null) ||
+                (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
+                FooterActions.disabledPrevious();
+            }
+
+            if (isFirstPageOfUnit()) { // TODO: dont like this here <---
+                FooterActions.disabledPrevious();
+            }
 
 
         });
@@ -342,12 +475,12 @@ function markChapterComplete() {
         _currentChapter.state = assign({}, state, {complete: true});
 
         // check if the unit is complete
-        setTimeout(function() {
-            if (_currentUnit && _currentUnit.id) {
-                UnitActions.evaluateUnitComplete(_currentUnit.id);
-            }
-        }, 0.1);
-
+        if (_currentUnit && _currentUnit.id) {
+            var unitId = _currentUnit.id;
+            setTimeout(function() {
+                UnitActions.evaluateUnitComplete(unitId);
+            }, 0.1);
+        }
     }
 }
 
@@ -592,7 +725,11 @@ AppDispatcher.register(function(action) {
             //PageStore.emitChange();
             break;
         case PageConstants.PAGE_LOAD_NEXT:
-            loadNext();
+            if (UnitStore.requiredExists()) {
+                loadNextRequired();
+            } else {
+                loadNext();
+            }
             //PageStore.emitChange();
             break;
         case PageConstants.PAGE_LOAD_PREVIOUS:

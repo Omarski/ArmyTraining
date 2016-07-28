@@ -6,7 +6,6 @@ var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogSt
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 var LocalizationStore = require('../../../../stores/LocalizationStore');
 
-var _shownOnce = true;
 function getCompState(show) {
     return {
         show: show,
@@ -17,14 +16,12 @@ function getCompState(show) {
 var ActiveDialogIntro = React.createClass({
 
     hideModal: function() {
-        _shownOnce = false;
         this.setState(getCompState(false));
         ActiveDialogActions.startDialog();
         ActiveDialogActions.continueDialog();
     },
 
     getInitialState: function() {
-        _shownOnce = true;
         return getCompState(false);
     },
 
@@ -39,7 +36,6 @@ var ActiveDialogIntro = React.createClass({
     render: function() {
         var content= "";
         var steps = "";
-        var end = "";
 
         if (this.state.intro && (typeof this.state.intro === "string") && this.state.intro !== "") {
             var intro = this.state.intro;
@@ -47,7 +43,6 @@ var ActiveDialogIntro = React.createClass({
             if (intro.indexOf("\n")) {
                 var parts = intro.split("\n");
                 content = parts.shift();
-                end = parts.pop();
 
                 steps = parts.map(function(item, index) {
                    return (
@@ -70,11 +65,23 @@ var ActiveDialogIntro = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
-                    {content}
-                    {steps}
-                    <br/>
-                    {end}
+                    <div className="active-dialog-evaluation-feedback-text">
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
+                                    </td>
+                                    <td>
+                                        <div className="active-dialog-evaluation-feedback">
+                                            <p>{content}</p>
+                                            {steps}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -85,8 +92,8 @@ var ActiveDialogIntro = React.createClass({
     },
 
     _onDialogChange: function() {
-        if (ActiveDialogStore.briefings() !== "") {
-            this.setState(getCompState(_shownOnce));
+        if (ActiveDialogStore.briefings() !== "" && !ActiveDialogStore.isDialogStarted()) {
+            this.setState(getCompState(true));
         }
     }
 });

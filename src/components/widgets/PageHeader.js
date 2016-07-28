@@ -58,10 +58,17 @@ function getPageState(props) {
     }
 
     var sources = "";
+
     if (props && props.sources && props.sources.length) {
-        //sources = props.sources.concat(", ")
-        sources = props.sources;
+        if (typeof props.sources === Array.isArray) {
+            sources = props.sources.concat(", ");
+        } else {
+            sources = props.sources;
+        }
     }
+
+
+
 
     return {
         sources: sources,
@@ -94,7 +101,7 @@ var PageHeader = React.createClass({
             image: null
         });
         BookmarkActions.create(bm);
-        this.setState(getPageState());
+        this.setState(getPageState(this.props));
 
     },
 
@@ -136,16 +143,15 @@ var PageHeader = React.createClass({
             </OverlayTrigger>
         );
 
-        var infoLink = this.state.sources;
-        var attributions = <Tooltip id="sourcesTooltip">{this.state.sources}</Tooltip>;
+        console.log("sources !!! " + this.state.sources);
+        var attributions = (<Tooltip id="sourcesTooltip">{this.state.sources}</Tooltip>);
+
         var info = "";
         if (this.state.sources !== "") {
-            info = <OverlayTrigger delayHide={4000} placement="right" overlay={attributions}>
+            info = (<OverlayTrigger delayHide={4000000} placement="right" overlay={attributions}>
                         <span className="infoAttributions glyphicon glyphicon-info-sign"></span>
-                    </OverlayTrigger>;
+                    </OverlayTrigger>);
         }
-        // var titleOfPageHeader = "";
-        // var titleOfPageHeaderFunction = function(){return this.state.pageTitle;};
 
         var pageTitle = this.state.pageTitle;
 
@@ -153,21 +159,21 @@ var PageHeader = React.createClass({
             pageTitle = "";
         }
 
-        //<p className="page-title-height"></p>
-
-        return  <div className="page-header-custom">
-            <div className="page-header-custom-title">
-                <div className="page-title-height">{pageTitle}
-                    <small>
-                        {info}
-                    </small>
+        return  (
+            <div className="page-header-custom">
+                <div className="page-header-custom-title">
+                    <div className="page-title-height">{pageTitle}
+                        <small>
+                            {info}
+                        </small>
+                    </div>
+                    <ul className="page-header-controls">
+                        <li><AudioControl /></li>
+                        <li>{bookmarkBtn}</li>
+                    </ul>
                 </div>
-                <ul className="page-header-controls">
-                    <li><AudioControl /></li>
-                    <li>{bookmarkBtn}</li>
-                </ul>
             </div>
-        </div>;
+        );
     }
 });
 

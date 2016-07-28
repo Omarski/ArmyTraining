@@ -121,7 +121,7 @@ var ActiveDialogComponent = React.createClass({
                 // increment counter if animation is not the default one otherwise play
                 if (animationName != this.currentIdleAnimationName) {
                     bFoundVideo2Play = true;
-                    console.log(video)
+                    
                     // add to hack
                     this.currentVideosPlayingHack.push(video);
                 } else {
@@ -214,6 +214,9 @@ var ActiveDialogComponent = React.createClass({
     },
 
     soundPlay: function (sound){
+        // sound hack
+        sound = sound.split(',')[0];
+
         if (this.refs.activeDialogAudioRef && this.refs.activeDialogAudioRef.refs.audioRef) {
             this.bSoundLoading = true;
             var player = this.refs.activeDialogAudioRef.refs.audioRef;
@@ -265,7 +268,9 @@ var ActiveDialogComponent = React.createClass({
 
         // check if video
         var videos = this.props.assets.map(function(item, index) {
-            var style = {top: item.assetData.dimensions[1], left: item.assetData.dimensions[0], position: "absolute", display: "block"};
+            var top = Number(item.assetData.dimensions[1].split("px")[0]);
+            var left = Number(item.assetData.dimensions[0].split("px")[0]);
+            var style = {top: top, left: left, position: "absolute", display: "block"};
             var videoStyle = {display: "none"};
             return (
                 <div className="" key={index} style={style}>

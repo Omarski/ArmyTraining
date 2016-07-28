@@ -9,6 +9,7 @@ var NotificationActions = require('../actions/NotificationActions');
 var ProgressView = require('../components/ProgressView');
 var ExplorerStore = require('../stores/ExplorerStore');
 var InfoTagConstants = require('../constants/InfoTagConstants');
+var PageTypeConstants = require('../constants/PageTypeConstants');
 
 var _expanded = {};
 var _expandedChapters = {};
@@ -401,6 +402,12 @@ var TOCPages = React.createClass({
         // TODO end clean up hack
 
         var items = this.props.data.map(function(item, index) {
+
+            // hide certain page types
+            if (item.type === PageTypeConstants.SECTION_END) {
+                return;
+            }
+
             // hide all but the first quiz page
             if (item.state && item.state.quizpage) {
                 if (firstQuizPage) {

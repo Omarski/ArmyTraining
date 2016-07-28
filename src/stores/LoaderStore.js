@@ -146,8 +146,9 @@ function loadChapterPages(units, unit, index) {
                         PageActions.load({unit: unit, chapter: chapter, page: page});
                     }
 
-                    LoaderActions.complete({});
                     _loaded = true;
+                    LoaderActions.complete({});
+
                 }, 100);
 
                 break;

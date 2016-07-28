@@ -57,7 +57,7 @@ var _isInitialized = false;
 var _message = "No data found.";
 var _lesson = "msb_lesson115_mini_10002";
 var _page = "page4004";
-var _recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+var _recordedSpeech = "This needs to be a unique message that isn't returned by the applet.";
 
 function getGrammarID(){
     var grammarID = "";

@@ -328,16 +328,16 @@ var ResponseFormationView = React.createClass({
         var state = this.state;
         var isCorrect = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
-        var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        var recordedSpeech = "This needs to be a unique message that isn't returned by the applet.";
         var feedbackResponse = state.feedbackResponse;
         var spoken = state.spoken;
 
         if(!ConfigStore.isASREnabled()){
-            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+            newMessage = "This needs to be a unique message that isn't returned by the applet.";
         }
 
         switch(newMessage){
-            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+            case "This needs to be a unique message that isn't returned by the applet.":
                 break;
             case "initialized":
 

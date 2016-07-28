@@ -2,10 +2,31 @@
  * Created by Alec on 6/7/2016.
  */
 var React = require('react');
+var ASRActions = require('../../actions/ASRActions');
+var ASRStore = require('../../stores/ASRStore');
 
+function asrState() {
+    return {};
+}
 var ASR = React.createClass({
+    getInitialState: function() {
+        return asrState();
+    },
 
+    componentWillMount: function() {
+        ASRStore.addChangeListener(this._onASRChange);
+    },
 
+    componentDidMount: function() {
+
+    },
+
+    componentWillUnmount: function() {
+        ASRStore.removeChangeListener(this._onChange);
+    },
+    loadASR: function(){
+        ASRActions.load();
+    },
 
     render: function() {
         // setup plugin html code
@@ -20,14 +41,38 @@ var ASR = React.createClass({
         pluginHTML += '<param name="jnlp_href" value="speechinterface16.jnlp"/>\n';
         pluginHTML += '</applet>\n';
 
-        var dangerousMarkup = {
-            __html: pluginHTML // the whole markup string you want to inject
-        };
+        var self = this;
+        setTimeout(function() {
+            document.getElementById('asr').innerHTML = pluginHTML;
 
-        return (
-            <div dangerouslySetInnerHTML={dangerousMarkup}></div>);
+            setTimeout(function() {
+                self.loadASR();
+            });
+        });
 
-    }
+        //pluginHTML = "";
+
+        //var dangerousMarkup = {
+
+          //  __html: pluginHTML // the whole markup string you want to inject
+        //};
+
+
+        return (<div></div>);
+        //return (
+        //    <div dangerouslySetInnerHTML={dangerousMarkup}></div>);
+
+    },
+
+    /**
+     * Event handler for 'change' events coming from the ASRStore
+     */
+    _onASRChange: function (){
+        var self = this;
+
+    },
+
+
 });
 
 module.exports = ASR;

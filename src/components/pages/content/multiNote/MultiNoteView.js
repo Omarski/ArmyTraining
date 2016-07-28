@@ -1,5 +1,6 @@
 var React = require('react');
-var Slider = require('react-slick');
+//var Slider = require('react-slick');
+var NukaCarousel = require('nuka-carousel');
 var PageStore = require('../../../../stores/PageStore');
 var PageHeader = require('../../../widgets/PageHeader');
 var SettingsStore = require('../../../../stores/SettingsStore');
@@ -74,6 +75,13 @@ var MultiNoteView = React.createClass({
     },
 
     handleClick: function(e){
+        var activeIndex = this.state.activePage;
+        setTimeout(function () {
+            $('.slick-slide').removeClass('slick-active');
+            var selected = $('.slick-slide')[activeIndex];
+            $(selected).addClass('slick-active');
+        });
+
         this.setState({
             activePage: $(e.target).attr("data")
         })
@@ -102,9 +110,9 @@ var MultiNoteView = React.createClass({
     updateSlick: function() {
         var activeIndex = this.state.activePage;
         setTimeout(function () {
-            $('.slick-slide').removeClass('slick-active');
-            var selected = $('.slick-slide')[activeIndex];
-            $(selected).addClass('slick-active');
+            $('.multi-note-page-btn').removeClass('active');
+            var selected = $('.multi-note-page-btn')[activeIndex];
+            $(selected).addClass('active');
         });
     },
 
@@ -260,9 +268,10 @@ var MultiNoteView = React.createClass({
         };
 
 
+
+
         var noteImage = "";
         var text = (<div className="col-md-4" key={xid + "activetext"}></div>);
-
 
         var p = pagesHTML[self.state.activePage];
         var xid = self.state.xid;
@@ -270,6 +279,53 @@ var MultiNoteView = React.createClass({
             sourceInfo = p.sources;
         }
         if (p && p.image) {
+            var Decorators = null;
+            if (pageChoices && pageChoices.length > 3) {
+                Decorators = [
+                    {
+                        component: React.createClass({
+                            render: function() {
+                                return (
+                                    <button
+                                        className="btn btn-default multi-note-carousel-btn"
+                                        onClick={this.props.previousSlide}
+                                    >
+                                        <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    </button>
+                                )
+                            }
+                        }),
+                        position: 'CenterLeft',
+                        style: {
+                            padding: 20,
+                            height: 151,
+                            left: -34
+                        }
+                    },
+                    {
+                        component: React.createClass({
+                            render: function() {
+                                return (
+                                    <button
+                                        className="btn btn-default multi-note-carousel-btn"
+                                        onClick={this.props.nextSlide}
+                                    >
+                                        <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    </button>
+                                )
+                            }
+                        }),
+                        position: 'CenterRight',
+                        style: {
+                            padding: 20,
+                            height: 151
+                        }
+                    }
+                ];
+
+            }
+
+
             noteImage = (
                 <div className="col-md-6 col-sm-6">
                     <div className="container-fluid">
@@ -279,20 +335,15 @@ var MultiNoteView = React.createClass({
                         <div className="row">
                             <div className="multi-note-slider-container">
 
-                                <Slider
-                                    dots={sliderSettings.dots}
+                                <NukaCarousel
+                                    decorators={Decorators}
                                     infinite={sliderSettings.infinite}
                                     speed={sliderSettings.speed}
                                     slidesToShow={sliderSettings.slidesToShow}
                                     slidesToScroll={sliderSettings.slidesToScroll}
-                                    centerMode={sliderSettings.centerMode}
-                                    variableWidth={sliderSettings.variableWidth}
-                                    focusOnSelect={sliderSettings.focusOnSelect}
-                                    beforeChange={this.updateSlick}
-                                    afterChange={this.updateSlick}
                                 >
                                     {pageChoices}
-                                </Slider>
+                                </NukaCarousel>
                             </div>
                         </div>
                     </div>

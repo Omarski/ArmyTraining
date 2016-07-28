@@ -5,6 +5,7 @@ var PageStore = require('../../../stores/PageStore');
 var React = require('react');
 var SCORMActions = require('../../../actions/SCORMActions');
 var UnitStore = require('../../../stores/UnitStore');
+var ReferenceStore = require('../../../stores/ReferenceStore');
 
 
 function getPageState(props) {
@@ -50,15 +51,19 @@ function getPageState(props) {
 var SectionEndView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
+        var self = this;
 
         // send course completion HACK
         if (UnitStore.areAllRequiredComplete()) {
             SCORMActions.complete();
         }
 
-        // disable next button if failed chapter
+        // disable next button
         setTimeout(function() {
             if (!PageStore.isChapterComplete()) {
+                FooterActions.disableNext();
+            }
+            if(UnitStore.areAllRequiredComplete()) {
                 FooterActions.disableNext();
             }
         }, 0.1);
@@ -69,6 +74,11 @@ var SectionEndView = React.createClass({
 
     componentWillMount: function() {
         PageStore.addChangeListener(this._onChange);
+    },
+
+    getPDF: function(){
+        var pdfPath = ReferenceStore.getPDF(PageStore.chapter().xid);
+        return pdfPath;
     },
 
     render: function() {
@@ -82,6 +92,16 @@ var SectionEndView = React.createClass({
 
         if (feedbackImageSrc !== "") {
             feedbackImage = <img className="" src={feedbackImageSrc}></img>;
+        }
+
+
+        var PDFcontent = "";
+        if (PageStore.isChapterComplete()) {
+            var pdfPath = self.getPDF();
+            if (pdfPath) {
+                var pdfText = PageStore.unit().data.title + " PDF Takeaways";
+                PDFcontent = <div className = "row"><a href={pdfPath} target="_blank">{pdfText}</a></div>;
+            }
         }
 
         return (
@@ -98,6 +118,7 @@ var SectionEndView = React.createClass({
                         <div className="row">
                             {feedback}
                         </div>
+                        {PDFcontent}
                     </div>
                 </div>
             </div>

@@ -17,8 +17,7 @@ var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
 var DliActions = require('../actions/DliActions');
 var DliStore = require('../stores/DliStore');
-var ASRActions = require('../actions/ASRActions');
-var ASRStore = require('../stores/ASRStore');
+
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
 var AppStateActions = require('../actions/AppStateActions');
@@ -32,6 +31,7 @@ var DevToolsActions = require('../actions/DevToolsActions');
 var ASRWidget = require('../components/widgets/ASR');
 
 var bDataLoaded = false;
+var _asrLoaded = false;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -80,9 +80,7 @@ var MainView = React.createClass({
         CoachFeedbackActions.load();
     },
 
-    loadASR: function(){
-        ASRActions.load();
-    },
+
 
     loadData: function() {
         LoaderActions.load();
@@ -96,8 +94,6 @@ var MainView = React.createClass({
 
     getInitialState: function() {
         var bookState = getBookState();
-        bookState.browserPopObj = null;
-        bookState.explorerVer = -1;
         return bookState;
     },
 
@@ -108,18 +104,17 @@ var MainView = React.createClass({
         LoaderStore.addChangeListener(this._onChange);
         DliStore.addChangeListener(this._onDliChange);
         ReferenceStore.addChangeListener(this._onReferenceChange);
-        ASRStore.addChangeListener(this._onASRChange);
     },
 
     componentDidMount: function() {
         window.addEventListener('resize', this.handleResize);
-        this.prepIEPopup();
+
         NotificationActions.show({
             title: 'Please wait',
-            body: 'Loading...',
+            body: 'Checking system...',
             full: true
         });
-        LocalizationActions.load();
+        this.systemCheck();
         document.addEventListener("keydown", this.keypress);
     },
 
@@ -131,48 +126,27 @@ var MainView = React.createClass({
         LocalizationStore.removeChangeListener(this._onLocalizationChange);
     },
 
-    prepIEPopup: function(){
+    systemCheck: function(){
 
         var self = this;
         var ver = this.getInternetExplorerVersion();
+        var infoText = "";
         if (ver >= 0 && ver <= 11){
+            var ie8Text = "Your browser version is unsupported for this course. Please upgrade your browser.";
+            var ie9to11Text = "To access all the features of this course, you must have Java enabled on your computer. Please install and/or upgrade Java and allow it to run when prompted.";
+            infoText = (ver <= 8) ? ie8Text: ie9to11Text;
 
-            var ie8Text = (
-                <div>
-                   Your browser version is unsupported for this course. Please upgrade your browser.
-                </div>
-            );
+            NotificationActions.show({
+                title: 'Notice',
+                body: infoText,
+                full: false,
+                percent: "",
+                onClose: self.onSystemOk
 
-            var ie9to11Text = (
-                <div>
-                    To access all the features of this course, you must have Java enabled on your computer. Please install and/or upgrade Java and allow it to run when prompted.
-                </div>
-            );
-
-
-            var popupObj = {
-                id:"IEWarning",
-                onClickOutside: null,
-                popupStyle: {height:'50%', width:'60%', top:'20%', left:'20%', background:'#fff'},
-
-                content: function(){
-
-                    return(
-                        <div className="popup-view-content">
-                            <div className="popup-view-bodyText">
-                                {ver <= 8 ? ie8Text: ie9to11Text}
-                            </div>
-                            <div className="popup-view-buttonCont" style={{marginTop:'20px'}}>
-                                <button type="button" className="btn btn-default"
-                                        onClick={self.onCloseIEPopup}>Close</button>
-                            </div>
-                        </div>
-                    )
-                }
-            };
-            self.setState({browserPopObj:popupObj});
-        }else self.loadProject();
-
+            });
+        } else {
+            self.loadProject();
+        }
     },
 
     getInternetExplorerVersion: function(){
@@ -187,14 +161,12 @@ var MainView = React.createClass({
                 if (re.exec(ua) != null)
                     rv = parseFloat(RegExp.$1);
             }
-            this.setState({explorerVer: Math.floor(rv)});
             return Math.floor(rv);
         }
     },
 
-    onCloseIEPopup: function(){
-        this.setState({browserPopObj:null});
-        if (this.state.explorerVer <= 8){
+    onSystemOk: function(){
+        if (this.getInternetExplorerVersion() <= 8){
             return false;
         }else{
             this.loadProject();
@@ -204,7 +176,8 @@ var MainView = React.createClass({
     loadProject: function(){
         NotificationActions.show({
             title: 'Please wait',
-            body: 'Loading...'
+            body: 'Loading...',
+            onClose: null
         });
         LocalizationActions.load();
     },
@@ -222,18 +195,15 @@ var MainView = React.createClass({
      * @return {object}
      */
     render: function() {
-        var asrFallback = hasGetUserMedia() ? "" : (<ASRWidget />);
+        var asrFallback = "";
+        if (LoaderStore.loadingComplete() && !_asrLoaded) {
+            _asrLoaded = true;
+            asrFallback = hasGetUserMedia() ? "" : (<ASRWidget />);
+        }
+
 
         return (
             <div>
-                {this.state.browserPopObj ?
-                <PopupView
-                    id = {this.state.browserPopObj.id}
-                    popupStyle = {this.state.browserPopObj.popupStyle}
-                    onClickOutside = {this.state.browserPopObj.onClickOutside}
-                >{this.state.browserPopObj.content()}
-                </PopupView>:null}
-
                 <audio id="mainViewAudio" volume={this.state.volume}>
                     <source id="mainViewMp3Source" src="" type="audio/mp3"></source>
                     Your browser does not support the audio format.
@@ -295,18 +265,9 @@ var MainView = React.createClass({
     _onDliChange: function (){
         var self = this;
         setTimeout(function() {
-            self.loadASR();
-        }, 100)
-    },
-
-    /**
-     * Event handler for 'change' events coming from the DLIStore
-     */
-    _onASRChange: function (){
-        var self = this;
-        setTimeout(function() {
             self.loadReference();
         }, 100)
+
     },
 
     /**

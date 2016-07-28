@@ -1,12 +1,14 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var OverlayTrigger = ReactBootstrap.OverlayTrigger;
+var Tooltip = ReactBootstrap.Tooltip;
 var Button = ReactBootstrap.Button;
 var Popover = ReactBootstrap.Popover;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
+var LocalizationStore = require('../../../../stores/LocalizationStore');
 
 function getCompState() {
     var objectives = [];
@@ -48,7 +50,7 @@ var ActiveDialogObjectives = React.createClass({
                 if (item.pass) {
                     check = <span className="glyphicon glyphicon-ok-sign pass" aria-hidden="true"></span>
                 } else {
-                    check = <span className="glyphicon glyphicon-remove-sign fail" aria-hidden="true"></span> // TODO: Greg, we need to not show this if the user has not got this far
+                    //check = <span className="glyphicon glyphicon-remove-sign fail" aria-hidden="true"></span> // TODO: Greg, we need to not show this if the user has not got this far
                 }
 
                 return  <ListGroupItem key={index}>
@@ -71,11 +73,18 @@ var ActiveDialogObjectives = React.createClass({
             </ListGroup>
         </Popover>;
 
+
+        var tt = (<Tooltip id="objectivesTooltip">{LocalizationStore.labelFor("evaluation", "lblObjectives")}</Tooltip>);
         return (
             <OverlayTrigger trigger='click' placement='bottom' overlay={objectivesPopover} ref="objectivesPopover">
-                <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
-                    <span className="glyphicon glyphicon-record" aria-hidden="true"></span>
-                </Button>
+                <OverlayTrigger
+                    overlay={tt} placement="top"
+                    delayShow={300} delayHide={150}
+                >
+                    <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
+                            <span className="glyphicon glyphicon-record" aria-hidden="true"></span>
+                    </Button>
+                </OverlayTrigger>
             </OverlayTrigger>
 
         );
@@ -86,7 +95,9 @@ var ActiveDialogObjectives = React.createClass({
         var currentAction = ActiveDialogStore.getCurrentAction();
         if (currentAction) {
             if (currentAction.type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_COMPLETE) {
-                // TODO hide overlay
+                if (this.refs.objectivesPopover) {
+                    this.refs.objectivesPopover.hide();
+                }
             }
         }
     }

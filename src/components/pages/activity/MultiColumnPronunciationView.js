@@ -338,7 +338,7 @@ var MultiColumnPronunciationView = React.createClass({
 
 
                     //if(self.state.message != "No data found.") {
-                    if(self.state.message != "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.") {
+                    if(self.state.message != "This needs to be a unique message that isn't returned by the applet.") {
                         var isRecording = self.state.recordingState[colNumber][index];
                         if (isRecording) {
                             itemRecordingClass = recordingClass + " " + L2_GLYPHICON_STOP_CLS;
@@ -351,7 +351,7 @@ var MultiColumnPronunciationView = React.createClass({
                     //update?
 
                     return (
-                    <table className={"table table-condensed pronunciation-view-table pronunciation-item-row " + "l2-vocal-answer"}
+                    <table className={"table table-condensed pronunciation-view-table l2-pronunciation-item-row " + "l2-vocal-answer"}
                            key={page.xid + String(index)}>
                         <tbody>
                         <tr>
@@ -410,7 +410,7 @@ var MultiColumnPronunciationView = React.createClass({
         });
 
         var finalColumns = columns[0].props.children.map(function(item, index){
-            return (<tr key={page.xid + String(index) + "l2-table-rows"}>
+            return (<tr key={page.xid + String(index) + "l2-table-rows"} className="l2-two-column-row">
                 <td className="l2-table-row">
                     {columns[0].props.children[index]}
                 </td>
@@ -426,7 +426,7 @@ var MultiColumnPronunciationView = React.createClass({
                 <div className="l2-container" key={"page-" + this.state.page.xid}>
                     <PageHeader sources={sources} title={title} key={page.xid}/>
                     <audio id="l2-demo-audio"></audio>
-                    <table className="table table-bordered table-striped l2-table-container">
+                    <table className="table table-bordered l2-table-container">
                         <tbody>
                         <tr>
                             <td colSpan="2">
@@ -447,14 +447,14 @@ var MultiColumnPronunciationView = React.createClass({
         var state = this.state;
         var isCorrectLists = state.isCorrect;
         var newMessage = ASRStore.GetMessage();
-        var recordedSpeech = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+        var recordedSpeech = "This needs to be a unique message that isn't returned by the applet.";
 
         if(!ConfigStore.isASREnabled()){
-            newMessage = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.";
+            newMessage = "This needs to be a unique message that isn't returned by the applet.";
         }
 
         switch(newMessage){
-            case "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.":
+            case "This needs to be a unique message that isn't returned by the applet.":
                 break;
             case "initialized":
                 console.log(newMessage);
