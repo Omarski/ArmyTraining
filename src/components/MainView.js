@@ -130,7 +130,6 @@ var MainView = React.createClass({
 
         var self = this;
         var ver = this.getInternetExplorerVersion();
-        console.log("ie version: " + ver);
         var infoText = "";
         if (ver >= 0 && ver <= 11){
             var ie8Text = "Your browser version is unsupported for this course. Please upgrade your browser.";
