@@ -33,7 +33,7 @@ var EthnoLayersView = React.createClass({
                     body: 'Loading...',
                     full: false,
                     percent: 0,
-                    allowDismiss: true
+                    allowDismiss: false
                 });
 
                 var imageColl = [];
@@ -83,11 +83,11 @@ var EthnoLayersView = React.createClass({
             state.loadedImageColl[index].src = imagesArray[index];
             state.loadedImageColl[index].onload = function () {
                 setTimeout(function () {
-                    NotificationActions.updatePercent((index / imagesArray.length) * 100);
+                    NotificationActions.updatePercent((index / imagesArray.length) * 100)
                 });
                 index++;
                 setTimeout(function () {
-                    self.loadImage(imagesArray, index);
+                    self.loadImage(imagesArray, index)
                 });
             };
         } else {
