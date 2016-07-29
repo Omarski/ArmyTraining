@@ -22,10 +22,10 @@ function destroy() {
 
 function load(){
     if(!hasGetUserMedia() || ConfigStore.isASREnabled()){
-        console.log("ASRStore.load.need to load ASR");
+        //"ASRStore.load.need to load ASR"
         // GetUserMedia not allowed
         if(!ASRStore.isInitialized()){
-            console.log("ASRStore.load.!isInitialized");
+            //"ASRStore.load.!isInitialized"
             ASRStore.InitializeASR();
         }
     }else{
@@ -92,19 +92,19 @@ var ASRStore = assign({}, EventEmitter.prototype, {
     },
 
     InitializeASR: function() {
-        console.log("ASR Store initialize");
+        //"ASR Store initialize"
         ASRMessajsTester.sendMessage("urn:ASRMessajsTester:MessajsImpl1,initialize English", "urn:ASRApplet:test", "text/plain; charset=utf-8");
         _isInitialized = true;
     },
 
     StartRecording: function() {
         ASRMessajsTester.sendMessage("startrecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        console.log("Start recording...");
+       //"Start recording..."
     },
 
     StopRecording: function() {
         ASRMessajsTester.sendMessage("stoprecording", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        console.log("stop recording...");
+        //"stop recording..."
     },
 
     RecognizeRecording: function() {

@@ -205,7 +205,7 @@ var EthnoLayersView = React.createClass({
                 }
                 //If the region is invisible
                 if(opacityLevel === "0"){
-                    //console.log("inside opacity level");
+                    //inside opacity level
                     self.state.lastHighlightedRegion = canvasElement;
                     self.props.onRollover(canvasElement, pixelX, pixelY, pageX, false);
                     // $("#" + self.state.canvasColl[i].id).removeClass("ethno-not-visible");
@@ -239,13 +239,9 @@ var EthnoLayersView = React.createClass({
             var offset = $("#wrapperDiv").offset();
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();
-            // console.log("x", x, "y", y);
             self.detectRegion(e, x, y, e.pageX, e.pageY);
-            // console.log("document.body.style.cursor", document.body.style.cursor);
         }
         else if (mode == "click"){
-            // console.log("self.state.lastHighlightedRegion", self.state.lastHighlightedRegion);
-            // console.log("x", x, "y", y);
             var offset = $("#wrapperDiv").offset();
             var x = function(){return e.pageX - offset.left}();
             var y = function(){return e.pageY - offset.top}();

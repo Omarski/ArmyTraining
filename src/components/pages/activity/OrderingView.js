@@ -180,7 +180,7 @@ var OrderingView = React.createClass({
             //}
         }
 
-        if($(e.target).hasClass("or-text-choice") || $(e.target).hasClass("or-image") || $(e.target).hasClass("or-play-icon")) {
+        if($(e.target).hasClass("or-text-choice") || $(e.target).hasClass("or-image") || $(e.target).hasClass("or-play-icon") || $(e.target).hasClass("or-choice-selection") || $(e.target).hasClass("or-choices-container")) {
             if( !!$(draggedItemTarget).css("opacity")){
                 if($(draggedItemTarget).parent().parent().hasClass("col-md-3") || $(draggedItemTarget).parent().parent().hasClass("or-answer")) {
                     answerState.map(function (item) {
@@ -193,7 +193,7 @@ var OrderingView = React.createClass({
                         }
                     });
 
-                    $(".or-choices-container div").map(function(i, index){
+                    $(".or-choice-selection").map(function(i, index){
                         if(index.attributes.getNamedItem("data-passed").value === draggedItemTarget.attributes.getNamedItem("data-passed").value ){
                             $(index).css("opacity", "1.0");
                             numMoved--;
@@ -222,7 +222,7 @@ var OrderingView = React.createClass({
                             item.currentBox = dropLocation;
                             item.currentBoxIndex = dropLocationIndex;
                             item.isMoved = true;
-                            if ($(draggedItemTarget).parent().parent().attr("class") === "or-choices-container") {
+                            if ($(draggedItemTarget).parent().hasClass("or-choices-container")) {
                                 $(draggedItemTarget).css("opacity", "0.3");
                                 numMoved++;
                             }
@@ -233,7 +233,7 @@ var OrderingView = React.createClass({
                             item.currentBox = dropLocation;
                             item.currentBoxIndex = dropLocationIndex;
                             item.isMoved = true;
-                            if ($(draggedItemTarget).parent().parent().attr("class") === "or-choices-container") {
+                            if($(draggedItemTarget).parent().hasClass("or-choices-container"))  {
                                 $(draggedItemTarget).css("opacity", "0.3");
                                 numMoved++;
                             }
@@ -285,7 +285,7 @@ var OrderingView = React.createClass({
         answerState = AGeneric().shuffle(answerState);
 
         // change class to be the container of the media object
-        $(".or-choices-container div").each(function(i, item){
+        $(".or-choice-selection").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 
@@ -359,46 +359,50 @@ var OrderingView = React.createClass({
             switch (item.mediaType){
                 case "audio":
                     var zid = item.passedData;
-                    draggable = <li key={page.xid + "choice-"+index}>
-                        <div
+                    draggable =
+                        <a
+                            href="#"
                             data-passed={item.passedData}
                             data={zid}
-                            className="or-playicon"
+                            key={page.xid + "choice-"+index}
+                            className="or-playicon or-choice-selection"
                             draggable="true"
                             onDragStart={self.onDragging}
                             onClick={self.onClick}>
                             <span className="glyphicon glyphicon-play-circle"></span>
-                        </div>
-                    </li>;
+                        </a>;
                     break;
                 case "image":
                     var source = item.passedData;
                     var letter = item.letter;
-                    draggable = <li key={page.xid + "choice-"+index}>
-                        <div
-                            data-passed={item.passedData}
-                            draggable="true"
-                            data={letter}
-                            onDragStart={self.onDragging}>
-                            <img draggable="false" src={"data/media/"+source}></img>
-                        </div>
-                    </li>;
+                    draggable =
+                        <div>
+                            <img
+                                data-passed={item.passedData}
+                                key={page.xid + "choice-"+index}
+                                className="or-choice-selection"
+                                draggable="true"
+                                data={letter}
+                                onDragStart={self.onDragging}
+                                src={"data/media/"+source}></img>
+                        </div>;
                     break;
                 case "string":
                     // the letter of the answer in current answer Container
                     var answerLetter = item.letter;
                     var text = item.passedData;
 
-                    draggable = <li className="or-text-choice-li" key={page.xid + "choice-"+index}>
-                        <div
+                    draggable =
+                        <a
+                            href="#"
+                            key={page.xid + "choice-"+index}
                             data-passed={item.passedData}
                             data={answerLetter}
-                            className="or-text-choice"
+                            className="or-text-choice or-choice-selection"
                             draggable="true"
                             onDragStart={self.onDragging}>
                             {text}
-                        </div>
-                    </li>;
+                        </a>;
                     break;
                 default:
                     // this shouldn't be reached unless you are moving videos, i hope
@@ -432,41 +436,45 @@ var OrderingView = React.createClass({
                     // check the matchsource media type, if audio then do the generic play image, else load specific image
                     switch (state.answerState[i].mediaType) {
                         case "audio":
-                            answerRender = <div
+                            answerRender = <a
+                                href="#"
                                 data-passed={state.answerState[i].passedData}
                                 data={state.answerState[i].passedData}
-                                className="or-play-icon"
+                                className="or-play-icon or-answer-placed"
                                 draggable="true"
                                 onDragStart={self.onDragging}
                                 onClick={self.onClick}>
                                 <span className="glyphicon glyphicon-play-circle"></span>
 
                                 <div className={feedback}></div>
-                            </div>;
+                            </a>;
                             break;
                         case "image":
                             var source = answerState[i].passedData;
-                            answerRender = <li key={page.xid + "choice-"+index}>
-                                <div
-                                    data-passed={source}
-                                    draggable="true"
-                                    onDragStart={self.onDragging}>
-                                    <img draggable="false" src={"data/media/"+source}></img>
+                            answerRender =
+                                <div>
+                                    <img
+                                        data-passed={source}
+                                        draggable="true"
+                                        className="or-answer-placed"
+                                        key={page.xid + "choice-"+index}
+                                        onDragStart={self.onDragging}
+                                        src={"data/media/"+source}></img>
                                     <div className={feedback}></div>
-                                </div>
-                            </li>;
+                                </div>;
                             break;
                         case "string":
                             answerRender = (
-                                <div
+                                <a
+                                    href="#"
                                     data-passed={state.answerState[i].passedData}
-                                    className="or-text-choice"
+                                    className="or-text-choice or-answer-placed"
                                     draggable="true"
                                     onDragStart={self.onDragging}
                                     >
                                     {state.answerState[i].passedData}
                                     <div className={feedback}></div>
-                                </div>
+                                </a>
                             );
                             break;
                         default:
@@ -498,11 +506,11 @@ var OrderingView = React.createClass({
 
                     <div className="container-fluid or-choice-answer-container">
                         <div className="row">
-                            <ul className="or-choices-container"
+                            <div className="or-choices-container"
                                 onDragOver={self.onDraggingOver}
                                 onDrop={self.onDropping}>
                                 {choices}
-                            </ul>
+                            </div>
                         </div>
                         <div className="row">
                             <ul className="or-answers-container">

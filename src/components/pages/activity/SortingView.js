@@ -219,7 +219,7 @@ var SortingView = React.createClass({
                     if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        if ($($(draggedItemTarget).parent()).attr("class") == "sorting-choices-container-text choice") {
+                        if ($(draggedItemTarget).hasClass("sort-choice")) {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;
                         }
@@ -266,7 +266,7 @@ var SortingView = React.createClass({
             item.currentBox = "";
         });
 
-        $(".sorting-choices-list div").each(function(i, item){
+        $(".sort-choice").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
 
@@ -358,8 +358,10 @@ var SortingView = React.createClass({
             switch(item.mediaType){
                 case "audio":
                     var zid = item.passedData;
-                    draggable = <li className="sorting-choices-container" key={page.xid + "choice-"+index}>
+                    draggable =
                         <div
+                            className="sorting-choices-container sort-choice"
+                            key={page.xid + "choice-"+index}
                             data={zid}
                             draggable="true"
                             onDragStart={self.onDragging}
@@ -367,36 +369,38 @@ var SortingView = React.createClass({
                             className="sorting-playicon"
                             >
                             <span className="glyphicon glyphicon-play-circle sorting-playicon"></span>
-                        </div>
-                    </li>;
+                        </div>;
 
                     break;
                 case "image":
                     var source = item.passedData;
                     var letter = item.letter;
-                    draggable = <li key={page.xid + "choice-"+index}>
+                    draggable =
                         <div
+                            key={page.xid + "choice-"+index}
                             draggable="true"
+                            className="sort-choice"
                             data={letter}
                             onDragStart={self.onDragging}>
                             <img draggable="false" src={"data/media/"+source}></img>
-                        </div>
-                    </li>;
+                        </div>;
                     break;
                 case "string":
                     // the letter of the answer in current answer Container
                     var answerLetter = item.letter;
                     var text = item.passedData;
 
-                    draggable = <li className="sorting-choices-container-text choice" key={page.xid + "choice-"+index}>
-                        <div
+                    draggable =
+                        <a
+                            className="sorting-choices-container-text choice sort-choice"
+                            key={page.xid + "choice-"+index}
+                            href="#"
                             data={answerLetter}
                             draggable="true"
                             onDragStart={self.onDragging}
                             >
                             {text}
-                        </div>
-                    </li>;
+                        </a>;
                     break;
                 default:
                 // this shouldn't be reached unless you are moving videos
@@ -469,12 +473,13 @@ var SortingView = React.createClass({
                     break;
                 case "string":
                     answerRender = <li className="sorting-choices-container-text answer placed-A" key={page.xid + "colA-"+index+itemA.passedData}>
-                        <div
+                        <a
+                            href="#"
                             draggable="true"
                             className="placed-A"
                             onDragStart={self.onDragging}>
                             {itemA.passedData}
-                        </div>
+                        </a>
                         <span className={feedbackA}></span>
                     </li>;
                     break;
@@ -527,12 +532,13 @@ var SortingView = React.createClass({
                     break;
                 case "string":
                     answerRender = <li className="sorting-choices-container-text answer placed-B" key={page.xid + "colA-"+itemB.passedData}>
-                        <div
+                        <a
+                            href="#"
                             draggable="true"
                             className="placed-B"
                             onDragStart={self.onDragging}>
                             {itemB.passedData}
-                        </div>
+                        </a>
                         <span className={feedbackB}></span>
                     </li>;
                     break;

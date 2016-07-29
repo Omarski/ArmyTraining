@@ -78,18 +78,16 @@ function hasGetUserMedia(){
 }
 
 var onFail = function(e){
-    console.log('An Error has occured.', e);
-    console.log('navigator.getUserMedia not present');
+   // An Error has occured.
+   // navigator.getUserMedia not present
 };
 
 var onSuccess = function(s){
-    console.log("on success.");
+    //on success.
     var context = new AudioContext();
     var mediaStreamSource = context.createMediaStreamSource(s);
     recorder = new Recorder(mediaStreamSource);
     recorder.record();
-    console.log("--- onSuccess ---");
-    console.dir(recorder);
 };
 
 function Setup(){
