@@ -48,30 +48,6 @@ var EthnoLayersView = React.createClass({
                     self.loadImage(imageColl, 0);
                 });
         });
-        //preload images
-
-
-
-        /*
-        for (var i=0 ; i < imageColl.length; i++){
-            state.loadedImageColl[i] = new Image();
-            state.loadedImageColl[i].src = imageColl[i];
-            state.loadedImageColl[i].onload = self.loadCounter;
-            if(i > 0){
-                var x = ((i+1)/imageColl.length) * 100;
-                NotificationActions.updatePercent(x);
-                if( (i + 1) === (imageColl.length)){
-                            NotificationActions.hide(true);
-                            if($('.modal-backdrop')){
-                                $('.modal-backdrop').remove();
-                            }
-                }
-            }
-        }
-        */
-        //     }
-        // );
-
     },
 
     loadImage: function(imagesArray, index){
@@ -169,10 +145,8 @@ var EthnoLayersView = React.createClass({
             });
 
             document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
-
-
+            
             canvasColl.push(regionCanvas);
-            // self.props.onLayersReady(regionCanvas);
         });
 
         self.setState({canvasColl:canvasColl});
@@ -222,11 +196,9 @@ var EthnoLayersView = React.createClass({
                     $("#" + self.state.canvasColl[i + 1].id).addClass("ethno-not-visible");
                 }
             }
-
         }
 
         if (!pixelHit) {
-            // self.props.onRollover(null);
             self.state.lastHighlightedRegion = null
         }
     },
@@ -251,7 +223,6 @@ var EthnoLayersView = React.createClass({
             if(!$("#toolTipperId").hasClass("ethno-not-visible")) {
                 $("#toolTipperId").addClass("ethno-not-visible");
             }
-            // document.body.style.cursor = "zoom-in";
         }
     },
 
