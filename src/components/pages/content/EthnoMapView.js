@@ -295,8 +295,8 @@ var EthnoMap = React.createClass({
                 {toolTipperInRender}
                 <div id="wrapperDiv"  className = "ethno-wrapper-div">
                     {popoverInRender}
-                    <EthnoLayersView className="ethno-image-layers-view col-sm-12 col-md-10" topZIndex = {self.state.topZindex} areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick} />
-                    <EthnoToggleDiv id="ethnoToggle" className="col-xs-3 col-sm-2 col-md-2" mapData = {mapData} topZIndex={self.state.topZindex} changeLabelState = {this.changeLabelState} whatIsLabelState ={this.whatIsLabelState} canvasColl = {canvasColl} popoverShow={this.state.popoverShow} toggleParentPopoverState={toggleParentPopoverState} />
+                    <EthnoLayersView className="ethno-image-layers-view" topZIndex = {self.state.topZindex} areaWidth = {this.state.areaWidth} areaHeight={this.state.areaHeight} imageColl={this.state.imageColl} backgroundImage={this.state.backgroundImage} onLayersReady={this.state.onLayersReady} onRollover={this.state.onRollover} onClick={this.state.onClick} />
+                    <EthnoToggleDiv id="ethnoToggle" mapData = {mapData} topZIndex={self.state.topZindex} changeLabelState = {this.changeLabelState} whatIsLabelState ={this.whatIsLabelState} canvasColl = {canvasColl} popoverShow={this.state.popoverShow} toggleParentPopoverState={toggleParentPopoverState} />
                 </div>
             </div>
         );
@@ -395,7 +395,7 @@ var EthnoToggleDiv = React.createClass({
 
 
         return (
-            <form className="well ethno-sidebar-form">
+            <form className="well ethno-sidebar-form col-xs-3 col-sm-2 col-md-2">
                     <div className="ethno-instruction-text">Click on the highlighted areas of the map to explore.</div>
                 {toggleElements}
             </form>
