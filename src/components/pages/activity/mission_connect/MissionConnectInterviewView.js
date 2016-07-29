@@ -59,6 +59,8 @@ var MissionConnectInterviewView = React.createClass({
             var char = self.props.gameData.networkGameNodes[self.props.activeNode - 1];
             var localStats = self.props.stats;
 
+            $("#missionConnectSubmitBtn").remove();
+        
             if (correct === "true") {
 
                 var iconCheckImg = self.props.images[parseInt(self.props.activeNode) - 1].charIconCheckUrl;

@@ -79,7 +79,7 @@ var CultureQuestView = React.createClass({
         var txtBxStyle = {height:'100%'};
         var popupObj = {
             id:"Intro",
-            onClickOutside: self.onClosePopup,
+            onClickOutside: null,
             popupStyle: {height:'315px', width:'455px', top:'20%', left:'20%', background:'#fff', border:'2px solid #fff'},
 
             content: function(){
