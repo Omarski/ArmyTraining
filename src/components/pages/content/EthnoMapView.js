@@ -330,7 +330,7 @@ var EthnoToggleDiv = React.createClass({
                 $("#imageLayer_canvas_" + index).css("opacity", "0.8");
                 $("#imageLayer_canvas_" + index).css("zIndex", newzIndex);
                 $("#ethno-toggle-name-" + index).css("color", self.state.regionColors[index]);
-                $("#ethno-checkbox-"+index).css("backgroundColor", self.state.regionColors[index]);
+                $("#ethno-checkbox-"+index).css("background-color", self.state.regionColors[index]);
 
                 if(self.props.popoverShow){self.props.toggleParentPopoverState()}
 
@@ -352,7 +352,7 @@ var EthnoToggleDiv = React.createClass({
                 }
             } else if (opacity === "0.8" && visibleTrueFalse === true){
                 $("#ethno-toggle-name-" + index).css("color", "black");
-                $("#ethno-checkbox-"+index).css("backgroundColor", "transparent");
+                $("#ethno-checkbox-"+index).css("background-color", "transparent");
                 $("#imageLayer_canvas_" + index).removeClass("ethno-visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "0");
                 $("#imageLayer_canvas_" + (Number(index) + 1)).removeClass("ethno-visible");
@@ -386,7 +386,7 @@ var EthnoToggleDiv = React.createClass({
             toggleElements.push(
                 <div key={"checkboxDiv" + i} className="checkbox">
                     <label onClick = {self.toggleOnClick}>
-                        <div id={"ethno-checkbox-" + i} data-region = {region.label} data-index={i} className="ethno-fake-checkbox" style={fakeCheckboxColor} ></div>
+                        <div id={"ethno-checkbox-" + i} data-region = {region.label} data-index={i} className="ethno-fake-checkbox" style={fakeCheckboxColor}></div>
                         <div className="ethno-region-name-span" id={"ethno-toggle-name-" + i} data-index={i}>{region.label + " "} </div>
                     </label>
                 </div>
