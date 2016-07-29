@@ -26,28 +26,31 @@ var EthnoLayersView = React.createClass({
     componentDidMount: function() {
         var self = this;
         var state = self.state;
-        // setTimeout(
-        //     function(){
-        //         NotificationActions.show({
-        //             title: 'Interactive Ethnolinguistic Map',
-        //             body: 'Loading...',
-        //             full: false,
-        //             percent: 0,
-        //             allowDismiss: true
-        //         })
-        //preload images
-        var imageColl = [];
+        setTimeout(
+            function() {
+                NotificationActions.show({
+                    title: 'Interactive Ethnolinguistic Map',
+                    body: 'Loading...',
+                    full: false,
+                    percent: 0,
+                    allowDismiss: true
+                });
 
-        self.props.imageColl.map(function(region,index){
-            imageColl.push(self.state.mediaPath+region.image);
+                var imageColl = [];
+
+                self.props.imageColl.map(function(region,index){
+                    imageColl.push(self.state.mediaPath+region.image);
+                });
+
+                self.setState({totalImages:imageColl.length});
+
+                setTimeout(function() {
+                    self.loadImage(imageColl, 0);
+                });
         });
+        //preload images
 
-        self.setState({totalImages:imageColl.length});
 
-
-    console.log("imageColl", imageColl);
-
-        self.loadImage(imageColl, 0);
 
         /*
         for (var i=0 ; i < imageColl.length; i++){
@@ -79,11 +82,22 @@ var EthnoLayersView = React.createClass({
             state.loadedImageColl[index] = new Image();
             state.loadedImageColl[index].src = imagesArray[index];
             state.loadedImageColl[index].onload = function () {
+                setTimeout(function () {
+                    NotificationActions.updatePercent((index / imagesArray.length) * 100);
+                });
                 index++;
-                self.loadImage(imagesArray, index);
+                setTimeout(function () {
+                    self.loadImage(imagesArray, index);
+                });
             };
         } else {
-            console.log("image load complete");
+            setTimeout(function () {
+                NotificationActions.hide();
+                if($('.modal-backdrop')){
+                    $('.modal-backdrop').remove();
+                }
+            });
+
             self.placeRegions();
         }
     },
