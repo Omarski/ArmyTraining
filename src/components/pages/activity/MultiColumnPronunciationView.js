@@ -84,12 +84,11 @@ function getPageState(props) {
     data.isListening = isColElementListening;
     data.recordingState = colElementRecordingState;
 
-    console.dir(data);
     return data;
 }
 
 var onFail = function(e){
-    console.log('An Error has occured.', e);
+   // An Error has occured
 };
 
 var onSuccess = function(s){
@@ -457,13 +456,13 @@ var MultiColumnPronunciationView = React.createClass({
             case "This needs to be a unique message that isn't returned by the applet.":
                 break;
             case "initialized":
-                console.log(newMessage);
+
                 break;
             case "recordingStarted":
-                console.log(newMessage);
+
                 break;
             case "recordingStopped":
-                console.log(newMessage);
+
                 break;
             default:
                 recordedSpeech = eval("(" + newMessage + ")").result;

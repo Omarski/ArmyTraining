@@ -97,7 +97,6 @@ var ContentView = React.createClass({
         if (this.state.page) {
             switch (this.state.page.type) {
                 case PageTypeConstants.ACTIVE_DIALOG:
-                    console.log("this.state", this.state);
                     page = <ActiveDialogView page={this.state.page} />;
                     break;
                 case PageTypeConstants.LISTENING_COMPREHENSION:
@@ -245,10 +244,10 @@ var ContentView = React.createClass({
         if (isFullScreen) {
             cls = "absolute-full";
         }
-        var onTouchStartFunction = function(e, swipeDiv){console.log("ONTOUCHSTART!!!!", e); e.preventDefault()/*Set x start pos*/}
-        var onTouchMoveFunction = function (e, swipeDiv){console.log("ONTOUCHMOVE!!!!", e); e.preventDefault(); /* Update x position*/ console.log("e.touches", e.touches)}
-        var onTouchCancelFunction = function(e){console.log("ONTOUCHCANCEL!!!!")}
-        var onTouchEndFunction = function(e){console.log("ONTOUCHEND!!!!!"); /*Update*/}
+        var onTouchStartFunction = function(e, swipeDiv){ e.preventDefault()/*Set x start pos*/}
+        var onTouchMoveFunction = function (e, swipeDiv){e.preventDefault(); /* Update x position*/ }
+        var onTouchCancelFunction = function(e){}
+        var onTouchEndFunction = function(e){/*Update*/}
 
         return (
             <div className="main-content-container">

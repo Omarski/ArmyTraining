@@ -83,12 +83,6 @@ var EthnoMapPopover = React.createClass({
     setStateIndexOfOverlayInfoPlusOne: function () {
         var self = this;
         var popoverPagesHolder = this.popoverPagesFunction();
-
-        // console.log("self.props.indexOfOverlay", self.props.indexOfOverlay);
-        // console.log("self.props", self.props);
-
-        //console.log("self.props.currentPopoverIndex", self.props.currentPopoverIndex);
-
         if(self.props.currentPopoverIndex < (popoverPagesHolder.length - 1) ) {
             self.props.parentPopoverNext();
         }
@@ -114,7 +108,6 @@ var EthnoMapPopover = React.createClass({
         //     zIndex: 999
         // };
 
-        //console.log("quadrant", self.props.quadrant);
 
         var style = {};
 
@@ -127,10 +120,8 @@ var EthnoMapPopover = React.createClass({
         } else if (self.props.quadrant === 4){
             style = {marginTop: 319, marginLeft: 379};
         } else {
-            //console.log("ERROR!!!");
+            //"ERROR!!!"
         }
-
-        //console.log("style", style);
 
         var checkIfPrevButtonIsDisabled = function(){
             if(self.props.currentPopoverIndex === 0){

@@ -88,15 +88,12 @@ var InteractiveTimelineView = React.createClass({
             return (<UnsupportedScreenSizeView/>);
         }
 
-        console.log("state");
-        console.dir(state);
 
         //image in center
         image = getImage(self.state.selectedDate, self.state.timelineJSON.nodes);
         description = getDescription(self.state.selectedDate, self.state.timelineJSON.nodes);
         attribution = getAttribution(self.state.selectedDate, self.state.timelineJSON.nodes);
 
-        console.log(attribution);
 
         var row1 = [];
         var row2 = [];

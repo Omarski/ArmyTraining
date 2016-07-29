@@ -32,7 +32,7 @@ function create(data) {
     }
 
     store.set('bookmark', obj);
-    console.log("in bookmark update")
+    //"in bookmark update"
 }
 
 function destroy() {

@@ -159,8 +159,6 @@ var OrderingView = React.createClass({
         var dropLocation = "";
         var dropLocationIndex = -1;
 
-        console.log($(e.target));
-        console.log(draggedItemTarget);
         switch($(e.target).attr("class")){
             case "or-answer-drop-area":
                 //if(drop location isn't taken)
@@ -224,10 +222,6 @@ var OrderingView = React.createClass({
                             item.currentBox = dropLocation;
                             item.currentBoxIndex = dropLocationIndex;
                             item.isMoved = true;
-                            console.log("looking for choices container");
-                            console.log($(draggedItemTarget).attr("class"));
-                            console.log($(draggedItemTarget).parent().attr("class"));
-                            console.log($(draggedItemTarget).parent().parent().attr("class"));
                             if ($(draggedItemTarget).parent().hasClass("or-choices-container")) {
                                 $(draggedItemTarget).css("opacity", "0.3");
                                 numMoved++;

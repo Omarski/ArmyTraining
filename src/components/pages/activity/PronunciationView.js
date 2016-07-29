@@ -19,7 +19,7 @@ var LI_GLYPHICON_INCORRECT_CLS = "glyphicon glyphicon-remove-circle";
 var recorder;
 
 var onFail = function(e){
-    console.log('An Error has occured.', e);
+   // An Error has occured.
 };
 
 var onSuccess = function(s){
@@ -473,7 +473,7 @@ var PronunciationView = React.createClass({
         if(!ConfigStore.isASREnabled()){
             newMessage = "This needs to be a unique message that isn't returned by the applet.";
         }
-        //console.log("the current message is: " + newMessage);
+        //"the current message is: " + newMessage
         switch(newMessage){
             case "This needs to be a unique message that isn't returned by the applet.":
                 break;

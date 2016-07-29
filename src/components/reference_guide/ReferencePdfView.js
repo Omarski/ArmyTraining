@@ -25,7 +25,6 @@ var ReferencePdfView = React.createClass({
     },
 
     handleClick: function(e){
-        console.dir(e.target);
     },
 
     render: function() {

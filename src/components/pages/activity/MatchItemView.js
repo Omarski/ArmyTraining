@@ -189,7 +189,7 @@ var MatchItemView = React.createClass({
                 dropLocation = $(e.target).attr("data-letter") || $(e.target).parent().attr("data-letter");
                 dropLocationIndex = Math.floor($(e.target).attr("data-index")) ||  Math.floor($(e.target).parent().attr("data-index")) || 0;
             }else{
-                //console.log("spot taken");
+                // spot taken
             }
         }
 

@@ -68,7 +68,7 @@ var EthnoMapView = React.createClass({
     },
     componentDidMount: function() {
         var self = this
-        //console.log("EthnoMap view component did mount");
+        //EthnoMap view component did mount
         // setTimeout(function(){NotificationActions.hide()});
         // $('.modal-backdrop').remove();
         AppStateStore.addChangeListener(this._onAppStateChange);
@@ -80,8 +80,6 @@ var EthnoMapView = React.createClass({
 
     render: function() {
         var self = this;
-        //console.log("self", self);
-        //console.log("...");
         var page = self.state.page;
         var title = self.state.title;
         var sources = self.state.sources;
@@ -155,11 +153,8 @@ var EthnoMap = React.createClass({
     onRegionClick: function(canvasElement, xVal, yVal) {
         var self = this;
 
-        //console.log("canvasElement", canvasElement);
 
         var visibleOrNot = $(canvasElement).hasClass("ethno-visible");
-        // console.log("visisbleOrNot", visibleOrNot);
-        //console.log("visibleOrNot", visibleOrNot);
         // if you clicked on a region and that region is visible
         if(canvasElement !== null) {
 
@@ -187,7 +182,7 @@ var EthnoMap = React.createClass({
                 if (side === "right" && level ==="top"){quadrant = 3;}
                 if (side === "left" && level ==="bottom"){quadrant = 2;}
                 if (side === "right" && level ==="bottom"){quadrant = 1;}
-                    // console.log("quadrant", quadrant);
+
             }
 
             findQuandrant(xVal,yVal);
@@ -205,17 +200,14 @@ var EthnoMap = React.createClass({
             canvasId = Number(canvasId);
 
             if(!visibleOrNot){
-                // console.log("CHANGE TOGGLE DIV!!!!!");
+                // CHANGE TOGGLE DIV!!!!!
                 // $(canvasElement).removeClass("ehtno-not-visible");
                 // $(canvasElement).addClass("ethno-visible");
-                // console.log("canvasId:", canvasId);
-                // console.log("lasttwo", lastTwo);
                 $("#ethno-checkbox-" + canvasId).trigger("click");
                 // $("#ethno-checkbox-" + lastTwo).prop('checked', true);
                 //function that sets correct toggle to checked
             }
 
-            // console.log("canvasId", canvasId);
 
 
             //If there is not currently a popover, render popover
@@ -233,24 +225,18 @@ var EthnoMap = React.createClass({
                 }
             }
 
-            // console.log("popoverIndex", self.state.popoverIndex, "self.state.popoverShow", self.state.popoverShow);
 
         }
 
-        // console.log("self.state.currentPopoverSlide", self.state.currentPopoverSlide);
-
-        // console.log("canvasElement:", canvasElement);
         //if you clicked on a region and that region is not visible
         if(canvasElement === null){
-            // console.log("INSIDE CANVAS ELEMENT IS NULL!!!:", canvasElement);
+            // INSIDE CANVAS ELEMENT IS NULL!!!:", canvasElement
             self.setState({popoverShow: false});
         }
 
     },
     onRegionRollover: function(canvasElement, x, y, pageX, pageY, invisible) {
         var self = this;
-
-        // console.log("ETHNOMAPVIEW: onRegionRollover : canvasElement", canvasElement);
 
         //if(invisible === false){
             if(canvasElement !== null) {
@@ -296,7 +282,6 @@ var EthnoMap = React.createClass({
             toolTipper.style.top = (y - 40) + 'px';
             toolTipper.style.left = (pageX - toolTipWidth ) + 'px';
             toolTipper.style.zIndex = self.state.topZindex + 20;
-            // console.log("tootlTipText inside onRegionRollover", self.state.toolTipText);
         //}
 
     },
@@ -308,12 +293,10 @@ var EthnoMap = React.createClass({
         $("#toolTipperId").addClass("ethno-not-visible");
     },
     nextPopoverSlide: function(){
-        // console.log("nextPopoverSlide   ---- inside ETHNOMAPVIEW");
         var self = this;
         self.setState({currentPopoverSlide: self.state.currentPopoverSlide + 1});
     },
     previousPopoverSlide: function(){
-        // console.log("previousPopoverSlide   ---- inside ETHNOMAPVIEW");
         var self = this;
         self.setState({currentPopoverSlide: self.state.currentPopoverSlide - 1});
     },
@@ -326,15 +309,12 @@ var EthnoMap = React.createClass({
         var mapBackground = self.props.mediaPath + backgroundImage;
         var mapStyle = {background:"#000 url("+mapBackground+") no-repeat", width:"768px" , height:"504px"};
         var canvasColl = this.state.canvasColl;
-        //console.log("self.state.toolTipText", self.state.toolTipText);
         var toolTipperInRender = toolTipper(self.state.toolTipText);
         var popoverInRender = popoverFunction(mapData.areas[self.state.popoverIndex], self.state.popoverShow, self.togglePopoverShow, self.state.quadrant, self.state.currentPopoverSlide, self.nextPopoverSlide, self.previousPopoverSlide);
 
         var popoverMapData = mapData.areas[self.state.popoverIndex];
         var popoverShowHide = self.state.popoverShow;
         var toggleParentPopoverState = self.togglePopoverShow;
-
-        // console.log("ethnomap render");
 
         return (
             <div className="ethno-map-container">
@@ -437,7 +417,6 @@ var EthnoToggleDiv = React.createClass({
             var region = mapData.areas[i];
             //if this region is showing --> change the fakeCheckboxColor
 
-            // console.log($("#imageLayer_canvas_" + i).hasClass("ethno-visible"));
 
             if($("#imageLayer_canvas_" + i).hasClass("ethno-visible")){
                 var fakeCheckboxColor = {backgroundColor: self.state.regionColors[i]};

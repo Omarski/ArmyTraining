@@ -260,7 +260,6 @@ var UnitStore = assign({}, EventEmitter.prototype, {
                 var u = _units[key];
                 if (u.data && u.data.xid === id) {
                     unit = u;
-                    console.log(u)
                     break;
                 }
             }
