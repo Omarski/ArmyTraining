@@ -62,7 +62,7 @@ Ext.define('scene.Fsm', (function ()
             case '<=': return val <=  vrRangeValue;
             case '>' : return val >   vrRangeValue;
             case '>=': return val >=  vrRangeValue;
-            default  : console.warn('UNKNOWN OP: ' + VR.operator);
+            default  : /*default action*/
         }
 
         return false;
@@ -157,7 +157,7 @@ Ext.define('scene.Fsm', (function ()
             case '=' : memory[effect.operand] = val; break;
             case '+=': memory[effect.operand] += ( 1 * val ); break; // todo clean up
             case '-=': memory[effect.operand] -= ( 1 * val ); break;
-            default  : console.warn('UNKNOWN OP: ' + effect.operator);
+            default  : /*default action*/
         }
     }
 

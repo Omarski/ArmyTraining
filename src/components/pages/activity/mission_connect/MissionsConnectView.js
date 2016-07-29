@@ -210,7 +210,7 @@ var MissionConnectView = React.createClass({
 
      prepLeaderPopup: function(mode){
 
-         console.log("Mode is: " + mode);
+         // "Mode is: " + mode
          var notYetText = "I appreciate your ambition, but you haven’t finished speaking to the necessary leaders and contractors.Some of the locals might be able to direct you. Come back when you\’re ready.";
          var self = this;
          var origImg = self.state.loadedImageColl[self.state.loadedImageColl.length - 1].charOrigUrl;

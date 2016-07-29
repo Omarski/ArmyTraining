@@ -219,7 +219,6 @@ var SortingView = React.createClass({
                     if ($(draggedItemTarget)[0].innerHTML == item.passedData) {
                         item.currentBox = dropLocation;
                         item.isMoved = true;
-                        console.log(draggedItemTarget);
                         if ($(draggedItemTarget).hasClass("sort-choice")) {
                             $(draggedItemTarget).css("opacity", "0.3");
                             numMoved++;

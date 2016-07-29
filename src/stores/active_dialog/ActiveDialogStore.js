@@ -99,7 +99,7 @@ function checkVR(VR) { // Check Variable Range
         case '<=': return val <=  vrRangeValue;
         case '>' : return val >   vrRangeValue;
         case '>=': return val >=  vrRangeValue;
-        default  : console.warn('UNKNOWN OP: ' + VR.operator);
+        default  : /*warn('UNKNOWN OP: ' + VR.operator);*/
     }
 
     return false;
@@ -213,7 +213,7 @@ function applyEffect(effect) {
         case '=' : memory[effect.operand] = val; break;
         case '+=': memory[effect.operand] += ( 1 * val ); break; // todo clean up
         case '-=': memory[effect.operand] -= ( 1 * val ); break;
-        default  : console.warn('UNKNOWN OP: ' + effect.operator);
+        default  : /*warn('UNKNOWN OP: ' + effect.operator);*/
     }
 }
 
@@ -443,8 +443,7 @@ function load(args) {
         });
     })
     .error(function(jqXHR, textStatus, errorThrown) {
-        console.log("error " + textStatus);
-        console.log("incoming Text " + jqXHR.responseText);
+        // error
     });
 }
 
