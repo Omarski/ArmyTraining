@@ -27,32 +27,38 @@ var EthnoLayersView = React.createClass({
         var self = this;
         var state = self.state;
         setTimeout(
-            function(){
+            function() {
                 NotificationActions.show({
                     title: 'Interactive Ethnolinguistic Map',
                     body: 'Loading...',
                     full: false,
                     percent: 0,
                     allowDismiss: true
-                })
+                });
 
-        //preload images
-        var imageColl = [];
+                var imageColl = [];
 
-        self.props.imageColl.map(function(region,index){
-            imageColl.push(self.state.mediaPath+region.image);
+                self.props.imageColl.map(function(region,index){
+                    imageColl.push(self.state.mediaPath+region.image);
+                });
+
+                self.setState({totalImages:imageColl.length});
+
+                setTimeout(function() {
+                    self.loadImage(imageColl, 0);
+                });
         });
+        //preload images
 
-        self.setState({totalImages:imageColl.length});
 
+
+        /*
         for (var i=0 ; i < imageColl.length; i++){
             state.loadedImageColl[i] = new Image();
             state.loadedImageColl[i].src = imageColl[i];
             state.loadedImageColl[i].onload = self.loadCounter;
             if(i > 0){
-                // console.log("i/imageColl.length", i/(imageColl.length - 1 ), "i", i, "imageColl.length" ,imageColl.length - 1);
                 var x = ((i+1)/imageColl.length) * 100;
-                // console.log("i", i, "imageColl.length", imageColl.length, "x", x);
                 NotificationActions.updatePercent(x);
                 if( (i + 1) === (imageColl.length)){
                             NotificationActions.hide(true);
@@ -62,10 +68,40 @@ var EthnoLayersView = React.createClass({
                 }
             }
         }
-            }
-        );
+        */
+        //     }
+        // );
 
     },
+
+    loadImage: function(imagesArray, index){
+        var self = this;
+        var state = self.state;
+        if(index < imagesArray.length){
+            var self = this;
+            state.loadedImageColl[index] = new Image();
+            state.loadedImageColl[index].src = imagesArray[index];
+            state.loadedImageColl[index].onload = function () {
+                setTimeout(function () {
+                    NotificationActions.updatePercent((index / imagesArray.length) * 100);
+                });
+                index++;
+                setTimeout(function () {
+                    self.loadImage(imagesArray, index);
+                });
+            };
+        } else {
+            setTimeout(function () {
+                NotificationActions.hide();
+                if($('.modal-backdrop')){
+                    $('.modal-backdrop').remove();
+                }
+            });
+
+            self.placeRegions();
+        }
+    },
+
     componentWillUnmount: function() {
     },
 

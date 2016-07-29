@@ -65,7 +65,6 @@ var EthnoMapView = React.createClass({
     },
     componentWillMount: function(){
         var self = this;
-        console.log("COMPONENTWILLMOUNT");
     },
     componentDidMount: function() {
         var self = this
@@ -375,8 +374,6 @@ var EthnoToggleDiv = React.createClass({
 
         var index = e.target.attributes['data-index'].value;
         var targetCanvas = document.getElementById("imageLayer_canvas_" + index);
-       // console.log("self.props.topZindex", self.props.topZIndex);
-
 
 
         // CHECK VISIBLE --- determines if a given ethno map (parameter is a canvas element) has the custom CSS class visible
@@ -405,9 +402,7 @@ var EthnoToggleDiv = React.createClass({
                             $("#imageLayer_canvas_" + i).addClass("ethno-not-visible");
                         }
                     } else if (i === numIndex + 1) {
-                        // console.log("i", i);
                         var targetElement = document.getElementById("imageLayer_canvas_" + i);
-                        //console.log("targetElement", targetElement);
                         $("#imageLayer_canvas_" + i).removeClass("ethno-not-visible");
                         $("#imageLayer_canvas_" + i).addClass("ethno-visible");
                         $("#imageLayer_canvas_" + i).css("zIndex", self.props.topZIndex + 19);
