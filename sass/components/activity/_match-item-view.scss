@@ -12,13 +12,19 @@
   }
 }
 
+.match-item-choices-container.match-item-play-icon{
+  display: block;
+  span{
+    display: block;
+  }
+}
+
 .matchitem-choice-td{
   .match-item-play-icon {
     margin: 0px;
     font-size: 55px;
     border: 1px solid black;
     border-radius: 5px;
-    display: inline-flex;
     .match-item-number {
       position: absolute;
       bottom: -9px;
@@ -92,6 +98,48 @@
 .match-item-choices-container {
   padding: 0;
 }
+
+.matchitem-choice-td{
+  a.match-item-choices-container {
+    color: black;
+    cursor: default;
+    display: block;
+  }
+
+  a:hover.match-item-choices-container {
+      color: black;
+      text-decoration: none;
+      cursor: default;
+    }
+
+  a:link.match-item-choices-container {
+      color: black;
+      text-decoration: none;
+      cursor: default;
+    }
+}
+
+.match-item-answer-drop-area{
+  a.match-item-text-choice, a.match-item-play-icon {
+    color: black;
+    cursor: default;
+    display: block;
+  }
+
+  a:hover.match-item-text-choice, a:hover.match-item-play-icon {
+    color: black;
+    text-decoration: none;
+    cursor: default;
+  }
+
+  a:link.match-item-text-choice, a:link.match-item-play-icon {
+    color: black;
+    text-decoration: none;
+    cursor: default;
+  }
+}
+
+
 
 .match-item-answers-container {
   width: 100%;
