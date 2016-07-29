@@ -37,8 +37,8 @@ function getPageState(props) {
         }
 
         props.page.matchSource.map(function(item, index){
-            //  var label = item.nut.uttering.utterance.native.text;
-            //  data.answerState.push({label: label, isMoved: false, currentBox: "", correctBox: item.letter});
+          //  var label = item.nut.uttering.utterance.native.text;
+          //  data.answerState.push({label: label, isMoved: false, currentBox: "", correctBox: item.letter});
             var mediaType = "audio";
             var letter = item.letter;
             var displayField = "";
@@ -73,10 +73,8 @@ function getPageState(props) {
 
                 mediaType = item.media.type || "audio";
                 passedData = item.media.xid.toString() || "000"+index;
-                // console.log("passedData", passedData);
             }
 
-            // console.log("passedData", passedData);
             data.answerState.push({letter: letter, isMoved: false, currentBox: "", currentBoxIndex: -1, mediaType: mediaType, displayField: displayField, passedData: passedData});
         });
     }
@@ -177,7 +175,6 @@ var MatchItemView = React.createClass({
         var dropLocationIndex = -1;
 
 
-
         if($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer")){
             //if(drop location isn't taken)
             var spotTaken = false;
@@ -190,21 +187,16 @@ var MatchItemView = React.createClass({
 
             if(!spotTaken){
                 dropLocation = $(e.target).attr("data-letter") || $(e.target).parent().attr("data-letter");
-                // console.log("it floor: ",Math.floor($(e.target).attr("data-index")));
-                // console.log("parent floor: ", Math.floor($(e.target).parent().attr("data-index")));
                 dropLocationIndex = Math.floor($(e.target).attr("data-index")) ||  Math.floor($(e.target).parent().attr("data-index")) || 0;
             }else{
                 //console.log("spot taken");
             }
         }
 
-        // console.log(dropLocation);
-        // console.log(dropLocationIndex);
         // clear answer if dragging off where it's placed.
-        //if($(e.target).hasClass("match-item-text-choice") || $(e.target).hasClass("match-item-image") || $(e.target).hasClass("match-item-play-icon")) {
-        if($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice")) {
+        if($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice") || $(e.target).hasClass("match-item-choice-td-text") || $(e.target).hasClass("match-item-image")) {
             if( !!$(draggedItemTarget).css("opacity")){
-                if($(draggedItemTarget).parent().hasClass("match-item-answer-drop-area")) {
+                if($(draggedItemTarget).parent().hasClass("match-item-answer-drop-area") || $(draggedItemTarget).parent().parent().hasClass("match-item-answer-drop-area-image")) {
                     answerState.map(function (item) {
                         if(draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData){
                             item.isMoved = false;
@@ -250,7 +242,6 @@ var MatchItemView = React.createClass({
                         }
                     }else{ // if( "image" || "audio" )
 
-                        // console.log("draggedItemTarget", draggedItemTarget, "draggedItemTarget.attributes", draggedItemTarget.attributes);
                         if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
                             item.currentBox = dropLocation;
                             item.currentBoxIndex = dropLocationIndex;
@@ -281,43 +272,19 @@ var MatchItemView = React.createClass({
         var it = null;
         var parent = null;
 
-        // console.log($(e.target).attr("class"));
         if($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice")){
             answerState.map(function(item){
-                // console.log("item.passedData: ", item.passedData);
                 it = $(e.target).attr("data") == item.passedData;
-                // console.log("it data: ",$(e.target).attr("data") );
                 parent = $(e.target).parent().attr("data") == item.passedData;
-                // console.log("parent data: ", $(e.target).parent().attr("data"));
-                // console.log("it or parent", it || parent);
                 if(it || parent){
-                    // console.log("isMoved: ", item.isMoved);
-                    // if(item.isMoved){
-                    //     playable = false;
-                    // }
                     if(it){
-                        // console.log("it data: ", $(e.target).attr("data"));
                         playAudio($(e.target).attr("data"));
                     }else if (parent){
-                        //console.log("parent data: ", $(e.target).parent().attr("data"));
                         playAudio($(e.target).parent().attr("data"));
                     }
                 }
             });
         }
-
-        // console.log("playable: ", playable);
-        // if(playable) {
-        //     console.log("it: ", it);
-        //     console.log("parent: ", parent);
-        //     if(it){
-        //         console.log("it data: ", $(e.target).attr("data"));
-        //         playAudio($(e.target).attr("data"));
-        //     }else if (parent){
-        //         console.log("parent data: ", $(e.target).parent().attr("data"));
-        //         playAudio($(e.target).parent().attr("data"));
-        //     }
-        // }
     },
 
     reset: function() {
@@ -408,65 +375,60 @@ var MatchItemView = React.createClass({
 
         choices = state.answerState.map(function(item, index){
             var draggable = "";
-            // if(audio)
-            // console.log("state.answerState", state.answerState);
-            // console.log("item", item);
             var numberNextToSpan = index + 1 + ".";
             switch(item.mediaType){
                 case "audio":
                     var zid = item.passedData;
-                    // console.log("state", state);
-                    // console.log("item.passedData", item.passedData);
                     draggable = (<a
-                    href="#"
-                    key={page.xid + "choice-"+index}
-            data={zid}
-            data-passed={item.passedData}
-            className="match-item-choices-container match-item-play-icon"
-            draggable="true"
-            onDragStart={self.onDragging}
-            onDragOver={self.onDraggingOver}
-            onDrop={self.onDropping}
-            onClick={self.onClick}>
-            <span className="glyphicon glyphicon-play-circle glyph-choice match-item-audio"></span>
-                </a>);
-            break;
-            case "image":
-            var source = item.passedData;
-            var letter = item.letter;
-            draggable = (<div
-            key={page.xid + "choice-"+index}
-            draggable="true"
-            data-passed={item.passedData}
-            data={letter}
-            className="match-item-choices-container"
-            onDragStart={self.onDragging}
-            onDragOver={self.onDraggingOver}
-            onDrop={self.onDropping}>
-            <img draggable="false" className="match-item-image" src={"data/media/"+source}></img>
-                </div>);
-            break;
-            case "string":
-            // the letter of the answer in current answer Container
-            var answerLetter = item.letter;
-            var text = item.passedData;
+                            href="#"
+                            key={page.xid + "choice-"+index}
+                            data={zid}
+                            data-passed={item.passedData}
+                            className="match-item-choices-container match-item-play-icon"
+                            draggable="true"
+                            onDragStart={self.onDragging}
+                            onDragOver={self.onDraggingOver}
+                            onDrop={self.onDropping}
+                            onClick={self.onClick}>
+                            <span className="glyphicon glyphicon-play-circle glyph-choice match-item-audio"></span>
+                        </a>);
+                    break;
+                case "image":
+                    var source = item.passedData;
+                    var letter = item.letter;
+                    draggable = (<img
+                        className="match-item-choices-container match-item-image"
+                        src={"data/media/"+source}
+                        key={page.xid + "choice-"+index}
+                        draggable="true"
+                        data-passed={item.passedData}
+                        data={letter}
+                        onDragStart={self.onDragging}
+                        onDragOver={self.onDraggingOver}
+                        onDrop={self.onDropping}>
+                    </img>);
+                    break;
+                case "string":
+                    // the letter of the answer in current answer Container
+                    var answerLetter = item.letter;
+                    var text = item.passedData;
 
-            draggable = (<div
-
-            key={page.xid + "choice-"+index}
-            data={answerLetter}
-            data-passed={item.passedData}
-            className="match-item-choices-container match-item-text-choice"
-            draggable="true"
-            onDragStart={self.onDragging}
-            onDragOver={self.onDraggingOver}
-            onDrop={self.onDropping}>
-            {text}
-            </div>);
-            break;
-            default:
-            // this shouldn't be reached unless you are moving videos
-        }
+                    draggable = (<a
+                            href="#"
+                            key={page.xid + "choice-"+index}
+                            data={answerLetter}
+                            data-passed={item.passedData}
+                            className="match-item-choices-container match-item-text-choice"
+                            draggable="true"
+                            onDragStart={self.onDragging}
+                            onDragOver={self.onDraggingOver}
+                            onDrop={self.onDropping}>
+                            {text}
+                        </a>);
+                    break;
+                default:
+                // this shouldn't be reached unless you are moving videos
+            }
 
             return (draggable);
         });
@@ -482,8 +444,6 @@ var MatchItemView = React.createClass({
             var needCheck = state.numMoved == answerState.length;
             // have array of boolean's equal length to answerState
             for(var i=0;i<state.answerState.length;i++){
-                // console.log("i", i);
-                // console.log("state.answerState", state.answerState);
                 // loop through the answerState array
                 var numberNextToSpan = i + 1 + ".";
                 if(index === state.answerState[i].currentBoxIndex) { // if there is an answer in this box
@@ -500,45 +460,45 @@ var MatchItemView = React.createClass({
                     switch (state.answerState[i].mediaType) {
                         case "audio":
                             answerRender = (<a
-                            href="#"
-                            data={state.answerState[i].passedData}
-                    data-passed={state.answerState[i].passedData}
-                    draggable="true"
-                    className="match-item-play-icon"
-                    onDragStart={self.onDragging}
-                    onClick={self.onClick}>
-                <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio"></span>
-                        <div className={(feedback + ' match-item-feedback-audio')}></div>
-                    </a>);
-                    break;
-                case "image":
-                    var source = answerState[i].passedData;
-                    answerRender = (<div
-                    draggable="true"
-                    data-passed={source}
-                    onDragStart={self.onDragging}
-                    className="match-item-answer-image"
-                        >
-
-                        <img draggable="false" className="match-item-image" src={"data/media/"+source}></img>
-                        <div className={(feedback  + ' match-item-feedback-image')}></div>
-                    </div>);
-                    break;
-                case "string":
-                    answerRender = (<div
-
-                    className="match-item-text-choice"
-                    data-passed={answerState[i].passedData}
-                    draggable="true"
-                    onDragStart={self.onDragging}
-                >
-                    {state.answerState[i].passedData}
-                <div className={(feedback  + ' match-item-feedback-text')}></div>
-                    </div>);
-                    break;
-                default:
-                    // this shouldn't be reached unless you are moving videos
-                }
+                                    href="#"
+                                    data={state.answerState[i].passedData}
+                                    data-passed={state.answerState[i].passedData}
+                                    draggable="true"
+                                    className="match-item-play-icon"
+                                    onDragStart={self.onDragging}
+                                    onClick={self.onClick}>
+                                    <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio"></span>
+                                    <div className={(feedback + ' match-item-feedback-audio')}></div>
+                                </a>);
+                            break;
+                        case "image":
+                            var source = answerState[i].passedData;
+                            answerRender = (<div>
+                                <img
+                                className="match-item-answer-image match-item-image"
+                                src={"data/media/"+source}
+                                draggable="true"
+                                data-passed={source}
+                                onDragStart={self.onDragging}
+                                ></img>
+                                <div className={(feedback  + ' match-item-feedback-image')}></div>
+                            </div>);
+                            break;
+                        case "string":
+                            answerRender = (<a
+                                    href="#"
+                                    className="match-item-text-choice"
+                                    data-passed={answerState[i].passedData}
+                                    draggable="true"
+                                    onDragStart={self.onDragging}
+                                    >
+                                    {state.answerState[i].passedData}
+                                    <div className={(feedback  + ' match-item-feedback-text')}></div>
+                                </a>);
+                            break;
+                        default:
+                        // this shouldn't be reached unless you are moving videos
+                    }
                 }
             }
 
@@ -546,66 +506,68 @@ var MatchItemView = React.createClass({
             //
             switch (state.answerState[0].mediaType) {
                 case "audio":
+                var row = (<tr>
+                                <td className={"matchitem-choice-td"}>
+                                    {choices[index]}
+                                </td>
+                                <td className={"matchitem-droparea-td"}>
+                                    <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                        {answerRender}
+                                        <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio match-item-audio-grayed-out"></span>
+                                    </div>
+                                </td>
+                                <td className={"matchitem-question-td"}>
+                                    <div className="match-item-answer-prompt">{answerPrompt}</div>
+                                </td>
+                            </tr>);
+                break;
+                case "image":
                     var row = (<tr>
-                        <td className={"matchitem-choice-td"}>
-                    {choices[index]}
-                    </td>
-                    <td className={"matchitem-droparea-td"}>
-                    <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
-            {answerRender}
-            <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio match-item-audio-grayed-out"></span>
-                </div>
-                </td>
-                <td className={"matchitem-question-td"}>
-                <div className="match-item-answer-prompt">{answerPrompt}</div>
-                </td>
-                </tr>);
-            break;
-            case "image":
-            var row = (<tr>
-                <td className={"matchitem-choice-td match-item-choice-image"}>
-                {choices[index]}
-                </td>
-                <td className={"matchitem-droparea-td"}>
-                <div className="match-item-answer-drop-area-image dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
-            {answerRender}
-            </div>
-            </td>
-            <td className={"matchitem-question-td "}>
-                <div className="match-item-answer-prompt">{answerPrompt}</div>
-                </td>
-                </tr>);
-            break;
-            case "string":
-            var row = (<tr>
-                <td className={"matchitem-choice-td match-item-choice-td-text"}>
-                {choices[index]}
-                </td>
-                <td className={"matchitem-droparea-td matchitem-droparea-td-text"}>
-                <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
-            {answerRender}
-            </div>
-            </td>
-            <td className={"matchitem-question-td"}>
-                <div className="match-item-answer-prompt">{answerPrompt}</div>
-                </td>
-                </tr>);
-            break;
-            default:
-        }
+                                    <td className={"matchitem-choice-td match-item-choice-image"}>
+                                        {choices[index]}
+                                    </td>
+                                    <td className={"matchitem-droparea-td"}>
+                                        <div className="match-item-answer-drop-area-image dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                            {answerRender}
+                                        </div>
+                                    </td>
+                                    <td className={"matchitem-question-td "}>
+                                        <div className="match-item-answer-prompt">{answerPrompt}</div>
+                                    </td>
+                                </tr>);
+                break;
+                case "string":
+                    var row = (<tr>
+                                    <td className={"matchitem-choice-td match-item-choice-td-text"}
+                                        onDragOver={self.onDraggingOver}
+                                        onDrop={self.onDropping}>
+                                    {choices[index]}
+                                    </td>
+                                    <td className={"matchitem-droparea-td matchitem-droparea-td-text"}>
+                                        <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                            {answerRender}
+                                        </div>
+                                    </td>
+                                    <td className={"matchitem-question-td"}>
+                                        <div className="match-item-answer-prompt">{answerPrompt}</div>
+                                    </td>
+                              </tr>);
+                break;
+                default:
+            }
             return (row);
         });
 
         // var imageGrid = "";
 
-        // var imageToupleRows = imageGridList.map(function(item, index){
-        //     if (index % 2 === 0 ){
-        //         return (<tr>{item[i]}{item[i+2]}</tr>);
-        //     }
-        //     if (index % 2 !== 0){
-        //         return (<tr)
-        //     }
-        // });
+            // var imageToupleRows = imageGridList.map(function(item, index){
+            //     if (index % 2 === 0 ){
+            //         return (<tr>{item[i]}{item[i+2]}</tr>);
+            //     }
+            //     if (index % 2 !== 0){
+            //         return (<tr)
+            //     }
+            // });
         // var imagesLeftColumn = (<td>{imageToupleRows}</td>);
         // var answerRightColumn = (<td></td>);
         //
@@ -615,26 +577,26 @@ var MatchItemView = React.createClass({
         //                    );
         return (
             <div>
-            <div key={"page-" + this.state.page.xid}>
-            <PageHeader sources={state.mediaCaption} title={title} key={page.xid}/>
-        <div className="container">
-            <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
-        <source id="mp3Source" src="" type="audio/mp3"></source>
-            Your browser does not support the audio format.
-        </audio>
-        <div className="row">
-            <h4 className="match-item-prompt">{state.prompt}</h4>
-        </div>
-        <table className={"table table-striped table-bordered table-condensed"}>
-            <tbody>
-            {answerContainers}
-            </tbody>
-            </table>
-            <div className="row">
-            <div className="match-item-buttons">{button}</div>
-            </div>
-            </div>
-            </div>
+                <div key={"page-" + this.state.page.xid}>
+                    <PageHeader sources={state.mediaCaption} title={title} key={page.xid}/>
+                    <div className="container">
+                        <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                            <source id="mp3Source" src="" type="audio/mp3"></source>
+                            Your browser does not support the audio format.
+                        </audio>
+                        <div className="row">
+                            <h4 className="match-item-prompt">{state.prompt}</h4>
+                        </div>
+                        <table className={"table table-striped table-bordered table-condensed"}>
+                            <tbody>
+                                {answerContainers}
+                            </tbody>
+                        </table>
+                        <div className="row">
+                            <div className="match-item-buttons">{button}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     },
