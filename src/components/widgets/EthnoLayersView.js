@@ -33,7 +33,7 @@ var EthnoLayersView = React.createClass({
                     body: 'Loading...',
                     full: false,
                     percent: 0,
-                    allowDismiss: true
+                    allowDismiss: false
                 });
 
                 var imageColl = [];
@@ -48,30 +48,6 @@ var EthnoLayersView = React.createClass({
                     self.loadImage(imageColl, 0);
                 });
         });
-        //preload images
-
-
-
-        /*
-        for (var i=0 ; i < imageColl.length; i++){
-            state.loadedImageColl[i] = new Image();
-            state.loadedImageColl[i].src = imageColl[i];
-            state.loadedImageColl[i].onload = self.loadCounter;
-            if(i > 0){
-                var x = ((i+1)/imageColl.length) * 100;
-                NotificationActions.updatePercent(x);
-                if( (i + 1) === (imageColl.length)){
-                            NotificationActions.hide(true);
-                            if($('.modal-backdrop')){
-                                $('.modal-backdrop').remove();
-                            }
-                }
-            }
-        }
-        */
-        //     }
-        // );
-
     },
 
     loadImage: function(imagesArray, index){
@@ -83,11 +59,11 @@ var EthnoLayersView = React.createClass({
             state.loadedImageColl[index].src = imagesArray[index];
             state.loadedImageColl[index].onload = function () {
                 setTimeout(function () {
-                    NotificationActions.updatePercent((index / imagesArray.length) * 100);
+                    NotificationActions.updatePercent((index / imagesArray.length) * 100)
                 });
                 index++;
                 setTimeout(function () {
-                    self.loadImage(imagesArray, index);
+                    self.loadImage(imagesArray, index)
                 });
             };
         } else {
@@ -169,10 +145,8 @@ var EthnoLayersView = React.createClass({
             });
 
             document.getElementById("imageLayerView-back-image").appendChild(regionCanvas);
-
-
+            
             canvasColl.push(regionCanvas);
-            // self.props.onLayersReady(regionCanvas);
         });
 
         self.setState({canvasColl:canvasColl});
@@ -222,11 +196,9 @@ var EthnoLayersView = React.createClass({
                     $("#" + self.state.canvasColl[i + 1].id).addClass("ethno-not-visible");
                 }
             }
-
         }
 
         if (!pixelHit) {
-            // self.props.onRollover(null);
             self.state.lastHighlightedRegion = null
         }
     },
@@ -251,7 +223,6 @@ var EthnoLayersView = React.createClass({
             if(!$("#toolTipperId").hasClass("ethno-not-visible")) {
                 $("#toolTipperId").addClass("ethno-not-visible");
             }
-            // document.body.style.cursor = "zoom-in";
         }
     },
 
