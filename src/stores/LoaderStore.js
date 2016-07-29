@@ -5,12 +5,15 @@ var LoaderActions = require('../actions/LoaderActions');
 var BookStore = require('../stores/BookStore');
 var BookActions = require('../actions/BookActions');
 var BookmarkStore = require('../stores/BookmarkStore');
+var InfoTagConstants = require('../constants/InfoTagConstants');
 var PageActions = require('../actions/PageActions');
 var UnitStore = require('../stores/UnitStore');
 var UnitActions = require('../actions/UnitActions');
 var NotificationActions = require('../actions/NotificationActions');
 var PersistenceStore = require('../stores/PersistenceStore');
 var assign = require('object-assign');
+var PrePostTestActions = require('../actions/PrePostTestActions');
+var Utils = require('../components/widgets/Utils');
 
 
 var CHANGE_EVENT = 'change';
@@ -130,6 +133,9 @@ function loadChapterPages(units, unit, index) {
     } else {
         loadUnitData(units, function () {
 
+            // build pre and post test lessons
+            PrePostTestActions.build();
+
             var units = UnitStore.getAll();
             for (key in units) {
                 unit = units[key];
@@ -140,6 +146,37 @@ function loadChapterPages(units, unit, index) {
 
                 setTimeout(function () {
                     var bookmark = BookmarkStore.current();
+
+                    // TODO move this out of here
+                    // get unit id from
+                    if (bookmark && bookmark.unit) {
+                        for (key in units) {
+                            var curUnit = units[key];
+                            if (curUnit.data.xid === bookmark.unit) {
+
+                                if (curUnit.data && curUnit.data.chapter) {
+                                    for (var curChapterIndex in curUnit.data.chapter) {
+                                        var curChapter = curUnit.data.chapter[curChapterIndex];
+                                        if ((Utils.findInfo(curChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null) ||
+                                            (Utils.findInfo(curChapter.info, InfoTagConstants.INFO_PROP_POSTTEST) !== null)) {
+
+                                            // go to the first page in this lesson
+                                            chapter = curUnit.data.chapter[0];
+                                            page = chapter.pages[0];
+
+                                            // update bookmark
+                                            bookmark.chapter = chapter.xid;
+                                            bookmark.page = page.xid;
+                                            break;
+                                        }
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    // TODO END move this out of here
+
                     if (bookmark) {
                         PageActions.jump(bookmark);
                     } else {
@@ -155,8 +192,6 @@ function loadChapterPages(units, unit, index) {
             }
         });
     }
-
-
 }
 
 var LoaderStore = assign({}, EventEmitter.prototype, {
