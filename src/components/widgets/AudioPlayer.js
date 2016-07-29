@@ -4,23 +4,23 @@ var SettingsStore = require('../../stores/SettingsStore');
 var PropTypes  = React.PropTypes;
 
 var AudioPlayer = React.createClass({
+    
     propTypes: {
         id: PropTypes.string.isRequired,
         sources: PropTypes.array.isRequired,
         autoPlay: PropTypes.bool,
         loop: PropTypes.bool,
         controls: PropTypes.bool,
-        controller: PropTypes.string
+        controller: PropTypes.func
     },
 
     componentDidMount: function() {
         this.renderAudioSources();
-        this.audioController();
+        if (this.props.controller) this.props.controller(this.audioController);
     },
 
     renderAudioSources: function(){
 
-        //self = this;
         var audioSources = this.props.sources.map(function(source, index){
             var type = "audio/"+source.format;
             var id = source.format+"Source";
@@ -32,11 +32,11 @@ var AudioPlayer = React.createClass({
         return audioSources;
     },
 
-    audioController: function(){
+    audioController: function(mode){
+        
+        var player = document.getElementById(this.props.id);
 
-        var player = $("#"+this.props.id);
-
-        switch (this.props.controller){
+        switch (mode){
             case "play":
                 player.play();
                 break;
@@ -50,8 +50,9 @@ var AudioPlayer = React.createClass({
     },
 
     setVolume: function(){
-       var volumeSet = SettingsStore.voiceVolume();
-       document.getElementById(this.props.id).volume = volumeSet;
+        var isMuted = SettingsStore.muted();
+        var volumeSet = isMuted ? 0.0 : SettingsStore.voiceVolume();
+        document.getElementById(this.props.id).volume = volumeSet;
     },
 
     render: function() {
@@ -59,11 +60,14 @@ var AudioPlayer = React.createClass({
         var autoPlay = this.props.autoPlay? true:false;
         var loop = this.props.loop? true:false;
         var controls = this.props.controls? true:false;
-        var isMuted = SettingsStore.muted();
-        var volumeSet = SettingsStore.voiceVolume();
 
         return (
-            <audio id={this.props.id} preload="auto" autoPlay={autoPlay} loop={loop} controls={controls} volume={volumeSet} muted={isMuted} onCanPlay={self.setVolume}>
+            <audio id={this.props.id}
+                   preload="auto"
+                   autoPlay={autoPlay}
+                   loop={loop}
+                   controls={controls}
+                   onLoadStart={self.setVolume}>
                 {this.renderAudioSources()}
             </audio>
         )

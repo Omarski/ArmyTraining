@@ -29,6 +29,7 @@ function getPageState(props) {
         audioObj:null,
         audioBgObj:null,
         audioController:"",
+        audioBgController:null,
         popupObj:null,
         mediaPath:'data/media/'
     };
@@ -119,9 +120,11 @@ var CultureQuestView = React.createClass({
         var self = this;
         var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
 
+        self.state.audioBgController("pause");
+
         var popupObj = {
             id:"GoBack",
-            onClickOutside: self.onClosePopup,
+            onClickOutside: self.onReturnClosePopup,
             popupStyle: {height:'148px', width:'460px', top:'40%', left:'20%', background:'#fff'},
 
             content: function(){
@@ -146,6 +149,11 @@ var CultureQuestView = React.createClass({
 
     onClosePopup: function(){
         this.setState(({popupObj:null,audioObj:null}));
+    },
+
+    onReturnClosePopup: function(){
+        this.setState(({popupObj:null, audioObj:null}));
+        this.state.audioBgController("play");
     },
 
     markHomeRegion: function(){
@@ -311,19 +319,17 @@ var CultureQuestView = React.createClass({
         this.playBgAudio({id:"bgMusic", autoPlay:true, loop:true, sources:[{format:"mp3", url:bgAudio}]});
     },
 
-
-    audioController: function(mode){
-        return mode;
+    audioBgContr: function(controllerFunc){
+        this.setState({audioBgController:controllerFunc});
     },
 
     displayPopup: function(popupObj){
-
         this.setState({popupObj:popupObj});
     },
 
-    setAudioControl: function(mode){
-        this.setState({audioController:mode});
-    },
+    // setAudioControl: function(mode){
+    //     this.setState({audioController:mode});
+    // },
 
     viewUpdate: function(update){
 
@@ -365,7 +371,6 @@ var CultureQuestView = React.createClass({
                         id = {self.state.audioObj.id}
                         sources    = {self.state.audioObj.sources}
                         autoPlay   = {self.state.audioObj.autoPlay}
-                        controller = {self.state.audioController}
                     /> : null}
 
                     {self.state.audioBgObj ?
@@ -374,7 +379,7 @@ var CultureQuestView = React.createClass({
                             sources    = {self.state.audioBgObj.sources}
                             autoPlay   = {self.state.audioBgObj.autoPlay}
                             loop       = {self.state.audioBgObj.loop}
-                            controller = {self.state.audioController}
+                            controller = {self.audioBgContr}
                         /> : null}
 
                     {self.state.popupObj ?
@@ -409,7 +414,6 @@ var CultureQuestView = React.createClass({
                         answersColl = {state.answersColl}
                         saveAnswersColl = {self.saveAnswersColl}
                         playAudio = {self.playAudio}
-                        setAudioControl = {self.setAudioControl}
                         />:null}
 
                     {self.state.showPuzzle? <CultureQuestPuzzleAwardView
