@@ -199,10 +199,21 @@ var MultipleChoiceView = React.createClass({
         var choices;
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
+
+            function containsAllAscii(str) {
+                return  /^[\000-\177]*$/.test(str) ;
+            }
+
+            var bigFontNonAscii = {};
+
+            if(!containsAllAscii(ans)){
+                bigFontNonAscii = {fontSize: "20px"};
+            }
+
             // TODO: allow for the text to be any of the text channels
             return (<li key={chapterId + page.xid + String(index)} className="list-group-item multiple-choice-list-group-item" >
                         <div className="checkbox multiple-choice-checkbox">
-                            <label className="multiple-choice-label-remove-padding-left">
+                            <label className="multiple-choice-label-remove-padding-left" style={bigFontNonAscii}>
                                 <input type="radio" name="question" aria-label={ans} className="multiple-choice-checkbox multiple-choice-radio multiple-choice-input-padding-right" value={ans} onClick={self.answerChange.bind(self, item)}></input>
                                 {ans}
                             </label>
