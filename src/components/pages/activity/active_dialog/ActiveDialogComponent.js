@@ -305,6 +305,7 @@ var ActiveDialogComponent = React.createClass({
                                onEnded={self.videoEndedHandler}
                                onLoadedMetadata={self.videoLoadedMetaDataHandler}
                                style={videoStyle}
+                               preload="auto"
                             >
                             <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
                         </video>
