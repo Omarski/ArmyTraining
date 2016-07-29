@@ -18,6 +18,7 @@ var ActiveDialogClosedCaptionActions = require('../../../../actions/active_dialo
 var ActiveDialogClosedCaption = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaption');
 var ActiveDialogClosedCaptionPanel = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaptionPanel');
 var RemediationView = require('../../../RemediationView');
+var NotificationActions = require('../../../../actions/NotificationActions');
 
 
 
@@ -72,6 +73,9 @@ function handlePersonaReady() {
     _videoCountHack--;
 
     if (_videoCountHack <= 0) {
+        // hide notification
+        NotificationActions.hide();
+
         // all videos loaded
         checkContinue();
     }
@@ -96,6 +100,20 @@ var ActiveDialogView = React.createClass({
             switch(currentAction.type) {
                 case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING:
                     st.stageMedia = ActiveDialogStore.getCurrentBlockingAssets();
+
+                    // show notification
+                    setTimeout(function() {
+                        // show notifications
+                        NotificationActions.show({
+                            title: 'Active Dialog',
+                            body: 'Loading...',
+                            full: false,
+                            percent: 100,
+                            allowDismiss: false
+                        });
+                    }, 0.1);
+
+
                     break;
 
                 case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT:
@@ -118,9 +136,6 @@ var ActiveDialogView = React.createClass({
                 ActiveDialogClosedCaptionActions.update(speaker + ' : ' + text);
             });
         }
-
-
-
 
         return {
             activeCOA: st.activeCOA,
