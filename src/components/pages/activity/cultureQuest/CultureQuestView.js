@@ -67,6 +67,8 @@ var CultureQuestView = React.createClass({
 
     componentDidMount: function() {
         AppStateStore.addChangeListener(this._onAppStateChange);
+        //dim speech and pause
+        $("#audioControlIcon , #audioControlButton").css({"opacity":".5", "pointer-events":"none"});
     },
 
     componentWillUnmount: function() {

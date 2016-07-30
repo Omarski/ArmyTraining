@@ -62,6 +62,10 @@ var MissionConnectView = React.createClass({
     },
 
     componentDidMount: function() {
+
+        //dim speech and pause
+        $("#audioControlIcon , #audioControlButton").css({"opacity":".5", "pointer-events":"none"});
+        
         this.bgAudio();
         this.preloadImages();
     },

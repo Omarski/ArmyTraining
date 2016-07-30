@@ -47,6 +47,9 @@ var ObjexView = React.createClass({
 
     componentDidMount: function(){
 
+        //dim speech and pause
+        $("#audioControlIcon , #audioControlButton").css({"opacity":".5", "pointer-events":"none"});
+        
         var self = this;
         var data = {};
 
