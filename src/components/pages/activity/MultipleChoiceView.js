@@ -96,7 +96,7 @@ var MultipleChoiceView = React.createClass({
         if (this.state.isQuizPage) {
             // load previous selected answer for this page
             var previousAnswer = PageStore.getPageAnswer();
-            if (previousAnswer !== null) {
+            if (previousAnswer !== null && previousAnswer.answer !== null) {
                 // mark answer that matches
                 $(".multiple-choice-checkbox").each(function () {
                     // TODO change to not assume it is the translation channel
@@ -104,6 +104,13 @@ var MultipleChoiceView = React.createClass({
                         this.checked = true;
                     }
                 });
+
+            } else {
+                // save no answer
+                var saveAnswerFun = this.saveAnswer;
+                setTimeout(function() {
+                    saveAnswerFun(null, null);
+                }, 0.1);
             }
         }
     },
@@ -134,23 +141,11 @@ var MultipleChoiceView = React.createClass({
 
         // for now only record if its a quiz page
         if (state.isQuizPage) {
-            // TODO <-------------- MOVE TO ITS OWN OBJECT------------------------------------------
-            // create new answer object
-            var answerObj = {
-                answer: {
-                    answer: answer,
-                    passed: answer.correct,
-                    question: state.prompt,
-                    target: state.correctAnswer
-                }
-            };
-            // TODO END <-------------- MOVE TO ITS OWN OBJECT---------------------------------------
-            source.src = "data/media/Click01a.mp3";
-            // submit answer to page
-            PageActions.answer(answerObj);
-        }else{
-            /* trigger audio */
+            this.saveAnswer(answer, answer.correct);
 
+            source.src = "data/media/Click01a.mp3";
+        } else {
+            /* trigger audio */
             if (source) {
                 if(answer.correct){
                     source.src = "data/media/Correct.mp3";
@@ -158,13 +153,36 @@ var MultipleChoiceView = React.createClass({
                     source.src = "data/media/Incorrect.mp3";
                 }
             }
-
         }
         if(audio && source) {
             audio.load();
             audio.play();
             audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
         }
+    },
+
+    saveAnswer: function(answerObj, correct) {
+        var state = this.state;
+        var answerCorrect = false;
+
+        if (correct === true) {
+            answerCorrect = true;
+        }
+
+        // TODO <-------------- MOVE TO ITS OWN OBJECT------------------------------------------
+        // create new answer object
+        var answerObj = {
+            answer: {
+                answer: answerObj,
+                passed: answerCorrect,
+                question: state.prompt,
+                target: state.correctAnswer
+            }
+        };
+        // TODO END <-------------- MOVE TO ITS OWN OBJECT---------------------------------------
+
+        // submit answer to page
+        PageActions.answer(answerObj);
     },
 
     render: function() {
