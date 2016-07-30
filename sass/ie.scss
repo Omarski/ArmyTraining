@@ -5,16 +5,16 @@
     display: table;
     width: 100%
   }
+}
 
-  /* IE9 FIXES ONLY --- TO FIX IE9 Include \9\0 at the end of a css property*/
-  :root .info-page-notes{
-    .info-bullets-div {
-      .info-bullets-indent {
-        display: table;
-      }
+/* IE9 FIXES ONLY --- TO FIX IE9 Include \9\0 at the end of a css property*/
+:root .info-page-notes{
+  .info-bullets-div {
+    .info-bullets-indent {
+      display: table;
     }
   }
-
 }
+
 
 
