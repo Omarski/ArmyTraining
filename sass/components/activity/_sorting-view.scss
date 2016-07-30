@@ -22,8 +22,20 @@
 .sorting-choices-list {
   list-style-type: none;
   padding: 0;
-  li {
+  a {
     display: inline-block;
+  }
+  a:hover {
+    color: black;
+    text-decoration: none;
+  }
+  a:link {
+    color: black;
+    text-decoration: none;
+  }
+  a:focus {
+    color: black;
+    text-decoration: none;
   }
 }
 
@@ -31,18 +43,43 @@
   -khtml-user-drag: element;
 }
 
+.sorting-drop-area {
+  .sorting-choices-list{
+    a {
+      color: black;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    a:hover{
+      color:black;
+      text-decoration: none;
+      cursor: default;
+    }
+    a:link {
+      color:black;
+      text-decoration: none;
+      cursor: default;
+    }
+    a:focus{
+      color:black;
+      text-decoration: none;
+      cursor: default;
+    }
+
+  }
+}
+
 .sorting-choices-container-text {
   text-align: center;
   border: 1px solid #ddd;
-  padding: 0px;
   margin: 5px;
   border-radius: 4px;
   position: relative;
-  div {
-    padding: 10px;
-    color: #000;
-    font-weight: bold;
-  }
+  padding: 10px;
+  color: #000;
+  font-weight: bold;
+  cursor: default;
   .sorting-feedback {
     top: -10px;
     right: -10px;
