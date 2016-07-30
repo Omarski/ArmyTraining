@@ -109,6 +109,19 @@ var ListeningComprehensionView = React.createClass({
     componentDidMount: function() {
 
         //SettingsStore.addChangeListener(this._onChange);
+
+        if (this.state.isQuizPage) {
+            var previousAnswer = PageStore.getPageAnswer();
+            if (previousAnswer !== null && previousAnswer.answer !== null) {
+                // TODO set previous answer
+            } else {
+                // save no answer
+                var saveAnswerFunc = this.saveAnswer;
+                setTimeout(function() {
+                    saveAnswerFunc(null, null);
+                }, 0.1);
+            }
+        }
     },
 
     componentDidUpdate: function(){
@@ -135,18 +148,7 @@ var ListeningComprehensionView = React.createClass({
 
                 // record if is a quiz page
                 if (state.isQuizPage) {
-                    // create new answer object
-                    var answerObj = {
-                        answer: {
-                            answer: selectedAns,
-                            passed: isCorrect,
-                            question: state.prompt,
-                            target: state.correctAnswer
-                        }
-                    };
-
-                    // submit answer to page
-                    PageActions.answer(answerObj);
+                    self.saveAnswer(selectedAns, isCorrect);
                 }else{
                     /* trigger audio */
                     var audio = document.getElementById('mainViewAudio');
@@ -234,6 +236,29 @@ var ListeningComprehensionView = React.createClass({
     componentWillUnmount: function() {
         SettingsStore.removeChangeListener(this._onSettingsChange);
     },
+
+    saveAnswer: function(answerObj, correct) {
+        var state = this.state;
+        var answerCorrect = false;
+
+        if (correct === true) {
+            answerCorrect = true;
+        }
+
+        // create new answer object
+        var answerObj = {
+            answer: {
+                answer: answerObj,
+                passed: answerCorrect,
+                question: state.prompt,
+                target: state.correctAnswer
+            }
+        };
+
+        // submit answer to page
+        PageActions.answer(answerObj);
+    },
+
     render: function() {
         var self = this;
         var state = this.state;

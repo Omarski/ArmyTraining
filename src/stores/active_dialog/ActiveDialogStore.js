@@ -4,6 +4,7 @@ var ActiveDialogConstants = require('../../constants/active_dialog/ActiveDialogC
 var ActiveDialogActions = require('../../actions/active_dialog/ActiveDialogActions');
 var PageStore = require('../../stores/PageStore');
 var RemediationActions = require('../../actions/RemediationActions');
+var NotificationActions = require('../../actions/NotificationActions');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -12,9 +13,12 @@ var _metrics = {};
 
 var DATA, memory, activityState, blockImg, blockId;
 var asrMode = false;
+var bPreloadAssets = true;
 
 // dialog state data
 var _actionQueue = [];
+var _activeDialogAssetCount = 0;
+var _activeDialogAssets = [];
 var _briefings = "";
 var _courseOfActions = [];
 var _currentAction = null;
@@ -398,8 +402,25 @@ function create(fsmData, infoData) {
         type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_INTRO,
     });
 
-    // trigger initial action
-    continueDialog();
+    if (bPreloadAssets === true) {
+        setTimeout(function() {
+            // show notifications
+            NotificationActions.show({
+                title: 'Active Dialog',
+                body: 'Loading...',
+                full: false,
+                percent: 0,
+                allowDismiss: false
+            });
+        }, 0.1);
+
+        // gather and preload assets for active dialog
+        gatherAssets();
+        preloadAssets();
+    } else {
+        // trigger initial action
+        continueDialog();
+    }
 }
 
 
@@ -451,7 +472,19 @@ function load(args) {
     });
 }
 
+function gatherAssets() {
+    if (_info && _info.assets) {
+        for (var assetKey in _info.assets) {
+            var asset = _info.assets[assetKey];
 
+            // add if not already added
+            if (asset.source && !(asset.source in _activeDialogAssets)) {
+                _activeDialogAssets.push(asset.source);
+                _activeDialogAssetCount++;
+            }
+        }
+    }
+}
 
 function hintsShown() {
     // Greg here is where you would store the hints shown count
@@ -464,8 +497,44 @@ function hintsShown() {
     }*/
 }
 
+function preloadAssets() {
+    if (_activeDialogAssets.length > 0) {
+        // update notification
+        setTimeout(function() {
+            if (_activeDialogAssetCount > 0) {
+                NotificationActions.updatePercent(((_activeDialogAssetCount - _activeDialogAssets.length) / _activeDialogAssetCount) * 100);
+            }
+        }, 0.1);
+
+        // get next assets
+        var nextAsset = _activeDialogAssets.shift();
+
+        // get url
+        var nextVideoUrl = "data/media/" + PageStore.chapter().xid + "/" + nextAsset;
+
+        this.serverRequest = $.get(nextVideoUrl, preloadAssetDoneHandler);
+        this.serverRequest.error(preloadAssetErrorHandler);
+    }
+    else {
+        NotificationActions.hide();
+
+        // trigger initial action
+        ActiveDialogActions.continueDialog();
+    }
+}
+
+function preloadAssetDoneHandler() {
+    preloadAssets();
+}
+
+function preloadAssetErrorHandler() {
+    preloadAssets();
+}
+
 function resetDialog() {
     _actionQueue = [];
+    _activeDialogAssetCount = 0;
+    _activeDialogAssets = [];
     _briefings = "";
     _courseOfActions = [];
     _currentAction = null;
