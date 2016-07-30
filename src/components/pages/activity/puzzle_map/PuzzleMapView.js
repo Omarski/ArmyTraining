@@ -212,7 +212,7 @@ var PuzzleMapView = React.createClass({
         var self = this;
         switch(self.state.phase){
             case "start":
-                window.setTimeout(function(){self.setState({phase:"play", showHUD:true});},200);
+                self.setState({phase:"play", showHUD:true});
                 break;
         }
     },
