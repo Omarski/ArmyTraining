@@ -308,7 +308,7 @@ var EthnoToggleDiv = React.createClass({
     getInitialState: function() {
         return {
             regionColors: ["#F49AC0", null, "#5E3A54", null,"#7B7ABC", null,"#2A7169",null, "#8DD883",null, "#2A3761",null, "#742753", null,"#374428", null,"#BF3C28", null,"#E68E4E", null,"#965F27", null,"#61764B", null,"#770026",null, "#B03A3A", null,"#9C9638", null,"#72250E"],
-            checkboxColors: ["transparent", null, "transparent", null,"#transparent", null,"#transparent",null, "#transparent",null, "#transparent",null, "#transparent", null,"#transparent", null,"#transparent", null,"transparent", null,"transparent", null,"transparent", null,"transparent",null, "transparent", null,"transparent", null,"transparent"]
+            checkboxColors: ["white", null, "white", null,"white", null,"white",null, "white",null, "white",null, "white", null,"white", null,"white", null,"white", null,"white", null,"white", null,"white",null, "white", null,"white", null,"white"]
         };
     },
     toggleOnClick: function(e){
@@ -352,7 +352,7 @@ var EthnoToggleDiv = React.createClass({
                 }
             } else if (opacity === "0.8" && visibleTrueFalse === true){
                 $("#ethno-toggle-name-" + index).css("color", "black");
-                $("#ethno-checkbox-"+index).css("background-color", "transparent");
+                $("#ethno-checkbox-"+index).css("background-color", "white");
                 $("#imageLayer_canvas_" + index).removeClass("ethno-visible");
                 $("#imageLayer_canvas_" + index).css("opacity", "0");
                 $("#imageLayer_canvas_" + (Number(index) + 1)).removeClass("ethno-visible");
@@ -380,7 +380,7 @@ var EthnoToggleDiv = React.createClass({
             if($("#imageLayer_canvas_" + i).hasClass("ethno-visible")){
                 var fakeCheckboxColor = {backgroundColor: self.state.regionColors[i]};
             } else if (!$("#imageLayer_canvas_" + i).hasClass("ethno-visible")) {
-                var fakeCheckboxColor = {backgroundColor: "transparent"};
+                var fakeCheckboxColor = {backgroundColor: "white"};
             }
 
             toggleElements.push(
