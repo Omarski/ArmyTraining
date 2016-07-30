@@ -2,6 +2,7 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var Button = ReactBootstrap.Button;
 var Modal = ReactBootstrap.Modal;
+var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialogActions');
 var LocalizationStore = require('../../../../stores/LocalizationStore');
@@ -92,8 +93,10 @@ var ActiveDialogIntro = React.createClass({
     },
 
     _onDialogChange: function() {
-        if (ActiveDialogStore.briefings() !== "" && !ActiveDialogStore.isDialogStarted()) {
-            this.setState(getCompState(true));
+        if (ActiveDialogStore.getCurrentAction() && ActiveDialogStore.getCurrentAction().type == ActiveDialogConstants.ACTIVE_DIALOG_ACTION_INTRO) {
+            if (ActiveDialogStore.briefings() !== "" && !ActiveDialogStore.isDialogStarted()) {
+                this.setState(getCompState(true));
+            }
         }
     }
 });

@@ -394,6 +394,10 @@ function create(fsmData, infoData) {
         data: "0000"
     });
 
+    _actionQueue.push({
+        type: ActiveDialogConstants.ACTIVE_DIALOG_ACTION_INTRO,
+    });
+
     // trigger initial action
     continueDialog();
 }
