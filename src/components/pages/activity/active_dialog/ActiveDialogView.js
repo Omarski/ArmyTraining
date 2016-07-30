@@ -18,13 +18,10 @@ var ActiveDialogClosedCaptionActions = require('../../../../actions/active_dialo
 var ActiveDialogClosedCaption = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaption');
 var ActiveDialogClosedCaptionPanel = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaptionPanel');
 var RemediationView = require('../../../RemediationView');
-var NotificationActions = require('../../../../actions/NotificationActions');
-
 
 
 var _dataLoaded = false;
 var _videoCountHack = 0;
-var _videoTotalHack = 0;
 
 function getPageState(props) {
     var title = "";
@@ -73,15 +70,7 @@ function handlePersonaReady() {
     // decrease count
     _videoCountHack--;
 
-    // update notification
-    if (_videoTotalHack > 0) {
-        NotificationActions.updatePercent(((_videoTotalHack - _videoCountHack) / _videoTotalHack) * 100);
-    }
-
     if (_videoCountHack <= 0) {
-        // hide notification
-        NotificationActions.hide();
-
         // all videos loaded
         checkContinue();
     }
@@ -106,20 +95,6 @@ var ActiveDialogView = React.createClass({
             switch(currentAction.type) {
                 case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING:
                     st.stageMedia = ActiveDialogStore.getCurrentBlockingAssets();
-
-                    // show notification
-                    setTimeout(function() {
-                        // show notifications
-                        NotificationActions.show({
-                            title: 'Active Dialog',
-                            body: 'Loading...',
-                            full: false,
-                            percent: 0,
-                            allowDismiss: false
-                        });
-                    }, 0.1);
-
-
                     break;
 
                 case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT:
@@ -293,7 +268,6 @@ var ActiveDialogScenarioView = React.createClass({
 
             // reset counter
             _videoCountHack = 0;
-            _videoTotalHack = this.props.media.length;
 
             // iterate over media creating persona components
             media = this.props.media.map(function(item, index){
