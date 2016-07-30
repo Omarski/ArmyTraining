@@ -1,8 +1,8 @@
 var Utils = (function() {
     function parseBullets(str) {
         //First check in if statement checks for number followed by period in case of Numbered list (e.g. "1. Click the triangle...")
-        //Second check in if statement checks for F + Number + . because of corner case: "
-        if(str.match(new RegExp('[0-9]+\.')) && !str.match(new RegExp('F+[[0-9]+\.'))){
+        //Second check in if statement checks for F + Number + . because of corner case: "...by pressing F11" in the Welcome page of the prologue
+        if(str.match(new RegExp('[0-9][.]')) && !str.match(new RegExp('F+[[0-9]+\.'))){
                 str = '<div><p>' + str;
                 str = str.replace(new RegExp('[0-9]+\.', 'g'), '</p></div><div class="info-bullets-div"><p class="info-number">$&</p><p class=info-bullets-indent">');
                 str = str + "</p></div>";
