@@ -1,17 +1,17 @@
 var Utils = (function() {
     function parseBullets(str) {
-
-        if(str.match(new RegExp('[0-9]+\.'))){
-            str = '<div><p>' + str;
-            str = str.replace(new RegExp('[0-9]+\.', 'g'), '</p></div><div class="info-bullets-div"><p class="info-number">$&</p><p class=info-bullets-indent">');
-            str = str + "</p></div>";
-
+        //First check in if statement checks for number followed by period in case of Numbered list (e.g. "1. Click the triangle...")
+        //Second check in if statement checks for F + Number + . because of corner case: "
+        if(str.match(new RegExp('[0-9]+\.')) && !str.match(new RegExp('F+[[0-9]+\.'))){
+                str = '<div><p>' + str;
+                str = str.replace(new RegExp('[0-9]+\.', 'g'), '</p></div><div class="info-bullets-div"><p class="info-number">$&</p><p class=info-bullets-indent">');
+                str = str + "</p></div>";
         } else {
+            //this is for styling bullet points
             str = '<div><p>' + str;
             str = str.replace(new RegExp('- ', 'g'), '</p></div><div class="info-bullets-div"><span class="info-view-bullet-item"></span><p class="info-bullets-indent">');
             str = str + '</p></div>';
         }
-
         return str;
     }
 
