@@ -60,9 +60,7 @@ var ActiveDialogComponent = React.createClass({
     },
 
     preloadVideos: function() {
-
         if (this.videosQueue.length > 0) {
-
             // get next video
             var nextVideoObject = this.videosQueue.shift();
 
@@ -227,73 +225,6 @@ var ActiveDialogComponent = React.createClass({
         event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
     },
 
-    videoLoadStartHandler: function(event) {
-        // remove event handler
-        if (event.currentTarget) {
-            event.currentTarget.removeEventListener("loadstart", this.videoLoadStartHandler);
-        }
-    },
-
-
-    // TODO COMMENTING OUT FOR NOW<-----------------------
-    /*
-
-    videoCheckBuffer: function() {
-
-        if (this.videoCurrentLoading.buffered.length > 0) {
-
-            // update timer
-            var timeoutTimer = (new Date().getTime()) - this.watchBuggerTimeout;
-            var bufferedEnd = this.videoCurrentLoading.buffered.end(0);
-            var videoDuration = this.videoCurrentLoading.duration;
-
-            console.log(bufferedEnd, videoDuration);
-
-            // if buffered is greater than duration or if longer than 5 seconds
-            if ((bufferedEnd >= videoDuration) || ((videoDuration - bufferedEnd) <= 3) || (timeoutTimer > 3000)) {
-
-                // remove watcher
-                clearInterval(this.watchBugger);
-
-
-
-                // decrease count
-                this.state.videosNotReady--;
-
-                // add next video to list
-                if (this.videosQueue.length > 0) {
-                    this.videos2Render.push(this.videosQueue.shift());
-                    this.forceUpdate();
-                }
-
-                // all videos for this asset are ready to play
-                if (this.state.videosNotReady <= 0) {
-
-                    // play default animation
-                    this.playAnimationVideo(this.currentIdleAnimationName);
-
-                    // trigger callback function
-                    if (this.props.onLoadDone !== null) {
-                        this.props.onLoadDone();
-                    }
-                }
-
-
-            }
-        }
-    },
-
-
-    videoLoadedMetaDataHandler: function(event) {
-        // reset timer
-        this.watchBuggerTimeout = new Date().getTime();
-        this.videoCurrentLoading = event.currentTarget;
-        this.watchBugger = setInterval(this.videoCheckBuffer, 500);
-    },
-
-    */
-    // TODO END COMMENTING OUT FOR NOW<-----------------------
-
     videoTimeUpdateHandler: function(event) {
         // get time to 3 decimal places
         var currentAnimationTime = event.currentTarget.currentTime.toFixed(3);
@@ -389,11 +320,9 @@ var ActiveDialogComponent = React.createClass({
                                alt=""
                                aria-label=""
                                title=""
-                               onLoadStart={self.videoLoadStartHandler}
                                onCanPlayThrough={self.videoCanPlayThroughHandler}
                                onError={self.videoErrorHandler}
                                onEnded={self.videoEndedHandler}
-                               //onLoadedMetadata={self.videoLoadedMetaDataHandler}
                                style={videoStyle}
                             >
                             <source src={"data/media/" + PageStore.chapter().xid + "/" + item.assetData.source} type="video/mp4"></source>
