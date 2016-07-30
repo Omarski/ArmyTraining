@@ -33,6 +33,9 @@
 .info-bullets-div {
   display: inline-flex !important;
   width: 100%;
+  .info-number {
+    margin-right: 10px;
+  }
 }
 
 .infoMediaContainer {

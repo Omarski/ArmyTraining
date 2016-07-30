@@ -1,8 +1,19 @@
 var Utils = (function() {
     function parseBullets(str) {
-        str = '<div><p>' + str;
-        str = str.replace(new RegExp('- ', 'g'), '</p></div><div class="info-bullets-div"><span class="info-view-bullet-item"></span><p class="info-bullets-indent">');
-        str = str + '</p></div>';
+
+        if(str.match(new RegExp('[0-9]+\.'))){
+            // console.log("INSIDE FUNCTION", str);
+            // console.log("str.match(new RegExp('[0-9]+\.'))", str.match(new RegExp('[0-9]+\.', 'g')));
+            str = '<div><p>' + str;
+            str = str.replace(new RegExp('[0-9]+\.', 'g'), '</p></div><div class="info-bullets-div"><p class="info-number">$&</p><p class=info-bullets-indent">');
+            str = str + "</p></div>";
+
+        } else {
+            str = '<div><p>' + str;
+            str = str.replace(new RegExp('- ', 'g'), '</p></div><div class="info-bullets-div"><span class="info-view-bullet-item"></span><p class="info-bullets-indent">');
+            str = str + '</p></div>';
+        }
+
         return str;
     }
 
