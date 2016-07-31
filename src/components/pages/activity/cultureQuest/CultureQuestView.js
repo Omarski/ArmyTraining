@@ -112,7 +112,49 @@ var CultureQuestView = React.createClass({
         self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
 
+    prepReplayPopup: function(){
+
+        var self = this;
+        var txtBxStyle = {height:'100%'};
+        var popupObj = {
+            id:"Replay",
+            onClickOutside: null,
+            popupStyle: {height:'315px', width:'455px', top:'20%', left:'20%', background:'#fff', border:'2px solid #fff'},
+
+            content: function(){
+
+                return(
+                    <div className="popup-view-content">
+                        <div className="culture-quest-view-popHeaderCont">
+                            <div className="culture-quest-view-popHeaderText">{"Congratulations! ..."}</div>
+                        </div>
+                        <div className="popup-view-bodyText" style={txtBxStyle}>
+                            <div>{self.state.imageData.gameEnd.replace("here",'"Restart"')}</div>
+                        </div>
+                        <div className="popup-view-buttonContCent" style={{background:'#cccccc'}}>
+                            <div className="popup-view-buttonCont">
+                                <button type="button" className="btn btn-default" style={{paddingLeft:'30px', paddingRight:'30px'}}
+                                        onClick={self.onReplay}>Restart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+
+        var debriefAudio = self.state.mediaPath + self.state.imageData.briefAudio;
+        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
+    },
+
     onStartGame: function(){
+        this.onClosePopup();
+        this.bgAudio();
+    },
+
+    onReplay: function(){
         this.onClosePopup();
         this.bgAudio();
     },
@@ -329,10 +371,6 @@ var CultureQuestView = React.createClass({
         this.setState({popupObj:popupObj});
     },
 
-    // setAudioControl: function(mode){
-    //     this.setState({audioController:mode});
-    // },
-
     viewUpdate: function(update){
 
         var self = this;
@@ -346,6 +384,11 @@ var CultureQuestView = React.createClass({
             case "tileAudio":
                 var tileAudio = self.state.mediaPath + "add_tile.mp3";
                 self.playAudio({id:"tile", autoPlay:true, sources:[{format:"mp3", url:tileAudio}]});
+                break;
+            
+            case "gameEnded":
+                self.setState({"showPuzzleGame":false});
+                self.prepReplayPopup();
                 break;
         }
     },

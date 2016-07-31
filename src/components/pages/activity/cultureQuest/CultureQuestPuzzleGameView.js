@@ -238,6 +238,11 @@ var CultureQuestPuzzleGameView = React.createClass({
         this.props.viewUpdate(update);
     },
 
+    onVidEnded: function(){
+        this.viewUpdate({task:"gameEnded",value:null})
+    },
+
+
     render: function() {
 
         var self=this;
@@ -272,6 +277,7 @@ var CultureQuestPuzzleGameView = React.createClass({
                         autoPlay={true}
                         width="400"
                         height="300"
+                        onVidEnded={self.onVidEnded}
                     />:null}
             </div>
         )
