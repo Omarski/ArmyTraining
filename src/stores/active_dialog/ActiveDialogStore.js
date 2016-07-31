@@ -473,14 +473,52 @@ function load(args) {
 }
 
 function gatherAssets() {
+    // gather videos
     if (_info && _info.assets) {
         for (var assetKey in _info.assets) {
             var asset = _info.assets[assetKey];
 
             // add if not already added
-            if (asset.source && !(asset.source in _activeDialogAssets)) {
-                _activeDialogAssets.push(asset.source);
-                _activeDialogAssetCount++;
+            if (asset.source) {
+                var videoUrl = "data/media/" + PageStore.chapter().xid + "/" + asset.source;
+                if (!(videoUrl in _activeDialogAssets)) {
+                    _activeDialogAssets.push(videoUrl);
+                    _activeDialogAssetCount++;
+                }
+            }
+        }
+    }
+
+    // gather audio
+    if (DATA && DATA.inputMappings && DATA.outputMappings) {
+        // inputs
+        for (var inputKey in DATA.inputMappings) {
+            var inputArray = DATA.inputMappings[inputKey];
+            for (var inputIndex in inputArray) {
+                var input = inputArray[inputIndex];
+
+                // add if not already added
+                if (input.sound && input.sound.length > 0) {
+                    var inputUrl = "data/media/" + input.sound + ".mp3";
+                    if (!(inputUrl in _activeDialogAssets)) {
+                        _activeDialogAssets.push(inputUrl);
+                        _activeDialogAssetCount++;
+                    }
+                }
+            }
+        }
+
+        // outputs
+        for (var outputKey in DATA.outputMappings) {
+            var output = DATA.outputMappings[outputKey];
+
+            // add if not already added
+            if (output.sound && output.sound.length > 0) {
+                var outputUrl = "data/media/" + output.sound + ".mp3";
+                if (!(outputUrl in _activeDialogAssets)) {
+                    _activeDialogAssets.push(outputUrl);
+                    _activeDialogAssetCount++;
+                }
             }
         }
     }
@@ -509,10 +547,7 @@ function preloadAssets() {
         // get next assets
         var nextAsset = _activeDialogAssets.shift();
 
-        // get url
-        var nextVideoUrl = "data/media/" + PageStore.chapter().xid + "/" + nextAsset;
-
-        this.serverRequest = $.get(nextVideoUrl, preloadAssetDoneHandler);
+        this.serverRequest = $.get(nextAsset, preloadAssetDoneHandler);
         this.serverRequest.error(preloadAssetErrorHandler);
     }
     else {

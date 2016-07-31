@@ -7,7 +7,8 @@ var SCORMActions = {
     },
 
     bookmarkSave: function(data) {
-        if (data) {
+        // check if data is less than 1000 characters
+        if (data && (data.length < 1000)) {
             this.setParameter("cmi.location", data);
         }
     },
