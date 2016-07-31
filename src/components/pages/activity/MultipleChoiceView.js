@@ -241,10 +241,7 @@ var MultipleChoiceView = React.createClass({
 
         var multipleChoiceMedia = "";
 
-        console.log("document.documentMode && (document.documentMode === 9)", Boolean(document.documentMode && (document.documentMode === "9")));
-        console.log("document.documentMode === 9", document.documentMode === "9");
-
-        if (document.documentMode && (document.documentMode === "9")){
+        if (document.documentMode && (document.documentMode === 9)){
             if(media){
                 multipleChoiceMedia = (
                     <div className="multiple-choice-flex">
