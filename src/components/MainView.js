@@ -17,6 +17,7 @@ var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
 var DliActions = require('../actions/DliActions');
 var DliStore = require('../stores/DliStore');
+var PersistenceStore = require('../stores/PersistenceStore');
 
 var ReferenceActions = require('../actions/ReferenceActions');
 var ReferenceStore = require('../stores/ReferenceStore');
@@ -32,6 +33,7 @@ var ASRWidget = require('../components/widgets/ASR');
 
 var bDataLoaded = false;
 var _asrLoaded = false;
+var _persistedDataFound = false;
 
 function getBookState() {
     var books = BookStore.getAll();
@@ -98,6 +100,7 @@ var MainView = React.createClass({
     },
 
     componentWillMount: function() {
+        PersistenceStore.addChangeListener(this._onPersistenceChange);
         LocalizationStore.addChangeListener(this._onLocalizationChange);
         ConfigStore.addChangeListener(this._onConfigChange);
         CoachFeedbackStore.addChangeListener(this._onCoachFeedbackChange);
@@ -193,7 +196,7 @@ var MainView = React.createClass({
             body: 'Loading...',
             onClose: null
         });
-        LocalizationActions.load();
+        PersistenceStore.get();
     },
 
 
@@ -230,6 +233,16 @@ var MainView = React.createClass({
                 {asrFallback}
             </div>
         );
+    },
+
+    _onPersistenceChange: function() {
+        if (!_persistedDataFound && PersistenceStore.complete()) {
+            _persistedDataFound = true;
+            setTimeout(function () {
+                LocalizationActions.load();
+            });
+
+        }
     },
 
     /**

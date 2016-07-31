@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var Assign = require('object-assign');
 var ConfigConstants = require('../constants/ConfigConstants');
 var PersistenceConstants = require('../constants/PersistenceConstants');
+var PersistenceActions = require('../actions/PersistenceActions');
 var SCORMActions = require('../actions/SCORMActions');
 
 var CHANGE_EVENT = 'change';
@@ -18,6 +19,7 @@ var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
 // TODO check when config is updated or change and update these
 var _storageGetFunction = null;
 var _storageSetFunction = null;
+var _initialLoadComplete = false;
 
 
 function getBookmarkData() {
@@ -82,6 +84,10 @@ function getData(name) {
 
     // check cache first
     if (_dataCache && _dataCache.hasOwnProperty(name)) {
+        _initialLoadComplete = true;
+        setTimeout(function () {
+            PersistenceActions.complete();
+        });
         return _dataCache[name];
     }
 
@@ -112,8 +118,15 @@ function getDataLocalStorage() {
     var _loadedData = store.get(LOCAL_STORAGE_KEY);
 
     // update cache
-    if (_loadedData)
+    if (_loadedData) {
         _dataCache = _loadedData;
+        _initialLoadComplete = true;
+        setTimeout(function () {
+            PersistenceActions.complete();
+        });
+
+    }
+
 }
 
 
@@ -131,6 +144,10 @@ function getDataSCORM() {
     // update cache
     if (loadedDataObject) {
         _dataCache = loadedDataObject;
+        _initialLoadComplete = true;
+        setTimeout(function () {
+            PersistenceActions.complete();
+        });
     }
 }
 
@@ -268,7 +285,9 @@ function setStorageType(type) {
     }
 }
 
-
+function setComplete() {
+    _initialLoadComplete = true;
+}
 
 var PersistenceStore = Assign({}, EventEmitter.prototype, {
     /**
@@ -280,14 +299,25 @@ var PersistenceStore = Assign({}, EventEmitter.prototype, {
         return getData(name);
     },
 
+    complete: function() {
+        return _initialLoadComplete;
+    },
+
     getBookmark: function() {
         return getBookmarkData();
     },
 
     emitChange: function() {
         this.emit(CHANGE_EVENT);
-    }
+    },
 
+    addChangeListener: function(callback) {
+        this.on(CHANGE_EVENT, callback);
+    },
+
+    removeChangeListener: function(callback) {
+        this.removeListener(CHANGE_EVENT, callback);
+    }
 });
 
 // Register callback to handle all updates
@@ -307,6 +337,10 @@ AppDispatcher.register(function(action) {
             break;
         case PersistenceConstants.PERSISTENCE_SET_STORAGE_TYPE:
             setStorageType(action.type);
+            break;
+        case PersistenceConstants.PERSISTENCE_COMPLETE:
+            setComplete();
+            PersistenceStore.emitChange();
             break;
         default:
         // no op
