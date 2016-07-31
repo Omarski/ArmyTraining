@@ -9,10 +9,23 @@ var PersistenceActions = {
         });
     },
 
+    removeBookmark: function() {
+        AppDispatcher.dispatch({
+            actionType: PersistenceConstants.PERSISTENCE_REMOVE_BOOKMARK
+        });
+    },
+
     set: function(name, value) {
         AppDispatcher.dispatch({
             actionType: PersistenceConstants.PERSISTENCE_SET,
             name: name,
+            value: value
+        });
+    },
+
+    setBookmark: function(value) {
+        AppDispatcher.dispatch({
+            actionType: PersistenceConstants.PERSISTENCE_SET_BOOKMARK,
             value: value
         });
     },
