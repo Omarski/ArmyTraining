@@ -1,4 +1,5 @@
 /*Below media query targets IE8, IE9, IE10, IE11 */
+/*
 @media screen and (min-width:0\0) {
 
   .multiple-choice-flex {
@@ -7,14 +8,14 @@
   }
 }
 
-/* IE9 FIXES ONLY --- TO FIX IE9 Include \9\0 at the end of a css property*/
-:root .info-page-notes{
-  .info-bullets-div {
-    .info-bullets-indent {
-      display: table;
+@media screen and (min-width:0\0) and (min-resolution: .001dpcm) {
+  .info-page-notes{
+    .info-bullets-div {
+      .info-bullets-indent {
+        display: table;
+      }
     }
   }
 }
 
-
-
+*/
