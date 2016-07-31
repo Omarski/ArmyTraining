@@ -244,7 +244,7 @@ var MultipleChoiceView = React.createClass({
         if (document.documentMode && (document.documentMode === 9)){
             if(media){
                 multipleChoiceMedia = (
-                    <div className="multiple-choice-flex">
+                    <div className="multiple-choice-flex ie-nine-class-multiple-choice">
                         <div className="col-md-4 col-sm5 col-xs-12">
                         {mediaContainer}
                         </div>
@@ -286,7 +286,7 @@ var MultipleChoiceView = React.createClass({
 
         } else {
             multipleChoiceMedia = (
-                    <div className="multiple-choice-flex ie-nine-class-multiple-choice">
+                    <div className="multiple-choice-flex">
                         <div>
                             {mediaContainer}
                         </div>
