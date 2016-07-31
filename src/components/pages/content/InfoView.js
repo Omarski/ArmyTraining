@@ -175,6 +175,7 @@ function getPageState(cmp, props) {
 function playMediaAudio(xidArray){
     //xid is of the form "000000000.mp3"
     if(xidArray.length > 0){
+        $("#audioControlButton").prop('disabled', false);
         document.getElementById("audio").onended = (function(){
             xidArray.shift();
             playMediaAudio(xidArray);
@@ -184,6 +185,7 @@ function playMediaAudio(xidArray){
     if(xidArray.length === 0){
         var audio = document.getElementById('audio');
         var source = document.getElementById('mp3Source');
+        $("#audioControlButton").prop('disabled', true);
         source.src = "";
         audio.load();
     }

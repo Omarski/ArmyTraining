@@ -20,7 +20,6 @@ var AudioControl = React.createClass({
         }
 
     },
-
     render: function() {
         var controlButton = "";
         if (this.state.isPlaying) {
