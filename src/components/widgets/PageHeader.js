@@ -110,6 +110,7 @@ var PageHeader = React.createClass({
     },
 
     render: function() {
+        var self = this;
         var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
             <ListGroup key="bookmarkbreadcrumbsbutton">
                 <Button
