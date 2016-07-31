@@ -196,7 +196,7 @@ var MainView = React.createClass({
             body: 'Loading...',
             onClose: null
         });
-        PersistenceStore.get();
+        PersistenceStore.get('units');
     },
 
 
