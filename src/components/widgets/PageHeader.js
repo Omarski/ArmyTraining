@@ -148,7 +148,7 @@ var PageHeader = React.createClass({
 
         var info = "";
         if (this.state.sources !== "") {
-            info = (<OverlayTrigger delayHide={4000000} placement="right" overlay={attributions}>
+            info = (<OverlayTrigger delayHide={40000} placement="right" overlay={attributions}>
                         <span className="infoAttributions glyphicon glyphicon-info-sign"></span>
                     </OverlayTrigger>);
         }
