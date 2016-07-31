@@ -35,6 +35,17 @@ var SCORMActions = {
         }
     },
 
+    getLastError: function() {
+        var errorCode = "mario";
+        try {
+            errorCode = doLMSGetLastError();
+        } catch (e) {
+            // do something
+        }
+
+        return errorCode;
+    },
+
     getParameter: function(name) {
         if (name) {
             try {
