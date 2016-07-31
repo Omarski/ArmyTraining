@@ -155,16 +155,29 @@ var CultureQuestView = React.createClass({
     },
 
     onReplay: function(){
+
         this.onClosePopup();
         this.bgAudio();
+        this.prepAnswersColl();
+        this.markHomeRegion();
+
+        for (var i=0; i < this.state.layersColl.length; i++){
+                this.state.layersColl[i].style.opacity = ".8";
+        }
     },
     
     prepGoBackPopup: function(){
 
         var self = this;
-        var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
+        //var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
 
         self.state.audioBgController("pause");
+
+        // for future title use
+        // <div className="culture-quest-goBackHeader">
+        //     <span className="culture-quest-goBackHeaderAlert" style={iconStyle}/>
+        //     <span className="culture-quest-goBackHeaderTitle">Message Box</span>
+        // </div>
 
         var popupObj = {
             id:"GoBack",
@@ -175,11 +188,7 @@ var CultureQuestView = React.createClass({
                 
                 return(
                     <div className="popup-view-content">
-                        <div className="culture-quest-goBackHeader">
-                            <span className="culture-quest-goBackHeaderAlert" style={iconStyle}/>
-                            <span className="culture-quest-goBackHeaderTitle">Message Box</span>
-                        </div>
-                        <div className="popup-view-bodyText" style={{marginLeft:'20px', marginTop:'60px'}}>
+                        <div className="popup-view-bodyText" style={{marginLeft:'20px', marginTop:'40px'}}>
                             {self.state.imageData.keepTryingText}
                         </div>
                     </div>

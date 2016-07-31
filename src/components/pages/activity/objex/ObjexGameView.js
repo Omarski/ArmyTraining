@@ -258,6 +258,7 @@ var ObjexGameView = React.createClass({
                     activeRoundObjexColl = {self.state.activeRoundObjexColl}
                     showHint = {self.showHint}
                     advancedLevel = {self.props.advancedLevel}
+                    hintMode = {self.state.hintMode}
                 />:null}
                </div>
         )
