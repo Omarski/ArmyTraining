@@ -239,6 +239,72 @@ var MultipleChoiceView = React.createClass({
                     </li>);
         });
 
+        var multipleChoiceMedia = "";
+        
+        if (document.documentMode && document.documentMode === "9"){
+            if(media){
+                multipleChoiceMedia = (
+                    <div className="multiple-choice-flex">
+                        <div className="col-md-4 col-sm5 col-xs-12">
+                        {mediaContainer}
+                        </div>
+                        <div className="multiple-choice-row-container col-md-8 col-sm-7">
+                            <div className="mc-choices-and-feedback-container">
+                                <div className="row multiple-choice-row">
+                                    <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
+                                        {choices}
+                                    </ul>
+                                </div>
+                                <div className="row multiple-choice-row">
+                                    {feedbackElement}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            } else {
+                multipleChoiceMedia = (
+                    <div className="multiple-choice-flex">
+                        <div>
+                        {mediaContainer}
+                        </div>
+                        <div className="multiple-choice-row-container">
+                            <div className="mc-choices-and-feedback-container">
+                                <div className="row multiple-choice-row">
+                                    <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
+                                        {choices}
+                                    </ul>
+                                </div>
+                                <div className="row multiple-choice-row">
+                                    {feedbackElement}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+        } else {
+            multipleChoiceMedia = (
+                    <div className="multiple-choice-flex ie-nine-class-multiple-choice">
+                        <div>
+                            {mediaContainer}
+                        </div>
+                        <div className="multiple-choice-row-container">
+                            <div className="mc-choices-and-feedback-container">
+                                <div className="row multiple-choice-row">
+                                    <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
+                                        {choices}
+                                    </ul>
+                                </div>
+                                <div className="row multiple-choice-row">
+                                    {feedbackElement}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            );
+        }
 
         return (
             <div>
@@ -250,23 +316,7 @@ var MultipleChoiceView = React.createClass({
                                 {state.prompt}
                             </h4>
                         </div>
-                        <div className="multiple-choice-flex">
-                            <div>
-                                {mediaContainer}
-                            </div>
-                            <div className="multiple-choice-row-container">
-                                <div className="mc-choices-and-feedback-container">
-                                    <div className="row multiple-choice-row">
-                                        <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
-                                            {choices}
-                                        </ul>
-                                    </div>
-                                    <div className="row multiple-choice-row">
-                                            {feedbackElement}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {multipleChoiceMedia}
                     </div>
                 </div>
             </div>
