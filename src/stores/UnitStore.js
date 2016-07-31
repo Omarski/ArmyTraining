@@ -45,7 +45,6 @@ function load(id) {
     if (_units[id] && _units[id].data && _units[id].data.xid && _units[id].state) {
         // load saved units
         var storedUnits = PersistenceStore.get('units');
-        console.log('---storedunits---', storedUnits);
         if (storedUnits) {
             _units[id].state = assign({}, _units[id].state, storedUnits[_units[id].data.xid]);
             if (_units[id].state.required === true) {
