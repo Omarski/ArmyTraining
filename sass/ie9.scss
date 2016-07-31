@@ -20,19 +20,19 @@
 
 .ie-nine-class-multiple-choice{
   .multiple-choice-row{
-    .multiple-choice-alert {
+    .multiple-choice-alert-text {
       display: inline-block;
       .thumbnail{
         display: inline-block;
         float: left;
         position: static;
-        .glyphicon.multiple-choice-feedback-icon{
+        .multiple-choice-feedback-icon{
           padding-right: 10px;
           float: left;
           display: inline-block;
           .coach-feedback-text {
             width: 100%;
-            display: inline-block;
+            display: table-row-group;
           }
         }
       }
