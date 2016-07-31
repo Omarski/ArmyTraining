@@ -1,12 +1,14 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var BookmarkConstants = require('../constants/BookmarkConstants');
+var PersistenceActions = require('../actions/PersistenceActions');
+var PersistenceStore = require('../stores/PersistenceStore');
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 function setCurrent(data) {
-    var bm = store.get('bookmark');
+    var bm = PersistenceStore.getBookmark();
     var obj = {};
     if (bm) {
         obj.current = data;
@@ -15,12 +17,15 @@ function setCurrent(data) {
         obj['current'] = data;
         obj['bookmarks'] = [];
     }
-    store.set('bookmark', obj);
+
+    setTimeout(function() {
+        PersistenceActions.setBookmark(obj);
+    }, 0.1);
 }
 
 
 function create(data) {
-    var bm = store.get('bookmark');
+    var bm = PersistenceStore.getBookmark();
     var obj = {};
     if (bm) {
         obj.current = data;
@@ -31,16 +36,20 @@ function create(data) {
         obj['bookmarks'] = [data];
     }
 
-    store.set('bookmark', obj);
+    setTimeout(function() {
+        PersistenceActions.setBookmark(obj);
+    }, 0.1);
     //"in bookmark update"
 }
 
 function destroy() {
-    store.remove('bookmark');
+    setTimeout(function() {
+        PersistenceActions.removeBookmark()
+    }, 0.1);
 }
 
 function remove(item) {
-    var bm = store.get('bookmark');
+    var bm = PersistenceStore.getBookmark();
     if (bm) {
         var bookmarks = bm.bookmarks;
         var len = bookmarks.length;
@@ -53,24 +62,25 @@ function remove(item) {
         }
         bm.bookmarks = newBookmarks;
     }
-    store.set('bookmark', bm);
-
+    setTimeout(function() {
+        PersistenceActions.setBookmark(bm);
+    }, 0.1);
 }
 
 var BookmarkStore = assign({}, EventEmitter.prototype, {
 
     current: function() {
-        var bm = store.get('bookmark');
+        var bm = PersistenceStore.getBookmark();
         return (bm) ? bm.current : null;
     },
 
     bookmarks: function() {
-        var bm = store.get('bookmark');
+        var bm = PersistenceStore.getBookmark();
         return (bm) ? bm.bookmarks : null;
     },
 
     bookmarkExists: function(data) {
-        var bm = store.get('bookmark');
+        var bm = PersistenceStore.getBookmark();
         var bookmarks = bm.bookmarks;
         var len = bookmarks.length;
         while (len--) {
