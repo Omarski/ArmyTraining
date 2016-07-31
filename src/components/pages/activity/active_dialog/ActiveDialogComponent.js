@@ -106,6 +106,7 @@ var ActiveDialogComponent = React.createClass({
         // if no animation or sound is playing then trigger callback
         if (!this.bAnimationPlaying && !this.bSoundPlaying && !this.bSoundLoading) {
             if (this.props.onPlayingDone !== null) {
+                console.log('_____outputdone____continuingtonext__>');
                 this.props.onPlayingDone();
             }
         }
@@ -238,6 +239,7 @@ var ActiveDialogComponent = React.createClass({
                 // mark as stopped
                 this.bAnimationPlaying = false;
 
+                console.log('==videoended==>');
                 // trigger callback
                 this.checkDonePlaying();
 
@@ -261,6 +263,7 @@ var ActiveDialogComponent = React.createClass({
 
         if (this.refs.activeDialogAudioRef && this.refs.activeDialogAudioRef.refs.audioRef) {
             this.bSoundLoading = true;
+            console.log('--loadingsound-->', 'data/media/' + sound + '.mp3');
             var player = this.refs.activeDialogAudioRef.refs.audioRef;
             player.setAttribute('src', 'data/media/' + sound + '.mp3');
             player.addEventListener('loadeddata', this.soundLoaded);
@@ -270,6 +273,7 @@ var ActiveDialogComponent = React.createClass({
     },
 
     soundLoaded: function(event) {
+        console.log('--playingsound-->');
         event.currentTarget.play();
         event.currentTarget.removeEventListener('loadeddata', this.soundLoaded);
         this.bSoundPlaying = true;
@@ -282,6 +286,7 @@ var ActiveDialogComponent = React.createClass({
     soundEnded: function(event) {
         event.currentTarget.removeEventListener('ended', this.soundEnded);
         this.bSoundPlaying = false;
+        console.log('==soundended==>');
 
         // trigger callback
         this.checkDonePlaying();
@@ -295,6 +300,7 @@ var ActiveDialogComponent = React.createClass({
             if (videoLen > 0) {
                 while(videoLen--) {
                     var video = this.currentVideosPlayingHack[videoLen];
+                    console.log('--playingvideo-->', video);
                     video.play();
                 }
 
