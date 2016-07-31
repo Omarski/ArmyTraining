@@ -84,10 +84,6 @@ function getData(name) {
 
     // check cache first
     if (_dataCache && _dataCache.hasOwnProperty(name)) {
-        _initialLoadComplete = true;
-        setTimeout(function () {
-            PersistenceActions.complete();
-        });
         return _dataCache[name];
     }
 
@@ -105,6 +101,12 @@ function getData(name) {
             getDataLocalStorage(name);
     }
 
+    // for now always mark complete
+    _initialLoadComplete = true;
+    setTimeout(function () {
+        PersistenceActions.complete();
+    });
+
     // check cache first
     if (_dataCache && _dataCache.hasOwnProperty(name)) {
         return _dataCache[name];
@@ -120,13 +122,7 @@ function getDataLocalStorage() {
     // update cache
     if (_loadedData) {
         _dataCache = _loadedData;
-        _initialLoadComplete = true;
-        setTimeout(function () {
-            PersistenceActions.complete();
-        });
-
     }
-
 }
 
 
@@ -141,13 +137,12 @@ function getDataSCORM() {
         // do something
     }
 
+    alert('--->>', loadedDataObject);
+    alert(SCORMActions.getLastError());
+
     // update cache
     if (loadedDataObject) {
         _dataCache = loadedDataObject;
-        _initialLoadComplete = true;
-        setTimeout(function () {
-            PersistenceActions.complete();
-        });
     }
 }
 
