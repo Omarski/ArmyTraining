@@ -7,9 +7,10 @@ var SCORMActions = require('../actions/SCORMActions');
 
 var CHANGE_EVENT = 'change';
 
-
 var LOCAL_STORAGE_KEY = "enskill_storage";
+var LOCAL_STORAGE_BOOKMARK_KEY = "bookmark";
 
+var _bookmarkDataCache = {};
 var _dataCache = {};
 var _isDirty = false;
 var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
@@ -18,6 +19,63 @@ var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
 var _storageGetFunction = null;
 var _storageSetFunction = null;
 
+
+function getBookmarkData() {
+    // TODO make asynchronous
+
+    // check cache first
+    if (_bookmarkDataCache && _bookmarkDataCache.hasOwnProperty(LOCAL_STORAGE_BOOKMARK_KEY)) {
+        return _bookmarkDataCache[LOCAL_STORAGE_BOOKMARK_KEY];
+    }
+
+    // if not found load from storage
+    switch (_storageType) {
+        case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
+            getBookmarkDataLocalStorage();
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
+            getBookmarkDataSCORM();
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            break;
+        default:
+            getBookmarkDataLocalStorage(name);
+    }
+
+    // check cache again
+    if (_bookmarkDataCache && _bookmarkDataCache.hasOwnProperty(LOCAL_STORAGE_BOOKMARK_KEY)) {
+        return _bookmarkDataCache[LOCAL_STORAGE_BOOKMARK_KEY];
+    } else {
+        // report some error
+        return null;
+    }
+
+}
+
+function getBookmarkDataLocalStorage() {
+    var _loadedData = store.get(LOCAL_STORAGE_BOOKMARK_KEY);
+
+    // update bookmark cache
+    if (_loadedData)
+        _bookmarkDataCache = _loadedData;
+}
+
+function getBookmarkDataSCORM() {
+    var loadedDataString = SCORMActions.bookmarkLoad();
+
+    // convert from JSON string to object
+    var loadedDataObject = null;
+    try {
+        loadedDataObject = JSON.parse(loadedDataString);
+    } catch (e) {
+        // do something
+    }
+
+    // update cache
+    if (loadedDataObject) {
+        _bookmarkDataCache = loadedDataObject;
+    }
+}
 
 function getData(name) {
     // TODO make asynchronous
@@ -102,6 +160,67 @@ function removeData(name) {
     return false;
 }
 
+function removeBookmarkData() {
+    if (_bookmarkDataCache.hasOwnProperty(LOCAL_STORAGE_BOOKMARK_KEY)) {
+
+        delete _bookmarkDataCache[LOCAL_STORAGE_BOOKMARK_KEY];
+
+        // TODO make asynchronous
+        switch (_storageType) {
+            case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
+                setBookmarkDataLocalStorage();
+                break;
+            case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
+                setBookmarkDataSCORM();
+                break;
+            case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+                break;
+            default:
+                setBookmarkDataLocalStorage();
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
+
+function setBookmarkData(value) {
+    // update local bookmark cache
+    _bookmarkDataCache[LOCAL_STORAGE_BOOKMARK_KEY] = value;
+
+    // TODO make asynchronous
+    switch(_storageType) {
+        case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
+            setBookmarkDataLocalStorage();
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
+            setBookmarkDataSCORM();
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            break;
+        default:
+            setBookmarkDataLocalStorage();
+    }
+
+    // TODO add some validation
+    return true;
+}
+
+function setBookmarkDataLocalStorage() {
+    store.set(LOCAL_STORAGE_BOOKMARK_KEY, _bookmarkDataCache);
+}
+
+function setBookmarkDataSCORM() {
+    // convert data to string
+    var dataString = JSON.stringify(_bookmarkDataCache);
+
+    setTimeout(function() {
+        SCORMActions.bookmarkSave(dataString);
+    }, 0.1);
+}
+
 
 function setData(name, value) {
     // update local cache
@@ -161,6 +280,10 @@ var PersistenceStore = Assign({}, EventEmitter.prototype, {
         return getData(name);
     },
 
+    getBookmark: function() {
+        return getBookmarkData();
+    },
+
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     }
@@ -173,8 +296,14 @@ AppDispatcher.register(function(action) {
         case PersistenceConstants.PERSISTENCE_REMOVE:
             removeData(action.name);
             break;
+        case PersistenceConstants.PERSISTENCE_REMOVE_BOOKMARK:
+            removeBookmarkData();
+            break;
         case PersistenceConstants.PERSISTENCE_SET:
             setData(action.name, action.value);
+            break;
+        case PersistenceConstants.PERSISTENCE_SET_BOOKMARK:
+            setBookmarkData(action.value);
             break;
         case PersistenceConstants.PERSISTENCE_SET_STORAGE_TYPE:
             setStorageType(action.type);
