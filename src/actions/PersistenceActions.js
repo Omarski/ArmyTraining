@@ -2,6 +2,12 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var PersistenceConstants = require('../constants/PersistenceConstants');
 
 var PersistenceActions = {
+    complete: function() {
+        AppDispatcher.dispatch({
+            actionType: PersistenceConstants.PERSISTENCE_COMPLETE
+        });
+    },
+
     remove: function(name) {
         AppDispatcher.dispatch({
             actionType: PersistenceConstants.PERSISTENCE_REMOVE,
