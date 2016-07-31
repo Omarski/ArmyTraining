@@ -48,7 +48,14 @@ $(document).on("click", ".btn-drp", function(){
 
 });
 
-// document.onselectstart = function() { return false; };
+document.onselectstart = function(e) {
+    if(e.path[0].classList[0] === "tooltip-inner" || e.path[1].classList[0] === "tool-tip-inner"){
+        console.log("SUCCESS!!!");
+        return true;
+    }
+    // console.log("e", e, "e.target.classList", e.target.classList);
+    return false;
+};
 
 // user clicks explorer button
 $(document).on("click", ".btn-exp", function(){
