@@ -8,7 +8,7 @@ var Utils = (function() {
 
             //&& !str.match(new RegExp('\'')
                 str = '<div><p>' + str;
-                str = str.replace(new RegExp('[0-9]+\.', 'g'), '</p></div><div class="info-bullets-div"><p class="info-number">$&</p><p class=info-bullets-indent">');
+                str = str.replace(new RegExp('[0-9]+\.', 'g'), '</p></div><div class="info-bullets-div"><p class="info-number">$&</p><p class="info-bullets-indent">');
                 str = str + "</p></div>";
         } else {
             //this is for styling bullet points
