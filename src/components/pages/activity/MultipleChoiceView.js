@@ -257,7 +257,7 @@ var MultipleChoiceView = React.createClass({
                                         {choices}
                                     </ul>
                                 </div>
-                                <div className="row multiple-choice-row">
+                                <div className="row multiple-choice-row-ie">
                                     {feedbackElement}
                                 </div>
                             </div>
@@ -277,7 +277,7 @@ var MultipleChoiceView = React.createClass({
                                         {choices}
                                     </ul>
                                 </div>
-                                <div className="row multiple-choice-row">
+                                <div className="row multiple-choice-row-ie">
                                     {feedbackElement}
                                 </div>
                             </div>
