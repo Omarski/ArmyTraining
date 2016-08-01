@@ -30,6 +30,14 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   background: #f9f9f9;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: default;
+  color: black;
+  display: inline-block;
+
   .or-feedback {
     position: absolute;
     font-size: 22px;
@@ -42,6 +50,23 @@
       color: red;
     }
   }
+}
+
+.or-text-choice:link {
+  text-decoration: none;
+  color: black;
+}
+.or-text-choice:hover {
+  text-decoration: none;
+  color: black;
+}
+.or-text-choice:active {
+  text-decoration: none;
+  color: black;
+}
+.or-text-choice:focus {
+  text-decoration: none;
+  color: black;
 }
 
 .or-choice-answer-container {
