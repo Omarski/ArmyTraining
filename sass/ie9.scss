@@ -22,10 +22,11 @@
   .multiple-choice-row{
     .multiple-choice-alert-text {
       display: inline-block;
-      .thumbnail{
+      .thumbnail {
         display: inline-block;
         float: left;
         position: static;
+      }
         .multiple-choice-feedback-icon{
           padding-right: 10px;
           float: left;
@@ -35,7 +36,6 @@
             display: table-row-group;
           }
         }
-      }
     }
   }
 }
