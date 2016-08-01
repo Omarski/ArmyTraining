@@ -3,7 +3,7 @@ var ReactBootstrap = require('react-bootstrap');
 var PageStore = require('../../../../stores/PageStore');
 
 
-var _soundTimer = 0;
+var _soundTimer = null;
 
 var ActiveDialogComponent = React.createClass({
     bAnimationPlaying: false,
@@ -106,7 +106,6 @@ var ActiveDialogComponent = React.createClass({
         // if no animation or sound is playing then trigger callback
         if (!this.bAnimationPlaying && !this.bSoundPlaying && !this.bSoundLoading) {
             if (this.props.onPlayingDone !== null) {
-                console.log('_____outputdone____continuingtonext__>');
                 this.props.onPlayingDone();
             }
         }
@@ -239,7 +238,6 @@ var ActiveDialogComponent = React.createClass({
                 // mark as stopped
                 this.bAnimationPlaying = false;
 
-                console.log('==videoended==>');
                 // trigger callback
                 this.checkDonePlaying();
 
@@ -263,7 +261,6 @@ var ActiveDialogComponent = React.createClass({
 
         if (this.refs.activeDialogAudioRef && this.refs.activeDialogAudioRef.refs.audioRef) {
             this.bSoundLoading = true;
-            console.log('--loadingsound-->', 'data/media/' + sound + '.mp3');
             var player = this.refs.activeDialogAudioRef.refs.audioRef;
             player.setAttribute('src', 'data/media/' + sound + '.mp3');
             player.addEventListener('loadeddata', this.soundLoaded);
@@ -273,25 +270,36 @@ var ActiveDialogComponent = React.createClass({
     },
 
     soundLoaded: function(event) {
-        console.log('--playingsound-->');
+        if (_soundTimer) {
+            clearInterval(_soundTimer);
+        }
+
         event.currentTarget.play();
         event.currentTarget.removeEventListener('loadeddata', this.soundLoaded);
         this.bSoundPlaying = true;
         this.bSoundLoading = false;
 
-        clearInterval(_soundTimer);
-        _soundTimer = setTimeout(function () {
-            console.log("I can do this even better than Greg!");
-            clearInterval(_soundTimer);
-        }, event.currentTarget.duration + 1);
+        var soundTimeout = (Math.round(event.currentTarget.duration) + 1) * 1000;
+        var self = this;
+
+        if (soundTimeout > 0) {
+            _soundTimer = setTimeout(function () {
+                clearInterval(_soundTimer);
+                self.soundEnded(event);
+            }, soundTimeout);
+        }
+
         // if videos are found play them
         this.syncPlayback();
     },
 
     soundEnded: function(event) {
-        event.currentTarget.removeEventListener('ended', this.soundEnded);
+        clearInterval(_soundTimer);
+        if (event.currentTarget) {
+            event.currentTarget.removeEventListener('ended', this.soundEnded);
+        }
+
         this.bSoundPlaying = false;
-        console.log('==soundended==>');
 
         // trigger callback
         this.checkDonePlaying();
@@ -305,7 +313,6 @@ var ActiveDialogComponent = React.createClass({
             if (videoLen > 0) {
                 while(videoLen--) {
                     var video = this.currentVideosPlayingHack[videoLen];
-                    console.log('--playingvideo-->', video);
                     video.play();
                 }
 
