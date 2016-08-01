@@ -30,11 +30,15 @@
   }
 }
 
-.info-bullets-div {
-  display: inline-flex !important;
-  width: 100%;
-  .info-number {
-    margin-right: 10px;
+.info-page-notes{
+  div{
+    .info-bullets-div {
+      display: inline-flex;
+      width: 100%;
+      .info-number {
+        margin-right: 10px;
+      }
+    }
   }
 }
 

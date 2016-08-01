@@ -39,6 +39,7 @@ button.navbar-toggle:hover {
   right: 253px;
   text-align: center;
   color: $nav-button-color;
+  cursor: default;
 }
 
 @media screen and (min-width: 767px) {
