@@ -18,10 +18,46 @@ var _isDirty = false;
 var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
 
 // TODO check when config is updated or change and update these
+var _bSaveOnDataChange = false;
 var _storageGetFunction = null;
 var _storageSetFunction = null;
 var _initialLoadComplete = false;
 
+function flushData() {
+    // TODO make asynchronous
+    switch (_storageType) {
+        case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
+            flushLocalStorage();
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
+            flushDataSCORM();
+            flushLocalStorage(); // TODO hack for now <----
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            break;
+        default:
+            flushLocalStorage();
+    }
+
+    // TODO add some validation?
+    return true;
+}
+
+function flushLocalStorage() {
+    store.set(LOCAL_STORAGE_KEY, _dataCache);
+}
+
+function flushDataSCORM() {
+    // convert data to string
+    var dataString = JSON.stringify(_dataCache);
+
+    setTimeout(function() {
+        SCORMActions.dataSave(dataString);
+
+        var error = SCORMActions.getLastError();
+        DevToolActions.log('---> error code: ' + error);
+    }, 0.1);
+}
 
 function getBookmarkData() {
     // TODO make asynchronous
@@ -82,7 +118,6 @@ function getBookmarkDataSCORM() {
 
 function getData(name) {
     // TODO make asynchronous
-
     // check cache first
     if (_dataCache && _dataCache.hasOwnProperty(name)) {
         return _dataCache[name];
@@ -101,10 +136,6 @@ function getData(name) {
         default:
             getDataLocalStorage(name);
     }
-
-    var error = SCORMActions.getLastError();
-    DevToolActions.log(name + ' error code: ' + error);
-
 
     // for now always mark complete
     _initialLoadComplete = true;
@@ -146,6 +177,15 @@ function getDataSCORM() {
     if (loadedDataObject) {
         _dataCache = loadedDataObject;
     }
+
+
+    // TODO for now fall back to local storage
+    var error = SCORMActions.getLastError();
+    if (error != 0) {
+        getDataLocalStorage();
+        DevToolActions.log('successful data load');
+    }
+    DevToolActions.log(name + ' error code: ' + error);
 }
 
 
@@ -154,18 +194,9 @@ function removeData(name) {
         // update local cache
         delete _dataCache[name];
 
-        // TODO make asynchronous
-        switch (_storageType) {
-            case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
-                setDataLocalStorage();
-                break;
-            case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
-                setDataSCORM();
-                break;
-            case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
-                break;
-            default:
-                setDataLocalStorage();
+        // save it
+        if (_bSaveOnDataChange) {
+            flushData();
         }
 
         return true;
@@ -240,40 +271,14 @@ function setData(name, value) {
     // update local cache
     _dataCache[name] = value;
 
-    // TODO make asynchronous
-    switch (_storageType) {
-        case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
-            setDataLocalStorage();
-            break;
-        case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
-            setDataSCORM();
-            break;
-        case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
-            break;
-        default:
-            setDataLocalStorage();
+    // save it
+    if (_bSaveOnDataChange) {
+        flushData();
     }
 
     // TODO add some validation?
     return true;
 }
-
-function setDataLocalStorage() {
-    store.set(LOCAL_STORAGE_KEY, _dataCache);
-}
-
-function setDataSCORM() {
-    // convert data to string
-    var dataString = JSON.stringify(_dataCache);
-
-    setTimeout(function() {
-        SCORMActions.dataSave(dataString);
-
-        var error = SCORMActions.getLastError();
-        DevToolActions.log('---> error code: ' + error);
-    }, 0.1);
-}
-
 
 function setStorageType(type) {
     _storageType = type;
@@ -282,6 +287,9 @@ function setStorageType(type) {
         setTimeout(function() {
             SCORMActions.initialize();
         }, 0.1);
+    }
+    else if (_storageType == ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE) {
+        _bSaveOnDataChange = true;
     }
 }
 
@@ -323,6 +331,9 @@ var PersistenceStore = Assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     switch(action.actionType) {
+        case PersistenceConstants.PERSISTENCE_FLUSH:
+            flushData();
+            break;
         case PersistenceConstants.PERSISTENCE_REMOVE:
             removeData(action.name);
             break;

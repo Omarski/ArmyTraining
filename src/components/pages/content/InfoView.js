@@ -173,7 +173,6 @@ function getPageState(cmp, props) {
 }
 
 function playMediaAudio(xidArray){
-
     //xid is of the form "000000000.mp3"
     if(xidArray.length > 0){
         $("#audioControlButton").prop('disabled', false);
