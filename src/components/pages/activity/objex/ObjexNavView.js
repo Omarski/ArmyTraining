@@ -26,7 +26,8 @@ var ObjexNavView = React.createClass({
         activeRoundObjexColl: PropTypes.array.isRequired,
         showCells: PropTypes.bool.isRequired,
         showHint: PropTypes.func.isRequired,
-        advancedLevel: PropTypes.bool.isRequired
+        advancedLevel: PropTypes.bool.isRequired,
+        hintMode: PropTypes.bool.isRequired
     },
     
     prepNav: function(){
@@ -81,8 +82,10 @@ var ObjexNavView = React.createClass({
     },
 
     onCoinClick: function(e){
-        $("#"+e.target.id).remove();
-        this.props.showHint();
+        if (!this.props.hintMode) {
+            $("#"+e.target.id).remove();
+            this.props.showHint();
+        }
     },
 
     viewUpdate: function(update){

@@ -111,7 +111,7 @@ var DnDPuzzleView = React.createClass({
 
         //donn't render a target stage if no data supplied
         return (
-            <div style={this.props.stageStyle}>
+            <div style={this.props.stageStyle} id="DnDStage">
                 {this.renderDraggableColl()}
                 {!stageTargetObj ? this.renderDropTargetColl():null}
 

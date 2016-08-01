@@ -14,12 +14,17 @@ var VideoPlayer = React.createClass({
         autoPlay: PropTypes.bool,
         loop: PropTypes.bool,
         controls: PropTypes.bool,
-        controller: PropTypes.string
+        controller: PropTypes.string,
+        onVidEnded: PropTypes.func
     },
 
     componentDidMount: function() {
         this.renderVideoSources();
         this.videoController();
+
+        if (this.props.onVidEnded){
+            document.getElementById(this.props.id).addEventListener('ended',this.onVidEnded,false);
+        }
     },
 
     renderVideoSources: function(){
@@ -51,6 +56,14 @@ var VideoPlayer = React.createClass({
                 player.currentTime = 0;
                 break;
         }
+    },
+
+    onVidEnded: function(){
+        var self = this;
+        window.setTimeout(function(){$("#"+self.props.id).remove();
+            self.props.onVidEnded();
+        },1000);
+
     },
 
     render: function() {

@@ -47,6 +47,9 @@ var ObjexView = React.createClass({
 
     componentDidMount: function(){
 
+        //dim speech and pause
+        $("#audioControlIcon , #audioControlButton").css({"opacity":".5", "pointer-events":"none"});
+        
         var self = this;
         var data = {};
 
@@ -139,7 +142,6 @@ var ObjexView = React.createClass({
                 locked: (!(i === 0) && self.state.levelStats[mode].indexOf(i) === -1),
                 completed: false
             };
-
             levelsColl.push(levelObj);
         }
 
@@ -237,7 +239,7 @@ var ObjexView = React.createClass({
 
         var self = this;
         self.setState({advancedLevel:!self.state.advancedLevel}, function(){
-            self.prepLevelsPopup();
+            self.prepLevels();
         });
     },
 

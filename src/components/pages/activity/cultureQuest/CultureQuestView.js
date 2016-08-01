@@ -67,6 +67,8 @@ var CultureQuestView = React.createClass({
 
     componentDidMount: function() {
         AppStateStore.addChangeListener(this._onAppStateChange);
+        //dim speech and pause
+        $("#audioControlIcon , #audioControlButton").css({"opacity":".5", "pointer-events":"none"});
     },
 
     componentWillUnmount: function() {
@@ -110,17 +112,72 @@ var CultureQuestView = React.createClass({
         self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
 
+    prepReplayPopup: function(){
+
+        var self = this;
+        var txtBxStyle = {height:'100%'};
+        var popupObj = {
+            id:"Replay",
+            onClickOutside: null,
+            popupStyle: {height:'315px', width:'455px', top:'20%', left:'20%', background:'#fff', border:'2px solid #fff'},
+
+            content: function(){
+
+                return(
+                    <div className="popup-view-content">
+                        <div className="culture-quest-view-popHeaderCont">
+                            <div className="culture-quest-view-popHeaderText">{"Congratulations! ..."}</div>
+                        </div>
+                        <div className="popup-view-bodyText" style={txtBxStyle}>
+                            <div>{self.state.imageData.gameEnd.replace("here",'"Restart"')}</div>
+                        </div>
+                        <div className="popup-view-buttonContCent" style={{background:'#cccccc'}}>
+                            <div className="popup-view-buttonCont">
+                                <button type="button" className="btn btn-default" style={{paddingLeft:'30px', paddingRight:'30px'}}
+                                        onClick={self.onReplay}>Restart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        };
+
+        self.displayPopup(popupObj);
+
+        var debriefAudio = self.state.mediaPath + self.state.imageData.briefAudio;
+        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
+    },
+
     onStartGame: function(){
         this.onClosePopup();
         this.bgAudio();
+    },
+
+    onReplay: function(){
+
+        this.onClosePopup();
+        this.bgAudio();
+        this.prepAnswersColl();
+        this.markHomeRegion();
+
+        for (var i=0; i < this.state.layersColl.length; i++){
+                this.state.layersColl[i].style.opacity = ".8";
+        }
     },
     
     prepGoBackPopup: function(){
 
         var self = this;
-        var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
+        //var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
 
         self.state.audioBgController("pause");
+
+        // for future title use
+        // <div className="culture-quest-goBackHeader">
+        //     <span className="culture-quest-goBackHeaderAlert" style={iconStyle}/>
+        //     <span className="culture-quest-goBackHeaderTitle">Message Box</span>
+        // </div>
 
         var popupObj = {
             id:"GoBack",
@@ -131,11 +188,7 @@ var CultureQuestView = React.createClass({
                 
                 return(
                     <div className="popup-view-content">
-                        <div className="culture-quest-goBackHeader">
-                            <span className="culture-quest-goBackHeaderAlert" style={iconStyle}/>
-                            <span className="culture-quest-goBackHeaderTitle">Message Box</span>
-                        </div>
-                        <div className="popup-view-bodyText" style={{marginLeft:'20px', marginTop:'60px'}}>
+                        <div className="popup-view-bodyText" style={{marginLeft:'20px', marginTop:'40px'}}>
                             {self.state.imageData.keepTryingText}
                         </div>
                     </div>
@@ -243,11 +296,11 @@ var CultureQuestView = React.createClass({
                             state.layersColl[l].removeAttribute(changesColl[c].name);
                             break;
                         case 'classAdd': case 'classAddAll':
-                            if (!state.layersColl[l].classList.contains(changesColl[c].name))
-                                 state.layersColl[l].classList.add(changesColl[c].name);
+                            if (!self.classListWrapper(state.layersColl[l],"contains",changesColl[c].name))
+                                self.classListWrapper(state.layersColl[l],"add",changesColl[c].name);
                             break;
                         case 'classRemove': case 'classRemoveAll':
-                            state.layersColl[l].classList.remove(changesColl[c].name);
+                            self.classListWrapper(state.layersColl[l],"remove",changesColl[c].name);
                             break;
                     }
                 }
@@ -265,15 +318,30 @@ var CultureQuestView = React.createClass({
                                 state.layersColl[l].removeAttribute(changesColl[c].name);
                                 break;
                             case 'classAddExcept':
-                                state.layersColl[l].classList.add(changesColl[c].name);
+                                self.classListWrapper(state.layersColl[l],"add",changesColl[c].name);
                                 break;
                             case 'classRemoveExcept':
-                                state.layersColl[l].classList.remove(changesColl[c].name);
+                                self.classListWrapper(state.layersColl[l],"remove",changesColl[c].name);
                             break;
                         }
                     }
                 }
             }
+        }
+    },
+
+    classListWrapper: function(obj,task,className){
+
+        switch(task){
+            case "add":
+                obj.className += " "+className;
+                break;
+            case "remove":
+                if (obj.className.indexOf(className) !== -1) obj.className.replace(className," ");
+                break;
+            case "contains":
+                return (obj.className.indexOf(className) !== -1);
+                break;
         }
     },
 
@@ -327,10 +395,6 @@ var CultureQuestView = React.createClass({
         this.setState({popupObj:popupObj});
     },
 
-    // setAudioControl: function(mode){
-    //     this.setState({audioController:mode});
-    // },
-
     viewUpdate: function(update){
 
         var self = this;
@@ -344,6 +408,11 @@ var CultureQuestView = React.createClass({
             case "tileAudio":
                 var tileAudio = self.state.mediaPath + "add_tile.mp3";
                 self.playAudio({id:"tile", autoPlay:true, sources:[{format:"mp3", url:tileAudio}]});
+                break;
+            
+            case "gameEnded":
+                self.setState({"showPuzzleGame":false});
+                self.prepReplayPopup();
                 break;
         }
     },

@@ -178,7 +178,7 @@ var CultureQuestPuzzleGameView = React.createClass({
                     dragItem.style.top  = $(target).position().top+"px";
                     dragItem.style.left = $(target).position().left+"px";
                     $(target).attr("pieceNumber", $(dragItem).attr("id").substring(15));
-                    this.viewUpdate({task:"tileAudio", value:null});
+                    // this.viewUpdate({task:"tileAudio", value:null});
                     this.checkCompletion();
                 }else{
                     dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
@@ -196,18 +196,19 @@ var CultureQuestPuzzleGameView = React.createClass({
     },
 
     checkCompletion: function(){
+        var self = this;
         var correctColl = "";
         var placedPuzzles = "";
         $("[id^='puzzleTarget']").each(function(){
-            if ($(this).attr('pieceNumber')) placedPuzzles += ($(this).attr('pieceNumber'));
+            if ($(this).attr('pieceNumber')) {placedPuzzles += ($(this).attr('pieceNumber')); self.viewUpdate({task:"tileAudio", value:null});}
             correctColl += $(this).attr('id').substring(12);
         });
         
         //completed
         if (placedPuzzles === correctColl) {
-            this.setState({showVideo:true});
+            self.setState({showVideo:true});
+            $("#DnDStage").css("pointer-events","none");
         }
-
     },
 
     draggableCanDragCond: function(itemObj){
@@ -238,8 +239,12 @@ var CultureQuestPuzzleGameView = React.createClass({
         this.props.viewUpdate(update);
     },
 
-    render: function() {
+    onVidEnded: function(){
+        this.viewUpdate({task:"gameEnded",value:null})
+    },
 
+
+    render: function() {
         var self=this;
         var videoUrl = this.state.mediaPath + this.props.imageData.videoReward;
         var stageStyle = {width:'768px', height:'506px', display:'block',
@@ -267,11 +272,12 @@ var CultureQuestPuzzleGameView = React.createClass({
                 {self.state.showVideo ?
                     <VideoPlayer
                         id="puzzleAwardVideo"
-                        style={{zIndex:'50',position:'absolute',top:'35%',left:'145px'}}
+                        style={{zIndex:'50',position:'absolute',top:'141px',left:'82px', width:'450px', height:'338px'}}
                         sources={[{format:"mp4",url:videoUrl}]}
                         autoPlay={true}
-                        width="400"
-                        height="300"
+                        width="450"
+                        height="338"
+                        onVidEnded={self.onVidEnded}
                     />:null}
             </div>
         )
