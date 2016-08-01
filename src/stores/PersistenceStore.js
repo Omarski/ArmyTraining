@@ -270,7 +270,7 @@ function setDataSCORM() {
         SCORMActions.dataSave(dataString);
 
         var error = SCORMActions.getLastError();
-        DevToolActions.log(name + ' error code: ' + error);
+        DevToolActions.log('---> error code: ' + error);
     }, 0.1);
 }
 
