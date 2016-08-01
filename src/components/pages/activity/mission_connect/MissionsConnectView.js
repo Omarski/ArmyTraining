@@ -140,11 +140,15 @@ var MissionConnectView = React.createClass({
 
     viewUpdate: function(update){
 
+        var self = this;
+        
         switch (update.task){
 
             case "leaderClicked":
                 if (this.state.stats.completed === this.state.objectNodesNum){
                     this.prepLeaderPopup("won");
+                    var comp = self.state.mediaPath + "Scribble6.mp3";
+                    self.playAudio({id:"countrySelect", autoPlay:true, sources:[{format:"mp3", url:comp}]});
                 }else
                     this.prepLeaderPopup("incomplete");
                 break;
@@ -159,6 +163,21 @@ var MissionConnectView = React.createClass({
 
             case "won":
                 $("#missionConnectViewPieceBlock"+this.state.chiefNode.nodeNumber + " .mission-connect-view-icon").css("opacity","1");
+                break;
+
+            case "iconClick":
+                var icon = self.state.mediaPath + "PickAGuy2.mp3";
+                self.playAudio({id:"countrySelect", autoPlay:true, sources:[{format:"mp3", url:icon}]});
+                break;
+
+            case "correct":
+                var correct = self.state.mediaPath + "Yay2.mp3";
+                self.playAudio({id:"countrySelect", autoPlay:true, sources:[{format:"mp3", url:correct}]});
+                break;
+
+            case "wrong":
+                var wrong = self.state.mediaPath + "Boo2.mp3";
+                self.playAudio({id:"countrySelect", autoPlay:true, sources:[{format:"mp3", url:wrong}]});
                 break;
         }
     },

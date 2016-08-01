@@ -56,7 +56,7 @@ var CultureQuestView = React.createClass({
 
         var self = this;
         for (var i = 0; i < layersColl.length; i++){
-            layersColl[i].style.opacity = "0.8";
+            layersColl[i].style.opacity = "0.7";
         }
         this.setState({layersColl:layersColl}, function(){
             self.prepAnswersColl();
@@ -162,7 +162,7 @@ var CultureQuestView = React.createClass({
         this.markHomeRegion();
 
         for (var i=0; i < this.state.layersColl.length; i++){
-                this.state.layersColl[i].style.opacity = ".8";
+                this.state.layersColl[i].style.opacity = "0.7";
         }
     },
     
