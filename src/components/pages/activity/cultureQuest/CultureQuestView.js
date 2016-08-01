@@ -296,11 +296,11 @@ var CultureQuestView = React.createClass({
                             state.layersColl[l].removeAttribute(changesColl[c].name);
                             break;
                         case 'classAdd': case 'classAddAll':
-                            if (!state.layersColl[l].classList.contains(changesColl[c].name))
-                                 state.layersColl[l].classList.add(changesColl[c].name);
+                            if (!self.classListWrapper(state.layersColl[l],"contains",changesColl[c].name))
+                                self.classListWrapper(state.layersColl[l],"add",changesColl[c].name);
                             break;
                         case 'classRemove': case 'classRemoveAll':
-                            state.layersColl[l].classList.remove(changesColl[c].name);
+                            self.classListWrapper(state.layersColl[l],"remove",changesColl[c].name);
                             break;
                     }
                 }
@@ -318,15 +318,30 @@ var CultureQuestView = React.createClass({
                                 state.layersColl[l].removeAttribute(changesColl[c].name);
                                 break;
                             case 'classAddExcept':
-                                state.layersColl[l].classList.add(changesColl[c].name);
+                                self.classListWrapper(state.layersColl[l],"add",changesColl[c].name);
                                 break;
                             case 'classRemoveExcept':
-                                state.layersColl[l].classList.remove(changesColl[c].name);
+                                self.classListWrapper(state.layersColl[l],"remove",changesColl[c].name);
                             break;
                         }
                     }
                 }
             }
+        }
+    },
+
+    classListWrapper: function(obj,task,className){
+
+        switch(task){
+            case "add":
+                obj.className += " "+className;
+                break;
+            case "remove":
+                if (obj.className.indexOf(className) !== -1) obj.className.replace(className," ");
+                break;
+            case "contains":
+                return (obj.className.indexOf(className) !== -1);
+                break;
         }
     },
 

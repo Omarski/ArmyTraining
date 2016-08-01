@@ -109,7 +109,7 @@ var ObjexGameView = React.createClass({
 
             var hit = $.grep(self.state.activeRoundObjexColl, function(e) { return "imageLayer_canvas_" +e.hog_id === canvasElement.id })[0];
 
-            if ((hit && self.state.hitColl.indexOf(hit.hog_id) === -1) ||
+            if ((hit && self.state.hitColl.indexOf(hit.hog_id) === -1 && !self.state.hintMode) ||
                 (hit && self.state.hintMode && hit.hog_id === self.state.hintedId)) {
 
                 $("#objexViewCellImg"+canvasElement.id.substring(18)).css("opacity","1");
