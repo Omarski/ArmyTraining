@@ -5,6 +5,7 @@ var ConfigConstants = require('../constants/ConfigConstants');
 var PersistenceConstants = require('../constants/PersistenceConstants');
 var PersistenceActions = require('../actions/PersistenceActions');
 var SCORMActions = require('../actions/SCORMActions');
+var DevToolActions = require('../actions/DevToolsActions');
 
 var CHANGE_EVENT = 'change';
 
@@ -100,6 +101,10 @@ function getData(name) {
         default:
             getDataLocalStorage(name);
     }
+
+    var error = SCORMActions.getLastError();
+    DevToolActions.log(name + ' error code: ' + error);
+
 
     // for now always mark complete
     _initialLoadComplete = true;
@@ -263,6 +268,9 @@ function setDataSCORM() {
 
     setTimeout(function() {
         SCORMActions.dataSave(dataString);
+
+        var error = SCORMActions.getLastError();
+        DevToolActions.log(name + ' error code: ' + error);
     }, 0.1);
 }
 

@@ -17,6 +17,7 @@ var ActiveDialogEvaluation = require('../../../../components/pages/activity/acti
 var ActiveDialogClosedCaptionActions = require('../../../../actions/active_dialog/ActiveDialogClosedCaptionActions');
 var ActiveDialogClosedCaption = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaption');
 var ActiveDialogClosedCaptionPanel = require('../../../../components/pages/activity/active_dialog/ActiveDialogClosedCaptionPanel');
+
 var RemediationView = require('../../../RemediationView');
 
 
@@ -182,6 +183,9 @@ var ActiveDialogView = React.createClass({
         } else {
             this.setState(getPageState());
         }
+        setTimeout(function () {
+            ActiveDialogClosedCaptionActions.show();
+        });
     },
 
     componentWillUnmount: function() {

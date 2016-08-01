@@ -4,7 +4,7 @@ var ActiveDialogClosedCaptionConstants = require('../../constants/active_dialog/
 
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
-var _visible = false;
+var _visible = true;
 var _transcript = "";
 
 function show() {
