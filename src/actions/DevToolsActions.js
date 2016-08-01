@@ -2,6 +2,12 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var DevToolsConstants = require('../constants/DevToolsConstants');
 
 var DevToolsActions = {
+    log: function(data) {
+        AppDispatcher.dispatch({
+            actionType: DevToolsConstants.DEV_TOOLS_LOG,
+            data: data
+        });
+    },
     show: function(data) {
         AppDispatcher.dispatch({
             actionType: DevToolsConstants.DEV_TOOLS_SHOW,

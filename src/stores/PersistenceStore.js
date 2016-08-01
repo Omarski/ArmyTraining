@@ -137,9 +137,6 @@ function getDataSCORM() {
         // do something
     }
 
-    alert('--->>', loadedDataObject);
-    alert(SCORMActions.getLastError());
-
     // update cache
     if (loadedDataObject) {
         _dataCache = loadedDataObject;

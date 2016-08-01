@@ -39,6 +39,7 @@ var PuzzleMapView = require('../components/pages/activity/puzzle_map/PuzzleMapVi
 var MissionConnectView = require('../components/pages/activity/mission_connect/MissionsConnectView');
 var ObjexView = require('../components/pages/activity/objex/ObjexView');
 var ClosedCaptionActions = require('../actions/ClosedCaptionActions');
+var DevToolsActions = require('../actions/DevToolsActions');
 
 function getPageState() {
     var page = null;
@@ -236,6 +237,15 @@ var ContentView = React.createClass({
                 default:
                     page = <DefaultPageView page={this.state.page} />;
             }
+
+            var str = this.state.page.type;
+            var dta = DevToolsActions;
+            setTimeout(function () {
+                dta.log("Page Type: " + str);
+            });
+
+
+
         }
 
         //ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);" onTouchStart={onTouchStartFunction} onTouchMove={onTouchMoveFunction} onTouchCancel={onTouchCancelFunction}
