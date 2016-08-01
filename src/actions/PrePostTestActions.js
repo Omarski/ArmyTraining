@@ -100,10 +100,11 @@ var PrePostTestActions = {
 
                 // add page to either the end or right before the quiz end page if found
                 var insertIndexPre = pretestchapter.pages.length;
-                if (pretestchapter.pages.length > 0) {
-                    var lastPagePre = pretestchapter.pages[pretestchapter.pages.length - 1];
-                    if (lastPagePre.type === PageTypeConstants.TEST_OUT_QUIZ_END) {
-                        insertIndexPre = -1;
+                for (var pageIndexPre in pretestchapter.pages) {
+                    var preTestPage = pretestchapter.pages[pageIndexPre];
+                    if (preTestPage.type === PageTypeConstants.TEST_OUT_QUIZ_END) {
+                        insertIndexPre = pageIndexPre;
+                        break;
                     }
                 }
 
@@ -130,10 +131,11 @@ var PrePostTestActions = {
 
                 // add page to either the end or right before the quiz end page if found
                 var insertIndexPost = posttestchapter.pages.length;
-                if (posttestchapter.pages.length > 0) {
-                    var lastPagePost = posttestchapter.pages[posttestchapter.pages.length - 1];
-                    if (lastPagePost.type === PageTypeConstants.POST_TEST_QUIZ_END) {
-                        insertIndexPost = -1;
+                for (var pageIndexPost in posttestchapter.pages) {
+                    var postTestPage = posttestchapter.pages[pageIndexPost];
+                    if (postTestPage.type === PageTypeConstants.POST_TEST_QUIZ_END) {
+                        insertIndexPost = pageIndexPost;
+                        break;
                     }
                 }
 
