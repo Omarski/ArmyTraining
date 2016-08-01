@@ -217,15 +217,17 @@ var MultipleChoiceView = React.createClass({
         var choices;
         choices = state.answers.map(function(item, index){
             var ans = item.nut.uttering.utterance.translation.text;
-
             function containsAllAscii(str) {
                 return  /^[\000-\177]*$/.test(str) ;
             }
 
+            // console.log("ans.match(new attempt)", ans.match(new RegExp(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/)));
             var bigFontNonAscii = {};
 
             if(!containsAllAscii(ans)){
-                bigFontNonAscii = {fontSize: "20px"};
+                if(!ans.match(/[\u2018\u2019]/g)){
+                    bigFontNonAscii = {fontSize: "20px"};
+                }
             }
 
             // TODO: allow for the text to be any of the text channels
