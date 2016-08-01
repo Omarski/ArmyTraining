@@ -49,12 +49,12 @@ $(document).on("click", ".btn-drp", function(){
 });
 
 document.onselectstart = function(e) {
-    console.log("e", e);
+    console.dir("e", e);
+    console.dir("e.target.classList", e.target.classList);
     if(e.path[0].classList[0] === "tooltip-inner" || e.path[1].classList[0] === "tool-tip-inner"){
         console.log("SUCCESS!!!");
         return true;
     }
-    // console.log("e", e, "e.target.classList", e.target.classList);
     return false;
 };
 
