@@ -4,7 +4,7 @@
 div{
   .info-page-notes{
     .info-bullets-div {
-      display: inline-block;
+      display: inline-block !important;
       .info-number {
         float: left;
       }
