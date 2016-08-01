@@ -223,10 +223,12 @@ var MultipleChoiceView = React.createClass({
 
             var bigFontNonAscii = {};
 
+
             if(!containsAllAscii(ans)){
-                if(!ans.match(/[\u2018\u2019]/g) && !ans.match(new RegExp(/^[A-z]+$/))){
-                    bigFontNonAscii = {fontSize: "20px"};
-                }
+                // !ans.match(/[\u2018\u2019]/g) <------- checks for a unicode apostrophe
+                    if(!ans.match(new RegExp(/[a-z]/i))){
+                        bigFontNonAscii = {fontSize: "20px"};
+                    }
             }
 
             // TODO: allow for the text to be any of the text channels
