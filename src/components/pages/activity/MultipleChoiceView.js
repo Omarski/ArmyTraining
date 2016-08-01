@@ -221,7 +221,6 @@ var MultipleChoiceView = React.createClass({
                 return  /^[\000-\177]*$/.test(str) ;
             }
 
-            // ("ans.match(new attempt)", ans.match(new RegExp(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/)));
             var bigFontNonAscii = {};
 
             if(!containsAllAscii(ans)){
