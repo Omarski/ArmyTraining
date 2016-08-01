@@ -31,6 +31,7 @@ function flushData() {
             break;
         case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
             flushDataSCORM();
+            flushLocalStorage(); // TODO hack for now <----
             break;
         case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
             break;
@@ -117,7 +118,6 @@ function getBookmarkDataSCORM() {
 
 function getData(name) {
     // TODO make asynchronous
-
     // check cache first
     if (_dataCache && _dataCache.hasOwnProperty(name)) {
         return _dataCache[name];
@@ -136,10 +136,6 @@ function getData(name) {
         default:
             getDataLocalStorage(name);
     }
-
-    var error = SCORMActions.getLastError();
-    DevToolActions.log(name + ' error code: ' + error);
-
 
     // for now always mark complete
     _initialLoadComplete = true;
@@ -181,6 +177,15 @@ function getDataSCORM() {
     if (loadedDataObject) {
         _dataCache = loadedDataObject;
     }
+
+
+    // TODO for now fall back to local storage
+    var error = SCORMActions.getLastError();
+    if (error != 0) {
+        getDataLocalStorage();
+        DevToolActions.log('successful data load');
+    }
+    DevToolActions.log(name + ' error code: ' + error);
 }
 
 
