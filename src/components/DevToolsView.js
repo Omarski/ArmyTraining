@@ -2,6 +2,7 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var DevToolsStore = require('../stores/DevToolsStore');
 var Button = ReactBootstrap.Button;
+var Panel = ReactBootstrap.Panel;
 var ListGroup = ReactBootstrap.ListGroup;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var BookmarkActions = require('../actions/BookmarkActions');
@@ -24,6 +25,10 @@ var DevToolsView = React.createClass({
 
     clearBookmark: function() {
         BookmarkActions.destroy();
+    },
+
+    clearConsole: function() {
+        DevToolsActions.clearLog();
     },
 
     resetProgress: function() {
@@ -59,6 +64,7 @@ var DevToolsView = React.createClass({
                             <h4 className="modal-title">Dev Tools</h4>
                         </div>
                         <div className="modal-body">
+
                             <ListGroup>
                                 <ListGroupItem>
                                     <Button bsStyle='warning' onClick={this.clearBookmark}>Clear Bookmark</Button>
@@ -73,8 +79,15 @@ var DevToolsView = React.createClass({
                                     <Button bsStyle='warning' onClick={this.toggleLessonIDs}>Toggle Lesson IDs</Button>
                                 </ListGroupItem>
                             </ListGroup>
-                            <ListGroup className={"dev-tools-console"}>
-                                {console}
+                            <Panel header="Console">
+                                <ListGroup fill className={"dev-tools-console"}>
+                                    {console}
+                                </ListGroup>
+                            </Panel>
+                            <ListGroup>
+                                <ListGroupItem>
+                                    <Button bsStyle='success' onClick={this.clearConsole}>Clear Console</Button>
+                                </ListGroupItem>
                             </ListGroup>
                         </div>
 

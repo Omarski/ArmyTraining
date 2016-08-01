@@ -173,6 +173,8 @@ function getPageState(cmp, props) {
 }
 
 function playMediaAudio(xidArray){
+    console.log('playMediaAudio ')
+    console.log(xidArray)
     //xid is of the form "000000000.mp3"
     if(xidArray.length > 0){
         $("#audioControlButton").prop('disabled', false);
@@ -192,6 +194,8 @@ function playMediaAudio(xidArray){
 }
 
 function playAudio(xid){
+    console.log('playAudio ')
+    console.log(xid)
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
@@ -214,10 +218,16 @@ var InfoView = React.createClass({
     },
 
     componentDidMount: function() {
+        console.log("componentDidMount")
+        AppStateStore.addChangeListener(this._onAppStateChange);
+    },
+
+    componentDidUpdate: function() {
+
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
-        AppStateStore.addChangeListener(this._onAppStateChange);
+
         var video = null;
         // play all note media in order (see dnd for example)
         playMediaAudio(noteMedia);
@@ -427,6 +437,7 @@ var InfoView = React.createClass({
      */
     _onChange: function() {
         if (this.isMounted()) {
+            console.log('onChange')
             this.setState(getPageState(this, this.props));
         }
     },

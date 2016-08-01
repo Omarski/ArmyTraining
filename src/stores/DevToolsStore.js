@@ -23,6 +23,10 @@ function log(data) {
     _console.push(data);
 }
 
+function clearLog() {
+    _console = [];
+}
+
 var DevToolsStore = assign({}, EventEmitter.prototype, {
 
     isVisible: function() {
@@ -49,6 +53,10 @@ var DevToolsStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     switch(action.actionType) {
+        case DevToolsConstants.DEV_TOOLS_LOG_CLEAR:
+            clearLog();
+            DevToolsStore.emitChange();
+            break;
         case DevToolsConstants.DEV_TOOLS_LOG:
             log(action.data);
             DevToolsStore.emitChange();
