@@ -3,8 +3,12 @@
 /* Indents 3rd line of bullet points in info pages*/
 .info-page-notes{
   .info-bullets-div {
+    display: inline-block;
+    .info-number {
+      float: left;
+    }
     .info-bullets-indent {
-      display: table;
+      display: table-row-group;
     }
   }
 }

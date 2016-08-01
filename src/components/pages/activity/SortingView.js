@@ -345,6 +345,8 @@ var SortingView = React.createClass({
                 audio.play();
                 audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
             }
+        } else {
+            feedback = (<div className="row sorting-feedback-text"><h5></h5></div>);
         }
         if(numMoved > 0 && numMoved < numQuestions){
             button = <button className="btn btn-action sorting-clear btn-rst" onClick={self.reset}>Clear All</button>; // clear all button
