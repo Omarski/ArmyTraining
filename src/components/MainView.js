@@ -70,6 +70,10 @@ var MainView = React.createClass({
         ConfigActions.load();
     },
 
+    loadStorage: function() {
+        PersistenceStore.get('units');
+    },
+
     loadDli: function(){
         DliActions.load();
     },
@@ -190,13 +194,15 @@ var MainView = React.createClass({
         }
     },
 
+
+
     loadProject: function(){
         NotificationActions.show({
             title: 'Please wait',
             body: 'Loading...',
             onClose: null
         });
-        PersistenceStore.get('units');
+        this.loadConfiguration();
     },
 
 
@@ -261,8 +267,7 @@ var MainView = React.createClass({
         var self = this;
         setTimeout(function() {
             NotificationActions.updateImage(LocalizationStore.labelFor("app", "imageSplash"));
-
-            self.loadConfiguration();
+            self.loadCoachFeedback();
         }, 100);
     },
 
@@ -272,7 +277,7 @@ var MainView = React.createClass({
     _onConfigChange: function() {
         var self = this;
         setTimeout(function() {
-            self.loadCoachFeedback();
+            self.loadStorage();
         }, 100)
     },
 
