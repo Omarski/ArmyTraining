@@ -11,6 +11,8 @@ var Utils = (function() {
                 // str = str + "</p></div>";
         // } else {
             //this is for styling bullet points
+        // test
+        
             str = '<div><p>' + str;
             str = str.replace(new RegExp('- ', 'g'), '</p></div><div class="info-bullets-div"><span class="info-view-bullet-item"></span><p class="info-bullets-indent">');
             str = str + '</p></div>';
