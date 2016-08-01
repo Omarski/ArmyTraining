@@ -8,6 +8,12 @@ var PersistenceActions = {
         });
     },
 
+    flush: function() {
+        AppDispatcher.dispatch({
+            actionType: PersistenceConstants.PERSISTENCE_FLUSH
+        });
+    },
+
     remove: function(name) {
         AppDispatcher.dispatch({
             actionType: PersistenceConstants.PERSISTENCE_REMOVE,
