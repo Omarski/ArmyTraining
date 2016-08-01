@@ -25,15 +25,16 @@ div{
 }
 
 .ie-nine-class-multiple-choice{
-  .multiple-choice-row-ie{
-    margin: 0px;
-    .multiple-choice-alert-text {
-      display: inline-block;
-      .thumbnail {
+  .multiple-choice-row-container-ie{
+    .multiple-choice-row-ie{
+      margin: 0px;
+      .multiple-choice-alert-text {
         display: inline-block;
-        float: left;
-        position: static;
-      }
+        .thumbnail {
+          display: inline-block;
+          float: left;
+          position: static;
+        }
         .multiple-choice-feedback-icon{
           padding-right: 10px;
           float: left;
@@ -43,6 +44,7 @@ div{
             display: table-row-group;
           }
         }
+      }
     }
   }
 }

@@ -250,7 +250,7 @@ var MultipleChoiceView = React.createClass({
                         <div className="col-md-4 col-sm5 col-xs-12">
                         {mediaContainer}
                         </div>
-                        <div className="multiple-choice-row-container col-md-8 col-sm-7">
+                        <div className="multiple-choice-row-container-ie col-md-8 col-sm-7">
                             <div className="mc-choices-and-feedback-container">
                                 <div className="row multiple-choice-row-ie">
                                     <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
@@ -270,7 +270,7 @@ var MultipleChoiceView = React.createClass({
                         <div>
                         {mediaContainer}
                         </div>
-                        <div className="multiple-choice-row-container">
+                        <div className="multiple-choice-row-container-ie">
                             <div className="mc-choices-and-feedback-container">
                                 <div className="row multiple-choice-row-ie">
                                     <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
