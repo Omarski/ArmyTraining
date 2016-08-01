@@ -47,6 +47,9 @@ var DevToolsView = React.createClass({
         DevToolsStore.removeChangeListener(this._onChange);
     },
     render: function() {
+        var console = DevToolsStore.console().map(function(item, index) {
+            return (<ListGroupItem key={"dev-tools-console" + index}>{item}</ListGroupItem>)
+        });
         return  (
             <div id="devToolsView" className="modal fade" data-backdrop="static">
                 <div className={"modal-dialog"}>
@@ -70,7 +73,11 @@ var DevToolsView = React.createClass({
                                     <Button bsStyle='warning' onClick={this.toggleLessonIDs}>Toggle Lesson IDs</Button>
                                 </ListGroupItem>
                             </ListGroup>
+                            <ListGroup className={"dev-tools-console"}>
+                                {console}
+                            </ListGroup>
                         </div>
+
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal">{LocalizationStore.labelFor("tools", "mdlClose")}</button>
                         </div>

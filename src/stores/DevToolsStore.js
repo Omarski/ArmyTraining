@@ -5,7 +5,7 @@ var DevToolsConstants = require('../constants/DevToolsConstants');
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 var _visible = false;
-
+var _console = [];
 
 function show() {
     _visible = true;
@@ -19,10 +19,18 @@ function hide() {
     }
 }
 
+function log(data) {
+    _console.push(data);
+}
+
 var DevToolsStore = assign({}, EventEmitter.prototype, {
 
     isVisible: function() {
         return _visible;
+    },
+
+    console: function() {
+        return _console;
     },
 
     emitChange: function() {
@@ -41,6 +49,10 @@ var DevToolsStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
     switch(action.actionType) {
+        case DevToolsConstants.DEV_TOOLS_LOG:
+            log(action.data);
+            DevToolsStore.emitChange();
+            break;
         case DevToolsConstants.DEV_TOOLS_SHOW:
             show(action.data);
             DevToolsStore.emitChange();
