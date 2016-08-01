@@ -49,9 +49,9 @@ $(document).on("click", ".btn-drp", function(){
 });
 
 document.onselectstart = function(e) {
-    if(e.path[0].classList[0] === "tooltip-inner" || e.path[1].classList[0] === "tool-tip-inner"){
-        return true;
-    }
+    // if(e.path[0].classList[0] === "tooltip-inner" || e.path[1].classList[0] === "tool-tip-inner"){
+    //     return true;
+    // }
     return false;
 };
 
