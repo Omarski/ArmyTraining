@@ -1,14 +1,16 @@
 /* This file targets IE9 and below */
 
 /* Indents 3rd line of bullet points in info pages*/
-.info-page-notes{
-  .info-bullets-div {
-    display: inline-block;
-    .info-number {
-      float: left;
-    }
-    .info-bullets-indent {
-      display: table-row-group;
+div{
+  .info-page-notes{
+    .info-bullets-div {
+      display: inline-block !important;
+      .info-number {
+        float: left;
+      }
+      .info-bullets-indent {
+        display: table-row-group;
+      }
     }
   }
 }
