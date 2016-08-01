@@ -252,7 +252,7 @@ var MultipleChoiceView = React.createClass({
                         </div>
                         <div className="multiple-choice-row-container col-md-8 col-sm-7">
                             <div className="mc-choices-and-feedback-container">
-                                <div className="row multiple-choice-row">
+                                <div className="row multiple-choice-row-ie">
                                     <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
                                         {choices}
                                     </ul>
@@ -272,7 +272,7 @@ var MultipleChoiceView = React.createClass({
                         </div>
                         <div className="multiple-choice-row-container">
                             <div className="mc-choices-and-feedback-container">
-                                <div className="row multiple-choice-row">
+                                <div className="row multiple-choice-row-ie">
                                     <ul className="list-group multiple-choice-choices-container list-group-item-mobile">
                                         {choices}
                                     </ul>
