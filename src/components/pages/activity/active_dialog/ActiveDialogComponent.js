@@ -3,7 +3,7 @@ var ReactBootstrap = require('react-bootstrap');
 var PageStore = require('../../../../stores/PageStore');
 
 
-
+var _soundTimer = 0;
 
 var ActiveDialogComponent = React.createClass({
     bAnimationPlaying: false,
@@ -279,6 +279,11 @@ var ActiveDialogComponent = React.createClass({
         this.bSoundPlaying = true;
         this.bSoundLoading = false;
 
+        clearInterval(_soundTimer);
+        _soundTimer = setTimeout(function () {
+            console.log("I can do this even better than Greg!");
+            clearInterval(_soundTimer);
+        }, event.currentTarget.duration + 1);
         // if videos are found play them
         this.syncPlayback();
     },
