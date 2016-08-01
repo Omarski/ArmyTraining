@@ -172,7 +172,9 @@ function loadNext() {
             chapIndex = 0;
             var unitKey = findCurrentUnitKey();
             unitKey = findNextUnitKey(unitKey);
-            _currentUnit = UnitStore.getAll()[unitKey];
+            var newUnit = UnitStore.getAll()[unitKey];
+            saveOnUnitChange(newUnit);
+            _currentUnit = newUnit;
         }
         _currentChapter = _currentUnit.data.chapter[chapIndex];
         newIndex = 0;
@@ -268,7 +270,9 @@ function loadNextRequired() {
         if (chapterIndex >= _currentUnit.data.chapter.length) {
             // get the next required unit
             unitIndex = findNextRequiredUnit();
-            _currentUnit = UnitStore.getAll()[unitIndex];
+            var newUnit = UnitStore.getAll()[unitIndex];
+            saveOnUnitChange(newUnit);
+            _currentUnit = newUnit;
 
             // find the first incomplete chapter of the new unit
             chapterIndex = findNextRequiredChapter(_currentUnit);
@@ -368,7 +372,9 @@ function loadPrevious() {
                 var validPrevUnit = isValidPrevUnit(prevUnit);
                 if (validPrevUnit === false) return;
 
-                _currentUnit = UnitStore.getAll()[unitKey];
+                var newUnit = UnitStore.getAll()[unitKey];
+                saveOnUnitChange(newUnit);
+                _currentUnit = newUnit;
                 chapIndex = _currentUnit.data.chapter.length -1;
             }
             _currentChapter = _currentUnit.data.chapter[chapIndex];
@@ -418,6 +424,7 @@ function load(data) {
 
         // load page data
         $.getJSON(pageContentPath, function(result) {
+            saveOnUnitChange(data.unit);
             _currentUnit = data.unit;
             _currentChapter = data.chapter;
             _currentPage = data.page;
@@ -505,6 +512,7 @@ function reset() {
 
         var units = UnitStore.getAll();
         for (var key in units) {
+            saveOnUnitChange(units[key]);
             _currentUnit = units[key];
             _currentChapter = _currentUnit.data.chapter[0];
             _currentPage = _currentChapter.pages[0];
@@ -602,6 +610,20 @@ function saveCurrentPage() {
     });
 
     return true;
+}
+
+function saveOnUnitChange(newUnit) {
+    if (_currentUnit && (_currentUnit.data.xid != null) &&
+        newUnit && (newUnit.data.xid != null)) {
+        var currentUnitXid = _currentUnit.data.xid;
+        var newUnitXid = newUnit.data.xid;
+
+        if (currentUnitXid !== newUnitXid) {
+            setTimeout(function() {
+                PersistenceActions.flush();
+            }, 0.1);
+        }
+    }
 }
 
 var PageStore = assign({}, EventEmitter.prototype, {
