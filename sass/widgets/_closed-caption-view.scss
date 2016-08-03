@@ -4,14 +4,8 @@
     position: absolute;
     top: 13px;
     right: 7px;
-    padding: 2px;
-    height: 28px;
-    width: 30px;
+    padding: 0;
     text-shadow: 0 0 3px black;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #BA9077;
-    background-color: #5A5C51;
     span {
       color: white !important;
       font-size: 20px;
@@ -22,37 +16,21 @@
     height: 28px;
     background-color: black;
     text-shadow: 0 0 3px black;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #BA9077;
-    background-color: #5A5C51;
   }
 
   .closed-caption-button:hover {
     height: 28px;
     text-shadow: 0 0 3px black;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #BA9077;
-    background-color: #5A5C51;
   }
 
   .closed-caption-button:focus {
     height: 28px;
     text-shadow: 0 0 3px black;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #BA9077;
-    background-color: #5A5C51;
   }
 
   .closed-caption-button:active {
     height: 28px;
     text-shadow: 0 0 3px black;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #BA9077;
-    background-color: #5A5C51;
     span {
       color: #D3D3D3 !important;
     }

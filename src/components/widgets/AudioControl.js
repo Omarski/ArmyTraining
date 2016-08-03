@@ -33,7 +33,7 @@ var AudioControl = React.createClass({
                     className="btn btn-default btn-link main-nav-bookmark"
                     onClick={this.toggle}
                 >
-                    <span className="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    <img src="images/icons/playn.png" className="bookmark-icon"/>
                 </Button>
             );
         } else {
@@ -47,13 +47,13 @@ var AudioControl = React.createClass({
                     className="btn btn-default btn-link main-nav-bookmark"
                     onClick={this.toggle}
                 >
-                    <span className="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                    <img src="images/icons/pausenarrationn.png" className="bookmark-icon"/>
                 </Button>
             );
         }
         return (
             <div className="audio-controls">
-                <i id="audioControlIcon" className="fa fa-commenting" aria-hidden="true"></i>
+                <img id="audioControlIcon" src="images/icons/narrationn.png"/>
                 {controlButton}
             </div>
         )

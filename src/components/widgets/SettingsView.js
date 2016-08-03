@@ -176,7 +176,7 @@ var SettingsView = React.createClass({
                             <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
                                     alt={LocalizationStore.labelFor("header", "tooltipSettings")}
                                     aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button btn-set">
-                                <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
+                                <img src="images/icons/settingsn.png"/>
                             </Button>
                         </OverlayTrigger>
                     </a>
@@ -189,7 +189,7 @@ var SettingsView = React.createClass({
                             <Button title={LocalizationStore.labelFor("header", "tooltipSettings")}
                             alt={LocalizationStore.labelFor("header", "tooltipSettings")}
                             aria-label={LocalizationStore.labelFor("header", "tooltipSettings")} className="btn btn-default btn-link btn-lg main-nav-bar-button">
-                                    <span className="glyphicon glyphicon-cog btn-icon" aria-hidden="true"></span>
+                                    <img src="images/icons/settingsn.png"/>
                             </Button>
                             <p>{LocalizationStore.labelFor("settings", "lblTitle")}</p>
                         </div>

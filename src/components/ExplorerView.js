@@ -439,15 +439,15 @@ var TOCPageRow = React.createClass({
         var itemState = this.props.item.state || null;
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
             cls += ' current';
-            icon = (<span className="glyphicon glyphicon-star current" aria-hidden="true"></span>);
+            icon = (<img src="images/icons/currentpage.png"/>);
         } else if (itemState && itemState.visited) {
-            icon = (<span className="glyphicon glyphicon-adjust visited" aria-hidden="true"></span>);
+            icon = (<img src="images/icons/inprogress.png"/>);
             cls += ' visited';
         } else if (itemState && itemState.complete) {
-            icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
+            icon = (<img src="images/icons/completeexplorer.png"/>);
         } else {
             cls += ' not-seen';
-            icon = (<i className="fa fa-circle-o" aria-hidden="true"></i>);
+            icon = (<img src="images/icons/notseen.png"/>);
         }
 
         return (
