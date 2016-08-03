@@ -284,7 +284,7 @@ var FooterView = React.createClass({
                                     type="button" onClick={this.previous}
                                     className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
-                                <span className="glyphicon glyphicon-chevron-left btn-icon" aria-hidden="true"></span>
+                                Back
                             </button>
                         </td>
                         <td className="footer-page-state">
@@ -298,7 +298,7 @@ var FooterView = React.createClass({
                                     onClick={this.next}
                                     className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipNext")}>
-                                <span className="glyphicon glyphicon-chevron-right btn-icon" aria-hidden="true"></span>
+                                Next
                             </button>
 
                             <button title={LocalizationStore.labelFor("footer", "tooltipClose")}
@@ -307,7 +307,7 @@ var FooterView = React.createClass({
                                     onClick={this.toggleTOC}
                                     className="btn btn-default btn-lg btn-link btn-close btn-exp"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipClose")}>
-                                    <span className="glyphicon glyphicon-remove btn-icon" aria-hidden="true"></span>
+                                    ^
                             </button>
 
                         </td>
