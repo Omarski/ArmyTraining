@@ -143,6 +143,13 @@ var CultureQuestQuiz = React.createClass({
             if (self.state.showInputBlocks) $("#culture-quest-quiz-view-inputBlock0").focus();
         });
 
+        //return click to answer
+        $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
+            if(e.keyCode === 13){
+                self.checkAnswer();
+            }
+        });
+
         //backspace
         $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
             if(e.keyCode === 8){
