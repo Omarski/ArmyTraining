@@ -56,7 +56,7 @@ var CultureQuestView = React.createClass({
 
         var self = this;
         for (var i = 0; i < layersColl.length; i++){
-            layersColl[i].style.opacity = "0.8";
+            layersColl[i].style.opacity = "0.7";
         }
         this.setState({layersColl:layersColl}, function(){
             self.prepAnswersColl();
@@ -145,8 +145,6 @@ var CultureQuestView = React.createClass({
 
         self.displayPopup(popupObj);
 
-        var debriefAudio = self.state.mediaPath + self.state.imageData.briefAudio;
-        self.playAudio({id:"debrief", autoPlay:true, sources:[{format:"mp3", url:debriefAudio}]});
     },
 
     onStartGame: function(){
@@ -159,11 +157,14 @@ var CultureQuestView = React.createClass({
         this.onClosePopup();
         this.bgAudio();
         this.prepAnswersColl();
-        this.markHomeRegion();
 
         for (var i=0; i < this.state.layersColl.length; i++){
-                this.state.layersColl[i].style.opacity = ".8";
+            this.state.layersColl[i].style.opacity = "0.7";
+            this.state.layersColl[i].style.pointerEvents = "auto";
+            this.updateLayersColl( this.state.layersColl[i],'attributeRemove', [{'name':'lastClicked'},{'name':'hidden'},{'name':'state'}]);
         }
+
+        this.markHomeRegion();
     },
     
     prepGoBackPopup: function(){
@@ -188,7 +189,7 @@ var CultureQuestView = React.createClass({
                 
                 return(
                     <div className="popup-view-content">
-                        <div className="popup-view-bodyText" style={{marginLeft:'20px', marginTop:'40px'}}>
+                        <div className="popup-view-bodyText" style={{marginLeft:'20px', marginTop:'30px'}}>
                             {self.state.imageData.keepTryingText}
                         </div>
                     </div>

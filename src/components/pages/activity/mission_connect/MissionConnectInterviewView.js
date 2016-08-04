@@ -63,6 +63,8 @@ var MissionConnectInterviewView = React.createClass({
         
             if (correct === "true") {
 
+                self.viewUpdate({task:"correct",value:null});
+
                 var iconCheckImg = self.props.images[parseInt(self.props.activeNode) - 1].charIconCheckUrl;
                 self.props.updateScore([{property:'answered', value:true},
                     {property:'attempts', value:attempt},
@@ -91,6 +93,9 @@ var MissionConnectInterviewView = React.createClass({
                 setTimeout(function(){self.renderFeedback();},250);
 
             }else{
+
+                self.viewUpdate({task:"wrong",value:null});
+
                 self.props.updateScore([{property:'attempts', value:attempt},
                     {property:'allAttempts', value:attempts},
                     {property:'choiceNum', value:choiceNum}]);

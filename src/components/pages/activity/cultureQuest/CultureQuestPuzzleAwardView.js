@@ -54,7 +54,7 @@ var CultureQuestPuzzleView = React.createClass({
         var sliderPuzzles = completedData.map(function(region,index){
 
             var pieceImg = self.state.mediaPath + region.tile;
-            var pieceStyle = {top: topPadding+(pieceHeight * index), background:"url("+pieceImg+") no-repeat 100% 100%"};
+            var pieceStyle = {top: topPadding+(pieceHeight * index), background:"url("+pieceImg+") no-repeat", backgroundSize:"40px 50px"};
             return (
                 <div className="culture-quest-puzzle-award-view-sliderPuzzle" style={pieceStyle} key={index}></div>
             )
