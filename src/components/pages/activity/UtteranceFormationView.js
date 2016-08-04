@@ -3,12 +3,19 @@ var PageStore = require('../../../stores/PageStore');
 var ASRStore = require('../../../stores/ASRStore');
 var ConfigStore= require('../../../stores/ConfigStore');
 
-
+/*
 var UF_GLYPHICON_STOP_CLS = "glyphicon-stop";
 var UF_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var UF_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
 var UF_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var UF_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+*/
+
+var UF_GLYPHICON_RECORD = (<img src="images/icons/recordn.png" />); // "glyphicon glyphicon-record";
+var UF_GLYPHICON_STOP = (<img src="images/icons/stoprecordn.png" />); // "fa fa-stop-circle-o";
+var UF_GLYPHICON_PLAY = (<img src="images/icons/playrecordingn.png" />); // "glyphicon glyphicon-repeat";
+var UF_GLYPHICON_CORRECT = (<img src="images/icons/completeexplorer.png" />); // "glyphicon glyphicon-ok-circle";
+var UF_GLYPHICON_INCORRECT = (<img src="images/icons/failedquiz.png" />); // "glyphicon glyphicon-remove-circle";
 
 var recorder;
 
@@ -203,18 +210,22 @@ var UtteranceFormationView = React.createClass({
         var recordingClass = "glyphicon UF-glyphicon UF-record";
         var recordedClass = "glyphicon UF-glyphicon UF-play";
         var feedbackClass = "glyphicon UF-glyphicon UF-feedback";
+        var recordingIcon = "";
+        var recordedIcon = "";
+        var feedbackIcon = "";
         var spoken = state.spoken;
 
         if(state.haveAnswered){
-            recordedClass += " " + UF_GLYPHICON_PLAY_CLS;
+            recordedIcon = UF_GLYPHICON_PLAY;
             if(ConfigStore.isASREnabled()){
                 coach = <img className="UF-coachImage" src={imageSource}></img>;
                 $(".UF-ResponseContainer").css("border", "1px solid black");
                 if(state.isCorrect){
-                    feedbackClass += " UF-correct " + UF_GLYPHICON_CORRECT_CLS;
+                    feedbackClass += " UF-correct ";
+                    feedbackIcon = UF_GLYPHICON_CORRECT;
                 }else{
-
-                    feedbackClass += " UF-incorrect " + UF_GLYPHICON_INCORRECT_CLS;
+                    feedbackClass += " UF-incorrect ";
+                    feedbackIcon = UF_GLYPHICON_INCORRECT;
                 }
             }else{
                 response = <div className="UF-response"></div>;
@@ -226,9 +237,9 @@ var UtteranceFormationView = React.createClass({
         if(self.state.message != "No data found." || !ConfigStore.isASREnabled()) {
             var isRecording = state.isRecording;
             if (isRecording) {
-                recordingClass += " " + UF_GLYPHICON_STOP_CLS;
+                recordingIcon = UF_GLYPHICON_STOP;
             } else {
-                recordingClass += " " + UF_GLYPHICON_RECORD_CLS;
+                recordingIcon = UF_GLYPHICON_RECORD;
             }
         }
 
@@ -241,8 +252,12 @@ var UtteranceFormationView = React.createClass({
                     <div className="UF-InteractionContainer">
                         <img className="row UF-Image" src={state.image}></img>
                         <div className="UF-RecorderContainer">
-                            <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
-                            <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
+                            <div className={recordingClass} onClick={function(){handleRecord(self)}}>
+                                {recordingIcon}
+                            </div>
+                            <div className={recordedClass} onClick={function(){handlePlaying(self)}}>
+                                {recordedIcon}
+                            </div>
                             <div className="UF-recorderTextContainer">{state.page.prompt.text}</div>
                         </div>
                     </div>
@@ -250,7 +265,9 @@ var UtteranceFormationView = React.createClass({
                         <div className="UF-coach">{coach}</div>
                         <div className="UF-answerString">{answerString}</div>
                         <div className="UF-response">{response}</div>
-                        <div className={feedbackClass}></div>
+                        <div className={feedbackClass}>
+                            {feedbackIcon}
+                        </div>
                         <div className="UF-spokenContainer">{spoken}</div>
                     </div>
                 </div>
