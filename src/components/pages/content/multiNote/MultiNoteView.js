@@ -225,9 +225,11 @@ var MultiNoteView = React.createClass({
             };
 
             if(imageURL.split(".")[1] === "mp4"){
-                buttonImage = (<span  className="glyphicon glyphicon-play-circle thumbnail thumbnail-video multi-note-thumbnail"
+                buttonImage = (<span  className="glyphicon thumbnail thumbnail-video multi-note-thumbnail"
                                      alt={title}
-                                     aira-hidden="true"></span>);
+                                     aira-hidden="true">
+                    <img src="images/icons/playrecordingn.png" />
+                </span>);
             }else{ // else it should be jpg or png
                 buttonImage = (<div  className="thumbnail multi-note-thumbnail"
                                      alt={title}
@@ -290,7 +292,9 @@ var MultiNoteView = React.createClass({
                                         className="btn btn-default multi-note-carousel-btn"
                                         onClick={this.props.previousSlide}
                                     >
-                                        <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span className="glyphicon" aria-hidden="true">
+                                            <img src="images/icons/prevn.png"/>
+                                        </span>
                                     </button>
                                 )
                             }
@@ -310,7 +314,10 @@ var MultiNoteView = React.createClass({
                                         className="btn btn-default multi-note-carousel-btn"
                                         onClick={this.props.nextSlide}
                                     >
-                                        <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+
+                                        <span className="glyphicon" aria-hidden="true">
+                                            <img src="images/icons/nextn.png"/>
+                                        </span>
                                     </button>
                                 )
                             }

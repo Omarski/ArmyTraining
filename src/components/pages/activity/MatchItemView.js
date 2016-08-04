@@ -332,8 +332,8 @@ var MatchItemView = React.createClass({
         var choices;
         var answerState = state.answerState;
         var numQuestions = answerState.length;
-        var correct = "glyphicon MI-feedback MI-correct glyphicon-ok";
-        var incorrect = "glyphicon MI-feedback MI-incorrect glyphicon-remove";
+        var correct = "glyphicon MI-feedback MI-correct ";
+        var incorrect = "glyphicon MI-feedback MI-incorrect ";
         var answerContainers;
 
         var numMoved = state.numMoved;
@@ -390,7 +390,9 @@ var MatchItemView = React.createClass({
                             onDragOver={self.onDraggingOver}
                             onDrop={self.onDropping}
                             onClick={self.onClick}>
-                            <span className="glyphicon glyphicon-play-circle glyph-choice match-item-audio"></span>
+                            <span className="glyphicon glyph-choice match-item-audio">
+                                <img src="images/icons/playrecordingn.png" />
+                            </span>
                         </a>);
                     break;
                 case "image":
@@ -446,11 +448,14 @@ var MatchItemView = React.createClass({
             for(var i=0;i<state.answerState.length;i++){
                 // loop through the answerState array
                 var numberNextToSpan = i + 1 + ".";
+                var icon = "";
                 if(index === state.answerState[i].currentBoxIndex) { // if there is an answer in this box
                     if (needCheck) { // does it need to be graded?
                         if (state.answerState[i].currentBox == state.answerState[i].letter) { // if correct
+                            icon = (<img src="images/icons/completeexplorer.png"/>);
                             feedback = correct;
                         } else {
+                            icon = (<img src="images/icons/failedquiz.png"/>);
                             feedback = incorrect;
                         }
                     }
@@ -467,8 +472,12 @@ var MatchItemView = React.createClass({
                                     className="match-item-play-icon"
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
-                                    <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio"></span>
-                                    <div className={(feedback + ' match-item-feedback-audio')}></div>
+                                    <span className="glyphicon glyph-answer match-item-audio">
+                                        <img src="images/icons/playrecordingn.png" />
+                                    </span>
+                                    <div className={(feedback + ' match-item-feedback-audio')}>
+                                        {icon}
+                                    </div>
                                 </a>);
                             break;
                         case "image":
@@ -481,7 +490,9 @@ var MatchItemView = React.createClass({
                                 data-passed={source}
                                 onDragStart={self.onDragging}
                                 ></img>
-                                <div className={(feedback  + ' match-item-feedback-image')}></div>
+                                <div className={(feedback  + ' match-item-feedback-image')}>
+                                    {icon}
+                                </div>
                             </div>);
                             break;
                         case "string":
@@ -493,7 +504,9 @@ var MatchItemView = React.createClass({
                                     onDragStart={self.onDragging}
                                     >
                                     {state.answerState[i].passedData}
-                                    <div className={(feedback  + ' match-item-feedback-text')}></div>
+                                    <div className={(feedback  + ' match-item-feedback-text')}>
+                                        {icon}
+                                    </div>
                                 </a>);
                             break;
                         default:
@@ -513,7 +526,9 @@ var MatchItemView = React.createClass({
                                 <td className={"matchitem-droparea-td"}>
                                     <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                         {answerRender}
-                                        <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio match-item-audio-grayed-out"></span>
+                                        <span className="glyphicon glyph-answer match-item-audio match-item-audio-grayed-out">
+                                            <img src="images/icons/playrecordingd.png" />
+                                        </span>
                                     </div>
                                 </td>
                                 <td className={"matchitem-question-td"}>

@@ -54,7 +54,9 @@ var ClosedCaptionPanelView = React.createClass({
                     <div className="panel-heading">
                         <h3 className="panel-title">{LocalizationStore.labelFor("closedCaption", "lblTitle")}</h3>
                         <button className="btn btn-default closed-caption-close-button" onClick={this.toggle}>
-                            <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span className="glyphicon" aria-hidden="true">
+                                <img src="images/icons/explorercloseh.png"/>
+                            </span>
                         </button>
                     </div>
                     <div className="panel-body">

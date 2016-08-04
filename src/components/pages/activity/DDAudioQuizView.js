@@ -829,7 +829,10 @@ var DDAudioQuizView = React.createClass({
                                               key={page.xid + String(aIndex) + "isCorrect"}
                                               data-question-id={index+1}
                                               data-question-letter={""}>
-                                    <span className="glyphicon glyphicon-ok-circle answer-feedback-correct"></span>
+
+                                    <span className="glyphicon answer-feedback-correct">
+                                        <img src="images/icons/completeexplorer.png"/>
+                                    </span>
                                     {" " + self.state.selection[counter] + " "}&nbsp;
                                 </div>
                             }else{
@@ -838,7 +841,10 @@ var DDAudioQuizView = React.createClass({
                                               key={page.xid + String(aIndex) + "!isCorrect"}
                                               data-question-id={index+1}
                                               data-question-letter={""}>
-                                    <span className="glyphicon glyphicon-remove-circle answer-feedback-incorrect"></span>
+                                    <span className="glyphicon answer-feedback-incorrect">
+                                        <img src="images/icons/failedquiz.png"/>
+                                    </span>
+
                                     {" " + self.state.selection[counter] + " "}&nbsp;
                                 </div>
                             }

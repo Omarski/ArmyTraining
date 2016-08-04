@@ -190,17 +190,23 @@ var QuizAnswerRow = React.createClass({
         var answer = this.props.answer;
         var passed = this.props.passed;
         var question = this.props.question;
-        var className = "glyphicon glyphicon-remove quiz-feedback-icon quiz-feedback-icon-incorrect"
+        var className = "glyphicon quiz-feedback-icon quiz-feedback-icon-incorrect"
+        var icon = (<img src="images/icons/failedquiz.png"/>);
+
+
 
         // changed if passed
         if (passed) {
-            className = "glyphicon glyphicon-ok quiz-feedback-icon quiz-feedback-icon-correct"
+            className = "glyphicon quiz-feedback-icon quiz-feedback-icon-correct"
+            icon = (<img src="images/icons/completeexplorer.png"/>);
         }
 
         return (
             <tr className="">
                 <td>
-                    <div className={className}/>
+                    <div className={className}>
+                        {icon}
+                    </div>
                 </td>
                 <td>
                     {question}

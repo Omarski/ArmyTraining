@@ -9,6 +9,11 @@
   padding-left: 3px;
   padding-right: 3px;
   background-color: #F5F5F5;
+  span {
+    img {
+      max-height: 15px;
+    }
+  }
 }
 
 .multi-note-carousel-btn.active {

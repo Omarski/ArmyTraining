@@ -316,8 +316,8 @@ var OrderingView = React.createClass({
         var choices;
         var answerState = state.answerState;
         var numQuestions = answerState.length;
-        var correct = "glyphicon or-feedback or-correct glyphicon-ok-circle";
-        var incorrect = "glyphicon or-feedback or-incorrect glyphicon-remove-circle";
+        var correct = "glyphicon or-feedback or-correct ";
+        var incorrect = "glyphicon or-feedback or-incorrect ";
         var answerContainers;
 
         var isGraded = state.isGraded;
@@ -369,7 +369,9 @@ var OrderingView = React.createClass({
                             draggable="true"
                             onDragStart={self.onDragging}
                             onClick={self.onClick}>
-                            <span className="glyphicon glyphicon-play-circle"></span>
+                            <span className="glyphicon">
+                                <img src="images/icons/playrecordingn.png" />
+                            </span>
                         </a>;
                     break;
                 case "image":
@@ -425,10 +427,13 @@ var OrderingView = React.createClass({
             for(var i=0;i<state.answerState.length;i++){
                 if(index === state.answerState[i].currentBoxIndex){
 
+                    var icon = "";
                     if(needCheck){
                         if(state.answerState[i].currentBox == state.answerState[i].letter){
+                            icon = (<img src="images/icons/completeexplorer.png"/>);
                             feedback = correct;
                         }else{
+                            icon = (<img src="images/icons/failedquiz.png"/>);
                             feedback = incorrect;
                         }
                     }
@@ -444,9 +449,14 @@ var OrderingView = React.createClass({
                                 draggable="true"
                                 onDragStart={self.onDragging}
                                 onClick={self.onClick}>
-                                <span className="glyphicon glyphicon-play-circle"></span>
+                                <span className="glyphicon ">
+                                    <img src="images/icons/playrecordn.png"/>
+                                </span>
 
-                                <div className={feedback}></div>
+
+                                <div className={feedback}>
+                                    {icon}
+                                </div>
                             </a>;
                             break;
                         case "image":
@@ -460,7 +470,9 @@ var OrderingView = React.createClass({
                                         key={page.xid + "choice-"+index}
                                         onDragStart={self.onDragging}
                                         src={"data/media/"+source}></img>
-                                    <div className={feedback}></div>
+                                    <div className={feedback}>
+                                        {icon}
+                                    </div>
                                 </div>;
                             break;
                         case "string":
@@ -473,7 +485,9 @@ var OrderingView = React.createClass({
                                     onDragStart={self.onDragging}
                                     >
                                     {state.answerState[i].passedData}
-                                    <div className={feedback}></div>
+                                    <div className={feedback}>
+                                        {icon}
+                                    </div>
                                 </a>
                             );
                             break;

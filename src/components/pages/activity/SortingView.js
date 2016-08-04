@@ -305,8 +305,8 @@ var SortingView = React.createClass({
         var colBTitle = "";
         var colBContent = [];
         var colBRender;
-        var correct = "glyphicon sorting-feedback sorting-correct glyphicon-ok";
-        var incorrect = "glyphicon sorting-feedback sorting-incorrect glyphicon-remove";
+        var correct = "glyphicon sorting-feedback sorting-correct ";
+        var incorrect = "glyphicon sorting-feedback sorting-incorrect ";
         var isGraded = state.isGraded;
         var numMoved = state.numMoved;
         var numCorrect = 0;
@@ -370,7 +370,9 @@ var SortingView = React.createClass({
                             onClick={self.onClick}
                             className="sorting-playicon"
                             >
-                            <span className="glyphicon glyphicon-play-circle sorting-playicon"></span>
+                            <span className="glyphicon sorting-playicon">
+                                <img src="images/icons/playrecordingn.png" />
+                            </span>
                         </div>;
 
                     break;
@@ -438,11 +440,14 @@ var SortingView = React.createClass({
         colARender = colAContent.map(function(itemA, index){
             var feedbackA = "";
             var answerRender = "";
+            var feedbackIcon = "";
             if(state.numMoved == answerState.length){
                 if(itemA.isCorrect){
                     feedbackA = correct;
+                    feedbackIcon = (<img src="images/icons/completeexplorer.png"/>);
                 }else{
                     feedbackA = incorrect;
+                    feedbackIcon = (<img src="images/icons/failedquiz.png"/>);
                 }
             }
 
@@ -457,8 +462,12 @@ var SortingView = React.createClass({
                                 draggable="true"
                                 onDragStart={self.onDragging}
                                 onClick={self.onClick}>
-                                <span className="glyphicon glyphicon-play-circle"></span>
-                                <div className={feedbackA}></div>
+                                <span className="glyphicon">
+                                    <img src="images/icons/playrecordingn.png" />
+                                </span>
+                                <div className={feedbackA}>
+                                    {feedbackIcon}
+                                </div>
                             </div>
                         </li>;
                     break;
@@ -469,7 +478,9 @@ var SortingView = React.createClass({
                             draggable="true"
                             onDragStart={self.onDragging}>
                             <img src={"data/media/"+source}></img>
-                            <div draggable="false" className={feedbackA}></div>
+                            <div draggable="false" className={feedbackA}>
+                                {feedbackIcon}
+                            </div>
                         </div>
                     </li>;
                     break;
@@ -482,7 +493,9 @@ var SortingView = React.createClass({
                             onDragStart={self.onDragging}>
                             {itemA.passedData}
                         </a>
-                        <span className={feedbackA}></span>
+                        <span className={feedbackA}>
+                            {feedbackIcon}
+                        </span>
                     </li>;
                     break;
                 default:
@@ -496,11 +509,14 @@ var SortingView = React.createClass({
         colBRender = colBContent.map(function(itemB, index){
             var feedbackB = "";
             var answerRender = "";
+            var feedbackIcon = "";
             if(state.numMoved == answerState.length){
                 if(itemB.isCorrect){
                     feedbackB = correct;
+                    feedbackIcon = (<img src="images/icons/completeexplorer.png"/>);
                 }else{
                     feedbackB = incorrect;
+                    feedbackIcon = (<img src="images/icons/failedquiz.png"/>);
                 }
             }
 
@@ -516,9 +532,13 @@ var SortingView = React.createClass({
                             draggable="true"
                             onDragStart={self.onDragging}
                             onClick={self.onClick}>
-                            <span className="glyphicon glyphicon-play-circle"></span>
+                            <span className="glyphicon">
+                                <img src="images/icons/playrecordingn.png" />
+                            </span>
                         </div>
-                        <div className={feedbackB}></div>
+                        <div className={feedbackB}>
+                            {feedbackIcon}
+                        </div>
                     </li>;
                     break;
                 case "image":
@@ -528,7 +548,9 @@ var SortingView = React.createClass({
                             draggable="true"
                             onDragStart={self.onDragging}>
                             <img draggable="false" src={"data/media/"+source}></img>
-                            <div className={feedbackB}></div>
+                            <div className={feedbackB}>
+                                {feedbackIcon}
+                            </div>
                         </div>
                     </li>;
                     break;
@@ -541,7 +563,9 @@ var SortingView = React.createClass({
                             onDragStart={self.onDragging}>
                             {itemB.passedData}
                         </a>
-                        <span className={feedbackB}></span>
+                        <span className={feedbackB}>
+                            {feedbackIcon}
+                        </span>
                     </li>;
                     break;
                 default:

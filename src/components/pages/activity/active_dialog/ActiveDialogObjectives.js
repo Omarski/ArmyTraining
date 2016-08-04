@@ -50,7 +50,7 @@ var ActiveDialogObjectives = React.createClass({
                 if (item.pass) {
                     check = <span className="glyphicon glyphicon-ok-sign pass" aria-hidden="true"></span>
                 } else {
-                    //check = <span className="glyphicon glyphicon-remove-sign fail" aria-hidden="true"></span> // TODO: Greg, we need to not show this if the user has not got this far
+                    //check = <span className=" fail" aria-hidden="true"></span> // TODO: Greg, we need to not show this if the user has not got this far
                 }
 
                 return  <ListGroupItem key={index}>

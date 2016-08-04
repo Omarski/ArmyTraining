@@ -56,6 +56,11 @@
   color: $info-panel-font-color;
   border-color: $info-panel-bg-color;
   background-color: $info-panel-bg-color;
+  span {
+    img {
+      max-height: 15px;
+    }
+  }
 }
 
 .closed-caption-close-button:hover {

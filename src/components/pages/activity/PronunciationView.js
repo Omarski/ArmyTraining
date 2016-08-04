@@ -8,13 +8,21 @@ var PageHeader = require('../../widgets/PageHeader');
 var LocalizationStore = require('../../../stores/LocalizationStore');
 
 // CONSTANTS
+/*
 var LI_GLYPHICON_RECORD_CLS = "glyphicon glyphicon-record";
 var LI_GLYPHICON_LISTEN_CLS = "glyphicon glyphicon-play-circle";
 var LI_GLYPHICON_STOP_CLS = "fa fa-stop-circle-o";
 var LI_GLYPHICON_PLAY_CLS = "glyphicon glyphicon-repeat";
 var LI_GLYPHICON_CORRECT_CLS = "glyphicon glyphicon-ok-circle";
 var LI_GLYPHICON_INCORRECT_CLS = "glyphicon glyphicon-remove-circle";
+*/
 
+var LI_GLYPHICON_RECORD = (<img src="images/icons/recordn.png" />); // "glyphicon glyphicon-record";
+var LI_GLYPHICON_LISTEN = (<img src="images/icons/playrecordn.png" />); // "glyphicon glyphicon-play-circle";
+var LI_GLYPHICON_STOP = (<img src="images/icons/stoprecordn.png" />); // "fa fa-stop-circle-o";
+var LI_GLYPHICON_PLAY = (<img src="images/icons/playrecordingn.png" />); // "glyphicon glyphicon-repeat";
+var LI_GLYPHICON_CORRECT = (<img src="images/icons/completeexplorer.png" />); // "glyphicon glyphicon-ok-circle";
+var LI_GLYPHICON_INCORRECT = (<img src="images/icons/failedquiz.png" />); // "glyphicon glyphicon-remove-circle";
 
 var recorder;
 
@@ -310,6 +318,9 @@ var PronunciationView = React.createClass({
                 var itemFeedbackClass = "";
                 var itemRecordedClass = "";
                 var itemRecordingClass = "";
+                var itemFeedbackIcon = "";
+                var itemRecordingIcon = "";
+                var itemRecordedIcon = "";
 
                 if(nativeText !== ""){
                     nativeText = (<tr>
@@ -343,9 +354,11 @@ var PronunciationView = React.createClass({
                 var isCorrect = self.state.isCorrect[qcIndex];
                 if(isCorrect != null){
                     if (isCorrect) {
-                        itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_CORRECT_CLS;
+                        itemFeedbackClass = feedbackClass;
+                        itemFeedbackIcon = LI_GLYPHICON_CORRECT;
                     } else {
-                        itemFeedbackClass = feedbackClass + " " + LI_GLYPHICON_INCORRECT_CLS;
+                        itemFeedbackClass = feedbackClass;
+                        itemFeedbackIcon = LI_GLYPHICON_INCORRECT;
                     }
                 }else{
                     itemFeedbackClass = feedbackClass;
@@ -358,25 +371,31 @@ var PronunciationView = React.createClass({
                     recordedClass = "pb-disabled";
                 }
                 if (self.state.isPlaying[qcIndex]) {
-                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_STOP_CLS;
+                    itemRecordedClass = recordedClass;
+                    itemRecordedIcon = LI_GLYPHICON_STOP;
                 } else {
-                    itemRecordedClass = recordedClass + " " + LI_GLYPHICON_PLAY_CLS;
+                    itemRecordedClass = recordedClass;
+                    itemRecordedIcon = LI_GLYPHICON_PLAY;
                 }
 
                 //if(self.state.message != "No data found.") {
                 if(self.state.message != "This needs to be a unique message that isn't returned by the applet.") {
                     var isRecording = self.state.recordingState[qcIndex];
                     if (isRecording) {
-                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
+                        itemRecordingClass = recordingClass;
+                        itemRecordingIcon = LI_GLYPHICON_STOP;
                     } else {
-                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
+                        itemRecordingClass = recordingClass;
+                        itemRecordingIcon = LI_GLYPHICON_RECORD;
                     }
                 }else if(ASRStore.isInitialized()){
                     var isRecording = self.state.recordingState[qcIndex];
                     if (isRecording) {
-                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_STOP_CLS;
+                        itemRecordingClass = recordingClass;
+                        itemRecordingIcon = LI_GLYPHICON_STOP;
                     } else {
-                        itemRecordingClass = recordingClass + " " + LI_GLYPHICON_RECORD_CLS;
+                        itemRecordingClass = recordingClass;
+                        itemRecordingIcon = LI_GLYPHICON_RECORD;
                     }
                 }
 
@@ -393,7 +412,9 @@ var PronunciationView = React.createClass({
                                         type="button" onClick={function(){textClick(id, qcIndex, self)}}
                                         className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
-                                        <span className={"glyphicon pronunciation-audio-button "+ (state.isListening[qcIndex] ? LI_GLYPHICON_STOP_CLS : LI_GLYPHICON_LISTEN_CLS)} ></span>
+                                        <span className={"glyphicon pronunciation-audio-button "} >
+                                            {(state.isListening[qcIndex] ? LI_GLYPHICON_STOP : LI_GLYPHICON_LISTEN)}
+                                        </span>
                                     </button>
                                 </td>
                                 <td rowSpan="2" width="25">
@@ -402,7 +423,9 @@ var PronunciationView = React.createClass({
                                             type="button" onClick={function(){handleRecord(id, qcIndex, self)}}
                                             className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                             aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
-                                        <span className={itemRecordingClass + " pronunciation-audio-button"} ></span>
+                                            <span className={itemRecordingClass + " pronunciation-audio-button"} >
+                                                {itemRecordingIcon}
+                                            </span>
                                     </button>
                                 </td>
                                 <td rowSpan="2" width="25">
@@ -411,10 +434,14 @@ var PronunciationView = React.createClass({
                                             type="button" onClick={function(){handlePlaying(id, qcIndex, self, recordedClass)}}
                                             className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                             aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
-                                        <span className={itemRecordedClass + " pronunciation-audio-button"} ></span>
+                                        <span className={itemRecordedClass + " pronunciation-audio-button"} >
+                                            {itemRecordedIcon}
+                                        </span>
                                     </button>
 
-                                    <span className={itemFeedbackClass}></span>
+                                    <span className={itemFeedbackClass}>
+                                        {itemFeedbackIcon}
+                                    </span>
 
                                 </td>
                                 {ezreadText}
