@@ -5,6 +5,14 @@
 
 }
 
+.notification-text-min {
+  min-height: 0 !important;
+}
+
+.notification-li {
+  list-style-type: inherit;
+}
+
 .splash-image{
   max-width: 756px;
   max-height: 421px;
