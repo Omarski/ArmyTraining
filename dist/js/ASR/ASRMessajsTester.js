@@ -77,7 +77,7 @@ var ASRMessajsTester = function()
 		for (i=0;i<messagesToSendStack.length;i++) {
 			if (messagesToSendStack[i].id == id) {	
 				if(window.console) {
-					console.log("Finished sending message: " + messagesToSendStack[i].msg);
+					//console.log("Finished sending message: " + messagesToSendStack[i].msg);
 				}
 				return;
 			}
@@ -93,7 +93,7 @@ var ASRMessajsTester = function()
                 }
                 
 				if (window.console) {
-					console.log("Finished receiving message: " + inbox[i].data);
+					//console.log("Finished receiving message: " + inbox[i].data);
 				}
 				return;
 			}

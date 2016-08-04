@@ -30,6 +30,11 @@ var onFail = function(e){
    // An Error has occured.
 };
 
+function hasGetUserMedia(){
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
 var onSuccess = function(s){
     var context = new AudioContext();
     var mediaStreamSource = context.createMediaStreamSource(s);
@@ -73,7 +78,7 @@ function stopRecording(id, index, self){
     }
 }
 
-function handlePlaying(id, index, self, recordedClass){
+function handlePlaying(id, index, self, recordedClass, fd){
     // if(recordedClass !== "pb-disabled") {
     //     if (ASRStore.isInitialized()) {
     //         ASRStore.PlayRecording();
@@ -85,17 +90,20 @@ function handlePlaying(id, index, self, recordedClass){
     //         }
     //     }
     // }
-    if(self.state.playableState[index]){
-        if (ASRStore.isInitialized()) {
-            ASRStore.PlayRecording();
-        } else {
-            if (self.state.isPlaying[index]) {
-                stop(id, index, self);
+    if(!fd){
+        if(self.state.playableState[index]){
+            if (ASRStore.isInitialized()) {
+                ASRStore.PlayRecording();
             } else {
-                play(id, index, self);
+                if (self.state.isPlaying[index]) {
+                    stop(id, index, self);
+                } else {
+                    play(id, index, self);
+                }
             }
         }
     }
+
 }
 
 function play(id, index, self){
@@ -123,25 +131,27 @@ function stop(id, index, self){
     });
 }
 
-function handleRecord(id, index, self){  // record if not currently recording
+function handleRecord(id, index, self, fd){  // record if not currently recording
     var newRecordingState = self.state.recordingState;
-    if (newRecordingState[index]) {
-        stopRecording(id, index, self);
-        var newPlayableState = self.state.playableState;
-        newPlayableState[index] = true;
-        newRecordingState[index] = false;
-        self.setState({
-            recordingState: newRecordingState,
-            playableState: newPlayableState
-        })
-    } else {
-      //  if(self.state.message != "recordingStarted") {
+    if(!fd){
+        if (newRecordingState[index]) {
+            stopRecording(id, index, self);
+            var newPlayableState = self.state.playableState;
+            newPlayableState[index] = true;
+            newRecordingState[index] = false;
+            self.setState({
+                recordingState: newRecordingState,
+                playableState: newPlayableState
+            })
+        } else {
+            //  if(self.state.message != "recordingStarted") {
             record(id, index, self);
             newRecordingState[index] = true;
             self.setState({
                 recordingState: newRecordingState
             });
-      //  }
+            //  }
+        }
     }
 }
 
@@ -283,7 +293,7 @@ var PronunciationView = React.createClass({
 
     componentWillUnmount: function() {
         PageStore.removeChangeListener(this._onChange);
-        ASRStore.removeChangeListener(this._onChange);
+        ASRStore.removeChangeListener(this._onMessageRecieved);
     },
 
     render: function() {
@@ -303,6 +313,7 @@ var PronunciationView = React.createClass({
         var displayTracker = state.displayTracker;
         var questionCounter = 0;
         var noteCounter = 0;
+        var fullDisable = (!ASRStore.isInitialized() && !hasGetUserMedia());
 
 
         // need to check for notes and send those  to top of page
@@ -370,6 +381,9 @@ var PronunciationView = React.createClass({
                 } else {
                     recordedClass = "pb-disabled";
                 }
+                if(fullDisable){
+                    recordedClass = "pb-disabled";
+                }
                 if (self.state.isPlaying[qcIndex]) {
                     itemRecordedClass = recordedClass;
                     itemRecordedIcon = LI_GLYPHICON_STOP;
@@ -379,7 +393,7 @@ var PronunciationView = React.createClass({
                 }
 
                 //if(self.state.message != "No data found.") {
-                if(self.state.message != "This needs to be a unique message that isn't returned by the applet.") {
+                if(self.state.message != "This needs to be a unique message that isn't returned by the applet." || ASRStore.isInitialized()) {
                     var isRecording = self.state.recordingState[qcIndex];
                     if (isRecording) {
                         itemRecordingClass = recordingClass;
@@ -388,15 +402,9 @@ var PronunciationView = React.createClass({
                         itemRecordingClass = recordingClass;
                         itemRecordingIcon = LI_GLYPHICON_RECORD;
                     }
-                }else if(ASRStore.isInitialized()){
-                    var isRecording = self.state.recordingState[qcIndex];
-                    if (isRecording) {
-                        itemRecordingClass = recordingClass;
-                        itemRecordingIcon = LI_GLYPHICON_STOP;
-                    } else {
-                        itemRecordingClass = recordingClass;
-                        itemRecordingIcon = LI_GLYPHICON_RECORD;
-                    }
+                }
+                if(fullDisable){
+                    itemRecordingClass = recordingClass + " pb-disabled " + LI_GLYPHICON_RECORD_CLS;
                 }
 
                 var cls = (index % 2) ? "pronunciation-item-row-odd" : "pronunciation-item-row-even";
@@ -420,7 +428,7 @@ var PronunciationView = React.createClass({
                                 <td rowSpan="2" width="25">
                                     <button title={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
                                             alt={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}
-                                            type="button" onClick={function(){handleRecord(id, qcIndex, self)}}
+                                            type="button" onClick={function(){handleRecord(id, qcIndex, self, fullDisable)}}
                                             className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                             aria-label={LocalizationStore.labelFor("PronunciationPage", "btnRecord")}>
                                             <span className={itemRecordingClass + " pronunciation-audio-button"} >
@@ -431,7 +439,7 @@ var PronunciationView = React.createClass({
                                 <td rowSpan="2" width="25">
                                     <button title={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
                                             alt={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}
-                                            type="button" onClick={function(){handlePlaying(id, qcIndex, self, recordedClass)}}
+                                            type="button" onClick={function(){handlePlaying(id, qcIndex, self, recordedClass, fullDisable)}}
                                             className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                             aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlayback")}>
                                         <span className={itemRecordedClass + " pronunciation-audio-button"} >
