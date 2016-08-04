@@ -167,10 +167,10 @@ var HeaderView = React.createClass({
         });
     },
     render: function() {
-        var muteIcon = <span className="glyphicon glyphicon-volume-up btn-icon" aria-hidden="true"></span>;
+        var muteIcon = (<img src="images/icons/speakeronn.png"/>);
         var self = this;
         if (this.state.muted) {
-            muteIcon = <span className="glyphicon glyphicon-volume-off btn-icon" aria-hidden="true"></span>;
+            muteIcon = (<img src="images/icons/speakeroffn.png"/>);
         }
 
 
@@ -212,7 +212,7 @@ var HeaderView = React.createClass({
                                     type="button"
                                     className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
                                     aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
-                                    <span className="glyphicon glyphicon-question-sign main-nav-bar-help-icon" aria-hidden="true"></span>
+                                    <img src="images/icons/helpn.png"/>
                                 </button>
                                 <p>Help</p>
                             </NavItem>

@@ -7,8 +7,8 @@ var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageActions = require('../../../actions/PageActions');
 var PageHeader = require('../../widgets/PageHeader');
 
-var LC_PLAY_ICON = " glyphicon glyphicon-play-circle";
-var LC_STOP_ICON = " fa fa-stop-circle-o";
+var LC_PLAY_ICON = (<img src="images/icons/playrecordn.png" />);
+var LC_STOP_ICON = (<img src="images/icons/stoprecordn.png" />);
 
 function getPageState(props) {
     var data = {
@@ -328,7 +328,9 @@ var ListeningComprehensionView = React.createClass({
                                             onClick={self.listenCheck}
                                             className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
                                             aria-label={btnTitleText}>
-                                        <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
+                                        <span className={"btn-icon lc-glyphicon"} aria-hidden="true">
+                                            {playButtonIcon}
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -359,7 +361,9 @@ var ListeningComprehensionView = React.createClass({
                                         onClick={self.listenCheck}
                                         className="btn btn-default btn-lg btn-link btn-step btn-clk btn-lc-btn"
                                         aria-label={btnTitleText}>
-                                    <span className={"btn-icon lc-glyphicon" + playButtonIcon} aria-hidden="true"></span>
+                                    <span className={"btn-icon lc-glyphicon"} aria-hidden="true">
+                                        {playButtonIcon}
+                                    </span>
                                 </button>
                             </div>
                         </div>

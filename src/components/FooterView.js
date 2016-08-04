@@ -240,7 +240,7 @@ var FooterView = React.createClass({
         var explorerBtn = (<span></span>);
         var progressView = (<span></span>);
         var explorerView = (<span></span>);
-
+        var explorerIcon = this.state.expanded ? (<img src="images/icons/explorerdwnn.png"/>) : (<img src="images/icons/explorerupn.png"/>);
         if(showExplorerButton()) {
             explorerBtn = (
                 <button title={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
@@ -251,7 +251,7 @@ var FooterView = React.createClass({
                         aria-label={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}
                         onClick={this.toggleTOC}>
                     <div className="explorer-icon-text-div">
-                        <span id="lessonsIndexBtnIcon" className={this.state.expanded ? "glyphicon glyphicon-circle-arrow-down btn-icon explorer-icon-text-span " : "glyphicon glyphicon-circle-arrow-up btn-icon explorer-icon-text-span "} aria-hidden="true"></span>
+                        {explorerIcon}
                         <span className="explorer-link explorer-icon-text-span ">{LocalizationStore.labelFor("footer", "lblExplorer")}</span>
                     </div>
                 </button>
@@ -284,7 +284,7 @@ var FooterView = React.createClass({
                                     type="button" onClick={this.previous}
                                     className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipPrevious")}>
-                                Back
+                                <img src="images/icons/prevn.png"/>
                             </button>
                         </td>
                         <td className="footer-page-state">
@@ -298,7 +298,7 @@ var FooterView = React.createClass({
                                     onClick={this.next}
                                     className="btn btn-default btn-lg btn-link btn-step btn-nxt"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipNext")}>
-                                Next
+                                <img src="images/icons/nextn.png"/>
                             </button>
 
                             <button title={LocalizationStore.labelFor("footer", "tooltipClose")}
@@ -307,9 +307,8 @@ var FooterView = React.createClass({
                                     onClick={this.toggleTOC}
                                     className="btn btn-default btn-lg btn-link btn-close btn-exp"
                                     aria-label={LocalizationStore.labelFor("footer", "tooltipClose")}>
-                                    ^
+                                    <img src="images/icons/explorerclosen.png"/>
                             </button>
-
                         </td>
                     </tr>
                     </tbody>

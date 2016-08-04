@@ -14,6 +14,12 @@
   }
 }
 
+.active-dialog-closed-caption-button {
+  padding-left: 3px !important;
+  .glyphicon {
+    top: 0 !important;
+  }
+}
 
 .active-dialog-closed-caption-panel {
   max-height: 320px;

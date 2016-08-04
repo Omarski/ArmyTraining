@@ -56,7 +56,7 @@ var DliView = React.createClass({
 
     render: function() {
         var self = this;
-        var dliIcon = <i className="fa fa-book" aria-hidden="true"></i>;
+        var dliIcon = (<img src="images/icons/dliguiden.png"/>);
 
         var nameList = self.state.nameList;
         var selections = nameList.map(function(item, index){

@@ -25,7 +25,9 @@ var ClosedCaptionView = React.createClass({
                     className="btn btn-default btn-link btn-lg closed-caption-button"
                     onClick={this.toggle}
             >
-                <span className="glyphicon glyphicon-comment btn-icon" aria-hidden="true"></span>
+                <span>
+                    <img src="images/icons/closedcaption.png"/>
+                </span>
             </Button>
         );
     }

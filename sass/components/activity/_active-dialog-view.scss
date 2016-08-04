@@ -26,6 +26,10 @@
   z-index: 1999;
 }
 
+.active-dialog-toolbar-icon {
+  max-height: 19px;
+}
+
 .active-dialog-toolbar-btn, .active-dialog-toolbar-btn:hover, .active-dialog-toolbar-btn:focus {
   margin-top: 4px;
   padding: 1px;
@@ -36,6 +40,7 @@
   width: 24px;
   height: 32px;
   background-color: #5A5C51;
+
 }
 
 #objectivesPopover {

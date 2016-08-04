@@ -38,7 +38,7 @@ var CultureQuestPuzzleGameView = React.createClass({
     displayPuzzlePopup: function(){
 
         var self = this;
-        var debriefText = {width:'400px',marginLeft:'33px'}
+        var debriefText = {width:'400px',marginLeft:'33px',marginTop:'-7px'};
 
         var popupObj = {
             id:"PuzzleBackground",
@@ -69,7 +69,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
             var imgUrl = this.state.mediaPath + imageData.regions[i].tile;
             var draggableStyle = {position:'absolute', width:'40px', height:'50px',
-                background: "url('"+imgUrl+"') no-repeat 100% 100%", zIndex:'30',
+                background: "url('"+imgUrl+"') no-repeat", backgroundSize:"40px 50px", zIndex:'30',
                 left: left+"px", top:topStart+(pieceHeight * i)+"px"};
 
             if (i === 0) {
@@ -77,6 +77,7 @@ var CultureQuestPuzzleGameView = React.createClass({
                 draggableStyle.left = "140px";
                 draggableStyle.width = "112px";
                 draggableStyle.height = "168px";
+                draggableStyle.backgroundSize = "100%";
             }
 
             var draggableObj = {
@@ -164,6 +165,7 @@ var CultureQuestPuzzleGameView = React.createClass({
         this.setState({dragOriginX:parseInt(dragItem.style.left.replace("px",""))});
         dragItem.style.width  = "112px";
         dragItem.style.height = "168px";
+        dragItem.style.backgroundSize  = "100%";
     },
 
     onDraggableEndDrag: function(itemObj, monitor, component){
@@ -182,7 +184,8 @@ var CultureQuestPuzzleGameView = React.createClass({
                     this.checkCompletion();
                 }else{
                     dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
-                    dragItem.style.left = (this.state.pointerOffset.x - parseInt(dragItem.style.width) / 2)+"px";
+                    dragItem.style.left = (this.state.pointerOffset.x - parseInt(dragItem.style.width) / 2) -50 + "px";
+                    if (this.state.pointerOffset.x > 700) dragItem.style.left = "650px";
                 }
             }
         }else{

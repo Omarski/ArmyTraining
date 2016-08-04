@@ -153,8 +153,11 @@ var EthnoMapPopover = React.createClass({
                                     <li className="ethno-overlay-li">
                                         <button className="ethno-close-button-for-overlay btn btn-default"
                                                 aria-label="Right Align"
-                                                onClick={this.toggleParentStateAndResetIndexOfOverlayInfoandResetMoreLessInfo}><span
-                                            className="glyphicon glyphicon-remove"></span></button>
+                                                onClick={this.toggleParentStateAndResetIndexOfOverlayInfoandResetMoreLessInfo}>
+                                            <span className="glyphicon">
+                                                <img src="images/icons/explorercloseh.png"/>
+                                            </span>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
@@ -182,8 +185,16 @@ var EthnoMapButtons = React.createClass({
     render: function(){
         return(
             <div className="ethno-overlay-button-container">
-                <button disabled={this.props.disabledPrev()} onClick={this.props.onPrevClick} className="btn btn-default ethno-overlay-prev-button"><span className="glyphicon glyphicon-chevron-left"></span></button>
-                <button disabled={this.props.disabledNext()} onClick={this.props.onNextClick} className="btn btn-default ethno-overlay-next-button"><span className="glyphicon glyphicon-chevron-right"></span></button>
+                <button disabled={this.props.disabledPrev()} onClick={this.props.onPrevClick} className="btn btn-default ethno-overlay-prev-button">
+                    <span className="glyphicon">
+                        <img src="images/icons/prevn.png" />
+                    </span>
+                </button>
+                <button disabled={this.props.disabledNext()} onClick={this.props.onNextClick} className="btn btn-default ethno-overlay-next-button">
+                    <span className="glyphicon">
+                        <img src="images/icons/nextn.png" />
+                    </span>
+                </button>
             </div>
         );
     }

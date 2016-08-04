@@ -146,7 +146,9 @@ var BookmarksView = React.createClass({
                         type="button"
                         className={"btn btn-default btn-link main-nav-bookmark btn-bmk " + ((this.state.bookmarked) ? "selected" : "")}
                     >
-                        <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                        <span className="glyphicon" aria-hidden="true">
+                            <img src="images/icons/bookmarkn.png"/>
+                        </span>
                     </Button>
                 </div>
                 )}>
@@ -163,7 +165,9 @@ var BookmarksView = React.createClass({
                         <button className="btn btn-link bookmark-link-btn" title={chapterTitle + " / " + item.title} onClick={self.bookmarkSelected.bind(self, item)}>{item.title}</button>
 
                         <button className="btn btn-default bookmark-item-remove" onClick={self.bookmarkRemove.bind(self, item)}>
-                            <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span>
+                                <img src="images/icons/failedquiz.png"/>
+                            </span>
                         </button>
 
                     </ListGroupItem>);
