@@ -78,6 +78,7 @@ var ActiveDialogCOAs = React.createClass({
 
     hideModal: function() {
         this.setState(getCompState(false));
+        $('.modal-backdrop').remove();
     },
 
     getInitialState: function() {
