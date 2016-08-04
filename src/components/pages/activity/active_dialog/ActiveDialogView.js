@@ -209,7 +209,9 @@ var ActiveDialogView = React.createClass({
                                 delayShow={300} delayHide={150}
                             >
                                 <Button className="btn btn-default btn-link active-dialog-toolbar-btn">
-                                    <span className="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                                    <span className="glyphicon" aria-hidden="true">
+                                        <img className="active-dialog-toolbar-icon" src="images/icons/pausenarrationh.png"/>
+                                    </span>
                                 </Button>
                             </OverlayTrigger>
                             <ActiveDialogObjectives />

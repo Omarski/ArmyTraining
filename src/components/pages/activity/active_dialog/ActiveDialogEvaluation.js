@@ -94,11 +94,19 @@ var ActiveDialogEvaluation = React.createClass({
                 var titleCls = ""
 
                 if (item.pass) {
-                    check = <span className="glyphicon glyphicon-ok-sign pass active-dialog-eval-icon" aria-hidden="true"></span>
+                    check = (
+                        <span className="glyphicon pass active-dialog-eval-icon" aria-hidden="true">
+                            <img src="images/icons/completeexplorer.png"/>
+                        </span>
+                    );
                     objectiveFeedback = item.passDescription;
                     titleCls = "pass";
                 } else {
-                    check = <span className="glyphicon glyphicon-remove-sign fail active-dialog-eval-icon" aria-hidden="true"></span>
+                    check = (
+                        <span className="glyphicon fail active-dialog-eval-icon" aria-hidden="true">
+                            <img src="images/icons/failedquiz.png"/>
+                        </span>
+                    );
                     objectiveFeedback = item.failDescription;
                     titleCls = "fail";
                 }

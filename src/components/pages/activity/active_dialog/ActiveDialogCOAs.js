@@ -110,11 +110,13 @@ var ActiveDialogCOAs = React.createClass({
 
                 }
 
-                return  <ListGroupItem key={index}>
-                    <a className="" href="#" data-animation-name={name} onClick={_self.coaAction.bind(_self, item.coa)}>
-                        {displayText}
-                    </a>
-                </ListGroupItem>
+                return  (
+                    <ListGroupItem key={index}>
+                        <a className="" href="#" data-animation-name={name} onClick={_self.coaAction.bind(_self, item.coa)}>
+                            {displayText}
+                        </a>
+                    </ListGroupItem>
+                );
             });
         }
 
