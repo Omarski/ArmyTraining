@@ -380,7 +380,7 @@ var MultiColumnPronunciationView = React.createClass({
                     }
                     if(fullDisable){
                         itemRecordingClass = recordingClass + " pb-disabled ";
-                        itemRecording = L2_GLYPHICON_RECORD_CLS;
+                        itemRecording = L2_GLYPHICON_RECORD;
                     }
 
                     // translatedText, ezreadText, nativeText
