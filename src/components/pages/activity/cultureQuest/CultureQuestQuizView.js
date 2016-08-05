@@ -206,6 +206,7 @@ var CultureQuestQuiz = React.createClass({
         var self = this;
         var completeAnswer = "";
         var answerObj = self.props.answersColl[self.getSelectedIndex()];
+        var completedIndex = self.props.lastSelected.id.substr(self.props.lastSelected.id.length - 1);
 
         answerObj["question"+ answerObj.onQuestion].attempts++;
 
@@ -222,12 +223,14 @@ var CultureQuestQuiz = React.createClass({
             //Question 2 correct
             if (answerObj.onQuestion === 2) {
                 //change in answersColl triggers CQ-Map updateLayerAccess
-                self.setState({answeredCorrectly:true}, function(){self.awardPuzzlePiece()});
+                self.setState({answeredCorrectly:true}, function(){ self.viewUpdate({task:"addAnswerOrder", value:completedIndex});
+                                                                    self.awardPuzzlePiece()});
 
             //Question 1 correct
             }else{
                 answerObj.question1.answered = true;
-                self.setState({answeredCorrectly:true}, function(){self.awardPuzzlePiece()});
+                self.setState({answeredCorrectly:true}, function(){ self.viewUpdate({task:"addAnswerOrder", value:completedIndex});
+                                                                    self.awardPuzzlePiece()});
             }
         //incorrect
         }else{
@@ -258,6 +261,7 @@ var CultureQuestQuiz = React.createClass({
                     }else{
                         setTimeout(function(){
                             self.awardPuzzlePiece();
+                            self.viewUpdate({task:"addAnswerOrder", value:completedIndex});
                         },2000);
                     }
                 }, 2000);
@@ -296,6 +300,10 @@ var CultureQuestQuiz = React.createClass({
         self.props.lastSelected.setAttribute('hidden',true);
         self.updateTimerController("pause");
         self.setState({puzzleAwardMode:true});
+    },
+
+    viewUpdate: function(update){
+        this.props.viewUpdate(update);
     },
 
     render: function() {
