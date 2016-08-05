@@ -31,6 +31,7 @@ function getPageState(props) {
         audioController:"",
         audioBgController:null,
         popupObj:null,
+        answeredOrder:[],
         mediaPath:'data/media/'
     };
 
@@ -126,7 +127,7 @@ var CultureQuestView = React.createClass({
                 return(
                     <div className="popup-view-content">
                         <div className="culture-quest-view-popHeaderCont">
-                            <div className="culture-quest-view-popHeaderText">{"Congratulations! ..."}</div>
+                            <div className="culture-quest-view-popHeaderText">{"Congratulations!"}</div>
                         </div>
                         <div className="popup-view-bodyText" style={txtBxStyle}>
                             <div>{self.state.imageData.gameEnd.replace("here",'"Restart"')}</div>
@@ -165,6 +166,7 @@ var CultureQuestView = React.createClass({
         }
 
         this.markHomeRegion();
+        this.setState({answeredOrder:[]});
     },
     
     prepGoBackPopup: function(){
@@ -415,6 +417,13 @@ var CultureQuestView = React.createClass({
                 self.setState({"showPuzzleGame":false});
                 self.prepReplayPopup();
                 break;
+
+            case "addAnswerOrder":
+                var currentOrder = self.state.answeredOrder;
+                currentOrder.push(update.value);
+                self.setState({"answeredOrder":currentOrder});
+                console.log("order: " + currentOrder.toString());
+                break;
         }
     },
 
@@ -484,6 +493,7 @@ var CultureQuestView = React.createClass({
                         answersColl = {state.answersColl}
                         saveAnswersColl = {self.saveAnswersColl}
                         playAudio = {self.playAudio}
+                        viewUpdate = {self.viewUpdate}
                         />:null}
 
                     {self.state.showPuzzle? <CultureQuestPuzzleAwardView
