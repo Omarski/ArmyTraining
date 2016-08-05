@@ -405,6 +405,7 @@ var PronunciationView = React.createClass({
                 }
                 if(fullDisable){
                     itemRecordingClass = recordingClass + " pb-disabled ";
+                    itemRecordingIcon = LI_GLYPHICON_RECORD;
                 }
 
                 var cls = (index % 2) ? "pronunciation-item-row-odd" : "pronunciation-item-row-even";
@@ -420,7 +421,7 @@ var PronunciationView = React.createClass({
                                         type="button" onClick={function(){textClick(id, qcIndex, self)}}
                                         className="btn btn-default btn-lg btn-link btn-step btn-pronunciation"
                                         aria-label={LocalizationStore.labelFor("PronunciationPage", "btnPlay")}>
-                                        <span className={"glyphicon pronunciation-audio-button "} >
+                                        <span className={"pronunciation-audio-button "} >
                                             {(state.isListening[qcIndex] ? LI_GLYPHICON_STOP : LI_GLYPHICON_LISTEN)}
                                         </span>
                                     </button>

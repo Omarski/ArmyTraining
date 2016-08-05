@@ -138,10 +138,36 @@ var MainView = React.createClass({
         var self = this;
         var ver = this.getInternetExplorerVersion();
         var infoText = "";
+
         if (ver >= 0 && ver <= 11){
             var ie8Text = "Your browser version is unsupported for this course. Please upgrade your browser.";
-            var ie9to11Text = "To access all the features of this course, you must have Java enabled on your computer. Please install and/or upgrade Java and allow it to run when prompted.";
+            var ie9to11Text = (
+                <div className="notification-text">
+                    <p>
+                        To access all the features of this course, you must have Java enabled on your computer. Please install and/or upgrade Java and allow it to run when prompted.
+                    </p>
+                    <p className="notification-text-min">
+                        To use the voice recording feature in this course, you must:
+                    </p>
+                    <ol>
+                        <li className="notification-li">
+                            Have Java installed and enabled on your computer
+                        </li>
+                        <li className="notification-li">
+                            Run the VCAT Java applet when prompted
+                        </li>
+                        <li className="notification-li">
+                            Allow the access to the VCAT Application when prompted
+                        </li>
+                    </ol>
+                    <p>
+                        If your system security settings prevent the VCAT Java applet from appearing, you will not be able to record your voice on language instruction pages.
+                    </p>
+                </div>
+
+            );
             infoText = (ver <= 8) ? ie8Text: ie9to11Text;
+
 
             NotificationActions.show({
                 title: 'Notice',

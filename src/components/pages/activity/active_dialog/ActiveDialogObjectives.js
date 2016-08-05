@@ -88,7 +88,7 @@ var ActiveDialogObjectives = React.createClass({
                 >
                     <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
                             <span className="glyphicon" aria-hidden="true">
-                                <img className="active-dialog-toolbar-icon" src="images/icons/recordh.png" />
+                                <img className="active-dialog-toolbar-icon" src="images/icons/objectivesIcon2.png" />
                             </span>
                     </Button>
                 </OverlayTrigger>

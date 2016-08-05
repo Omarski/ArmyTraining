@@ -464,7 +464,7 @@ var ObjexView = React.createClass({
                 break;
 
             case "advancedLevel":
-                this.setState({advancedLevel:true});
+                self.setState({advancedLevel:true});
                 break;
 
             case "successAudio":

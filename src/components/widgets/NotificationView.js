@@ -84,7 +84,7 @@ var NotificationView = React.createClass({
                         </div>
                         <div className="modal-body">
                             {image}
-                            <p>{this.state.body}</p>
+                            {this.state.body}
                             {progress}
                         </div>
                         <div className="modal-footer">
