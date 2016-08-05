@@ -87,6 +87,8 @@ function playAudio(zid){
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     var newSource = "data/media/" + zid + ".mp3";
+    var icons = document.getElementsByClassName("match-item-choices-container");
+
     if(audio && source){
         // play audio, or stop the audio if currently playing
         source.src = newSource;
@@ -94,8 +96,20 @@ function playAudio(zid){
             audio.load();
             audio.play();
             audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-            audio.onended = function(){audio.pause(); };
+            Array.prototype.forEach.call(icons, function(item, index){
+                if(zid.toString() === $(item).attr("data-passed")){
+                    $(item.childNodes)[0].src = "images/icons/stoprecordn.png ";
+                    audio.onended = function(){
+                        $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
+                        audio.pause();
+                    };
+                }
+            });
+
         }else{
+            Array.prototype.forEach.call(icons, function(item, index){
+                $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
+            });
             audio.pause();
         }
     }
@@ -277,6 +291,7 @@ var MatchItemView = React.createClass({
                 it = $(e.target).attr("data") == item.passedData;
                 parent = $(e.target).parent().attr("data") == item.passedData;
                 if(it || parent){
+                    // TODO: trigger image to change to stop? for duration?
                     if(it){
                         playAudio($(e.target).attr("data"));
                     }else if (parent){
@@ -390,9 +405,8 @@ var MatchItemView = React.createClass({
                             onDragOver={self.onDraggingOver}
                             onDrop={self.onDropping}
                             onClick={self.onClick}>
-                            <span className="glyphicon glyph-choice match-item-audio">
-                                <img src="images/icons/playrecordingn.png" />
-                            </span>
+                            <img src="images/icons/playrecordn.png"  className="glyphicon glyph-choice match-item-audio">
+                            </img>
                         </a>);
                     break;
                 case "image":
@@ -472,9 +486,8 @@ var MatchItemView = React.createClass({
                                     className="match-item-play-icon"
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
-                                    <span className="glyphicon glyph-answer match-item-audio">
-                                        <img src="images/icons/playrecordingn.png" />
-                                    </span>
+                                    <img src="images/icons/playrecordn.png" className="glyphicon glyph-answer match-item-audio">
+                                    </img>
                                     <div className={(feedback + ' match-item-feedback-audio')}>
                                         {icon}
                                     </div>
@@ -526,9 +539,8 @@ var MatchItemView = React.createClass({
                                 <td className={"matchitem-droparea-td"}>
                                     <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                         {answerRender}
-                                        <span className="glyphicon glyph-answer match-item-audio match-item-audio-grayed-out">
-                                            <img src="images/icons/playrecordingd.png" />
-                                        </span>
+                                        <img src="images/icons/playrecordn.png" className="glyphicon glyph-answer match-item-audio match-item-audio-grayed-out">
+                                        </img>
                                     </div>
                                 </td>
                                 <td className={"matchitem-question-td"}>
