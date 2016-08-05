@@ -210,7 +210,7 @@ var ActiveDialogView = React.createClass({
                             >
                                 <Button className="btn btn-default btn-link active-dialog-toolbar-btn">
                                     <span className="glyphicon" aria-hidden="true">
-                                        <img className="active-dialog-toolbar-icon" src="images/icons/pausenarrationh.png"/>
+                                        <img className="active-dialog-toolbar-icon" src="images/icons/pauseIcon2.png"/>
                                     </span>
                                 </Button>
                             </OverlayTrigger>
