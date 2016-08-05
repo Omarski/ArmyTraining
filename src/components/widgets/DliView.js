@@ -71,12 +71,12 @@ var DliView = React.createClass({
             </ReactBootstrap.ListGroup>
         </Popover>);
 
-        return(<span id="dliView">
+        return(<li id="dliView">
             <OverlayTrigger trigger='click' rootClose placement='left' id="DliOverlayTrigger" overlay={popOver}>
                 <Button title={LocalizationStore.labelFor("header", "tooltipDLI")}
                         alt={LocalizationStore.labelFor("header", "tooltipDLI")}
                         aria-label={LocalizationStore.labelFor("header", "tooltipDLI")}
-                        className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set">
+                        className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set dli-button dli-styling">
                     {dliIcon}
                 </Button>
             </OverlayTrigger>
@@ -89,7 +89,7 @@ var DliView = React.createClass({
                     <iframe id="iframe" className="dliframe" src={self.state.iframeSrc}></iframe>
                 </Modal.Body>
             </Modal>
-        </span>);
+        </li>);
     },
     _onChange: function() {
         this.setState(getSettingsState());

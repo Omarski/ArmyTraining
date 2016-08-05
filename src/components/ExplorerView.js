@@ -345,11 +345,15 @@ var ExplorerView = React.createClass({
         if(UnitStore.requiredExists()) {
             requiredItems = this.explorerItems(this.state.requiredUnits, 'required');
             optionalItems = this.explorerItems(this.state.optionalUnits, 'optional');
+
+            var requiredBtn = (<li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblRequired")}</a></li>);
+            var optionalBtn = (<li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblOptional")}</a></li>);
+
             result = (
                 <div className={this.state.expanded ? "main-footer-tab-container-expanded" : "main-footer-tab-container"}>
                     <ul className="nav nav-tabs nav-justified main-footer-tab" role="tablist">
-                        <li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblRequired")}</a></li>
-                        <li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblOptional")}</a></li>
+                        {this.state.expanded ? requiredBtn : ""}
+                        {this.state.expanded ? optionalBtn : ""}
                     </ul>
                     <div className="tab-content main-footer-tab-content">
                         <div role="tabpanel" className="tab-pane active main-footer-tab-pane" id="mainFooterLessonsTab">

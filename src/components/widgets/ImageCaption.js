@@ -6,6 +6,7 @@ function getImageCaptionState(props) {
         filePath: props.src || "",
         caption: props.caption || "",
         altText: props.altText || "",
+        mediaTitle: props.mediaTitle || "",
         onImageLoaded: props.onImageLoaded || null
     };
 }
@@ -64,8 +65,8 @@ var ImageCaptionView = React.createClass({
                     id="captionImage"
                     className={this.state.videoType}
                     src={this.state.filePath}
-                    aria-label={this.state.altText}
-                    title={this.state.altText}
+                    aria-label={this.state.mediaTitle}
+                    title={this.state.mediaTitle}
                     alt={this.state.altText}
                     onLoad={this.handleImageLoaded}
                     onError={this.handleImageErrored}
