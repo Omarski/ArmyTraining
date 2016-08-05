@@ -379,7 +379,8 @@ var MultiColumnPronunciationView = React.createClass({
                         }
                     }
                     if(fullDisable){
-                        itemRecordingClass = recordingClass + " pb-disabled " + L2_GLYPHICON_RECORD_CLS;
+                        itemRecordingClass = recordingClass + " pb-disabled ";
+                        itemRecording = L2_GLYPHICON_RECORD_CLS;
                     }
 
                     // translatedText, ezreadText, nativeText
@@ -423,7 +424,9 @@ var MultiColumnPronunciationView = React.createClass({
                                         {itemRecorded}
                                     </span>
                                 </button>
-                                <span className={itemFeedbackClass}></span>
+                                <span className={itemFeedbackClass}>
+                                    {itemFeedback}
+                                </span>
                             </td>
                             <td className="l2-native-text">
                                 <div className="l2-native-text">
