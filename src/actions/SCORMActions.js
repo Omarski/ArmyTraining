@@ -62,7 +62,7 @@ var SCORMActions = {
         if (name && value) {
             try {
                 doLMSSetValue(name, value);
-                doLMSCommit();
+                //doLMSCommit();
             } catch (e) {
                 // do something
             }
