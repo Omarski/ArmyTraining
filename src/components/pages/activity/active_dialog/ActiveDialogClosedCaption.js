@@ -28,11 +28,10 @@ var ActiveDialogClosedCaptionView = React.createClass({
                     className="btn btn-default btn-link btn-lg active-dialog-closed-caption-button"
                     onClick={this.toggle}
             >
-                <span className="glyphicon glyphicon-subtitles btn-icon" aria-hidden="true"></span>
+                <span className="glyphicon btn-icon" aria-hidden="true">
+                    <img src="images/icons/ClosedCaptionIcon2.png"/>
+                </span>
             </Button>
-
-
-
         );
     }
 });

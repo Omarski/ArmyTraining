@@ -32,10 +32,6 @@ function load(){
 
     }
 
-    setTimeout(function() {
-        ASRActions.loadComplete();
-    }, 100);
-
 }
 
 window.onload = function init(){
@@ -94,7 +90,10 @@ var ASRStore = assign({}, EventEmitter.prototype, {
     InitializeASR: function() {
         //"ASR Store initialize"
         ASRMessajsTester.sendMessage("urn:ASRMessajsTester:MessajsImpl1,initialize English", "urn:ASRApplet:test", "text/plain; charset=utf-8");
-        _isInitialized = true;
+    },
+
+    InitializeDone: function(){
+        //console.log("trying to finish initializing...");
     },
 
     StartRecording: function() {
@@ -127,6 +126,12 @@ var ASRStore = assign({}, EventEmitter.prototype, {
 
     RecievedMessaj: function(msj){
         _message = msj;
+        if(_message === "initialized"){
+            setTimeout(function() {
+                ASRActions.loadComplete();
+                _isInitialized = true;
+            }, 100);
+        }
         var self = this;
         setTimeout(function() {
             self.emitChange();
@@ -153,6 +158,9 @@ AppDispatcher.register(function(action) {
         case ASRConstants.ACTIVE_DIALOG_OBJECTIVE_CREATE:
             create(action.data);
             ASRStore.emitChange();
+            break;
+        case ASRConstants.INITIALIZE_DONE:
+            ASRStore.InitializeDone();
             break;
         case ASRConstants.ACTIVE_DIALOG_OBJECTIVE_DESTROY:
             destroy();

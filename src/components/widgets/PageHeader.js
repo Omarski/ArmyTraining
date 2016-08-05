@@ -139,7 +139,7 @@ var PageHeader = React.createClass({
                     aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     className={("btn btn-default btn-link main-nav-audio-control btn-bmk ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
-                    <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                    <img src="images/icons/bookmarkn.png" className="bookmark-icon"/>
                 </Button>
             </OverlayTrigger>
         );
@@ -149,7 +149,7 @@ var PageHeader = React.createClass({
         var info = "";
         if (this.state.sources !== "") {
             info = (<OverlayTrigger delayHide={40000} placement="right" overlay={attributions}>
-                        <span className="infoAttributions glyphicon glyphicon-info-sign"></span>
+                        <img src="images/icons/imageinfo.png" className="bookmark-icon info-sources-icon"/>
                     </OverlayTrigger>);
         }
 

@@ -148,6 +148,8 @@ var MissionConnectGameView = React.createClass({
 
     onIconClick: function(e){
 
+        this.viewUpdate({task:"iconClick",value:null});
+
         if (parseInt(e.target.id.substring(18)) === parseInt(this.state.endNode)){
             this.props.viewUpdate({task:"leaderClicked", value:null});
         } else this.setState({activeNode:parseInt(e.target.id.substring(18)), showInterview:true});

@@ -117,6 +117,11 @@
   position: absolute;
   right: 5px;
   top: 5px;
+  span {
+    img {
+      max-height: 15px;
+    }
+  }
 }
 
 

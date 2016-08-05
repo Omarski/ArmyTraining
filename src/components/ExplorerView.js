@@ -89,15 +89,19 @@ function getUnitState(expanded) {
                     }
                 }
 
-                var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
+                var expandCollapseIconCls = 'footer-expand-collapse-btn ';
+                var expandCollapseIcon = "";
                 var ex = (_expandedChapters[c.xid]) ? _expandedChapters[c.xid] : false;
                 if (ex) {
-                    expandCollapseIconCls += ' glyphicon-minus-sign';
+                    expandCollapseIconCls += " plus";
+                    expandCollapseIcon = (<img src="images/icons/ExplorerCollapsen.png"/>);
                 } else {
-                    expandCollapseIconCls += ' glyphicon-plus-sign';
+                    expandCollapseIconCls += " minus";
+                    expandCollapseIcon = (<img src="images/icons/ExplorerExpandn.png"/>);
                 }
                 chapters.push({
                     expandCollapseIconCls: expandCollapseIconCls,
+                    expandCollapseIcon: expandCollapseIcon,
                     expanded: ex,
                     completed: chapterCompleted,
                     title: c.title,
@@ -112,18 +116,20 @@ function getUnitState(expanded) {
             // skip if marked as hidden
             if (bHidden)
                 continue;
-
             var unitCls = '';
             var expandCollapseIconCls = 'footer-expand-collapse-btn glyphicon';
+            var expandCollapseIcon = "";
             var unitExpandedCls = ' panel-collapse collapse ';
             if (PageStore.unit() && PageStore.unit().data.xid === unit.data.xid && !_fromHeaderAction) {
                 currentUnitIndex = totalUnits;
                 unitCls = 'main-footer-accordian-table-row-active';
                 unitExpandedCls += ' in';
-                expandCollapseIconCls += ' glyphicon-minus-sign';
+                expandCollapseIconCls += " plus";
+                expandCollapseIcon = (<img src="images/icons/ExplorerCollapsen.png"/>);
                 _expanded[unit.data.xid] = true;
             } else {
-                expandCollapseIconCls += ' glyphicon-plus-sign';
+                expandCollapseIconCls += " minus";
+                expandCollapseIcon = (<img src="images/icons/ExplorerExpandn.png"/>);
             }
 
             // increase unit completed count
@@ -134,6 +140,7 @@ function getUnitState(expanded) {
             var obj = {
                 unitExpandedCls: unitExpandedCls,
                 expandCollapseIconCls: expandCollapseIconCls,
+                expandCollapseIcon: expandCollapseIcon,
                 unitCls: unitCls,
                 unit: unit,
                 completed: unitCompleted,
@@ -169,15 +176,18 @@ function getUnitState(expanded) {
 
 var ExplorerView = React.createClass({
     panelHeaderClick: function(item, index, idStr) {
+
         _fromHeaderAction = true;
         var btn = $('#heading' + idStr + index).find('.footer-expand-collapse-btn');
-        if (btn.hasClass('glyphicon-plus-sign')) {
-            btn.removeClass('glyphicon-plus-sign').addClass('glyphicon-minus-sign');
+        if (btn.hasClass('plus')) {
+            btn.removeClass('plus').addClass('minus');
+            btn.find('img').attr('src', "images/icons/ExplorerCollapsen.png");
             $('#collapse' + idStr + index).collapse('show');
             _expanded[item.unit.data.xid] = true;
         } else {
-            btn.removeClass('glyphicon-minus-sign').addClass('glyphicon-plus-sign');
+            btn.removeClass('minus').addClass('plus');
             $('#collapse' + idStr + index).collapse('hide');
+            btn.find('img').attr('src', "images/icons/ExplorerExpandn.png");
             _expanded[item.unit.data.xid] = false;
         }
 
@@ -274,7 +284,7 @@ var ExplorerView = React.createClass({
 
 
                 if (item.unit.state.complete) {
-                    icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
+                    icon = (<img src="images/icons/completeexplorer.png"/>);
                 }
                 if (_expanded[item.unit.data.xid]) {
 
@@ -305,7 +315,9 @@ var ExplorerView = React.createClass({
                     <div id={'accordion' +idStr + index} role="tablist" aria-multiselectable="true" key={index}>
                         <li id={'heading' + idStr + index} className={"list-group-item main-footer-section main-footer-row btn-clk" + cls} onClick={self.panelHeaderClick.bind(self, item, index, idStr)}>
                             <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
-                                <span className={item.expandCollapseIconCls} aria-hidden="true"></span>
+                                <span className={item.expandCollapseIconCls} aria-hidden="true">
+                                    {item.expandCollapseIcon}
+                                </span>
                             </a>
                             <span className="explorer-section-title">{item.title}</span>
                             <span className="badge">
@@ -333,11 +345,15 @@ var ExplorerView = React.createClass({
         if(UnitStore.requiredExists()) {
             requiredItems = this.explorerItems(this.state.requiredUnits, 'required');
             optionalItems = this.explorerItems(this.state.optionalUnits, 'optional');
+
+            var requiredBtn = (<li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblRequired")}</a></li>);
+            var optionalBtn = (<li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblOptional")}</a></li>);
+
             result = (
                 <div className={this.state.expanded ? "main-footer-tab-container-expanded" : "main-footer-tab-container"}>
                     <ul className="nav nav-tabs nav-justified main-footer-tab" role="tablist">
-                        <li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblRequired")}</a></li>
-                        <li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblOptional")}</a></li>
+                        {this.state.expanded ? requiredBtn : ""}
+                        {this.state.expanded ? optionalBtn : ""}
                     </ul>
                     <div className="tab-content main-footer-tab-content">
                         <div role="tabpanel" className="tab-pane active main-footer-tab-pane" id="mainFooterLessonsTab">
@@ -370,13 +386,15 @@ var TOCChapterRow = React.createClass({
         var icon = '';
         
         if (this.props.item.data.state && this.props.item.data.state.complete) {
-            icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
+            icon = (<img src="images/icons/completeexplorer.png"/>);
         }
 
         return (
             <li className="list-group-item main-footer-chapter-row main-footer-row btn-clk" onClick={self.chapterHeaderClick.bind(this, this.props.item, index, idStr)}>
                 <a role="button" data-toggle="collapse" data-parent={'#accordion' + idStr + index} href={'#collapse' + idStr + index} aria-expanded="true" aria-controls={'collapse' + idStr + index}>
-                    <span className={this.props.item.expandCollapseIconCls} aria-hidden="true"></span>
+                    <span className={this.props.item.expandCollapseIconCls} aria-hidden="true">
+                        {this.props.item.expandCollapseIcon}
+                    </span>
                 </a>
                 <span className="explorer-section-title">{this.props.item.title}</span>
                 <span className="badge">
@@ -439,15 +457,15 @@ var TOCPageRow = React.createClass({
         var itemState = this.props.item.state || null;
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
             cls += ' current';
-            icon = (<span className="glyphicon glyphicon-star current" aria-hidden="true"></span>);
+            icon = (<img src="images/icons/currentpage.png"/>);
         } else if (itemState && itemState.visited) {
-            icon = (<span className="glyphicon glyphicon-adjust visited" aria-hidden="true"></span>);
+            icon = (<img src="images/icons/inprogress.png"/>);
             cls += ' visited';
         } else if (itemState && itemState.complete) {
-            icon = (<span className="glyphicon glyphicon-ok pass" aria-hidden="true"></span>);
+            icon = (<img src="images/icons/completeexplorer.png"/>);
         } else {
             cls += ' not-seen';
-            icon = (<i className="fa fa-circle-o" aria-hidden="true"></i>);
+            icon = (<img src="images/icons/notseen.png"/>);
         }
 
         return (

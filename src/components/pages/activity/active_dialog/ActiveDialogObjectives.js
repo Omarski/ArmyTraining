@@ -48,12 +48,17 @@ var ActiveDialogObjectives = React.createClass({
             objectivesList = this.state.objectives.map(function(item, index) {
                 var check = "";
                 if (item.pass) {
-                    check = <span className="glyphicon glyphicon-ok-sign pass" aria-hidden="true"></span>
+                    check = (
+                        <span className="glyphicon pass" aria-hidden="true">
+                            <img src="images/icons/completeexplorer.png"/>
+                        </span>
+                    )
                 } else {
-                    //check = <span className="glyphicon glyphicon-remove-sign fail" aria-hidden="true"></span> // TODO: Greg, we need to not show this if the user has not got this far
+                    //check = <span className=" fail" aria-hidden="true"></span> // TODO: Greg, we need to not show this if the user has not got this far
                 }
 
-                return  <ListGroupItem key={index}>
+                return  (
+                    <ListGroupItem key={index}>
                         <table>
                             <tbody>
                                 <tr>
@@ -62,8 +67,8 @@ var ActiveDialogObjectives = React.createClass({
                                 </tr>
                             </tbody>
                         </table>
-
-                        </ListGroupItem>
+                    </ListGroupItem>
+                );
             });
         }
 
@@ -82,7 +87,9 @@ var ActiveDialogObjectives = React.createClass({
                     delayShow={300} delayHide={150}
                 >
                     <Button className="btn btn btn-default btn-link active-dialog-toolbar-btn">
-                            <span className="glyphicon glyphicon-record" aria-hidden="true"></span>
+                            <span className="glyphicon" aria-hidden="true">
+                                <img className="active-dialog-toolbar-icon" src="images/icons/objectivesIcon2.png" />
+                            </span>
                     </Button>
                 </OverlayTrigger>
             </OverlayTrigger>

@@ -6,11 +6,19 @@ var ConfigStore = require('../../../stores/ConfigStore');
 var PageHeader = require('../../widgets/PageHeader');
 
 
+/*
 var RF_GLYPHICON_STOP_CLS = "glyphicon-stop";
 var RF_GLYPHICON_RECORD_CLS = "glyphicon-record";
 var RF_GLYPHICON_PLAY_CLS = "glyphicon-play-circle";
 var RF_GLYPHICON_CORRECT_CLS = "glyphicon-ok-circle";
 var RF_GLYPHICON_INCORRECT_CLS = "glyphicon-remove-circle";
+*/
+
+var RF_GLYPHICON_RECORD = (<img src="images/icons/recordn.png" />); // "glyphicon glyphicon-record";
+var RF_GLYPHICON_STOP = (<img src="images/icons/stoprecordn.png" />); // "fa fa-stop-circle-o";
+var RF_GLYPHICON_PLAY = (<img src="images/icons/playrecordingn.png" />); // "glyphicon glyphicon-repeat";
+var RF_GLYPHICON_CORRECT = (<img src="images/icons/completeexplorer.png" />); // "glyphicon glyphicon-ok-circle";
+var RF_GLYPHICON_INCORRECT = (<img src="images/icons/failedquiz.png" />); // "glyphicon glyphicon-remove-circle";
 
 var recorder;
 
@@ -242,20 +250,25 @@ var ResponseFormationView = React.createClass({
         var recordingClass = "glyphicon RF-glyphicon RF-record";
         var recordedClass = "glyphicon RF-glyphicon RF-play";
         var feedbackClass = "glyphicon RF-glyphicon RF-feedback";
+        var recordingIcon = "";
+        var recordedIcon = "";
+        var feedbackIcon = "";
         var requestAnswer = "";
         var showAnswer = "";
         var spoken = state.spoken;
         var answer = state.answer;
 
         if(state.haveAnswered){
-            recordedClass += " " + RF_GLYPHICON_PLAY_CLS;
+            recordedIcon = RF_GLYPHICON_PLAY;
             if(ConfigStore.isASREnabled()){
                 coach = <img className="RF-coachImage" src={imageSource}></img>;
                 $(".RF-ResponseContainer").css("border", "1px solid black");
                 if(state.isCorrect){
-                    feedbackClass += " RF-correct " + RF_GLYPHICON_CORRECT_CLS;
+                    feedbackClass += " RF-correct ";
+                    feedbackIcon = RF_GLYPHICON_CORRECT;
                 }else{
-                    feedbackClass += " RF-incorrect " + RF_GLYPHICON_INCORRECT_CLS;
+                    feedbackClass += " RF-incorrect ";
+                    feedbackIcon = RF_GLYPHICON_INCORRECT;
                     requestAnswer = <div className="RF-requestAnswer" onClick={function(){getAnswer(self)}}>Show Correct Answer</div>;
                 }
             }else{
@@ -268,9 +281,9 @@ var ResponseFormationView = React.createClass({
         if(self.state.message != "No data found." || !ConfigStore.isASREnabled()) {
             var isRecording = state.isRecording;
             if (isRecording) {
-                recordingClass += " " + RF_GLYPHICON_STOP_CLS;
+                recordingIcon = RF_GLYPHICON_STOP;
             } else {
-                recordingClass += " " + RF_GLYPHICON_RECORD_CLS;
+                recordingIcon =  RF_GLYPHICON_RECORD;
             }
         }
 
@@ -298,8 +311,12 @@ var ResponseFormationView = React.createClass({
                                 </li>
                                 <li>
                                     <div className="RF-RecorderContainer">
-                                        <div className={recordingClass} onClick={function(){handleRecord(self)}}></div>
-                                        <div className={recordedClass} onClick={function(){handlePlaying(self)}}></div>
+                                        <div className={recordingClass} onClick={function(){handleRecord(self)}}>
+                                            {recordingIcon}
+                                        </div>
+                                        <div className={recordedClass} onClick={function(){handlePlaying(self)}}>
+                                            {recordedIcon}
+                                        </div>
                                         <div className="RF-recorderTextContainer">{state.page.prompt.text}</div>
                                     </div>
                                 </li>
@@ -309,7 +326,9 @@ var ResponseFormationView = React.createClass({
                             <div className="RF-coach">{coach}</div>
                             <div className="RF-answerString">{answerString}</div>
                             <div className="RF-response">{response}</div>
-                            <div className={feedbackClass}></div>
+                            <div className={feedbackClass}>
+                                {feedbackIcon}
+                            </div>
                             <div className="RF-spokenContainer">{spoken}</div>
                             {requestAnswer}
                             {showAnswer}

@@ -87,6 +87,8 @@ function playAudio(zid){
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
     var newSource = "data/media/" + zid + ".mp3";
+    var icons = document.getElementsByClassName("match-item-choices-container");
+
     if(audio && source){
         // play audio, or stop the audio if currently playing
         source.src = newSource;
@@ -94,8 +96,20 @@ function playAudio(zid){
             audio.load();
             audio.play();
             audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-            audio.onended = function(){audio.pause(); };
+            Array.prototype.forEach.call(icons, function(item, index){
+                if(zid.toString() === $(item).attr("data-passed")){
+                    $(item.childNodes)[0].src = "images/icons/stoprecordn.png ";
+                    audio.onended = function(){
+                        $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
+                        audio.pause();
+                    };
+                }
+            });
+
         }else{
+            Array.prototype.forEach.call(icons, function(item, index){
+                $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
+            });
             audio.pause();
         }
     }
@@ -277,6 +291,7 @@ var MatchItemView = React.createClass({
                 it = $(e.target).attr("data") == item.passedData;
                 parent = $(e.target).parent().attr("data") == item.passedData;
                 if(it || parent){
+                    // TODO: trigger image to change to stop? for duration?
                     if(it){
                         playAudio($(e.target).attr("data"));
                     }else if (parent){
@@ -332,8 +347,8 @@ var MatchItemView = React.createClass({
         var choices;
         var answerState = state.answerState;
         var numQuestions = answerState.length;
-        var correct = "glyphicon MI-feedback MI-correct glyphicon-ok";
-        var incorrect = "glyphicon MI-feedback MI-incorrect glyphicon-remove";
+        var correct = "glyphicon MI-feedback MI-correct ";
+        var incorrect = "glyphicon MI-feedback MI-incorrect ";
         var answerContainers;
 
         var numMoved = state.numMoved;
@@ -390,7 +405,8 @@ var MatchItemView = React.createClass({
                             onDragOver={self.onDraggingOver}
                             onDrop={self.onDropping}
                             onClick={self.onClick}>
-                            <span className="glyphicon glyphicon-play-circle glyph-choice match-item-audio"></span>
+                            <img src="images/icons/playrecordn.png"  className="glyphicon glyph-choice match-item-audio">
+                            </img>
                         </a>);
                     break;
                 case "image":
@@ -446,11 +462,14 @@ var MatchItemView = React.createClass({
             for(var i=0;i<state.answerState.length;i++){
                 // loop through the answerState array
                 var numberNextToSpan = i + 1 + ".";
+                var icon = "";
                 if(index === state.answerState[i].currentBoxIndex) { // if there is an answer in this box
                     if (needCheck) { // does it need to be graded?
                         if (state.answerState[i].currentBox == state.answerState[i].letter) { // if correct
+                            icon = (<img src="images/icons/completeexplorer.png"/>);
                             feedback = correct;
                         } else {
+                            icon = (<img src="images/icons/failedquiz.png"/>);
                             feedback = incorrect;
                         }
                     }
@@ -467,8 +486,11 @@ var MatchItemView = React.createClass({
                                     className="match-item-play-icon"
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
-                                    <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio"></span>
-                                    <div className={(feedback + ' match-item-feedback-audio')}></div>
+                                    <img src="images/icons/playrecordn.png" className="glyphicon glyph-answer match-item-audio">
+                                    </img>
+                                    <div className={(feedback + ' match-item-feedback-audio')}>
+                                        {icon}
+                                    </div>
                                 </a>);
                             break;
                         case "image":
@@ -481,7 +503,9 @@ var MatchItemView = React.createClass({
                                 data-passed={source}
                                 onDragStart={self.onDragging}
                                 ></img>
-                                <div className={(feedback  + ' match-item-feedback-image')}></div>
+                                <div className={(feedback  + ' match-item-feedback-image')}>
+                                    {icon}
+                                </div>
                             </div>);
                             break;
                         case "string":
@@ -493,7 +517,9 @@ var MatchItemView = React.createClass({
                                     onDragStart={self.onDragging}
                                     >
                                     {state.answerState[i].passedData}
-                                    <div className={(feedback  + ' match-item-feedback-text')}></div>
+                                    <div className={(feedback  + ' match-item-feedback-text')}>
+                                        {icon}
+                                    </div>
                                 </a>);
                             break;
                         default:
@@ -513,7 +539,6 @@ var MatchItemView = React.createClass({
                                 <td className={"matchitem-droparea-td"}>
                                     <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                         {answerRender}
-                                        <span className="glyphicon glyphicon-play-circle glyph-answer match-item-audio match-item-audio-grayed-out"></span>
                                     </div>
                                 </td>
                                 <td className={"matchitem-question-td"}>

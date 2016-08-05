@@ -126,7 +126,7 @@ var BreadcrumbsView = React.createClass({
                     aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
                     className={("btn btn-default btn-link main-nav-bookmark ") + ((this.state.bookmarked) ? "selected" : "")}
                 >
-                    <span className="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                    <span className="glyphicon" aria-hidden="true"></span>
                 </Button>
             </OverlayTrigger>
         );

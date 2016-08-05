@@ -2,9 +2,6 @@ var React = require('react');
 var CoachFeedbackStore = require('../../stores/CoachFeedbackStore');
 var SettingsStore = require('../../stores/SettingsStore');
 
-var COACH_GLYPHICON_CORRECT_CLS = "glyphicon-ok";
-var COACH_GLYPHICON_INCORRECT_CLS = "glyphicon-remove";
-
 function getCoachFeedbackState(props) {
     return {
         isCorrect: props.isCorrect || false,
@@ -70,9 +67,9 @@ var CoachFeedbackView = React.createClass({
         var cannedText = "";
         var coachMedia = "";
         var feedbackMap = {};
-        var feedbackClass = "glyphicon MC-glyphicon MC-feedback";
+        var feedbackClass = "MC-feedback";
         var mediaDir = "data/media/"; // TODO <-------------should be a global setting----------------------------------
-
+        var feedbackIcon = "";
         // skip if hidden
         if (this.state.coachVisible === false) {
             return null;
@@ -80,10 +77,12 @@ var CoachFeedbackView = React.createClass({
 
         // get feedback object based on correctness
         if (this.props.isCorrect) {
-            feedbackClass += " multiple-choice-feedback-icon multiple-choice-correct " + COACH_GLYPHICON_CORRECT_CLS;
+            feedbackIcon = (<img src="images/icons/completeexplorer.png"/>);
+            feedbackClass += " multiple-choice-feedback-icon multiple-choice-correct ";
             feedbackMap = CoachFeedbackStore.getPositiveFeedback();
         } else {
-            feedbackClass += " multiple-choice-feedback-icon multiple-choice-incorrect " + COACH_GLYPHICON_INCORRECT_CLS;
+            feedbackIcon = (<img src="images/icons/failedquiz.png"/>);
+            feedbackClass += " multiple-choice-feedback-icon multiple-choice-incorrect ";
             feedbackMap = CoachFeedbackStore.getNegativeFeedback();
         }
 
@@ -128,7 +127,9 @@ var CoachFeedbackView = React.createClass({
             <div className="alert alert-dismissible multiple-choice-alert " role="alert" >
                 <div className="multiple-choice-alert-text">
                     {coachMedia}
-                    <span className={feedbackClass}></span>
+                    <span className={feedbackClass}>
+                        {feedbackIcon}
+                    </span>
                     <p className="coach-feedback-text"><strong>{cannedText}<br></br>{this.props.text}</strong></p>
                 </div>
             </div>

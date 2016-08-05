@@ -206,12 +206,17 @@ var TestOutRow = React.createClass({
     render: function() {
         var passed = this.props.passed;
         var title = this.props.title;
-        var className = "glyphicon glyphicon-remove quiz-feedback-icon quiz-feedback-icon-incorrect";
+        var className = "glyphicon quiz-feedback-icon quiz-feedback-icon-incorrect"
+        var icon = (<img src="images/icons/failedquiz.png"/>);
 
         // changed if passed
         if (passed) {
-            className = "glyphicon glyphicon-ok quiz-feedback-icon quiz-feedback-icon-correct";
+            className = "glyphicon quiz-feedback-icon quiz-feedback-icon-correct"
+            icon = (<img src="images/icons/completeexplorer.png"/>);
         }
+
+
+
 
         return (
             <tr>
@@ -219,7 +224,9 @@ var TestOutRow = React.createClass({
                     {title}
                 </td>
                 <td>
-                    <span className={className}/>
+                    <span className={className}>
+                        {icon}
+                    </span>
                 </td>
             </tr>
         );

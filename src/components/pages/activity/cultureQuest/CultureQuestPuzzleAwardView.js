@@ -6,16 +6,23 @@ var CultureQuestPuzzleView = React.createClass({
     getInitialState: function() {
 
         return {
-            mediaPath: 'data/media/'
+            mediaPath: 'data/media/',
+            sliderRendered:false
         };
     },
 
     componentWillMount: function() {
         this.renderSliderPieces();
+        this.setState({sliderRendered:true});
     },
 
     componentDidMount: function() {
+
         var self = this;
+        var completedIndex = self.props.lastSelected.id.substr(self.props.lastSelected.id.length - 1);
+        var lastSelectedData = self.props.imageData.regions[completedIndex];
+        var completedTile = lastSelectedData.name.replace(" ","");
+
         window.setTimeout(function(){
             $("#culture-quest-puzzle-award-view-puzzleSlider").animate({right:'0'},1000,'swing');
             self.viewUpdate({task:"tileAudio", value:null});
@@ -25,13 +32,20 @@ var CultureQuestPuzzleView = React.createClass({
             $("#culture-quest-puzzle-award-view-puzzleAwardImg").animate({left:'590px'},1000,'swing',
             function(){
                 $("#culture-quest-puzzle-award-view-puzzleAwardImg").remove();
+                $("#cultureQuestTile_"+completedTile).css("opacity","1");
             });
         },2500);
 
         window.setTimeout(function(){
+
                 self.props.showQuizUpdate("hide");
                 self.props.showPuzzleUpdate("hide");
+
         },5500);
+    },
+
+    shouldComponentUpdate: function(){
+        return !this.state.sliderRendered;
     },
 
     getSelectedIndex: function(){
@@ -42,24 +56,31 @@ var CultureQuestPuzzleView = React.createClass({
 
     renderSliderPieces: function(){
 
-        var self = this, pieceHeight = 55, topPadding = 60;
-        var regionsColl = self.props.imageData.regions;
-        var completedData = [];
+            var self = this, pieceHeight = 55, topPadding = 60;
+            var regionsColl = self.props.imageData.regions;
+            var completedData = [];
+            var completedIndex = self.props.lastSelected.id.substr(self.props.lastSelected.id.length - 1);
+            var lastSelectedData = self.props.imageData.regions[completedIndex];
 
-        //only add completed region data
-        for (var i = 0 ; i < self.props.answersColl.length; i++){
-            if (self.props.answersColl[i].completed) completedData.push(regionsColl[i]);
-        }
+            //only add completed region data
+            for (var i = 0 ; i < self.props.answersColl.length; i++){
+                if (self.props.answersColl[i].completed) completedData.push(regionsColl[i]);
+            }
 
-        var sliderPuzzles = completedData.map(function(region,index){
+            var sliderPuzzles = completedData.map(function(region,index){
 
-            var pieceImg = self.state.mediaPath + region.tile;
-            var pieceStyle = {top: topPadding+(pieceHeight * index), background:"url("+pieceImg+") no-repeat 100% 100%"};
-            return (
-                <div className="culture-quest-puzzle-award-view-sliderPuzzle" style={pieceStyle} key={index}></div>
-            )
-        });
-        return sliderPuzzles;
+                var pieceImg = self.state.mediaPath + region.tile;
+                var opacity = (lastSelectedData.tile === region.tile) ? "0":"1";
+                if (opacity === "0") console.log("hiding: " + "cultureQuestTile_"+region.name.replace(" ",""));
+                var pieceStyle = {top: parseInt(topPadding+(pieceHeight * index)), background:"url("+pieceImg+") no-repeat", backgroundSize:"40px 50px", opacity:opacity};
+
+                return (
+                    <div className="culture-quest-puzzle-award-view-sliderPuzzle" id={"cultureQuestTile_"+region.name.replace(" ","")} style={pieceStyle} key={index}></div>
+                )
+            });
+           
+            return sliderPuzzles;
+
     },
 
     viewUpdate: function(update){
