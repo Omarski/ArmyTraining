@@ -181,12 +181,12 @@ var FooterView = React.createClass({
         var event = window.event ? window.event : e;
         if(event.keyCode === 39){ // if right arrow pressed
             if (!FooterStore.isNextDisabled()) {
-                event.preventDefault();
+                event.preventDefault ? event.preventDefault() : (event.returnValue = false);
                 this.next();
             }
         }else if(event.keyCode === 37){ // if left arrow pressed
             if (!FooterStore.isPrevDisabled()) {
-                event.preventDefault();
+                event.preventDefault ? event.preventDefault() : (event.returnValue = false);
                 this.previous();
             }
         }

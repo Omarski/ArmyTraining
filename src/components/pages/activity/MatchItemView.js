@@ -539,8 +539,6 @@ var MatchItemView = React.createClass({
                                 <td className={"matchitem-droparea-td"}>
                                     <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                         {answerRender}
-                                        <img src="images/icons/playrecordn.png" className="glyphicon glyph-answer match-item-audio match-item-audio-grayed-out">
-                                        </img>
                                     </div>
                                 </td>
                                 <td className={"matchitem-question-td"}>

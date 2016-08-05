@@ -31,6 +31,8 @@ function getPageState(cmp, props) {
         sources: [],
         caption: "",
         transcript: "",
+        mediaTitle: null,
+        mediaAltText: null,
         fullCoach: false
     };
 
@@ -58,6 +60,12 @@ function getPageState(cmp, props) {
                             break;
                         case "mediacaption":
                             data.sources.push(item.value);
+                            break;
+                        case "mediatitle":
+                            data.mediaTitle = item.value;
+                            break;
+                        case "mediarollover":
+                            data.mediaAltText = item.value;
                             break;
                         case "videoTranscript":
                             data.transcript = item.value;
@@ -115,6 +123,51 @@ function getPageState(cmp, props) {
             mediaItems = media.map(function(item, index) {
                 var filePath = "data/media/" + item.file;
                 var result = <div key={index}>Unknown File Type</div>;
+                var altText = "";
+                var mediaTitle = "";
+                var mediaBlurb = "";
+                var mediaCaption = "";
+
+                // if no info tag, use info on media object
+                if(props.page.info && props.page.info.property){
+                    props.page.info.property.map(function(item){
+                        switch(item.name){
+                            case "mediadisplayblurb":
+                                mediaCaption = item.value;
+                                break;
+                            case "mediatitle":
+                                mediaTitle = item.value;
+                                break;
+                            case "mediarollover":
+                                altText = item.value;
+                                break;
+                            default:
+                            //no op
+                        }
+                    });
+                }
+                /*
+                    Removed because content will always use the page level info tags instead of the media
+                    object info tags.
+                
+                else if(item.info && item.info.property){
+                    item.info.property.map(function(item){
+                        switch(item.name){
+                            case "mediadisplayblurb":
+                                mediaCaption = item.value;
+                                break;
+                            case "mediatitle":
+                                mediaTitle = item.value;
+                                break;
+                            case "mediarollover":
+                                altText = item.value;
+                                break;
+                            default:
+                            //no op
+                        }
+                    });
+                }
+                */
 
                 if (item.type === "video") {
                     if(item.file.split(".")[1] === "mp4") {
@@ -125,9 +178,9 @@ function getPageState(cmp, props) {
 
                         result = (
                             <div className={data.videoType + " info-view-video-container"} key={index + filePath}>
-                                <video title={props.page.title}
-                                       alt={props.page.title}
-                                       aria-label={props.page.title}
+                                <video title={mediaTitle}
+                                       alt={altText}
+                                       aria-label={mediaTitle}
                                        className="info-video-player"
                                        id="video" controls
                                        autoPlay={SettingsStore.autoPlaySound()}
@@ -142,22 +195,9 @@ function getPageState(cmp, props) {
                 }
 
                 if (item.type === "image") {
-                    var altText = ""; // TODO: add check for mediatitle and mediaalttext
-                    if(item.info && item.info.property){
-                        item.info.property.map(function(item){
-                            if(item.name === "mediadisplayblurb"){
-                                altText = item.value;
-                            }
-                        });
-                    }else if(props.page.info && props.page.info.property){
-                        props.page.info.property.map(function(item){
-                            if(item.name === "mediadisplayblurb"){
-                                altText = item.value;
-                            }
-                        });
-                    }
+
                     _hasImage = true;
-                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={data.caption} key={index + filePath} altText={altText} onImageLoaded={cmp.imageReady}/>);
+                    result = (<ImageCaption videoType={data.videoType} src={filePath} caption={mediaCaption} key={index + filePath} mediaTitle={mediaTitle} altText={altText} onImageLoaded={cmp.imageReady}/>);
                 }
 
                 return result;

@@ -205,26 +205,24 @@ var HeaderView = React.createClass({
                                      title={LocalizationStore.labelFor("header", "tooltipReference")}
                                      alt={LocalizationStore.labelFor("header", "tooltipReference")}
                                      aria-label={LocalizationStore.labelFor("header", "tooltipReference")}><div>{referenceView}<p>ReferenceView</p></div></NavItem>
-                            <NavItem eventKey={2} href="#" className="dli-styling">{dliView}<p>DLI Text</p></NavItem>
-                            <NavItem eventKey={3} href="#" onClick={this.showHelp}>
-                                <button title={LocalizationStore.labelFor("header", "tooltipHelp")}
-                                    alt={LocalizationStore.labelFor("header", "tooltipHelp")}
-                                    type="button"
-                                    className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
-                                    aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
-                                    <img src="images/icons/helpn.png"/>
-                                </button>
+                            {dliView}
+                            <NavItem eventKey={3} href="#" onClick={this.showHelp}
+                                     title={LocalizationStore.labelFor("header", "tooltipHelp")}
+                                     alt={LocalizationStore.labelFor("header", "tooltipHelp")}
+                                     type="button"
+                                     className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
+                                     aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
+                                <img src="images/icons/helpn.png"/>
                                 <p>Help</p>
                             </NavItem>
 
-                            <NavItem eventKey={4} href="#" onClick={this.toggleMute}>
-                                <button title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
-                                        alt={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
-                                        type="button"
-                                        className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
-                                        aria-label={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}>
-                                    {muteIcon}
-                                </button>
+                            <NavItem eventKey={4} href="#" onClick={this.toggleMute}
+                                     title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
+                                     alt={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
+                                     type="button"
+                                     className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
+                                     aria-label={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}>
+                                {muteIcon}
                                 <p>Toggle Mute</p>
                             </NavItem>
                             <SettingsView isNav={AppStateStore.isMobile()}/>
