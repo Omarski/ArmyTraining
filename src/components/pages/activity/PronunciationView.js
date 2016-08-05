@@ -404,7 +404,8 @@ var PronunciationView = React.createClass({
                     }
                 }
                 if(fullDisable){
-                    itemRecordingClass = recordingClass + " pb-disabled " + LI_GLYPHICON_RECORD_CLS;
+                    itemRecordingClass = recordingClass + " pb-disabled ";
+                    itemRecordingIcon = LI_GLYPHICON_RECORD;
                 }
 
                 var cls = (index % 2) ? "pronunciation-item-row-odd" : "pronunciation-item-row-even";
