@@ -61,10 +61,10 @@ function getPageState(cmp, props) {
                         case "mediacaption":
                             data.sources.push(item.value);
                             break;
-                        case "mediatitle":
+                        case "mediarollover":
                             data.mediaTitle = item.value;
                             break;
-                        case "mediarollover":
+                        case "mediaalttext":
                             data.mediaAltText = item.value;
                             break;
                         case "videoTranscript":
@@ -135,10 +135,10 @@ function getPageState(cmp, props) {
                             case "mediadisplayblurb":
                                 mediaCaption = item.value;
                                 break;
-                            case "mediatitle":
+                            case "mediarollover":
                                 mediaTitle = item.value;
                                 break;
-                            case "mediarollover":
+                            case "mediaalttext":
                                 altText = item.value;
                                 break;
                             default:
@@ -156,10 +156,10 @@ function getPageState(cmp, props) {
                             case "mediadisplayblurb":
                                 mediaCaption = item.value;
                                 break;
-                            case "mediatitle":
+                            case "mediarollover":
                                 mediaTitle = item.value;
                                 break;
-                            case "mediarollover":
+                            case "mediaalttext":
                                 altText = item.value;
                                 break;
                             default:
