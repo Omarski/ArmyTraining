@@ -20,7 +20,7 @@ button.navbar-toggle:hover {
     margin-left: 5px !important;
     margin-right: 5px !important;
     margin-top: 0px !important;
-    width: 100%;
+    width: auto;
   }
   .nav>li>a {
     padding: 5px;
@@ -79,11 +79,6 @@ button.navbar-toggle:hover {
   .navbarHeightDesktop{
     height: 39px;
   }
-  /*
-  .navbarButtonsPaddingDesktop {
-    padding-top: 7px !important;
-  }
-  */
 
   .navbar-fixed-top {
     .container {
@@ -128,13 +123,13 @@ button.navbar-toggle:hover {
     padding-bottom: 7px;
     padding-left: 7px;
     padding-right: 7px;
-    border-color: #337ab7 !important;
+    border-color: $nav-button-color !important;
   }
 
   .icon-bar {
-    color: #337ab7;
-    border-color: #337ab7;
-    background-color: #337ab7 !important;
+    color: $nav-button-color;
+    border-color: $nav-button-color;
+    background-color: $nav-button-color !important;
   }
 
   #collapseNav {
@@ -244,6 +239,16 @@ button.navbar-toggle:hover {
 }
 
 @media screen and (min-width: 374px) and (max-width: 767px) {
+  .vcat-logo {
+    display: none;
+  }
+
+  .navbar-brand {
+    padding-left: 35px;
+    left: auto;
+    right: auto;
+  }
+
   .navbar-toggle {
     margin-top: 4px;
     margin-bottom: 4px;
@@ -251,7 +256,7 @@ button.navbar-toggle:hover {
     padding-bottom: 7px;
     padding-left: 7px;
     padding-right: 7px;
-    border-color: #337ab7 !important;
+    border-color: #6f6f77 !important;
     margin-right: 25px;
   }
 
@@ -325,9 +330,9 @@ button.navbar-toggle:hover {
   }
 
   .icon-bar {
-    color: #337ab7;
-    border-color: #337ab7;
-    background-color: #337ab7 !important;
+    color: $nav-button-color;
+    border-color: $nav-button-color;
+    background-color: $nav-button-color !important;
   }
 
   .reduce-padding-around-a-element-for-nav-buttons {
@@ -418,6 +423,8 @@ button.navbar-toggle:hover {
 
   .navbar-brand {
     margin-left: 20px;
+    left: auto;
+    right: auto;
   }
 
   .navbar-toggle {
@@ -427,7 +434,7 @@ button.navbar-toggle:hover {
     padding-bottom: 7px;
     padding-left: 7px;
     padding-right: 7px;
-    border-color: #337ab7 !important;
+    border-color: $nav-button-color !important;
     margin-right: 25px;
   }
 
@@ -437,12 +444,13 @@ button.navbar-toggle:hover {
     margin-left: 40px;
   }
 
+  /*
   .icon-bar {
-    color: #337ab7;
-    border-color: #337ab7;
-    background-color: #337ab7 !important;
+    color: $nav-button-color;
+    border-color: $nav-button-color;
+    background-color: $nav-button-color !important;
   }
-
+*/
   .reduce-padding-around-a-element-for-nav-buttons {
     margin: 0px;
     background-color: white;
