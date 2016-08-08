@@ -153,8 +153,10 @@ var CultureQuestQuiz = React.createClass({
         //backspace
         $("[id^='culture-quest-quiz-view-inputBlock']").keydown(function(e){
             if(e.keyCode === 8){
-                $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
+               if ($("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).val() !== "") $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
                 self.state.atInputBlock--;
+                $("#culture-quest-quiz-view-inputBlock"+ self.state.atInputBlock).focus().val("");
+                // self.state.atInputBlock--;
             }
         });
 
