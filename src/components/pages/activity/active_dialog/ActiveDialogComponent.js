@@ -18,8 +18,6 @@ var ActiveDialogComponent = React.createClass({
     videosQueue: [],
     videos2Render: [],
     videoCurrentLoading: null,
-    watchBugger: null,
-    watchBuggerTimeout: 0,
 
     propTypes: {
         name: React.PropTypes.string.isRequired,
@@ -39,8 +37,6 @@ var ActiveDialogComponent = React.createClass({
 
         this.videos2Render = [];
         //this.videos2Render.push(this.videosQueue.shift());
-        this.watchBugger = null;
-        this.watchBuggerTimeout = 0;
 
         // look up chat animation
         this.findChatAnimation();
