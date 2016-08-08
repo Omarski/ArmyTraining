@@ -32,7 +32,8 @@ function getPageState(props) {
         phase:"start",
         resetBottomCanvas: false,
         showBottomCanvas: true,
-        correctAttempts:0
+        correctAttempts:0,
+        showInstructions:false
     };
 
 
@@ -150,7 +151,7 @@ var PuzzleMapView = React.createClass({
                        currentIndex:0,
                        scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1, correct:0},
                        showBottomCanvas:false,
-                       correctAttempts:0
+                       correctAttempts:0,
         },
             function(){
                 self.updateHUDView(true);
@@ -163,13 +164,15 @@ var PuzzleMapView = React.createClass({
     },
 
     showStartHud: function(){
+        var self = this;
         return(
             <div className = "puzzle-map-view-HUD-cont" id="puzzle-map-view-HUD-start">
                 <div className="puzzle-map-view-HUD-text">Click and drag the country pieces to their correct locations on the map.</div>
                 <div className="puzzle-map-view-HUD-buttonCont">
                     <div className="puzzle-map-view-HUD-buttonContCent">
                         <div className = "btn btn-default" style={{paddingLeft:'30px', paddingRight:'30px'}} onClick={
-                        this.updateHudDisplay
+                        function(){self.setState({showInstructions:true});
+                        self.updateHudDisplay();}
                         }>Start</div>
                     </div>
                 </div>
@@ -261,7 +264,7 @@ var PuzzleMapView = React.createClass({
         var title = self.state.title;
         var sources = self.state.sources;
         var blockStyle = {position:'relative', width:'768px', height:'504px', marginLeft:'auto', marginRight:'auto'};
-
+        var instStyle = {position:'absolute',bottom:'8px',right:'8px',width:'240px',height:'85px', border:'2px solid #cccccc',zIndex:'3px',padding:'15px',backgroundColor:'#fff',textAlign:'center'};
         var mapUrl = self.state.mediaPath + self.state.imageData.puzzleMapPieces[0].imageFileName;
         var backMapStyle = {background:'url('+mapUrl+') no-repeat 100% 100%'};
 
@@ -274,8 +277,11 @@ var PuzzleMapView = React.createClass({
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
 
                 <div id="puzzleMapViewBlock">
-
+                    
                     <div className="puzzle-map-view-mapCont" style={backMapStyle}>
+
+                        {self.state.showInstructions ? <div style={instStyle}>Click and drag the country pieces to their correct location on the map.</div>:null}
+
                         {state.phase === "play" ? <PuzzleMapDnDView
                             puzzlePiecesObj = {self.state.puzzlePiecesColl[self.state.currentIndex]}
                             scoreObj = {self.state.scoreObj}
