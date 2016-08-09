@@ -17,10 +17,14 @@ var _show = false;
  */
 function load() {
     _loading = true;
-    $.getJSON("data/reference/reference.json", function(result) {
-        _data = result;
-        ReferenceActions.loadComplete();
-    });
+    $.getJSON("data/reference/reference.json")
+        .done(function(result) {
+            _data = result;
+            ReferenceActions.loadComplete();
+        })
+        .fail(function() {
+            ReferenceActions.loadComplete();
+        });
 }
 
 function show(val) {
