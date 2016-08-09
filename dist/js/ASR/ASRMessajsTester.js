@@ -18,7 +18,7 @@ var ASRMessajsTester = function()
 
 	function mjsBegin(mid, uri, mime, chunkSize, kind) {
 	
-		if (kind == "read") {
+		if (kind === "read") {
 			for (i=0;i<messagesToSendStack.length;i++) {
 				if (messagesToSendStack[i].id == -1) {
 					messagesToSendStack[i].id = mid;
