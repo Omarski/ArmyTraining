@@ -146,6 +146,13 @@ function getPageState(cmp, props) {
                         }
                     });
                 }
+                if( (mediaTitle === "") && (mediaCaption !== "") ){
+                    mediaTitle = mediaCaption;
+                }
+                if( (altText === "") && (mediaCaption !== "") ){
+                    altText = mediaCaption;
+                }
+
                 /*
                     Removed because content will always use the page level info tags instead of the media
                     object info tags.

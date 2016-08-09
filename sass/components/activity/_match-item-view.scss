@@ -34,9 +34,12 @@
 }
 .match-item-answer-drop-area{
   position: relative;
-  background: transparent url("../../images/icons/playrecordn.png") no-repeat;
-  background-position-y: 25px;
-  background-position-x: 19px;
+  &.audio-drop{
+    background: transparent url("../../images/icons/playrecordn.png") no-repeat;
+    background-position-y: 25px;
+    background-position-x: 19px;
+  }
+
   .match-item-play-icon {
     margin: 0px;
     left: -1px;

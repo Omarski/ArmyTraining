@@ -6,6 +6,7 @@ var PageHeader = require('../../../widgets/PageHeader');
 var SettingsStore = require('../../../../stores/SettingsStore');
 var ImageCaption = require('../../../widgets/ImageCaption');
 var Utils = require('../../../widgets/Utils');
+var LocalizationStore = require('../../../../stores/LocalizationStore');
 
 function getPageState(props) {
     var data = {
@@ -291,6 +292,7 @@ var MultiNoteView = React.createClass({
                                     <button
                                         className="btn btn-default multi-note-carousel-btn"
                                         onClick={this.props.previousSlide}
+                                        title={LocalizationStore.labelFor("tools", "carPrev")}
                                     >
                                         <span className="glyphicon" aria-hidden="true">
                                             <img src="images/icons/prevn.png"/>
@@ -313,6 +315,7 @@ var MultiNoteView = React.createClass({
                                     <button
                                         className="btn btn-default multi-note-carousel-btn"
                                         onClick={this.props.nextSlide}
+                                        title={LocalizationStore.labelFor("tools", "carNext")}
                                     >
 
                                         <span className="glyphicon" aria-hidden="true">

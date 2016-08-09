@@ -60,7 +60,9 @@ var CoachFeedbackView = React.createClass({
     },
 
     componentWillReceiveProps: function() {
-        this.setState({coachVisible: true});
+        var self = this;
+        self.setState({coachVisible: false});
+        setTimeout(function(){self.setState({coachVisible: true})}, 100);
     },
 
     render: function() {
