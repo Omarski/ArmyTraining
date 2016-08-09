@@ -29,6 +29,7 @@
 
 #bookmarkButton, #audioControlButton, #audioControlIcon {
   margin-top: 4px;
+  margin-bottom: 4px;
   padding: 1px;
   border-style: solid;
   border-width: 1px;
@@ -75,10 +76,14 @@
 }
 
 .page-header-controls {
-  position: absolute;
-  right: 10px;
-  top: 0px;
+  right: 0px;
+  margin-right: 4px;
+  float: right;
   list-style-type: none;
+  padding-left: 10px;
+  top: 0px;
+  position: static;
+  margin-bottom: 0px;
   li {
     float: left;
     button {
@@ -87,10 +92,67 @@
   }
 }
 
+.page-title-height {
+  padding-top: 10px;
+  height: 100%;
+  padding-bottom: 3px;
+}
+
+.page-header-custom-title {
+  padding-top: 0px;
+}
+
+.page-header-custom {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/*
+.page-header-controls {
+  position: absolute;
+  float: right;
+  right: 10px;
+  top: 40px;
+  list-style-type: none;
+}*/
+
 .info-sources-icon {
   margin-left: 5px;
 }
 
+.clear-float {
+  clear: both;
+}
 
 
+@media screen and (max-width: 767px) {
 
+  #bookmarkButton, #audioControlButton, #audioControlIcon {
+    margin-right: 0px;
+    margin-bottom: 0px;
+  }
+
+  .page-header-controls {
+    right: 0px;
+    padding-left: 10px;
+    top: 0px;
+    position: static;
+    margin-bottom: 0px;
+  }
+
+  .page-title-height {
+    padding-top: 10px;
+    height: 100%;
+    padding-bottom: 3px;
+  }
+
+  .page-header-custom-title {
+    padding-top: 0px;
+  }
+
+  .page-header-custom {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+}

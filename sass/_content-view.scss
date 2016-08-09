@@ -45,9 +45,20 @@
 @media screen and (max-width: 767px) {
   .main-content {
     top: 40px;
+    border: none;
+  }
+
+  .main-content-bottom-border {
+    display: none;
+    border: none;
+  }
+
+  .main-content-container {
+    border-color: #5A5C51;
+    border-top-width: 1px;
   }
 }
 
-.swipeable{
-  z-index: 1000000000000;
-}
+  .swipeable {
+    z-index: 1000000000000;
+  }

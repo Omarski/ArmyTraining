@@ -17,8 +17,6 @@ button.navbar-toggle:hover {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   .container {
-    margin-left: 5px !important;
-    margin-right: 5px !important;
     margin-top: 0px !important;
     width: auto;
   }
@@ -237,6 +235,57 @@ button.navbar-toggle:hover {
     }
   }
 }
+@media screen and (max-width: 767px) {
+
+  .reduce-padding-around-a-element-for-nav-buttons {
+    margin: 0px;
+    background-color: white;
+    li {
+      a {
+        padding-top: 8px !important;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #5a5c51;
+      }
+      .a-element-for-settings-dropdown {
+        height: 45px !important;
+      }
+      a:hover {
+        background-color: #D2E0E6 !important;
+      }
+    }
+  }
+
+  #mainView .navbarHeightDesktop .container {
+    border: #5A5C51 solid 1px;
+  }
+
+  .reference-guide-hide-on-mobile {
+    a {
+      text-align: center;
+      line-height: 25px;
+      #referenceView {
+        float: left;
+      }
+      p {font-size: 16px;}
+    }
+  }
+
+  .navbar-nav {
+    .dropdown #settingsViewDropdown {
+      .main-nav-bar-button{
+          float: left;
+      }
+      text-align: center;
+      line-height: 25px;
+      p {font-size: 16px;}
+    }
+  }
+
+  .navbar-nav .main-nav-bar-button a {
+    line-height: 25px;
+    p{ font-size: 16px;}
+  }
+}
 
 @media screen and (min-width: 374px) and (max-width: 767px) {
   .vcat-logo {
@@ -260,9 +309,6 @@ button.navbar-toggle:hover {
     margin-right: 25px;
   }
 
-  .reference-guide-hide-on-mobile {
-    display: none !important;
-  }
 
   .dropdown-menu{
     .dropdown-toggle {
@@ -319,10 +365,6 @@ button.navbar-toggle:hover {
     display:none !important;
   }
 
-  .navbar-default .btn-link {
-    color: #337ab7;
-  }
-
   .vcat-logo{
     margin-top: 4px;
     max-height: 33px;
@@ -342,7 +384,6 @@ button.navbar-toggle:hover {
       a {
         padding-top: 8px !important;
         padding-bottom: 7px;
-        border-bottom: 1px solid #337ab7;
       }
       a:hover {
         background-color: #D2E0E6 !important;
@@ -365,17 +406,16 @@ button.navbar-toggle:hover {
   }
 
   nav{
-    height: 40px !important;
+    height: 39px !important;
   }
 
   .navbar-default{
-    min-height: 40px !important;
+    min-height: 39px !important;
   }
 
-  .navbar-fixed-top {
-    border-bottom: 1px solid;
-    border-bottom-color: #337ab7 !important;
-  }
+
+
+
 
   .navbar-fixed-top {
     .container {
@@ -402,7 +442,6 @@ button.navbar-toggle:hover {
           p {
             display: inline;
             margin-left: 50px;
-            color: #337ab7;
           }
         }
       }
@@ -451,31 +490,7 @@ button.navbar-toggle:hover {
     background-color: $nav-button-color !important;
   }
 */
-  .reduce-padding-around-a-element-for-nav-buttons {
-    margin: 0px;
-    background-color: white;
-    li {
-      a {
-        padding-top: 8px !important;
-        padding-bottom: 7px;
-        border-bottom: 1px solid #337ab7;
-        ul {
-          li {
-            a{
-              height: 45px;
-              border-bottom: 1px solid #337ab7;
-            }
-          }
-        }
-      }
-      .a-element-for-settings-dropdown {
-        height: 45px !important;
-      }
-      a:hover {
-        background-color: #D2E0E6 !important;
-      }
-    }
-  }
+
 
   .navbarHeightDesktop{
     height: 39px;
@@ -494,15 +509,18 @@ button.navbar-toggle:hover {
   #collapseNav {
     ul {
       li {
+        padding: 0px;
         a {
-          height: 45px !important;
+          height: 45px;
+          .icons-mobile-menu{
+            float: left;
+          }
           button{
             padding: 0px;
           }
           p {
             display: inline;
-            margin-left: 50px;
-            color: #337ab7;
+            color: #5a5c51;
           }
         }
       }
@@ -518,20 +536,11 @@ button.navbar-toggle:hover {
   }
 
   .navbar-fixed-top {
-    border-bottom: 1px solid;
-    border-bottom-color: #337ab7 !important;
-  }
-
-  .navbar-fixed-top {
     .container {
       height: 39px;
       padding: 0px;
       background-color: white;
     }
-  }
-
-  .navbar-default .btn-link {
-    color: #337ab7;
   }
 
   .navbar-brand {
