@@ -28,12 +28,18 @@ function updateVoiceVolume(val) {
 function voiceVolumeStepUp(){
     var settings = store.get('settings') || {};
     settings['voiceVolume'] += 0.1;
+    if(settings['voiceVolume'] >= 1.0){
+        settings['voiceVolume'] = 1.0;
+    }
     store.set('settings', settings);
 }
 
 function voiceVolumeStepDown(){
     var settings = store.get('settings') || {};
     settings['voiceVolume'] -= 0.1;
+    if(settings['voiceVolume'] <= 0.0){
+        settings['voiceVolume'] = 0.0;
+    }
     store.set('settings', settings);
 }
 
@@ -46,12 +52,18 @@ function updateBackgroundVolume(val) {
 function backgroundVolumeStepUp(){
     var settings = store.get('settings') || {};
     settings['backgroundVolume'] += 0.1;
+    if(settings['backgroundVolume'] >= 1.0){
+        settings['backgroundVolume'] = 1.0;
+    }
     store.set('settings', settings);
 }
 
 function backgroundVolumeStepDown(){
     var settings = store.get('settings') || {};
     settings['backgroundVolume'] -= 0.1;
+    if(settings['backgroundVolume'] <= 0.0){
+        settings['backgroundVolume'] = 0.0;
+    }
     store.set('settings', settings);
 }
 
