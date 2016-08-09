@@ -23,12 +23,16 @@ function destroy() {
 }
 
 function loadDli(){
-    $.getJSON("data/dli/dli.json", function(data){
-        if(data && data.dliPaths){
-            _dliPathList = data.dliPaths;
+    $.getJSON("data/dli/dli.json")
+        .done(function(data){
+            if(data && data.dliPaths){
+                _dliPathList = data.dliPaths;
+                DliActions.loadComplete();
+            }
+        })
+        .fail(function() {
             DliActions.loadComplete();
-        }
-    });
+        });
 }
 
 var DliStore = assign({}, EventEmitter.prototype, {
