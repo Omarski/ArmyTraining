@@ -26,7 +26,8 @@ function getPageState(props) {
         levelsColl:[],
         levelStats:{basic:[], advanced:[]},
         advancedLevel:false,
-        showAdvanced:false
+        showAdvanced:false,
+        jsonLoaded: false
     };
     
     if (props && props.page) {
@@ -45,36 +46,42 @@ var ObjexView = React.createClass({
         return pageState;
     },
 
-    componentDidMount: function(){
+    componentDidMount: function() {
 
         //dim speech and pause
-        $("#audioControlIcon , #audioControlButton").css({"opacity":".5", "pointer-events":"none"});
-        
+        $("#audioControlIcon , #audioControlButton").css({"opacity": ".5", "pointer-events": "none"});
+
         var self = this;
         var data = {};
 
-        $.getJSON(self.props.page.info.property[0].value).done(function(mainJSON){
-            data.gameData = mainJSON;
-            $.getJSON(data.gameData.levels.level1).done(function(level1JSON){
-                data.level1Data = level1JSON;
-                $.getJSON(data.gameData.levels.level2).done(function(level2JSON){
-                    data.level2Data = level2JSON;
-                    self.setState({
-                        gameData:data.gameData,
-                        level1Data:data.level1Data,
-                        level2Data:data.level2Data},
-                        function(){
-                            this.prepObjex();
-                        });
+        if (!self.state.jsonLoaded) {
+            $.getJSON(self.props.page.info.property[0].value).done(function (mainJSON) {
+                data.gameData = mainJSON;
+                $.getJSON(data.gameData.levels.level1).done(function (level1JSON) {
+                    data.level1Data = level1JSON;
+                    $.getJSON(data.gameData.levels.level2).done(function (level2JSON) {
+                        data.level2Data = level2JSON;
+                        self.setState({
+                                gameData: data.gameData,
+                                level1Data: data.level1Data,
+                                level2Data: data.level2Data
+                            },
+                            function () {
+                                self.prepIntroPopup();
+                                self.setState({jsonLoaded:true});
+                            });
+                    });
                 });
             });
-        });
+        }
     },
 
     prepObjex: function(){
 
         var self = this;
         var loadedObjexColl = [];
+
+        self.setState({loadCounter:0}, function(){
 
             self.state["level"+self.state.currentLevel+"Data"].objects.map(function(img,index){
 
@@ -108,22 +115,28 @@ var ObjexView = React.createClass({
             var backgroundImg = new Image();
             backgroundImg.src = self.state.mediaPath + self.state["level"+self.state.currentLevel+"Data"].backgroundImage.src;
             backgroundImg.onload = self.loadCounter;
+            console.log("Loading bg: " + backgroundImg.src);
 
-        var totalImages = 41; //update when json combined
+            var totalImages = 41; //update when json combined
 
-        self.setState({totalImages:totalImages, loadedObjexColl:loadedObjexColl});
+            self.setState({totalImages:totalImages, loadedObjexColl:loadedObjexColl});
+        });
     },
 
     loadCounter: function(){
         var self = this;
         self.state.loadCounter++;
-        if (self.state.loadCounter == self.state.totalImages){
+        console.log("Loading: " + self.state.loadCounter);
+        if (self.state.loadCounter === self.state.totalImages){
             this.onObjexReady();
         }
     },
 
     onObjexReady: function(){
-        this.prepIntroPopup();
+        var self = this;
+        setTimeout(function () {
+            self.setState({showGame:true});
+        }, 100);
     },
 
     prepLevels: function(){
@@ -274,11 +287,16 @@ var ObjexView = React.createClass({
                     <div className="objex-view-popCont">
                         <div className="objex-view-textAdvanced">{advancedText}</div>
                         <div className="objex-view-advancedButtonCont">
-                            <div type="button" className="btn btn-default objex-view-btn" onClick={self.menuToLevels}>Main Menu</div>
+                            <div type="button" className="btn btn-default objex-view-btn" onClick={self.advancedPopupExit}>Main Menu</div>
                         </div>
                     </div>
                 )
             });
+    },
+
+    advancedPopupExit: function(){
+        this.menuToLevels();
+        this.updateAdvClick();
     },
 
     prepGameCompletePopup: function(){
@@ -355,9 +373,6 @@ var ObjexView = React.createClass({
             self.prepObjex();
             self.viewUpdate({task:"buttonAudio", value:null});
             self.bgAudio();
-            setTimeout(function () {
-                self.setState({showGame:true});
-            }, 100);
         });
     },
 
@@ -369,9 +384,6 @@ var ObjexView = React.createClass({
         this.setState({popupObj:null, currentLevel:level}, function(){
             self.prepObjex();
             self.viewUpdate({task:"successAudio", value:null});
-            setTimeout(function(){
-                self.setState({showGame:true});
-            },100);
         });
     },
 

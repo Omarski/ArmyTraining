@@ -7,6 +7,7 @@ var _soundTimer = null;
 
 var ActiveDialogComponent = React.createClass({
     bAnimationPlaying: false,
+    bIdleOrChatLoop: false,
     bSoundLoading: false,
     bSoundPlaying: false,
     currentAnimation: "",
@@ -18,8 +19,6 @@ var ActiveDialogComponent = React.createClass({
     videosQueue: [],
     videos2Render: [],
     videoCurrentLoading: null,
-    watchBugger: null,
-    watchBuggerTimeout: 0,
 
     propTypes: {
         name: React.PropTypes.string.isRequired,
@@ -39,8 +38,6 @@ var ActiveDialogComponent = React.createClass({
 
         this.videos2Render = [];
         //this.videos2Render.push(this.videosQueue.shift());
-        this.watchBugger = null;
-        this.watchBuggerTimeout = 0;
 
         // look up chat animation
         this.findChatAnimation();
@@ -88,13 +85,14 @@ var ActiveDialogComponent = React.createClass({
         // cancel requests
         if (this.serverRequest) {
             this.serverRequest.abort();
-        };
+        }
     },
 
     changeIdleAnimation: function(animationName) {
         this.currentIdleAnimationName = animationName;
         if (this.bAnimationPlaying === false) {
             this.playAnimationVideo(this.currentIdleAnimationName);
+            this.bIdleOrChatLoop = true;
         }
     },
 
@@ -103,8 +101,23 @@ var ActiveDialogComponent = React.createClass({
     },
 
     checkDonePlaying: function() {
+        if (this.bSoundPlaying) {
+            // set idle animation as the chat animation
+            this.currentIdleAnimationName = this.currentChatAnimationName;
+
+            if (!this.bAnimationPlaying) {
+                this.playAnimationVideo(this.currentIdleAnimationName);
+                this.bIdleOrChatLoop = true;
+            }
+        }
+
         // if no animation or sound is playing then trigger callback
-        if (!this.bAnimationPlaying && !this.bSoundPlaying && !this.bSoundLoading) {
+        else if (!this.bAnimationPlaying && !this.bSoundPlaying && !this.bSoundLoading) {
+            // go back to idle
+            this.currentIdleAnimationName = "Default";
+            this.playAnimationVideo(this.currentIdleAnimationName);
+            this.bIdleOrChatLoop = true;
+
             if (this.props.onPlayingDone !== null) {
                 this.props.onPlayingDone();
             }
@@ -128,10 +141,29 @@ var ActiveDialogComponent = React.createClass({
         }
     },
 
+    hideVideos: function() {
+        // hide all videos that are playing
+        var vidLength = this.currentVideosPlayingHack.length;
+        while(vidLength--) {
+            var video = this.currentVideosPlayingHack[vidLength];
+
+            // remove event listeners
+            video.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
+
+            // stop video
+            video.pause();
+
+            // hide video
+            video.style.display = "none";
+        }
+    },
+
     playAnimationVideo: function(animationName) {
         var bFoundVideo2Play = false;
 
-        // reset hack
+        // reset hacks
+        this.bIdleOrChatLoop = false;
+        this.hideVideos();
         this.currentVideosPlayingHack = [];
 
         // get video
@@ -161,12 +193,13 @@ var ActiveDialogComponent = React.createClass({
                 // show video
                 video.style.display = "block";
 
+                // add to hack
+                this.currentVideosPlayingHack.push(video);
+
                 // increment counter if animation is not the default one otherwise play
                 if (animationName != this.currentIdleAnimationName) {
                     bFoundVideo2Play = true;
-                    
-                    // add to hack
-                    this.currentVideosPlayingHack.push(video);
+
                 } else {
                     video.play();
                 }
@@ -205,6 +238,7 @@ var ActiveDialogComponent = React.createClass({
 
             // play default animation
             this.playAnimationVideo(this.currentIdleAnimationName);
+            this.bIdleOrChatLoop = true;
 
             // update stupid hack
             this.hack = true;
@@ -234,24 +268,19 @@ var ActiveDialogComponent = React.createClass({
             event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
 
             // dispatch event if animation is not the default one
-            if (this.currentAnimation != this.currentIdleAnimationName) {
+            if (this.bIdleOrChatLoop === false) {
+            //if (this.currentAnimation != this.currentIdleAnimationName) {
                 // mark as stopped
                 this.bAnimationPlaying = false;
 
                 // trigger callback
                 this.checkDonePlaying();
-
-                // hide all videos that are playing
-                var vidLength = this.currentVideosPlayingHack.length;
-                while(vidLength--) {
-                    var video = this.currentVideosPlayingHack[vidLength];
-                    // hide video
-                    video.style.display = "none";
-                }
             }
-
-            // go back to default
-            this.playAnimationVideo(this.currentIdleAnimationName);
+            else {
+                // go back to default
+                this.playAnimationVideo(this.currentIdleAnimationName);
+                this.bIdleOrChatLoop = true;
+            }
         }
     },
 
