@@ -1,6 +1,7 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageHeader = require('../../widgets/PageHeader');
 var UnitStore = require('../../../stores/UnitStore');
 
@@ -403,7 +404,7 @@ var MatchItemView = React.createClass({
                     var zid = item.passedData;
                     var draggableTitle = "paused";
                     if(audio){
-                        draggableTitle = self.state.isPaused ? "state PAUSED" : "state NOT PAUSED!!";
+                        draggableTitle = self.state.isPaused ? LocalizationStore.labelFor("PronunciationPage", "btnPlay") : LocalizationStore.labelFor("PronunciationPage", "btnStop");
                     }
                     draggable = (<a
                             href="#"
