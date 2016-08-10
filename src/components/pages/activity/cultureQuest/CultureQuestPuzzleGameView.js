@@ -1,7 +1,8 @@
 
 var React = require('react');
 var ReactDom = require('react-dom');
-var DnDPuzzleView = require('../../../widgets/dragAndDropPuzzle/DnDPuzzleView');
+var DnDPuzzleView = require('../../../widgets/dragAndDropPuzzle/ClickDropPuzzleView');
+//var DnDPuzzleView = require('../../../widgets/dragAndDropPuzzle/DnDPuzzleView');
 var VideoPlayer = require('../../../widgets/VideoPlayer');
 var PropTypes = React.PropTypes;
 
@@ -33,6 +34,8 @@ var CultureQuestPuzzleGameView = React.createClass({
     componentDidMount: function(){
         //special gift piece
         $("#puzzleTarget0").attr("pieceNumber","0");
+        $("#puzzleDraggable0").attr("placement","placed");
+
     },
 
     displayPuzzlePopup: function(){
@@ -101,13 +104,13 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         var imageData = this.props.imageData;
         var targetColl = [];
-        var gridOrigin = {x:140, y:113}, targetWidth = 110, targetHeight = 165;
+        var gridOrigin = {x:140, y:113}, targetWidth = 112, targetHeight = 168;
         var targetPosColl = [];
 
         for (var r = 0 ; r < 3; r++){
             for (var c = 0 ; c < 3 ; c++){
-                var x = parseInt(gridOrigin.x + (targetWidth * c));
-                var y = parseInt(gridOrigin.y + (targetHeight * r));
+                var x = (c === 0) ? parseInt(gridOrigin.x + (targetWidth * c)) : parseInt(gridOrigin.x + (targetWidth * c)) - c;
+                var y = (r === 0) ? parseInt(gridOrigin.y + (targetHeight * r)) : parseInt(gridOrigin.y + (targetHeight * r)) - r;
                 targetPosColl.push({
                     x:x,
                     y:y
@@ -117,11 +120,11 @@ var CultureQuestPuzzleGameView = React.createClass({
 
         for (var i=0; i < imageData.regions.length; i++){
 
-            var targetStyle = {position:'absolute', width:'110px', height:'165px', zIndex:'50px',
+            var targetStyle = {position:'absolute', width:targetWidth+'px', height:targetHeight+'px', zIndex:'50px',
                 background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
                 border:'1px solid #000'};
 
-            var targetOverStyle = {position:'absolute', width:'110px', height:'165px', zIndex:'50px',
+            var targetOverStyle = {position:'absolute', width:targetWidth+'px', height:targetHeight+'px', zIndex:'50px',
                 background:'#fff', top: targetPosColl[i].y+"px", left:targetPosColl[i].x+"px",
                 border:'1px solid red'};
 
@@ -180,7 +183,6 @@ var CultureQuestPuzzleGameView = React.createClass({
                     dragItem.style.top  = $(target).position().top+"px";
                     dragItem.style.left = $(target).position().left+"px";
                     $(target).attr("pieceNumber", $(dragItem).attr("id").substring(15));
-                    // this.viewUpdate({task:"tileAudio", value:null});
                     this.checkCompletion();
                 }else{
                     dragItem.style.top  = (this.state.pointerOffset.y - parseInt(dragItem.style.height) / 2)+"px";
@@ -198,6 +200,19 @@ var CultureQuestPuzzleGameView = React.createClass({
         }
     },
 
+    //mobile
+    onDraggableClick: function(e){
+
+    },
+
+    onDraggableDrop: function(dragId,targetId){
+
+        $("#"+dragId).css({"width": "112px", height:"168px","background-size":"102%",
+            "top":$("#"+targetId).position().top+"px", "left":$("#"+targetId).position().left+"px"});
+        $("#"+targetId).attr("pieceNumber", dragId.substring(15));
+        this.checkCompletion();
+    },
+
     checkCompletion: function(){
         var self = this;
         var correctColl = "";
@@ -209,8 +224,9 @@ var CultureQuestPuzzleGameView = React.createClass({
         
         //completed
         if (placedPuzzles === correctColl) {
-            self.setState({showVideo:true});
-            $("#DnDStage").css("pointer-events","none");
+            window.setTimeout(function(){
+                self.setState({showVideo:true});
+                $("#DnDStage").css("pointer-events","none");},1500);
         }
     },
 
@@ -251,7 +267,7 @@ var CultureQuestPuzzleGameView = React.createClass({
         var self=this;
         var videoUrl = this.state.mediaPath + this.props.imageData.videoReward;
         var stageStyle = {width:'768px', height:'506px', display:'block',
-                          top: '34px', left:0, position:'absolute', zIndex:'25'};
+                          top: '28px', left:0, position:'absolute', zIndex:'25'};
 
         return (
             <div>
@@ -261,12 +277,17 @@ var CultureQuestPuzzleGameView = React.createClass({
                     stageTargetObj       = {this.prepStageTargetObj()}
                     targetsColl          = {this.prepTargetData()}
                     onDraggableBeginDrag = {this.onDraggableBeginDrag}
+                    onDraggableClick     = {this.onDraggableClick}
                     onDraggableEndDrag   = {this.onDraggableEndDrag}
+                    onTargetClick        = {this.onDraggableDrop}
                     draggableCanDragCond = {null}
                     onTargetDrop         = {this.onTargetDrop}
                     onTargetHover        = {this.onTargetHover}
                     targetCanDropCond    = {null}
+                    draggableOnClass     = {"culture-quest-puzzle-game-dragOn"}
+                    targetOnClass        = {"culture-quest-puzzle-game-targetOn"}
                     onPuzzleReady        = {this.onPuzzleReady}
+                    allowSwap            = {true}
                 />
                 <div className = "culture-quest-puzzle-game-view-puzzleSlider">
                     <div className = "culture-quest-puzzle-game-slider-title">Collection</div>
