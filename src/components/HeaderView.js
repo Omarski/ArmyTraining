@@ -167,10 +167,10 @@ var HeaderView = React.createClass({
         });
     },
     render: function() {
-        var muteIcon = (<img src="images/icons/speakeronn.png"/>);
+        var muteIcon = (<img className="icons-mobile-menu" src="images/icons/speakeronn.png"/>);
         var self = this;
         if (this.state.muted) {
-            muteIcon = (<img src="images/icons/speakeroffn.png"/>);
+            muteIcon = (<img className="icons-mobile-menu" src="images/icons/speakeroffn.png"/>);
         }
 
 
@@ -180,7 +180,7 @@ var HeaderView = React.createClass({
             dliView = (<DliView />);
         }
         if(ConfigStore.hasReference()){
-            referenceView = (<ReferenceView ref="foo" />);
+            referenceView = (<ReferenceView className="icons-mobile-menu" ref="foo" />);
         }
 
         var changeNavBarCollapse = function () {
@@ -204,7 +204,7 @@ var HeaderView = React.createClass({
                             <NavItem className="reference-guide-hide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView}
                                      title={LocalizationStore.labelFor("header", "tooltipReference")}
                                      alt={LocalizationStore.labelFor("header", "tooltipReference")}
-                                     aria-label={LocalizationStore.labelFor("header", "tooltipReference")}><div>{referenceView}<p>ReferenceView</p></div></NavItem>
+                                     aria-label={LocalizationStore.labelFor("header", "tooltipReference")}>{referenceView}<p>ReferenceView</p></NavItem>
                             {dliView}
                             <NavItem eventKey={3} href="#" onClick={this.showHelp}
                                      title={LocalizationStore.labelFor("header", "tooltipHelp")}
@@ -212,8 +212,7 @@ var HeaderView = React.createClass({
                                      type="button"
                                      className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
                                      aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
-                                <img src="images/icons/helpn.png"/>
-                                <p>Help</p>
+                                <div><img src="images/icons/helpn.png" className="icons-mobile-menu"/></div><p>Help</p>
                             </NavItem>
 
                             <NavItem eventKey={4} href="#" onClick={this.toggleMute}

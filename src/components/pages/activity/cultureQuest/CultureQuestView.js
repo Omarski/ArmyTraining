@@ -22,7 +22,7 @@ function getPageState(props) {
         showQuiz: false,
         showPopup: false,
         showPuzzle: false,
-        showPuzzleGame: false,
+        showPuzzleGame: true,
         layersColl:[],
         lastSelected: null,
         answersColl:[],
@@ -61,7 +61,7 @@ var CultureQuestView = React.createClass({
         }
         this.setState({layersColl:layersColl}, function(){
             self.prepAnswersColl();
-            self.prepIntroPopup();
+            //self.prepIntroPopup();
             self.markHomeRegion();
         });
     },

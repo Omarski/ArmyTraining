@@ -12,8 +12,6 @@ var MapView = require('../components/pages/content/MapView');
 var MultiNoteView = require('../components/pages/content/multiNote/MultiNoteView');
 var VideoView = require('../components/pages/content/VideoView');
 var EthnoMapView = require('../components/pages/content/EthnoMapView');
-var Swiper = require('../components/widgets/Swiper');
-
 var ActiveDialogView = require('../components/pages/activity/active_dialog/ActiveDialogView');
 var ListeningComprehensionView = require('../components/pages/activity/ListeningComprehensionView');
 var MatchItemView = require('../components/pages/activity/MatchItemView');
@@ -22,7 +20,6 @@ var MultipleChoiceView = require('../components/pages/activity/MultipleChoiceVie
 var OrderingView = require('../components/pages/activity/OrderingView');
 var QuestionnaireView = require('../components/pages/content/QuestionnaireView');
 var QuestionnaireEndView = require('../components/pages/content/QuestionnaireEndView');
-var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizStartView = require('../components/pages/activity/QuizStartView');
 var QuizView = require('../components/pages/activity/QuizView');
 var PostTestQuizEndView = require('../components/pages/content/PostTestQuizEndView');
@@ -40,6 +37,7 @@ var MissionConnectView = require('../components/pages/activity/mission_connect/M
 var ObjexView = require('../components/pages/activity/objex/ObjexView');
 var ClosedCaptionActions = require('../actions/ClosedCaptionActions');
 var DevToolsActions = require('../actions/DevToolsActions');
+var Swipeable = require('../components/widgets/Swipeable');
 
 function getPageState() {
     var page = null;
@@ -261,12 +259,12 @@ var ContentView = React.createClass({
 
         return (
             <div className="main-content-container">
-                <Swiper className={'swipe-container container main-content ' + cls} onSwipeLeft={self.handleLeftSwipe} onSwipeRight={self.handleRightSwipe}>
+                <Swipeable className={'swipe-container container main-content ' + cls} onSwipedLeft={self.handleLeftSwipe} onSwipedRight={self.handleRightSwipe}>
                     <div className={cls} key={"content-" + pageId}>
                         {page}
                     </div>
                     <div className="main-content-bottom-border"></div>
-                </Swiper>
+                </Swipeable>
             </div>
         );
     },

@@ -127,11 +127,13 @@
   background-color: #fff;
 }
 
-.main-footer-page-nav {
-  height: 100%;
-  overflow: hidden;
-  border: 1px solid $border-color !important;
+.container-fluid{
+  .main-footer-page-nav {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid $border-color;
 
+  }
 }
 
 .footer-table {
@@ -273,6 +275,15 @@
   padding: 0;
 }
 
+@media screen and (max-width: 767px) {
+  .container-fluid .main-footer-page-nav {
+      border-color: #5A5C51;
+    }
+  .main-footer-page-nav-row .footer-table .btn-lg{
+    font-size: 16px;
+  }
+}
+
 @media screen and (max-width: 420px) {
   #lessonsIndexBtn {
     padding-left: 5px;
@@ -290,5 +301,9 @@
   .button-right-mobile-padding {
     padding-left: 4px;
     padding-right: 5px;
+  }
+  .main-footer-page-nav-row .footer-table .btn-lg{
+    padding-right: 10px;
+    padding-left: 10px;
   }
 }

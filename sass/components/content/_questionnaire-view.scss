@@ -26,10 +26,7 @@ label{
 .questionnaire-container {
 
   position: absolute;
-  top: 70px;
-  bottom: 30px;
-  left: 30px;
-  right: 30px;
+  margin: 30px;
   .panel-body {
     padding: 30px;
   }
@@ -84,4 +81,10 @@ label{
 
 .questionnaire-end-btn-col {
   text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+  .questionnaire-container {
+    margin: 10px;
+  }
 }

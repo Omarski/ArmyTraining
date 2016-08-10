@@ -124,19 +124,29 @@ var PuzzleMapView = React.createClass({
         var puzzlePiecesColl = [];
         var puzzlePieces = self.state.imageData.puzzleMapPieces;
 
-        for (var i = 0; i < puzzlePieces.length ; i++){
-            if (i == 0 ) continue;
-            
-            var correctUrl = self.state.imageData.puzzleMapPieces[i].imageFileName;
+        var randColl = [];
+
+        while (randColl.length < puzzlePieces.length){
+
+            var rand = Math.floor(Math.random()*puzzlePieces.length);
+            if ($.inArray(rand, randColl) === -1) randColl.push(rand);
+        }
+
+        console.log(randColl);
+
+        for (var i = 0; i < randColl.length ; i++){
+            var nextRand = parseInt(randColl[i]);
+            if (randColl[i] === 0 ) continue;
+            var correctUrl = self.state.imageData.puzzleMapPieces[nextRand].imageFileName;
             var puzzleObj = {
                 index:i,
-                scaleAmount:parseFloat(puzzlePieces[i].scaleAmount),
-                offsetX:parseInt(puzzlePieces[i].offsetX),
-                offsetY:parseInt(puzzlePieces[i].offsetY),
+                scaleAmount:parseFloat(puzzlePieces[nextRand].scaleAmount),
+                offsetX:parseInt(puzzlePieces[nextRand].offsetX),
+                offsetY:parseInt(puzzlePieces[nextRand].offsetY),
                 correctUrl:correctUrl,
-                correct:self.state.loadedImageColl[i-1].correct,
-                labeled:self.state.loadedImageColl[i-1].labeled,
-                hint:self.state.loadedImageColl[i-1].hint
+                correct:self.state.loadedImageColl[nextRand-1].correct,
+                labeled:self.state.loadedImageColl[nextRand-1].labeled,
+                hint:self.state.loadedImageColl[nextRand-1].hint
             };
 
             puzzlePiecesColl.push(puzzleObj);
@@ -147,11 +157,12 @@ var PuzzleMapView = React.createClass({
     replayGame: function(){
 
         var self = this;
+        self.preparePuzzlePieces();
         self.setState({
                        currentIndex:0,
                        scoreObj:{currentIndex:0, totalPieces:self.state.imageData.puzzleMapPieces.length - 1, correct:0},
                        showBottomCanvas:false,
-                       correctAttempts:0,
+                       correctAttempts:0
         },
             function(){
                 self.updateHUDView(true);
