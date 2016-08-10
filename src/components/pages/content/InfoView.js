@@ -75,7 +75,13 @@ function getPageState(cmp, props) {
                             // anything other than one of the above?
                             data.videoType = "";
                     }
-                })
+                });
+                if( (!data.mediaTitle) && (data.caption !== "") ){
+                    data.mediaTitle = data.caption;
+                }
+                if( (!data.mediaAltText) && (data.caption !== "") ){
+                    data.mediaAltText = data.caption;
+                }
             }
         }
 
