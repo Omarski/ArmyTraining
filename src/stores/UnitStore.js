@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var PersistenceActions = require('../actions/PersistenceActions');
 var PersistenceStore = require('../stores/PersistenceStore');
 var UnitConstants = require('../constants/UnitConstants');
+var Utils = require('../components/widgets/Utils');
 var assign = require('object-assign');
 
 
@@ -268,10 +269,19 @@ var UnitStore = assign({}, EventEmitter.prototype, {
     },
 
     getUnitTime: function(id){
-        var object = _units[id].data.playlistInfo[0].property.filter(function (obj){
-            return obj.name === "minutes";
-        });
-        return object[0].value;
+        var time = 0;
+        if (_units[id].data && _units[id].data.playlistInfo) {
+            for (var index in _units[id].data.playlistInfo) {
+                var infoObject = _units[id].data.playlistInfo[index];
+                // look up info
+                var foundInfo = Utils.findInfo(infoObject, "minutes");
+                if (foundInfo !== null) {
+                    time = foundInfo;
+                    break;
+                }
+            }
+        }
+        return time;
     },
 
     getChapterById: function(id, chapterId) {
