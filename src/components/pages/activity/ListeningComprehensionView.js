@@ -403,9 +403,9 @@ var ListeningComprehensionView = React.createClass({
                                     <div className="listening-comp-interaction-container">
                                         <div className="row listening-comp-image" >
                                             {transcriptContainer}
+                                            {cc}
                                             <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} src={state.image}></img>
                                         </div>
-                                        {cc}
                                     </div>
                                 </div>
                             </div>

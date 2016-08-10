@@ -77,8 +77,14 @@ input[type=checkbox] {
   border:1px solid #BA9077;
   margin: 10px;
   position: relative;
+  display: inline-table;
   .closed-caption-panel{
     position: absolute;
+    bottom: 0;
+  }
+  .closed-caption-button{
+    position: absolute;
+    right: 0;
   }
 }
 
