@@ -44,12 +44,14 @@ function getPageState(props) {
         imageZid = props.page.media[0].zid;
         data.prompt = props.page.prompt.text;
         data.answers = props.page.answer;
-        if(props.page.info && props.page.info.property){
-            props.page.info.property.map(function(item){
-                if(item.name === "videoTranscript"){
-                    data.transcript = item.value;
-                }
-            });
+        if(props.page.question && props.page.question.utterance){
+            // if ezread is present, use it as transcript
+            if(props.page.question.utterance.ezread && props.page.question.utterance.ezread.text !== ""){
+                data.transcript = props.page.question.utterance.ezread.text;
+            }else if(props.page.question.utterance.translation && props.page.question.utterance.translation.text !== ""){
+                // else if translation exists, use it
+                data.transcript = props.page.question.utterance.translation.text;
+            }// else no transcript
         }
         props.page.answer.map(function(item){
             if(item.correct === true){
@@ -403,9 +405,9 @@ var ListeningComprehensionView = React.createClass({
                                     <div className="listening-comp-interaction-container">
                                         <div className="row listening-comp-image" >
                                             {transcriptContainer}
+                                            {cc}
                                             <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} src={state.image}></img>
                                         </div>
-                                        {cc}
                                     </div>
                                 </div>
                             </div>

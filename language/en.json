@@ -79,7 +79,8 @@
   "PronunciationPage":{
     "btnPlay": "Play",
     "btnRecord": "Record",
-    "btnPlayback": "Play Recording"
+    "btnPlayback": "Play Recording",
+    "btnStop": "Stop"
   },
   "quizEnd": {
     "btnRestart": "Retake",
