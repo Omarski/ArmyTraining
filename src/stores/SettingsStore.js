@@ -25,9 +25,45 @@ function updateVoiceVolume(val) {
     store.set('settings', settings);
 }
 
+function voiceVolumeStepUp(){
+    var settings = store.get('settings') || {};
+    settings['voiceVolume'] += 0.1;
+    if(settings['voiceVolume'] >= 1.0){
+        settings['voiceVolume'] = 1.0;
+    }
+    store.set('settings', settings);
+}
+
+function voiceVolumeStepDown(){
+    var settings = store.get('settings') || {};
+    settings['voiceVolume'] -= 0.1;
+    if(settings['voiceVolume'] <= 0.0){
+        settings['voiceVolume'] = 0.0;
+    }
+    store.set('settings', settings);
+}
+
 function updateBackgroundVolume(val) {
     var settings = store.get('settings') || {};
     settings['backgroundVolume'] = val;
+    store.set('settings', settings);
+}
+
+function backgroundVolumeStepUp(){
+    var settings = store.get('settings') || {};
+    settings['backgroundVolume'] += 0.1;
+    if(settings['backgroundVolume'] >= 1.0){
+        settings['backgroundVolume'] = 1.0;
+    }
+    store.set('settings', settings);
+}
+
+function backgroundVolumeStepDown(){
+    var settings = store.get('settings') || {};
+    settings['backgroundVolume'] -= 0.1;
+    if(settings['backgroundVolume'] <= 0.0){
+        settings['backgroundVolume'] = 0.0;
+    }
     store.set('settings', settings);
 }
 
@@ -137,6 +173,22 @@ AppDispatcher.register(function(action) {
             break;
         case SettingsConstants.SETTINGS_UPDATE_VOICE_VOLUME:
             updateVoiceVolume(action.data);
+            SettingsStore.emitChange();
+            break;
+        case SettingsConstants.SETTINGS_VOICE_VOLUME_STEP_UP:
+            voiceVolumeStepUp();
+            SettingsStore.emitChange();
+            break;
+        case SettingsConstants.SETTINGS_VOICE_VOLUME_STEP_DOWN:
+            voiceVolumeStepDown();
+            SettingsStore.emitChange();
+            break;
+        case SettingsConstants.SETTINGS_BACKGROUND_VOLUME_STEP_UP:
+            backgroundVolumeStepUp();
+            SettingsStore.emitChange();
+            break;
+        case SettingsConstants.SETTINGS_BACKGROUND_VOLUME_STEP_DOWN:
+            backgroundVolumeStepDown();
             SettingsStore.emitChange();
             break;
         default:

@@ -76,6 +76,10 @@ input[type=checkbox] {
 .listening-comp-image{
   border:1px solid #BA9077;
   margin: 10px;
+  position: relative;
+  .closed-caption-panel{
+    position: absolute;
+  }
 }
 
 .listening-comp-interaction-container {

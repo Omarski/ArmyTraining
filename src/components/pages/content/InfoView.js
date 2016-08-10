@@ -75,7 +75,13 @@ function getPageState(cmp, props) {
                             // anything other than one of the above?
                             data.videoType = "";
                     }
-                })
+                });
+                if( (!data.mediaTitle) && (data.caption !== "") ){
+                    data.mediaTitle = data.caption;
+                }
+                if( (!data.mediaAltText) && (data.caption !== "") ){
+                    data.mediaAltText = data.caption;
+                }
             }
         }
 
@@ -146,6 +152,13 @@ function getPageState(cmp, props) {
                         }
                     });
                 }
+                if( (mediaTitle === "") && (mediaCaption !== "") ){
+                    mediaTitle = mediaCaption;
+                }
+                if( (altText === "") && (mediaCaption !== "") ){
+                    altText = mediaCaption;
+                }
+
                 /*
                     Removed because content will always use the page level info tags instead of the media
                     object info tags.

@@ -141,7 +141,7 @@ var ActiveDialogEvaluation = React.createClass({
                 carouselItems.push(
                     <CarouselItem key="carouselEnd">
                         <Panel header={LocalizationStore.labelFor("evaluation", "lblObjectives")}>
-                            <button type="button" className="btn btn-default" aria-label="Next" onClick={this.start}>
+                            <button type="button" className="btn btn-default" title={LocalizationStore.labelFor("evaluation", "btnContinue")} aria-label={LocalizationStore.labelFor("evaluation", "btnContinue")} onClick={this.start}>
                                 {LocalizationStore.labelFor("evaluation", "btnContinue")}
                             </button>
                         </Panel>
@@ -150,10 +150,10 @@ var ActiveDialogEvaluation = React.createClass({
             } else {
                 var btns = (
                     <div>
-                        <button type="button" className="btn btn-default" aria-label="Next" onClick={this.restart}>
+                        <button type="button" className="btn btn-default" title={LocalizationStore.labelFor("evaluation", "btnRestart")} aria-label={LocalizationStore.labelFor("evaluation", "btnRestart")} onClick={this.restart}>
                             {LocalizationStore.labelFor("evaluation", "btnRestart")}
                         </button>
-                        <button type="button" className="btn btn-default" aria-label="Next" onClick={this.review}>
+                        <button type="button" className="btn btn-default" title={LocalizationStore.labelFor("evaluation", "brnReview")} aria-label={LocalizationStore.labelFor("evaluation", "brnReview")} onClick={this.review}>
                             {LocalizationStore.labelFor("evaluation", "brnReview")}
                         </button>
                     </div>
