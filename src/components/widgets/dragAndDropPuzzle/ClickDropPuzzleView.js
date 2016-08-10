@@ -10,7 +10,9 @@ var ClickDropPuzzleView = React.createClass({
         return {
             mediaPath: 'data/media/',
             renderedDraggableColl:[],
-            renderedDropTargetsColl:[]
+            renderedDropTargetsColl:[],
+            lastDraggable:null,
+            lastTarget:null
         };
     },
 
@@ -19,12 +21,13 @@ var ClickDropPuzzleView = React.createClass({
         stageStyle: PropTypes.object,
         draggableColl: PropTypes.array.isRequired,
         targetsColl: PropTypes.array.isRequired,
-        draggableOnStyle: PropTypes.object.isRequired,
-        targetOnStyle: PropTypes.object.isRequired,
+        draggableOnClass: PropTypes.string.isRequired,
+        targetOnClass: PropTypes.string.isRequired,
         stageTargetObj: PropTypes.object,
-        onDraggableClick: PropTypes.func,
-        onDraggableDrop: PropTypes.func.isRequired,
+        onDraggableClick: PropTypes.func.isRequired,
+        onTargetClick: PropTypes.func.isRequired,
         onPuzzleReady: PropTypes.func,
+        allowSwap:PropTypes.bool
     },
 
     renderDraggableColl: function(){
@@ -38,6 +41,7 @@ var ClickDropPuzzleView = React.createClass({
                     id = {itemObj.id}
                     style={itemObj.draggableStyle}
                     onClick={self.onDraggableClick}
+                    className=""
                 ></div>
             )
         });
@@ -50,13 +54,15 @@ var ClickDropPuzzleView = React.createClass({
 
         var self = this;
         var dropTargetsRender = self.props.targetsColl.map(function(itemObj,index){
+        var targetClass = self.state.lastDraggable ? self.props.targetOnClass:"";
 
             return (
 
                 <div key={index}
                      id = {itemObj.id}
-                     style={itemObj.draggableStyle}
+                     style={itemObj.targetStyle}
                      onClick={self.onTargetClick}
+                     className={targetClass}
                 ></div>
             )
         });
@@ -68,11 +74,41 @@ var ClickDropPuzzleView = React.createClass({
     },
 
     onDraggableClick: function(e){
-        console.log("Draggable clicked...");
+
+        var self = this;
+        var lastDraggable = document.getElementById(self.state.lastDraggable);
+
+        //swapping
+        if (self.props.allowSwap && e.target.getAttribute("placement") === "placed" && self.state.lastDraggable &&
+            lastDraggable.getAttribute("placement") === "placed"){
+            self.setState({draggableSelected:false, lastDraggable:null});
+            lastDraggable.className = lastDraggable.className.replace(self.props.draggableOnClass," ");
+            console.log("Swap....");
+            return;
+        }
+
+        if (e.target.className.indexOf(self.props.draggableOnClass) === -1) {
+            if (lastDraggable) lastDraggable.className = lastDraggable.className.replace(self.props.draggableOnClass," ");
+            e.target.className = e.target.className + " " + self.props.draggableOnClass;
+            self.setState({draggableSelected:true, lastDraggable:e.target.id});
+        }else {
+            e.target.className = (e.target.className).replace(self.props.draggableOnClass," ");
+            self.setState({draggableSelected:false, lastDraggable:null});
+        }
     },
 
     onTargetClick: function(e){
-        console.log("Target clicked...");
+
+        var self = this;
+        var lastDraggable = document.getElementById(self.state.lastDraggable);
+        lastDraggable.setAttribute("placement","placed");
+        self.props.onTargetClick(self.state.lastDraggable, e.target.id);
+        lastDraggable.className = lastDraggable.className.replace(self.props.draggableOnClass," ");
+        self.setState({draggableSelected:false, lastDraggable:null});
+    },
+
+    accessDraggables: function(item){
+
     },
 
     render: function() {
