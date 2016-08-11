@@ -115,7 +115,6 @@ var ObjexView = React.createClass({
             var backgroundImg = new Image();
             backgroundImg.src = self.state.mediaPath + self.state["level"+self.state.currentLevel+"Data"].backgroundImage.src;
             backgroundImg.onload = self.loadCounter;
-            console.log("Loading bg: " + backgroundImg.src);
 
             var totalImages = 41; //update when json combined
 
@@ -126,7 +125,6 @@ var ObjexView = React.createClass({
     loadCounter: function(){
         var self = this;
         self.state.loadCounter++;
-        console.log("Loading: " + self.state.loadCounter);
         if (self.state.loadCounter === self.state.totalImages){
             this.onObjexReady();
         }
@@ -134,9 +132,7 @@ var ObjexView = React.createClass({
 
     onObjexReady: function(){
         var self = this;
-        setTimeout(function () {
             self.setState({showGame:true});
-        }, 100);
     },
 
     prepLevels: function(){
