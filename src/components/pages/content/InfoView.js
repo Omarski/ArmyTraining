@@ -33,7 +33,8 @@ function getPageState(cmp, props) {
         transcript: "",
         mediaTitle: null,
         mediaAltText: null,
-        fullCoach: false
+        fullCoach: false,
+        firstViewing: true
     };
 
     var caption = "";
@@ -127,7 +128,10 @@ function getPageState(cmp, props) {
         if (props.page.media) {
             var media = props.page.media;
             mediaItems = media.map(function(item, index) {
-                var filePath = "data/media/" + item.file;
+                var filePath = "data/media/";
+                if(item.file){
+                    filePath = "data/media/" + item.file;
+                }
                 var result = <div key={index}>Unknown File Type</div>;
                 var altText = "";
                 var mediaTitle = "";
@@ -271,22 +275,26 @@ var InfoView = React.createClass({
     },
 
     componentDidUpdate: function() {
-
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
-
         var video = null;
-        // play all note media in order (see dnd for example)
-        playMediaAudio(noteMedia);
-        video = document.getElementById("video");
-        if(video){
-            video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-            video.onvolumechange=function(){
-                self.updateVolume();
-            };
+
+        if(firstViewing){
+            // play all note media in order (see dnd for example)
+            playMediaAudio(noteMedia);
+            video = document.getElementById("video");
+            if(video){
+                video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+                video.onvolumechange=function(){
+                    self.updateVolume();
+                };
+            }
+            $('[data-toggle="tooltip"]').tooltip();
         }
-        $('[data-toggle="tooltip"]').tooltip();
+        self.setState({
+            firstViewing: false
+        });
 
     },
 

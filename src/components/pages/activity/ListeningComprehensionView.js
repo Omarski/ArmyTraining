@@ -39,11 +39,11 @@ function getPageState(props) {
 
     if (props && props.page) {
         data.page = props.page;
-        data.title = props.page.title;
-        data.pageType = props.page.type;
-        imageZid = props.page.media[0].zid;
-        data.prompt = props.page.prompt.text;
-        data.answers = props.page.answer;
+        data.title = props.page.title || "";
+        data.pageType = props.page.type || "";
+        imageZid = props.page.media[0].zid || "";
+        data.prompt = props.page.prompt.text || "";
+        data.answers = props.page.answer || "";
         if(props.page.question && props.page.question.utterance){
             // if ezread is present, use it as transcript
             if(props.page.question.utterance.ezread && props.page.question.utterance.ezread.text !== ""){

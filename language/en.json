@@ -47,7 +47,8 @@
   "header": {
     "lbltitle": "AFPAK",
     "tooltipLogo": "Virtual Culture Awareness Trainer",
-    "tooltipDLI": "DLI Guide",
+    "tooltipDLI": "DLI Guides",
+    "dliModalTitle": "DLI Guide",
     "tooltipReference": "Reference Guide",
     "tooltipMute": "Mute Sound",
     "tooltipUnMute": "Turn on Sound",
