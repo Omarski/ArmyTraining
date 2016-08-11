@@ -151,3 +151,13 @@
   border-radius: 0 0 10px 0;
 }
 
+#cultureQuestMapBlock{
+  position: absolute;
+  display:block;
+  top:40px;
+  left:0;
+  width:768px;
+  height:502px;
+  background-color:rgba(255, 255, 255,0);
+  z-index: 5;
+}
