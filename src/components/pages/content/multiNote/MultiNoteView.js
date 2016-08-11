@@ -229,7 +229,7 @@ var MultiNoteView = React.createClass({
                 buttonImage = (<span  className="glyphicon thumbnail thumbnail-video multi-note-thumbnail"
                                      alt={title}
                                      aira-hidden="true">
-                    <img src="images/icons/playrecordingn.png" />
+                    <img src="images/icons/playrecordn.png" />
                 </span>);
             }else{ // else it should be jpg or png
                 buttonImage = (<div  className="thumbnail multi-note-thumbnail"
