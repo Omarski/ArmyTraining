@@ -6,6 +6,8 @@ var PageStore = require('../../../../stores/PageStore');
 var _soundTimer = null;
 
 var ActiveDialogComponent = React.createClass({
+    assetQueue: [],
+    assets2Render: [],
     bAnimationPlaying: false,
     bIdleOrChatLoop: false,
     bSoundLoading: false,
@@ -16,8 +18,7 @@ var ActiveDialogComponent = React.createClass({
     currentStop: "",
     currentVideosPlayingHack: [],
     hack: false,
-    videosQueue: [],
-    videos2Render: [],
+
     videoCurrentLoading: null,
 
     propTypes: {
@@ -28,16 +29,14 @@ var ActiveDialogComponent = React.createClass({
     },
 
     getInitialState: function() {
-        var videosNotReady = this.props.assets ? this.props.assets.length : 0;
+        var assetsNotReady = this.props.assets ? this.props.assets.length : 0;
 
-        // get first video
-        this.videosQueue = [];
+        // get first asset
+        this.assetQueue = [];
         for (var assetIndex in this.props.assets) {
-            this.videosQueue.push(this.props.assets[assetIndex]);
+            this.assetQueue.push(this.props.assets[assetIndex]);
         }
-
-        this.videos2Render = [];
-        //this.videos2Render.push(this.videosQueue.shift());
+        this.assets2Render.push(this.assetQueue.shift());
 
         // look up chat animation
         this.findChatAnimation();
@@ -48,43 +47,7 @@ var ActiveDialogComponent = React.createClass({
         }
 
         return {
-            videosNotReady: videosNotReady
-        }
-    },
-
-    componentDidMount: function() {
-        this.preloadVideos();
-    },
-
-    preloadVideos: function() {
-        if (this.videosQueue.length > 0) {
-            // get next video
-            var nextVideoObject = this.videosQueue.shift();
-
-            // add video to render list
-            this.videos2Render.push(nextVideoObject);
-
-            // get url
-            var nextVideoUrl = "data/media/" + PageStore.chapter().xid + "/" + nextVideoObject.assetData.source;
-
-            this.serverRequest = $.get(nextVideoUrl, this.preloadVideosDoneHandler);
-
-        } else {
-            // all done force render with loaded videos
-            this.forceUpdate();
-        }
-    },
-
-    preloadVideosDoneHandler: function(result) {
-        // get next video
-        this.preloadVideos();
-    },
-
-
-    componentWillUnmount: function() {
-        // cancel requests
-        if (this.serverRequest) {
-            this.serverRequest.abort();
+            assetsNotReady: assetsNotReady
         }
     },
 
@@ -223,16 +186,16 @@ var ActiveDialogComponent = React.createClass({
         }
 
         // decrease count
-        this.state.videosNotReady--;
+        this.state.assetsNotReady--;
 
         // add next video to list
-        if (this.videosQueue.length > 0) {
-            this.videos2Render.push(this.videosQueue.shift());
+        if (this.assetQueue.length > 0) {
+            this.assets2Render.push(this.assetQueue.shift());
             this.forceUpdate();
         }
 
         // all videos for this asset are ready to play
-        if (this.state.videosNotReady <= 0) {
+        if (this.state.assetsNotReady <= 0) {
 
             // set ready
 
@@ -355,7 +318,7 @@ var ActiveDialogComponent = React.createClass({
         var self = this;
 
         // check if video
-        var videos = this.videos2Render.map(function(item, index) {
+        var videos = this.assets2Render.map(function(item, index) {
             var top = Number(item.assetData.dimensions[1].split("px")[0]);
             var left = Number(item.assetData.dimensions[0].split("px")[0]);
             var style = {top: top, left: left, position: "absolute", display: "block"};
