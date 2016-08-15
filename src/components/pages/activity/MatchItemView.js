@@ -1,6 +1,7 @@
 var React = require('react');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
+var LocalizationStore = require('../../../stores/LocalizationStore');
 var PageHeader = require('../../widgets/PageHeader');
 var UnitStore = require('../../../stores/UnitStore');
 
@@ -17,6 +18,7 @@ function getPageState(props) {
         draggedItemTarget: "",
         draggedItemData: "",
         numMoved: 0,
+        isPaused: true,
         mediaCaption: null
     };
 
@@ -82,7 +84,7 @@ function getPageState(props) {
     return data;
 }
 
-function playAudio(zid){
+function playAudio(zid, self){
     var audio = document.getElementById('audio');
     var source = document.getElementById('mp3Source');
     // construct file-path to audio file
@@ -96,12 +98,18 @@ function playAudio(zid){
             audio.load();
             audio.play();
             audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            setTimeout(function(){self.setState({
+                isPaused: false
+            })});
             Array.prototype.forEach.call(icons, function(item, index){
                 if(zid.toString() === $(item).attr("data-passed")){
                     $(item.childNodes)[0].src = "images/icons/stoprecordn.png ";
                     audio.onended = function(){
                         $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
                         audio.pause();
+                        setTimeout(function(){self.setState({
+                            isPaused: true
+                        })});
                     };
                 }
             });
@@ -293,9 +301,9 @@ var MatchItemView = React.createClass({
                 if(it || parent){
                     // TODO: trigger image to change to stop? for duration?
                     if(it){
-                        playAudio($(e.target).attr("data"));
+                        playAudio($(e.target).attr("data"), self);
                     }else if (parent){
-                        playAudio($(e.target).parent().attr("data"));
+                        playAudio($(e.target).parent().attr("data"), self);
                     }
                 }
             });
@@ -350,6 +358,7 @@ var MatchItemView = React.createClass({
         var correct = "glyphicon MI-feedback MI-correct ";
         var incorrect = "glyphicon MI-feedback MI-incorrect ";
         var answerContainers;
+        var audio = document.getElementById('mainViewAudio');
 
         var numMoved = state.numMoved;
         //                                    <div className={(feedback + ' match-item-feedback-audio')}></div>
@@ -365,7 +374,6 @@ var MatchItemView = React.createClass({
                 }
             }
 
-            var audio = document.getElementById('mainViewAudio');
             var source = document.getElementById('mainViewMp3Source');
             if(isCorrect){
                 // play correct audio
@@ -394,10 +402,15 @@ var MatchItemView = React.createClass({
             switch(item.mediaType){
                 case "audio":
                     var zid = item.passedData;
+                    var draggableTitle = "paused";
+                    if(audio){
+                        draggableTitle = self.state.isPaused ? LocalizationStore.labelFor("PronunciationPage", "btnPlay") : LocalizationStore.labelFor("PronunciationPage", "btnStop");
+                    }
                     draggable = (<a
                             href="#"
                             key={page.xid + "choice-"+index}
                             data={zid}
+                            title={draggableTitle}
                             data-passed={item.passedData}
                             className="match-item-choices-container match-item-play-icon"
                             draggable="true"
@@ -486,11 +499,11 @@ var MatchItemView = React.createClass({
                                     className="match-item-play-icon"
                                     onDragStart={self.onDragging}
                                     onClick={self.onClick}>
-                                    <img src="images/icons/playrecordn.png" className="glyphicon glyph-answer match-item-audio">
-                                    </img>
-                                    <div className={(feedback + ' match-item-feedback-audio')}>
-                                        {icon}
-                                    </div>
+                                        <img src="images/icons/playrecordn.png" className="glyphicon glyph-answer match-item-audio">
+                                        </img>
+                                        <div className={(feedback + ' match-item-feedback-audio')}>
+                                            {icon}
+                                        </div>
                                 </a>);
                             break;
                         case "image":
@@ -529,6 +542,7 @@ var MatchItemView = React.createClass({
             }
 
             // this return is for the drop areas with their question prompts
+            //div className="match-item-answer-drop-area dropped audio-drop" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
 
             switch (state.answerState[0].mediaType) {
                 case "audio":

@@ -86,7 +86,7 @@ var ActiveDialogIntro = React.createClass({
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={this.hideModal}>Start</Button>
+                    <Button title={LocalizationStore.labelFor("scenario", "sceneStart", null, "Start")} onClick={this.hideModal}>Start</Button>
                 </Modal.Footer>
             </Modal>
         );

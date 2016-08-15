@@ -65,7 +65,7 @@ var DliView = React.createClass({
             </ReactBootstrap.ListGroupItem>);
         });
 
-        var popOver = (<Popover key={"dlipopoverList"} id="dliPopover" title='DLI Section'>
+        var popOver = (<Popover key={"dlipopoverList"} id="dliPopover" title={LocalizationStore.labelFor("header", "tooltipDLI")}>
             <ReactBootstrap.ListGroup>
                 {selections}
             </ReactBootstrap.ListGroup>
@@ -83,7 +83,7 @@ var DliView = React.createClass({
 
             <Modal dialogClassName="dlimodal" bsSize="large" show={this.state.showModal} onHide={this.close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>DLI Guides</Modal.Title>
+                    <Modal.Title>{LocalizationStore.labelFor("header", "dliModalTitle")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body id="modalbody">
                     <iframe id="iframe" className="dliframe" src={self.state.iframeSrc}></iframe>

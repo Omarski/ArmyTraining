@@ -327,7 +327,7 @@ var CultureQuestQuiz = React.createClass({
         var instStyle = {background:"#000 url("+instImg+") no-repeat 100% 100%"};
 
         var timerStyle = {fontSize:'20px', textAlign:'center', color:'#0000ff', zIndex:'20'};
-
+        
         var quizTextClass = "culture-quest-quiz-view-quizText";
 
         var puzzleAwardTextClass = "culture-quest-quiz-view-quizText " + (self.state.puzzleAwardMode) ? "culture-quest-quiz-view-show":"culture-quest-quiz-view-hide";
@@ -383,7 +383,9 @@ var CultureQuestQuiz = React.createClass({
                     <div className = "culture-quest-quiz-view-btnBackground"></div>
                     </div>:null}
                 </div>
-                </div>
+                <div id="cultureQuestMapBlock"></div>
+
+            </div>
 
         );
     }

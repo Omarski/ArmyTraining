@@ -409,7 +409,7 @@ var CultureQuestView = React.createClass({
                 break;
 
             case "tileAudio":
-                var tileAudio = self.state.mediaPath + "add_tile.mp3";
+                var tileAudio = self.state.mediaPath + "move_rug_tile.mp3";
                 self.playAudio({id:"tile", autoPlay:true, sources:[{format:"mp3", url:tileAudio}]});
                 break;
             
@@ -483,7 +483,7 @@ var CultureQuestView = React.createClass({
 
                     </CultureQuestMapView>
 
-                        {self.state.showQuiz? <CultureQuestQuizView
+                    {self.state.showQuiz? <CultureQuestQuizView
                         imageData={state.imageData}
                         layersColl={state.layersColl}
                         lastSelected={state.lastSelected}
@@ -495,7 +495,7 @@ var CultureQuestView = React.createClass({
                         playAudio = {self.playAudio}
                         viewUpdate = {self.viewUpdate}
                         />:null}
-
+                    
                     {self.state.showPuzzle? <CultureQuestPuzzleAwardView
                         imageData = {state.imageData}
                         lastSelected = {state.lastSelected}

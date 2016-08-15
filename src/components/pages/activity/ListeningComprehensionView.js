@@ -1,6 +1,8 @@
 var React = require('react');
 var CoachFeedbackView = require('../../widgets/CoachFeedbackView');
 var ClosedCaption = require('../../widgets/ClosedCaption');
+var ClosedCaptionPanel = require('../../widgets/ClosedCaptionPanel');
+var ClosedCaptionStore = require('../../../stores/ClosedCaptionStore');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
 var LocalizationStore = require('../../../stores/LocalizationStore');
@@ -37,13 +39,19 @@ function getPageState(props) {
 
     if (props && props.page) {
         data.page = props.page;
-        data.title = props.page.title;
-        data.pageType = props.page.type;
-        imageZid = props.page.media[0].zid;
-        data.prompt = props.page.prompt.text;
-        data.answers = props.page.answer;
-        if(props.page.question && props.page.question.utterance && props.page.question.utterance.translation){
-            data.transcript = props.page.question.utterance.translation.text;
+        data.title = props.page.title || "";
+        data.pageType = props.page.type || "";
+        imageZid = props.page.media[0].zid || "";
+        data.prompt = props.page.prompt.text || "";
+        data.answers = props.page.answer || "";
+        if(props.page.question && props.page.question.utterance){
+            // if ezread is present, use it as transcript
+            if(props.page.question.utterance.ezread && props.page.question.utterance.ezread.text !== ""){
+                data.transcript = props.page.question.utterance.ezread.text;
+            }else if(props.page.question.utterance.translation && props.page.question.utterance.translation.text !== ""){
+                // else if translation exists, use it
+                data.transcript = props.page.question.utterance.translation.text;
+            }// else no transcript
         }
         props.page.answer.map(function(item){
             if(item.correct === true){
@@ -104,6 +112,7 @@ var ListeningComprehensionView = React.createClass({
 
     componentWillMount: function() {
         SettingsStore.addChangeListener(this._onSettingsChange);
+        ClosedCaptionStore.addChangeListener(this._onClosedCaptionChange);
     },
 
     componentDidMount: function() {
@@ -235,6 +244,7 @@ var ListeningComprehensionView = React.createClass({
 
     componentWillUnmount: function() {
         SettingsStore.removeChangeListener(this._onSettingsChange);
+        ClosedCaptionStore.removeChangeListener(this._onClosedCaptionChange);
     },
 
     saveAnswer: function(answerObj, correct) {
@@ -266,10 +276,17 @@ var ListeningComprehensionView = React.createClass({
         var title = page.title;
         var sources = self.state.sources;
         var feedbackElement = "";
+        var transcriptContainer = "";
         var playButtonIcon = self.state.isListening ? LC_STOP_ICON : LC_PLAY_ICON;
         // if answered added coach feedback
         if(state.haveAnswered && !state.isQuizPage) {
             feedbackElement = state.answerFeedback
+        }
+
+        if (this.state.transcript) {
+            transcriptContainer = (
+                <ClosedCaptionPanel transcript={this.state.transcript} />
+            );
         }
 
         var cc = "";
@@ -386,8 +403,11 @@ var ListeningComprehensionView = React.createClass({
                             <div className={interactionColumn}>
                                 <div className="container-fluid">
                                     <div className="listening-comp-interaction-container">
-                                        <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} className="row listening-comp-image" src={state.image}></img>
-
+                                        <div className="row listening-comp-image" >
+                                            {transcriptContainer}
+                                            {cc}
+                                            <img title={this.state.imageCaption} alt={this.state.imageCaption} aria-label={this.state.imageCaption} src={state.image}></img>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -409,6 +429,13 @@ var ListeningComprehensionView = React.createClass({
         this.setState({
             updated: true
         });
+    },
+    _onClosedCaptionChange: function () {
+        if (ClosedCaptionStore.visible()) {
+            // $('.info-page-notes').hide();
+        } else {
+            // $('.info-page-notes').show();
+        }
     }
 });
 

@@ -33,7 +33,8 @@ function getPageState(cmp, props) {
         transcript: "",
         mediaTitle: null,
         mediaAltText: null,
-        fullCoach: false
+        fullCoach: false,
+        firstViewing: true
     };
 
     var caption = "";
@@ -75,7 +76,13 @@ function getPageState(cmp, props) {
                             // anything other than one of the above?
                             data.videoType = "";
                     }
-                })
+                });
+                if( (!data.mediaTitle) && (data.caption !== "") ){
+                    data.mediaTitle = data.caption;
+                }
+                if( (!data.mediaAltText) && (data.caption !== "") ){
+                    data.mediaAltText = data.caption;
+                }
             }
         }
 
@@ -121,7 +128,10 @@ function getPageState(cmp, props) {
         if (props.page.media) {
             var media = props.page.media;
             mediaItems = media.map(function(item, index) {
-                var filePath = "data/media/" + item.file;
+                var filePath = "data/media/";
+                if(item.file){
+                    filePath = "data/media/" + item.file;
+                }
                 var result = <div key={index}>Unknown File Type</div>;
                 var altText = "";
                 var mediaTitle = "";
@@ -146,6 +156,13 @@ function getPageState(cmp, props) {
                         }
                     });
                 }
+                if( (mediaTitle === "") && (mediaCaption !== "") ){
+                    mediaTitle = mediaCaption;
+                }
+                if( (altText === "") && (mediaCaption !== "") ){
+                    altText = mediaCaption;
+                }
+
                 /*
                     Removed because content will always use the page level info tags instead of the media
                     object info tags.
@@ -258,22 +275,26 @@ var InfoView = React.createClass({
     },
 
     componentDidUpdate: function() {
-
         //play audio recording for info page
         var self = this;
         var noteMedia = self.state.noteAudio;
-
         var video = null;
-        // play all note media in order (see dnd for example)
-        playMediaAudio(noteMedia);
-        video = document.getElementById("video");
-        if(video){
-            video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
-            video.onvolumechange=function(){
-                self.updateVolume();
-            };
+
+        if(firstViewing){
+            // play all note media in order (see dnd for example)
+            playMediaAudio(noteMedia);
+            video = document.getElementById("video");
+            if(video){
+                video.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+                video.onvolumechange=function(){
+                    self.updateVolume();
+                };
+            }
+            $('[data-toggle="tooltip"]').tooltip();
         }
-        $('[data-toggle="tooltip"]').tooltip();
+        self.setState({
+            firstViewing: false
+        });
 
     },
 

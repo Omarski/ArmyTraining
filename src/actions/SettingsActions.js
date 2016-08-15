@@ -12,6 +12,30 @@ var SettingsActions = {
             data: data
         });
     },
+    
+    voiceVolumeStepUp: function(){
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_VOICE_VOLUME_STEP_UP
+        });
+    },
+    
+    voiceVolumeStepDown: function(){
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_VOICE_VOLUME_STEP_DOWN
+        });
+    },
+    
+    backgroundVolumeStepUp: function(){
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_BACKGROUND_VOLUME_STEP_UP
+        });
+    },
+    
+    backgroundVolumeStepDown: function(){
+        AppDispatcher.dispatch({
+            actionType: SettingsConstants.SETTINGS_BACKGROUND_VOLUME_STEP_DOWN
+        });
+    },
 
     /**
      * @param  {string} id

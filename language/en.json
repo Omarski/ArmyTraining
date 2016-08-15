@@ -32,6 +32,9 @@
     "lblTestFailed": "I can tell that you are working hard to remember all of the cultural information you've learned so far, but unfortunately, your score does not allow you to move on in the course. Please review the information provided in the After Action Review below. It will help you to remember the cultural points necessary to perform better on your next try. When you feel that you are ready, play the episode again.",
     "lblEndInstructions": "Click the buttons below to review the information you missed or play the scenario again."
   },
+  "scenario": {
+    "sceneStart": "Start"
+  },
   "footer": {
     "tooltipNext": "Next",
     "tooltipPrevious": "Previous",
@@ -44,7 +47,8 @@
   "header": {
     "lbltitle": "AFPAK",
     "tooltipLogo": "Virtual Culture Awareness Trainer",
-    "tooltipDLI": "DLI Guide",
+    "tooltipDLI": "DLI Guides",
+    "dliModalTitle": "DLI Guide",
     "tooltipReference": "Reference Guide",
     "tooltipMute": "Mute Sound",
     "tooltipUnMute": "Turn on Sound",
@@ -76,7 +80,8 @@
   "PronunciationPage":{
     "btnPlay": "Play",
     "btnRecord": "Record",
-    "btnPlayback": "Play Recording"
+    "btnPlayback": "Play Recording",
+    "btnStop": "Stop"
   },
   "quizEnd": {
     "btnRestart": "Retake",
@@ -123,7 +128,11 @@
   "tools":{
     "btnListen": "Click to Listen",
     "btnStop": "Stop",
-    "mdlClose": "Close"
+    "mdlClose": "Close",
+    "carNext": "Next",
+    "carPrev": "Previous",
+    "volumeIncrease": "Increase Volume",
+    "volumeDecrease": "Decrease Volume"
   },
   "mapView":{
     "mapInstructions": "Click the tacks to learn about points of interest in "

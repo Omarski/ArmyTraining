@@ -42,7 +42,9 @@ function getSettingsState(isNav) {
         muted: settings.muted,
         voiceVolume: v,
         max : 1.0,
-        isNav: AppStateStore.isMobile()
+        isNav: AppStateStore.isMobile(),
+        minusIcon: (<img src="images/icons/ExplorerCollapsen.png"/>),
+        plusIcon: (<img src="images/icons/ExplorerExpandn.png"/>)
     };
 }
 
@@ -58,9 +60,27 @@ var SettingsView = React.createClass({
         $('audio,video').prop("volume", SettingsStore.voiceVolume());
     },
 
+    voiceVolumeReduce: function(){
+        SettingsActions.voiceVolumeStepDown();
+        $('audio,video').prop("volume", SettingsStore.voiceVolume());
+    },
+
+    voiceVolumeIncrease: function(){
+        SettingsActions.voiceVolumeStepUp();
+        $('audio,video').prop("volume", SettingsStore.voiceVolume());
+    },
+
     backgroundVolumeChange: function(event) {
         var value = event.value || event;
         SettingsActions.updateBackgroundVolume(value);
+    },
+
+    backgroundVolumeReduce: function(){
+        SettingsActions.backgroundVolumeStepDown();
+    },
+
+    backgroundVolumeIncrease: function(){
+        SettingsActions.backgroundVolumeStepUp();
     },
 
     autoPlaySoundChange: function(event) {
@@ -129,23 +149,43 @@ var SettingsView = React.createClass({
                     </ListGroupItem>
                     <ListGroupItem>
                         <h5>{LocalizationStore.labelFor("settings", "lblVoiceVolume")}</h5>
-                        <Slider
-                            min={0.0}
-                            max={this.state.max}
-                            step={0.1}
-                            value={this.state.voiceVolume}
-                            toolTip={false}
-                            onSlide={this.voiceVolumeChange} />
+                        <div className="row">
+                            <button className="btn btn-default btn-settings-volume col-sm-1" title={LocalizationStore.labelFor("tools", "volumeDecrease")} onClick={self.voiceVolumeReduce}>
+                                {self.state.minusIcon}
+                            </button>
+                            <div className="col-sm-10 slider-box">
+                                <Slider
+                                    min={0.0}
+                                    max={this.state.max}
+                                    step={0.1}
+                                    value={this.state.voiceVolume}
+                                    toolTip={false}
+                                    onSlide={this.voiceVolumeChange} />
+                            </div>
+                            <button className="btn btn-default btn-settings-volume col-sm-1" title={LocalizationStore.labelFor("tools", "volumeIncrease")} onClick={self.voiceVolumeIncrease}>
+                                {self.state.plusIcon}
+                            </button>
+                        </div>
                     </ListGroupItem>
                     <ListGroupItem>
                         <h5>{LocalizationStore.labelFor("settings", "lblBackgroundVolume")}</h5>
-                        <Slider
-                            min={0.0}
-                            max={this.state.max}
-                            step={0.1}
-                            value={this.state.backgroundVolume}
-                            toolTip={false}
-                            onSlide={this.backgroundVolumeChange} />
+                        <div className="row">
+                            <button className="btn btn-default btn-settings-volume col-sm-1" title={LocalizationStore.labelFor("tools", "volumeDecrease")} onClick={self.backgroundVolumeReduce}>
+                                {self.state.minusIcon}
+                            </button>
+                            <div className="col-sm-10 slider-box">
+                                <Slider
+                                    min={0.0}
+                                    max={this.state.max}
+                                    step={0.1}
+                                    value={this.state.backgroundVolume}
+                                    toolTip={false}
+                                    onSlide={this.backgroundVolumeChange} />
+                            </div>
+                            <button className="btn btn-default btn-settings-volume col-sm-1" title={LocalizationStore.labelFor("tools", "volumeIncrease")} onClick={self.backgroundVolumeIncrease}>
+                                {self.state.plusIcon}
+                            </button>
+                        </div>
                     </ListGroupItem>
                 </ListGroup>
             </Popover>;
