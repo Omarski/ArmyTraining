@@ -16,6 +16,7 @@ var _hasNotes = false;
 var _imageReady = false;
 var _hasImage = false;
 var _wideImageLayout = false;
+var _firstViewing = true;
 
 function getPageState(cmp, props) {
     var noteItems = "";
@@ -33,9 +34,10 @@ function getPageState(cmp, props) {
         transcript: "",
         mediaTitle: null,
         mediaAltText: null,
-        fullCoach: false,
-        firstViewing: true
+        fullCoach: false
     };
+
+    _firstViewing = true;
 
     var caption = "";
     if (props && props.page) {
@@ -280,7 +282,7 @@ var InfoView = React.createClass({
         var noteMedia = self.state.noteAudio;
         var video = null;
 
-        if(firstViewing){
+        if(_firstViewing){
             // play all note media in order (see dnd for example)
             playMediaAudio(noteMedia);
             video = document.getElementById("video");
@@ -292,9 +294,9 @@ var InfoView = React.createClass({
             }
             $('[data-toggle="tooltip"]').tooltip();
         }
-        self.setState({
-            firstViewing: false
-        });
+
+        _firstViewing = false;
+
 
     },
 
