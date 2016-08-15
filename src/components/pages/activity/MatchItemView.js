@@ -529,7 +529,7 @@ var MatchItemView = React.createClass({
             }
 
             // this return is for the drop areas with their question prompts
-            //
+
             switch (state.answerState[0].mediaType) {
                 case "audio":
                 var row = (<tr>
@@ -537,7 +537,7 @@ var MatchItemView = React.createClass({
                                     {choices[index]}
                                 </td>
                                 <td className={"matchitem-droparea-td"}>
-                                    <div className="match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                    <div className="match-item-answer-drop-area-audio match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                         {answerRender}
                                     </div>
                                 </td>
@@ -604,12 +604,12 @@ var MatchItemView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={state.mediaCaption} title={title} key={page.xid}/>
-                    <div className="container">
+                    <div className="match-item-view-container">
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.
                         </audio>
-                        <div className="row">
+                        <div>
                             <h4 className="match-item-prompt">{state.prompt}</h4>
                         </div>
                         <table className={"table table-striped table-bordered table-condensed"}>

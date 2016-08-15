@@ -9,6 +9,7 @@ var _windowWidth = window.innerWidth;
 var _windowHeight = window.innerHeight;
 var _lastKnownDevice = null;
 var _renderChange = false;
+var _PHONE_WIDTH = 450;
 var _MOBILE_WIDTH = 767;
 var _TABLET_WIDTH = 1068;
 var _MOBILE = "mobile";
@@ -49,6 +50,9 @@ var AppStateStore = assign({}, EventEmitter.prototype, {
 
     getWidth: function () {
         return _windowWidth;
+    },
+    isPhone: function(){
+        return (_windowWidth <= _PHONE_WIDTH);
     },
 
     isMobile: function () {
