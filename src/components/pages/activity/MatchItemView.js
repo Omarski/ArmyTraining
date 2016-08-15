@@ -543,6 +543,7 @@ var MatchItemView = React.createClass({
 
             // this return is for the drop areas with their question prompts
             //div className="match-item-answer-drop-area dropped audio-drop" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+            //<div className="match-item-answer-drop-area-audio match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
 
             switch (state.answerState[0].mediaType) {
                 case "audio":
@@ -551,7 +552,7 @@ var MatchItemView = React.createClass({
                                     {choices[index]}
                                 </td>
                                 <td className={"matchitem-droparea-td"}>
-                                    <div className="match-item-answer-drop-area-audio match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                    <div className="match-item-answer-drop-area dropped audio-drop" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                         {answerRender}
                                     </div>
                                 </td>

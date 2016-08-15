@@ -31,6 +31,8 @@
     font-size: 55px;
     border: 1px solid black;
     border-radius: 5px;
+    width: 80px;
+    text-align: center;
     .match-item-number {
       position: absolute;
       bottom: -9px;
@@ -59,6 +61,7 @@
     border-radius: 5px;
     display: inline-flex;
     font-size: 55px;
+    width: 80px;
   }
 }
 
