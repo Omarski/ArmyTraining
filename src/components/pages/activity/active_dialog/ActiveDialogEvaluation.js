@@ -171,6 +171,7 @@ var ActiveDialogEvaluation = React.createClass({
         return (
             <Modal
                 id="evaluationModal"
+                backdrop="static"
                 show={this.state.show}
                 onHide={this.hideModal}
                 >

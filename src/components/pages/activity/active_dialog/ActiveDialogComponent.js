@@ -2,7 +2,7 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var PageStore = require('../../../../stores/PageStore');
 
-
+var _animationTimer = null;
 var _soundTimer = null;
 
 var ActiveDialogComponent = React.createClass({
@@ -48,6 +48,12 @@ var ActiveDialogComponent = React.createClass({
 
         return {
             assetsNotReady: assetsNotReady
+        }
+    },
+
+    componentWillUnmount: function() {
+        if (_animationTimer) {
+            clearInterval(_animationTimer);
         }
     },
 
@@ -105,13 +111,14 @@ var ActiveDialogComponent = React.createClass({
     },
 
     hideVideos: function() {
+        if (_animationTimer) {
+            clearInterval(_animationTimer);
+        }
+
         // hide all videos that are playing
         var vidLength = this.currentVideosPlayingHack.length;
         while(vidLength--) {
             var video = this.currentVideosPlayingHack[vidLength];
-
-            // remove event listeners
-            video.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
 
             // stop video
             video.pause();
@@ -145,9 +152,6 @@ var ActiveDialogComponent = React.createClass({
                 // set current time
                 video.currentTime = animation.start / 1000;
 
-                // add event listeners
-                video.addEventListener("timeupdate", this.videoTimeUpdateHandler);
-
                 // set current animation playing
                 this.currentAnimation = animationName;
                 this.currentStop = animation.stop / 1000;
@@ -165,6 +169,12 @@ var ActiveDialogComponent = React.createClass({
 
                 } else {
                     video.play();
+
+                    // set timer
+                    var self = this;
+                    _animationTimer = setInterval(function() {
+                        self.videoTimeUpdateHandler(video);
+                    }, 100);
                 }
             }
         }
@@ -218,17 +228,17 @@ var ActiveDialogComponent = React.createClass({
     },
 
     videoEndedHandler: function(event) {
-        // remove event listener?
-        event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
     },
 
-    videoTimeUpdateHandler: function(event) {
+    videoTimeUpdateHandler: function(video) {
         // get time to 3 decimal places
-        var currentAnimationTime = event.currentTarget.currentTime.toFixed(3);
+        var currentAnimationTime = video.currentTime.toFixed(3);
 
         if (currentAnimationTime >= this.currentStop) {
-            // remove event listener
-            event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
+            // clear timer
+            if (_animationTimer) {
+                clearInterval(_animationTimer);
+            }
 
             // dispatch event if animation is not the default one
             if (this.bIdleOrChatLoop === false) {
@@ -307,6 +317,12 @@ var ActiveDialogComponent = React.createClass({
                     var video = this.currentVideosPlayingHack[videoLen];
                     video.play();
                 }
+
+                // set timer
+                var self = this;
+                _animationTimer = setInterval(function() {
+                    self.videoTimeUpdateHandler(video);
+                }, 100);
 
                 // mark as playing
                 this.bAnimationPlaying = true;
