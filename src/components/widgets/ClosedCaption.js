@@ -19,7 +19,7 @@ var ClosedCaptionView = React.createClass({
 
     render: function() {
         return  (
-            <Button title={"Closed Caption"}
+            <Button title={"Transcript"}
                     alt={"Closed Caption or Transcript"}
                     aria-label={"Video Transcript"}
                     className="btn btn-default btn-link btn-lg closed-caption-button"
