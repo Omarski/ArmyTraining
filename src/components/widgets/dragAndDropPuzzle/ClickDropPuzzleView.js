@@ -27,7 +27,7 @@ var ClickDropPuzzleView = React.createClass({
         onDraggableClick: PropTypes.func.isRequired,
         onTargetClick: PropTypes.func.isRequired,
         onPuzzleReady: PropTypes.func,
-        allowSwap:PropTypes.bool
+        onDraggableSwap:PropTypes.func
     },
 
     renderDraggableColl: function(){
@@ -79,11 +79,11 @@ var ClickDropPuzzleView = React.createClass({
         var lastDraggable = document.getElementById(self.state.lastDraggable);
 
         //swapping
-        if (self.props.allowSwap && e.target.getAttribute("placement") === "placed" && self.state.lastDraggable &&
-            lastDraggable.getAttribute("placement") === "placed"){
+        if (self.props.onDraggableSwap && e.target.hasAttribute("placement") && e.target.getAttribute("placement").indexOf("placed") != -1 && self.state.lastDraggable
+            && lastDraggable.hasAttribute("placement") && lastDraggable.getAttribute("placement").indexOf("placed") != -1){
             self.setState({draggableSelected:false, lastDraggable:null});
             lastDraggable.className = lastDraggable.className.replace(self.props.draggableOnClass," ");
-            console.log("Swap....");
+            self.props.onDraggableSwap(self.state.lastDraggable, e.target.id);
             return;
         }
 
@@ -101,7 +101,7 @@ var ClickDropPuzzleView = React.createClass({
 
         var self = this;
         var lastDraggable = document.getElementById(self.state.lastDraggable);
-        lastDraggable.setAttribute("placement","placed");
+        lastDraggable.setAttribute("placement","placed"+e.target.id.substring(12));
         self.props.onTargetClick(self.state.lastDraggable, e.target.id);
         lastDraggable.className = lastDraggable.className.replace(self.props.draggableOnClass," ");
         self.setState({draggableSelected:false, lastDraggable:null});
