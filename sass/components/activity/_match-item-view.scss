@@ -87,6 +87,7 @@
   width: 100%;
 }
 
+/*
 .matchitem-droparea-td{
   .match-item-answer-drop-area{
     height: 79px;
@@ -105,6 +106,7 @@
     }
   }
 }
+*/
 
 .match-item-text-choice{
   margin-bottom: 0px;
@@ -137,6 +139,7 @@
       color: black;
       text-decoration: none;
       cursor: default;
+    background-color: white;
     }
 }
 
@@ -200,7 +203,6 @@
   padding: 4px;
   margin-bottom: 5px;
   line-height: 1.42857143;
-  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
   width: 100%;
@@ -281,12 +283,11 @@
 
 }
 
-.matchitem-mobile-answer {
-  font-size: 12px;
-  z-index: -4;
+.match-item-feedback-text {
 }
 
-.match-item-feedback-text {
+.matchitem-mobile-answer {
+  display: none;
 }
 
 @media screen and (max-width: 767px) {
@@ -299,7 +300,37 @@
   }
   .matchitem-mobile-answer {
     display: block;
+    font-size: 12px;
+    z-index: -4;
+    position: absolute;
   }
+
+  div {
+    table {
+      tbody {
+        tr {
+          background-color: transparent;
+          .match-item-choice-td-text {
+            padding: 10px;
+            min-width: 100px;
+            .match-item-answer-drop-area {
+              position: relative;
+              height: auto;
+              background-color: transparent;
+            }
+            .match-item-text-choice {
+              padding: 10px;
+            }
+          }
+          .matchitem-droparea-td-text {
+            padding: 10px;
+            min-width: 200px;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 /*IMAGE STYLING*/
@@ -369,7 +400,30 @@ div{
 
 
 
+
 /*TEXT STYLING*/
+@media screen and (min-width: 767px) {
+  div {
+    table {
+      tbody {
+        tr {
+          .match-item-choice-td-text {
+            padding: 10px;
+            min-width: 200px;
+            .match-item-text-choice {
+              padding: 10px;
+            }
+          }
+          .matchitem-droparea-td-text {
+            padding: 10px;
+            min-width: 200px;
+          }
+        }
+      }
+    }
+  }
+}
+
 div{
   table{
     tbody{
@@ -383,7 +437,6 @@ div{
         }
         .matchitem-droparea-td-text {
           padding: 10px;
-          min-width: 200px;
           .match-item-answer-drop-area {
             width: 100%;
             min-height: 38px;

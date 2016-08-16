@@ -197,7 +197,7 @@ var MatchItemView = React.createClass({
         var dropLocationIndex = -1;
 
 
-        if($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer")){
+        if($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer") || $(e.target).hasClass("matchitem-mobile-answer")){
             //if(drop location isn't taken)
             var spotTaken = false;
             answerState.map(function(item){
@@ -236,7 +236,14 @@ var MatchItemView = React.createClass({
                 }
             }
         }
-
+/*
+        if($(e.target).hasClass("matchitem-mobile-answer")){
+            var spotTaken = false;
+            answerState.map(function(item){
+                if(item.currentBoxIndex === Math.floor($(e.target).parent().attr("data-index")) || )
+            })
+        }
+*/
         var itemFound = false;
 
         if($(draggedItemTarget).css("opacity") != 0.0 && (dropLocation !== "") ){
@@ -630,7 +637,7 @@ var MatchItemView = React.createClass({
                         <div>
                             <h4 className="match-item-prompt">{state.prompt}</h4>
                         </div>
-                        <table className={"table table-striped table-bordered table-condensed"}>
+                        <table className={"table table-bordered table-condensed"}>
                             <tbody>
                                 {answerContainers}
                             </tbody>
