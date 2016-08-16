@@ -9,6 +9,8 @@ module.exports = {
     INFO_PROP_PLAYLIST: "playlist",
     INFO_PROP_POSTTEST: "posttest",
     INFO_PROP_PRETEST: "pretest",
+    INFO_PROP_PRETESTAUDIOPASS: "testoutaudiopass",
+    INFO_PROP_PRETESTAUDIOFAIL: "testoutaudiofail",
     INFO_PROP_PROLOGUE: "prologue",
     INFO_PROP_QUESTIONNAIRE: "questionnaire",
     INFO_PROP_QUIZ: "quiz",

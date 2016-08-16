@@ -1,4 +1,6 @@
 var React = require('react');
+var AudioPlayer = require('../../widgets/AudioPlayer');
+var InfoTagConstants = require('../../../constants/InfoTagConstants');
 var PageActions = require('../../../actions/PageActions');
 var PageStore = require('../../../stores/PageStore');
 var SettingsStore = require('../../../stores/SettingsStore');
@@ -6,11 +8,13 @@ var PageHeader = require('../../widgets/PageHeader');
 var PrePostTestActions = require('../../../actions/PrePostTestActions');
 var PrePostTestStore = require('../../../stores/PrePostTestStore');
 var LocalizationStore = require('../../../stores/LocalizationStore');
+var Utils = require('../../widgets/Utils');
 
 
 function getPageState(props) {
     var data = {
         answers: [],
+        audioObj: null,
         bAccepted: true,
         bPassed: false,
         title: "",
@@ -73,6 +77,26 @@ function getPageState(props) {
         }
     }
 
+    // find audio feedback
+    if (props.page.media) {
+        var mediaLength = props.page.media.length;
+        while(mediaLength--) {
+            var media = props.page.media[mediaLength];
+
+            if (data.bPassed === true) {
+                if (Utils.findInfo(media.info, InfoTagConstants.INFO_PROP_PRETESTAUDIOPASS) !== null) {
+                    data.audioObj = {id:"audio", autoPlay:true, sources:[{format:"mp3", url:'data/media/' + media.file}]};
+                    break;
+                }
+            } else {
+                if (Utils.findInfo(media.info, InfoTagConstants.INFO_PROP_PRETESTAUDIOFAIL) !== null) {
+                    data.audioObj = {id:"audio", autoPlay:true, sources:[{format:"mp3", url:'data/media/' + media.file}]};
+                    break;
+                }
+            }
+        }
+    }
+
     return data;
 }
 
@@ -119,6 +143,18 @@ var TestOutQuizEndView = React.createClass({
 
     declinedSelected: function() {
         this.state.bAccepted = false;
+    },
+
+    playAudio: function(audioObj){
+        var self = this;
+
+        this.setState({audioObj:audioObj}, function(){
+            if (!audioObj.loop) {
+                $("#"+audioObj.id).on("ended", function(){
+                    self.setState({audioObj:null});
+                });
+            }
+        });
     },
 
     render: function() {
@@ -175,6 +211,13 @@ var TestOutQuizEndView = React.createClass({
                         </tbody>
                     </table>
                 </div>
+                {self.state.audioObj ?
+                    <AudioPlayer
+                        id = {self.state.audioObj.id}
+                        sources    = {self.state.audioObj.sources}
+                        autoPlay   = {self.state.audioObj.autoPlay}
+                        /> : null
+                }
             </div>
         );
     },
@@ -206,12 +249,12 @@ var TestOutRow = React.createClass({
     render: function() {
         var passed = this.props.passed;
         var title = this.props.title;
-        var className = "glyphicon quiz-feedback-icon quiz-feedback-icon-incorrect"
+        var className = "glyphicon quiz-feedback-icon quiz-feedback-icon-incorrect";
         var icon = (<img src="images/icons/failedquiz.png"/>);
 
         // changed if passed
         if (passed) {
-            className = "glyphicon quiz-feedback-icon quiz-feedback-icon-correct"
+            className = "glyphicon quiz-feedback-icon quiz-feedback-icon-correct";
             icon = (<img src="images/icons/completeexplorer.png"/>);
         }
 
