@@ -15,6 +15,7 @@ var _requiredExists = false;
 // default unit state values
 var _defaultState = {
     complete: false,
+    passed: false,
     required: false
 };
 
@@ -167,6 +168,31 @@ function evaluateUnitComplete(unitId) {
 }
 
 /**
+ * Checks all the units chapters to see if it is passed
+ * @param unitId
+ */
+function evaluateUnitPassed(unitId) {
+    // find unit by id
+    var unit = _units[unitId];
+
+    // iterate over chapters
+    if (unit && unit.data && unit.data.chapter) {
+        var chapterLength = unit.data.chapter.length;
+        while (chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+
+            // exit if even one is not complete
+            if (!(chapter.state && chapter.state.passed === true)) {
+                return;
+            }
+        }
+
+        // mark unit complete
+        update(unitId, {passed: true});
+    }
+}
+
+/**
  * Marks a units chapter as complete
  * @param unitId
  * @param chapterId
@@ -188,6 +214,35 @@ function markChapterComplete(unitId, chapterId) {
 
                 // mark it as complete
                 chapter.state = assign({}, state, {complete: true});
+
+                break;
+            }
+        }
+    }
+}
+
+/**
+ * Marks a units chapter as passed
+ * @param unitId
+ * @param chapterId
+ */
+function markChapterPassed(unitId, chapterId) {
+    // find unit by id
+    var unit = _units[unitId];
+    if (unit && unit.data && unit.data.chapter) {
+        var chapterLength = unit.data.chapter.length;
+        while(chapterLength--) {
+            var chapter = unit.data.chapter[chapterLength];
+            // check for matching chapter id
+            if (chapter.xid === chapterId) {
+                var state = {};
+                // get state
+                if (chapter.state) {
+                    state = chapter.state;
+                }
+
+                // mark it as complete
+                chapter.state = assign({}, state, {passed: true});
 
                 break;
             }
@@ -218,10 +273,35 @@ var UnitStore = assign({}, EventEmitter.prototype, {
         return true;
     },
 
+    /**
+     * Tests whether all the remaining UNIT items are marked as passed.
+     * @return {boolean}
+     */
+    areAllPassed: function() {
+        for (var id in _units) {
+            if (_units[id].state && !_units[id].state.passed) {
+                return false;
+            }
+        }
+        return true;
+    },
+
     areAllRequiredComplete: function() {
         for (var id in _units) {
             if (_units[id].state && _units[id].state.required) {
                 if (_units[id].state.complete !== true) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    },
+
+    areAllRequiredPassed: function() {
+        for (var id in _units) {
+            if (_units[id].state && _units[id].state.required) {
+                if (_units[id].state.passed !== true) {
                     return false;
                 }
             }
@@ -340,6 +420,10 @@ AppDispatcher.register(function(action) {
             markChapterComplete(action.id, action.chapterId);
             break;
 
+        case UnitConstants.UNIT_CHAPTER_PASSED:
+            markChapterPassed(action.id, action.chapterId);
+            break;
+
         case UnitConstants.UNIT_CREATE:
 
             if (text !== '') {
@@ -351,6 +435,10 @@ AppDispatcher.register(function(action) {
         case UnitConstants.UNIT_EVALUATE_COMPLETE:
             evaluateUnitComplete(action.data);
             // emit change?
+            break;
+
+        case UnitConstants.UNIT_EVALUATE_PASSED:
+            evaluateUnitPassed(action.data);
             break;
 
         case UnitConstants.UNIT_MARK_REQUIRED:
@@ -387,6 +475,11 @@ AppDispatcher.register(function(action) {
             break;
 
         case UnitConstants.UNIT_LOAD_COMPLETE:
+            UnitStore.emitChange();
+            break;
+
+        case UnitConstants.UNIT_PASSED:
+            update(action.id, {passed: true});
             UnitStore.emitChange();
             break;
 

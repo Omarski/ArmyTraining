@@ -197,8 +197,8 @@ function findNextRequiredUnit() {
             // required unit
             if (unit.state.required === true) {
 
-                // complete required
-                if (unit.state.complete === true) {
+                // passed required
+                if (unit.state.passed === true) {
                     continue;
                 }
 
@@ -213,8 +213,8 @@ function findNextRequiredUnit() {
                     firstOptional = true;
                 }
 
-                // complete optional
-                if (unit.state.complete === true) {
+                // passed optional
+                if (unit.state.passed === true) {
                     continue;
                 }
 
@@ -248,8 +248,8 @@ function findNextRequiredChapter(unit) {
     var result = unit.data.chapter.length;
     for (var chapterIndex in unit.data.chapter) {
         var chapter = unit.data.chapter[chapterIndex];
-        // skip if complete
-        if (chapter.state && chapter.state.complete === true) {
+        // skip if passed
+        if (chapter.state && chapter.state.passed === true) {
             continue;
         }
         return chapterIndex;
@@ -274,10 +274,10 @@ function loadNextRequired() {
             saveOnUnitChange(newUnit);
             _currentUnit = newUnit;
 
-            // find the first incomplete chapter of the new unit
+            // find the first chapter of the new unit that is not passed
             chapterIndex = findNextRequiredChapter(_currentUnit);
 
-            // if all complete then just go to the first one
+            // if all are passed then just go to the first one
             if (chapterIndex >= _currentUnit.data.chapter.length) {
                 chapterIndex = 0;
             }
@@ -446,6 +446,7 @@ function load(data) {
             FooterActions.enableAll(); // TODO: dont like this here <---
             if (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_AUTOPASS) !== null) {
                 markChapterComplete();  // TODO: dont like this here <---
+                markChapterPassed();
             }
             if ((Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_POSTTEST) !== null) ||
                 (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
@@ -485,6 +486,32 @@ function markChapterComplete() {
             var unitId = _currentUnit.id;
             setTimeout(function() {
                 UnitActions.evaluateUnitComplete(unitId);
+            }, 0.1);
+        }
+    }
+}
+
+/**
+ * Marks the current chapter as passed
+ */
+function markChapterPassed() {
+    // get current chapter
+    if (_currentChapter) {
+        var state = {};
+
+        // get chapter state
+        if (_currentChapter.state) {
+            state = _currentChapter.state;
+        }
+
+        // mark it as passed
+        _currentChapter.state = assign({}, state, {passed: true});
+
+        // check if the unit is passed
+        if (_currentUnit && _currentUnit.id) {
+            var unitId = _currentUnit.id;
+            setTimeout(function() {
+                UnitActions.evaluateUnitPassed(unitId);
             }, 0.1);
         }
     }
@@ -651,8 +678,22 @@ var PageStore = assign({}, EventEmitter.prototype, {
         return false;
     },
 
+    isChapterPassed: function() {
+        if (_currentChapter && _currentChapter.state && (_currentChapter.state.passed === true)) {
+            return true;
+        }
+        return false;
+    },
+
     isUnitComplete: function() {
         if (_currentUnit && _currentUnit.state && (_currentUnit.state.complete === true)) {
+            return true;
+        }
+        return false;
+    },
+
+    isUnitPassed: function() {
+        if (_currentUnit && _currentUnit.state && (_currentUnit.state.passed === true)) {
             return true;
         }
         return false;
@@ -732,6 +773,9 @@ AppDispatcher.register(function(action) {
     switch(action.actionType) {
         case PageConstants.CHAPTER_MARK_COMPLETE:
             markChapterComplete();
+            break;
+        case PageConstants.CHAPTER_MARK_PASSED:
+            markChapterPassed();
             break;
         case PageConstants.PAGE_ANSWER:
             answer(action.data);
