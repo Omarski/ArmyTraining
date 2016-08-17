@@ -739,7 +739,7 @@ var MatchItemView = React.createClass({
                                             {answerRender}
                                         </div>
                                     </td>
-                                    <td className={"matchitem-question-td "}>
+                                    <td className={"matchitem-question-td"}>
                                         <div className="match-item-answer-prompt">{answerPrompt}</div>
                                     </td>
                                 </tr>);
