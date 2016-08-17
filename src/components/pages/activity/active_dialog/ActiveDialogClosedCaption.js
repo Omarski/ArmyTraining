@@ -19,9 +19,7 @@ var ActiveDialogClosedCaptionView = React.createClass({
     },
 
     render: function() {
-
         return  (
-
             <Button title={LocalizationStore.labelFor("evaluation", "lblClosedCaptions")}
                     alt={"Closed Caption or Transcript"}
                     aria-label={"Video Transcript"}

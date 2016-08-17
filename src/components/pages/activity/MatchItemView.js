@@ -236,7 +236,7 @@ var MatchItemView = React.createClass({
         var dropLocationIndex = -1;
 
 
-        if($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer")){
+        if($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer") || $(e.target).hasClass("matchitem-mobile-answer")){
             //if(drop location isn't taken)
             var spotTaken = false;
             answerState.map(function(item){
@@ -275,7 +275,14 @@ var MatchItemView = React.createClass({
                 }
             }
         }
-
+/*
+        if($(e.target).hasClass("matchitem-mobile-answer")){
+            var spotTaken = false;
+            answerState.map(function(item){
+                if(item.currentBoxIndex === Math.floor($(e.target).parent().attr("data-index")) || )
+            })
+        }
+*/
         var itemFound = false;
 
         if($(draggedItemTarget).css("opacity") != 0.0 && (dropLocation !== "") ){
@@ -698,8 +705,13 @@ var MatchItemView = React.createClass({
                     }
                 }
             }
+            //                                        <div className="matchitem-mobile-answer">{answerPrompt}</div>
+
 
             // this return is for the drop areas with their question prompts
+            //div className="match-item-answer-drop-area dropped audio-drop" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+            //<div className="match-item-answer-drop-area-audio match-item-answer-drop-area dropped" data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+
 
             switch (state.answerState[0].mediaType) {
                 case "audio":
@@ -727,7 +739,7 @@ var MatchItemView = React.createClass({
                                             {answerRender}
                                         </div>
                                     </td>
-                                    <td className={"matchitem-question-td "}>
+                                    <td className={"matchitem-question-td"}>
                                         <div className="match-item-answer-prompt">{answerPrompt}</div>
                                     </td>
                                 </tr>);
@@ -741,6 +753,7 @@ var MatchItemView = React.createClass({
                                     </td>
                                     <td className={"matchitem-droparea-td matchitem-droparea-td-text"}>
                                         <div className="match-item-answer-drop-area dropped" onClick={self.onTargetClick} data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                            <div className="matchitem-mobile-answer">{answerPrompt}</div>
                                             {answerRender}
                                         </div>
                                     </td>
@@ -758,15 +771,15 @@ var MatchItemView = React.createClass({
             <div>
                 <div key={"page-" + this.state.page.xid}>
                     <PageHeader sources={state.mediaCaption} title={title} key={page.xid}/>
-                    <div className="container">
+                    <div className="match-item-view-container">
                         <audio id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                             <source id="mp3Source" src="" type="audio/mp3"></source>
                             Your browser does not support the audio format.
                         </audio>
-                        <div className="row">
+                        <div>
                             <h4 className="match-item-prompt">{state.prompt}</h4>
                         </div>
-                        <table className={"table table-striped table-bordered table-condensed"}>
+                        <table className={"table table-bordered table-condensed"}>
                             <tbody>
                                 {answerContainers}
                             </tbody>

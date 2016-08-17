@@ -8,7 +8,7 @@ input[type=checkbox] {
 
 .lc-page-container-container{
   border:1px solid #5A5C51;
-  margin: 50px auto;
+  margin: 30px;
 }
 
 .lc-prompt-row{
@@ -26,6 +26,8 @@ input[type=checkbox] {
 
 .listening-comp-choices-container {
   margin-top: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
   .list-group-item {
     padding: 0;
     label {
@@ -90,8 +92,24 @@ input[type=checkbox] {
 }
 
 .listening-comp-interaction-container {
+  margin-top: 20px;
   text-align: center;
 }
+
+.lc-page-container-container{
+  .multiple-choice-alert {
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .lc-page-container-container {
+    margin: 0px;
+    border: none;
+  }
+}
+
 
 @media screen and (max-width: 450px) {
   .listening-comp-interaction-container {

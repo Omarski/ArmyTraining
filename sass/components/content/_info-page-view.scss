@@ -9,6 +9,10 @@
   }
 }
 
+.info-page-notes > p {
+  margin: auto;
+}
+
 .infoMediaContainer {
   .cutscene {
     video {
@@ -31,6 +35,8 @@
 }
 
 .info-page-notes{
+  padding-left: 10px;
+  padding-right: 10px;
   div{
     .info-bullets-div {
       display: inline-flex;
@@ -54,10 +60,8 @@
   border-style: solid;
   border-width: 1px;
   border-color: $border-color;
-  margin: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 20px;
+  margin: 30px;
+  padding: 20px;
 }
 
 div.cutscene.infoNoteContainer{
@@ -92,48 +96,45 @@ div.cutscene.infoNoteContainer{
   margin-bottom: 0px;
   margin-top: 0px;
   img {
-    width: 100%;
+    width: auto;
     max-height: 320px;
     max-width: 447px;
   }
 }
 
 .image-caption-container {
-  margin-top: 10px;
+  margin-top: 25px;
   margin-bottom: 15px;
-  border-style: solid;
-  border-color: $caption-bg-color;
-  border-width: 1px;
+  border: none;
   img {
-    width: 100%;
-
+    width: auto;
+    max-width: 100%;
   }
   .caption {
     width: 100%;
   }
 }
+@media screen and (max-width: 565px) {
+
+  .info-container {
+    border: none;
+    padding: 0px;
+    margin: 10px;
+  }
+}
 
 @media screen and (max-width: 767px){
   .image-caption-container {
-    width: 95%;
     img {
-      width: 100%;
+      max-width: 100%;
     }
     .caption {
       width: 100%;
     }
   }
 
-  .info-container {
-    border: none;
-    padding: 0px;
-  }
-
   .infoMediaContainer{
     margin-top: 20px;
-    img {
-      width: 100%;
-    }
     .caption {
       width: 100%;
       vertical-align: middle;
@@ -165,6 +166,7 @@ div.cutscene.infoNoteContainer{
 
 .infoDataContainer{
   text-align: center;
+
 }
 
 .infoAttributions{

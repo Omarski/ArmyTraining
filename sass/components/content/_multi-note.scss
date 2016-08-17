@@ -1,6 +1,9 @@
-.multi-note-img-row {
-  min-height: 360px;
+@media screen and (min-width: 546px){
+  .multi-note-img-row {
+    min-height: 360px;
+  }
 }
+
 .multi-note-carousel-btn {
   border-style: solid;
   border-width: 1px;
@@ -25,16 +28,15 @@
   border-style: solid;
   border-width: 1px;
   border-color: $border-color;
-  margin: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 20px;
+  margin: 30px;
+  padding: 20px;
   position: relative;
 }
 
 .multi-note-slider-container {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
 }
 
 .multi-note-page-btn {
@@ -63,10 +65,10 @@
   margin: 0;
   border-radius: 0;
 }
+
 @media screen and (max-width: 767px) {
   .multi-note-image {
     text-align: center;
-    width: 100%;
     img {
       max-width: 100%;
       max-height: 300px;
@@ -102,7 +104,7 @@
   }
 }
 
-
+/*
 .multi-note-choices {
   margin-top: 10px;
   list-style-type: none;
@@ -115,7 +117,7 @@
     }
   }
 }
-
+*/
 .multi-note-text {
   font-size: 18px;
   white-space: pre-line;
@@ -127,24 +129,21 @@
     padding-right: 15px;
   }
   .multi-note-image {
-    width: 100%;
     margin-bottom: 20px;
     .image-caption-container {
-      width: 100%;
       height: auto;
-      display: block;
       margin: 0 auto;
       img {
-        width: 100%;
+        width: auto;
         height: auto;
         display: block;
-        margin: 0 auto 15px auto;
+        margin: auto;
       }
     }
 
   }
 
-  .multi-note-choices{
+/*  .multi-note-choices{
     padding-left: 0px;
     li {
       margin-left: auto;
@@ -156,5 +155,15 @@
       }
     }
   }
+*/
+}
 
+@media screen and (max-width: 545px) {
+  .multi-note-container {
+    border: none;
+    margin: 0px;
+  }
+  .multi-note-img-row {
+    min-height: none;
+  }
 }

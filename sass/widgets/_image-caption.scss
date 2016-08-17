@@ -1,7 +1,7 @@
 .image-caption-container {
   position: relative;
   display: inline-block;
-  border-color: #BA9077;
+  border: none;
   margin-top: 15px;
   .caption {
     text-align: center;
@@ -18,4 +18,8 @@
       padding: 0;
     }
   }
+}
+
+#captionImage{
+  outline: 2px solid #ba9077;
 }

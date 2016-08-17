@@ -472,14 +472,15 @@ var InfoView = React.createClass({
         return (
             <div>
                 <PageHeader sources={state.sources} title={title} key={this.state.page.xid}/>
-                <div className="infoContainer" key={"page-" + this.state.page.xid}>
+                <div className="info-container" key={"page-" + this.state.page.xid}>
                     <audio autoPlay id="audio" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="info-container container">
+                    <div>
                         {content}
                     </div>
+                    <div className="clear-float"></div>
                 </div>
             </div>
         );

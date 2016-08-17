@@ -1,5 +1,5 @@
 button.navbar-toggle:hover {
-  background-color: #D2E0E6 !important;
+  background-color: #9FA8A3 !important;
 }
 
 .caret {
@@ -8,6 +8,10 @@ button.navbar-toggle:hover {
 
 .dli-button{
   padding: 5px !important;
+}
+
+#collapseNav .nav .open a {
+  border-color: #5A5C51;
 }
 
 .navbar-default {
@@ -42,6 +46,16 @@ button.navbar-toggle:hover {
   text-align: center;
   color: $nav-button-color;
   cursor: default;
+}
+
+.dropdown-menu {
+  li {
+    .large-bookmark-nav-item {
+      height: 60px !important;
+      border-bottom: 1px solid;
+      border-bottom-color: #5A5C51 !important;
+    }
+  }
 }
 
 @media screen and (min-width: 767px) {
@@ -104,10 +118,26 @@ button.navbar-toggle:hover {
     border: 1px solid $border-color !important;
   }
 
+  ul{
+    .btn {
+      border: 0px solid transparent;
+    }
+  }
+
+  ul{
+    .main-nav-bar-button {
+      border: 0px solid transparent;
+    }
+  }
+
   .ul-containing-navbar-buttons {
     height: 40px !important;
+    .btn {
+      border: none;
+    }
     li {
       height: 40px;
+      border: none;
       a {
         padding-top: 5px;
       }
@@ -237,6 +267,31 @@ button.navbar-toggle:hover {
 }
 @media screen and (max-width: 767px) {
 
+  #collapseNav {
+    border: none;
+    ul {
+      .btn{
+        border: none;
+      }
+      li {
+        padding: 0px;
+          a {
+          height: 45px;
+          .icons-mobile-menu{
+            float: left;
+          }
+          button{
+            padding: 0px;
+          }
+          p {
+            display: inline;
+            color: #5a5c51;
+          }
+        }
+      }
+    }
+  }
+
   .reduce-padding-around-a-element-for-nav-buttons {
     margin: 0px;
     background-color: white;
@@ -250,13 +305,16 @@ button.navbar-toggle:hover {
         height: 45px !important;
       }
       a:hover {
-        background-color: #D2E0E6 !important;
+        background-color: #9FA8A3 !important;
       }
     }
   }
 
   #mainView .navbarHeightDesktop .container {
     border: #5A5C51 solid 1px;
+  }
+
+  .navbar-fixed-top .container .navbar-collapse .reduce-padding-around-a-element-for-nav-buttons .reference-guide-hide-on-mobile {
   }
 
   .reference-guide-hide-on-mobile {
@@ -322,7 +380,6 @@ button.navbar-toggle:hover {
 
   .bookmark-text-paragraph-element {
     display: inline;
-    margin-left: 50px;
   }
 
   .breadcrumbs-icon-li-element {
@@ -386,7 +443,7 @@ button.navbar-toggle:hover {
         padding-bottom: 7px;
       }
       a:hover {
-        background-color: #D2E0E6 !important;
+        background-color: #9FA8A3 !important;
       }
     }
   }
@@ -394,7 +451,7 @@ button.navbar-toggle:hover {
   .navbarHeightDesktop{
     height: 39px;
     .navbar-header {
-      height: 39px;
+      height: 38px;
     }
   }
 
@@ -410,7 +467,7 @@ button.navbar-toggle:hover {
   }
 
   .navbar-default{
-    min-height: 39px !important;
+    min-height: 38px !important;
   }
 
 
@@ -441,12 +498,17 @@ button.navbar-toggle:hover {
           }
           p {
             display: inline;
-            margin-left: 50px;
           }
         }
       }
     }
   }
+
+}
+
+@media screen and (max-width: 565px) {
+
+  .navbar-fixed-top .container .reference-guide-hide-on-mobile a { display: none;}
 
 }
 
@@ -506,26 +568,7 @@ button.navbar-toggle:hover {
     padding: 0px;
   }
 
-  #collapseNav {
-    ul {
-      li {
-        padding: 0px;
-        a {
-          height: 45px;
-          .icons-mobile-menu{
-            float: left;
-          }
-          button{
-            padding: 0px;
-          }
-          p {
-            display: inline;
-            color: #5a5c51;
-          }
-        }
-      }
-    }
-  }
+
 
   nav{
     height: 40px !important;
@@ -537,7 +580,7 @@ button.navbar-toggle:hover {
 
   .navbar-fixed-top {
     .container {
-      height: 39px;
+      height: 40px;
       padding: 0px;
       background-color: white;
     }
@@ -547,15 +590,5 @@ button.navbar-toggle:hover {
     padding-top: 8px !important;
     padding-bottom: 0px;
     height: 40px;
-  }
-}
-
-.dropdown-menu {
-  li {
-    .large-bookmark-nav-item {
-      height: 60px !important;
-      border-bottom: 1px solid;
-      border-bottom-color: #337ab7 !important;
-    }
   }
 }
