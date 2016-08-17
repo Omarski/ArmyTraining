@@ -55,6 +55,16 @@ var PageActions = {
             actionType: PageConstants.CHAPTER_MARK_PASSED
         });
     },
+    markPageComplete: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.PAGE_MARK_COMPLETE
+        });
+    },
+    markPagePassed: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.PAGE_MARK_PASSED
+        });
+    },
     jump: function(data) {
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_JUMP,
