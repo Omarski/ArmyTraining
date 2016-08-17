@@ -533,6 +533,42 @@ function jump(data) {
     load({unit: unit, chapter: chapter, page:page});
 }
 
+/**
+ * Marks the current page as complete
+ */
+function markPageComplete() {
+    // get current page
+    if (_currentPage) {
+        var state = {};
+
+        // get chapter state
+        if (_currentPage.state) {
+            state = _currentPage.state;
+        }
+
+        // mark it as complete
+        _currentPage.state = assign({}, state, {complete: true});
+    }
+}
+
+/**
+ * Marks the current page as passed
+ */
+function markPagePassed() {
+    // get current page
+    if (_currentPage) {
+        var state = {};
+
+        // get chapter state
+        if (_currentPage.state) {
+            state = _currentPage.state;
+        }
+
+        // mark it as complete
+        _currentPage.state = assign({}, state, {passed: true});
+    }
+}
+
 function reset() {
     setTimeout(function() {
         PersistenceActions.remove('pages');
@@ -803,6 +839,12 @@ AppDispatcher.register(function(action) {
         case PageConstants.PAGE_JUMP:
             jump(action.data);
             //PageStore.emitChange();
+            break;
+        case PageConstants.PAGE_MARK_COMPLETE:
+            markPageComplete();
+            break;
+        case PageConstants.PAGE_MARK_PASSED:
+            markPagePassed();
             break;
         case PageConstants.PAGE_RESET:
             reset();
