@@ -283,7 +283,7 @@ var ExplorerView = React.createClass({
                 var sitems = "";
 
 
-                if (item.unit.state.complete) {
+                if (item.unit.state.passed) {
                     icon = (<img src="images/icons/completeexplorer.png"/>);
                 }
                 if (_expanded[item.unit.data.xid]) {
@@ -384,8 +384,9 @@ var TOCChapterRow = React.createClass({
         var index = this.props.index;
         var self = this;
         var icon = '';
-        
-        if (this.props.item.data.state && this.props.item.data.state.complete) {
+
+        var itemState = this.props.item.data.state || null;
+        if (itemState && itemState.passed) {
             icon = (<img src="images/icons/completeexplorer.png"/>);
         }
 
@@ -455,14 +456,20 @@ var TOCPageRow = React.createClass({
         var cls = '';
         var icon = '';
         var itemState = this.props.item.state || null;
+        console.log(this.props.item, itemState);
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
             cls += ' current';
             icon = (<img src="images/icons/currentpage.png"/>);
         } else if (itemState && itemState.visited) {
-            icon = (<img src="images/icons/inprogress.png"/>);
-            cls += ' visited';
-        } else if (itemState && itemState.complete) {
-            icon = (<img src="images/icons/completeexplorer.png"/>);
+            if (itemState.complete && itemState.passed) {
+                icon = (<img src="images/icons/completeexplorer.png"/>);
+            }
+            else if (itemState.complete) {
+                icon = (<img src="images/icons/failedquiz.png"/>);
+            } else {
+                icon = (<img src="images/icons/inprogress.png"/>);
+                cls += ' visited';
+            }
         } else {
             cls += ' not-seen';
             icon = (<img src="images/icons/notseen.png"/>);
