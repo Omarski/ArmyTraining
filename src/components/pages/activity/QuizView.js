@@ -96,11 +96,12 @@ var QuizView = React.createClass({
     getInitialState: function() {
         var pageState = getPageState(this.props);
 
-        if (pageState.quizPassed) {
-            setTimeout(function() {
-                PageActions.markChapterComplete();
-            });
-        }
+        setTimeout(function() {
+            PageActions.markChapterComplete();
+            if (pageState.quizPassed) {
+                PageActions.markChapterPassed()
+            }
+        });
 
         return pageState;
     },

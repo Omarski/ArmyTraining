@@ -47,6 +47,14 @@ var PageActions = {
             actionType: PageConstants.CHAPTER_MARK_COMPLETE
         });
     },
+    /**
+     * Marks the current chapter passed
+     */
+    markChapterPassed: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.CHAPTER_MARK_PASSED
+        });
+    },
     jump: function(data) {
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_JUMP,

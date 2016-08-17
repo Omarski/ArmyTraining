@@ -52,7 +52,7 @@ var PrePostTestActions = {
                         if (chapter.pages) {
                             // iterate over the chapters pages
                             for (var pageIndex = 0; pageIndex < chapter.pages.length; pageIndex++) {
-                                var page = chapter.pages[pageIndex]
+                                var page = chapter.pages[pageIndex];
                                 // if page is a quiz page and is marked for the preposttest then save it for later
                                 if (page.state && (page.state.quizpage == true) && (page.preposttest === true)) {
                                     foundPages.push({
@@ -168,14 +168,16 @@ var PrePostTestActions = {
             var chaptersArray = UnitStore.getChapterIdsInUnit(unitId);
             var chapterLength = chaptersArray.length;
 
-            // mark chapters as complete
+            // mark chapters as passed and complete
             while(chapterLength--) {
                 var chapterId = chaptersArray[chapterLength];
                 UnitActions.markChapterComplete(unitId, chapterId);
+                UnitActions.markChapterPassed(unitId, chapterId);
             }
 
-            // mark unit as complete
+            // mark unit as complete and passed
             UnitActions.markUnitComplete(unitId);
+            UnitActions.markUnitPassed(unitId);
         }
     }
 };

@@ -213,12 +213,13 @@ var ActiveDialogEvaluation = React.createClass({
             var compState = getCompState(true);
             this.setState(compState);
 
-            // mark chapter complete if passed
-            if (compState.dialogPassed) {
-                setTimeout(function() {
+            setTimeout(function() {
+                PageActions.markChapterComplete();
+
+                if (compState.dialogPassed) {
                     PageActions.markChapterComplete();
-                }, 0.1);
-            }
+                }
+            }, 0.1);
         } else {
             var compState = getCompState(false);
             this.setState(compState);
