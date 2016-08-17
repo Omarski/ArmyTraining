@@ -176,7 +176,7 @@ var PrePostTestActions = {
             }
 
             // mark unit as complete and passed
-            UnitActions.markChapterComplete(unitId);
+            UnitActions.markUnitComplete(unitId);
             UnitActions.markUnitPassed(unitId);
         }
     }
