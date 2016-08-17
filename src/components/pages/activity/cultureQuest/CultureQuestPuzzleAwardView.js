@@ -63,15 +63,19 @@ var CultureQuestPuzzleView = React.createClass({
             var lastSelectedData = self.props.imageData.regions[completedIndex];
 
             //only add completed region data
-            for (var i = 0 ; i < self.props.answersColl.length; i++){
-                if (self.props.answersColl[i].completed) completedData.push(regionsColl[i]);
+            for (var i = 0 ; i < self.props.answeredOrder.length; i++){
+                if (i !== 0) completedData.push(regionsColl[self.props.answeredOrder[i]]);
             }
+
+            // for (var i = 0 ; i < self.props.answersColl.length; i++){
+            //     if (self.props.answersColl[i].completed) completedData.push(regionsColl[i]);
+            // }
 
             var sliderPuzzles = completedData.map(function(region,index){
 
                 var pieceImg = self.state.mediaPath + region.tile;
                 var opacity = (lastSelectedData.tile === region.tile) ? "0":"1";
-                if (opacity === "0") console.log("hiding: " + "cultureQuestTile_"+region.name.replace(" ",""));
+                //if (opacity === "0") console.log("hiding: " + "cultureQuestTile_"+region.name.replace(" ",""));
                 var pieceStyle = {top: parseInt(topPadding+(pieceHeight * index)), background:"url("+pieceImg+") no-repeat", backgroundSize:"40px 50px", opacity:opacity};
 
                 return (
