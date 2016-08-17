@@ -6,6 +6,7 @@ var PageHeader = require('../../../widgets/PageHeader');
 var SettingsStore = require('../../../../stores/SettingsStore');
 var ImageCaption = require('../../../widgets/ImageCaption');
 var Utils = require('../../../widgets/Utils');
+var AppStateStore = require('../../../../stores/AppStateStore');
 var LocalizationStore = require('../../../../stores/LocalizationStore');
 
 function getPageState(props) {
@@ -70,9 +71,15 @@ var MultiNoteView = React.createClass({
         var pageState = getPageState(this.props);
         return pageState;
     },
+    componentDidMount: function() {
+        var self = this;
+        this.updateMediaAndPlay();
+        this.updateSlick();
+        AppStateStore.addChangeListener(this._onAppStateChange);
 
-    componentWillMount: function() {
-        //PageStore.addChangeListener(this._onChange);
+    },
+    componentWillUnmount: function() {
+        AppStateStore.removeChangeListener(this._onAppStateChange);
     },
 
     handleClick: function(e){
@@ -116,20 +123,11 @@ var MultiNoteView = React.createClass({
             $(selected).addClass('active');
         });
     },
-
-    componentDidMount: function() {
-        this.updateMediaAndPlay();
-        this.updateSlick();
-    },
-
     componentDidUpdate: function(){
         this.updateMediaAndPlay();
         this.updateSlick();
     },
 
-    componentWillUnmount: function() {
-        //PageStore.removeChangeListener(this._onChange);
-    },
     render: function() {
         var self = this;
         var page = self.state.page;
@@ -257,18 +255,36 @@ var MultiNoteView = React.createClass({
 
         //mouse work for mouseover'ed selections
 
-        var sliderSettings = { // settigns for the carousel
-            dots: false,
-            infinite: false,
-            speed: 500,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            centerMode: false,
-            variableWidth: true,
-            accessibility: true,
-            focusOnSelect: false,
-            initialSlide: 0
-        };
+
+        if (AppStateStore.isMobile()) {
+            var sliderSettings = { // settigns for the carousel
+                dots: true,
+                infinite: false,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                centerMode: true,
+                variableWidth: true,
+                accessibility: true,
+                focusOnSelect: false,
+                initialSlide: 0,
+                cellAlign: "center"
+            };
+        } else {
+            var sliderSettings = { // settigns for the carousel
+                dots: false,
+                infinite: false,
+                speed: 500,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: false,
+                variableWidth: true,
+                accessibility: true,
+                focusOnSelect: false,
+                initialSlide: 0,
+                cellAlign: "left"
+            };
+        }
 
 
 
@@ -328,7 +344,8 @@ var MultiNoteView = React.createClass({
                         position: 'CenterRight',
                         style: {
                             padding: 20,
-                            height: 151
+                            height: 151,
+                            right: -48
                         }
                     }
                 ];
@@ -351,6 +368,7 @@ var MultiNoteView = React.createClass({
                                     speed={sliderSettings.speed}
                                     slidesToShow={sliderSettings.slidesToShow}
                                     slidesToScroll={sliderSettings.slidesToScroll}
+                                    cellAlign ={sliderSettings.cellAlign}
                                 >
                                     {pageChoices}
                                 </NukaCarousel>
@@ -383,7 +401,7 @@ var MultiNoteView = React.createClass({
                         <source id="mp3Source" src="" type="audio/mp3"></source>
                         Your browser does not support the audio format.
                     </audio>
-                    <div className="container multi-note-container">
+                    <div className="multi-note-container">
                         <div className="row">
                             {noteImage}
                             {text}
@@ -392,8 +410,15 @@ var MultiNoteView = React.createClass({
                 </div>
             </div>
         );
+    },
+    _onAppStateChange: function () {
+        if (AppStateStore.renderChange()) {
+            this.setState(getPageState(this.props));
+        }
+    },
+    _onChange: function() {
+        this.setState(getPageState(this.props));
     }
-
 });
 
 module.exports = MultiNoteView;

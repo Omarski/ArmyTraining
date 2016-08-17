@@ -25,7 +25,7 @@ label{
 
 .questionnaire-container {
 
-  position: absolute;
+  position: relative;
   margin: 30px;
   .panel-body {
     padding: 30px;
@@ -43,15 +43,14 @@ label{
 
 .questionnaire-time-lbl {
   margin-top: 30px;
+  text-align: center;
+  padding-bottom: 50px;
 }
+
 .questionnaire-results-container {
   li {
     list-style-type: disc;
   }
-}
-
-.questionnaire-time-lbl {
-  text-align: center;
 }
 
 .questionnaire-list-group-item {

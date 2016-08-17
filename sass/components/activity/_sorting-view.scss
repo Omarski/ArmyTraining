@@ -2,11 +2,8 @@
   border-style: solid;
   border-width: 1px;
   border-color: $border-color;
-  position: absolute;
-  top: 70px;
-  bottom: 30px;
-  left: 30px;
-  right: 30px;
+  position: relative;
+  margin: 30px;
   padding: 27px;
   padding-top: 5px;
   h4 {
@@ -143,6 +140,14 @@
   text-align: center;
 }
 
+@media screen and (max-width: 565px) {
+  .sorting-view-container {
+    border: none;
+    padding: 5px;
+    margin: 0px;
+  }
+}
+
 @media screen and (max-width: 767px){
   .sorting-columnA {
     padding-left: 0px;
@@ -151,7 +156,11 @@
     padding-left: 0px;
   }
 
-  .container {
+  .sorting-view-container {
+    margin: 5px 15px;
+  }
+
+    .container {
     .row {
 
       .sorting-view-header-prompt {

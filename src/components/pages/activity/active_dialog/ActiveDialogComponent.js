@@ -2,10 +2,12 @@ var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 var PageStore = require('../../../../stores/PageStore');
 
-
+var _animationTimer = null;
 var _soundTimer = null;
 
 var ActiveDialogComponent = React.createClass({
+    assetQueue: [],
+    assets2Render: [],
     bAnimationPlaying: false,
     bIdleOrChatLoop: false,
     bSoundLoading: false,
@@ -16,8 +18,7 @@ var ActiveDialogComponent = React.createClass({
     currentStop: "",
     currentVideosPlayingHack: [],
     hack: false,
-    videosQueue: [],
-    videos2Render: [],
+
     videoCurrentLoading: null,
 
     propTypes: {
@@ -28,16 +29,14 @@ var ActiveDialogComponent = React.createClass({
     },
 
     getInitialState: function() {
-        var videosNotReady = this.props.assets ? this.props.assets.length : 0;
+        var assetsNotReady = this.props.assets ? this.props.assets.length : 0;
 
-        // get first video
-        this.videosQueue = [];
+        // get first asset
+        this.assetQueue = [];
         for (var assetIndex in this.props.assets) {
-            this.videosQueue.push(this.props.assets[assetIndex]);
+            this.assetQueue.push(this.props.assets[assetIndex]);
         }
-
-        this.videos2Render = [];
-        //this.videos2Render.push(this.videosQueue.shift());
+        this.assets2Render.push(this.assetQueue.shift());
 
         // look up chat animation
         this.findChatAnimation();
@@ -48,43 +47,13 @@ var ActiveDialogComponent = React.createClass({
         }
 
         return {
-            videosNotReady: videosNotReady
+            assetsNotReady: assetsNotReady
         }
     },
-
-    componentDidMount: function() {
-        this.preloadVideos();
-    },
-
-    preloadVideos: function() {
-        if (this.videosQueue.length > 0) {
-            // get next video
-            var nextVideoObject = this.videosQueue.shift();
-
-            // add video to render list
-            this.videos2Render.push(nextVideoObject);
-
-            // get url
-            var nextVideoUrl = "data/media/" + PageStore.chapter().xid + "/" + nextVideoObject.assetData.source;
-
-            this.serverRequest = $.get(nextVideoUrl, this.preloadVideosDoneHandler);
-
-        } else {
-            // all done force render with loaded videos
-            this.forceUpdate();
-        }
-    },
-
-    preloadVideosDoneHandler: function(result) {
-        // get next video
-        this.preloadVideos();
-    },
-
 
     componentWillUnmount: function() {
-        // cancel requests
-        if (this.serverRequest) {
-            this.serverRequest.abort();
+        if (_animationTimer) {
+            clearInterval(_animationTimer);
         }
     },
 
@@ -142,13 +111,14 @@ var ActiveDialogComponent = React.createClass({
     },
 
     hideVideos: function() {
+        if (_animationTimer) {
+            clearInterval(_animationTimer);
+        }
+
         // hide all videos that are playing
         var vidLength = this.currentVideosPlayingHack.length;
         while(vidLength--) {
             var video = this.currentVideosPlayingHack[vidLength];
-
-            // remove event listeners
-            video.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
 
             // stop video
             video.pause();
@@ -182,9 +152,6 @@ var ActiveDialogComponent = React.createClass({
                 // set current time
                 video.currentTime = animation.start / 1000;
 
-                // add event listeners
-                video.addEventListener("timeupdate", this.videoTimeUpdateHandler);
-
                 // set current animation playing
                 this.currentAnimation = animationName;
                 this.currentStop = animation.stop / 1000;
@@ -202,6 +169,12 @@ var ActiveDialogComponent = React.createClass({
 
                 } else {
                     video.play();
+
+                    // set timer
+                    var self = this;
+                    _animationTimer = setInterval(function() {
+                        self.videoTimeUpdateHandler(video);
+                    }, 100);
                 }
             }
         }
@@ -223,16 +196,16 @@ var ActiveDialogComponent = React.createClass({
         }
 
         // decrease count
-        this.state.videosNotReady--;
+        this.state.assetsNotReady--;
 
         // add next video to list
-        if (this.videosQueue.length > 0) {
-            this.videos2Render.push(this.videosQueue.shift());
+        if (this.assetQueue.length > 0) {
+            this.assets2Render.push(this.assetQueue.shift());
             this.forceUpdate();
         }
 
         // all videos for this asset are ready to play
-        if (this.state.videosNotReady <= 0) {
+        if (this.state.assetsNotReady <= 0) {
 
             // set ready
 
@@ -255,17 +228,17 @@ var ActiveDialogComponent = React.createClass({
     },
 
     videoEndedHandler: function(event) {
-        // remove event listener?
-        event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
     },
 
-    videoTimeUpdateHandler: function(event) {
+    videoTimeUpdateHandler: function(video) {
         // get time to 3 decimal places
-        var currentAnimationTime = event.currentTarget.currentTime.toFixed(3);
+        var currentAnimationTime = video.currentTime.toFixed(3);
 
         if (currentAnimationTime >= this.currentStop) {
-            // remove event listener
-            event.currentTarget.removeEventListener("timeupdate", this.videoTimeUpdateHandler);
+            // clear timer
+            if (_animationTimer) {
+                clearInterval(_animationTimer);
+            }
 
             // dispatch event if animation is not the default one
             if (this.bIdleOrChatLoop === false) {
@@ -345,6 +318,12 @@ var ActiveDialogComponent = React.createClass({
                     video.play();
                 }
 
+                // set timer
+                var self = this;
+                _animationTimer = setInterval(function() {
+                    self.videoTimeUpdateHandler(video);
+                }, 100);
+
                 // mark as playing
                 this.bAnimationPlaying = true;
             }
@@ -355,7 +334,7 @@ var ActiveDialogComponent = React.createClass({
         var self = this;
 
         // check if video
-        var videos = this.videos2Render.map(function(item, index) {
+        var videos = this.assets2Render.map(function(item, index) {
             var top = Number(item.assetData.dimensions[1].split("px")[0]);
             var left = Number(item.assetData.dimensions[0].split("px")[0]);
             var style = {top: top, left: left, position: "absolute", display: "block"};

@@ -5,10 +5,6 @@
   }
 }
 
-.or-choices-container{
-  height: 50px;
-}
-
 .or-answers-container, .or-choices-container {
   padding-left: 0px;
   display: inline-flex;
@@ -116,7 +112,7 @@
         margin-left: 0px;
         margin-right: 0px;
         height: auto;
-        width: 95%;
+        width: 90%;
         .or-drop-area-index {
           margin-top: 0;
         }

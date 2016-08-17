@@ -58,6 +58,7 @@ var ActiveDialogIntro = React.createClass({
         return (
             <Modal
                 id="introModal"
+                backdrop="static"
                 show={this.state.show}
                 onHide={this.hideModal}
                 >

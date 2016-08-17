@@ -122,8 +122,9 @@ var QuestionnaireEndView = React.createClass({
                 UnitActions.markUnitRequired(selectedUnits[selectedUnitsLength].id);
             }
 
-            // mark questionnaire as complete
+            // mark questionnaire as complete and passed
             PageActions.markChapterComplete();
+            PageActions.markChapterPassed();
 
             // build pre and post test lessons
             PrePostTestActions.build();
@@ -181,10 +182,24 @@ var QuestionnaireEndView = React.createClass({
                     <div className="panel-footer">
                         <div className="row">
                             <div className="col-md-6 col-sm-6 questionnaire-end-btn-col">
-                                <button className="btn btn-default btn-action" onClick={self.reset}>{state.btnRestart}</button>
+                                <button className="btn btn-default btn-action"
+                                        title={LocalizationStore.labelFor("questionnaireEnd", "btnRestart")}
+                                        alt={LocalizationStore.labelFor("questionnaireEnd", "btnRestart")}
+                                        type="button"
+                                        aria-label={LocalizationStore.labelFor("questionnaireEnd", "btnRestart")}
+                                        onClick={self.reset}>
+                                    {state.btnRestart}
+                                </button>
                             </div>
                             <div className="col-md-6 col-sm-6 questionnaire-end-btn-col">
-                                <button className="btn btn-default btn-action" onClick={self.confirm}>{state.btnConfirm}</button>
+                                <button className="btn btn-default btn-action"
+                                        title={LocalizationStore.labelFor("questionnaireEnd", "btnConfirm")}
+                                        alt={LocalizationStore.labelFor("questionnaireEnd", "btnConfirm")}
+                                        aria-label={LocalizationStore.labelFor("questionnaireEnd", "btnConfirm")}
+                                        type="button"
+                                        onClick={self.confirm}>
+                                    {state.btnConfirm}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -201,3 +216,9 @@ var QuestionnaireEndView = React.createClass({
 });
 
 module.exports = QuestionnaireEndView;
+
+//
+// title={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
+// alt={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
+// type="button"
+// aria-label={LocalizationStore.labelFor("bookmarks", "tooltipBookmark")}
