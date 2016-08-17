@@ -226,10 +226,12 @@ var ActiveDialogEvaluation = React.createClass({
             this.setState(compState);
 
             setTimeout(function() {
+                PageActions.markPageComplete();
                 PageActions.markChapterComplete();
 
                 if (compState.dialogPassed) {
-                    PageActions.markChapterComplete();
+                    PageActions.markPagePassed();
+                    PageActions.markChapterPassed();
                 }
             }, 0.1);
         } else {
