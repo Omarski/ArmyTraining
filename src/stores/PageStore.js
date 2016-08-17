@@ -564,7 +564,7 @@ function markPagePassed() {
             state = _currentPage.state;
         }
 
-        // mark it as complete
+        // mark it as passed
         _currentPage.state = assign({}, state, {passed: true});
     }
 }
