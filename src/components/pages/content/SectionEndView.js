@@ -25,16 +25,16 @@ function getPageState(props) {
     }
 
 
-    // check if current chapter is completed
-    if (!PageStore.isChapterComplete()) {
+    // check if current chapter is passed
+    if (!PageStore.isChapterPassed()) {
         data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblSectionFailed");
     }
-    else if (UnitStore.areAllRequiredComplete()) {
+    else if (UnitStore.areAllRequiredPassed()) {
         data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblCourseComplete");
         data.pageFeedbackHeader = LocalizationStore.labelFor("sectionEnd", "lblCongratulations");
         data.pageFeedbackImage = LocalizationStore.labelFor("sectionEnd", "imageComplete");
     }
-    else if (PageStore.isUnitComplete()) {
+    else if (PageStore.isUnitPassed()) {
         data.pageFeedback = LocalizationStore.labelFor("sectionEnd", "lblLessonComplete");
         data.pageFeedbackHeader = LocalizationStore.labelFor("sectionEnd", "lblCongratulations");
         data.pageFeedbackImage = LocalizationStore.labelFor("sectionEnd", "imageComplete");
@@ -54,16 +54,16 @@ var SectionEndView = React.createClass({
         var self = this;
 
         // send course completion HACK
-        if (UnitStore.areAllRequiredComplete()) {
+        if (UnitStore.areAllRequiredPassed()) {
             SCORMActions.complete();
         }
 
         // disable next button
         setTimeout(function() {
-            if (!PageStore.isChapterComplete()) {
+            if (!PageStore.isChapterPassed()) {
                 FooterActions.disableNext();
             }
-            if(UnitStore.areAllRequiredComplete()) {
+            if(UnitStore.areAllRequiredPassed()) {
                 FooterActions.disableNext();
             }
         }, 0.1);
@@ -96,7 +96,7 @@ var SectionEndView = React.createClass({
 
 
         var PDFcontent = "";
-        if (PageStore.isChapterComplete()) {
+        if (PageStore.isChapterPassed()) {
             var pdfPath = self.getPDF();
             if (pdfPath) {
                 var pdfText = PageStore.unit().data.title + " PDF Takeaway";

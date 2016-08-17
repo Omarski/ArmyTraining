@@ -52,6 +52,7 @@ var PostTestQuizEndView = React.createClass({
 
         setTimeout(function() {
             PageActions.markChapterComplete();
+            PageActions.markChapterPassed();
         });
 
         return pageState;
