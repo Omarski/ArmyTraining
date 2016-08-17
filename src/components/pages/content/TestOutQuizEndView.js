@@ -106,7 +106,7 @@ function TestOutComplete(state) {
     if (state.bPassed && state.bAccepted && state.unitsPassed && (state.unitsPassed.length > 0)) {
 
         setTimeout(function() { // TODO <-- dont like this
-            // mark the chapters in the units as complete
+            // mark the chapters in the units as complete and passed
             PrePostTestActions.markTestOutUnitsComplete(state.unitsPassed);
         });
     }
@@ -119,6 +119,7 @@ var TestOutQuizEndView = React.createClass({
 
         setTimeout(function() {
             PageActions.markChapterComplete();
+            PageActions.markChapterPassed();
         });
 
         return pageState;

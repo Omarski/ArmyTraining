@@ -121,9 +121,11 @@ var QuestionnaireEndView = React.createClass({
             while(selectedUnitsLength--) {
                 UnitActions.markUnitRequired(selectedUnits[selectedUnitsLength].id);
             }
+            var unit = PageStore.unit();
 
-            // mark questionnaire as complete
+            // mark questionnaire as complete and passed
             PageActions.markChapterComplete();
+            PageActions.markChapterPassed();
 
             // build pre and post test lessons
             PrePostTestActions.build();
