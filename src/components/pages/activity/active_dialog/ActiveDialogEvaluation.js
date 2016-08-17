@@ -10,10 +10,12 @@ var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveD
 var ActiveDialogStore = require('../../../../stores/active_dialog/ActiveDialogStore');
 var PageActions = require('../../../../actions/PageActions');
 var LocalizationStore = require("../../../../stores/LocalizationStore");
+var SettingsStore = require("../../../../stores/SettingsStore");
 
 function getCompState(show) {
 
     var feedback = "";
+    var feedbackVid = "";
     var dialogPassed = false;
     var scorePercent = 0;
     var objectivesPassed = 0;
@@ -41,14 +43,17 @@ function getCompState(show) {
     // get feedback based of score
     if (scorePercent === 100) {
         feedback = LocalizationStore.labelFor("evaluation", "lblTestPassed");
+        feedbackVid = LocalizationStore.labelFor("evaluation", "vidTestPassed");
         dialogPassed = true;
     } else {
         feedback = LocalizationStore.labelFor("evaluation", "lblTestFailed");
+        feedbackVid = LocalizationStore.labelFor("evaluation", "vidTestFailed");
     }
 
     return {
         dialogPassed: dialogPassed,
         feedback: feedback,
+        feedbackVid: feedbackVid,
         objectives: objectives,
         show: show
     };
@@ -85,7 +90,6 @@ var ActiveDialogEvaluation = React.createClass({
     },
 
     render: function() {
-
         var carouselItems = "";
         if (this.state.objectives) {
             carouselItems = this.state.objectives.map(function(item, index) {
@@ -185,7 +189,15 @@ var ActiveDialogEvaluation = React.createClass({
                             <tbody>
                             <tr>
                                 <td>
-                                    <img draggable="false" className="active-dialog-intro-image" src={LocalizationStore.labelFor("briefing", "image")}></img>
+                                    <video title={LocalizationStore.labelFor("evaluation", "lblFeedbackTitle")}
+                                           alt={LocalizationStore.labelFor("evaluation", "lblFeedbackTitle")}
+                                           aria-label={LocalizationStore.labelFor("evaluation", "lblFeedbackTitle")}
+                                           className="info-video-player"
+                                           id="video" controls
+                                           autoPlay={SettingsStore.autoPlaySound()}
+                                           volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                                        <source src={this.state.feedbackVid} type="video/mp4"></source>
+                                    </video>
                                 </td>
                                 <td>
                                     <div className="active-dialog-evaluation-feedback">
