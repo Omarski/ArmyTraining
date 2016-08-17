@@ -24,6 +24,13 @@ var UnitActions = {
         });
     },
 
+    evaluateUnitPassed: function(unitId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_EVALUATE_PASSED,
+            data: unitId
+        });
+    },
+
     /**
      * Mark unit with given id as complete
      * @param unitId
@@ -36,6 +43,17 @@ var UnitActions = {
     },
 
     /**
+     * Mark unit with given id as passed and complete
+     * @param unitId
+     */
+    markUnitPassed: function(unitId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_PASSED,
+            id: unitId
+        });
+    },
+
+    /**
      * Marks chapter in a unit complete
      * @param unitId
      * @param chapterId
@@ -43,6 +61,19 @@ var UnitActions = {
     markChapterComplete: function(unitId, chapterId) {
         AppDispatcher.dispatch({
             actionType: UnitConstants.UNIT_CHAPTER_COMPLETE,
+            id: unitId,
+            chapterId: chapterId
+        });
+    },
+
+    /**
+     * Marks chapter in a unit passed
+     * @param unitId
+     * @param chapterId
+     */
+    markChapterPassed: function(unitId, chapterId) {
+        AppDispatcher.dispatch({
+            actionType: UnitConstants.UNIT_CHAPTER_PASSED,
             id: unitId,
             chapterId: chapterId
         });
