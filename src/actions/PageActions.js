@@ -65,6 +65,16 @@ var PageActions = {
             actionType: PageConstants.PAGE_MARK_PASSED
         });
     },
+    markQuizPageComplete: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.QUIZ_PAGE_MARK_COMPLETE
+        });
+    },
+    markQuizPagePassed: function() {
+        AppDispatcher.dispatch({
+            actionType: PageConstants.QUIZ_PAGE_MARK_PASSED
+        });
+    },
     jump: function(data) {
         AppDispatcher.dispatch({
             actionType: PageConstants.PAGE_JUMP,

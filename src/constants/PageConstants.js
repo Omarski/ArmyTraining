@@ -12,6 +12,8 @@ module.exports = keyMirror({
     PAGE_MARK_COMPLETE: null,
     PAGE_MARK_PASSED: null,
     PAGE_RESET: null,
+    QUIZ_PAGE_MARK_COMPLETE: null,
+    QUIZ_PAGE_MARK_PASSED: null,
     QUIZ_RESET: null,
     QUIZ_RESTART: null
 });
