@@ -31,7 +31,7 @@ function getPageState(props) {
         audioController:"",
         audioBgController:null,
         popupObj:null,
-        answeredOrder:[],
+        answeredOrder:[0],
         mediaPath:'data/media/'
     };
 
@@ -166,7 +166,7 @@ var CultureQuestView = React.createClass({
         }
 
         this.markHomeRegion();
-        this.setState({answeredOrder:[]});
+        this.setState({answeredOrder:[0]});
     },
     
     prepGoBackPopup: function(){
@@ -422,7 +422,6 @@ var CultureQuestView = React.createClass({
                 var currentOrder = self.state.answeredOrder;
                 currentOrder.push(update.value);
                 self.setState({"answeredOrder":currentOrder});
-                console.log("order: " + currentOrder.toString());
                 break;
         }
     },
@@ -502,6 +501,7 @@ var CultureQuestView = React.createClass({
                         answersColl = {state.answersColl}
                         showQuizUpdate = {self.showQuizUpdate}
                         showPuzzleUpdate = {self.showPuzzleUpdate}
+                        answeredOrder={self.state.answeredOrder}
                         viewUpdate = {self.viewUpdate}
                     />:null}
 
@@ -509,6 +509,7 @@ var CultureQuestView = React.createClass({
                     imageData={state.imageData}
                     displayPopup={this.displayPopup}
                     onClosePopup={this.onClosePopup}
+                    answeredOrder={self.state.answeredOrder}
                     viewUpdate = {self.viewUpdate}
                     />:null}
 

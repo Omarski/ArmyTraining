@@ -37,21 +37,25 @@ var CultureQuestPuzzleGameView = React.createClass({
 
     propTypes: {
 
-        imageData: PropTypes.object.isRequired
+        imageData: PropTypes.object.isRequired,
+        displayPopup: PropTypes.func.isRequired,
+        onClosePopup: PropTypes.func.isRequired,
+        answeredOrder: PropTypes.array.isRequired,
+        viewUpdate: PropTypes.func.isRequired
     },
 
     componentWillMount: function() {
         this.displayPuzzlePopup();
-        this.prepDraggableData();
+        //this.prepDraggableData();
         this.prepTargetData();
         this.prepStageTargetObj();
     },
 
     componentDidMount: function(){
+
         //special gift piece
         $("#puzzleTarget0").attr("pieceNumber","0");
         $("#puzzleDraggable0").attr("placement","placed0");
-
     },
 
     displayPuzzlePopup: function(){
@@ -83,15 +87,16 @@ var CultureQuestPuzzleGameView = React.createClass({
         var imageData = this.props.imageData;
         var draggableColl = [];
         var pieceHeight = 55, topStart = 90, left = 680;
+        var order = this.props.answeredOrder;
 
         for (var i=0; i < imageData.regions.length; i++){
 
-            var imgUrl = this.state.mediaPath + imageData.regions[i].tile;
+            var imgUrl = this.state.mediaPath + imageData.regions[order[i]].tile;
             var draggableStyle = {position:'absolute', width:'40px', height:'50px',
                 background: "url('"+imgUrl+"') no-repeat", backgroundSize:"40px 50px", zIndex:'30',
                 left: left+"px", top:topStart+(pieceHeight * i)+"px"};
 
-            if (i === 0) {
+            if (order[i] === 0) {
                 draggableStyle.top = "113px";
                 draggableStyle.left = "140px";
                 draggableStyle.width = "112px";
@@ -101,7 +106,7 @@ var CultureQuestPuzzleGameView = React.createClass({
 
             var draggableObj = {
                 
-                id:"puzzleDraggable"+i,
+                id:"puzzleDraggable"+order[i],
                 draggableStyle : draggableStyle,
                 imgUrl:null,
                 onDraggableBeginDrag: this.onDraggableBeginDrag,
@@ -223,7 +228,6 @@ var CultureQuestPuzzleGameView = React.createClass({
     onDraggableSwap: function(dragId,targetId){
         var tempTargetNumber1 = $("#"+dragId).attr("placement").substring(6);
         var tempTargetNumber2 = $("#"+targetId).attr("placement").substring(6);
-        console.log("Saving from drg: " + tempTargetNumber1 + " from target: " + tempTargetNumber2)
 
         //swap target pieceNumbers
         $("#puzzleTarget"+tempTargetNumber1).attr("pieceNumber", tempTargetNumber1);
