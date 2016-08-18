@@ -456,7 +456,7 @@ var TOCPageRow = React.createClass({
         var cls = '';
         var icon = '';
         var itemState = this.props.item.state || null;
-        console.log(this.props.item, itemState);
+
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
             cls += ' current';
             icon = (<img src="images/icons/currentpage.png"/>);
@@ -484,7 +484,6 @@ var TOCPageRow = React.createClass({
                     <span className="explorer-section-title">{this.props.item.title}</span>
                 </a>
             </li>
-
         );
     }
 });
