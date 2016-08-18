@@ -569,6 +569,58 @@ function markPagePassed() {
     }
 }
 
+/**
+ * Marks the quiz start page for the current chapter as complete
+ */
+function markQuizStartPageComplete() {
+    if (_currentChapter) {
+        var pages = _currentChapter.pages;
+        var pagesLen = pages.length;
+
+        for (var i = 0; i < pagesLen; i++) {
+            var page = pages[i];
+
+            // find quiz start page
+            if (page.state && page.state.quizpage) {
+                if (page.type === PageTypeConstants.QUIZ_START) {
+                    // get page state
+                    var state = page.state ? page.state : {};
+
+                    // mark it as complete
+                    page.state = assign({}, state, {complete: true});
+                    break;
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Marks the quiz start page for the current chapter as passed
+ */
+function markQuizStartPagePassed() {
+    if (_currentChapter) {
+        var pages = _currentChapter.pages;
+        var pagesLen = pages.length;
+
+        for (var i = 0; i < pagesLen; i++) {
+            var page = pages[i];
+
+            // find quiz start page
+            if (page.state && page.state.quizpage) {
+                if (page.type === PageTypeConstants.QUIZ_START) {
+                    // get page state
+                    var state = page.state ? page.state : {};
+
+                    // mark it as passed
+                    page.state = assign({}, state, {passed: true});
+                    break;
+                }
+            }
+        }
+    }
+}
+
 function reset() {
     setTimeout(function() {
         PersistenceActions.remove('pages');
@@ -804,8 +856,6 @@ var PageStore = assign({}, EventEmitter.prototype, {
 
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
-
-
     switch(action.actionType) {
         case PageConstants.CHAPTER_MARK_COMPLETE:
             markChapterComplete();
@@ -849,6 +899,12 @@ AppDispatcher.register(function(action) {
         case PageConstants.PAGE_RESET:
             reset();
             PageStore.emitChange();
+            break;
+        case PageConstants.QUIZ_PAGE_MARK_COMPLETE:
+            markQuizStartPageComplete();
+            break;
+        case PageConstants.QUIZ_PAGE_MARK_PASSED:
+            markQuizStartPagePassed();
             break;
         case PageConstants.QUIZ_RESET:
             resetQuiz();

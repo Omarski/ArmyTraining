@@ -97,9 +97,11 @@ var QuizView = React.createClass({
         var pageState = getPageState(this.props);
 
         setTimeout(function() {
+            PageActions.markQuizPageComplete();
             PageActions.markChapterComplete();
             if (pageState.quizPassed) {
-                PageActions.markChapterPassed()
+                PageActions.markQuizPagePassed();
+                PageActions.markChapterPassed();
             }
         });
 
