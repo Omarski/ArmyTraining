@@ -45,7 +45,13 @@
     "tooltipIndexCollapse": "Close Explorer",
     "lblRequired": "Required",
     "lblOptional": "Optional",
-    "lblExplorer": "Explorer"
+    "lblExplorer": "Explorer",
+    "halfCircle": "In Progress",
+    "fullCircle" : "Viewed",
+    "star" : "Current",
+    "emptyCircle": "Not Viewed",
+    "redX": "Failed",
+    "greenCheckmark": "Passed"
   },
   "header": {
     "lbltitle": "AFPAK",

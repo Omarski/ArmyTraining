@@ -186,7 +186,26 @@
     }
   }
 }
+/*
 
+@media screen and (max-width: 767px){
+
+  #introModal &.modal {
+    overflow-y: hidden;
+  }
+
+  #introModal .modal-dialog {
+    overflow-y: auto;
+    border-radius: 8px;
+    height: 92%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+
+}
+
+@media screen and (max-height: )
+*/
 
 
 .remediation-view-modal {
