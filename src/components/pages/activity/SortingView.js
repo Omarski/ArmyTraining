@@ -147,6 +147,10 @@ var SortingView = React.createClass({
             draggedItemTarget = "";
         }
 
+        //remove heighlights
+        $(".choice").css({"border":"1px solid #ddd"});
+        $(".sorting-columnA-dropArea, .sorting-columnB-dropArea").css({"border":"1px solid #ddd"});
+
         self.setState({
             draggedItemLetter: draggedItemLetter,
             draggedItemTarget: draggedItemTarget
@@ -186,10 +190,10 @@ var SortingView = React.createClass({
             else  $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
 
 
-        if ($(e.target).hasClass("placed-A") || $(e.target).hasClass("placed-B")) $(e.target).parent().css({"border":"2px solid #f6ae23"});
-        else $(e.target).css({"border":"2px solid #f6ae23"});
+        if ($(e.target).hasClass("placed-A") || $(e.target).hasClass("placed-B")) $(e.target).parent().css({"border":"4px solid #f6ae23"});
+        else $(e.target).css({"border":"4px solid #f6ae23"});
 
-        $(".sorting-columnA-dropArea, .sorting-columnB-dropArea").css({"border":"2px solid #f6ae23"});
+        $(".sorting-columnA-dropArea, .sorting-columnB-dropArea").css({"border":"4px solid #f6ae23"});
 
         self.setState({
             draggedItemLetter: draggedItemLetter,
@@ -407,6 +411,10 @@ var SortingView = React.createClass({
         });
 
         answerState = AGeneric().shuffle(answerState);
+
+        //remove heighlights
+        $(".choice").css({"border":"1px solid #ddd"});
+        $(".sorting-columnA-dropArea, .sorting-columnB-dropArea").css({"border":"1px solid #ddd"});
 
         self.setState({
             numMoved: 0,
