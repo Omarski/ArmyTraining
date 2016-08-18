@@ -6,8 +6,6 @@ var _animationTimer = null;
 var _soundTimer = null;
 
 var ActiveDialogComponent = React.createClass({
-    assetQueue: [],
-    assets2Render: [],
     bAnimationPlaying: false,
     bIdleOrChatLoop: false,
     bSoundLoading: false,
@@ -18,7 +16,8 @@ var ActiveDialogComponent = React.createClass({
     currentStop: "",
     currentVideosPlayingHack: [],
     hack: false,
-
+    videosQueue: [],
+    videos2Render: [],
     videoCurrentLoading: null,
 
     propTypes: {
@@ -29,14 +28,16 @@ var ActiveDialogComponent = React.createClass({
     },
 
     getInitialState: function() {
-        var assetsNotReady = this.props.assets ? this.props.assets.length : 0;
+        var videosNotReady = this.props.assets ? this.props.assets.length : 0;
 
-        // get first asset
-        this.assetQueue = [];
+        // get first video
+        this.videosQueue = [];
         for (var assetIndex in this.props.assets) {
-            this.assetQueue.push(this.props.assets[assetIndex]);
+            this.videosQueue.push(this.props.assets[assetIndex]);
         }
-        this.assets2Render.push(this.assetQueue.shift());
+
+        this.videos2Render = [];
+        //this.videos2Render.push(this.videosQueue.shift());
 
         // look up chat animation
         this.findChatAnimation();
@@ -47,8 +48,36 @@ var ActiveDialogComponent = React.createClass({
         }
 
         return {
-            assetsNotReady: assetsNotReady
+            videosNotReady: videosNotReady
         }
+    },
+
+    componentDidMount: function() {
+        this.preloadVideos();
+    },
+
+    preloadVideos: function() {
+        if (this.videosQueue.length > 0) {
+            // get next video
+            var nextVideoObject = this.videosQueue.shift();
+
+            // add video to render list
+            this.videos2Render.push(nextVideoObject);
+
+            // get url
+            var nextVideoUrl = "data/media/" + PageStore.chapter().xid + "/" + nextVideoObject.assetData.source;
+
+            this.serverRequest = $.get(nextVideoUrl, this.preloadVideosDoneHandler);
+
+        } else {
+            // all done force render with loaded videos
+            this.forceUpdate();
+        }
+    },
+
+    preloadVideosDoneHandler: function(result) {
+        // get next video
+        this.preloadVideos();
     },
 
     componentWillUnmount: function() {
@@ -196,16 +225,16 @@ var ActiveDialogComponent = React.createClass({
         }
 
         // decrease count
-        this.state.assetsNotReady--;
+        this.state.videosNotReady--;
 
         // add next video to list
-        if (this.assetQueue.length > 0) {
-            this.assets2Render.push(this.assetQueue.shift());
+        if (this.videosQueue.length > 0) {
+            this.videos2Render.push(this.videosQueue.shift());
             this.forceUpdate();
         }
 
         // all videos for this asset are ready to play
-        if (this.state.assetsNotReady <= 0) {
+        if (this.state.videosNotReady <= 0) {
 
             // set ready
 
@@ -334,7 +363,7 @@ var ActiveDialogComponent = React.createClass({
         var self = this;
 
         // check if video
-        var videos = this.assets2Render.map(function(item, index) {
+        var videos = this.videos2Render.map(function(item, index) {
             var top = Number(item.assetData.dimensions[1].split("px")[0]);
             var left = Number(item.assetData.dimensions[0].split("px")[0]);
             var style = {top: top, left: left, position: "absolute", display: "block"};
