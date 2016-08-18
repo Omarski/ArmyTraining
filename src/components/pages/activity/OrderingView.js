@@ -17,7 +17,7 @@ function getPageState(props) {
         draggedItemData: "",
         isGraded: false,
         numMoved: 0,
-        lastDraggable:null
+        lastDraggable:null,
     } ;
 
     if (props && props.page) {
@@ -94,14 +94,6 @@ var OrderingView = React.createClass({
     },
 
     onDragging: function(e){
-        // var dragItems = document.querySelectorAll('[draggable=true]');
-        // for (var i = 0; i < dragItems.length; i++) {
-        //     addEvent(dragItems[i], 'dragstart', function (event) {
-        //         // store the ID of the element, and collect it on the drop later on
-        //
-        //         event.dataTransfer.setData('Text', 'nothing');
-        //     });
-        // }
 
         e.dataTransfer.setData("text", e.target.id);
 
@@ -140,7 +132,6 @@ var OrderingView = React.createClass({
 
     onDraggableClick: function(e){
 
-        console.log("Dragging...");
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";
@@ -168,7 +159,9 @@ var OrderingView = React.createClass({
         }
 
         //highlight
-        if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
+        if (self.state.lastDraggable) {
+            $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
+        }
         $(e.target).css({"border":"2px solid #f6ae23"});
 
         self.setState({
@@ -268,7 +261,7 @@ var OrderingView = React.createClass({
                             item.currentBoxIndex = dropLocationIndex;
                             item.isMoved = true;
                             if ($(draggedItemTarget).parent().hasClass("or-choices-container")) {
-                                $(draggedItemTarget).css("opacity", "0.3");
+                                $(draggedItemTarget).css({"opacity":"0.3","pointerEvents":"none"});
                                 numMoved++;
                             }
                             itemFound = true;
@@ -279,7 +272,7 @@ var OrderingView = React.createClass({
                             item.currentBoxIndex = dropLocationIndex;
                             item.isMoved = true;
                             if($(draggedItemTarget).parent().hasClass("or-choices-container"))  {
-                                $(draggedItemTarget).css("opacity", "0.3");
+                                $(draggedItemTarget).css({"opacity":"0.3","pointerEvents":"none"});
                                 numMoved++;
                             }
                             itemFound = true;
@@ -378,7 +371,7 @@ var OrderingView = React.createClass({
                                 item.currentBoxIndex = dropLocationIndex;
                                 item.isMoved = true;
                                 if ($(draggedItemTarget).parent().hasClass("or-choices-container")) {
-                                    $(draggedItemTarget).css("opacity", "0.3");
+                                    $(draggedItemTarget).css({"opacity":"0.3","pointerEvents":"none"});
                                     numMoved++;
                                 }
                                 itemFound = true;
@@ -389,7 +382,7 @@ var OrderingView = React.createClass({
                                 item.currentBoxIndex = dropLocationIndex;
                                 item.isMoved = true;
                                 if ($(draggedItemTarget).parent().hasClass("or-choices-container")) {
-                                    $(draggedItemTarget).css("opacity", "0.3");
+                                    $(draggedItemTarget).css({"opacity":"0.3","pointerEvents":"none"});
                                     numMoved++;
                                 }
                                 itemFound = true;
@@ -436,6 +429,9 @@ var OrderingView = React.createClass({
         var state = self.state;
         var answerState = state.answerState;
 
+        //allow interaction
+        $("a[draggable = 'false']").attr("draggable","true").css("pointerEvents","auto");
+
         answerState.map(function (item) {
             item.isMoved = false;
             item.currentBox = "";
@@ -451,7 +447,7 @@ var OrderingView = React.createClass({
 
         self.setState({
             numMoved: 0,
-            answerState: answerState
+            answerState: answerState,
         });
     },
 
@@ -484,6 +480,10 @@ var OrderingView = React.createClass({
         var numMoved = state.numMoved;
 
         if(numMoved === numQuestions){
+
+            //prevent more dragging
+            $("a[draggable = 'true']").attr("draggable","false").css("pointerEvents","none");
+
             var isCorrect = true;
             // check if correct and update accordingly
 
@@ -509,6 +509,7 @@ var OrderingView = React.createClass({
                 audio.play();
                 audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
             }
+
         }
         if(numMoved > 0 && numMoved < numQuestions){
             button = <button className="btn btn-action or-clear btn-rst" onClick={self.reset}>Clear All</button>; // clear all button
