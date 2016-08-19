@@ -236,7 +236,7 @@ AppDispatcher.register(function(action) {
             load();
             setTimeout(function(){
                 LoaderStore.emitChange();
-            }, 1);
+            }, 0);
 
             break;
 
