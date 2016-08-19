@@ -871,7 +871,9 @@ AppDispatcher.register(function(action) {
             PageStore.emitChange();
             break;
         case PageConstants.PAGE_LOAD:
-            load(action.data);
+            setTimeout(function(){
+                load(action.data);
+            }, 1);
             //PageStore.emitChange();
             break;
         case PageConstants.PAGE_LOAD_NEXT:

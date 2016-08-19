@@ -235,10 +235,8 @@ AppDispatcher.register(function(action) {
         case LoaderConstants.LOADER_LOAD:
             setTimeout(function(){
                 load();
-            }, 10);
-            setTimeout(function(){
                 LoaderStore.emitChange();
-            }, 10);
+            }, 1);
             break;
 
         default:
