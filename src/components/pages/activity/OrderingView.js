@@ -123,6 +123,11 @@ var OrderingView = React.createClass({
             draggedItemData = "";
         }
 
+        //remove heighlights
+        $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
+        if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
+        $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
+
         self.setState({
             draggedItemLetter: draggedItemLetter,
             draggedItemTarget: draggedItemTarget,
@@ -162,7 +167,12 @@ var OrderingView = React.createClass({
         if (self.state.lastDraggable) {
             $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
         }
-        $(e.target).css({"border":"2px solid #f6ae23"});
+        $(e.target).css({"border":"4px solid #f6ae23"});
+        
+        $(".or-answer-drop-area").each(
+            function(){
+                if ($(this).has("a").length < 1) $(this).css({"border":"4px solid #f6ae23"});
+            });
 
         self.setState({
             draggedItemLetter: draggedItemLetter,
@@ -399,6 +409,7 @@ var OrderingView = React.createClass({
 
             $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
             if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
+            $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
 
         }
     },
@@ -444,6 +455,11 @@ var OrderingView = React.createClass({
         $(".or-choice-selection").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
+
+        //remove heighlights
+        $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
+        if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
+        $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
 
         self.setState({
             numMoved: 0,
