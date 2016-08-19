@@ -458,7 +458,6 @@ var TOCPageRow = React.createClass({
         var iconToolTip = '';
         var itemState = this.props.item.state || null;
         var self = this;
-        console.log("this.props", self.props);
 
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
             cls += ' current';

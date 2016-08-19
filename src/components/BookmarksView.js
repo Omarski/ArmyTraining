@@ -183,7 +183,9 @@ var BookmarksView = React.createClass({
 
     },
     _onChange: function() {
-        this.setState(getPageState(this.props.isNav));
+        if(this.isMounted()) {
+            this.setState(getPageState(this.props.isNav));
+        }
     }
 });
 
