@@ -279,7 +279,9 @@ var MainView = React.createClass({
      * Event handler for 'change' events coming from the LoaderStore
      */
     _onChange: function() {
+        if(this.mounted()){
             this.setState(getBookState());
+        }
     },
 
     /**
