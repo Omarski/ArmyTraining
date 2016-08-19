@@ -376,7 +376,6 @@ var PronunciationView = React.createClass({
                 }
 
                 var hasRecorded = self.state.playableState[qcIndex];
-                console.log("hasRecorded", hasRecorded);
                 if (hasRecorded) {
                     recordedClass = "";
                 } else {
