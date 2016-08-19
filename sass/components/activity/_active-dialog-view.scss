@@ -9,6 +9,14 @@
   color: red;
 }
 
+.active-dialog-image {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
 .active-dialog-view {
   position: relative;
   min-height: 504px;

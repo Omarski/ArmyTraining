@@ -10,7 +10,6 @@ var ActiveDialogActions = require('../../../../actions/active_dialog/ActiveDialo
 var ActiveDialogCOAs = require('../../../../components/pages/activity/active_dialog/ActiveDialogCOAs');
 var ActiveDialogComponent = require('../active_dialog/ActiveDialogComponent');
 var ActiveDialogConstants = require('../../../../constants/active_dialog/ActiveDialogConstants');
-//var ActiveDialogHistory = require('../../../../components/pages/activity/active_dialog/ActiveDialogHistory');
 var ActiveDialogObjectives = require('../../../../components/pages/activity/active_dialog/ActiveDialogObjectives');
 var ActiveDialogIntro = require('../../../../components/pages/activity/active_dialog/ActiveDialogIntro');
 var ActiveDialogEvaluation = require('../../../../components/pages/activity/active_dialog/ActiveDialogEvaluation');
@@ -20,6 +19,7 @@ var ActiveDialogClosedCaptionPanel = require('../../../../components/pages/activ
 var RemediationView = require('../../../RemediationView');
 
 var _dataLoaded = false;
+var _nonVerbalAnimationTime = 3000;
 
 function getPageState(props) {
     var title = "";
@@ -95,6 +95,7 @@ var ActiveDialogMobileView = React.createClass({
         var currentAction = ActiveDialogStore.getCurrentAction();
         if (currentAction) {
             switch(currentAction.type) {
+
                 case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_BLOCKING:
                     var blockingAssets = ActiveDialogStore.getCurrentBlockingAssets();
                     // only take the first one
@@ -111,35 +112,33 @@ var ActiveDialogMobileView = React.createClass({
                     break;
 
                 case ActiveDialogConstants.ACTIVE_DIALOG_ACTION_OUTPUT:
-
-                    // get audio
+                    // get audio and animation
                     var sound = currentAction.sound;
-
-                    // get animation
                     var animation = currentAction.anima;
 
-
                     if (sound) {
-                        //this.playSound(speaker, sound);
+                        this.playSound(sound);
                     }
 
                     if (animation) {
                         currentImage = animation + ".jpg";
                     }
 
-                    // TODO remove this hack
                     if (!sound && !animation) {
                         checkContinue();
+                    } else if (!sound && animation) {
+                        setTimeout(function() {
+                            checkContinue();
+                        }, _nonVerbalAnimationTime);
                     }
-
-
                     break;
 
                 default:
-                // no op
+                    // no op
             }
         }
 
+        // get speaker
         var speaker = ActiveDialogStore.getCurrentSpeakerName();
 
         // get text
@@ -161,8 +160,27 @@ var ActiveDialogMobileView = React.createClass({
         };
     },
 
-    playSound: function(speaker, sound) {
-        // TODO play audio file
+    playSound: function(sound) {
+        // sound hack
+        sound = sound.split(',')[0];
+
+        if (this.refs.activeDialogAudioRef && this.refs.activeDialogAudioRef.refs.audioRef) {
+            var player = this.refs.activeDialogAudioRef.refs.audioRef;
+            player.setAttribute('src', this.state.mediaPath + sound + '.mp3');
+            player.addEventListener('ended', this.soundEnded);
+            player.load();
+            player.play();
+        }
+    },
+
+    soundEnded: function(event) {
+        if (event.currentTarget) {
+            event.currentTarget.removeEventListener('ended', this.soundEnded);
+        }
+
+        // TODO set background
+
+        checkContinue();
     },
 
     /**
@@ -194,9 +212,9 @@ var ActiveDialogMobileView = React.createClass({
 
         if (this.state.info) {
 
+            // get url for the images
             var imgUrl = this.state.mediaPath + this.state.currentImage;
 
-            console.log(imgUrl);
             // get image style
             imageStyle = {
                 background: "url('" + imgUrl + "') no-repeat",
@@ -239,12 +257,24 @@ var ActiveDialogMobileView = React.createClass({
                         <ActiveDialogEvaluation />
                         <RemediationView />
                     </div>
+                    <ActiveDialogAudio ref="activeDialogAudioRef" />
                 </div>
             );
-
         }
 
         return (content);
+    }
+});
+
+var ActiveDialogAudio = React.createClass({
+    shouldRender: true,
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return this.shouldRender;
+    },
+
+    render: function() {
+        this.shouldRender = false;
+        return (<audio ref="audioRef" src="" ></audio>);
     }
 });
 

@@ -13,6 +13,7 @@ var MultiNoteView = require('../components/pages/content/multiNote/MultiNoteView
 var VideoView = require('../components/pages/content/VideoView');
 var EthnoMapView = require('../components/pages/content/EthnoMapView');
 var ActiveDialogView = require('../components/pages/activity/active_dialog/ActiveDialogView');
+var ActiveDialogMobileView = require('../components/pages/activity/active_dialog/ActiveDialogMobileView');
 var ListeningComprehensionView = require('../components/pages/activity/ListeningComprehensionView');
 var MatchItemView = require('../components/pages/activity/MatchItemView');
 var MultiColumnPronunciationView = require('../components/pages/activity/MultiColumnPronunciationView');
@@ -38,6 +39,7 @@ var ObjexView = require('../components/pages/activity/objex/ObjexView');
 var ClosedCaptionActions = require('../actions/ClosedCaptionActions');
 var DevToolsActions = require('../actions/DevToolsActions');
 var Swipeable = require('../components/widgets/Swipeable');
+var AppStateStore = require('../stores/AppStateStore');
 
 function getPageState() {
     var page = null;
@@ -96,7 +98,11 @@ var ContentView = React.createClass({
         if (this.state.page) {
             switch (this.state.page.type) {
                 case PageTypeConstants.ACTIVE_DIALOG:
-                    page = <ActiveDialogView page={this.state.page} />;
+                    if (AppStateStore.isDesktop() !== true) {
+                        page = <ActiveDialogMobileView page={this.state.page} />;
+                    } else {
+                        page = <ActiveDialogView page={this.state.page} />;
+                    }
                     break;
                 case PageTypeConstants.LISTENING_COMPREHENSION:
                     page = <ListeningComprehensionView page={this.state.page} />;
