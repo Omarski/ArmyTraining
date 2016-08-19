@@ -166,19 +166,32 @@ var MatchItemView = React.createClass({
             draggedItemTarget: draggedItemTarget,
             draggedItemData: draggedItemData
         });
+
+        //remove highlight
+        $(".match-item-answer-drop-area").css({"border": "1px solid #ddd"});
+        if (self.state.lastDraggable) {
+            $(self.state.lastDraggable).css({"border": "1px solid #ddd"});
+        }
     },
 
     onDraggableClick: function(e){
-        console.log("dragging...");
-
-        // if ($(e.target).attr("style")){
-        //     console.log("a drag spot");
-        //     this.onTargetClick(e);
-        //     return false;
-        // }
 
         var self = this;
         var state = self.state;
+
+        if (e.target.style.opacity === "0" ) {
+            return false;
+        }
+        // if ($(e.target).attr("style").indexOf("opacity: 0") !== -1) {
+        //     console.log("Style: " + $(e.target).attr("style"));
+        //     return false;
+        // }
+        // if (self.state.lastDraggable){
+        //     console.log("a target spot");
+        //     self.onTargetClick(e);
+        //     return false;
+        // }
+
         var draggedItemLetter = "";
         var draggedItemTarget = "";
         var draggedItemData = "";
@@ -204,10 +217,20 @@ var MatchItemView = React.createClass({
         }
 
         //highlight
+        //"border":"4px solid #f6ae23",
         if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
-        $(e.target).css({"border":"2px solid #f6ae23"});
+        $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
+      
+        $(".match-item-answer-drop-area").each(
+            function(){
+                if ($(this).children().length < 2) $(this).css({"border":"4px solid #f6ae23", "boxSizing":"border-box", "-moz-box-sizing":"border-box", "-webkit-box-sizing":"border-box"});
+            });
 
-        $(".match-item-answer-drop-area").css({"border":"2px solid #f6ae23"});
+        $(".match-item-answer-drop-area-image").each(
+            function(){
+                if ($(this).children().length < 1) $(this).css({"border":"4px solid #f6ae23"});
+            });
+
         self.setState({
             draggedItemLetter: draggedItemLetter,
             draggedItemTarget: draggedItemTarget,
@@ -225,6 +248,7 @@ var MatchItemView = React.createClass({
     },
 
     onDropping: function(e){
+
         e.preventDefault();
         e.stopPropagation();
         var self = this;
@@ -343,10 +367,11 @@ var MatchItemView = React.createClass({
 
         var self = this;
         var state = self.state;
-        console.log("target click..");
+
         // if (!$(e.target).hasClass("dropped")){
-        //     //self.setState({lastDraggable:e.target});
-        //    // self.onDraggableClick(e);
+        //     self.setState({lastDraggable:e.target});
+        //     self.onDraggableClick(e);
+        //     console.log("target as draggable..");
         //     return false;
         // }
 
@@ -368,7 +393,7 @@ var MatchItemView = React.createClass({
 
         if (lastDraggable) {
             if ($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer")) {
-                
+
                 //if(drop location isn't taken)
                 var spotTaken = false;
                 answerState.map(function (item) {
@@ -385,80 +410,86 @@ var MatchItemView = React.createClass({
                     // spot taken
                 }
             }
-        }
+            //}
 
-        // clear answer if dragging off where it's placed.
-        if($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice") || $(e.target).hasClass("match-item-choice-td-text") || $(e.target).hasClass("match-item-image")) {
-            if( !!$(draggedItemTarget).css("opacity")){
-                if($(draggedItemTarget).parent().hasClass("match-item-answer-drop-area") || $(draggedItemTarget).parent().parent().hasClass("match-item-answer-drop-area-image")) {
-                    answerState.map(function (item) {
-                        if(draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData){
-                            item.isMoved = false;
-                            item.currentBox = "";
-                            item.currentBoxIndex = -1;
-                        }
-                    });
+            // clear answer if dragging off where it's placed.
+            if ($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice") || $(e.target).hasClass("match-item-choice-td-text") || $(e.target).hasClass("match-item-image")) {
+                if (!!$(draggedItemTarget).css("opacity")) {
+                    if ($(draggedItemTarget).parent().hasClass("match-item-answer-drop-area") || $(draggedItemTarget).parent().parent().hasClass("match-item-answer-drop-area-image")) {
+                        answerState.map(function (item) {
+                            if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
+                                item.isMoved = false;
+                                item.currentBox = "";
+                                item.currentBoxIndex = -1;
+                            }
+                        });
 
-                    $(".match-item-choices-container").map(function(i, index){
-                        if(index.attributes.getNamedItem("data-passed").value === draggedItemTarget.attributes.getNamedItem("data-passed").value ){
-                            $(index).css("opacity", "1.0");
-                            numMoved--;
+                        $(".match-item-choices-container").map(function (i, index) {
+                            if (index.attributes.getNamedItem("data-passed").value === draggedItemTarget.attributes.getNamedItem("data-passed").value) {
+                                $(index).css("opacity", "1.0");
+                                numMoved--;
+                            }
+                        });
+                    }
+                }
+            }
+
+            var itemFound = false;
+
+            if ($(draggedItemTarget).css("opacity") != 0.0 && (dropLocation !== "")) {
+                source.src = "data/media/Drop01.mp3";
+                if (audio && source) {
+                    audio.load();
+                    audio.play();
+                    audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+                }
+            }
+
+            if (state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.0) {
+                if (draggedItemLetter !== "" && dropLocation !== "") {
+                    answerState.map(function (item, index) {
+                        if (item.mediaType === "string") {
+                            if ($(draggedItemTarget)[0].textContent === item.passedData) {
+                                item.currentBox = dropLocation;
+                                item.currentBoxIndex = dropLocationIndex;
+                                item.isMoved = true;
+                                if ($(draggedItemTarget).hasClass("match-item-choices-container")) {
+                                    $(draggedItemTarget).css("opacity", "0.0");
+                                    numMoved++;
+                                }
+                                itemFound = true;
+                            }
+                        } else { // if( "image" || "audio" )
+
+                            if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
+                                item.currentBox = dropLocation;
+                                item.currentBoxIndex = dropLocationIndex;
+                                item.isMoved = true;
+                                if ($(draggedItemTarget).hasClass("match-item-choices-container")) {
+                                    $(draggedItemTarget).css("opacity", "0.0");
+                                    numMoved++;
+                                }
+                                itemFound = true;
+                            }
                         }
+
                     });
                 }
             }
-        }
 
-        var itemFound = false;
+            $(".match-item-answer-drop-area, .match-item-answer-drop-area-image").css({"border": "1px solid #ddd"});
 
-        if($(draggedItemTarget).css("opacity") != 0.0 && (dropLocation !== "") ){
-            source.src = "data/media/Drop01.mp3";
-            if(audio && source) {
-                audio.load();
-                audio.play();
-                audio.volume = SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume();
+            if (self.state.lastDraggable) {
+
+                $(self.state.lastDraggable).css({"-webkit-box-shadow":"inset 0px 0px 0px 1px #ddd", "-moz-box-shadow":"inset 0px 0px 0px 1px #ddd", "box-shadow":"inset 0px 0px 0px 1px #ddd"});
             }
+
+            self.setState({
+                answerState: answerState,
+                numMoved: numMoved,
+                lastDraggable: null
+            });
         }
-
-        if(state.numMoved !== state.answerState.length && $(draggedItemTarget).css("opacity") != 0.0) {
-            if (draggedItemLetter !== "" && dropLocation !== "") {
-                answerState.map(function (item, index) {
-                    if(item.mediaType === "string"){
-                        if ($(draggedItemTarget)[0].textContent === item.passedData) {
-                            item.currentBox = dropLocation;
-                            item.currentBoxIndex = dropLocationIndex;
-                            item.isMoved = true;
-                            if ($(draggedItemTarget).hasClass("match-item-choices-container")) {
-                                $(draggedItemTarget).css("opacity", "0.0");
-                                numMoved++;
-                            }
-                            itemFound = true;
-                        }
-                    }else{ // if( "image" || "audio" )
-
-                        if (draggedItemTarget.attributes.getNamedItem("data-passed").value === item.passedData) {
-                            item.currentBox = dropLocation;
-                            item.currentBoxIndex = dropLocationIndex;
-                            item.isMoved = true;
-                            if ($(draggedItemTarget).hasClass("match-item-choices-container")) {
-                                $(draggedItemTarget).css("opacity", "0.0");
-                                numMoved++;
-                            }
-                            itemFound = true;
-                        }
-                    }
-
-                });
-            }
-        }
-
-        $(".match-item-answer-drop-area").css({"border":"1px solid #ddd"});
-        if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
-        
-        self.setState({
-            answerState: answerState,
-            numMoved: numMoved
-        })
     },
 
     onClick: function(e){
@@ -504,6 +535,11 @@ var MatchItemView = React.createClass({
         $(".match-item-choices-container").each(function(i, item){
             $(item).css("opacity", "1.0");
         });
+
+        $(".match-item-answer-drop-area, .match-item-answer-drop-area-image").css({"border": "1px solid #ddd"});
+        if (self.state.lastDraggable) {
+            $(self.state.lastDraggable).css({"-webkit-box-shadow":"inset 0px 0px 0px 1px #ddd", "-moz-box-shadow":"inset 0px 0px 0px 1px #ddd", "box-shadow":"inset 0px 0px 0px 1px #ddd"});
+        }
 
         self.setState({
             numMoved: 0,
