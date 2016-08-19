@@ -197,10 +197,37 @@ input[type=radio] {
     right: 0px;
     margin-top: 0px;
   }
+
+  .listening-comp-image img {
+        width: 100%;
+      }
+
+  .multiple-choice-feedback-icon {
+    margin-left: 4px;
+  }
+
+  .coach-feedback-text {
+    margin-left: 5px;
+    font-size: 14px;
+  }
+
+  .listening-comp-choices-container .list-group-item .checkbox label {
+    padding-left: 15px;
+  }
+
 }
 
 @media screen and (max-width: 320px) {
   .multiple-choice-container .multiple-choice-flex .infoMediaContainer .image-caption-container #captionImage {
     width: 100%;
+  }
+
+  .multiple-choice-feedback-icon {
+    margin-left: 3px;
+  }
+
+  .coach-feedback-text {
+    margin-left: 4px;
+    font-size: 12px;
   }
 }
