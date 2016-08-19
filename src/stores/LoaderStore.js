@@ -233,8 +233,8 @@ AppDispatcher.register(function(action) {
             LoaderStore.emitChange();
             break;
         case LoaderConstants.LOADER_LOAD:
+            load();
             setTimeout(function(){
-                load();
                 LoaderStore.emitChange();
             }, 1);
 
