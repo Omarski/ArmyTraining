@@ -169,7 +169,14 @@ var MatchItemView = React.createClass({
     },
 
     onDraggableClick: function(e){
-        
+        console.log("dragging...");
+
+        // if ($(e.target).attr("style")){
+        //     console.log("a drag spot");
+        //     this.onTargetClick(e);
+        //     return false;
+        // }
+
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";
@@ -334,10 +341,17 @@ var MatchItemView = React.createClass({
 
     onTargetClick: function(e){
 
-        e.preventDefault();
-        e.stopPropagation();
         var self = this;
         var state = self.state;
+        console.log("target click..");
+        // if (!$(e.target).hasClass("dropped")){
+        //     //self.setState({lastDraggable:e.target});
+        //    // self.onDraggableClick(e);
+        //     return false;
+        // }
+
+        e.preventDefault();
+        e.stopPropagation();
         var numMoved = state.numMoved;
         var answerState = state.answerState;
         var audio = document.getElementById('mainViewAudio');
@@ -354,8 +368,7 @@ var MatchItemView = React.createClass({
 
         if (lastDraggable) {
             if ($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer")) {
-
-                console.log("Dropped on target");
+                
                 //if(drop location isn't taken)
                 var spotTaken = false;
                 answerState.map(function (item) {
@@ -477,6 +490,9 @@ var MatchItemView = React.createClass({
         var state = self.state;
         var answerState = state.answerState;
 
+        //allow interaction
+        $("a[draggable = 'false']").attr("draggable","true").css("pointerEvents","auto");
+
         answerState.map(function (item) {
             item.isMoved = false;
             item.currentBox = "";
@@ -525,6 +541,10 @@ var MatchItemView = React.createClass({
         var numMoved = state.numMoved;
 
         if(numMoved === numQuestions){
+
+            //prevent more dragging
+            $("a[draggable = 'true']").attr("draggable","false").css("pointerEvents","none");
+
             var isCorrect = true;
             // check if correct and update accordingly
 

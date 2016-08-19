@@ -261,9 +261,10 @@ var CultureQuestQuiz = React.createClass({
                         self.resetQuestion();
                         self.updateTimerController("play");
                     }else{
+                        answerObj["question"+ answerObj.onQuestion].answered = true;
+                        self.viewUpdate({task:"addAnswerOrder", value:completedIndex});
                         setTimeout(function(){
                             self.awardPuzzlePiece();
-                            self.viewUpdate({task:"addAnswerOrder", value:completedIndex});
                         },2000);
                     }
                 }, 2000);
