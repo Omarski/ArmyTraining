@@ -455,29 +455,40 @@ var TOCPageRow = React.createClass({
     render: function() {
         var cls = '';
         var icon = '';
+        var iconToolTip = '';
         var itemState = this.props.item.state || null;
+        var self = this;
 
         if (PageStore.page() && this.props.item.xid === PageStore.page().xid) {
             cls += ' current';
             icon = (<img src="images/icons/currentpage.png"/>);
+            iconToolTip = LocalizationStore.labelFor("footer", "star");
         } else if (itemState && itemState.visited) {
             if (itemState.complete && itemState.passed) {
                 icon = (<img src="images/icons/completeexplorer.png"/>);
+                iconToolTip = LocalizationStore.labelFor("footer", "greenCheckmark");
             }
             else if (itemState.complete) {
                 icon = (<img src="images/icons/failedquiz.png"/>);
+                iconToolTip = LocalizationStore.labelFor("footer", "redX");
             } else {
                 icon = (<img src="images/icons/inprogress.png"/>);
                 cls += ' visited';
+                iconToolTip = LocalizationStore.labelFor("footer", "halfCircle");
             }
         } else {
             cls += ' not-seen';
             icon = (<img src="images/icons/notseen.png"/>);
+            iconToolTip = LocalizationStore.labelFor("footer", "emptyCircle");
         }
 
         return (
             <li className={"list-group-item main-footer-page-row main-footer-row" + cls} onClick={this.loadPage.bind(this, this.props.item, this.props.chapter, this.props.unit)}>
-                <span className="badge">
+                <span className="badge"
+                      alt={iconToolTip}
+                      aria-label={iconToolTip}
+                      title = {iconToolTip}
+                >
                     {icon}
                 </span>
                 <a href="#">

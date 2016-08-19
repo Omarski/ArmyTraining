@@ -141,6 +141,7 @@ function getPageState(cmp, props) {
                 var mediaCaption = "";
 
                 // if no info tag, use info on media object
+
                 if(props.page.info && props.page.info.property){
                     props.page.info.property.map(function(item){
                         switch(item.name){
@@ -158,11 +159,14 @@ function getPageState(cmp, props) {
                         }
                     });
                 }
+
                 if( (mediaTitle === "") && (mediaCaption !== "") ){
                     mediaTitle = mediaCaption;
                 }
                 if( (altText === "") && (mediaCaption !== "") ){
                     altText = mediaCaption;
+                } else if ( (altText === "") && (mediaCaption === "") && (mediaTitle !== "") ) {
+                    altText = mediaTitle;
                 }
 
                 /*

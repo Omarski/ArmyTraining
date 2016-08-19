@@ -100,8 +100,8 @@ function getBookmarkDataLocalStorage() {
 }
 
 function getBookmarkDataSCORM() {
+    
     var loadedDataString = SCORMActions.bookmarkLoad();
-
     // convert from JSON string to object
     var loadedDataObject = null;
     try {

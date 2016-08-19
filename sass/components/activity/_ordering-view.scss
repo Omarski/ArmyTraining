@@ -80,7 +80,7 @@
   border-radius: 4px;
   height: 150px;
   width: 150px;
-  min-height: 55px;
+  min-height: 50px;
   position: relative;
 }
 
@@ -111,12 +111,21 @@
       .or-answer-drop-area {
         margin-left: 0px;
         margin-right: 0px;
-        height: auto;
+        margin-top: 0px;
+        height: 50px;
         width: 90%;
+        padding: 0px;
         .or-drop-area-index {
           margin-top: 0;
         }
       }
+    }
+  }
+
+  .or-text-choice{
+    &.or-answer-placed {
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
   }
 
