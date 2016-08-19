@@ -198,7 +198,7 @@ function getPageState(cmp, props) {
                         if (data.transcript !== "") {
                             cc = (<ClosedCaption transcript={data.transcript}/>);
                         }
-                        
+
                         result = (
                             <div className={data.videoType + " info-view-video-container"} key={index + filePath}>
                                 <video title={mediaTitle}
