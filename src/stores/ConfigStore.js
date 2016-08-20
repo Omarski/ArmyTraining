@@ -27,6 +27,12 @@ function destroy() {
 var _needsASR = false;
 var _hasDLI = false;
 var _hasReference = false;
+var _hasHelp = false;
+var _hasSettings = false;
+var _hasBookmark = false;
+var _hasAbout = false;
+var _hasDownloadPDF = false;
+var _hasResetCourse = false;
 var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
 
 
@@ -47,6 +53,30 @@ var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
              // is there are reference section?
              if(data.hasOwnProperty('reference')){
                  _hasReference = true;
+             }
+
+             if(data.hasOwnProperty('help')){
+                 _hasHelp = true;
+             }
+
+             if(data.hasOwnProperty('settings')){
+                 _hasSettings = true;
+             }
+
+             if(data.hasOwnProperty('bookmark')){
+                 _hasBookmark = true;
+             }
+
+             if(data.hasOwnProperty('about')){
+                 _hasAbout = true;
+             }
+
+             if(data.hasOwnProperty('downloadPDF')){
+                 _hasDownloadPDF = true;
+             }
+
+             if(data.hasOwnProperty('resetCourse')){
+                 _hasResetCourse = true;
              }
 
              // get storage type
@@ -85,6 +115,30 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
 
     hasReference: function(){
         return (_hasReference);
+    },
+
+    hasHelp: function(){
+        return (_hasReference);
+    },
+
+    hasSetting: function(){
+        return (_hasSettings);
+    },
+
+    hasBookmark: function(){
+        return (_hasBookmark);
+    },
+
+    hasAbout: function(){
+        return (_hasAbout);
+    },
+
+    hasDownloadPDF: function(){
+        return (_hasDownloadPDF);
+    },
+
+    hasReset: function(){
+        return (_hasReset);
     },
 
     emitChange: function() {
