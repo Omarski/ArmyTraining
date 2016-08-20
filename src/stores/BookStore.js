@@ -32,19 +32,6 @@ function create(data) {
 }
 
 /**
- * Update a BOOK item.
- * @param  {string} id
- * @param {object} updates An object literal containing only the data to be
- *     updated.
- */
-function update(id, updates) {
-    if (_books[id] && _books[id].state) {
-        _books[id].state = assign({}, _books[id].state, updates);
-    }
-
-}
-
-/**
  * Update all of the BOOK items with the same object.
  * @param  {object} updates An object literal containing only the data to be
  *     updated.
@@ -54,7 +41,17 @@ function updateAll(updates) {
         update(id, updates);
     }
 }
-
+/**
+ * Update a BOOK item.
+ * @param  {string} id
+ * @param {object} updates An object literal containing only the data to be
+ *     updated.
+ */
+function update(id, updates) {
+    if (_books[id] && _books[id].state) {
+        _books[id].state = assign({}, _books[id].state, updates);
+    }
+}
 /**
  * Delete a BOOK item.
  * @param  {string} id

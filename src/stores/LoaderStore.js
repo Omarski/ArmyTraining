@@ -237,7 +237,6 @@ AppDispatcher.register(function(action) {
                 load();
                 LoaderStore.emitChange();
             }, 1);
-
             break;
 
         default:

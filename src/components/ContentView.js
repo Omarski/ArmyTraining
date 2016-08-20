@@ -38,7 +38,6 @@ var MissionConnectView = require('../components/pages/activity/mission_connect/M
 var ObjexView = require('../components/pages/activity/objex/ObjexView');
 var ClosedCaptionActions = require('../actions/ClosedCaptionActions');
 var DevToolsActions = require('../actions/DevToolsActions');
-var Swipeable = require('../components/widgets/Swipeable');
 var AppStateStore = require('../stores/AppStateStore');
 
 function getPageState() {
@@ -265,12 +264,12 @@ var ContentView = React.createClass({
 
         return (
             <div className="main-content-container">
-                <Swipeable className={'swipe-container container main-content ' + cls} onSwipedLeft={self.handleLeftSwipe} onSwipedRight={self.handleRightSwipe}>
+                <div className={'container main-content ' + cls}>
                     <div className={cls} key={"content-" + pageId}>
                         {page}
                     </div>
                     <div className="main-content-bottom-border"></div>
-                </Swipeable>
+                </div>
             </div>
         );
     },

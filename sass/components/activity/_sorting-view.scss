@@ -156,8 +156,20 @@
     padding-left: 0px;
   }
 
+  .row .sorting-view-header-prompt {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+
+  .sorting-drop-area {
+    min-height: 60px;
+  }
+
   .sorting-view-container {
     margin: 5px 15px;
+    .sorting-feedback-text {
+      min-height: 0px;
+    }
   }
 
     .container {
@@ -165,6 +177,7 @@
 
       .sorting-view-header-prompt {
         margin-left: 10px;
+        margin-bottom: 5px;
       }
 
       .sorting-columnA {

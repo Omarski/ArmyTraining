@@ -327,6 +327,7 @@ var InfoView = React.createClass({
        // store.set('settings', settings);
         // ...
 
+
         SettingsActions.updateVoiceVolume(vol);
     },
 
@@ -381,9 +382,6 @@ var InfoView = React.createClass({
                     </div>
                 );
             }
-
-
-
 
             noteDisplay = (
                 <div
