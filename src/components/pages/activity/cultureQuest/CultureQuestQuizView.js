@@ -24,7 +24,7 @@ var CultureQuestQuiz = React.createClass({
             correctAnswer:"",
             hintIntro: this.props.imageData.hintBlurb,
             answerRevealIntro: "Not quite, but here's the answer you are looking for.",
-            wrongAnswerText:"That is incorrect. But since we are short on time, I want you to take this with you anyhow.",
+            wrongAnswerText:"That is incorrect, but I would like you to have this puzzle piece anyway.",
             correctAnswerText:"Yes, that's correct. Here's what you're looking for.",
             hintMode: false,
             skipMode: false,
@@ -73,7 +73,7 @@ var CultureQuestQuiz = React.createClass({
             question = selectedJSON['prompt'+ answerObj.onQuestion];
         }
 
-        var questionDisplayObj = {'intro': 'I\'ve been expecting you. I don\'t have much time.',
+        var questionDisplayObj = {'intro': '',
                         'introL2': intro2,
                         'question': question
                         };

@@ -131,8 +131,7 @@ var PuzzleMapView = React.createClass({
             var rand = Math.floor(Math.random()*puzzlePieces.length);
             if ($.inArray(rand, randColl) === -1) randColl.push(rand);
         }
-
-        console.log(randColl);
+        
 
         for (var i = 0; i < randColl.length ; i++){
             var nextRand = parseInt(randColl[i]);
@@ -268,6 +267,28 @@ var PuzzleMapView = React.createClass({
         this.setState({audioController:mode});
     },
 
+    viewUpdate: function(update){
+
+        var self = this;
+        switch (update.task){
+
+            case "puzzlePickup":
+                var pickupAudio = self.state.mediaPath + "MatchPickup.mp3";
+                self.playAudio({id:"pickup", autoPlay:true, sources:[{format:"mp3", url:pickupAudio}]});
+                break;
+
+            case "puzzleRight":
+                var rightAudio = self.state.mediaPath + "MatchDrop.mp3";
+                self.playAudio({id:"pickup", autoPlay:true, sources:[{format:"mp3", url:rightAudio}]});
+                break;
+
+            case "puzzleWrong":
+                var wrongAudio = self.state.mediaPath + "PMIncorrect.mp3";
+                self.playAudio({id:"pickup", autoPlay:true, sources:[{format:"mp3", url:wrongAudio}]});
+                break;
+        }
+    },
+
     render: function() {
         var self = this;
         var state = self.state;
@@ -288,7 +309,14 @@ var PuzzleMapView = React.createClass({
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
 
                 <div id="puzzleMapViewBlock">
-                    
+
+                    {self.state.audioObj ?
+                        <AudioPlayer
+                            id = {self.state.audioObj.id}
+                            sources    = {self.state.audioObj.sources}
+                            autoPlay   = {self.state.audioObj.autoPlay}
+                        /> : null}
+
                     <div className="puzzle-map-view-mapCont" style={backMapStyle}>
 
                         {self.state.showInstructions ? <div style={instStyle}>Click and drag the country pieces to their correct location on the map.</div>:null}
@@ -300,6 +328,7 @@ var PuzzleMapView = React.createClass({
                             updateHUDView = {self.updateHUDView}
                             updatePhase = {self.updatePhase}
                             updateAttempts = {self.updateAttempts}
+                            viewUpdate = {self.viewUpdate}
                         />:null}
 
                         {state.showHUD ? <PuzzleMapHUDView

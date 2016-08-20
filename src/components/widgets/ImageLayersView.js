@@ -48,8 +48,6 @@ var ImageLayersView = React.createClass({
         onClick: PropTypes.func.isRequired
     },
 
-    componentWillMount: function() {
-    },
 
     componentDidMount: function() {
 
@@ -69,9 +67,6 @@ var ImageLayersView = React.createClass({
             state.loadedImageColl[i].src = imageColl[i];
             state.loadedImageColl[i].onload = self.loadCounter;
         }
-    },
-
-    componentWillUnmount: function() {
     },
 
     loadCounter: function(){
@@ -177,7 +172,7 @@ var ImageLayersView = React.createClass({
             self.detectRegion(e, x, y);
         }
         else if (mode == "click"){
-            self.props.onClick(self.state.lastHighlightedRegion);
+            self.props.onClick(self.state.lastHighlightedRegion, e.pageX, e.pageY);
         }
     },
 

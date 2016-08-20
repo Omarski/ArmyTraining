@@ -27,7 +27,8 @@ var PuzzleMapDnDView = React.createClass({
         renderHUD: PropTypes.func.isRequired,
         updateHUDView: PropTypes.func.isRequired,
         updatePhase: PropTypes.func.isRequired,
-        updateAttempts: PropTypes.func.isRequired
+        updateAttempts: PropTypes.func.isRequired,
+        viewUpdate: PropTypes.func.isRequired
     },
 
     componentDidMount: function(){
@@ -93,6 +94,7 @@ var PuzzleMapDnDView = React.createClass({
     handleMouseDown: function(e){
         this.props.updateHUDView(false);
         this.setState({isDragging:true});
+        this.props.viewUpdate({task:"puzzlePickup", value:null});
     },
 
     handleMouseUp: function(e){
@@ -108,7 +110,11 @@ var PuzzleMapDnDView = React.createClass({
         var imgOffsetY = (canMouseY - imgBounds.top) - (parseInt(self.state.imgBounds.height)/2);
         if ((imgOffsetX >= -50 && imgOffsetX <= 50) && (imgOffsetY >= -50 && imgOffsetY <= 50)){
             self.updateBottomCanvas("labeled");
-        }else self.updateBottomCanvas("hint");
+            self.props.viewUpdate({task:"puzzleRight", value:null});
+        }else {
+            self.updateBottomCanvas("hint");
+            self.props.viewUpdate({task:"puzzleWrong", value:null});
+        }
     },
 
     handleMouseOut: function(e){
@@ -217,6 +223,10 @@ var PuzzleMapDnDView = React.createClass({
                 self.setState({dropStatus:"hint"});
             }
         }
+    },
+
+    viewUpdate: function(update){
+        this.props.viewUpdate(update);
     },
 
     render: function() {
