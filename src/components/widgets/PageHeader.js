@@ -159,12 +159,25 @@ var PageHeader = React.createClass({
             pageTitle = "";
         }
 
+        var bookMarkDesktop = "";
+        if(ConfigStore.hasBookmark()) {
+            bookMarkDesktop = (
+                <li>{bookmarkBtn}</li>
+            );
+        }
+        var playHeaderAudio = "";
+        if(ConfigStore.hasPageHeaderAudio()) {
+            playHeaderAudio = (
+                <li><AudioControl /></li>
+            );
+        }
+
         return  (
             <div className="page-header-custom">
                 <div className="page-header-custom-title">
                     <ul className="page-header-controls">
-                        <li><AudioControl /></li>
-                        <li>{bookmarkBtn}</li>
+                        {playHeaderAudio}
+                        {bookMarkDesktop}
                     </ul>
                     <div className="page-title-height">{pageTitle}
                         <small>

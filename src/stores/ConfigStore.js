@@ -33,6 +33,7 @@ var _hasBookmark = false;
 var _hasAbout = false;
 var _hasDownloadPDF = false;
 var _hasResetCourse = false;
+var _hasPageHeaderAudio = false;
 var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
 
 
@@ -77,6 +78,10 @@ var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
 
              if(data.hasOwnProperty('resetCourse')){
                  _hasResetCourse = true;
+             }
+
+             if(data.hasOwnProperty('pageHeaderAudio')){
+                 _hasPageHeaderAudio = true;
              }
 
              // get storage type
@@ -138,7 +143,11 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
     },
 
     hasReset: function(){
-        return (_hasReset);
+        return (_hasResetCourse);
+    },
+
+    hasPageHeaderAudio: function(){
+        return (_hasPageHeaderAudio);
     },
 
     emitChange: function() {

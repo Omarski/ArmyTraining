@@ -100,6 +100,7 @@ var BreadcrumbsView = React.createClass({
         PageStore.removeChangeListener(this._onChange);
     },
     render: function() {
+
         var popover =  (<Popover id="bookmarksPopover" title='Bookmarks'>
             <ListGroup key="bookmarkbreadcrumbsbutton">
                 <Button
