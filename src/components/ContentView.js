@@ -48,7 +48,6 @@ function getPageState() {
             NotificationActions.hide();
         });
     }
-    console.log("page", page);
     return {
         page: page
     };

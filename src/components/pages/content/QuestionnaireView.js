@@ -255,7 +255,6 @@ var QuestionnaireView = React.createClass({
         var page = self.state.page;
         var title = this.state.title;
         var sources = self.state.sources;
-        console.log("state", state);
 
         var choices;
         var _this = this;
