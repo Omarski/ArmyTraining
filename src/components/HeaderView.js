@@ -18,6 +18,10 @@ var PanelGroup = require("react-bootstrap/lib/PanelGroup");
 var Panel = require("react-bootstrap/lib/Panel");
 var ReferenceActions = require("../actions/ReferenceActions");
 var AppStateStore = require("../stores/AppStateStore");
+var PageActions = require('../actions/PageActions');
+var UnitActions = require('../actions/UnitActions');
+
+
 
 
 function getBookState() {
@@ -90,6 +94,7 @@ var HeaderView = React.createClass({
     },
 
     toggleMute: function() {
+        console.log("Toggle mute");
         var settings = store.get('settings') || {};
         var previousVolume = this.state.previousVolume;
         var vol = 1.0;
@@ -130,7 +135,10 @@ var HeaderView = React.createClass({
         BookStore.removeChangeListener(this._onChange);
         ConfigStore.removeChangeListener((this._onChange));
     },
-    
+    mobileResetProgress: function(){
+        PageActions.reset();
+        UnitActions.reset();
+    },
     bookmarkFunction: function(){
 
             var bm = {
@@ -175,12 +183,77 @@ var HeaderView = React.createClass({
 
 
         var dliView = "";
-        var referenceView = "";
+        var referenceViewDesktop = "";
+        var helpDesktopView = "";
+        var settingsView = "";
+        var bookmarksView = "";
+        var aboutView = "";
+        var downloadPDFView = "";
+        var resetView = "";
         if(ConfigStore.hasDLI()){
             dliView = (<DliView />);
         }
         if(ConfigStore.hasReference()){
-            referenceView = (<ReferenceView className="icons-mobile-menu" ref="foo" />);
+            var referenceView = (<ReferenceView className="icons-mobile-menu" ref="foo" />);
+            referenceViewDesktop = (
+            <NavItem className="reference-guide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView}
+                     title={LocalizationStore.labelFor("header", "tooltipReference")}
+                     alt={LocalizationStore.labelFor("header", "tooltipReference")}
+                     aria-label={LocalizationStore.labelFor("header", "tooltipReference")}>{referenceView}<p>ReferenceView</p></NavItem>
+            );
+        }
+        if(ConfigStore.hasHelp()){
+            helpDesktopView = (<NavItem eventKey={3} href="#" onClick={this.showHelp}
+                                        title={LocalizationStore.labelFor("header", "tooltipHelp")}
+                                        alt={LocalizationStore.labelFor("header", "tooltipHelp")}
+                                        type="button"
+                                        className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set help-button-mobile"
+                                        aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
+                                            <div><img src="images/icons/helpn.png" className="icons-mobile-menu"/></div><p>{LocalizationStore.labelFor("header", "tooltipHelp")}</p>
+                                </NavItem>
+                                );
+        }
+        if(ConfigStore.hasSetting()){
+            settingsView = (<SettingsView isNav={AppStateStore.isMobile()}/>);
+        }
+        if(ConfigStore.hasBookmark()) {
+            bookmarksView = (<BookmarksView id="bookmarksViewId" isNav={AppStateStore.isMobile()} className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState}/>);
+        }
+        if(ConfigStore.hasAbout()) {
+            aboutView = (
+                <NavItem eventKey={1} href="#" onClick={console.log("Show About!!")}
+                         title={LocalizationStore.labelFor("header", "about")}
+                         alt={LocalizationStore.labelFor("header", "about")}
+                         type="button"
+                         className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set help-button-mobile"
+                         aria-label={LocalizationStore.labelFor("header", "about")}>
+                            <div><img src="images/icons/helpn.png" className="icons-mobile-menu"/></div><p>{LocalizationStore.labelFor("header", "about")}</p>
+                </NavItem>
+            );
+        }
+        if(ConfigStore.hasDownloadPDF()) {
+            downloadPDFView = (
+                <NavItem eventKey={2} href="#" onClick={console.log("Download PDF!")}
+                         title={LocalizationStore.labelFor("header", "downloadPDF")}
+                         alt={LocalizationStore.labelFor("header", "downloadPDF")}
+                         type="button"
+                         className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set help-button-mobile"
+                         aria-label={LocalizationStore.labelFor("header", "downloadPDF")}>
+                    <div><img src="images/icons/helpn.png" className="icons-mobile-menu"/></div><p>{LocalizationStore.labelFor("header", "downloadPDF")}</p>
+                </NavItem>
+            );
+        }
+        if(ConfigStore.hasReset()) {
+            resetView = (
+                <NavItem eventKey={3} href="#" onClick={self.mobileResetProgress}
+                         title={LocalizationStore.labelFor("header", "resetCourse")}
+                         alt={LocalizationStore.labelFor("header", "resetCourse")}
+                         type="button"
+                         className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set help-button-mobile"
+                         aria-label={LocalizationStore.labelFor("header", "resetCourse")}>
+                    <div><img src="images/icons/helpn.png" className="icons-mobile-menu"/></div><p>{LocalizationStore.labelFor("header", "resetCourse")}</p>
+                </NavItem>
+            );
         }
 
         var changeNavBarCollapse = function () {
@@ -195,26 +268,18 @@ var HeaderView = React.createClass({
                     <Navbar.Header id="navbarHeader" className="main-navbar-brand">
                         <img src="images/VCAT_H5_logo.jpg" className="pull-left vcat-logo"/>
                         <Navbar.Brand>
-                                <a className="navbar-brand" href="#">{this.state.title}</a>
+                            <a className="navbar-brand" href="#">{this.state.title}</a>
                         </Navbar.Brand>
                         <Navbar.Toggle onClick={changeNavBarCollapse} />
                     </Navbar.Header>
                     <NavbarCollapse style={self.state.hideInClass} id="collapseNav">
                         <Nav id="navId" pullRight className="reduce-padding-around-a-element-for-nav-buttons ul-containing-navbar-buttons">
-                            <NavItem className="reference-guide-hide-on-mobile"eventKey={1} href="#" onClick={self.showReferenceView}
-                                     title={LocalizationStore.labelFor("header", "tooltipReference")}
-                                     alt={LocalizationStore.labelFor("header", "tooltipReference")}
-                                     aria-label={LocalizationStore.labelFor("header", "tooltipReference")}>{referenceView}<p>ReferenceView</p></NavItem>
+                            {referenceViewDesktop}
+                            {aboutView}
+                            {downloadPDFView}
+                            {resetView}
                             {dliView}
-                            <NavItem eventKey={3} href="#" onClick={this.showHelp}
-                                     title={LocalizationStore.labelFor("header", "tooltipHelp")}
-                                     alt={LocalizationStore.labelFor("header", "tooltipHelp")}
-                                     type="button"
-                                     className="btn btn-default btn-lg btn-link main-nav-bar-button btn-set"
-                                     aria-label={LocalizationStore.labelFor("header", "tooltipHelp")}>
-                                <div><img src="images/icons/helpn.png" className="icons-mobile-menu"/></div><p>Help</p>
-                            </NavItem>
-
+                            {helpDesktopView}
                             <NavItem eventKey={4} href="#" onClick={this.toggleMute}
                                      title={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
                                      alt={this.state.muted ? LocalizationStore.labelFor("header", "tooltipUnMute") : LocalizationStore.labelFor("header", "tooltipMute")}
@@ -224,13 +289,14 @@ var HeaderView = React.createClass({
                                 {muteIcon}
                                 <p>Toggle Mute</p>
                             </NavItem>
-                            <SettingsView isNav={AppStateStore.isMobile()}/>
-                            <BookmarksView id="bookmarksViewId" isNav={AppStateStore.isMobile()} className="hide-bookmarksview-for-desktop" getPageStateFromParent={getPageState} />
+                            {settingsView}
+                            {bookmarksView}
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>
             </div>
         );
+
     },
 
 

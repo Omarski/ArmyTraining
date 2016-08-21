@@ -265,6 +265,7 @@ button.navbar-toggle:hover {
     }
   }
 }
+
 @media screen and (max-width: 767px) {
 
   #collapseNav {
@@ -314,10 +315,10 @@ button.navbar-toggle:hover {
     border: #5A5C51 solid 1px;
   }
 
-  .navbar-fixed-top .container .navbar-collapse .reduce-padding-around-a-element-for-nav-buttons .reference-guide-hide-on-mobile {
+  .navbar-fixed-top .container .navbar-collapse .reduce-padding-around-a-element-for-nav-buttons .reference-guide-on-mobile {
   }
 
-  .reference-guide-hide-on-mobile {
+  .reference-guide-on-mobile {
     a {
       text-align: center;
       line-height: 25px;
@@ -503,12 +504,6 @@ button.navbar-toggle:hover {
       }
     }
   }
-
-}
-
-@media screen and (max-width: 565px) {
-
-  .navbar-fixed-top .container .reference-guide-hide-on-mobile a { display: none;}
 
 }
 
