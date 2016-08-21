@@ -14,7 +14,8 @@
     "image": "data/media/briefing.jpg"
   },
   "closedCaption": {
-    "lblTitle": "Transcript"
+    "lblTitle": "Transcript",
+    "tooltipClose": "Close"
   },
   "evaluation": {
     "btnContinue": "Continue",
