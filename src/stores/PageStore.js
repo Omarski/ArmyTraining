@@ -442,19 +442,29 @@ function load(data) {
             saveCurrentPage();
 
             // after load actions
-            PageActions.complete(result);
-            FooterActions.enableAll(); // TODO: dont like this here <---
+            setTimeout(function(){
+                PageActions.complete(result);
+            });
+
+            setTimeout(function() {
+                FooterActions.enableAll(); // TODO: dont like this here <---
+            });
+
             if (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_AUTOPASS) !== null) {
                 markChapterComplete();  // TODO: dont like this here <---
                 markChapterPassed();
             }
             if ((Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_POSTTEST) !== null) ||
                 (Utils.findInfo(_currentChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
-                FooterActions.disabledPrevious();
+                setTimeout(function() {
+                    FooterActions.disabledPrevious();
+                });
             }
 
             if (isFirstPageOfUnit()) { // TODO: dont like this here <---
-                FooterActions.disabledPrevious();
+                setTimeout(function() {
+                    FooterActions.disabledPrevious();
+                });
             }
 
 

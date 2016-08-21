@@ -205,7 +205,7 @@ var QuizAnswerRow = React.createClass({
         }
 
         return (
-            <tr className="">
+            <tr className="quiz-answer-row">
                 <td>
                     <div className={className}>
                         {icon}
