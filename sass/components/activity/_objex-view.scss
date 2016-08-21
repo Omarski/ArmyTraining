@@ -183,7 +183,7 @@
 //vav
 .objex-view-navCont{
   position: absolute;
-  top:439px;
+  top:442px;
   left:0;
   width:1000px;
   height:105px;
@@ -277,7 +277,7 @@
   }
 }
 
-.objex-view-textHalfway{
+.objex-view-textHalfway, .objex-view-loadingText{
   display:none;
   width:399px;
   height:79px;
@@ -290,4 +290,8 @@
   top:37%;
   padding-left:57px;
   padding-top:6px;
+}
+
+.objex-view-loadingText{
+  display:block;
 }

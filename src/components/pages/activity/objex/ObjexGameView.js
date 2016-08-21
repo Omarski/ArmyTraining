@@ -101,7 +101,7 @@ var ObjexGameView = React.createClass({
         this.setState({layersCanvColl:canvasColl});
     },
 
-    onRegionClicked: function(canvasElement){
+    onRegionClicked: function(canvasElement, pageX, pageY){
 
         var self = this;
 
@@ -122,7 +122,16 @@ var ObjexGameView = React.createClass({
                                hintMode:false
                 });
 
-                $("#imageLayer_canvas_"+hit.hog_id).remove();
+                //add hit effect
+                var offset = $("#image-layers-view-back-image").offset();
+                context = canvasElement.getContext('2d');
+                var flareImg = new Image();
+                flareImg.src = self.props.mediaPath + 'objex/img/spark.png';
+                flareImg.onload = function(){
+                    context.drawImage(flareImg, pageX - offset.left - 30, pageY - offset.top - 32, 61, 66);
+                };
+
+                window.setTimeout(function(){$("#imageLayer_canvas_"+hit.hog_id).remove()},700);
 
                 self.viewUpdate({task:"successAudio", value:null});
             }

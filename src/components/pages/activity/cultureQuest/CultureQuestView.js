@@ -10,6 +10,7 @@ var CultureQuestPuzzleAwardView = require('./CultureQuestPuzzleAwardView');
 var CultureQuestPuzzleGameView = require('./CultureQuestPuzzleGameView');
 var PageHeader = require('../../../widgets/PageHeader');
 var AppStateStore = require('../../../../stores/AppStateStore');
+var ExplorerStore = require('../../../../stores/ExplorerStore');
 var UnsupportedScreenSizeView = require('../../../../components/UnsupportedScreenSizeView');
 
 function getPageState(props) {
@@ -68,12 +69,14 @@ var CultureQuestView = React.createClass({
 
     componentDidMount: function() {
         AppStateStore.addChangeListener(this._onAppStateChange);
+        ExplorerStore.addChangeListener(this._onExplorerStoreChange);
         //dim speech and pause
         $("#audioControlIcon , #audioControlButton").css({"opacity":".5", "pointer-events":"none"});
     },
 
     componentWillUnmount: function() {
         AppStateStore.removeChangeListener(this._onAppStateChange);
+        this.setState({audioObj:null});
     },
 
     prepIntroPopup: function(){
@@ -90,7 +93,7 @@ var CultureQuestView = React.createClass({
                 return(
                     <div className="popup-view-content">
                         <div className="culture-quest-view-popHeaderCont">
-                            <div className="culture-quest-view-popHeaderText">{"Welcome to ..."}</div>
+                            <div className="culture-quest-view-popHeaderText">{"Briefing"}</div>
                         </div>
                         <div className="popup-view-bodyText" style={txtBxStyle}>
                             <div>{self.state.imageData.briefText}</div>
@@ -172,15 +175,8 @@ var CultureQuestView = React.createClass({
     prepGoBackPopup: function(){
 
         var self = this;
-        //var iconStyle = {background:'url('+self.state.mediaPath+'alertIcon.png) no-repeat 100% 100%'};
 
         self.state.audioBgController("pause");
-
-        // for future title use
-        // <div className="culture-quest-goBackHeader">
-        //     <span className="culture-quest-goBackHeaderAlert" style={iconStyle}/>
-        //     <span className="culture-quest-goBackHeaderTitle">Message Box</span>
-        // </div>
 
         var popupObj = {
             id:"GoBack",
@@ -449,6 +445,7 @@ var CultureQuestView = React.createClass({
                         id = {self.state.audioObj.id}
                         sources    = {self.state.audioObj.sources}
                         autoPlay   = {self.state.audioObj.autoPlay}
+                        controller = {self.audioBgContr}
                     /> : null}
 
                     {self.state.audioBgObj ?
@@ -458,6 +455,7 @@ var CultureQuestView = React.createClass({
                             autoPlay   = {self.state.audioBgObj.autoPlay}
                             loop       = {self.state.audioBgObj.loop}
                             controller = {self.audioBgContr}
+
                         /> : null}
 
                     {self.state.popupObj ?
@@ -524,9 +522,17 @@ var CultureQuestView = React.createClass({
             this.setState(getPageState(this.props));
         }
     },
+
+    _onExplorerStoreChange: function () {
+        var self = this;
+        if (ExplorerStore.isVisible()) {
+            self.state.audioBgController("pause");
+        }else if (!ExplorerStore.isVisible() && self.state.audioObj) self.state.audioBgController("play");
+    },
     /**
      * Event handler for 'change' events coming from the BookStore
      */
+    
     _onChange: function() {
         this.setState(getPageState(this.props));
     }

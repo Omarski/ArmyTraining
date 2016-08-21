@@ -400,7 +400,7 @@ var SortingView = React.createClass({
         var answerState = state.answerState;
         
         //allow interaction
-        $("a[draggable = 'false']").attr("draggable","true").css("pointerEvents","auto");
+        $("a[draggable = 'false'], .choice").attr("draggable","true").css("pointerEvents","auto");
         
         answerState.map(function (item) {
             item.isMoved = false;

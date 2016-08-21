@@ -168,7 +168,7 @@ var OrderingView = React.createClass({
             $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
         }
         $(e.target).css({"border":"4px solid #f6ae23"});
-        
+
         $(".or-answer-drop-area").each(
             function(){
                 if ($(this).has("a").length < 1) $(this).css({"border":"4px solid #f6ae23"});
@@ -463,7 +463,7 @@ var OrderingView = React.createClass({
 
         self.setState({
             numMoved: 0,
-            answerState: answerState,
+            answerState: answerState
         });
     },
 

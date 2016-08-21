@@ -33,11 +33,12 @@ var ObjexInfoPopView = React.createClass({
         var popImgStyle = {background:'url('+img+') no-repeat', backgroundSize:'140px 140px'};
         var closeImg = this.props.mediaPath + "objex/img/close.png";
         var closeBtnStyle = {background:'url('+closeImg+') no-repeat 100% 100%'};
+        var popRight = (parseInt(objex.spotX) >= 500) ? 640:50;
 
         var popupObj = {
             id:"InfoPop",
             onClickOutside: null,
-            popupStyle: {height:'250px', width:'300px', top:'70px', right:'50px',
+            popupStyle: {height:'250px', width:'300px', top:'70px', right:popRight+'px',
                          background: '#fff', border:'2px solid #cccccc', padding:'5px', zIndex:'6'},
 
             content: function(){

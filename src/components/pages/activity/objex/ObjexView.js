@@ -27,7 +27,8 @@ function getPageState(props) {
         levelStats:{basic:[], advanced:[]},
         advancedLevel:false,
         showAdvanced:false,
-        jsonLoaded: false
+        jsonLoaded: false,
+        loading:false
     };
     
     if (props && props.page) {
@@ -81,7 +82,7 @@ var ObjexView = React.createClass({
         var self = this;
         var loadedObjexColl = [];
 
-        self.setState({loadCounter:0}, function(){
+        self.setState({loadCounter:0, loading:true}, function(){
 
             self.state["level"+self.state.currentLevel+"Data"].objects.map(function(img,index){
 
@@ -132,7 +133,7 @@ var ObjexView = React.createClass({
 
     onObjexReady: function(){
         var self = this;
-            self.setState({showGame:true});
+        self.setState({showGame:true, loading:false});
     },
 
     prepLevels: function(){
@@ -507,6 +508,8 @@ var ObjexView = React.createClass({
                 <PageHeader sources={sources} title={title} key={state.page.xid} />
 
                 <div id="missionConnectViewBlock">
+
+                    {self.state.loading ? <div className="objex-view-loadingText">Loading ...</div>:null}
 
                     {self.state.audioObj ?
                         <AudioPlayer
