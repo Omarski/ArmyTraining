@@ -294,7 +294,7 @@ var QuestionnaireView = React.createClass({
                         inputElement = (
                             <div className="checkbox">
                                 <label for={inputId}>
-                                    <input type="checkbox" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
+                                    <input type="checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                     {item.text}
                                 </label>
                             </div>);
