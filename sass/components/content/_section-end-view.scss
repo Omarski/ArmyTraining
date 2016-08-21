@@ -11,3 +11,21 @@
     margin: 20px;
   }
 }
+
+@media screen and (max-width: 420px) {
+  .section-end-container{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+
+    .row {
+      margin: 0px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      img {
+        max-width: 100%;
+        max-height: 69px;
+      }
+    }
+  }
+}
