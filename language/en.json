@@ -43,6 +43,7 @@
     "tooltipPrevious": "Previous",
     "tooltipIndexExpand": "Open Explorer",
     "tooltipIndexCollapse": "Close Explorer",
+    "tooltipClose": "Close",
     "lblRequired": "Required",
     "lblOptional": "Optional",
     "lblExplorer": "Explorer",
