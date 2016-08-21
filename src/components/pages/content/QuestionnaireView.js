@@ -255,6 +255,7 @@ var QuestionnaireView = React.createClass({
         var page = self.state.page;
         var title = this.state.title;
         var sources = self.state.sources;
+        console.log("state", state);
 
         var choices;
         var _this = this;
@@ -294,7 +295,7 @@ var QuestionnaireView = React.createClass({
                         inputElement = (
                             <div className="checkbox">
                                 <label for={inputId}>
-                                    <input type="checkbox" value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
+                                    <input type="checkbox" defaultChecked value={item.text} onChange={_this.answerChange.bind(_this, item)} onClick={_this.handleClick} />
                                     {item.text}
                                 </label>
                             </div>);

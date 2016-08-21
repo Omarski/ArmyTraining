@@ -111,6 +111,18 @@ input[type=checkbox] {
 }
 
 
+@media screen and (max-width: 420px) {
+  .listening-comp-alert-text .thumbnail {
+    height: 100px;
+    margin: 0;
+    #coachVideo {
+      width: 90px;
+      height: 90px;
+    }
+  }
+}
+
+
 @media screen and (max-width: 450px) {
   .listening-comp-interaction-container {
     .listening-comp-image {

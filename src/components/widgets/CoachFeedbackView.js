@@ -92,13 +92,14 @@ var CoachFeedbackView = React.createClass({
             // get random one
             var feedbackObject = feedbackMap[Math.floor(Math.random() * feedbackMap.length)];
 
+            //width="110" height="110"
             // construct media element
             if ("asset" in feedbackObject && feedbackObject["asset"].length > 0) {
                 switch(feedbackObject["type"]) {
                     case "video/mp4":
                         coachMedia = (
                             <div className="thumbnail">
-                                <video id="coachVideo" width="110" height="110" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
+                                <video id="coachVideo" volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                                     <source src={mediaDir + feedbackObject["asset"]} type="video/mp4"></source>
                                 </video>
                             </div>

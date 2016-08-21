@@ -9,6 +9,11 @@ input[type=checkbox] {
   height: 15px;
 }
 
+#coachVideo {
+  width: 110px;
+  height: 110px;
+}
+
 /*
 input[type=radio] {
   & .multiple-choice-checkbox{
@@ -216,6 +221,18 @@ input[type=radio] {
   }
 
 }
+
+@media screen and (max-width: 420px) {
+  .multiple-choice-alert-text .thumbnail {
+    height: 100px;
+    margin: 0;
+    #coachVideo {
+      width: 90px;
+      height: 90px;
+    }
+  }
+}
+
 
 @media screen and (max-width: 320px) {
   .multiple-choice-container .multiple-choice-flex .infoMediaContainer .image-caption-container #captionImage {
