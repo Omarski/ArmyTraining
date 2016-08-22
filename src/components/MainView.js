@@ -71,7 +71,7 @@ var MainView = React.createClass({
     },
 
     loadStorage: function() {
-        PersistenceStore.get('units');
+        PersistenceStore.initialize();
     },
 
     loadDli: function(){
@@ -102,7 +102,7 @@ var MainView = React.createClass({
     },
 
     componentWillMount: function() {
-        PersistenceStore.addChangeListener(this._onPersistenceChange);
+        PersistenceStore.addInitializedListener(this._onPersistenceInitialized)
         LocalizationStore.addChangeListener(this._onLocalizationChange);
         ConfigStore.addChangeListener(this._onConfigChange);
         CoachFeedbackStore.addChangeListener(this._onCoachFeedbackChange);
@@ -265,7 +265,7 @@ var MainView = React.createClass({
         );
     },
 
-    _onPersistenceChange: function() {
+    _onPersistenceInitialized: function() {
         if (!_persistedDataFound && PersistenceStore.complete()) {
             _persistedDataFound = true;
             setTimeout(function () {
