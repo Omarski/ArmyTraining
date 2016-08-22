@@ -4,6 +4,7 @@ var PageHeader = require('../../widgets/PageHeader');
 var PageStore = require('../../../stores/PageStore');
 var React = require('react');
 var SCORMActions = require('../../../actions/SCORMActions');
+var TribalActions = require('../../../actions/TribalActions');
 var UnitStore = require('../../../stores/UnitStore');
 var ReferenceStore = require('../../../stores/ReferenceStore');
 
@@ -56,6 +57,7 @@ var SectionEndView = React.createClass({
         // send course completion HACK
         if (UnitStore.areAllRequiredPassed()) {
             SCORMActions.complete();
+            TribalActions.complete();
         }
 
         // disable next button
