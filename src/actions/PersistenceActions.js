@@ -2,12 +2,6 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var PersistenceConstants = require('../constants/PersistenceConstants');
 
 var PersistenceActions = {
-    complete: function() {
-        AppDispatcher.dispatch({
-            actionType: PersistenceConstants.PERSISTENCE_COMPLETE
-        });
-    },
-
     flush: function() {
         AppDispatcher.dispatch({
             actionType: PersistenceConstants.PERSISTENCE_FLUSH

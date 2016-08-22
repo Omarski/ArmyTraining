@@ -193,7 +193,7 @@ var ActiveDialogEvaluation = React.createClass({
                                            alt={LocalizationStore.labelFor("evaluation", "lblFeedbackTitle")}
                                            aria-label={LocalizationStore.labelFor("evaluation", "lblFeedbackTitle")}
                                            className="info-video-player"
-                                           id="video" controls
+                                           id="video"
                                            autoPlay={SettingsStore.autoPlaySound()}
                                            volume={SettingsStore.muted() ? 0.0 : SettingsStore.voiceVolume()}>
                                         <source src={this.state.feedbackVid} type="video/mp4"></source>

@@ -14,6 +14,8 @@ var PageTypeConstants = require('../constants/PageTypeConstants');
 var _expanded = {};
 var _expandedChapters = {};
 var _fromHeaderAction = false;
+var _fromPageChange = false;
+var _fromToggle = false;
 
 function getUnitState(expanded) {
     var units = UnitStore.getAll();
@@ -214,12 +216,14 @@ var ExplorerView = React.createClass({
 
     _onPageChange: function() {
         if (this.isMounted()) {
+            _fromPageChange = true;
             this.setState(getUnitState(false));
         }
     },
 
     _onChange: function() {
         if (this.isMounted()) {
+            _fromToggle = true;
             this.setState(getUnitState(ExplorerStore.isVisible()));
         }
     },
@@ -246,7 +250,34 @@ var ExplorerView = React.createClass({
         ExplorerStore.removeChangeListener(this._onChange);
     },
 
+    componentDidUpdate: function() {
+        if (_fromPageChange && _fromToggle) {
+            _fromPageChange = false;
+            _fromToggle = false;
+
+            if (PageStore.unit()) {
+                var units = UnitStore.getAll();
+                var unit = null;
+                for (var key in units) {
+                    unit = units[key];
+                    if(PageStore.unit().data.xid === unit.data.xid) {
+                        break;
+                    }
+                }
+                if (unit) {
+                    if(unit.state.required) {
+                        $('#explorerTabs a:first').tab('show');
+                    } else {
+                        $('#explorerTabs a:last').tab('show');
+                    }
+                }
+            }
+        }
+    },
+
     toggleTOC: function(event) {
+        _fromToggle = true;
+
         // pause videos before opening TOC
         var video = document.getElementById("video");
         var audio = document.getElementById("audio");
@@ -346,22 +377,30 @@ var ExplorerView = React.createClass({
             requiredItems = this.explorerItems(this.state.requiredUnits, 'required');
             optionalItems = this.explorerItems(this.state.optionalUnits, 'optional');
 
-            var requiredBtn = (<li role="presentation" className="active"><a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblRequired")}</a></li>);
-            var optionalBtn = (<li role="presentation"><a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblOptional")}</a></li>);
+            var requiredBtn = (
+                <li role="presentation">
+                    <a href="#mainFooterLessonsTab" aria-controls="mainFooterLessonsTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblRequired")}</a>
+                </li>
+            );
+            var optionalBtn = (
+                <li role="presentation">
+                    <a href="#mainFooterCoursesTab" aria-controls="mainFooterCoursesTab" role="tab" data-toggle="tab">{LocalizationStore.labelFor("footer", "lblOptional")}</a>
+                </li>
+            );
 
             result = (
                 <div className={this.state.expanded ? "main-footer-tab-container-expanded" : "main-footer-tab-container"}>
-                    <ul className="nav nav-tabs nav-justified main-footer-tab" role="tablist">
+                    <ul id="explorerTabs" className="nav nav-tabs nav-justified main-footer-tab" role="tablist">
                         {this.state.expanded ? requiredBtn : ""}
                         {this.state.expanded ? optionalBtn : ""}
                     </ul>
                     <div className="tab-content main-footer-tab-content">
-                        <div role="tabpanel" className="tab-pane active main-footer-tab-pane" id="mainFooterLessonsTab">
+                        <div role="tabpanel" className={"tab-pane main-footer-tab-pane"} id="mainFooterLessonsTab">
                             <ul className="list-group">
                             {requiredItems}
                             </ul>
                         </div>
-                        <div role="tabpanel" className="tab-pane main-footer-tab-pane" id="mainFooterCoursesTab">
+                        <div role="tabpanel" className={"tab-pane main-footer-tab-pane"} id="mainFooterCoursesTab">
                             <ul className="list-group">
                             {optionalItems}
                             </ul>

@@ -5,12 +5,16 @@ var ConfigConstants = require('../constants/ConfigConstants');
 var PersistenceConstants = require('../constants/PersistenceConstants');
 var PersistenceActions = require('../actions/PersistenceActions');
 var SCORMActions = require('../actions/SCORMActions');
+var TribalActions = require('../actions/TribalActions');
 var DevToolActions = require('../actions/DevToolsActions');
 
 var CHANGE_EVENT = 'change';
+var INITIALIZED_EVENT = "initialized";
 
 var LOCAL_STORAGE_KEY = "enskill_storage";
 var LOCAL_STORAGE_BOOKMARK_KEY = "bookmark";
+
+var LOAD_TIMEOUT_TIME = 10000;
 
 var _bookmarkDataCache = {};
 var _dataCache = {};
@@ -22,6 +26,16 @@ var _bSaveOnDataChange = false;
 var _storageGetFunction = null;
 var _storageSetFunction = null;
 var _initialLoadComplete = false;
+var _bBookmarkInitialized = false;
+var _bDataInitialized = false;
+
+
+function checkInitialized() {
+    if (_initialLoadComplete === false && _bBookmarkInitialized === true && _bDataInitialized === true) {
+        _initialLoadComplete = true;
+        PersistenceStore.emitInitialized();
+    }
+}
 
 function flushData() {
     // TODO make asynchronous
@@ -34,6 +48,7 @@ function flushData() {
             flushLocalStorage(); // TODO hack for now <----
             break;
         case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            flushDataTribal();
             break;
         default:
             flushLocalStorage();
@@ -59,48 +74,44 @@ function flushDataSCORM() {
     }, 0.1);
 }
 
-function getBookmarkData() {
-    // TODO make asynchronous
+function flushDataTribal() {
+    // convert data to string
+    var dataString = JSON.stringify(_dataCache);
 
-    // check cache first
-    if (_bookmarkDataCache && _bookmarkDataCache.hasOwnProperty(LOCAL_STORAGE_BOOKMARK_KEY)) {
-        return _bookmarkDataCache[LOCAL_STORAGE_BOOKMARK_KEY];
-    }
-
-    // if not found load from storage
-    switch (_storageType) {
-        case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
-            getBookmarkDataLocalStorage();
-            break;
-        case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
-            getBookmarkDataSCORM();
-            break;
-        case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
-            break;
-        default:
-            getBookmarkDataLocalStorage(name);
-    }
-
-    // check cache again
-    if (_bookmarkDataCache && _bookmarkDataCache.hasOwnProperty(LOCAL_STORAGE_BOOKMARK_KEY)) {
-        return _bookmarkDataCache[LOCAL_STORAGE_BOOKMARK_KEY];
-    } else {
-        // report some error
-        return null;
-    }
-
+    setTimeout(function() {
+        TribalActions.dataSave(dataString);
+    }, 0.1);
 }
 
-function getBookmarkDataLocalStorage() {
+
+function loadBookmarkData() {
+    switch (_storageType) {
+        case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
+            loadBookmarkDataLocalStorage();
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
+            loadBookmarkDataSCORM();
+            break;
+        case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            loadBookmarkDataTribal();
+            break;
+        default:
+            loadBookmarkDataLocalStorage();
+    }
+}
+
+function loadBookmarkDataLocalStorage() {
     var _loadedData = store.get(LOCAL_STORAGE_BOOKMARK_KEY);
 
     // update bookmark cache
     if (_loadedData)
         _bookmarkDataCache = _loadedData;
+
+    _bBookmarkInitialized = true;
+    checkInitialized();
 }
 
-function getBookmarkDataSCORM() {
-    
+function loadBookmarkDataSCORM() {
     var loadedDataString = SCORMActions.bookmarkLoad();
     // convert from JSON string to object
     var loadedDataObject = null;
@@ -114,55 +125,78 @@ function getBookmarkDataSCORM() {
     if (loadedDataObject) {
         _bookmarkDataCache = loadedDataObject;
     }
+
+    _bBookmarkInitialized = true;
+    checkInitialized();
 }
 
-function getData(name) {
-    // TODO make asynchronous
-    // check cache first
-    if (_dataCache && _dataCache.hasOwnProperty(name)) {
-        return _dataCache[name];
+function loadBookmarkDataTribal() {
+    TribalActions.bookmarkLoad(loadBookmarkDataTribalCompleted);
+}
+
+function loadBookmarkDataTribalCompleted(value) {
+    var loadedDataString = value;
+    // convert from JSON string to object
+    var loadedDataObject = null;
+    try {
+        loadedDataObject = JSON.parse(loadedDataString);
+    } catch (e) {
+        // do something
     }
 
-    // if not found load from storage
+    // update cache
+    if (loadedDataObject) {
+        _bookmarkDataCache = loadedDataObject;
+    }
+
+    _bBookmarkInitialized = true;
+    checkInitialized();
+}
+
+function getBookmarkData() {
+    // get from cache
+    if (_bookmarkDataCache && _bookmarkDataCache.hasOwnProperty(LOCAL_STORAGE_BOOKMARK_KEY)) {
+        return _bookmarkDataCache[LOCAL_STORAGE_BOOKMARK_KEY];
+    }
+    // report some error
+    return null;
+}
+
+
+function loadData() {
     switch (_storageType) {
         case ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE:
-            getDataLocalStorage();
+            loadDataLocalStorage();
             break;
         case ConfigConstants.CONFIG_STORAGE_TYPE_SCORM:
-            getDataSCORM();
+            loadDataSCORM();
             break;
         case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            loadDataTribal();
             break;
         default:
-            getDataLocalStorage(name);
+            loadDataLocalStorage();
     }
 
     // for now always mark complete
-    _initialLoadComplete = true;
     setTimeout(function () {
         PersistenceActions.complete();
     });
-
-    // check cache first
-    if (_dataCache && _dataCache.hasOwnProperty(name)) {
-        return _dataCache[name];
-    } else {
-        // report some error
-        return null;
-    }
 }
 
-function getDataLocalStorage() {
+function loadDataLocalStorage() {
     var _loadedData = store.get(LOCAL_STORAGE_KEY);
 
     // update cache
     if (_loadedData) {
         _dataCache = _loadedData;
     }
+
+    _bDataInitialized = true;
+    checkInitialized();
 }
 
-
-function getDataSCORM() {
+function loadDataSCORM() {
     var loadedDataString = SCORMActions.dataLoad();
 
     // convert from JSON string to object
@@ -178,15 +212,49 @@ function getDataSCORM() {
         _dataCache = loadedDataObject;
     }
 
-
     // TODO for now fall back to local storage
     var error = SCORMActions.getLastError();
     if (error != 0) {
-        getDataLocalStorage();
-        DevToolActions.log('successful data load');
+        loadDataLocalStorage();
     }
-    DevToolActions.log(name + ' error code: ' + error);
+    else {
+        _bDataInitialized = true;
+        checkInitialized();
+    }
 }
+
+function loadDataTribal() {
+    TribalActions.dataLoad(loadDataTribalComplete);
+}
+
+function loadDataTribalComplete(value) {
+    var loadedDataString = value;
+    // convert from JSON string to object
+    var loadedDataObject = null;
+    try {
+        loadedDataObject = JSON.parse(loadedDataString);
+    } catch (e) {
+        // do something
+    }
+
+    // update cache
+    if (loadedDataObject) {
+        _dataCache = loadedDataObject;
+    }
+
+    _bDataInitialized = true;
+    checkInitialized();
+}
+
+function getData(name) {
+    if (_dataCache && _dataCache.hasOwnProperty(name)) {
+        return _dataCache[name];
+    }
+
+    // report some error
+    return null;
+}
+
 
 
 function removeData(name) {
@@ -244,6 +312,7 @@ function setBookmarkData(value) {
             setBookmarkDataSCORM();
             break;
         case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            setBookmarkDataTribal();
             break;
         default:
             setBookmarkDataLocalStorage();
@@ -266,6 +335,14 @@ function setBookmarkDataSCORM() {
     }, 0.1);
 }
 
+function setBookmarkDataTribal() {
+    // convert data to string
+    var dataString = JSON.stringify(_bookmarkDataCache);
+
+    setTimeout(function() {
+        TribalActions.bookmarkSave(dataString);
+    }, 0.1);
+}
 
 function setData(name, value) {
     // update local cache
@@ -315,16 +392,38 @@ var PersistenceStore = Assign({}, EventEmitter.prototype, {
         return getBookmarkData();
     },
 
+    initialize: function() {
+        loadBookmarkData();
+        loadData();
+        setTimeout(function() {
+            _bBookmarkInitialized = true;
+            _bDataInitialized = true;
+            checkInitialized();
+        }, LOAD_TIMEOUT_TIME);
+    },
+
     emitChange: function() {
         this.emit(CHANGE_EVENT);
+    },
+
+    emitInitialized: function() {
+        this.emit(INITIALIZED_EVENT);
     },
 
     addChangeListener: function(callback) {
         this.on(CHANGE_EVENT, callback);
     },
 
+    addInitializedListener: function (callback) {
+        this.on(INITIALIZED_EVENT, callback);
+    },
+
     removeChangeListener: function(callback) {
         this.removeListener(CHANGE_EVENT, callback);
+    },
+
+    removeInitializedListener: function(callback) {
+        this.removeListener(INITIALIZED_EVENT, callback);
     }
 });
 
@@ -349,14 +448,9 @@ AppDispatcher.register(function(action) {
         case PersistenceConstants.PERSISTENCE_SET_STORAGE_TYPE:
             setStorageType(action.type);
             break;
-        case PersistenceConstants.PERSISTENCE_COMPLETE:
-            setComplete();
-            PersistenceStore.emitChange();
-            break;
         default:
-        // no op
+            // no op
     }
-
 });
 
 module.exports = PersistenceStore;
