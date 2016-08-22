@@ -115,34 +115,42 @@ var ConfigStore = assign({}, EventEmitter.prototype, {
     },
 
     hasDLI: function(){
+        // return false;
         return(_hasDLI);
     },
 
     hasReference: function(){
+        // return false;
         return (_hasReference);
     },
 
     hasHelp: function(){
+        // return false;
         return (_hasReference);
     },
 
     hasSetting: function(){
+        // return false;
         return (_hasSettings);
     },
 
     hasBookmark: function(){
+        // return false;
         return (_hasBookmark);
     },
 
     hasAbout: function(){
+        // return true;
         return (_hasAbout);
     },
 
     hasDownloadPDF: function(){
+        // return true;
         return (_hasDownloadPDF);
     },
 
     hasReset: function(){
+        // return true;
         return (_hasResetCourse);
     },
 

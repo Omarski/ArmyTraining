@@ -94,7 +94,6 @@ var HeaderView = React.createClass({
     },
 
     toggleMute: function() {
-        console.log("Toggle mute");
         var settings = store.get('settings') || {};
         var previousVolume = this.state.previousVolume;
         var vol = 1.0;
@@ -277,7 +276,6 @@ var HeaderView = React.createClass({
                             {referenceViewDesktop}
                             {aboutView}
                             {downloadPDFView}
-                            {resetView}
                             {dliView}
                             {helpDesktopView}
                             <NavItem eventKey={4} href="#" onClick={this.toggleMute}
@@ -291,6 +289,7 @@ var HeaderView = React.createClass({
                             </NavItem>
                             {settingsView}
                             {bookmarksView}
+                            {resetView}
                         </Nav>
                     </NavbarCollapse>
                 </Navbar>

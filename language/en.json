@@ -62,7 +62,8 @@
     "tooltipMute": "Mute Sound",
     "tooltipUnMute": "Turn on Sound",
     "tooltipHelp": "Help",
-    "tooltipSettings": "Settings"
+    "tooltipSettings": "Settings",
+    "resetCourse": "Reset"
   },
   "lessonStart": {
     "lblTime": "This lesson may contain multiple sections. The entire lesson will take approximately {0} minutes to complete."
