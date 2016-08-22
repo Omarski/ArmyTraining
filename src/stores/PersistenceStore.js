@@ -5,6 +5,7 @@ var ConfigConstants = require('../constants/ConfigConstants');
 var PersistenceConstants = require('../constants/PersistenceConstants');
 var PersistenceActions = require('../actions/PersistenceActions');
 var SCORMActions = require('../actions/SCORMActions');
+var TribalActions = require('../actions/TribalActions');
 var DevToolActions = require('../actions/DevToolsActions');
 
 var CHANGE_EVENT = 'change';
@@ -34,6 +35,7 @@ function flushData() {
             flushLocalStorage(); // TODO hack for now <----
             break;
         case ConfigConstants.CONFIG_STORAGE_TYPE_TRIBAL:
+            flushDataTribal();
             break;
         default:
             flushLocalStorage();
@@ -56,6 +58,15 @@ function flushDataSCORM() {
 
         var error = SCORMActions.getLastError();
         DevToolActions.log('---> error code: ' + error);
+    }, 0.1);
+}
+
+function flushDataTribal() {
+    // convert data to string
+    var dataString = JSON.stringify(_dataCache);
+
+    setTimeout(function() {
+        TribalActions.dataSave(dataString);
     }, 0.1);
 }
 
