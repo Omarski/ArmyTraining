@@ -2,15 +2,11 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var TribalActions = {
 
-    bookmarkLoad: function() {
+    bookmarkLoad: function(callbackFunc) {
         if (window.plugins && window.plugins.clientPlugin) {
             var jkoPlugin = window.plugins.clientPlugin;
-            jkoPlugin.getValue(MFStoreType.SPECIFIC, "bookmark", this.bookmarkLoadComplete);
+            jkoPlugin.getValue(MFStoreType.SPECIFIC, "bookmark", callbackFunc);
         }
-    },
-
-    bookmarkLoadComplete: function(value) {
-        // TODO
     },
 
     bookmarkSave: function(data) {
@@ -38,21 +34,17 @@ var TribalActions = {
         }
     },
 
-    dataLoad: function() {
+    dataLoad: function(callbackFunc) {
         if (window.plugins && window.plugins.clientPlugin) {
             var jkoPlugin = window.plugins.clientPlugin;
-            jkoPlugin.getValue(MFStoreType.SPECIFIC, "data", this.dataLoadComplete)
+            jkoPlugin.getValue(MFStoreType.SPECIFIC, "data", callbackFunc);
         }
-    },
-
-    dataLoadComplete: function(value) {
-        // TODO
     },
 
     dataSave: function(data) {
         if (window.plugins && window.plugins.clientPlugin) {
             var jkoPlugin = window.plugins.clientPlugin;
-            jkoPlugin.setValue(MFStoreType.SPECIFIC, "data", data, this.dataSaveComplete)
+            jkoPlugin.setValue(MFStoreType.SPECIFIC, "data", data, this.dataSaveComplete);
         }
     },
 
