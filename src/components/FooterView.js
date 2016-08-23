@@ -138,6 +138,7 @@ function showExplorerButton() {
     var currentChapter = PageStore.chapter();
     if (currentChapter !== null) {
         // hide if current chapter is marked as one of the following
+
         if ((Utils.findInfo(currentChapter.info, InfoTagConstants.INFO_PROP_PROLOGUE) !== null) ||
             (Utils.findInfo(currentChapter.info, InfoTagConstants.INFO_PROP_PRETEST) !== null)) {
             return false;
@@ -241,6 +242,7 @@ var FooterView = React.createClass({
         var progressView = (<span></span>);
         var explorerView = (<span></span>);
         var explorerIcon = this.state.expanded ? (<img src="images/icons/explorerdwnn.png"/>) : (<img src="images/icons/explorerupn.png"/>);
+        
         if(showExplorerButton()) {
             explorerBtn = (
                 <button title={this.state.expanded ? LocalizationStore.labelFor("footer", "tooltipIndexCollapse") : LocalizationStore.labelFor("footer", "tooltipIndexExpand")}

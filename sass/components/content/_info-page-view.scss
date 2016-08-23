@@ -134,8 +134,12 @@ div.cutscene.infoNoteContainer{
     }
   }
 
+  .info-page-notes{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
   .infoMediaContainer{
-    margin-top: 20px;
     .caption {
       width: 100%;
       vertical-align: middle;
@@ -144,9 +148,10 @@ div.cutscene.infoNoteContainer{
 
   .infoNoteContainer {
     position: relative;
-    width: 95%;
+    width: 100%;
     ul {
       padding-left: 0px;
+      padding-right: 0px;
     }
 
   }

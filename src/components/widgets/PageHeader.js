@@ -148,8 +148,8 @@ var PageHeader = React.createClass({
 
         var info = "";
         if (this.state.sources !== "") {
-            info = (<OverlayTrigger delayHide={40000} placement="right" overlay={attributions}>
-                        <img src="images/icons/imageinfo.png" className="bookmark-icon info-sources-icon"/>
+            info = (<OverlayTrigger delayHide={40000} placement="right" overlay={attributions} rootClose={true}>
+                        <img src="images/icons/imageinfo.png" className="info-sources-icon"/>
                     </OverlayTrigger>);
         }
 

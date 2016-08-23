@@ -56,6 +56,7 @@ function getPageState(props) {
             }
         }
 
+
         // get info
         if (unitData.xid && (plists.indexOf(unitData.xid) !== -1)) {
             // create object and add it
@@ -181,7 +182,7 @@ var QuestionnaireEndView = React.createClass({
                     </div>
                     <div className="panel-footer">
                         <div className="row">
-                            <div className="col-md-6 col-sm-6 questionnaire-end-btn-col">
+                            <div className="col-md-6 col-sm-6 col-xs-6 questionnaire-end-btn-col">
                                 <button className="btn btn-default btn-action"
                                         title={LocalizationStore.labelFor("questionnaireEnd", "btnRestart")}
                                         alt={LocalizationStore.labelFor("questionnaireEnd", "btnRestart")}
@@ -191,7 +192,7 @@ var QuestionnaireEndView = React.createClass({
                                     {state.btnRestart}
                                 </button>
                             </div>
-                            <div className="col-md-6 col-sm-6 questionnaire-end-btn-col">
+                            <div className="col-md-6 col-sm-6 col-xs-6 questionnaire-end-btn-col">
                                 <button className="btn btn-default btn-action"
                                         title={LocalizationStore.labelFor("questionnaireEnd", "btnConfirm")}
                                         alt={LocalizationStore.labelFor("questionnaireEnd", "btnConfirm")}

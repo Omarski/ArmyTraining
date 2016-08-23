@@ -28,15 +28,20 @@ var QuestionnaireStore = Assign({}, EventEmitter.prototype, {
     getPlaylists: function() {
         if (_data) {
             var values = [];
+            var valuesObj = {};
             for (var key in _data) {
                 for (var playlists in _data[key]) {
                     if (_data[key][playlists] !== null) {
                         var split = _data[key][playlists].split(',');
                         for (var index in split) {  // TODO <--- ugh i hate this
-                            // check if not already added
-                            if (!(split[index] in values)) {
+
+                            if(!valuesObj[split[index]]){
+                                valuesObj[split[index]] = split[index];
                                 values.push(split[index]);
                             }
+                            // if (!(split[index] in values)) {
+                            //     values.push(split[index]);
+                            // }
                         }
                     }
                 }
