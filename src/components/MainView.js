@@ -17,6 +17,7 @@ var LocalizationActions = require('../actions/LocalizationActions');
 var CoachFeedbackStore = require('../stores/CoachFeedbackStore');
 var DliActions = require('../actions/DliActions');
 var DliStore = require('../stores/DliStore');
+var PersistenceActions = require('../actions/PersistenceActions');
 var PersistenceStore = require('../stores/PersistenceStore');
 
 var ReferenceActions = require('../actions/ReferenceActions');
@@ -71,7 +72,7 @@ var MainView = React.createClass({
     },
 
     loadStorage: function() {
-        PersistenceStore.initialize();
+        PersistenceActions.initialize(ConfigStore.getStorageType());
     },
 
     loadDli: function(){
