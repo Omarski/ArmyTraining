@@ -90,10 +90,6 @@ var _storageType = ConfigConstants.CONFIG_STORAGE_TYPE_LOCAL_STORAGE;
              }
          }
          ConfigActions.loadComplete();
-             setTimeout(function(){
-                 PersistenceActions.setStorageType(_storageType);
-             }, 0.1);
-
         })
         .fail(function(){
              ConfigActions.loadComplete();

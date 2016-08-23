@@ -29,6 +29,15 @@ var _initialLoadComplete = false;
 var _bBookmarkInitialized = false;
 var _bDataInitialized = false;
 
+function initialize() {
+    loadBookmarkData();
+    loadData();
+    setTimeout(function() {
+        _bBookmarkInitialized = true;
+        _bDataInitialized = true;
+        checkInitialized();
+    }, LOAD_TIMEOUT_TIME);
+}
 
 function checkInitialized() {
     if (_initialLoadComplete === false && _bBookmarkInitialized === true && _bDataInitialized === true) {
@@ -177,11 +186,6 @@ function loadData() {
         default:
             loadDataLocalStorage();
     }
-
-    // for now always mark complete
-    setTimeout(function () {
-        PersistenceActions.complete();
-    });
 }
 
 function loadDataLocalStorage() {
@@ -392,16 +396,6 @@ var PersistenceStore = Assign({}, EventEmitter.prototype, {
         return getBookmarkData();
     },
 
-    initialize: function() {
-        loadBookmarkData();
-        loadData();
-        setTimeout(function() {
-            _bBookmarkInitialized = true;
-            _bDataInitialized = true;
-            checkInitialized();
-        }, LOAD_TIMEOUT_TIME);
-    },
-
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
@@ -432,6 +426,10 @@ AppDispatcher.register(function(action) {
     switch(action.actionType) {
         case PersistenceConstants.PERSISTENCE_FLUSH:
             flushData();
+            break;
+        case PersistenceConstants.PERSISTENCE_INITIALIZE:
+            setStorageType(action.storageType);
+            initialize();
             break;
         case PersistenceConstants.PERSISTENCE_REMOVE:
             removeData(action.name);
