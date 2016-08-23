@@ -431,6 +431,19 @@ var SortingView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+        var self = this;
+
+        $(".choice").keydown(function(e){
+            if(e.keyCode === 13){
+                self.onDraggableClick(e);
+            }
+        });
+
+        $(".sorting-columnA-dropArea .sorting-columnB-dropArea").keydown(function(e){
+            if(e.keyCode === 13){
+                self.onTargetClick(e);
+            }
+        });
     },
 
     componentWillUnmount: function() {
@@ -810,12 +823,12 @@ var SortingView = React.createClass({
                                 <div className="panel panel-default sorting-panel">
                                     <div className="panel-heading sorting-panel-heading">{colATitle}</div>
                                     <div className="panel-body">
-                                        <div className="sorting-columnA-dropArea sorting-drop-area"
+                                        <a href="#" tabindex={"0"} className="sorting-columnA-dropArea sorting-drop-area"
                                              onDragOver={self.onDraggingOver}
                                              onDrop={self.onDropping}
                                              onClick={self.onTargetClick}>
                                             <ul className="sorting-choices-list">{colARender}</ul>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -823,9 +836,9 @@ var SortingView = React.createClass({
                                 <div className="panel panel-default sorting-panel">
                                     <div className="panel-heading sorting-panel-heading">{colBTitle}</div>
                                     <div className="panel-body">
-                                        <div className="sorting-columnB-dropArea sorting-drop-area"  onClick={self.onTargetClick} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                        <a href="#" tabindex={"0"} className="sorting-columnB-dropArea sorting-drop-area"  onClick={self.onTargetClick} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                             <ul className="sorting-choices-list">{colBRender}</ul>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

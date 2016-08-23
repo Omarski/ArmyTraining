@@ -474,6 +474,20 @@ var OrderingView = React.createClass({
 
     componentDidMount: function() {
         //PageStore.addChangeListener(this._onChange);
+        var self = this;
+
+            $(".choice").keydown(function(e){
+            if(e.keyCode === 13){
+                self.onDraggableClick(e);
+            }
+        });
+
+        $(".or-answer-drop-area").keydown(function(e){
+            if(e.keyCode === 13){
+                self.onTargetClick(e);
+            }
+        });
+        
     },
 
     componentWillUnmount: function() {
@@ -679,14 +693,15 @@ var OrderingView = React.createClass({
             }
             return(<li className = "or-answer" key={page.xid + "answer-"+index}>
                 <div className="or-answer-prompt">{answerPrompt}</div>
-                <div className="or-answer-drop-area"
-                     data-letter={letter}
+                <a href="#" className="or-answer-drop-area"
+                   tabindex={"0"}
+                   data-letter={letter}
                      data-index={index}
                      onDragOver={self.onDraggingOver}
                      onClick={self.onTargetClick}
                      onDrop={self.onDropping}>
                     {answerRender}
-                </div>
+                </a>
             </li>);
         });
 

@@ -215,11 +215,6 @@ var MatchItemView = React.createClass({
             draggedItemTarget = "";
             draggedItemData = "";
         }
-
-        //highlight
-        //"border":"4px solid #f6ae23",
-        // if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
-        // $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
       
         $(".match-item-answer-drop-area").each(
             function(){
@@ -308,14 +303,7 @@ var MatchItemView = React.createClass({
                 }
             }
         }
-/*
-        if($(e.target).hasClass("matchitem-mobile-answer")){
-            var spotTaken = false;
-            answerState.map(function(item){
-                if(item.currentBoxIndex === Math.floor($(e.target).parent().attr("data-index")) || )
-            })
-        }
-*/
+
         var itemFound = false;
 
         if($(draggedItemTarget).css("opacity") != 0.0 && (dropLocation !== "") ){
@@ -416,16 +404,6 @@ var MatchItemView = React.createClass({
                                 console.log("icon clicked");
                                 self.onClick(e);
                         }
-
-                        // if ($(e.target).hasClass('match-item-play-icon')) {
-                        //         $(e.target).click(function(e){
-                        //         console.log("icon clicked");
-                        //         self.onClick(e);
-                        //     });
-                        // }
-
-                        //if ($(this).find('match-item-play-icon').length != 0) self.onClick(e);
-                        //self.onDraggableClick(e);
                     });
                 });
 
@@ -545,8 +523,7 @@ var MatchItemView = React.createClass({
 
     reset: function() {
         var self = this;
-        var state = self.sta
-        te;
+        var state = self.state;
         var answerState = state.answerState;
 
         //allow interaction
@@ -586,7 +563,18 @@ var MatchItemView = React.createClass({
         $(".match-item-play-icon").click(function(e){
             self.onClick(e);
         });
-        //PageStore.addChangeListener(this._onChange);
+
+        $(".match-item-choices-container").keydown(function(e){
+            if(e.keyCode === 13){
+                self.onDraggableClick(e);
+            }
+        });
+
+        $(".match-item-answer-drop-area, .match-item-answer-drop-area-image").keydown(function(e){
+            if(e.keyCode === 13){
+                self.onTargetClick(e);
+            }
+        });
     },
 
     componentWillUnmount: function() {
@@ -812,9 +800,9 @@ var MatchItemView = React.createClass({
                                     {choices[index]}
                                 </td>
                                 <td className={"matchitem-droparea-td"} >
-                                    <div className="match-item-answer-drop-area dropped audio-drop" onClick={self.onTargetClick} data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                    <a href="#" className="match-item-answer-drop-area dropped audio-drop" tabindex={"0"} onClick={self.onTargetClick} data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                         {answerRender}
-                                    </div>
+                                    </a>
                                 </td>
                                 <td className={"matchitem-question-td"}>
                                     <div className="match-item-answer-prompt">{answerPrompt}</div>
@@ -827,9 +815,9 @@ var MatchItemView = React.createClass({
                                         {choices[index]}
                                     </td>
                                     <td className={"matchitem-droparea-td"}>
-                                        <div className="match-item-answer-drop-area-image dropped" onClick={self.onTargetClick} data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                        <a href="#" className="match-item-answer-drop-area-image dropped" tabindex={"0"} onClick={self.onTargetClick} data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                             {answerRender}
-                                        </div>
+                                        </a>
                                     </td>
                                     <td className={"matchitem-question-td"}>
                                         <div className="match-item-answer-prompt">{answerPrompt}</div>
@@ -844,10 +832,10 @@ var MatchItemView = React.createClass({
                                     {choices[index]}
                                     </td>
                                     <td className={"matchitem-droparea-td matchitem-droparea-td-text"}>
-                                        <div className="match-item-answer-drop-area dropped" onClick={self.onTargetClick} data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
+                                        <a href="#" className="match-item-answer-drop-area dropped" tabindex={"0"} onClick={self.onTargetClick} data-letter={letter} data-index={index} onDragOver={self.onDraggingOver} onDrop={self.onDropping}>
                                             <div className="matchitem-mobile-answer">{answerPrompt}</div>
                                             {answerRender}
-                                        </div>
+                                        </a>
                                     </td>
                                     <td className={"matchitem-question-td"}>
                                         <div className="match-item-answer-prompt">{answerPrompt}</div>

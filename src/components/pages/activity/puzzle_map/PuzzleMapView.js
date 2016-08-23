@@ -319,7 +319,7 @@ var PuzzleMapView = React.createClass({
 
                     <div className="puzzle-map-view-mapCont" style={backMapStyle}>
 
-                        {self.state.showInstructions ? <div style={instStyle}>Click and drag the country pieces to their correct location on the map.</div>:null}
+                        {self.state.showInstructions ? <div style={instStyle}>{"Click and drag the country pieces to their correct location on the map."}</div>:null}
 
                         {state.phase === "play" ? <PuzzleMapDnDView
                             puzzlePiecesObj = {self.state.puzzlePiecesColl[self.state.currentIndex]}
