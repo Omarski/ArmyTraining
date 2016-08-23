@@ -108,9 +108,9 @@ function playAudio(zid, self){
                     $(item.childNodes)[0].src = "images/icons/stoprecordn.png ";
                     audio.onended = function(){
                         $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
-                        audio.pause();
+                        //audio.pause();
                         setTimeout(function(){self.setState({
-                            isPaused: true
+                            //isPaused: true
                         })});
                     };
                 }
@@ -120,7 +120,7 @@ function playAudio(zid, self){
             Array.prototype.forEach.call(icons, function(item, index){
                 $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
             });
-            audio.pause();
+            //audio.pause();
         }
     }
 }
@@ -218,8 +218,8 @@ var MatchItemView = React.createClass({
 
         //highlight
         //"border":"4px solid #f6ae23",
-        if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
-        $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
+        // if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
+        // $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
       
         $(".match-item-answer-drop-area").each(
             function(){
@@ -231,16 +231,17 @@ var MatchItemView = React.createClass({
                 if ($(this).children().length < 1) $(this).css({"border":"4px solid #f6ae23"});
             });
 
+        if (self.state.lastDraggable) {
+            $(self.state.lastDraggable).css({"-webkit-box-shadow":"inset 0px 0px 0px 1px #ddd", "-moz-box-shadow":"inset 0px 0px 0px 1px #ddd", "box-shadow":"inset 0px 0px 0px 1px #ddd"});
+        }
+        $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
+
         self.setState({
             draggedItemLetter: draggedItemLetter,
             draggedItemTarget: draggedItemTarget,
             draggedItemData: draggedItemData,
             lastDraggable: e.target
         });
-
-        //Audio?
-        //console.log("has icon class: " + $(e.target).hasClass("match-item-play-icon"));
-        //if ($(e.target).hasClass("match-item-play-icon")) self.onClick(e);
     },
 
     onDraggingOver: function(e){
@@ -508,8 +509,6 @@ var MatchItemView = React.createClass({
                 $(self.state.lastDraggable).css({"-webkit-box-shadow":"inset 0px 0px 0px 1px #ddd", "-moz-box-shadow":"inset 0px 0px 0px 1px #ddd", "box-shadow":"inset 0px 0px 0px 1px #ddd"});
             }
 
-            //if ($(e.target).hasClass("match-item-play-icon")) self.onClick(e);
-
             self.setState({
                 answerState: answerState,
                 numMoved: numMoved,
@@ -519,7 +518,7 @@ var MatchItemView = React.createClass({
     },
 
     onClick: function(e){
-        console.log("At click........");
+
         var self = this;
         var state = self.state;
         var playable = true;
@@ -528,7 +527,7 @@ var MatchItemView = React.createClass({
         var parent = null;
 
         if($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice") || $(e.target).hasClass("match-item-play-icon")){
-            console.log("Play audio!!");
+
             answerState.map(function(item){
                 it = $(e.target).attr("data") == item.passedData;
                 parent = $(e.target).parent().attr("data") == item.passedData;
@@ -546,7 +545,8 @@ var MatchItemView = React.createClass({
 
     reset: function() {
         var self = this;
-        var state = self.state;
+        var state = self.sta
+        te;
         var answerState = state.answerState;
 
         //allow interaction
