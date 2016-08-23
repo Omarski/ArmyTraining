@@ -2,6 +2,13 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var PersistenceConstants = require('../constants/PersistenceConstants');
 
 var PersistenceActions = {
+    initialize: function(storageType) {
+        AppDispatcher.dispatch({
+            actionType: PersistenceConstants.PERSISTENCE_INITIALIZE,
+            storageType: storageType
+        });
+    },
+
     flush: function() {
         AppDispatcher.dispatch({
             actionType: PersistenceConstants.PERSISTENCE_FLUSH
