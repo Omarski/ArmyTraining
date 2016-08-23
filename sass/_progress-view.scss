@@ -36,6 +36,13 @@
   }
 }
 
+.shrink-td-padding-for-mobile:last-child {
+  padding-right: 80px;
+}
+
+.shrink-td-padding-for-mobile:first-child {
+  padding-left: 60px;
+}
 
 @media screen and (min-width: 420px) and  (max-width: 500px) {
   .hide-progress-bars {

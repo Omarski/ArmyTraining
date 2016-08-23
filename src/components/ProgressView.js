@@ -112,6 +112,11 @@ var ProgressView = React.createClass({
     },
     render: function() {
 
+        /*
+         <div className="progress-bar progress-bar-total" style={{width: this.state.totalProgressPercent + '%'}}>
+         <span className="sr-only">{this.state.totalProgressPercent}% Complete (success)</span>
+         </div>
+         */
         return (
             <table className="table progress-table">
                 <tbody>
@@ -127,9 +132,6 @@ var ProgressView = React.createClass({
                                             <div className="progress">
                                                 <div className="progress-bar progress-bar-unit" style={{width: this.state.unitsPercent + '%'}}>
                                                     <span className="sr-only">{this.state.unitsPercent}% Complete (success)</span>
-                                                </div>
-                                                <div className="progress-bar progress-bar-total" style={{width: this.state.totalProgressPercent + '%'}}>
-                                                    <span className="sr-only">{this.state.totalProgressPercent}% Complete (success)</span>
                                                 </div>
                                             </div>
                                         </td>
