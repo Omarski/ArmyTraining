@@ -159,13 +159,15 @@ var SortingView = React.createClass({
 
     onDraggableClick: function(e){
 
-        console.log("Draggable clicked >>>");
+
         var self = this;
         var state = self.state;
         var draggedItemLetter = "";
         var draggedItemTarget = "";
         var audio = document.getElementById('mainViewAudio');
         var source = document.getElementById('mainViewMp3Source');
+
+        //if (self.state.lastDraggable) return false;
 
         source.src = "data/media/Grab02.mp3";
         if(audio && source) {
@@ -356,7 +358,7 @@ var SortingView = React.createClass({
                 }
             }
 
-            $(".choice").css({"border":"1px solid #ddd"});
+            $(".choice, .answer").css({"border":"1px solid #ddd"});
             $(".sorting-columnA-dropArea, .sorting-columnB-dropArea").css({"border":"1px solid #ddd"});
 
 
@@ -400,7 +402,7 @@ var SortingView = React.createClass({
         
         //allow interaction
         $("a[draggable = 'false'], .choice").attr("draggable","true").css("pointerEvents","auto");
-        
+        //$(".placed-A, .placed-B").css("pointerEvents","auto");
         answerState.map(function (item) {
             item.isMoved = false;
             item.currentBox = "";
@@ -458,9 +460,9 @@ var SortingView = React.createClass({
         var feedback = "";
 
         if(numMoved == numQuestions){
-            console.log("Correct check...");
+
             //prevent more dragging
-            $("a[draggable = 'true']").attr("draggable","false").css("pointerEvents","none");
+            window.setTimeout(function(){$("a[draggable = 'true']").attr("draggable","false").css("pointerEvents","none");},300);
 
             for(var i = 0; i < answerState.length; i++){
                 if(answerState[i].currentBox == answerState[i].letter){
