@@ -350,7 +350,15 @@ var ExplorerView = React.createClass({
                                     {item.expandCollapseIcon}
                                 </span>
                             </a>
-                            <span className="explorer-section-title">{item.title}</span>
+                            <a
+                                href="#"
+                                className="explorer-section-title"
+                                alt={item.title}
+                                aria-label={item.title}
+                                title = {item.title}
+                            >
+                                <span>{item.title}</span>
+                            </a>
                             <span className="badge">
                                 {icon}
                              </span>
@@ -436,7 +444,14 @@ var TOCChapterRow = React.createClass({
                         {this.props.item.expandCollapseIcon}
                     </span>
                 </a>
-                <span className="explorer-section-title">{this.props.item.title}</span>
+                <a
+                    href="#"
+                    className="explorer-section-title"
+                    alt={this.props.item.title}
+                    aria-label={this.props.item.title}
+                    title = {this.props.item.title}>
+                <span>{this.props.item.title}</span>
+                </a>
                 <span className="badge">
                     {icon}
                  </span>
@@ -530,7 +545,12 @@ var TOCPageRow = React.createClass({
                 >
                     {icon}
                 </span>
-                <a href="#">
+                <a
+                    href="#"
+                    alt={this.props.item.title}
+                    aria-label={this.props.item.title}
+                    title = {this.props.item.title}
+                >
                     <span className="explorer-section-title">{this.props.item.title}</span>
                 </a>
             </li>
