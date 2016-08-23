@@ -30,16 +30,33 @@ var _bBookmarkInitialized = false;
 var _bDataInitialized = false;
 
 function initialize() {
+    var startInitTime = new Date().getTime();
+
+    // load data
     loadBookmarkData();
     loadData();
-    setTimeout(function() {
-        _bBookmarkInitialized = true;
-        _bDataInitialized = true;
-        checkInitialized();
-    }, LOAD_TIMEOUT_TIME);
+
+    var interval = setInterval(function () {
+        // skip and clear timer if expired
+        if (new Date().getTime() - startInitTime > LOAD_TIMEOUT_TIME) {
+            clearInterval(interval);
+            _bBookmarkInitialized = true;
+            _bDataInitialized = true;
+            checkInitialized();
+        }
+
+        if (_bBookmarkInitialized !== true) {
+            loadBookmarkData();
+        }
+
+        if (_bDataInitialized !== true) {
+            loadData();
+        }
+    }, 3000);
 }
 
 function checkInitialized() {
+
     if (_initialLoadComplete === false && _bBookmarkInitialized === true && _bDataInitialized === true) {
         _initialLoadComplete = true;
         PersistenceStore.emitInitialized();
