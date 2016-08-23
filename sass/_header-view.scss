@@ -2,6 +2,11 @@ button.navbar-toggle:hover {
   background-color: #9FA8A3 !important;
 }
 
+.bookmark-mobile-menu{
+  font-size: 16px;
+  margin-left: 50px;
+}
+
 .caret {
   display: none;
 }
@@ -320,12 +325,15 @@ button.navbar-toggle:hover {
 
   .reference-guide-on-mobile {
     a {
-      text-align: center;
+      text-align: left;
       line-height: 25px;
       #referenceView {
         float: left;
       }
-      p {font-size: 16px;}
+      p {
+        font-size: 16px;
+        margin-left: 50px;
+      }
     }
   }
 
@@ -334,15 +342,22 @@ button.navbar-toggle:hover {
       .main-nav-bar-button{
           float: left;
       }
-      text-align: center;
+      text-align: left;
       line-height: 25px;
-      p {font-size: 16px;}
+      p {
+        font-size: 16px;
+        margin-left: 50px;
+      }
     }
   }
 
   .navbar-nav .main-nav-bar-button a {
     line-height: 25px;
-    p{ font-size: 16px;}
+    text-align: left;
+    p {
+      font-size: 16px;
+      margin-left: 50px;
+    }
   }
 }
 

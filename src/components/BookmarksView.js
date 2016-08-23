@@ -149,6 +149,7 @@ var BookmarksView = React.createClass({
                         <span className="glyphicon" aria-hidden="true">
                             <img src="images/icons/bookmarkn.png"/>
                         </span>
+                        <p className="bookmark-mobile-menu">Bookmark</p>
                     </Button>
                 </div>
                 )}>

@@ -87,3 +87,21 @@ label{
     margin: 10px;
   }
 }
+
+@media screen and (max-width: 767px){
+  #questionnaireForm .questionnaire-choices-container .radio label {
+    .questionnaire-radio-button {
+      margin-top: 1px;
+      margin-left: -23px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  #questionnaireForm .questionnaire-choices-container .checkbox label {
+    input[type=checkbox] {
+      margin-left: -23px;
+      height: 16px;
+      width: 16px;
+    }
+  }
+}
