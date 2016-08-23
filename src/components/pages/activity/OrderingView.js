@@ -441,7 +441,8 @@ var OrderingView = React.createClass({
         var answerState = state.answerState;
 
         //allow interaction
-        $("a[draggable = 'false']").attr("draggable","true").css("pointerEvents","auto");
+       // $("a[draggable = 'false']").attr("draggable","true").css("pointerEvents","auto");
+        $(".or-choice-selection").css("pointerEvents","auto");
 
         answerState.map(function (item) {
             item.isMoved = false;
@@ -456,10 +457,10 @@ var OrderingView = React.createClass({
             $(item).css("opacity", "1.0");
         });
 
-        //remove heighlights
-        $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
+        //restore interaction
+        $(".or-answer-drop-area").css({"pointerEvents":"auto","border":"1px solid #ddd"});
+        //remove highlights
         if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
-        $(".or-answer-drop-area").css({"border":"1px solid #ddd"});
 
         self.setState({
             numMoved: 0,
@@ -499,6 +500,7 @@ var OrderingView = React.createClass({
 
             //prevent more dragging
             $("a[draggable = 'true']").attr("draggable","false").css("pointerEvents","none");
+            $(".or-answer-drop-area").css("pointerEvents","none");
 
             var isCorrect = true;
             // check if correct and update accordingly

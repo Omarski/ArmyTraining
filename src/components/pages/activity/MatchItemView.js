@@ -108,9 +108,9 @@ function playAudio(zid, self){
                     $(item.childNodes)[0].src = "images/icons/stoprecordn.png ";
                     audio.onended = function(){
                         $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
-                        audio.pause();
+                        //audio.pause();
                         setTimeout(function(){self.setState({
-                            isPaused: true
+                            //isPaused: true
                         })});
                     };
                 }
@@ -120,7 +120,7 @@ function playAudio(zid, self){
             Array.prototype.forEach.call(icons, function(item, index){
                 $(item.childNodes)[0].src = "images/icons/playrecordn.png ";
             });
-            audio.pause();
+            //audio.pause();
         }
     }
 }
@@ -179,7 +179,7 @@ var MatchItemView = React.createClass({
         var self = this;
         var state = self.state;
 
-        if (e.target.style.opacity === "0" ) {
+        if (e.target.hasAttribute("style") && e.target.style.opacity === "0" ) {
             return false;
         }
         // if ($(e.target).attr("style").indexOf("opacity: 0") !== -1) {
@@ -218,8 +218,8 @@ var MatchItemView = React.createClass({
 
         //highlight
         //"border":"4px solid #f6ae23",
-        if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
-        $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
+        // if (self.state.lastDraggable) $(self.state.lastDraggable).css({"border":"1px solid #ddd"});
+        // $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
       
         $(".match-item-answer-drop-area").each(
             function(){
@@ -231,15 +231,17 @@ var MatchItemView = React.createClass({
                 if ($(this).children().length < 1) $(this).css({"border":"4px solid #f6ae23"});
             });
 
+        if (self.state.lastDraggable) {
+            $(self.state.lastDraggable).css({"-webkit-box-shadow":"inset 0px 0px 0px 1px #ddd", "-moz-box-shadow":"inset 0px 0px 0px 1px #ddd", "box-shadow":"inset 0px 0px 0px 1px #ddd"});
+        }
+        $(e.target).css({"-webkit-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "-moz-box-shadow":"inset 0px 0px 0px 4px #f6ae23", "box-shadow":"inset 0px 0px 0px 4px #f6ae23"});
+
         self.setState({
             draggedItemLetter: draggedItemLetter,
             draggedItemTarget: draggedItemTarget,
             draggedItemData: draggedItemData,
             lastDraggable: e.target
         });
-
-        //Audio?
-        if ($(e.target).hasClass("match-item-play-icon")) self.onClick(e);
     },
 
     onDraggingOver: function(e){
@@ -375,8 +377,8 @@ var MatchItemView = React.createClass({
         //     return false;
         // }
 
-        e.preventDefault();
-        e.stopPropagation();
+        //e.preventDefault();
+        //e.stopPropagation();
         var numMoved = state.numMoved;
         var answerState = state.answerState;
         var audio = document.getElementById('mainViewAudio');
@@ -392,6 +394,8 @@ var MatchItemView = React.createClass({
         var dropLocationIndex = -1;
 
         if (lastDraggable) {
+
+
             if ($(e.target).hasClass("match-item-answer-drop-area") || $(e.target).hasClass("match-item-answer-drop-area-image") || $(e.target).hasClass("glyph-answer")) {
 
                 //if(drop location isn't taken)
@@ -401,6 +405,28 @@ var MatchItemView = React.createClass({
                         draggedItemLetter = "";
                         spotTaken = true;
                     }
+
+                    //good drop
+                    console.log("last data: " + $(self.state.lastDraggable).attr("data"));
+                    $(e.target).parent().attr("data",$(self.state.lastDraggable).attr("data")).attr("data-passed",$(self.state.lastDraggable).attr("data")).addClass("match-item-choices-container").click(function(e){
+                        //if ($(e.target).find('match-item-play-icon').length != 0) {
+                        console.log("click....");
+                        if ($(this).find('match-item-play-icon')){
+                            console.log("icon child found");
+                                console.log("icon clicked");
+                                self.onClick(e);
+                        }
+
+                        // if ($(e.target).hasClass('match-item-play-icon')) {
+                        //         $(e.target).click(function(e){
+                        //         console.log("icon clicked");
+                        //         self.onClick(e);
+                        //     });
+                        // }
+
+                        //if ($(this).find('match-item-play-icon').length != 0) self.onClick(e);
+                        //self.onDraggableClick(e);
+                    });
                 });
 
                 if (!spotTaken) {
@@ -410,7 +436,6 @@ var MatchItemView = React.createClass({
                     // spot taken
                 }
             }
-            //}
 
             // clear answer if dragging off where it's placed.
             if ($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice") || $(e.target).hasClass("match-item-choice-td-text") || $(e.target).hasClass("match-item-image")) {
@@ -493,6 +518,7 @@ var MatchItemView = React.createClass({
     },
 
     onClick: function(e){
+
         var self = this;
         var state = self.state;
         var playable = true;
@@ -500,7 +526,8 @@ var MatchItemView = React.createClass({
         var it = null;
         var parent = null;
 
-        if($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice")){
+        if($(e.target).hasClass("match-item-choices-container") || $(e.target).hasClass("glyph-choice") || $(e.target).hasClass("match-item-play-icon")){
+
             answerState.map(function(item){
                 it = $(e.target).attr("data") == item.passedData;
                 parent = $(e.target).parent().attr("data") == item.passedData;
@@ -518,7 +545,8 @@ var MatchItemView = React.createClass({
 
     reset: function() {
         var self = this;
-        var state = self.state;
+        var state = self.sta
+        te;
         var answerState = state.answerState;
 
         //allow interaction
@@ -553,6 +581,11 @@ var MatchItemView = React.createClass({
     },
 
     componentDidMount: function() {
+        var self = this;
+
+        $(".match-item-play-icon").click(function(e){
+            self.onClick(e);
+        });
         //PageStore.addChangeListener(this._onChange);
     },
 
@@ -711,6 +744,7 @@ var MatchItemView = React.createClass({
                     switch (state.answerState[i].mediaType) {
                         case "audio":
                             answerRender = (<a
+                                    key={index}
                                     href="#"
                                     data={state.answerState[i].passedData}
                                     data-passed={state.answerState[i].passedData}
@@ -729,6 +763,7 @@ var MatchItemView = React.createClass({
                             var source = answerState[i].passedData;
                             answerRender = (<div>
                                 <img
+                                key={index}
                                 className="match-item-answer-image match-item-image"
                                 src={"data/media/"+source}
                                 draggable="true"
@@ -744,6 +779,7 @@ var MatchItemView = React.createClass({
                         case "string":
                             answerRender = (<a
                                     href="#"
+                                    key={index}
                                     className="match-item-text-choice"
                                     data-passed={answerState[i].passedData}
                                     draggable="true"
